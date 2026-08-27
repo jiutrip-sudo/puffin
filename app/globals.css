@@ -1,0 +1,232 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #1a1a1a;
+  --color-primary: #b4a7d6;
+  --color-primary-dark: #9b8fcc;
+  --color-primary-light: #c8bde8;
+  --color-primary-surface: #d4cceb;
+  --color-hero-text: #ffffff;
+  --glass-bg: rgba(255, 255, 255, 0.18);
+  --glass-border: rgba(255, 255, 255, 0.28);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--color-primary);
+  --color-primary-dark: var(--color-primary-dark);
+  --color-primary-light: var(--color-primary-light);
+  --color-primary-surface: var(--color-primary-surface);
+  --color-hero-text: var(--color-hero-text);
+  --font-sans: var(--font-syne);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-syne), system-ui, sans-serif;
+}
+
+/* Glass morphism utility */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+}
+
+.glass-pill {
+  background: rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+/* Floating animation */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(2deg);
+  }
+}
+
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-slow {
+  animation: float-slow 8s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 20s linear infinite;
+}
+
+/* Aurora overlay — layered curtains over hero sky */
+.aurora-overlay {
+  clip-path: polygon(0 0, 100% 0, 100% 62%, 0 78%);
+}
+
+.aurora-layer {
+  position: absolute;
+  top: -15%;
+  left: -15%;
+  width: 130%;
+  height: 85%;
+  filter: blur(36px);
+  mix-blend-mode: soft-light;
+  will-change: transform, opacity;
+}
+
+.aurora-layer--green {
+  background: linear-gradient(
+    98deg,
+    transparent 0%,
+    rgba(34, 197, 94, 0.15) 18%,
+    rgba(74, 222, 128, 0.45) 38%,
+    rgba(45, 212, 191, 0.35) 55%,
+    transparent 78%
+  );
+  animation: aurora-drift-green 14s ease-in-out infinite;
+}
+
+.aurora-layer--cyan {
+  background: linear-gradient(
+    82deg,
+    transparent 5%,
+    rgba(56, 189, 248, 0.2) 25%,
+    rgba(103, 232, 249, 0.4) 42%,
+    rgba(147, 197, 253, 0.25) 60%,
+    transparent 85%
+  );
+  animation: aurora-drift-cyan 18s ease-in-out infinite;
+  animation-delay: -4s;
+}
+
+.aurora-layer--violet {
+  background: linear-gradient(
+    110deg,
+    transparent 10%,
+    rgba(192, 132, 252, 0.2) 30%,
+    rgba(244, 114, 182, 0.28) 48%,
+    rgba(167, 139, 250, 0.18) 65%,
+    transparent 88%
+  );
+  animation: aurora-drift-violet 22s ease-in-out infinite;
+  animation-delay: -8s;
+}
+
+.aurora-layer--shimmer {
+  background: repeating-linear-gradient(
+    92deg,
+    transparent 0px,
+    transparent 48px,
+    rgba(255, 255, 255, 0.04) 64px,
+    rgba(167, 243, 208, 0.12) 96px,
+    rgba(255, 255, 255, 0.06) 128px,
+    transparent 180px
+  );
+  mix-blend-mode: screen;
+  filter: blur(20px);
+  opacity: 0.7;
+  animation: aurora-shimmer 10s linear infinite;
+}
+
+@keyframes aurora-drift-green {
+  0%,
+  100% {
+    transform: translateX(-6%) translateY(0) skewX(-6deg) scale(1);
+    opacity: 0.45;
+  }
+  33% {
+    transform: translateX(4%) translateY(-4%) skewX(4deg) scale(1.04);
+    opacity: 0.7;
+  }
+  66% {
+    transform: translateX(7%) translateY(2%) skewX(-3deg) scale(0.98);
+    opacity: 0.55;
+  }
+}
+
+@keyframes aurora-drift-cyan {
+  0%,
+  100% {
+    transform: translateX(5%) translateY(2%) skewX(8deg) scale(1.02);
+    opacity: 0.35;
+  }
+  50% {
+    transform: translateX(-8%) translateY(-5%) skewX(-10deg) scale(1.06);
+    opacity: 0.65;
+  }
+}
+
+@keyframes aurora-drift-violet {
+  0%,
+  100% {
+    transform: translateX(-4%) translateY(-3%) skewX(5deg);
+    opacity: 0.3;
+  }
+  40% {
+    transform: translateX(6%) translateY(4%) skewX(-8deg);
+    opacity: 0.5;
+  }
+  80% {
+    transform: translateX(2%) translateY(-2%) skewX(3deg);
+    opacity: 0.4;
+  }
+}
+
+@keyframes aurora-shimmer {
+  0% {
+    transform: translateX(-12%);
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.75;
+  }
+  100% {
+    transform: translateX(12%);
+    opacity: 0.4;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aurora-layer {
+    animation: none !important;
+    opacity: 0.25;
+  }
+}
+
+/* Mountain silhouettes */
+.hero-mountains {
+  background: linear-gradient(
+    180deg,
+    #c5b8e0 0%,
+    #b4a7d6 40%,
+    #a89bd4 100%
+  );
+}
