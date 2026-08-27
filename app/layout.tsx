@@ -22,10 +22,6 @@ export const metadata: Metadata = {
   title: `${BRAND_NAME} | 冰島行程專賣`,
   description:
     "探索冰島，從這裡開始。台灣出發或冰島集合，為您量身規劃完美旅程。",
-  icons: {
-    icon: "/images/puffin-logo.png",
-    apple: "/images/puffin-logo.png",
-  },
 };
 
 export default async function RootLayout({ children }: LayoutProps<"/">) {
