@@ -34,6 +34,14 @@ export const OPTION_LABELS: Record<string, string> = {
   experience: "體驗",
 };
 
+export const COMING_SOON_TRIPS = new Set([
+  "taiwan/summer",
+  "taiwan/winter",
+  "iceland/group",
+  "iceland/self-drive",
+  "iceland/experience",
+]);
+
 export type PlaceholderTrip = {
   id: string;
   name: string;

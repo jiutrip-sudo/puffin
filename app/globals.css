@@ -43,6 +43,22 @@ html {
   border: 1px solid var(--glass-border);
 }
 
+.glass-hero {
+  background: rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.34);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.14);
+}
+
+.hero-text-shadow {
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.45);
+}
+
+.hero-text-shadow-sm {
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.4);
+}
+
 .glass-pill {
   background: rgba(255, 255, 255, 0.14);
   backdrop-filter: blur(12px);
@@ -98,6 +114,22 @@ html {
   width: 100%;
   aspect-ratio: 5504 / 3072;
   overflow: hidden;
+}
+
+.site-footer {
+  background: linear-gradient(
+    165deg,
+    color-mix(in srgb, var(--color-primary-dark) 88%, #2d2848) 0%,
+    #3d3658 48%,
+    #2a2540 100%
+  );
+}
+
+.site-footer-panel {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 /* Aurora overlay — layered curtains over hero sky */
