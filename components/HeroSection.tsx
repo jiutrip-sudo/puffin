@@ -30,37 +30,50 @@ export function HeroSection({
   const isCentered = align === "center";
 
   return (
-    <section className="relative w-full">
+    <section className="relative isolate w-full">
+      <div className="site-header-shell pointer-events-none fixed inset-x-0 top-0 z-[90]">
+        <div className="pointer-events-auto">
+          {header ?? <SiteHeader />}
+        </div>
+      </div>
+
       <HeroMediaFrame>
         <HeroMedia priority={priority} />
-
-        {header ?? <SiteHeader />}
 
         <div
           className={
             isCentered
-              ? `absolute inset-0 z-10 flex flex-col items-center justify-center px-6 text-center md:px-8 ${footer ? "pb-24 md:pb-28" : ""} pt-16`
-              : "absolute inset-0 z-10 flex flex-col items-center justify-end px-6 pb-24 pt-16 text-center md:items-start md:px-8 md:pb-28 md:pt-20 md:text-left"
+              ? `pointer-events-none absolute inset-0 z-10 flex flex-col px-5 text-center max-md:pt-[calc(env(safe-area-inset-top)+3.25rem)] max-md:pb-[calc(env(safe-area-inset-bottom)+0.5rem)] md:px-8 md:pt-16 ${footer ? "max-md:justify-between md:justify-center" : "justify-center"} ${footer ? "md:pb-28" : ""}`
+              : "pointer-events-none absolute inset-0 z-10 flex flex-col items-center justify-end px-6 pb-24 pt-16 text-center md:items-start md:px-8 md:pb-28 md:pt-20 md:text-left"
           }
         >
           <div
             className={
-              isCentered
-                ? "mx-auto w-full max-w-3xl"
-                : "mx-auto w-full max-w-3xl md:max-w-7xl"
+              isCentered && footer
+                ? "pointer-events-none flex min-h-0 flex-1 flex-col items-center justify-center max-md:py-2 md:contents"
+                : isCentered
+                  ? "contents"
+                  : ""
             }
           >
+            <div
+              className={
+                isCentered
+                  ? "pointer-events-auto mx-auto w-full max-w-3xl"
+                  : "pointer-events-auto mx-auto w-full max-w-3xl md:max-w-7xl"
+              }
+            >
             {eyebrow && (
-              <p className="hero-text-shadow-sm mb-4 text-[10px] font-medium uppercase tracking-[0.25em] text-white/80 md:mb-5">
+              <p className="hero-text-shadow-sm mb-2 text-[10px] font-medium uppercase tracking-[0.25em] text-white/80 sm:mb-4 md:mb-5">
                 {eyebrow}
               </p>
             )}
             <h1
               className={
                 highlightTitle
-                  ? "hero-text-shadow text-4xl font-extrabold leading-tight tracking-tight text-white md:text-6xl lg:text-7xl"
+                  ? "hero-text-shadow text-3xl font-extrabold leading-tight tracking-tight text-white sm:text-4xl md:text-6xl lg:text-7xl"
                   : isCentered
-                    ? "hero-text-shadow text-[2.5rem] font-extrabold leading-[1.05] tracking-tight text-white md:text-5xl lg:text-6xl"
+                    ? "hero-text-shadow text-[1.75rem] font-extrabold leading-[1.1] tracking-tight text-white sm:text-[2.5rem] md:text-5xl lg:text-6xl"
                     : "hero-text-shadow text-3xl font-extrabold text-white md:text-5xl"
               }
             >
@@ -70,7 +83,7 @@ export function HeroSection({
               <p
                 className={
                   isCentered
-                    ? "hero-text-shadow-sm mx-auto mt-4 max-w-md text-base leading-relaxed text-white/90 md:mt-5"
+                    ? "hero-text-shadow-sm mx-auto mt-2 max-w-md text-sm leading-relaxed text-white/90 sm:mt-4 sm:text-base md:mt-5"
                     : "hero-text-shadow-sm mt-3 max-w-lg text-sm text-white/90 md:mt-4"
                 }
               >
@@ -78,7 +91,7 @@ export function HeroSection({
               </p>
             )}
             {tagline && isCentered && (
-              <p className="hero-text-shadow-sm mx-auto mt-4 max-w-md text-[10px] font-medium uppercase leading-relaxed tracking-[0.2em] text-white/65 md:text-xs">
+              <p className="hero-text-shadow-sm mx-auto mt-2 hidden max-w-md text-[10px] font-medium uppercase leading-relaxed tracking-[0.2em] text-white/65 sm:mt-4 sm:block md:text-xs">
                 {tagline}
               </p>
             )}
@@ -86,7 +99,7 @@ export function HeroSection({
               <div
                 className={
                   isCentered
-                    ? "mt-10 flex flex-col items-center justify-center gap-5 sm:flex-row md:mt-8 md:gap-7"
+                    ? "mt-5 flex flex-col items-center justify-center gap-4 sm:mt-8 sm:flex-row sm:gap-5 md:mt-8 md:gap-7"
                     : "mt-8 flex flex-col items-center md:items-start"
                 }
               >
@@ -94,13 +107,14 @@ export function HeroSection({
               </div>
             )}
           </div>
-        </div>
-
-        {footer && (
-          <div className="absolute bottom-4 left-0 right-0 z-20 md:bottom-6">
-            {footer}
           </div>
-        )}
+
+          {footer && (
+            <div className="pointer-events-auto relative z-20 w-full shrink-0 max-md:pt-2 md:absolute md:bottom-6 md:left-0 md:right-0 md:pt-0">
+              {footer}
+            </div>
+          )}
+        </div>
       </HeroMediaFrame>
     </section>
   );

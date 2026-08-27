@@ -5,26 +5,44 @@ import { statSync } from "fs";
 const HERO_IMAGE_WIDTH = 5504;
 const HERO_IMAGE_HEIGHT = 3072;
 
-const src = "public/images/hero.png";
-const outputs = [
-  { file: "hero-1920.webp", width: 1920 },
-  { file: "hero-3840.webp", width: 3840 },
+const VARIANTS = [
+  {
+    src: "public/images/hero.png",
+    prefix: "hero",
+    widths: [1920, 3840],
+  },
+  {
+    src: "public/images/hero-dark.png",
+    prefix: "hero-dark",
+    widths: [1920, 3840],
+  },
 ];
 
-for (const { file, width } of outputs) {
-  const out = `public/images/${file}`;
-  const height = Math.round((width * HERO_IMAGE_HEIGHT) / HERO_IMAGE_WIDTH);
+for (const { src, prefix, widths } of VARIANTS) {
+  const sourceMeta = await sharp(src).metadata();
+  const sourceWidth = sourceMeta.width ?? HERO_IMAGE_WIDTH;
+  const sourceHeight = sourceMeta.height ?? HERO_IMAGE_HEIGHT;
 
-  await sharp(src)
-    .resize(width, height, { fit: "fill" })
-    .webp({ quality: 92, effort: 6 })
-    .toFile(out);
+  for (const width of widths) {
+    const file = `${prefix}-${width}.webp`;
+    const out = `public/images/${file}`;
+    const height = Math.round((width * sourceHeight) / sourceWidth);
 
-  const meta = await sharp(out).metadata();
-  const size = statSync(out).size;
-  const ratio = meta.width / meta.height;
+    await sharp(src)
+      .resize(width, height, { fit: "fill" })
+      .webp({ quality: 92, effort: 6 })
+      .toFile(out);
+
+    const meta = await sharp(out).metadata();
+    const size = statSync(out).size;
+    const ratio = meta.width / meta.height;
+    console.log(
+      `${file}: ${meta.width}x${meta.height}, ratio=${ratio.toFixed(6)}, ${(size / 1024 / 1024).toFixed(2)} MB`,
+    );
+  }
+
   console.log(
-    `${file}: ${meta.width}x${meta.height}, ratio=${ratio.toFixed(6)}, ${(size / 1024 / 1024).toFixed(2)} MB`,
+    `${prefix} source: ${sourceWidth}x${sourceHeight}, ratio=${(sourceWidth / sourceHeight).toFixed(6)}`,
   );
 }
 
