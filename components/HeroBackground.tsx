@@ -1,9 +1,11 @@
+import { HERO_IMAGE_HEIGHT, HERO_IMAGE_WIDTH } from "@/lib/hero-image";
+
 type HeroBackgroundProps = {
   className?: string;
   priority?: boolean;
 };
 
-const HERO_SRC = "/images/hero-1920.webp";
+const HERO_SRC = "/images/hero.png";
 const HERO_SRCSET = [
   "/images/hero-1920.webp 1920w",
   "/images/hero-3840.webp 3840w",
@@ -20,6 +22,8 @@ export function HeroBackground({
       src={HERO_SRC}
       srcSet={HERO_SRCSET}
       sizes="100vw"
+      width={HERO_IMAGE_WIDTH}
+      height={HERO_IMAGE_HEIGHT}
       alt=""
       aria-hidden="true"
       fetchPriority={priority ? "high" : "auto"}

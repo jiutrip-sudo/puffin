@@ -9,8 +9,6 @@ export default function TaiwanPage() {
       subtitle="選擇您想前往的季節，我們將為您規劃最適合的行程。"
       tagline="CHOOSE YOUR SEASON FOR THE PERFECT ICELAND ADVENTURE."
       options={TAIWAN_OPTIONS}
-      backHref="/"
-      backLabel="首頁"
     />
   );
 }

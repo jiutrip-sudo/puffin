@@ -9,8 +9,6 @@ export default function IcelandPage() {
       subtitle="選擇您的旅行方式，跟團、自駕或體驗，各有精彩。"
       tagline="GROUP TOUR, SELF-DRIVE, OR UNIQUE EXPERIENCES AWAIT."
       options={ICELAND_OPTIONS}
-      backHref="/"
-      backLabel="首頁"
     />
   );
 }

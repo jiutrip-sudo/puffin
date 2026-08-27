@@ -1,30 +1,9 @@
 import Link from "next/link";
 
-function ArrowIcon() {
-  return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 16 16"
-      fill="none"
-      aria-hidden="true"
-    >
-      <path
-        d="M3 8h10M9 4l4 4-4 4"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
 type PillButtonProps = {
   href: string;
   children: React.ReactNode;
-  variant?: "solid" | "outline" | "dark" | "ghost";
-  showArrow?: boolean;
+  variant?: "solid" | "outline" | "dark" | "ghost" | "glass";
   className?: string;
 };
 
@@ -41,22 +20,13 @@ export function PillButton({
   href,
   children,
   variant = "solid",
-  showArrow = true,
   className = "",
 }: PillButtonProps) {
-  if (variant === "solid" && showArrow) {
+  if (variant === "glass") {
     return (
-      <Link href={href} className={`group inline-flex items-center ${className}`}>
-        <span
-          className="rounded-full bg-white px-7 py-3.5 text-sm font-semibold tracking-wide text-foreground shadow-lg shadow-black/8 transition-all group-hover:bg-white/95 md:px-8 md:text-base"
-        >
-          {children}
-        </span>
-        <span
-          className="ml-1 flex h-11 w-11 items-center justify-center rounded-full bg-white/25 text-hero-text backdrop-blur-sm transition-all group-hover:bg-white/35"
-        >
-          <ArrowIcon />
-        </span>
+      <Link href={href} className={`glass-pill-button group ${className}`}>
+        <span className="glass-pill-button-ring" aria-hidden="true" />
+        <span className="glass-pill-button-face">{children}</span>
       </Link>
     );
   }

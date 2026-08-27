@@ -2,11 +2,12 @@ export type TripOption = {
   id: string;
   label: string;
   href: string;
+  lines?: [string, string];
 };
 
 export const DEPARTURE_OPTIONS: TripOption[] = [
-  { id: "taiwan", label: "台灣出發", href: "/taiwan" },
-  { id: "iceland", label: "冰島集合", href: "/iceland" },
+  { id: "taiwan", label: "台灣出發", href: "/taiwan", lines: ["台灣", "出發"] },
+  { id: "iceland", label: "冰島集合", href: "/iceland", lines: ["冰島", "集合"] },
 ];
 
 export const TAIWAN_OPTIONS: TripOption[] = [

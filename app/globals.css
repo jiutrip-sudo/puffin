@@ -24,9 +24,15 @@
 }
 
 body {
+  margin: 0;
+  width: 100%;
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-syne), system-ui, sans-serif;
+}
+
+html {
+  width: 100%;
 }
 
 /* Glass morphism utility */
@@ -84,6 +90,14 @@ body {
 
 .animate-spin-slow {
   animation: spin-slow 20s linear infinite;
+}
+
+/* Hero frame — aspect ratio from lib/hero-image.ts (5504×3072) */
+.hero-media-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 5504 / 3072;
+  overflow: hidden;
 }
 
 /* Aurora overlay — layered curtains over hero sky */
@@ -218,6 +232,251 @@ body {
   .aurora-layer {
     animation: none !important;
     opacity: 0.25;
+  }
+}
+
+/* Circle button — glass + aurora hover */
+.circle-button {
+  position: relative;
+  display: flex;
+  aspect-ratio: 1;
+  width: 5.5rem;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  font-weight: 600;
+  color: var(--color-hero-text);
+  transition:
+    transform 0.4s cubic-bezier(0.34, 1.45, 0.64, 1),
+    box-shadow 0.4s ease;
+}
+
+@media (min-width: 768px) {
+  .circle-button {
+    width: 6.25rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .circle-button {
+    width: 6.75rem;
+  }
+}
+
+.circle-button-ring {
+  position: absolute;
+  inset: -3px;
+  border-radius: 9999px;
+  padding: 3px;
+  background: conic-gradient(
+    from 0deg,
+    #4ade80,
+    #67e8f9,
+    #a78bfa,
+    #f472b6,
+    #4ade80
+  );
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  z-index: 0;
+  pointer-events: none;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+}
+
+.circle-button-face {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  aspect-ratio: 1;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  text-align: center;
+  color: var(--color-hero-text);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.circle-button:hover {
+  transform: translateY(-6px) scale(1.06);
+  box-shadow:
+    0 14px 32px rgba(0, 0, 0, 0.18),
+    0 0 28px rgba(74, 222, 128, 0.45),
+    0 0 48px rgba(103, 232, 249, 0.25);
+}
+
+.circle-button:hover .circle-button-ring {
+  opacity: 1;
+  animation: aurora-ring-spin 2.5s linear infinite;
+}
+
+.circle-button:hover .circle-button-face {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.38);
+}
+
+.circle-button:active {
+  transform: translateY(-2px) scale(1.02);
+  transition-duration: 0.15s;
+}
+
+@keyframes aurora-ring-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .circle-button {
+    transition: box-shadow 0.2s ease;
+  }
+
+  .circle-button:hover {
+    transform: none;
+  }
+
+  .circle-button:hover .circle-button-ring {
+    animation: none;
+    opacity: 0.85;
+  }
+}
+
+/* Glass pill button — flowing rainbow border + glass fill */
+.glass-pill-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  border-radius: 9999px;
+  font-weight: 600;
+  letter-spacing: 0.025em;
+  color: var(--color-hero-text);
+  transition:
+    transform 0.4s cubic-bezier(0.34, 1.45, 0.64, 1),
+    box-shadow 0.4s ease;
+}
+
+.glass-pill-button-ring {
+  position: absolute;
+  inset: -2px;
+  border-radius: 9999px;
+  padding: 2px;
+  background: linear-gradient(
+    90deg,
+    #4ade80,
+    #22d3ee,
+    #60a5fa,
+    #a78bfa,
+    #f472b6,
+    #fbbf24,
+    #4ade80
+  );
+  background-size: 300% 100%;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  z-index: 0;
+  pointer-events: none;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+}
+
+.glass-pill-button-face {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  padding: 0.875rem 1.75rem;
+  font-size: 0.875rem;
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  color: var(--color-hero-text);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease;
+}
+
+@media (min-width: 768px) {
+  .glass-pill-button-face {
+    padding: 0.875rem 2rem;
+    font-size: 1rem;
+  }
+}
+
+.glass-pill-button:hover {
+  transform: translateY(-6px) scale(1.06);
+  box-shadow:
+    0 14px 32px rgba(0, 0, 0, 0.18),
+    0 0 28px rgba(74, 222, 128, 0.45),
+    0 0 48px rgba(103, 232, 249, 0.25);
+}
+
+.glass-pill-button:hover .glass-pill-button-ring {
+  opacity: 1;
+  animation: pill-rainbow-flow 2.8s linear infinite;
+}
+
+.glass-pill-button:hover .glass-pill-button-face {
+  background: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.glass-pill-button:active {
+  transform: translateY(-2px) scale(1.02);
+  transition-duration: 0.15s;
+}
+
+@keyframes pill-rainbow-flow {
+  0% {
+    background-position: 0% center;
+  }
+  100% {
+    background-position: 300% center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glass-pill-button {
+    transition: box-shadow 0.2s ease;
+  }
+
+  .glass-pill-button:hover {
+    transform: none;
+  }
+
+  .glass-pill-button:hover .glass-pill-button-ring {
+    animation: none;
+    opacity: 0.85;
+    background-position: 50% center;
   }
 }
 
