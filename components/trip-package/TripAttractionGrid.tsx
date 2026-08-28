@@ -1,12 +1,17 @@
 "use client";
 
 import Image from "next/image";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import type { TripAttraction } from "@/lib/trip-packages/types";
 
 type TripAttractionGridProps = {
   attractions: TripAttraction[];
 };
+
+const ATTRACTION_CARD_RADIUS = "rounded-[10px]";
+const CARD_WIDTH = 159;
+const CARD_GAP = 24;
+const SCROLL_STEP = CARD_WIDTH + CARD_GAP;
 
 function attractionImageSrc(url: string, width: number) {
   if (url.includes("senlinmao.com/images/")) {
@@ -28,8 +33,11 @@ function attractionParagraphs(spot: TripAttraction) {
 }
 
 export function TripAttractionGrid({ attractions }: TripAttractionGridProps) {
+  const scrollRef = useRef<HTMLDivElement>(null);
   const [activeSpot, setActiveSpot] = useState<TripAttraction | null>(null);
   const [galleryIndex, setGalleryIndex] = useState(0);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(false);
 
   const close = useCallback(() => {
     setActiveSpot(null);
@@ -40,6 +48,40 @@ export function TripAttractionGrid({ attractions }: TripAttractionGridProps) {
     setActiveSpot(spot);
     setGalleryIndex(0);
   }, []);
+
+  const updateScrollButtons = useCallback(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+
+    const maxScrollLeft = el.scrollWidth - el.clientWidth;
+    setCanScrollLeft(el.scrollLeft > 4);
+    setCanScrollRight(el.scrollLeft < maxScrollLeft - 4);
+  }, []);
+
+  const scrollCards = useCallback((direction: "prev" | "next") => {
+    const el = scrollRef.current;
+    if (!el) return;
+
+    el.scrollBy({
+      left: direction === "next" ? SCROLL_STEP : -SCROLL_STEP,
+      behavior: "smooth",
+    });
+  }, []);
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+
+    updateScrollButtons();
+
+    el.addEventListener("scroll", updateScrollButtons, { passive: true });
+    window.addEventListener("resize", updateScrollButtons);
+
+    return () => {
+      el.removeEventListener("scroll", updateScrollButtons);
+      window.removeEventListener("resize", updateScrollButtons);
+    };
+  }, [attractions.length, updateScrollButtons]);
 
   useEffect(() => {
     if (!activeSpot) return;
@@ -75,36 +117,76 @@ export function TripAttractionGrid({ attractions }: TripAttractionGridProps) {
     );
   }, [activeGallery.length]);
 
+  const showCarouselArrows = attractions.length > 1;
+
   return (
     <>
-      <div
-        className="trip-attraction-scroll -mx-4 flex gap-6 overflow-x-auto scroll-pl-4 scroll-pr-4 px-4 pb-1 md:mx-0 md:scroll-pl-0 md:scroll-pr-0 md:px-0 snap-x snap-mandatory [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-        aria-label="景點高光，可左右滑動瀏覽"
-      >
-        {attractions.map((spot) => (
+      <div className="relative md:px-11">
+        {showCarouselArrows && canScrollLeft && (
           <button
-            key={spot.nameEn}
             type="button"
-            onClick={() => openSpot(spot)}
-            className="group w-[159px] shrink-0 snap-start overflow-hidden rounded-[10px] bg-background text-left transition-opacity hover:opacity-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-            aria-label={`查看景點介紹：${spot.name}`}
+            onClick={() => scrollCards("prev")}
+            className="absolute left-0 top-[99px] z-10 hidden h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-foreground/10 bg-background text-sm font-semibold text-foreground shadow-md transition-colors hover:bg-primary-surface/30 md:flex"
+            aria-label="上一組景點"
           >
-            <div className="relative h-[118px] w-full overflow-hidden bg-primary-surface/25">
-              <Image
-                src={attractionImageSrc(spot.imageUrl, 320)}
-                alt={spot.name}
-                fill
-                className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
-                sizes="159px"
-              />
-            </div>
-            <div className="px-3.5 py-3">
-              <p className="line-clamp-3 text-[15px] font-bold leading-[18px] text-foreground">
-                {spot.name}｜{spot.nameEn}
-              </p>
-            </div>
+            ←
           </button>
-        ))}
+        )}
+
+        {showCarouselArrows && canScrollRight && (
+          <button
+            type="button"
+            onClick={() => scrollCards("next")}
+            className="absolute right-0 top-[99px] z-10 hidden h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-foreground/10 bg-background text-sm font-semibold text-foreground shadow-md transition-colors hover:bg-primary-surface/30 md:flex"
+            aria-label="下一組景點"
+          >
+            →
+          </button>
+        )}
+
+        <div
+          ref={scrollRef}
+          className="trip-attraction-scroll -mx-4 flex gap-6 overflow-x-auto scroll-pl-4 scroll-pr-4 px-4 pb-1 md:mx-0 md:scroll-pl-0 md:scroll-pr-0 md:px-0 snap-x snap-mandatory [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          aria-label="景點高光，可左右滑動瀏覽"
+        >
+          {attractions.map((spot) => (
+            <button
+              key={spot.nameEn}
+              type="button"
+              onClick={() => openSpot(spot)}
+              className={`group w-[159px] shrink-0 cursor-pointer snap-start overflow-hidden ${ATTRACTION_CARD_RADIUS} border border-foreground/5 bg-background text-left shadow-sm transition-[transform,box-shadow,ring-color] hover:scale-[1.02] hover:shadow-md hover:ring-2 hover:ring-primary/35 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2`}
+              aria-label={`查看景點介紹：${spot.name}`}
+            >
+              <div className="relative h-[118px] w-full overflow-hidden rounded-t-[10px] bg-primary-surface/25">
+                <Image
+                  src={attractionImageSrc(spot.imageUrl, 320)}
+                  alt={spot.name}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                  sizes="159px"
+                />
+                <div
+                  className="absolute inset-0 flex items-center justify-center bg-black/0 transition-colors group-hover:bg-black/30 group-focus-visible:bg-black/30"
+                  aria-hidden="true"
+                >
+                  <span
+                    className="rounded-full bg-background/95 px-3 py-1 text-[11px] font-semibold text-foreground opacity-0 shadow-sm transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100"
+                  >
+                    查看介紹
+                  </span>
+                </div>
+              </div>
+              <div className="flex h-[78px] flex-col px-3.5 py-3">
+                <p className="line-clamp-1 text-[15px] font-bold leading-[18px] text-foreground">
+                  {spot.name}
+                </p>
+                <p className="mt-0.5 line-clamp-2 text-[12px] font-medium leading-[16px] text-foreground/65">
+                  {spot.nameEn}
+                </p>
+              </div>
+            </button>
+          ))}
+        </div>
       </div>
 
       {activeSpot && (
@@ -159,8 +241,10 @@ export function TripAttractionGrid({ attractions }: TripAttractionGridProps) {
 
                 {activeGallery.length > 0 && (
                   <div className="relative mt-8">
-                    <div className="overflow-hidden rounded-xl">
-                      <div className="relative aspect-[16/10] w-full bg-primary-surface/25">
+                    <div className={`overflow-hidden ${ATTRACTION_CARD_RADIUS}`}>
+                      <div
+                        className={`relative aspect-[16/10] w-full overflow-hidden ${ATTRACTION_CARD_RADIUS} bg-primary-surface/25`}
+                      >
                         <Image
                           src={attractionImageSrc(
                             activeGallery[galleryIndex],
@@ -168,7 +252,7 @@ export function TripAttractionGrid({ attractions }: TripAttractionGridProps) {
                           )}
                           alt={activeSpot.name}
                           fill
-                          className="object-cover"
+                          className={`object-cover ${ATTRACTION_CARD_RADIUS}`}
                           sizes="800px"
                           priority
                         />
