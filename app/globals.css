@@ -16,6 +16,9 @@
   --glass-hero-bg: rgba(255, 255, 255, 0.22);
   --glass-hero-border: rgba(255, 255, 255, 0.34);
   --glass-hero-shadow: 0 4px 24px rgba(0, 0, 0, 0.14);
+  --glass-white-bg: #ffffff;
+  --glass-white-border: rgba(0, 0, 0, 0.06);
+  --glass-white-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
   --hero-pop-0: #fcdca8;
   --hero-pop-30: #d4cceb;
   --hero-pop-60: #7c94c6;
@@ -31,6 +34,9 @@
   --theme-toggle-muted: rgba(255, 255, 255, 0.7);
   --theme-toggle-active-bg: rgba(255, 255, 255, 0.28);
   --theme-toggle-active-text: #ffffff;
+  --date-field-bg: color-mix(in srgb, var(--color-primary-surface) 58%, var(--background));
+  --date-field-border: color-mix(in srgb, var(--color-primary-dark) 20%, transparent);
+  --date-field-focus-ring: color-mix(in srgb, var(--color-primary) 32%, transparent);
 }
 
 [data-theme="dark"] {
@@ -48,6 +54,9 @@
   --glass-hero-bg: rgba(12, 11, 20, 0.52);
   --glass-hero-border: rgba(255, 255, 255, 0.14);
   --glass-hero-shadow: 0 4px 28px rgba(0, 0, 0, 0.42);
+  --glass-white-bg: rgba(28, 26, 38, 0.94);
+  --glass-white-border: rgba(255, 255, 255, 0.1);
+  --glass-white-shadow: 0 4px 24px rgba(0, 0, 0, 0.32);
   --hero-pop-0: #1e3a5f;
   --hero-pop-30: #5b4d8a;
   --hero-pop-60: #4338ca;
@@ -58,6 +67,9 @@
   --theme-toggle-muted: rgba(255, 255, 255, 0.55);
   --theme-toggle-active-bg: rgba(180, 167, 214, 0.32);
   --theme-toggle-active-text: #f4f2fa;
+  --date-field-bg: color-mix(in srgb, var(--color-primary-surface) 72%, var(--background));
+  --date-field-border: rgba(255, 255, 255, 0.14);
+  --date-field-focus-ring: color-mix(in srgb, var(--color-primary) 38%, transparent);
 }
 
 @theme inline {
@@ -97,6 +109,467 @@ html {
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--glass-hero-border);
   box-shadow: var(--glass-hero-shadow);
+}
+
+/* Opaque white frost — blur without see-through transparency */
+.glass-white {
+  background: var(--glass-white-bg);
+  backdrop-filter: blur(24px) saturate(1.2);
+  -webkit-backdrop-filter: blur(24px) saturate(1.2);
+  border: 1px solid var(--glass-white-border);
+  box-shadow: var(--glass-white-shadow);
+}
+
+.trip-package-page {
+  --trip-header-height: calc(env(safe-area-inset-top) + 3.25rem);
+  --trip-sticky-offset: calc(env(safe-area-inset-top) + 6.25rem);
+}
+
+.trip-date-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  border-radius: 0.75rem;
+  border: 1px solid var(--date-field-border);
+  background: var(--date-field-bg);
+  transition:
+    border-color 200ms ease,
+    box-shadow 200ms ease,
+    background-color 200ms ease;
+}
+
+.trip-date-input-wrap:focus-within {
+  border-color: var(--color-primary-dark);
+  box-shadow: 0 0 0 3px var(--date-field-focus-ring);
+}
+
+.trip-date-input-wrap.is-disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.trip-date-input {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+  border: none;
+  background: transparent;
+  color: var(--foreground);
+  padding: 0.625rem 2.35rem 0.625rem 0.75rem;
+  font: inherit;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color-scheme: light;
+  accent-color: var(--color-primary-dark);
+  outline: none;
+  cursor: pointer;
+}
+
+[data-theme="dark"] .trip-date-input {
+  color-scheme: dark;
+}
+
+.trip-date-input:disabled {
+  cursor: not-allowed;
+}
+
+.trip-date-trigger {
+  display: block;
+  text-align: left;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  font: inherit;
+}
+
+.trip-date-trigger.is-placeholder {
+  color: color-mix(in srgb, var(--foreground) 48%, transparent);
+}
+
+.trip-calendar-popover {
+  border-radius: 1rem;
+  border: 1px solid var(--date-field-border);
+  background: var(--background);
+  padding: 0.75rem;
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.12),
+    0 0 0 1px color-mix(in srgb, var(--color-primary-dark) 8%, transparent);
+}
+
+[data-theme="dark"] .trip-calendar-popover {
+  box-shadow:
+    0 18px 48px rgba(0, 0, 0, 0.48),
+    0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+
+.trip-calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.trip-calendar-title {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--foreground);
+}
+
+.trip-calendar-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 9999px;
+  border: 1px solid var(--date-field-border);
+  background: var(--date-field-bg);
+  color: var(--foreground);
+  font-size: 1.125rem;
+  line-height: 1;
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease;
+}
+
+.trip-calendar-nav:hover:not(:disabled) {
+  border-color: var(--color-primary-dark);
+  background: color-mix(in srgb, var(--color-primary-surface) 65%, var(--background));
+}
+
+.trip-calendar-nav:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.trip-calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.125rem;
+  margin-bottom: 0.25rem;
+}
+
+.trip-calendar-weekday {
+  text-align: center;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: color-mix(in srgb, var(--foreground) 55%, transparent);
+  padding: 0.25rem 0;
+}
+
+.trip-calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.125rem;
+}
+
+.trip-calendar-day {
+  aspect-ratio: 1;
+  border: none;
+  border-radius: 9999px;
+  background: transparent;
+  color: var(--foreground);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    background-color 150ms ease,
+    color 150ms ease;
+}
+
+.trip-calendar-day:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--color-primary-surface) 70%, var(--background));
+}
+
+.trip-calendar-day.is-outside {
+  color: color-mix(in srgb, var(--foreground) 35%, transparent);
+}
+
+.trip-calendar-day.is-today:not(.is-selected) {
+  border: 1px solid color-mix(in srgb, var(--color-primary-dark) 55%, transparent);
+}
+
+.trip-calendar-day.is-selected {
+  background: var(--color-primary-dark);
+  color: #ffffff;
+}
+
+.trip-calendar-day:disabled {
+  opacity: 0.28;
+  cursor: not-allowed;
+}
+
+.trip-date-input::-webkit-calendar-picker-indicator {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.trip-date-input::-webkit-datetime-edit {
+  padding: 0;
+}
+
+.trip-date-input::-webkit-datetime-edit-fields-wrapper {
+  padding: 0;
+}
+
+.trip-date-icon {
+  position: absolute;
+  right: 0.7rem;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: var(--color-primary-dark);
+  opacity: 0.9;
+}
+
+.trip-date-input-wrap.is-disabled .trip-date-icon {
+  opacity: 0.45;
+}
+
+@media (min-width: 768px) {
+  .trip-package-page {
+    --trip-header-height: calc(env(safe-area-inset-top) + 4rem);
+    --trip-sticky-offset: calc(env(safe-area-inset-top) + 7rem);
+  }
+}
+
+/* Booking panel — reference card layout */
+.booking-panel-card {
+  position: relative;
+  border-radius: 1.25rem;
+  border: 1px solid color-mix(in srgb, var(--foreground) 12%, transparent);
+  background: var(--background);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="dark"] .booking-panel-card {
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+}
+
+.booking-panel-start-price {
+  font-size: 1.5rem;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--foreground);
+}
+
+.booking-panel-start-suffix {
+  font-size: 0.9375rem;
+  font-weight: 700;
+}
+
+.booking-field {
+  position: relative;
+  display: block;
+  border-radius: 0.625rem;
+  border: 1px solid color-mix(in srgb, var(--foreground) 14%, transparent);
+  background: var(--background);
+  padding: 0.625rem 0.75rem;
+  transition:
+    border-color 150ms ease,
+    box-shadow 150ms ease;
+}
+
+.booking-field:not(.is-disabled):hover {
+  border-color: color-mix(in srgb, var(--color-primary-dark) 35%, transparent);
+}
+
+.booking-field:focus-visible {
+  outline: none;
+  border-color: var(--color-primary-dark);
+  box-shadow: 0 0 0 3px var(--date-field-focus-ring);
+}
+
+.booking-field.is-disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.booking-field-label {
+  display: block;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: color-mix(in srgb, var(--foreground) 52%, transparent);
+}
+
+.booking-field-value {
+  display: block;
+  margin-top: 0.125rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--foreground);
+  line-height: 1.3;
+}
+
+.booking-date-trigger {
+  padding-right: 2rem;
+}
+
+.booking-date-trigger.is-placeholder .booking-field-value {
+  color: color-mix(in srgb, var(--foreground) 45%, transparent);
+}
+
+.booking-date-icon {
+  position: absolute;
+  right: 0.65rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: color-mix(in srgb, var(--foreground) 40%, transparent);
+  pointer-events: none;
+}
+
+.booking-option-chip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  width: 100%;
+  min-width: 0;
+  border: none;
+  border-radius: 0.625rem;
+  background: color-mix(in srgb, var(--color-primary-surface) 72%, #eef3ff);
+  padding: 0.625rem 0.75rem;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 150ms ease;
+}
+
+[data-theme="dark"] .booking-option-chip {
+  background: color-mix(in srgb, var(--color-primary-surface) 85%, var(--background));
+}
+
+.booking-option-chip:hover {
+  background: color-mix(in srgb, var(--color-primary-surface) 55%, var(--background));
+}
+
+.booking-option-chip-label {
+  display: block;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: color-mix(in srgb, var(--color-primary-dark) 88%, var(--foreground));
+}
+
+.booking-option-chip-value {
+  display: block;
+  margin-top: 0.125rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--foreground);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.booking-option-chevron {
+  flex-shrink: 0;
+  color: color-mix(in srgb, var(--color-primary-dark) 75%, var(--foreground));
+  font-size: 0.75rem;
+  line-height: 1;
+  letter-spacing: -0.12em;
+}
+
+.booking-panel-total-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding-top: 0.25rem;
+}
+
+.booking-panel-total-label {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+.booking-panel-total-amount {
+  font-size: 1.375rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--foreground);
+  transition: color 200ms ease;
+}
+
+.booking-panel-total-amount.is-flash {
+  color: var(--color-primary-dark);
+}
+
+.booking-panel-cta {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 9999px;
+  background: #e8946f;
+  padding: 0.875rem 1.5rem;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-decoration: none;
+  transition:
+    background-color 150ms ease,
+    transform 150ms ease;
+}
+
+.booking-panel-cta:hover {
+  background: #df7f56;
+}
+
+.booking-panel-cta:active {
+  transform: scale(0.98);
+}
+
+.booking-panel-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  border-radius: inherit;
+  background: var(--background);
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.booking-panel-overlay-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.booking-panel-overlay-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--foreground);
+}
+
+.booking-panel-overlay-close {
+  border: none;
+  background: transparent;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: color-mix(in srgb, var(--foreground) 60%, transparent);
+  cursor: pointer;
+}
+
+.booking-guest-panel {
+  margin-top: 0.5rem;
+  border-radius: 0.625rem;
+  border: 1px solid color-mix(in srgb, var(--foreground) 12%, transparent);
+  background: color-mix(in srgb, var(--color-primary-surface) 25%, var(--background));
+  padding: 0.75rem;
 }
 
 .hero-text-shadow {

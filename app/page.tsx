@@ -12,7 +12,7 @@ export default function Home() {
       tagline="START YOUR JOURNEY WITH A WELL-PLANNED ITINERARY."
       footer={<TransitionBar />}
     >
-      <div className="flex items-center justify-center gap-5 md:gap-7">
+      <div className="flex items-center justify-center gap-16 md:gap-24">
         {DEPARTURE_OPTIONS.map((option) => (
           <CircleButton
             key={option.id}

@@ -1,0 +1,123 @@
+import { notFound } from "next/navigation";
+import type { Metadata } from "next";
+import { TripPackagePage } from "@/components/trip-package/TripPackagePage";
+import { HeroSection } from "@/components/HeroSection";
+import { SiteHeader } from "@/components/SiteHeader";
+import { TransitionBar } from "@/components/TransitionBar";
+import Link from "next/link";
+import { getTripPackageWithPricing } from "@/lib/trip-packages/get-package-with-pricing";
+import {
+  COMING_SOON_TRIPS,
+  ICELAND_TRIP_SEASON_DAY_IDS,
+  OPTION_LABELS,
+  SOURCE_LABELS,
+} from "@/lib/trip-options";
+
+type PageProps = {
+  params: Promise<{
+    source: string;
+    option: string;
+    suboption: string;
+    duration: string;
+  }>;
+};
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { source, option, suboption, duration } = await params;
+  const tripKey = `${source}/${option}/${suboption}/${duration}`;
+  const data = getTripPackageWithPricing(tripKey);
+
+  if (data) {
+    return {
+      title: `${data.package.title} | 大樂旅行社`,
+      description: data.package.intro.summary,
+      openGraph: {
+        title: data.package.title,
+        description: data.package.intro.summary,
+        images: [{ url: data.package.heroImage }],
+      },
+    };
+  }
+
+  const durationLabel = `${duration}日`;
+  const optionLabel = OPTION_LABELS[option];
+  const suboptionLabel = OPTION_LABELS[suboption];
+
+  return {
+    title: `${durationLabel}${optionLabel}行程 | 大樂旅行社`,
+    description: `${SOURCE_LABELS[source]} · ${optionLabel} · ${suboptionLabel} · ${durationLabel}`,
+  };
+}
+
+export default async function TripDurationPage({ params }: PageProps) {
+  const { source, option, suboption, duration } = await params;
+
+  const seasonDayIds = ICELAND_TRIP_SEASON_DAY_IDS[option]?.[suboption];
+
+  if (source !== "iceland" || !seasonDayIds?.has(duration)) {
+    notFound();
+  }
+
+  const tripKey = `${source}/${option}/${suboption}/${duration}`;
+  const packageData = getTripPackageWithPricing(tripKey);
+
+  if (packageData) {
+    return (
+      <TripPackagePage
+        package={packageData.package}
+        pricingConfig={packageData.pricingConfig}
+      />
+    );
+  }
+
+  const sourceLabel = SOURCE_LABELS[source];
+  const optionLabel = OPTION_LABELS[option];
+  const suboptionLabel = OPTION_LABELS[suboption];
+  const durationLabel = `${duration}日`;
+  const isComingSoon = COMING_SOON_TRIPS.has(tripKey);
+
+  const header = (
+    <SiteHeader
+      rightSlot={
+        <Link
+          href={`/trips/iceland/${option}/${suboption}`}
+          className="glass-hero rounded-full px-5 py-2 text-xs font-medium text-hero-text/90 transition-all hover:bg-white/25"
+        >
+          返回 {suboptionLabel}
+        </Link>
+      }
+    />
+  );
+
+  const footer = (
+    <TransitionBar
+      tags={[`#${durationLabel}`, `#${suboptionLabel}`, "#冰島之旅"]}
+    />
+  );
+
+  if (isComingSoon) {
+    return (
+      <HeroSection
+        eyebrow={`${sourceLabel} · ${optionLabel} · ${suboptionLabel}`}
+        title="即將推出，敬請期待"
+        align="center"
+        highlightTitle
+        priority={false}
+        footer={footer}
+        header={header}
+      />
+    );
+  }
+
+  return (
+    <HeroSection
+      eyebrow={`${sourceLabel} · ${optionLabel} · ${suboptionLabel}`}
+      title={`${durationLabel}行程`}
+      subtitle={`為您精選的 ${sourceLabel} · ${optionLabel} · ${suboptionLabel} · ${durationLabel} 行程`}
+      align="start"
+      priority={false}
+      footer={footer}
+      header={header}
+    />
+  );
+}

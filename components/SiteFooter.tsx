@@ -14,7 +14,9 @@ function findItem(items: ReadonlyArray<InfoItem>, label: string) {
 }
 
 function CompactFooterInfo() {
-  const registrationLine = COMPANY_INFO.registration.map((item) => item.value).join(" · ");
+  const registrationLine = COMPANY_INFO.registration
+    .map((item) => item.value)
+    .join(" · ");
   const chairman = findItem(COMPANY_INFO.contact, "執行董事長");
   const contact = findItem(COMPANY_INFO.contact, "聯絡人");
   const phone = findItem(COMPANY_INFO.contact, "電話");
@@ -61,7 +63,7 @@ function CompactFooterInfo() {
   );
 }
 
-function InfoSection({
+function InfoColumn({
   title,
   items,
 }: {
@@ -69,63 +71,60 @@ function InfoSection({
   items: ReadonlyArray<InfoItem>;
 }) {
   return (
-    <section className="site-footer-panel rounded-xl px-3.5 py-3 sm:rounded-2xl sm:px-5 sm:py-4 md:px-6 md:py-5">
-      <h3 className="mb-2.5 text-[9px] font-semibold uppercase tracking-[0.2em] text-white/55 sm:mb-4 sm:text-[10px]">
+    <div className="min-w-0">
+      <h3 className="mb-1 text-[8px] font-semibold uppercase tracking-[0.18em] text-white/50">
         {title}
       </h3>
-      <dl className="grid grid-cols-2 gap-x-3 gap-y-2 sm:gap-x-6 sm:gap-y-3">
+      <dl className="grid grid-cols-2 gap-x-3 gap-y-0.5">
         {items.map((item) => {
           const isWide = WIDE_FIELD_LABELS.has(item.label);
 
           return (
             <div
               key={item.label}
-              className={`min-w-0 ${isWide ? "col-span-2" : ""}`}
+              className={`flex min-w-0 items-baseline gap-1 ${isWide ? "col-span-2" : ""}`}
             >
-              <div className="flex min-w-0 items-baseline gap-1 sm:block">
-                <dt className="shrink-0 text-[10px] font-medium text-white/50 sm:text-[11px]">
-                  {item.label}
-                  <span className="sm:hidden">：</span>
-                </dt>
-                <dd className="min-w-0 text-xs leading-snug text-white/92 sm:mt-0.5 sm:text-sm">
-                  {item.href ? (
-                    <a
-                      href={item.href}
-                      className="break-all transition-colors hover:text-primary-light"
-                    >
-                      {item.value}
-                    </a>
-                  ) : (
-                    <span className="break-words">{item.value}</span>
-                  )}
-                </dd>
-              </div>
+              <dt className="shrink-0 text-[10px] font-medium text-white/50">
+                {item.label}
+              </dt>
+              <dd className="min-w-0 text-[10px] leading-tight text-white/88">
+                {item.href ? (
+                  <a
+                    href={item.href}
+                    className="break-all transition-colors hover:text-primary-light"
+                  >
+                    {item.value}
+                  </a>
+                ) : (
+                  <span className="break-words">{item.value}</span>
+                )}
+              </dd>
             </div>
           );
         })}
       </dl>
-    </section>
+    </div>
   );
 }
 
 export function SiteFooter() {
   return (
-    <footer className="site-footer w-full px-4 py-4 sm:px-5 sm:py-8 md:px-8 md:py-10">
+    <footer className="site-footer w-full px-4 py-4 sm:px-5 sm:py-8 md:px-8 md:py-2.5">
       <div className="mx-auto max-w-7xl">
-        <div className="flex items-center justify-center gap-2.5 border-b border-white/12 pb-3 sm:gap-4 sm:pb-6 md:justify-start">
+        <div className="flex items-center justify-center gap-2 border-b border-white/12 pb-2 sm:gap-3 sm:pb-5 md:justify-start md:pb-2">
           <Image
             src={COMPANY_LOGO.src}
             alt=""
             width={COMPANY_LOGO.width}
             height={COMPANY_LOGO.height}
             aria-hidden="true"
-            className="h-8 w-auto shrink-0 object-contain sm:h-11"
+            className="h-7 w-auto shrink-0 object-contain sm:h-8 md:h-7"
           />
           <div className="min-w-0 text-left">
-            <p className="hidden text-[10px] font-medium uppercase tracking-[0.25em] text-white/55 sm:block">
+            <p className="hidden text-[8px] font-medium uppercase tracking-[0.2em] text-white/50 sm:block">
               {BRAND_NAME}
             </p>
-            <p className="text-sm font-semibold leading-tight text-white sm:mt-0.5 sm:text-lg md:text-xl">
+            <p className="text-sm font-semibold leading-none text-white sm:text-base md:text-sm">
               {COMPANY_INFO.name}
             </p>
           </div>
@@ -133,12 +132,14 @@ export function SiteFooter() {
 
         <CompactFooterInfo />
 
-        <div className="mt-3 hidden gap-4 md:mt-6 md:grid md:grid-cols-2 md:gap-5">
-          <InfoSection title="登記資訊" items={COMPANY_INFO.registration} />
-          <InfoSection title="聯絡方式" items={COMPANY_INFO.contact} />
-        </div>
+        <section className="site-footer-panel mt-2 hidden rounded-lg px-3 py-2 md:block">
+          <div className="grid grid-cols-2 gap-x-5 gap-y-0">
+            <InfoColumn title="登記資訊" items={COMPANY_INFO.registration} />
+            <InfoColumn title="聯絡方式" items={COMPANY_INFO.contact} />
+          </div>
+        </section>
 
-        <p className="mt-3 text-center text-[9px] tracking-wide text-white/35 sm:mt-6 sm:text-[10px]">
+        <p className="mt-2 text-center text-[8px] tracking-wide text-white/35 sm:mt-5 sm:text-[10px] md:mt-1.5">
           © {new Date().getFullYear()} {COMPANY_INFO.name}
         </p>
       </div>

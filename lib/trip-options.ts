@@ -6,8 +6,8 @@ export type TripOption = {
 };
 
 export const DEPARTURE_OPTIONS: TripOption[] = [
-  { id: "taiwan", label: "台灣出發", href: "/taiwan", lines: ["台灣", "出發"] },
   { id: "iceland", label: "冰島集合", href: "/iceland", lines: ["冰島", "集合"] },
+  { id: "taiwan", label: "台灣出發", href: "/taiwan", lines: ["台灣", "出發"] },
 ];
 
 export const TAIWAN_OPTIONS: TripOption[] = [
@@ -16,10 +16,92 @@ export const TAIWAN_OPTIONS: TripOption[] = [
 ];
 
 export const ICELAND_OPTIONS: TripOption[] = [
-  { id: "group", label: "跟團", href: "/trips/iceland/group" },
   { id: "self-drive", label: "自駕", href: "/trips/iceland/self-drive" },
+  { id: "group", label: "跟團", href: "/trips/iceland/group" },
   { id: "experience", label: "體驗", href: "/trips/iceland/experience" },
 ];
+
+export const ICELAND_GROUP_SEASON_OPTIONS: TripOption[] = [
+  { id: "summer", label: "夏季", href: "/trips/iceland/group/summer" },
+  { id: "winter", label: "冬季", href: "/trips/iceland/group/winter" },
+];
+
+export const ICELAND_SELF_DRIVE_OPTIONS: TripOption[] = [
+  { id: "summer", label: "夏季", href: "/trips/iceland/self-drive/summer" },
+  { id: "winter", label: "冬季", href: "/trips/iceland/self-drive/winter" },
+];
+
+export const ICELAND_GROUP_SUMMER_DAY_OPTIONS: TripOption[] = Array.from(
+  { length: 7 },
+  (_, index) => {
+    const days = 4 + index;
+    return {
+      id: `${days}`,
+      label: `${days}日`,
+      href: `/trips/iceland/group/summer/${days}`,
+    };
+  },
+);
+
+export const ICELAND_GROUP_WINTER_DAY_OPTIONS: TripOption[] = Array.from(
+  { length: 7 },
+  (_, index) => {
+    const days = 4 + index;
+    return {
+      id: `${days}`,
+      label: `${days}日`,
+      href: `/trips/iceland/group/winter/${days}`,
+    };
+  },
+);
+
+export const ICELAND_GROUP_SUMMER_DAY_IDS = new Set(
+  ICELAND_GROUP_SUMMER_DAY_OPTIONS.map((option) => option.id),
+);
+
+export const ICELAND_GROUP_WINTER_DAY_IDS = new Set(
+  ICELAND_GROUP_WINTER_DAY_OPTIONS.map((option) => option.id),
+);
+
+export const ICELAND_SELF_DRIVE_SUMMER_DAY_OPTIONS: TripOption[] = Array.from(
+  { length: 11 },
+  (_, index) => {
+    const days = 4 + index;
+    return {
+      id: `${days}`,
+      label: `${days}日`,
+      href: `/trips/iceland/self-drive/summer/${days}`,
+    };
+  },
+);
+
+export const ICELAND_SELF_DRIVE_WINTER_DAY_OPTIONS: TripOption[] = Array.from(
+  { length: 9 },
+  (_, index) => {
+    const days = 4 + index;
+    return {
+      id: `${days}`,
+      label: `${days}日`,
+      href: `/trips/iceland/self-drive/winter/${days}`,
+    };
+  },
+);
+
+export const ICELAND_SELF_DRIVE_SEASON_DAY_IDS: Record<string, Set<string>> = {
+  summer: new Set(ICELAND_SELF_DRIVE_SUMMER_DAY_OPTIONS.map((option) => option.id)),
+  winter: new Set(ICELAND_SELF_DRIVE_WINTER_DAY_OPTIONS.map((option) => option.id)),
+};
+
+export const ICELAND_TRIP_SEASON_DAY_IDS: Record<
+  string,
+  Record<string, Set<string>>
+> = {
+  "self-drive": ICELAND_SELF_DRIVE_SEASON_DAY_IDS,
+  group: {
+    summer: ICELAND_GROUP_SUMMER_DAY_IDS,
+    winter: ICELAND_GROUP_WINTER_DAY_IDS,
+  },
+};
 
 export const SOURCE_LABELS: Record<string, string> = {
   taiwan: "台灣出發",
@@ -37,9 +119,19 @@ export const OPTION_LABELS: Record<string, string> = {
 export const COMING_SOON_TRIPS = new Set([
   "taiwan/summer",
   "taiwan/winter",
-  "iceland/group",
-  "iceland/self-drive",
   "iceland/experience",
+  ...ICELAND_GROUP_SUMMER_DAY_OPTIONS.map(
+    (option) => `iceland/group/summer/${option.id}`,
+  ),
+  ...ICELAND_GROUP_WINTER_DAY_OPTIONS.map(
+    (option) => `iceland/group/winter/${option.id}`,
+  ),
+  ...ICELAND_SELF_DRIVE_SUMMER_DAY_OPTIONS.map(
+    (option) => `iceland/self-drive/summer/${option.id}`,
+  ),
+  ...ICELAND_SELF_DRIVE_WINTER_DAY_OPTIONS.filter(
+    (option) => option.id !== "4",
+  ).map((option) => `iceland/self-drive/winter/${option.id}`),
 ]);
 
 export type PlaceholderTrip = {
@@ -65,7 +157,7 @@ export const PLACEHOLDER_TRIPS: PlaceholderTrip[] = [
     days: 5,
     price: "NT$ 65,000",
     image:
-      "https://images.unsplash.com/photo-1531168914074-09a1a6261276?w=800&q=80",
+      "https://images.unsplash.com/photo-1504829857797-ddff29c27927?w=800&q=80",
   },
   {
     id: "3",
