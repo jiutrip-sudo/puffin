@@ -53,6 +53,17 @@ export type GalleryImage = {
   caption?: string;
 };
 
+export type TripAttraction = {
+  name: string;
+  nameEn: string;
+  imageUrl: string;
+  region?: string;
+  subtitle?: string;
+  paragraphs?: string[];
+  galleryImages?: string[];
+  description?: string;
+};
+
 export type TripPackage = {
   id: string;
   tripKey: string;
@@ -71,7 +82,7 @@ export type TripPackage = {
   intro: { summary: string; full: string };
   gallery: GalleryImage[];
   highlights: string[];
-  attractions: { name: string; nameEn: string }[];
+  attractions: TripAttraction[];
   routeStops: RouteStop[];
   itinerary: ItineraryDay[];
   inclusions: { included: string[]; excluded: string[] };
