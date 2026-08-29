@@ -3,17 +3,12 @@
 import dynamic from "next/dynamic";
 import { useState } from "react";
 import type { RouteMapConfig, ValueProp } from "@/lib/trip-packages/types";
-
-const MAP_CONTAINER_CLASS =
-  "aspect-[16/10] w-full min-h-[320px] max-h-[min(58vh,560px)] lg:min-h-[360px]";
+import { ROUTE_MAP_SKELETON_CLASS } from "./trip-route-map-layout";
 
 const TripRouteMap = dynamic(() => import("./TripRouteMap"), {
   ssr: false,
   loading: () => (
-    <div
-      className={`${MAP_CONTAINER_CLASS} rounded-2xl border border-foreground/10 bg-foreground/5`}
-      aria-hidden
-    />
+    <div className={ROUTE_MAP_SKELETON_CLASS} aria-hidden />
   ),
 });
 

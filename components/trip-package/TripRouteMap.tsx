@@ -14,6 +14,7 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import { fetchMapboxDrivingRoute } from "@/lib/mapbox/fetch-driving-route";
 import { getTripRouteLine } from "@/lib/trip-packages/route-lines";
 import type { RouteMapConfig } from "@/lib/trip-packages/types";
+import { ROUTE_MAP_CONTAINER_CLASS } from "./trip-route-map-layout";
 
 const MAP_STYLES = {
   light: "mapbox://styles/mapbox/outdoors-v12",
@@ -21,9 +22,6 @@ const MAP_STYLES = {
 } as const;
 
 const ROUTE_LINE_COLOR = "#e67e22";
-
-const MAP_CONTAINER_CLASS =
-  "relative aspect-[16/10] w-full min-h-[320px] max-h-[min(58vh,560px)] overflow-hidden rounded-2xl border border-foreground/10 lg:min-h-[360px]";
 
 type SiteTheme = "light" | "dark";
 
@@ -169,7 +167,7 @@ export default function TripRouteMap({ routeMap }: TripRouteMapProps) {
   if (!accessToken) {
     return (
       <div
-        className={`${MAP_CONTAINER_CLASS} flex items-center justify-center bg-foreground/5 px-6 text-center text-sm text-foreground/65`}
+        className={`${ROUTE_MAP_CONTAINER_CLASS} flex items-center justify-center bg-foreground/5 px-6 text-center text-sm text-foreground/65`}
         role="status"
       >
         地圖載入需要 Mapbox 存取權杖。請在環境變數設定
@@ -179,7 +177,7 @@ export default function TripRouteMap({ routeMap }: TripRouteMapProps) {
   }
 
   return (
-    <div ref={containerRef} className={MAP_CONTAINER_CLASS}>
+    <div ref={containerRef} className={ROUTE_MAP_CONTAINER_CLASS}>
       <Map
         ref={setMapRef}
         mapboxAccessToken={accessToken}
