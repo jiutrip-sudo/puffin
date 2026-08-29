@@ -1,6 +1,6 @@
 /** 路線概覽地圖容器尺寸（主欄全寬；桌面以固定高度為主，避免 aspect 壓扁） */
 export const ROUTE_MAP_CONTAINER_CLASS =
-  "relative w-full overflow-hidden rounded-2xl border border-foreground/10 aspect-[3/2] min-h-[380px] max-h-[min(72vh,640px)] sm:min-h-[420px] lg:aspect-auto lg:h-[min(70vh,700px)] lg:min-h-[580px]";
+  "relative w-full overflow-hidden rounded-2xl border border-foreground/10 aspect-[3/2] min-h-[320px] max-h-[min(62vh,520px)] sm:min-h-[340px] lg:aspect-auto lg:h-[min(56vh,540px)] lg:min-h-[500px]";
 
 export const ROUTE_MAP_SKELETON_CLASS =
   `${ROUTE_MAP_CONTAINER_CLASS} bg-foreground/5`;
