@@ -83,7 +83,16 @@ async function writeKvSnapshot(snapshot: PackagePricingSnapshot): Promise<boolea
     ]),
   });
 
-  return response.ok;
+  if (!response.ok) {
+    const detail = await response.text().catch(() => "");
+    console.error(
+      `KV 寫入失敗（${response.status}）`,
+      detail.slice(0, 200),
+    );
+    return false;
+  }
+
+  return true;
 }
 
 async function readFileSnapshot(packageId: string): Promise<PackagePricingSnapshot | null> {
@@ -112,11 +121,17 @@ export async function readPackagePricingSnapshot(
 export async function writePackagePricingSnapshot(
   snapshot: PackagePricingSnapshot,
 ): Promise<void> {
-  if (getKvRestCredentials()) {
-    await writeKvSnapshot(snapshot);
-    return;
+  const credentials = getKvRestCredentials();
+  if (credentials) {
+    const ok = await writeKvSnapshot(snapshot);
+    if (!ok) {
+      throw new Error("無法寫入計價快照至 KV");
+    }
   }
-  await writeFileSnapshot(snapshot);
+
+  if (!credentials || process.env.SYNC_PRICING_CLI === "1") {
+    await writeFileSnapshot(snapshot);
+  }
 }
 
 export function emptyPackageSnapshot(packageId: string): PackagePricingSnapshot {
