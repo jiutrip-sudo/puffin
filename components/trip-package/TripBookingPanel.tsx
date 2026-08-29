@@ -76,12 +76,14 @@ function NumberStepper({
   hint,
   value,
   min,
+  max,
   onChange,
 }: {
   label: string;
   hint?: string;
   value: number;
   min: number;
+  max: number;
   onChange: (value: number) => void;
 }) {
   return (
@@ -106,8 +108,9 @@ function NumberStepper({
         <button
           type="button"
           aria-label={`增加${label}`}
-          className="flex h-9 w-9 items-center justify-center rounded-full border border-foreground/15 bg-background text-base font-semibold transition-colors hover:border-primary hover:bg-primary/10"
-          onClick={() => onChange(value + 1)}
+          className="flex h-9 w-9 items-center justify-center rounded-full border border-foreground/15 bg-background text-base font-semibold transition-colors hover:border-primary hover:bg-primary/10 disabled:opacity-40"
+          disabled={value >= max}
+          onClick={() => onChange(Math.min(max, value + 1))}
         >
           +
         </button>
@@ -225,6 +228,18 @@ export function TripBookingPanel({
       ?.trim() ?? "",
   );
   const guestSummary = formatGuestSummary(adults, children, infants);
+  const minAdults = pricingConfig.minAdults ?? 1;
+  const maxTravelers = pricingConfig.maxTravelers ?? 9;
+  const maxInfantsLimit = pricingConfig.maxInfants ?? 2;
+  const maxAdults = Math.max(
+    minAdults,
+    maxTravelers - children - infants,
+  );
+  const maxChildren = Math.max(0, maxTravelers - adults - infants);
+  const maxInfants = Math.min(
+    maxInfantsLimit,
+    Math.max(0, maxTravelers - adults - children),
+  );
   const startPriceLabel = pricingLoading
     ? "計算中…"
     : pricing
@@ -300,22 +315,49 @@ export function TripBookingPanel({
               label="成人"
               hint="12 歲以上"
               value={adults}
-              min={pricingConfig.minAdults ?? 1}
-              onChange={setAdults}
+              min={minAdults}
+              max={maxAdults}
+              onChange={(value) =>
+                setAdults(
+                  Math.min(
+                    Math.max(minAdults, value),
+                    maxTravelers - children - infants,
+                  ),
+                )
+              }
             />
             <NumberStepper
               label="兒童"
               hint="2–11 歲"
               value={children}
               min={0}
-              onChange={setChildren}
+              max={maxChildren}
+              onChange={(value) =>
+                setChildren(
+                  Math.min(
+                    Math.max(0, value),
+                    maxTravelers - adults - infants,
+                  ),
+                )
+              }
             />
             <NumberStepper
               label="嬰兒"
               hint="0–1 歲"
               value={infants}
               min={0}
-              onChange={setInfants}
+              max={maxInfants}
+              onChange={(value) =>
+                setInfants(
+                  Math.min(
+                    Math.max(0, value),
+                    Math.min(
+                      maxInfantsLimit,
+                      maxTravelers - adults - children,
+                    ),
+                  ),
+                )
+              }
             />
           </div>
         )}

@@ -1,7 +1,13 @@
 "use client";
 
-import { useEffect, useMemo, useState, type ReactNode } from "react";
-import type { PricingConfig, PricingResult } from "@/lib/trip-pricing/types";
+import { useCallback, useEffect, useMemo, useState, type ReactNode } from "react";
+import type {
+  PricingConfig,
+  PricingResult,
+  TierAvailabilityMap,
+  TripAvailabilityResult,
+} from "@/lib/trip-pricing/types";
+import { isTierBookable, pickFirstBookableTier } from "@/lib/trip-pricing/corivo-availability";
 import { formatIsk } from "@/lib/trip-pricing/calculate";
 import { computeTripEndDate } from "@/lib/trip-date-utils";
 import { TripBookingPanel } from "./TripBookingPanel";
@@ -24,6 +30,10 @@ type TripPackageBookingSectionProps = {
     setAccommodationTier: (value: string) => void;
     vehicleTier: string;
     setVehicleTier: (value: string) => void;
+    tierAvailability: TripAvailabilityResult | null;
+    availabilityLoading: boolean;
+    availabilityActive: boolean;
+    requestAvailability: () => void;
   }) => ReactNode;
 };
 
@@ -48,6 +58,14 @@ export function TripPackageBookingSection({
   const [pricing, setPricing] = useState<PricingResult | null>(null);
   const [pricingLoading, setPricingLoading] = useState(true);
   const [pricingError, setPricingError] = useState<string | null>(null);
+  const [tierAvailability, setTierAvailability] =
+    useState<TripAvailabilityResult | null>(null);
+  const [availabilityLoading, setAvailabilityLoading] = useState(false);
+  const [availabilityRequested, setAvailabilityRequested] = useState(false);
+
+  const requestAvailability = useCallback(() => {
+    setAvailabilityRequested(true);
+  }, []);
 
   const pricingInput = useMemo(
     () => ({
@@ -113,6 +131,80 @@ export function TripPackageBookingSection({
       window.clearTimeout(timer);
     };
   }, [pricingInput]);
+
+  const availabilityInput = useMemo(
+    () => ({
+      packageId,
+      startDate,
+      adults,
+      children: childrenCount,
+      infants,
+    }),
+    [packageId, startDate, adults, childrenCount, infants],
+  );
+
+  useEffect(() => {
+    if (!availabilityRequested) return;
+
+    let cancelled = false;
+    setAvailabilityLoading(true);
+
+    const timer = window.setTimeout(async () => {
+      try {
+        const response = await fetch("/api/trips/pricing/availability", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify(availabilityInput),
+        });
+        const data = (await response.json()) as TripAvailabilityResult & {
+          error?: string;
+        };
+
+        if (!response.ok) {
+          throw new Error(data.error ?? "查詢可訂狀態失敗");
+        }
+
+        if (!cancelled) {
+          setTierAvailability(data);
+        }
+      } catch {
+        if (!cancelled) {
+          setTierAvailability(null);
+        }
+      } finally {
+        if (!cancelled) {
+          setAvailabilityLoading(false);
+        }
+      }
+    }, 320);
+
+    return () => {
+      cancelled = true;
+      window.clearTimeout(timer);
+    };
+  }, [availabilityInput, availabilityRequested]);
+
+  useEffect(() => {
+    if (!availabilityRequested || !tierAvailability || availabilityLoading) return;
+
+    const tierIds = pricingConfig.tiers.map((tier) => tier.id);
+    if (!isTierBookable(tierAvailability.accommodation[accommodationTier])) {
+      const nextAccommodation = pickFirstBookableTier(
+        tierIds,
+        tierAvailability.accommodation,
+        accommodationTier,
+      );
+      if (nextAccommodation && nextAccommodation !== accommodationTier) {
+        setAccommodationTier(nextAccommodation);
+      }
+    }
+  }, [
+    availabilityRequested,
+    tierAvailability,
+    availabilityLoading,
+    accommodationTier,
+    pricingConfig.tiers,
+  ]);
 
   useEffect(() => {
     if (!sheetOpen) return;
@@ -221,6 +313,10 @@ export function TripPackageBookingSection({
         setAccommodationTier,
         vehicleTier,
         setVehicleTier,
+        tierAvailability,
+        availabilityLoading,
+        availabilityActive: availabilityRequested,
+        requestAvailability,
       })}
       {mobileBar}
     </>

@@ -2,10 +2,13 @@
 
 import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
+import { isTierBookable } from "@/lib/trip-pricing/corivo-availability";
 import { formatIsk } from "@/lib/trip-pricing/calculate";
 import type {
   AccommodationTier,
+  AvailabilityStatus,
   PricingConfig,
+  TierAvailabilityMap,
   VehicleTier,
 } from "@/lib/trip-pricing/types";
 
@@ -26,6 +29,27 @@ function gearTypeLabel(gearType?: VehicleTier["gearType"]) {
   return null;
 }
 
+function availabilityBadgeLabel(
+  status: AvailabilityStatus | undefined,
+  loading: boolean,
+  active: boolean,
+): string | null {
+  if (!active) return null;
+  if (loading) return "查詢中…";
+  if (status === "UNAVAILABLE" || status === "SOLD_OUT") return "暫不可訂";
+  if (status === "FEW_REMAINING") return "剩餘不多";
+  return null;
+}
+
+function tierIsSelectable(
+  status: AvailabilityStatus | undefined,
+  loading: boolean,
+  active: boolean,
+): boolean {
+  if (!active || loading) return true;
+  return isTierBookable(status);
+}
+
 function tierGallery(tier: AccommodationTier) {
   if (tier.galleryImages?.length) return tier.galleryImages;
   return [tier.imageUrl];
@@ -38,6 +62,9 @@ type AccommodationPickerProps = {
   onSelect?: (id: string) => void;
   interactive?: boolean;
   compact?: boolean;
+  tierAvailability?: TierAvailabilityMap;
+  availabilityLoading?: boolean;
+  availabilityActive?: boolean;
 };
 
 export function AccommodationTypePicker({
@@ -47,6 +74,9 @@ export function AccommodationTypePicker({
   onSelect,
   interactive = false,
   compact = false,
+  tierAvailability,
+  availabilityLoading = false,
+  availabilityActive = false,
 }: AccommodationPickerProps) {
   const [activeTier, setActiveTier] = useState<AccommodationTier | null>(null);
   const [galleryIndex, setGalleryIndex] = useState(0);
@@ -117,6 +147,17 @@ export function AccommodationTypePicker({
       >
         {tiers.map((tier) => {
           const isSelected = tier.id === selectedId;
+          const status = tierAvailability?.[tier.id];
+          const badge = availabilityBadgeLabel(
+            status,
+            availabilityLoading,
+            availabilityActive,
+          );
+          const selectable = tierIsSelectable(
+            status,
+            availabilityLoading,
+            availabilityActive,
+          );
 
           return (
             <li key={tier.id} className={compact ? undefined : "min-h-0"}>
@@ -125,7 +166,7 @@ export function AccommodationTypePicker({
                   isSelected
                     ? "border-primary bg-primary/10"
                     : "border-foreground/10 bg-primary-surface/15"
-                }`}
+                } ${!selectable ? "opacity-60" : ""}`}
               >
                 {!compact && (
                   <div className="relative aspect-[16/10] w-full overflow-hidden bg-primary-surface/25">
@@ -140,9 +181,16 @@ export function AccommodationTypePicker({
                 )}
                 <div className="flex flex-col gap-3 p-4 sm:p-5">
                   <div className="min-w-0">
-                    <h4 className="text-base font-bold text-foreground">
-                      {tier.label}
-                    </h4>
+                    <div className="flex flex-wrap items-center gap-2">
+                      <h4 className="text-base font-bold text-foreground">
+                        {tier.label}
+                      </h4>
+                      {badge && (
+                        <span className="rounded-full bg-foreground/8 px-2.5 py-0.5 text-xs font-semibold text-foreground/65">
+                          {badge}
+                        </span>
+                      )}
+                    </div>
                     <p className="mt-2 text-sm leading-relaxed text-foreground/70">
                       {tier.description}
                     </p>
@@ -162,7 +210,7 @@ export function AccommodationTypePicker({
                         >
                           已選
                         </span>
-                      ) : (
+                      ) : selectable ? (
                         <button
                           type="button"
                           onClick={() => onSelect(tier.id)}
@@ -170,6 +218,12 @@ export function AccommodationTypePicker({
                         >
                           挑選{tier.label}
                         </button>
+                      ) : (
+                        <span
+                          className="rounded-full border border-foreground/15 px-4 py-2 text-xs font-semibold text-foreground/55"
+                        >
+                          暫不可訂
+                        </span>
                       )
                     ) : (
                       isSelected && (
@@ -368,6 +422,11 @@ export function VehicleTypePicker({
                   }
                 >
                   <div className="min-w-0">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <p className="text-base font-bold text-foreground">
+                        {vehicle.label.split("|")[0]?.trim() ?? vehicle.label}
+                      </p>
+                    </div>
                     {gearbox && (
                       <p className="text-xs font-semibold text-foreground/70">
                         {gearbox}
@@ -455,6 +514,9 @@ type TripOptionPickersProps = {
   vehicleInteractive?: boolean;
   showPricing?: boolean;
   compact?: boolean;
+  accommodationAvailability?: TierAvailabilityMap;
+  availabilityLoading?: boolean;
+  availabilityActive?: boolean;
 };
 
 export function TripOptionPickers({
@@ -468,6 +530,9 @@ export function TripOptionPickers({
   vehicleInteractive,
   showPricing = false,
   compact = false,
+  accommodationAvailability,
+  availabilityLoading = false,
+  availabilityActive = false,
 }: TripOptionPickersProps) {
   const accInteractive = accommodationInteractive ?? interactive;
   const vehInteractive = vehicleInteractive ?? interactive;
@@ -481,6 +546,9 @@ export function TripOptionPickers({
         onSelect={onAccommodationChange}
         interactive={accInteractive}
         compact={compact}
+        tierAvailability={accommodationAvailability}
+        availabilityLoading={availabilityLoading}
+        availabilityActive={availabilityActive}
       />
       <VehicleTypePicker
         vehicles={pricingConfig.vehicleTiers}

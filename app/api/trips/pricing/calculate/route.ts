@@ -1,4 +1,4 @@
-import { calculateCorivoTripPrice } from "@/lib/trip-pricing/corivo-calculate";
+import { resolveCorivoTripPrice } from "@/lib/trip-pricing/pricing-snapshot-read";
 import { calculateTripPrice } from "@/lib/trip-pricing/calculate";
 import { getPricingConfig, usesCorivoPricing } from "@/lib/trip-pricing/fetch";
 import type { PricingInput } from "@/lib/trip-pricing/types";
@@ -17,7 +17,7 @@ export async function POST(request: Request) {
     }
 
     if (usesCorivoPricing(config) && config.corivo) {
-      const result = await calculateCorivoTripPrice(
+      const result = await resolveCorivoTripPrice(
         { ...config, corivo: config.corivo },
         body,
       );

@@ -1,3 +1,16 @@
+export type AvailabilityStatus =
+  | "AVAILABLE"
+  | "UNAVAILABLE"
+  | "SOLD_OUT"
+  | "FEW_REMAINING";
+
+export type TierAvailabilityMap = Record<string, AvailabilityStatus>;
+
+export type TripAvailabilityResult = {
+  accommodation: TierAvailabilityMap;
+  vehicles: TierAvailabilityMap;
+};
+
 export type RoomType = "double" | "twin" | "single";
 
 export type VehicleTier = {
@@ -85,6 +98,10 @@ export type PricingConfig = {
   bookingDateRange?: BookingDateRange;
   tripDurationDays?: number;
   minAdults?: number;
+  /** 成人＋兒童＋嬰兒合計上限 */
+  maxTravelers?: number;
+  /** 嬰兒人數上限（仍受 maxTravelers 約束） */
+  maxInfants?: number;
   accommodationIntro?: string;
   vehicleIntro?: string;
   corivo?: CorivoPricingBinding;

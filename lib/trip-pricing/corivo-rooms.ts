@@ -20,56 +20,177 @@ type TravelerRoomConfig = {
   rooms: RoomSlot[];
 };
 
-// 與森林猫／Corivo SLMSD-042 預設房型配置一致
+function roomConfig(
+  adults: number,
+  children: number,
+  rooms: RoomSlot[],
+): TravelerRoomConfig {
+  return { adults, children, infants: 0, rooms };
+}
+
+// 與森林猫 SLMSD-042 defaultRoomConfiguration 一致（36 種旅客組合）
 const DEFAULT_ROOM_CONFIGS: TravelerRoomConfig[] = [
-  { adults: 2, children: 0, infants: 0, rooms: [{ adults: 2, children: 0, roomTypeCategory: "TWIN" }] },
-  { adults: 1, children: 0, infants: 0, rooms: [{ adults: 1, children: 0, roomTypeCategory: "SINGLE" }] },
-  { adults: 1, children: 1, infants: 0, rooms: [{ adults: 1, children: 1, roomTypeCategory: "TWIN" }] },
-  {
-    adults: 3,
-    children: 0,
-    infants: 0,
-    rooms: [
-      { adults: 2, children: 0, roomTypeCategory: "TWIN" },
-      { adults: 1, children: 0, roomTypeCategory: "SINGLE" },
-    ],
-  },
-  { adults: 1, children: 2, infants: 0, rooms: [{ adults: 1, children: 2, roomTypeCategory: "TRIPLE" }] },
-  {
-    adults: 2,
-    children: 1,
-    infants: 0,
-    rooms: [
-      { adults: 1, children: 1, roomTypeCategory: "TWIN" },
-      { adults: 1, children: 0, roomTypeCategory: "SINGLE" },
-    ],
-  },
-  {
-    adults: 4,
-    children: 0,
-    infants: 0,
-    rooms: [
-      { adults: 2, children: 0, roomTypeCategory: "TWIN" },
-      { adults: 2, children: 0, roomTypeCategory: "TWIN" },
-    ],
-  },
-  {
-    adults: 2,
-    children: 2,
-    infants: 0,
-    rooms: [
-      { adults: 1, children: 1, roomTypeCategory: "TWIN" },
-      { adults: 1, children: 1, roomTypeCategory: "TWIN" },
-    ],
-  },
+  roomConfig(2, 0, [{ adults: 2, children: 0, roomTypeCategory: "TWIN" }]),
+  roomConfig(1, 0, [{ adults: 1, children: 0, roomTypeCategory: "SINGLE" }]),
+  roomConfig(1, 1, [{ adults: 1, children: 1, roomTypeCategory: "TWIN" }]),
+  roomConfig(3, 0, [
+    { adults: 2, children: 0, roomTypeCategory: "TWIN" },
+    { adults: 1, children: 0, roomTypeCategory: "SINGLE" },
+  ]),
+  roomConfig(1, 2, [{ adults: 1, children: 2, roomTypeCategory: "TRIPLE" }]),
+  roomConfig(2, 1, [
+    { adults: 1, children: 1, roomTypeCategory: "TWIN" },
+    { adults: 1, children: 0, roomTypeCategory: "SINGLE" },
+  ]),
+  roomConfig(4, 0, [
+    { adults: 2, children: 0, roomTypeCategory: "TWIN" },
+    { adults: 2, children: 0, roomTypeCategory: "TWIN" },
+  ]),
+  roomConfig(5, 0, [
+    { adults: 2, children: 0, roomTypeCategory: "TWIN" },
+    { adults: 2, children: 0, roomTypeCategory: "TWIN" },
+    { adults: 1, children: 0, roomTypeCategory: "SINGLE" },
+  ]),
+  roomConfig(6, 0, [
+    { adults: 2, children: 0, roomTypeCategory: "TWIN" },
+    { adults: 2, children: 0, roomTypeCategory: "TWIN" },
+    { adults: 2, children: 0, roomTypeCategory: "TWIN" },
+  ]),
+  roomConfig(7, 0, [
+    { adults: 2, children: 0, roomTypeCategory: "TWIN" },
+    { adults: 2, children: 0, roomTypeCategory: "TWIN" },
+    { adults: 2, children: 0, roomTypeCategory: "TWIN" },
+    { adults: 1, children: 0, roomTypeCategory: "SINGLE" },
+  ]),
+  roomConfig(8, 0, [
+    { adults: 2, children: 0, roomTypeCategory: "TWIN" },
+    { adults: 2, children: 0, roomTypeCategory: "TWIN" },
+    { adults: 2, children: 0, roomTypeCategory: "TWIN" },
+    { adults: 2, children: 0, roomTypeCategory: "TWIN" },
+  ]),
+  roomConfig(9, 0, [
+    { adults: 3, children: 0, roomTypeCategory: "TRIPLE" },
+    { adults: 2, children: 0, roomTypeCategory: "TWIN" },
+    { adults: 2, children: 0, roomTypeCategory: "TWIN" },
+    { adults: 2, children: 0, roomTypeCategory: "TWIN" },
+  ]),
+  roomConfig(3, 1, [
+    { adults: 1, children: 1, roomTypeCategory: "TWIN" },
+    { adults: 2, children: 0, roomTypeCategory: "TWIN" },
+  ]),
+  roomConfig(2, 2, [
+    { adults: 1, children: 1, roomTypeCategory: "TWIN" },
+    { adults: 1, children: 1, roomTypeCategory: "TWIN" },
+  ]),
+  roomConfig(4, 1, [
+    { adults: 2, children: 1, roomTypeCategory: "TRIPLE" },
+    { adults: 2, children: 0, roomTypeCategory: "TWIN" },
+  ]),
+  roomConfig(3, 2, [
+    { adults: 2, children: 1, roomTypeCategory: "TRIPLE" },
+    { adults: 1, children: 1, roomTypeCategory: "TWIN" },
+  ]),
+  roomConfig(2, 3, [
+    { adults: 1, children: 2, roomTypeCategory: "TRIPLE" },
+    { adults: 1, children: 1, roomTypeCategory: "TWIN" },
+  ]),
+  roomConfig(5, 1, [
+    { adults: 2, children: 1, roomTypeCategory: "TRIPLE" },
+    { adults: 3, children: 0, roomTypeCategory: "TRIPLE" },
+  ]),
+  roomConfig(4, 2, [
+    { adults: 2, children: 1, roomTypeCategory: "TRIPLE" },
+    { adults: 2, children: 1, roomTypeCategory: "TRIPLE" },
+  ]),
+  roomConfig(3, 3, [
+    { adults: 1, children: 2, roomTypeCategory: "TRIPLE" },
+    { adults: 2, children: 1, roomTypeCategory: "TRIPLE" },
+  ]),
+  roomConfig(2, 4, [
+    { adults: 1, children: 2, roomTypeCategory: "TRIPLE" },
+    { adults: 1, children: 2, roomTypeCategory: "TRIPLE" },
+  ]),
+  roomConfig(6, 1, [
+    { adults: 2, children: 1, roomTypeCategory: "TRIPLE" },
+    { adults: 2, children: 0, roomTypeCategory: "TWIN" },
+    { adults: 2, children: 0, roomTypeCategory: "TWIN" },
+  ]),
+  roomConfig(5, 2, [
+    { adults: 2, children: 1, roomTypeCategory: "TRIPLE" },
+    { adults: 1, children: 1, roomTypeCategory: "TWIN" },
+    { adults: 2, children: 0, roomTypeCategory: "TWIN" },
+  ]),
+  roomConfig(4, 3, [
+    { adults: 2, children: 1, roomTypeCategory: "TRIPLE" },
+    { adults: 1, children: 1, roomTypeCategory: "TWIN" },
+    { adults: 1, children: 1, roomTypeCategory: "TWIN" },
+  ]),
+  roomConfig(3, 4, [
+    { adults: 1, children: 2, roomTypeCategory: "TRIPLE" },
+    { adults: 1, children: 1, roomTypeCategory: "TWIN" },
+    { adults: 1, children: 1, roomTypeCategory: "TWIN" },
+  ]),
+  roomConfig(7, 1, [
+    { adults: 2, children: 1, roomTypeCategory: "TRIPLE" },
+    { adults: 3, children: 0, roomTypeCategory: "TRIPLE" },
+    { adults: 2, children: 0, roomTypeCategory: "TWIN" },
+  ]),
+  roomConfig(6, 2, [
+    { adults: 2, children: 1, roomTypeCategory: "TRIPLE" },
+    { adults: 2, children: 1, roomTypeCategory: "TRIPLE" },
+    { adults: 2, children: 0, roomTypeCategory: "TWIN" },
+  ]),
+  roomConfig(5, 3, [
+    { adults: 2, children: 1, roomTypeCategory: "TRIPLE" },
+    { adults: 2, children: 1, roomTypeCategory: "TRIPLE" },
+    { adults: 1, children: 1, roomTypeCategory: "TWIN" },
+  ]),
+  roomConfig(4, 4, [
+    { adults: 1, children: 2, roomTypeCategory: "TRIPLE" },
+    { adults: 1, children: 2, roomTypeCategory: "TRIPLE" },
+    { adults: 2, children: 0, roomTypeCategory: "TWIN" },
+  ]),
+  roomConfig(3, 5, [
+    { adults: 1, children: 2, roomTypeCategory: "TRIPLE" },
+    { adults: 1, children: 2, roomTypeCategory: "TRIPLE" },
+    { adults: 1, children: 1, roomTypeCategory: "TWIN" },
+  ]),
+  roomConfig(8, 1, [
+    { adults: 2, children: 1, roomTypeCategory: "TRIPLE" },
+    { adults: 3, children: 0, roomTypeCategory: "TRIPLE" },
+    { adults: 3, children: 0, roomTypeCategory: "TRIPLE" },
+  ]),
+  roomConfig(7, 2, [
+    { adults: 2, children: 1, roomTypeCategory: "TRIPLE" },
+    { adults: 2, children: 1, roomTypeCategory: "TRIPLE" },
+    { adults: 3, children: 0, roomTypeCategory: "TRIPLE" },
+  ]),
+  roomConfig(6, 3, [
+    { adults: 2, children: 1, roomTypeCategory: "TRIPLE" },
+    { adults: 2, children: 1, roomTypeCategory: "TRIPLE" },
+    { adults: 2, children: 1, roomTypeCategory: "TRIPLE" },
+  ]),
+  roomConfig(5, 4, [
+    { adults: 1, children: 2, roomTypeCategory: "TRIPLE" },
+    { adults: 2, children: 1, roomTypeCategory: "TRIPLE" },
+    { adults: 2, children: 1, roomTypeCategory: "TRIPLE" },
+  ]),
+  roomConfig(4, 5, [
+    { adults: 1, children: 2, roomTypeCategory: "TRIPLE" },
+    { adults: 1, children: 2, roomTypeCategory: "TRIPLE" },
+    { adults: 2, children: 1, roomTypeCategory: "TRIPLE" },
+  ]),
+  roomConfig(3, 6, [
+    { adults: 1, children: 2, roomTypeCategory: "TRIPLE" },
+    { adults: 1, children: 2, roomTypeCategory: "TRIPLE" },
+    { adults: 1, children: 2, roomTypeCategory: "TRIPLE" },
+  ]),
 ];
 
 function findRoomConfig(counts: CorivoTravelerCounts): TravelerRoomConfig {
   const match = DEFAULT_ROOM_CONFIGS.find(
     (config) =>
-      config.adults === counts.adults &&
-      config.children === counts.children &&
-      config.infants === counts.infants,
+      config.adults === counts.adults && config.children === counts.children,
   );
 
   if (!match) {

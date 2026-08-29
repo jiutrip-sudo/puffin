@@ -5,6 +5,10 @@ const CONFIGS: Record<string, PricingConfig> = {
   [icelandSelfDriveWinter4Pricing.packageId]: icelandSelfDriveWinter4Pricing,
 };
 
+export function getAllPricingConfigs(): PricingConfig[] {
+  return Object.values(CONFIGS);
+}
+
 export function getPricingConfig(packageId: string): PricingConfig | undefined {
   return CONFIGS[packageId];
 }

@@ -1,8 +1,8 @@
 import {
-  fetchCorivoPackageItems,
-  fetchCorivoPackageTourPrice,
-  type CorivoTravelerCounts,
-} from "./corivo-client";
+  cachedFetchCorivoPackageItems,
+  cachedFetchCorivoPackageTourPrice,
+} from "./corivo-cached";
+import type { CorivoTravelerCounts } from "./corivo-client";
 import { buildCorivoPriceItems, getRoomTypeLabel } from "./corivo-rooms";
 import type { CorivoPricingConfig, PricingInput, PricingResult } from "./types";
 
@@ -39,7 +39,7 @@ export async function calculateCorivoTripPrice(
   const baseVehicleItemId =
     corivo.vehicleItems[corivo.baseVehicleTier] ?? vehicleItemId;
 
-  const packageItems = await fetchCorivoPackageItems(
+  const packageItems = await cachedFetchCorivoPackageItems(
     corivo.instanceId,
     corivo.packageTourId,
     travelers,
@@ -60,14 +60,14 @@ export async function calculateCorivoTripPrice(
   );
 
   const [price, basePrice] = await Promise.all([
-    fetchCorivoPackageTourPrice(corivo.instanceId, {
+    cachedFetchCorivoPackageTourPrice(corivo.instanceId, {
       packageTourId: corivo.packageTourId,
       date: input.startDate,
       allTravelers: travelers,
       items,
       currencyCode: config.currency,
     }),
-    fetchCorivoPackageTourPrice(corivo.instanceId, {
+    cachedFetchCorivoPackageTourPrice(corivo.instanceId, {
       packageTourId: corivo.packageTourId,
       date: input.startDate,
       allTravelers: travelers,

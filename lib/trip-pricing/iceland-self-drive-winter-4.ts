@@ -15,6 +15,8 @@ export const icelandSelfDriveWinter4Pricing: PricingConfig = {
   depositRate: 0.2,
   occupancyBase: 2,
   minAdults: 1,
+  maxTravelers: 9,
+  maxInfants: 2,
   bookingDateRange: { min: "2026-11-01", max: "2027-03-31" },
   tripDurationDays: 4,
   accommodationIntro:

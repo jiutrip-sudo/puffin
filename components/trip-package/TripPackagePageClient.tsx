@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import type { TripPackage } from "@/lib/trip-packages/types";
-import type { PricingConfig } from "@/lib/trip-pricing/types";
+import type { PricingConfig, TripAvailabilityResult } from "@/lib/trip-pricing/types";
 import { SiteHeader } from "@/components/SiteHeader";
 import { TripAttractionGrid } from "./TripAttractionGrid";
 import {
@@ -47,6 +47,150 @@ function SectionHeading({
         <p className="mt-1 text-sm text-foreground/60">{subtitle}</p>
       )}
     </header>
+  );
+}
+
+type TripPackageMainContentProps = {
+  pkg: TripPackage;
+  pricingConfig: PricingConfig;
+  desktopPanel: React.ReactNode;
+  accommodationTier: string;
+  setAccommodationTier: (value: string) => void;
+  vehicleTier: string;
+  setVehicleTier: (value: string) => void;
+  tierAvailability: TripAvailabilityResult | null;
+  availabilityLoading: boolean;
+  availabilityActive: boolean;
+  requestAvailability: () => void;
+};
+
+function TripPackageMainContent({
+  pkg,
+  pricingConfig,
+  desktopPanel,
+  accommodationTier,
+  setAccommodationTier,
+  vehicleTier,
+  setVehicleTier,
+  tierAvailability,
+  availabilityLoading,
+  availabilityActive,
+  requestAvailability,
+}: TripPackageMainContentProps) {
+  const roomVehicleSectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const section = roomVehicleSectionRef.current;
+    if (!section) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          requestAvailability();
+        }
+      },
+      { rootMargin: "120px" },
+    );
+
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, [requestAvailability]);
+
+  return (
+    <div className="mx-auto max-w-7xl px-4 py-10 md:px-8 md:py-12">
+      <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_380px] lg:gap-10 lg:items-start">
+        <main className="min-w-0 space-y-14 pb-24 lg:pb-10">
+          <section>
+            <SectionHeading id="overview" title="簡介" />
+            <TripMetaGrid package={pkg} />
+            <div className="mt-8">
+              <TripIntroSection
+                summary={pkg.intro.summary}
+                full={pkg.intro.full}
+              />
+            </div>
+            {pkg.gallery.length > 0 && (
+              <div className="mt-8">
+                <TripGallery images={pkg.gallery} />
+              </div>
+            )}
+          </section>
+
+          <section>
+            <h3 className="mb-4 text-lg font-bold text-foreground">
+              此次旅行您將
+            </h3>
+            <TripHighlightList highlights={pkg.highlights} />
+          </section>
+
+          <section>
+            <h3 className="mb-4 text-lg font-bold text-foreground">
+              景點高光
+            </h3>
+            <TripAttractionGrid attractions={pkg.attractions} />
+          </section>
+
+          <section>
+            <h3 className="mb-4 text-lg font-bold text-foreground">
+              為什麼選擇大樂旅行社？
+            </h3>
+            <TripWhyChooseUs items={pkg.whyChooseUs} />
+          </section>
+
+          <section>
+            <SectionHeading
+              id="route"
+              title="路線概覽"
+              subtitle="南岸冬季自駕主要動線"
+            />
+            <TripRouteOverview stops={pkg.routeStops} routeMap={pkg.routeMap} />
+          </section>
+
+          <section>
+            <SectionHeading
+              id="itinerary"
+              title="每日行程"
+              subtitle={`您的 ${pkg.duration.days} 天 ${pkg.duration.nights} 夜行程概覽`}
+            />
+            <TripItineraryAccordion days={pkg.itinerary} />
+          </section>
+
+          <section>
+            <SectionHeading id="inclusions" title="費用包含與不含" />
+            <TripInclusionsPanel
+              included={pkg.inclusions.included}
+              excluded={pkg.inclusions.excluded}
+            />
+          </section>
+
+          <section ref={roomVehicleSectionRef}>
+            <SectionHeading id="room-vehicle" title="房型與車型" />
+            <TripRoomVehicleCards
+              pricingConfig={pricingConfig}
+              accommodationTier={accommodationTier}
+              vehicleTier={vehicleTier}
+              onAccommodationChange={setAccommodationTier}
+              onVehicleChange={setVehicleTier}
+              accommodationAvailability={tierAvailability?.accommodation}
+              availabilityLoading={availabilityLoading}
+              availabilityActive={availabilityActive}
+            />
+          </section>
+
+          <section>
+            <SectionHeading id="faq" title="常見問題" />
+            <TripFaqAccordion groups={pkg.faq} />
+          </section>
+        </main>
+
+        <aside className="hidden lg:block">{desktopPanel}</aside>
+      </div>
+
+      <section className="mt-14 lg:mt-16">
+        <SectionHeading id="similar" title="更多相似套餐" />
+        <TripSimilarPackages trips={pkg.similarTrips} />
+      </section>
+    </div>
   );
 }
 
@@ -134,98 +278,24 @@ export function TripPackagePageClient({
           setAccommodationTier,
           vehicleTier,
           setVehicleTier,
+          tierAvailability,
+          availabilityLoading,
+          availabilityActive,
+          requestAvailability,
         }) => (
-          <div className="mx-auto max-w-7xl px-4 py-10 md:px-8 md:py-12">
-            <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_380px] lg:gap-10 lg:items-start">
-              <main className="min-w-0 space-y-14 pb-24 lg:pb-10">
-                <section>
-                  <SectionHeading id="overview" title="簡介" />
-                  <TripMetaGrid package={pkg} />
-                  <div className="mt-8">
-                    <TripIntroSection
-                      summary={pkg.intro.summary}
-                      full={pkg.intro.full}
-                    />
-                  </div>
-                  {pkg.gallery.length > 0 && (
-                    <div className="mt-8">
-                      <TripGallery images={pkg.gallery} />
-                    </div>
-                  )}
-                </section>
-
-                <section>
-                  <h3 className="mb-4 text-lg font-bold text-foreground">
-                    此次旅行您將
-                  </h3>
-                  <TripHighlightList highlights={pkg.highlights} />
-                </section>
-
-                <section>
-                  <h3 className="mb-4 text-lg font-bold text-foreground">
-                    景點高光
-                  </h3>
-                  <TripAttractionGrid attractions={pkg.attractions} />
-                </section>
-
-                <section>
-                  <h3 className="mb-4 text-lg font-bold text-foreground">
-                    為什麼選擇大樂旅行社？
-                  </h3>
-                  <TripWhyChooseUs items={pkg.whyChooseUs} />
-                </section>
-
-                <section>
-                  <SectionHeading
-                    id="route"
-                    title="路線概覽"
-                    subtitle="南岸冬季自駕主要動線"
-                  />
-                  <TripRouteOverview stops={pkg.routeStops} routeMap={pkg.routeMap} />
-                </section>
-
-                <section>
-                  <SectionHeading
-                    id="itinerary"
-                    title="每日行程"
-                    subtitle={`您的 ${pkg.duration.days} 天 ${pkg.duration.nights} 夜行程概覽`}
-                  />
-                  <TripItineraryAccordion days={pkg.itinerary} />
-                </section>
-
-                <section>
-                  <SectionHeading id="inclusions" title="費用包含與不含" />
-                  <TripInclusionsPanel
-                    included={pkg.inclusions.included}
-                    excluded={pkg.inclusions.excluded}
-                  />
-                </section>
-
-                <section>
-                  <SectionHeading id="room-vehicle" title="房型與車型" />
-                  <TripRoomVehicleCards
-                    pricingConfig={pricingConfig}
-                    accommodationTier={accommodationTier}
-                    vehicleTier={vehicleTier}
-                    onAccommodationChange={setAccommodationTier}
-                    onVehicleChange={setVehicleTier}
-                  />
-                </section>
-
-                <section>
-                  <SectionHeading id="faq" title="常見問題" />
-                  <TripFaqAccordion groups={pkg.faq} />
-                </section>
-
-                <section>
-                  <SectionHeading id="similar" title="更多相似套餐" />
-                  <TripSimilarPackages trips={pkg.similarTrips} />
-                </section>
-              </main>
-
-              <aside className="hidden lg:block">{desktopPanel}</aside>
-            </div>
-          </div>
+          <TripPackageMainContent
+            pkg={pkg}
+            pricingConfig={pricingConfig}
+            desktopPanel={desktopPanel}
+            accommodationTier={accommodationTier}
+            setAccommodationTier={setAccommodationTier}
+            vehicleTier={vehicleTier}
+            setVehicleTier={setVehicleTier}
+            tierAvailability={tierAvailability}
+            availabilityLoading={availabilityLoading}
+            availabilityActive={availabilityActive}
+            requestAvailability={requestAvailability}
+          />
         )}
       </TripPackageBookingSection>
 

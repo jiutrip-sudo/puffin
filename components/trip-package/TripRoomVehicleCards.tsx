@@ -1,5 +1,6 @@
 "use client";
 
+import type { TierAvailabilityMap } from "@/lib/trip-pricing/types";
 import type { PricingConfig } from "@/lib/trip-pricing/types";
 import { TripOptionPickers } from "./TripOptionPickers";
 
@@ -9,6 +10,9 @@ type TripRoomVehicleCardsProps = {
   vehicleTier: string;
   onAccommodationChange?: (id: string) => void;
   onVehicleChange?: (id: string) => void;
+  accommodationAvailability?: TierAvailabilityMap;
+  availabilityLoading?: boolean;
+  availabilityActive?: boolean;
 };
 
 export function TripRoomVehicleCards({
@@ -17,6 +21,9 @@ export function TripRoomVehicleCards({
   vehicleTier,
   onAccommodationChange,
   onVehicleChange,
+  accommodationAvailability,
+  availabilityLoading = false,
+  availabilityActive = false,
 }: TripRoomVehicleCardsProps) {
   return (
     <TripOptionPickers
@@ -28,6 +35,9 @@ export function TripRoomVehicleCards({
       accommodationInteractive={Boolean(onAccommodationChange)}
       vehicleInteractive={Boolean(onVehicleChange)}
       showPricing={Boolean(onVehicleChange)}
+      accommodationAvailability={accommodationAvailability}
+      availabilityLoading={availabilityLoading}
+      availabilityActive={availabilityActive}
     />
   );
 }
