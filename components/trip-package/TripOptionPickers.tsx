@@ -461,7 +461,7 @@ export function VehicleTypePicker({
                       </p>
                     )}
                     {vehicle.co2Note && (
-                      <p className="mt-1 flex items-center gap-1 text-sm font-medium text-emerald-700 dark:text-emerald-400">
+                      <p className="mt-1 flex items-center gap-1.5 text-sm font-medium text-emerald-700 dark:text-emerald-400">
                         <EcoHybridIcon />
                         <span>{vehicle.co2Note}</span>
                       </p>
