@@ -1,6 +1,13 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState, useSyncExternalStore } from "react";
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  useSyncExternalStore,
+} from "react";
 import Map, { Layer, Marker, Source, type MapRef } from "react-map-gl/mapbox";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
@@ -14,6 +21,9 @@ const MAP_STYLES = {
 } as const;
 
 const ROUTE_LINE_COLOR = "#e67e22";
+
+const MAP_CONTAINER_CLASS =
+  "relative aspect-[16/10] w-full min-h-[320px] max-h-[min(58vh,560px)] overflow-hidden rounded-2xl border border-foreground/10 lg:min-h-[360px]";
 
 type SiteTheme = "light" | "dark";
 
@@ -42,6 +52,7 @@ type TripRouteMapProps = {
 export default function TripRouteMap({ routeMap }: TripRouteMapProps) {
   const accessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN;
   const theme = useSiteTheme();
+  const containerRef = useRef<HTMLDivElement>(null);
   const [mapRef, setMapRef] = useState<MapRef | null>(null);
   const presetLine =
     routeMap.routeLineId
@@ -108,7 +119,14 @@ export default function TripRouteMap({ routeMap }: TripRouteMapProps) {
       }
 
       if (!bounds.isEmpty()) {
-        map.fitBounds(bounds, { padding: 48, duration: 0 });
+        const container = containerRef.current ?? map.getContainer();
+        const fitPadding = Math.max(
+          32,
+          Math.round(
+            Math.min(container.clientWidth, container.clientHeight) * 0.08,
+          ),
+        );
+        map.fitBounds(bounds, { padding: fitPadding, duration: 0 });
       }
     },
     [routeCoordinates, waypoints],
@@ -136,10 +154,22 @@ export default function TripRouteMap({ routeMap }: TripRouteMapProps) {
     };
   }, [fitRouteBounds, mapRef, theme]);
 
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container || !mapRef) {
+      return;
+    }
+
+    const map = mapRef.getMap();
+    const observer = new ResizeObserver(() => fitRouteBounds(map));
+    observer.observe(container);
+    return () => observer.disconnect();
+  }, [fitRouteBounds, mapRef]);
+
   if (!accessToken) {
     return (
       <div
-        className="flex min-h-[320px] items-center justify-center rounded-2xl border border-foreground/10 bg-foreground/5 px-6 text-center text-sm text-foreground/65 lg:h-[420px]"
+        className={`${MAP_CONTAINER_CLASS} flex items-center justify-center bg-foreground/5 px-6 text-center text-sm text-foreground/65`}
         role="status"
       >
         地圖載入需要 Mapbox 存取權杖。請在環境變數設定
@@ -149,7 +179,7 @@ export default function TripRouteMap({ routeMap }: TripRouteMapProps) {
   }
 
   return (
-    <div className="min-h-[320px] overflow-hidden rounded-2xl border border-foreground/10 lg:h-[420px]">
+    <div ref={containerRef} className={MAP_CONTAINER_CLASS}>
       <Map
         ref={setMapRef}
         mapboxAccessToken={accessToken}
@@ -159,7 +189,7 @@ export default function TripRouteMap({ routeMap }: TripRouteMapProps) {
           latitude: waypoints[0]?.lat ?? 64.1466,
           zoom: 7,
         }}
-        style={{ width: "100%", height: "100%", minHeight: "320px" }}
+        style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
         doubleClickZoom={false}
         attributionControl={true}
         onLoad={(event) => fitRouteBounds(event.target)}
