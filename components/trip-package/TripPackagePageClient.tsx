@@ -102,10 +102,11 @@ export function TripPackagePageClient({
       <div
         ref={headerRef}
         className={`fixed inset-x-0 top-0 z-[70] isolate transition-[background,backdrop-filter,box-shadow,border-color] duration-300 ${
-          headerElevated ? "glass-white" : "border-b border-transparent"
+          headerElevated ? "glass-white site-header--on-surface" : "border-b border-transparent"
         }`}
       >
         <SiteHeader
+          onSurface={headerElevated}
           rightSlot={
             <Link
               href={pkg.backHref}
@@ -127,7 +128,13 @@ export function TripPackagePageClient({
         packageTitle={pkg.title}
         pricingConfig={pricingConfig}
       >
-        {({ desktopPanel, accommodationTier, vehicleTier }) => (
+        {({
+          desktopPanel,
+          accommodationTier,
+          setAccommodationTier,
+          vehicleTier,
+          setVehicleTier,
+        }) => (
           <div className="mx-auto max-w-7xl px-4 py-10 md:px-8 md:py-12">
             <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_380px] lg:gap-10 lg:items-start">
               <main className="min-w-0 space-y-14 pb-24 lg:pb-10">
@@ -174,7 +181,7 @@ export function TripPackagePageClient({
                     title="路線概覽"
                     subtitle="南岸冬季自駕主要動線"
                   />
-                  <TripRouteOverview stops={pkg.routeStops} />
+                  <TripRouteOverview stops={pkg.routeStops} routeMap={pkg.routeMap} />
                 </section>
 
                 <section>
@@ -200,6 +207,8 @@ export function TripPackagePageClient({
                     pricingConfig={pricingConfig}
                     accommodationTier={accommodationTier}
                     vehicleTier={vehicleTier}
+                    onAccommodationChange={setAccommodationTier}
+                    onVehicleChange={setVehicleTier}
                   />
                 </section>
 

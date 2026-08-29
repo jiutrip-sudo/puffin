@@ -12,6 +12,8 @@ const NAV_LINKS = [
 type SiteHeaderProps = {
   activeLabel?: string;
   rightSlot?: React.ReactNode;
+  /** 離開 Hero、疊在淺色內容區時提高字色對比 */
+  onSurface?: boolean;
 };
 
 function HeaderActions({ rightSlot }: { rightSlot?: React.ReactNode }) {
@@ -35,9 +37,17 @@ function HeaderActions({ rightSlot }: { rightSlot?: React.ReactNode }) {
   );
 }
 
-export function SiteHeader({ activeLabel, rightSlot }: SiteHeaderProps) {
+export function SiteHeader({
+  activeLabel,
+  rightSlot,
+  onSurface = false,
+}: SiteHeaderProps) {
   return (
-    <header className="px-4 py-3 pt-[max(0.75rem,env(safe-area-inset-top))] md:px-8 md:py-4">
+    <header
+      className={`px-4 py-3 pt-[max(0.75rem,env(safe-area-inset-top))] md:px-8 md:py-4 ${
+        onSurface ? "site-header--on-surface" : ""
+      }`}
+    >
       <div className="mx-auto max-w-7xl">
         <div className="flex items-center justify-between gap-2 md:hidden">
           <SiteLogo />
@@ -62,8 +72,12 @@ export function SiteHeader({ activeLabel, rightSlot }: SiteHeaderProps) {
                 href={link.href}
                 className={`rounded-full px-4 py-1.5 text-xs font-medium tracking-wide transition-all ${
                   activeLabel === link.label
-                    ? "bg-white text-primary-dark shadow-sm"
-                    : "text-hero-text/90 hover:bg-white/15 hover:text-hero-text"
+                    ? onSurface
+                      ? "bg-primary-dark text-white shadow-sm"
+                      : "bg-white text-primary-dark shadow-sm"
+                    : onSurface
+                      ? "text-hero-text/80 hover:bg-foreground/8 hover:text-hero-text"
+                      : "text-hero-text/90 hover:bg-white/15 hover:text-hero-text"
                 }`}
               >
                 {link.label}

@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import Image from "next/image";
+import { useCallback, useEffect, useState } from "react";
 import { formatIsk } from "@/lib/trip-pricing/calculate";
 import type {
   AccommodationTier,
@@ -9,6 +10,26 @@ import type {
 } from "@/lib/trip-pricing/types";
 
 const VISIBLE_VEHICLE_COUNT = 6;
+const CARD_RADIUS = "rounded-[10px]";
+
+function optionImageSrc(url: string, width: number) {
+  if (url.includes("senlinmao.com/images/")) {
+    return url.replace(/w_\d+/, `w_${width}`);
+  }
+  const separator = url.includes("?") ? "&" : "?";
+  return `${url}${separator}w=${width}&q=80`;
+}
+
+function gearTypeLabel(gearType?: VehicleTier["gearType"]) {
+  if (gearType === "manual") return "手排";
+  if (gearType === "automatic") return "自排";
+  return null;
+}
+
+function tierGallery(tier: AccommodationTier) {
+  if (tier.galleryImages?.length) return tier.galleryImages;
+  return [tier.imageUrl];
+}
 
 type AccommodationPickerProps = {
   tiers: AccommodationTier[];
@@ -27,10 +48,54 @@ export function AccommodationTypePicker({
   interactive = false,
   compact = false,
 }: AccommodationPickerProps) {
-  const [detailId, setDetailId] = useState<string | null>(null);
+  const [activeTier, setActiveTier] = useState<AccommodationTier | null>(null);
+  const [galleryIndex, setGalleryIndex] = useState(0);
+
+  const closeModal = useCallback(() => {
+    setActiveTier(null);
+    setGalleryIndex(0);
+  }, []);
+
+  const openModal = useCallback((tier: AccommodationTier) => {
+    setActiveTier(tier);
+    setGalleryIndex(0);
+  }, []);
+
+  useEffect(() => {
+    if (!activeTier) return;
+
+    document.body.style.overflow = "hidden";
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") closeModal();
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [activeTier, closeModal]);
+
+  const activeGallery = activeTier ? tierGallery(activeTier) : [];
+
+  const showGalleryPrev = useCallback(() => {
+    setGalleryIndex((index) =>
+      activeGallery.length === 0
+        ? 0
+        : (index - 1 + activeGallery.length) % activeGallery.length,
+    );
+  }, [activeGallery.length]);
+
+  const showGalleryNext = useCallback(() => {
+    setGalleryIndex((index) =>
+      activeGallery.length === 0 ? 0 : (index + 1) % activeGallery.length,
+    );
+  }, [activeGallery.length]);
 
   return (
-    <div>
+    <div id="accommodation-options">
       {compact ? (
         <p className="mb-2 text-sm font-semibold text-foreground">住宿類型</p>
       ) : (
@@ -43,43 +108,53 @@ export function AccommodationTypePicker({
           {intro}
         </p>
       )}
-      <ul className={compact ? "space-y-2" : "mt-6 space-y-3"}>
+      <ul
+        className={
+          compact
+            ? "space-y-2"
+            : "mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
+        }
+      >
         {tiers.map((tier) => {
           const isSelected = tier.id === selectedId;
-          const showDetail = detailId === tier.id;
 
           return (
-            <li key={tier.id}>
+            <li key={tier.id} className={compact ? undefined : "min-h-0"}>
               <article
-                className={`rounded-2xl border p-4 transition-colors sm:p-5 ${
+                className={`overflow-hidden rounded-2xl border transition-colors ${
                   isSelected
                     ? "border-primary bg-primary/10"
                     : "border-foreground/10 bg-primary-surface/15"
                 }`}
               >
-                <div className="flex flex-wrap items-start justify-between gap-3">
-                  <div className="min-w-0 flex-1">
+                {!compact && (
+                  <div className="relative aspect-[16/10] w-full overflow-hidden bg-primary-surface/25">
+                    <Image
+                      src={optionImageSrc(tier.imageUrl, 640)}
+                      alt={tier.label}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    />
+                  </div>
+                )}
+                <div className="flex flex-col gap-3 p-4 sm:p-5">
+                  <div className="min-w-0">
                     <h4 className="text-base font-bold text-foreground">
                       {tier.label}
                     </h4>
-                    {(showDetail || isSelected) && (
-                      <p className="mt-2 text-sm leading-relaxed text-foreground/70">
-                        {tier.description}
-                      </p>
-                    )}
+                    <p className="mt-2 text-sm leading-relaxed text-foreground/70">
+                      {tier.description}
+                    </p>
                   </div>
-                  <div className="flex shrink-0 flex-wrap gap-2">
-                    {!isSelected && (
-                      <button
-                        type="button"
-                        onClick={() =>
-                          setDetailId(showDetail ? null : tier.id)
-                        }
-                        className="rounded-full border border-foreground/15 px-4 py-2 text-xs font-semibold text-foreground/80 transition-colors hover:border-primary/40 hover:bg-primary/10"
-                      >
-                        查看
-                      </button>
-                    )}
+                  <div className="flex flex-wrap gap-2">
+                    <button
+                      type="button"
+                      onClick={() => openModal(tier)}
+                      className="rounded-full border border-foreground/15 px-4 py-2 text-xs font-semibold text-foreground/80 transition-colors hover:border-primary/40 hover:bg-primary/10"
+                    >
+                      查看
+                    </button>
                     {interactive && onSelect ? (
                       isSelected ? (
                         <span
@@ -90,10 +165,7 @@ export function AccommodationTypePicker({
                       ) : (
                         <button
                           type="button"
-                          onClick={() => {
-                            onSelect(tier.id);
-                            setDetailId(null);
-                          }}
+                          onClick={() => onSelect(tier.id)}
                           className="rounded-full bg-primary-dark px-4 py-2 text-xs font-semibold text-white transition-colors hover:bg-primary"
                         >
                           挑選{tier.label}
@@ -115,6 +187,92 @@ export function AccommodationTypePicker({
           );
         })}
       </ul>
+
+      {activeTier && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 p-4 backdrop-blur-sm"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="accommodation-modal-title"
+          onClick={closeModal}
+        >
+          <div
+            className="relative flex max-h-[90vh] w-full max-w-[800px] flex-col overflow-hidden rounded-[20px] bg-background shadow-xl"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <button
+              type="button"
+              onClick={closeModal}
+              className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-foreground/5 text-lg text-foreground/70 transition-colors hover:bg-foreground/10"
+              aria-label="關閉"
+            >
+              ×
+            </button>
+
+            <div className="overflow-y-auto">
+              <div className="px-6 pb-8 pt-10 md:px-10">
+                <h4
+                  id="accommodation-modal-title"
+                  className="pr-12 text-2xl font-bold leading-tight text-foreground md:text-[28px]"
+                >
+                  {activeTier.modalTitle}
+                </h4>
+
+                {activeTier.paragraphs.length > 0 && (
+                  <div className="mt-6 space-y-4 text-base leading-relaxed text-foreground/80">
+                    {activeTier.paragraphs.map((paragraph) => (
+                      <p key={paragraph.slice(0, 48)}>{paragraph}</p>
+                    ))}
+                  </div>
+                )}
+
+                {activeGallery.length > 0 && (
+                  <div className="relative mt-8">
+                    <div className={`overflow-hidden ${CARD_RADIUS}`}>
+                      <div
+                        className={`relative aspect-[16/10] w-full overflow-hidden ${CARD_RADIUS} bg-primary-surface/25`}
+                      >
+                        <Image
+                          src={optionImageSrc(
+                            activeGallery[galleryIndex],
+                            1200,
+                          )}
+                          alt={activeTier.label}
+                          fill
+                          className={`object-cover ${CARD_RADIUS}`}
+                          sizes="800px"
+                          priority
+                        />
+                      </div>
+                    </div>
+
+                    {activeGallery.length > 1 && (
+                      <>
+                        <button
+                          type="button"
+                          onClick={showGalleryPrev}
+                          className="absolute left-3 top-1/2 -translate-y-1/2 rounded-full bg-background/90 px-3 py-2 text-sm font-semibold text-foreground shadow-md transition-colors hover:bg-background"
+                          aria-label="上一張"
+                        >
+                          ←
+                        </button>
+                        <button
+                          type="button"
+                          onClick={showGalleryNext}
+                          className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full bg-background/90 px-3 py-2 text-sm font-semibold text-foreground shadow-md transition-colors hover:bg-background"
+                          aria-label="下一張"
+                        >
+                          →
+                        </button>
+                      </>
+                    )}
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -158,7 +316,10 @@ export function VehicleTypePicker({
     : "mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3";
 
   return (
-    <div>
+    <div
+      id="vehicle-options"
+      className="scroll-mt-[calc(var(--trip-sticky-offset)+0.75rem)]"
+    >
       {compact ? (
         <p className="mb-2 text-sm font-semibold text-foreground">租車車型</p>
       ) : (
@@ -177,39 +338,57 @@ export function VehicleTypePicker({
       <ul className={vehicleListClass}>
         {visibleVehicles.map((vehicle) => {
           const isSelected = vehicle.id === selectedId;
+          const gearbox = gearTypeLabel(vehicle.gearType);
 
           return (
             <li key={vehicle.id} className={compact ? undefined : "min-h-0"}>
               <article
-                className={`rounded-2xl border p-4 transition-colors sm:p-5 ${
-                  compact
-                    ? ""
-                    : "flex h-full flex-col"
+                className={`overflow-hidden rounded-2xl border transition-colors ${
+                  compact ? "p-4 sm:p-5" : "flex h-full flex-col"
                 } ${
                   isSelected
                     ? "border-primary bg-primary/10"
                     : "border-foreground/10 bg-background"
                 }`}
               >
+                {!compact && (
+                  <div className="relative aspect-[3/2] w-full overflow-hidden bg-primary-surface/15">
+                    <Image
+                      src={optionImageSrc(vehicle.imageUrl, 640)}
+                      alt={vehicle.label}
+                      fill
+                      className="object-contain object-center p-2"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    />
+                    {gearbox && (
+                      <span
+                        className="absolute left-3 top-3 rounded-full bg-background/95 px-3 py-1 text-xs font-semibold text-foreground shadow-sm"
+                      >
+                        {gearbox}
+                      </span>
+                    )}
+                  </div>
+                )}
                 <div
                   className={
                     compact
                       ? "flex flex-wrap items-start justify-between gap-3"
-                      : "flex flex-1 flex-col gap-3"
+                      : "flex flex-1 flex-col gap-3 p-4 sm:p-5"
                   }
                 >
                   <div className="min-w-0 flex-1">
-                    <h4 className="text-base font-bold text-foreground">
-                      {vehicle.label}
-                    </h4>
                     {vehicle.co2Emission != null && (
-                      <p className="mt-1 text-sm text-foreground/60">
+                      <p className="text-sm text-foreground/60">
                         CO₂ {vehicle.co2Emission} 克／公里
                         {vehicle.co2Note ? ` ${vehicle.co2Note}` : ""}
                       </p>
                     )}
                     {vehicle.footnote && (
-                      <p className="mt-2 text-sm leading-relaxed text-foreground/75">
+                      <p
+                        className={`text-sm leading-relaxed text-foreground/80 ${
+                          vehicle.co2Emission != null ? "mt-1" : ""
+                        }`}
+                      >
                         {vehicle.footnote}
                       </p>
                     )}
@@ -276,6 +455,8 @@ type TripOptionPickersProps = {
   onAccommodationChange?: (id: string) => void;
   onVehicleChange?: (id: string) => void;
   interactive?: boolean;
+  accommodationInteractive?: boolean;
+  vehicleInteractive?: boolean;
   showPricing?: boolean;
   compact?: boolean;
 };
@@ -287,9 +468,14 @@ export function TripOptionPickers({
   onAccommodationChange,
   onVehicleChange,
   interactive = false,
+  accommodationInteractive,
+  vehicleInteractive,
   showPricing = false,
   compact = false,
 }: TripOptionPickersProps) {
+  const accInteractive = accommodationInteractive ?? interactive;
+  const vehInteractive = vehicleInteractive ?? interactive;
+
   return (
     <div className={compact ? "space-y-4" : "space-y-12"}>
       <AccommodationTypePicker
@@ -297,7 +483,7 @@ export function TripOptionPickers({
         intro={pricingConfig.accommodationIntro}
         selectedId={accommodationTier}
         onSelect={onAccommodationChange}
-        interactive={interactive}
+        interactive={accInteractive}
         compact={compact}
       />
       <VehicleTypePicker
@@ -305,7 +491,7 @@ export function TripOptionPickers({
         intro={pricingConfig.vehicleIntro}
         selectedId={vehicleTier}
         onSelect={onVehicleChange}
-        interactive={interactive}
+        interactive={vehInteractive}
         showPricing={showPricing}
         compact={compact}
       />

@@ -21,7 +21,9 @@ type TripPackageBookingSectionProps = {
   children: (args: {
     desktopPanel: ReactNode;
     accommodationTier: string;
+    setAccommodationTier: (value: string) => void;
     vehicleTier: string;
+    setVehicleTier: (value: string) => void;
   }) => ReactNode;
 };
 
@@ -139,9 +141,7 @@ export function TripPackageBookingSection({
     infants,
     setInfants,
     accommodationTier,
-    setAccommodationTier,
     vehicleTier,
-    setVehicleTier,
     pricing,
     pricingLoading,
     pricingError,
@@ -218,7 +218,9 @@ export function TripPackageBookingSection({
       {children({
         desktopPanel,
         accommodationTier,
+        setAccommodationTier,
         vehicleTier,
+        setVehicleTier,
       })}
       {mobileBar}
     </>

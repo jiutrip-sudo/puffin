@@ -1,4 +1,17 @@
 import type { TripPackage } from "./types";
+import {
+  icelandSelfDriveWinter4Day1Highlights,
+  icelandSelfDriveWinter4Day1OptionalActivities,
+} from "./iceland-self-drive-winter-4-day1-cards";
+import {
+  icelandSelfDriveWinter4Day2Highlights,
+  icelandSelfDriveWinter4Day2OptionalActivities,
+  icelandSelfDriveWinter4Day3Highlights,
+  icelandSelfDriveWinter4Day3OptionalActivities,
+  icelandSelfDriveWinter4Day4Highlights,
+  icelandSelfDriveWinter4Day4OptionalActivities,
+} from "./iceland-self-drive-winter-4-days2-4-cards";
+import { ICELAND_SELF_DRIVE_WINTER_4_ROUTE_LINE } from "./iceland-self-drive-winter-4-route-line";
 
 export const icelandSelfDriveWinter4: TripPackage = {
   id: "iceland-self-drive-winter-4",
@@ -255,6 +268,35 @@ export const icelandSelfDriveWinter4: TripPackage = {
     { label: "第 3 天", detail: "瓦特納冰川國家公園 → 傑古沙龍冰河湖 → 鑽石沙灘 → 返回雷克雅未克" },
     { label: "第 4 天", detail: "雷克雅未克市區（可選）→ 機場離境" },
   ],
+  routeMap: {
+    waypoints: [
+      {
+        lng: -21.9426,
+        lat: 64.1466,
+        label: "第 1 天",
+        detail: "雷克雅未克（入境、取車、可選藍湖）",
+      },
+      {
+        lng: -18.057,
+        lat: 63.794,
+        label: "第 2 天",
+        detail: "南岸一號公路 → 塞里雅蘭／斯科加瀑布 → 黑沙灘 → 維克 → 教堂鎮住宿",
+      },
+      {
+        lng: -16.179,
+        lat: 64.0484,
+        label: "第 3 天",
+        detail: "瓦特納冰川國家公園 → 傑古沙龍冰河湖 → 鑽石沙灘 → 返回雷克雅未克",
+      },
+      {
+        lng: -21.9426,
+        lat: 64.1466,
+        label: "第 4 天",
+        detail: "雷克雅未克市區（可選）→ 機場離境",
+      },
+    ],
+    lineCoordinates: ICELAND_SELF_DRIVE_WINTER_4_ROUTE_LINE,
+  },
   itinerary: [
     {
       day: 1,
@@ -262,23 +304,8 @@ export const icelandSelfDriveWinter4: TripPackage = {
       accommodation: "雷克雅未克",
       description:
         "今天是您入境冰島的第一天，抵達後將在冰島首都雷克雅未克精選的飯店安頓下來。在此之前您需要在下飛機後到租車辦公室取車。工作人員會仔細幫您檢查車輛，並耐心講解所有冰島安全駕駛須知。如果您航班抵達的時間較早，還可以直接駕車到藍湖溫泉（Blue Lagoon），這裡的純天然溫泉透著淡藍色，泉水如牛奶般絲滑。塗上藍湖溫泉特有的面膜，躺在溫泉中彷彿時間靜止了一般。周圍黑色的火山岩被白雪輕輕覆蓋，別有一番獨特的韻味。泡完溫泉，您可以在飯店好好休息，準備好接下來的旅程。",
-      highlights: [
-        { name: "雷克雅未克", nameEn: "Reykjavík" },
-        { name: "哈爾格林姆斯教堂", nameEn: "Hallgrímskirkja" },
-        { name: "哈帕音樂廳", nameEn: "Harpa" },
-        { name: "太陽航海者", nameEn: "Sun Voyager" },
-        { name: "冰島丁丁博物館", nameEn: "Icelandic Phallological Museum" },
-        { name: "雷克雅未克彩虹街", nameEn: "Rainbow Street" },
-      ],
-      optionalActivities: [
-        { name: "雷克雅未克出發極光船遊" },
-        { name: "Sky Lagoon 天空之境溫泉 7 步療法純享體驗門票" },
-        { name: "藍湖溫泉（Blue Lagoon）舒適體驗" },
-        { name: "雷克雅未克經典觀鯨" },
-        { name: "雷克雅未克熔岩秀（Reykjavik Lava Show）" },
-        { name: "珍珠樓博物館（Perlan Museum）入場票" },
-        { name: "雷克雅未克市區 Flyover Iceland 飛越冰島 4D 電影" },
-      ],
+      highlights: icelandSelfDriveWinter4Day1Highlights,
+      optionalActivities: icelandSelfDriveWinter4Day1OptionalActivities,
     },
     {
       day: 2,
@@ -286,6 +313,8 @@ export const icelandSelfDriveWinter4: TripPackage = {
       accommodation: "南岸",
       description:
         "今天您將早早出發，直接開往冰島南岸。冰島南岸的自然景觀中，最壯觀的一定要數分布在南岸各處的冰川。除了美景以外，冰島冬季的色調非常獨具一格：白雪覆蓋的地表、天空中粉紅色的彩雲，更是讓整個南岸在冬季有了一絲溫暖。塞里雅蘭瀑布（Seljalandsfoss）雖然不大，但能從瀑布後方穿行觀賞而脫穎而出；冬季因安全考量，瀑布後方小道將封閉。隨後您將來到南岸一號公路旁的斯科加瀑布（Skógafoss），若足夠幸運還能看見雙彩虹，因此也常被人稱為彩虹瀑布。美劇《權力遊戲》第八季的瀑布也是在這裡取景。繼續向南則是冰島著名的黑沙灘（Reynisfjara），旁邊岩壁有冰島特色的黑色六邊形玄武岩石柱。不遠處海岸線上還能看見雷尼斯德蘭格海蝕柱（Reynisdrangar），在冰島古老傳說中還有魔幻故事。巨石另一側則是南岸著名小鎮維克鎮（Vík）。之後您將駕車來到教堂鎮（Kirkjubæjarklaustur）附近的飯店，這裡不僅能欣賞獨特的南岸風光，雪山與大海環抱；若當晚天氣條件許可，還可在飯店附近遠離光源處偶遇極光。",
+      highlights: icelandSelfDriveWinter4Day2Highlights,
+      optionalActivities: icelandSelfDriveWinter4Day2OptionalActivities,
     },
     {
       day: 3,
@@ -293,6 +322,8 @@ export const icelandSelfDriveWinter4: TripPackage = {
       accommodation: "雷克雅未克",
       description:
         "今日行程您將繼續向東南行進。當您踏入瓦特納冰川國家公園，將被傑古沙龍冰河湖（Jökulsárlón）的壯麗景色所震撼。這裡是冰島最著名的冰瀉湖，位於冰島一號環島公路沿途，處於斯卡夫塔山自然保護區（Skaftafell）和霍芬鎮（Höfn）之間。傑古沙龍冰河湖常年漂浮著由瓦特納冰川（Vatnajökull）分支 Breiðamerkurjökull 斷裂的浮冰，風景每天甚至每時每刻都在變化。仔細聆聽，彷彿能聽到海鳥揮動翅膀的聲音。位於傑古沙龍冰河湖以南的黑沙灘就是著名的鑽石沙灘（Diamond Beach），這裡的「鑽石」小則幾公斤、大則幾噸，正是冰河湖浮冰流入海中後被海水推回的巨型冰塊，每一顆都晶瑩剔透。身處黑色沙灘中，彷彿世界上只有黑白兩種顏色。參觀之餘，您還可以自行附加斯卡夫塔冰川徒步和藍冰洞探險，深入了解冰川的神奇與奧秘。",
+      highlights: icelandSelfDriveWinter4Day3Highlights,
+      optionalActivities: icelandSelfDriveWinter4Day3OptionalActivities,
     },
     {
       day: 4,
@@ -300,6 +331,8 @@ export const icelandSelfDriveWinter4: TripPackage = {
       accommodation: "—",
       description:
         "快樂的時光總是短暫，今天是您離境冰島的日子，別忘了前往機場退稅。若時間充裕，您還可以在雷克雅未克走走逛逛，探索博物館、藝術畫廊、咖啡館和購物區等。您可以漫步在街頭巷尾，感受這座城市的獨特氛圍，並整理好滿滿的回憶。我們歡迎您下次再來冰島！",
+      highlights: icelandSelfDriveWinter4Day4Highlights,
+      optionalActivities: icelandSelfDriveWinter4Day4OptionalActivities,
     },
   ],
   inclusions: {

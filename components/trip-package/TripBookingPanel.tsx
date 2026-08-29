@@ -3,10 +3,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { COMPANY_INFO } from "@/lib/company-info";
 import { formatIsk } from "@/lib/trip-pricing/calculate";
-import {
-  AccommodationTypePicker,
-  VehicleTypePicker,
-} from "./TripOptionPickers";
 import { TripDateField } from "./TripDateField";
 import type {
   PricingConfig,
@@ -29,15 +25,34 @@ export type TripBookingPanelControlledProps = {
   infants: number;
   setInfants: (value: number) => void;
   accommodationTier: string;
-  setAccommodationTier: (value: string) => void;
   vehicleTier: string;
-  setVehicleTier: (value: string) => void;
   pricing: PricingResult | null;
   pricingLoading?: boolean;
   pricingError?: string | null;
 };
 
-type PickerMode = "guest" | "accommodation" | "vehicle" | null;
+type PickerMode = "guest" | null;
+
+function scrollToSection(
+  sectionId: string,
+  isSheet: boolean,
+  onCloseSheet?: () => void,
+) {
+  const scroll = () => {
+    document.getElementById(sectionId)?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
+
+  if (isSheet && onCloseSheet) {
+    onCloseSheet();
+    window.setTimeout(scroll, 150);
+    return;
+  }
+
+  scroll();
+}
 
 function formatGuestSummary(
   adults: number,
@@ -136,9 +151,7 @@ export function TripBookingPanel({
   infants,
   setInfants,
   accommodationTier,
-  setAccommodationTier,
   vehicleTier,
-  setVehicleTier,
   pricing,
   pricingLoading = false,
   pricingError = null,
@@ -311,12 +324,16 @@ export function TripBookingPanel({
           <OptionChip
             label="住宿"
             value={accommodationLabel}
-            onClick={() => setPickerOpen("accommodation")}
+            onClick={() =>
+              scrollToSection("room-vehicle", isSheet, onCloseSheet)
+            }
           />
           <OptionChip
             label="租車"
             value={vehicleShort}
-            onClick={() => setPickerOpen("vehicle")}
+            onClick={() =>
+              scrollToSection("vehicle-options", isSheet, onCloseSheet)
+            }
           />
         </div>
       </div>
@@ -338,57 +355,6 @@ export function TripBookingPanel({
       >
         立即預訂
       </a>
-
-      {pickerOpen === "accommodation" && (
-        <div className="booking-panel-overlay">
-          <div className="booking-panel-overlay-header">
-            <h3 className="booking-panel-overlay-title">選擇住宿</h3>
-            <button
-              type="button"
-              className="booking-panel-overlay-close"
-              onClick={() => setPickerOpen(null)}
-            >
-              關閉
-            </button>
-          </div>
-          <AccommodationTypePicker
-            tiers={pricingConfig.tiers}
-            selectedId={accommodationTier}
-            onSelect={(id) => {
-              setAccommodationTier(id);
-              setPickerOpen(null);
-            }}
-            interactive
-            compact
-          />
-        </div>
-      )}
-
-      {pickerOpen === "vehicle" && (
-        <div className="booking-panel-overlay">
-          <div className="booking-panel-overlay-header">
-            <h3 className="booking-panel-overlay-title">選擇租車車型</h3>
-            <button
-              type="button"
-              className="booking-panel-overlay-close"
-              onClick={() => setPickerOpen(null)}
-            >
-              關閉
-            </button>
-          </div>
-          <VehicleTypePicker
-            vehicles={pricingConfig.vehicleTiers}
-            selectedId={vehicleTier}
-            onSelect={(id) => {
-              setVehicleTier(id);
-              setPickerOpen(null);
-            }}
-            interactive
-            showPricing
-            compact
-          />
-        </div>
-      )}
     </div>
   );
 }

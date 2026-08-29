@@ -5,6 +5,7 @@ export type VehicleTier = {
   label: string;
   description?: string;
   footnote?: string;
+  imageUrl: string;
   co2Emission?: number;
   co2Note?: string;
   addonTotal: number;
@@ -43,6 +44,10 @@ export type AccommodationTier = {
   perPersonDouble: number;
   singleSupplementPerNight: number;
   nights: number;
+  imageUrl: string;
+  modalTitle: string;
+  paragraphs: string[];
+  galleryImages?: string[];
 };
 
 export type AgeBandRates = {

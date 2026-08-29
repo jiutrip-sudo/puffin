@@ -120,6 +120,21 @@ html {
   box-shadow: var(--glass-white-shadow);
 }
 
+/* Header on content surface (e.g. trip page scrolled past hero) — light theme */
+[data-theme="light"] .site-header--on-surface {
+  --color-hero-text: var(--foreground);
+  --theme-toggle-muted: color-mix(in srgb, var(--foreground) 55%, transparent);
+  --theme-toggle-active-bg: color-mix(
+    in srgb,
+    var(--color-primary) 24%,
+    var(--background)
+  );
+  --theme-toggle-active-text: var(--color-primary-dark);
+  --glass-hero-bg: color-mix(in srgb, var(--foreground) 6%, var(--background));
+  --glass-hero-border: color-mix(in srgb, var(--foreground) 10%, transparent);
+  --glass-hero-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
 .trip-package-page {
   --trip-header-height: calc(env(safe-area-inset-top) + 3.25rem);
   --trip-sticky-offset: calc(env(safe-area-inset-top) + 6.25rem);

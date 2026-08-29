@@ -4,13 +4,15 @@ export type ValueProp = {
   description: string;
 };
 
-export type ItineraryHighlight = {
+export type TripAttraction = {
   name: string;
-  nameEn: string;
-};
-
-export type OptionalActivity = {
-  name: string;
+  nameEn?: string;
+  imageUrl: string;
+  region?: string;
+  subtitle?: string;
+  paragraphs?: string[];
+  galleryImages?: string[];
+  description?: string;
 };
 
 export type ItineraryDay = {
@@ -18,8 +20,8 @@ export type ItineraryDay = {
   title: string;
   accommodation: string;
   description: string;
-  highlights?: ItineraryHighlight[];
-  optionalActivities?: OptionalActivity[];
+  highlights?: TripAttraction[];
+  optionalActivities?: TripAttraction[];
 };
 
 export type FaqItem = {
@@ -38,6 +40,19 @@ export type RouteStop = {
   detail?: string;
 };
 
+export type RouteWaypoint = {
+  lng: number;
+  lat: number;
+  label: string;
+  detail?: string;
+};
+
+export type RouteMapConfig = {
+  waypoints: RouteWaypoint[];
+  /** 預先計算的路線座標 [lng, lat][]；有則免呼叫 Directions API */
+  lineCoordinates?: [number, number][];
+};
+
 export type SimilarTrip = {
   tripKey: string;
   title: string;
@@ -51,17 +66,6 @@ export type GalleryImage = {
   url: string;
   alt: string;
   caption?: string;
-};
-
-export type TripAttraction = {
-  name: string;
-  nameEn: string;
-  imageUrl: string;
-  region?: string;
-  subtitle?: string;
-  paragraphs?: string[];
-  galleryImages?: string[];
-  description?: string;
 };
 
 export type TripPackage = {
@@ -84,6 +88,7 @@ export type TripPackage = {
   highlights: string[];
   attractions: TripAttraction[];
   routeStops: RouteStop[];
+  routeMap?: RouteMapConfig;
   itinerary: ItineraryDay[];
   inclusions: { included: string[]; excluded: string[] };
   faq: FaqGroup[];

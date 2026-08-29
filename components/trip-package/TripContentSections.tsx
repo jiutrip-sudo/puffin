@@ -1,7 +1,18 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { useState } from "react";
-import type { ValueProp } from "@/lib/trip-packages/types";
+import type { RouteMapConfig, ValueProp } from "@/lib/trip-packages/types";
+
+const TripRouteMap = dynamic(() => import("./TripRouteMap"), {
+  ssr: false,
+  loading: () => (
+    <div
+      className="min-h-[320px] rounded-2xl border border-foreground/10 bg-foreground/5 lg:h-[420px]"
+      aria-hidden
+    />
+  ),
+});
 
 type TripIntroSectionProps = {
   summary: string;
@@ -58,9 +69,14 @@ export function TripWhyChooseUs({ items }: TripWhyChooseUsProps) {
 
 type TripRouteOverviewProps = {
   stops: { label: string; detail?: string }[];
+  routeMap?: RouteMapConfig;
 };
 
-export function TripRouteOverview({ stops }: TripRouteOverviewProps) {
+function TripRouteStopList({
+  stops,
+}: {
+  stops: TripRouteOverviewProps["stops"];
+}) {
   return (
     <ol className="space-y-4">
       {stops.map((stop, index) => (
@@ -84,5 +100,18 @@ export function TripRouteOverview({ stops }: TripRouteOverviewProps) {
         </li>
       ))}
     </ol>
+  );
+}
+
+export function TripRouteOverview({ stops, routeMap }: TripRouteOverviewProps) {
+  if (!routeMap) {
+    return <TripRouteStopList stops={stops} />;
+  }
+
+  return (
+    <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
+      <TripRouteMap routeMap={routeMap} />
+      <TripRouteStopList stops={stops} />
+    </div>
   );
 }
