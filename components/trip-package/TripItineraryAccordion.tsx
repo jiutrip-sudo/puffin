@@ -57,7 +57,7 @@ export function TripItineraryAccordion({ days }: TripItineraryAccordionProps) {
                 aria-expanded={isOpen}
               >
                 <div>
-                  <p className="text-xs font-medium uppercase tracking-wide text-primary-dark">
+                  <p className="font-display text-xs font-medium uppercase tracking-wide text-primary-dark">
                     第 {day.day} 天
                   </p>
                   <p className="mt-0.5 text-base font-bold text-foreground">

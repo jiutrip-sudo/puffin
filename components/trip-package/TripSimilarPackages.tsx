@@ -19,7 +19,7 @@ export function TripSimilarPackages({ trips }: TripSimilarPackagesProps) {
           key={trip.tripKey}
           className="flex min-h-[220px] flex-col rounded-2xl border border-foreground/10 bg-primary-surface/15 p-6 transition-colors hover:border-primary/30 hover:bg-primary-surface/25 md:min-h-[240px] md:p-7"
         >
-          <p className="text-xs font-semibold uppercase tracking-wide text-primary-dark">
+          <p className="font-display text-xs font-semibold uppercase tracking-wide text-primary-dark">
             冬季自駕 · {trip.tourCode}
           </p>
           <h3 className="mt-2 text-lg font-bold leading-snug text-foreground md:text-xl">

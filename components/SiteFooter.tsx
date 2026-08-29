@@ -72,7 +72,7 @@ function InfoColumn({
 }) {
   return (
     <div className="min-w-0">
-      <h3 className="mb-1 text-[8px] font-semibold uppercase tracking-[0.18em] text-white/50">
+      <h3 className="font-display mb-1 text-[8px] font-semibold uppercase tracking-[0.18em] text-white/50">
         {title}
       </h3>
       <dl className="grid grid-cols-2 gap-x-3 gap-y-0.5">
@@ -121,7 +121,7 @@ export function SiteFooter() {
             className="h-7 w-auto shrink-0 object-contain sm:h-8 md:h-7"
           />
           <div className="min-w-0 text-left">
-            <p className="hidden text-[8px] font-medium uppercase tracking-[0.2em] text-white/50 sm:block">
+            <p className="font-display hidden text-[8px] font-medium uppercase tracking-[0.2em] text-white/50 sm:block">
               {BRAND_NAME}
             </p>
             <p className="text-sm font-semibold leading-none text-white sm:text-base md:text-sm">

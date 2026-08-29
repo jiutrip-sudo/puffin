@@ -14,7 +14,7 @@ export function TripFaqAccordion({ groups }: TripFaqAccordionProps) {
     <div className="space-y-6">
       {groups.map((group) => (
         <div key={group.id}>
-          <h3 className="mb-3 text-sm font-bold uppercase tracking-wide text-primary-dark">
+          <h3 className="font-display mb-3 text-sm font-bold uppercase tracking-wide text-primary-dark">
             {group.title}
           </h3>
           <div className="space-y-2">

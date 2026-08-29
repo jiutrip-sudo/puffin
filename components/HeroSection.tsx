@@ -64,7 +64,7 @@ export function HeroSection({
               }
             >
             {eyebrow && (
-              <p className="hero-text-shadow-sm mb-2 text-[10px] font-medium uppercase tracking-[0.25em] text-white/80 sm:mb-4 md:mb-5">
+              <p className="font-display hero-text-shadow-sm mb-2 text-[10px] font-medium uppercase tracking-[0.25em] text-white/80 sm:mb-4 md:mb-5">
                 {eyebrow}
               </p>
             )}
@@ -91,7 +91,7 @@ export function HeroSection({
               </p>
             )}
             {tagline && isCentered && (
-              <p className="hero-text-shadow-sm mx-auto mt-2 hidden max-w-md text-[10px] font-medium uppercase leading-relaxed tracking-[0.2em] text-white/65 sm:mt-4 sm:block md:text-xs">
+              <p className="font-display hero-text-shadow-sm mx-auto mt-2 hidden max-w-md text-[10px] font-medium uppercase leading-relaxed tracking-[0.2em] text-white/65 sm:mt-4 sm:block md:text-xs">
                 {tagline}
               </p>
             )}

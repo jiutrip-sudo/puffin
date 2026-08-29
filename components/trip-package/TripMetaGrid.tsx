@@ -23,7 +23,7 @@ export function TripMetaGrid({ package: pkg }: TripMetaGridProps) {
           key={item.label}
           className="rounded-2xl border border-foreground/10 bg-primary-surface/25 p-4"
         >
-          <p className="text-xs font-medium uppercase tracking-wide text-foreground/50">
+          <p className="font-display text-xs font-medium uppercase tracking-wide text-foreground/50">
             {item.label}
           </p>
           <p className="mt-1 text-sm font-semibold text-foreground">

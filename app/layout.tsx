@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Syne } from "next/font/google";
+import { Noto_Sans_TC, Syne } from "next/font/google";
 import { cookies, headers } from "next/headers";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteThemeBootstrap } from "@/components/SiteThemeBootstrap";
@@ -10,6 +10,13 @@ import {
   resolveSiteTheme,
 } from "@/lib/site-theme";
 import "./globals.css";
+
+const notoSansTC = Noto_Sans_TC({
+  variable: "--font-noto-sans-tc",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+  display: "swap",
+});
 
 const syne = Syne({
   variable: "--font-syne",
@@ -34,7 +41,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="zh-TW"
-      className={`${syne.variable} h-full antialiased`}
+      className={`${notoSansTC.variable} ${syne.variable} h-full antialiased`}
       data-theme-preference={preference}
       data-theme={initialTheme}
       suppressHydrationWarning

@@ -80,7 +80,12 @@
   --color-primary-light: var(--color-primary-light);
   --color-primary-surface: var(--color-primary-surface);
   --color-hero-text: var(--color-hero-text);
-  --font-sans: var(--font-syne);
+  --font-sans: var(--font-noto-sans-tc);
+}
+
+.font-display {
+  font-family: var(--font-syne), var(--font-noto-sans-tc), "PingFang TC",
+    "Microsoft JhengHei", sans-serif;
 }
 
 body {
@@ -88,7 +93,7 @@ body {
   width: 100%;
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-syne), system-ui, sans-serif;
+  font-family: var(--font-noto-sans-tc), "PingFang TC", "Microsoft JhengHei", sans-serif;
 }
 
 html {
