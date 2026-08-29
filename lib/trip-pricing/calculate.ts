@@ -78,9 +78,10 @@ export function calculateTripPrice(
 }
 
 export function formatIsk(amount: number): string {
-  return new Intl.NumberFormat("is-IS", {
-    style: "currency",
-    currency: "ISK",
-    maximumFractionDigits: 0,
-  }).format(amount);
+  const rounded = Math.round(amount);
+  const sign = rounded < 0 ? "-" : "";
+  const digits = Math.abs(rounded).toString();
+  const withCommas = digits.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  // Deterministic across Node SSR and browsers — is-IS ICU output differs by runtime.
+  return `${sign}ISK ${withCommas}`;
 }
