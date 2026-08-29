@@ -3,7 +3,6 @@ import { Syne } from "next/font/google";
 import { cookies, headers } from "next/headers";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteThemeBootstrap } from "@/components/SiteThemeBootstrap";
-import { ThemeControlsScript } from "@/components/ThemeControls";
 import { BRAND_NAME } from "@/lib/company-info";
 import {
   SITE_THEME_COOKIE,
@@ -55,7 +54,6 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
         />
       </head>
       <body className="flex min-h-full w-full flex-col">
-        <ThemeControlsScript />
         <SiteThemeBootstrap />
         {children}
         <SiteFooter />
