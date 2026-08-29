@@ -39,10 +39,18 @@ function scrollToSection(
   onCloseSheet?: () => void,
 ) {
   const scroll = () => {
-    document.getElementById(sectionId)?.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
+    const target = document.getElementById(sectionId);
+    if (!target) return;
+
+    const page = document.querySelector(".trip-package-page");
+    const offsetRaw = page
+      ? getComputedStyle(page).getPropertyValue("--trip-sticky-offset")
+      : "0";
+    const stickyOffset = Number.parseFloat(offsetRaw) || 0;
+    const top =
+      target.getBoundingClientRect().top + window.scrollY - stickyOffset - 8;
+
+    window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
   };
 
   if (isSheet && onCloseSheet) {

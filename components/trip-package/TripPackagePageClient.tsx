@@ -98,7 +98,7 @@ function TripPackageMainContent({
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-10 md:px-8 md:py-12">
-      <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_380px] lg:gap-10 lg:items-start">
+      <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_380px] lg:gap-10">
         <main className="min-w-0 space-y-14 pb-24 lg:pb-10">
           <section>
             <SectionHeading id="overview" title="簡介" />
@@ -183,7 +183,11 @@ function TripPackageMainContent({
           </section>
         </main>
 
-        <aside className="hidden lg:block">{desktopPanel}</aside>
+        <aside className="hidden lg:block lg:min-h-0">
+          <div className="sticky top-[var(--trip-sticky-offset)] z-[50]">
+            {desktopPanel}
+          </div>
+        </aside>
       </div>
 
       <section className="mt-14 lg:mt-16">

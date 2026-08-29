@@ -240,9 +240,7 @@ export function TripPackageBookingSection({
   };
 
   const desktopPanel = (
-    <div className="sticky top-[var(--trip-sticky-offset)]">
-      <TripBookingPanel {...panelProps} variant="sidebar" />
-    </div>
+    <TripBookingPanel {...panelProps} variant="sidebar" />
   );
 
   const mobileBar = (
