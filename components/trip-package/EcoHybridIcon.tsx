@@ -3,9 +3,7 @@ type EcoHybridIconProps = {
   size?: number;
 };
 
-/**
- * 線條葉子 + 葉脈（小尺寸可辨識的單一路徑葉形）
- */
+/** 插電式油電：充電插頭 + 閃電 */
 export function EcoHybridIcon({
   className = "shrink-0 text-emerald-600 dark:text-emerald-400",
   size = 20,
@@ -23,12 +21,12 @@ export function EcoHybridIcon({
       strokeLinejoin="round"
       aria-hidden="true"
     >
-      {/* 單片葉輪廓（Lucide leaf） */}
-      <path
-        d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.5 17 4.5s-.5 2.5-1 6.5c2.5 0 5 2 5 5.5 0 4.5-4 7-7 7z"
-      />
-      {/* 葉脈 */}
-      <path d="M9.5 17.5c2-4 4-7.5 6.5-11" />
+      <path d="M6.5 12H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2.5" />
+      <path d="M17.5 12H20a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-2.5" />
+      <path d="M12 22v-6" />
+      <path d="M9 8V2" />
+      <path d="M15 8V2" />
+      <path d="M13 11l-2 8" />
     </svg>
   );
 }
