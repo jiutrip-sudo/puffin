@@ -23,9 +23,13 @@ function parseUpstashRedisUrl(redisUrl: string): { apiUrl: string; token: string
 
 function getKvRestCredentials(): { apiUrl: string; token: string } | null {
   const apiUrl =
-    process.env.KV_REST_API_URL ?? process.env.UPSTASH_REDIS_REST_URL;
+    process.env.KV_REST_API_URL ??
+    process.env.UPSTASH_KV_REST_API_URL ??
+    process.env.UPSTASH_REDIS_REST_URL;
   const token =
-    process.env.KV_REST_API_TOKEN ?? process.env.UPSTASH_REDIS_REST_TOKEN;
+    process.env.KV_REST_API_TOKEN ??
+    process.env.UPSTASH_KV_REST_API_TOKEN ??
+    process.env.UPSTASH_REDIS_REST_TOKEN;
   if (apiUrl && token) return { apiUrl, token };
 
   const redisUrl = process.env.REDIS_URL;
