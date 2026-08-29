@@ -10,6 +10,7 @@ import {
   isDateInRange,
   toISODate,
 } from "@/lib/trip-date-utils";
+import { BookingShimmer } from "./BookingPriceShimmer";
 
 const WEEKDAYS = ["日", "一", "二", "三", "四", "五", "六"] as const;
 
@@ -193,6 +194,7 @@ type TripDateFieldProps = {
   min?: string;
   max?: string;
   disabled?: boolean;
+  loading?: boolean;
   onChange?: (event: { target: { value: string } }) => void;
 };
 
@@ -202,6 +204,7 @@ export function TripDateField({
   min,
   max,
   disabled,
+  loading = false,
   onChange,
 }: TripDateFieldProps) {
   const [open, setOpen] = useState(false);
@@ -223,9 +226,13 @@ export function TripDateField({
         } ${displayValue ? "" : "is-placeholder"}`}
       >
         <span className="booking-field-label">{label}</span>
-        <span className="booking-field-value">
-          {displayValue || "選擇日期"}
-        </span>
+        {loading ? (
+          <BookingShimmer variant="field" />
+        ) : (
+          <span className="booking-field-value">
+            {displayValue || "選擇日期"}
+          </span>
+        )}
         <CalendarIcon />
       </button>
 

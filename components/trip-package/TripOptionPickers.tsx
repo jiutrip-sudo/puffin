@@ -3,7 +3,8 @@
 import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
 import { isTierBookable } from "@/lib/trip-pricing/corivo-availability";
-import { formatIsk } from "@/lib/trip-pricing/calculate";
+import { BookingShimmer } from "./BookingPriceShimmer";
+import { EcoHybridIcon } from "./EcoHybridIcon";
 import type {
   AccommodationTier,
   AvailabilityStatus,
@@ -34,8 +35,7 @@ function availabilityBadgeLabel(
   loading: boolean,
   active: boolean,
 ): string | null {
-  if (!active) return null;
-  if (loading) return "查詢中…";
+  if (!active || loading) return null;
   if (status === "UNAVAILABLE" || status === "SOLD_OUT") return "暫不可訂";
   if (status === "FEW_REMAINING") return "剩餘不多";
   return null;
@@ -65,6 +65,7 @@ type AccommodationPickerProps = {
   tierAvailability?: TierAvailabilityMap;
   availabilityLoading?: boolean;
   availabilityActive?: boolean;
+  pricingLoading?: boolean;
 };
 
 export function AccommodationTypePicker({
@@ -77,6 +78,7 @@ export function AccommodationTypePicker({
   tierAvailability,
   availabilityLoading = false,
   availabilityActive = false,
+  pricingLoading = false,
 }: AccommodationPickerProps) {
   const [activeTier, setActiveTier] = useState<AccommodationTier | null>(null);
   const [galleryIndex, setGalleryIndex] = useState(0);
@@ -166,7 +168,7 @@ export function AccommodationTypePicker({
                   isSelected
                     ? "border-primary bg-primary/10"
                     : "border-foreground/10 bg-primary-surface/15"
-                } ${!selectable ? "opacity-60" : ""}`}
+                } ${!selectable ? "opacity-60" : ""} ${compact ? "" : "flex flex-col"}`}
               >
                 {!compact && (
                   <div className="relative aspect-[16/10] w-full overflow-hidden bg-primary-surface/25">
@@ -179,23 +181,36 @@ export function AccommodationTypePicker({
                     />
                   </div>
                 )}
-                <div className="flex flex-col gap-3 p-4 sm:p-5">
-                  <div className="min-w-0">
+                <div
+                  className={
+                    compact
+                      ? "flex flex-col gap-3 p-4 sm:p-5"
+                      : "flex flex-1 flex-col p-4 sm:p-5"
+                  }
+                >
+                  <div className="min-w-0 flex-1">
                     <div className="flex flex-wrap items-center gap-2">
                       <h4 className="text-base font-bold text-foreground">
                         {tier.label}
                       </h4>
-                      {badge && (
-                        <span className="rounded-full bg-foreground/8 px-2.5 py-0.5 text-xs font-semibold text-foreground/65">
-                          {badge}
-                        </span>
+                      {availabilityLoading && availabilityActive ? (
+                        <BookingShimmer variant="badge" />
+                      ) : (
+                        badge && (
+                          <span className="rounded-full bg-foreground/8 px-2.5 py-0.5 text-xs font-semibold text-foreground/65">
+                            {badge}
+                          </span>
+                        )
+                      )}
+                      {isSelected && pricingLoading && (
+                        <BookingShimmer variant="badge" />
                       )}
                     </div>
                     <p className="mt-2 text-sm leading-relaxed text-foreground/70">
                       {tier.description}
                     </p>
                   </div>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="mt-3 flex flex-wrap items-center justify-between gap-2">
                     <button
                       type="button"
                       onClick={() => openModal(tier)}
@@ -203,6 +218,7 @@ export function AccommodationTypePicker({
                     >
                       查看
                     </button>
+                    <div className="flex flex-wrap justify-end gap-2">
                     {interactive && onSelect ? (
                       isSelected ? (
                         <span
@@ -234,6 +250,7 @@ export function AccommodationTypePicker({
                         </span>
                       )
                     )}
+                    </div>
                   </div>
                 </div>
               </article>
@@ -337,7 +354,7 @@ type VehiclePickerProps = {
   selectedId: string;
   onSelect?: (id: string) => void;
   interactive?: boolean;
-  showPricing?: boolean;
+  pricingLoading?: boolean;
   compact?: boolean;
 };
 
@@ -347,7 +364,7 @@ export function VehicleTypePicker({
   selectedId,
   onSelect,
   interactive = false,
-  showPricing = false,
+  pricingLoading = false,
   compact = false,
 }: VehiclePickerProps) {
   const [showAll, setShowAll] = useState(false);
@@ -401,7 +418,7 @@ export function VehicleTypePicker({
                   isSelected
                     ? "border-primary bg-primary/10"
                     : "border-foreground/10 bg-primary-surface/15"
-                }`}
+                } ${compact ? "" : "flex flex-col"}`}
               >
                 {!compact && (
                   <div className="relative aspect-[16/10] w-full overflow-hidden bg-primary-surface/25">
@@ -412,52 +429,60 @@ export function VehicleTypePicker({
                       className="object-cover"
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     />
+                    {gearbox && (
+                      <span className="vehicle-gear-badge">{gearbox}</span>
+                    )}
                   </div>
                 )}
                 <div
                   className={
                     compact
                       ? "flex flex-wrap items-start justify-between gap-3 p-4 sm:p-5"
-                      : "flex flex-col gap-3 p-4 sm:p-5"
+                      : "flex flex-1 flex-col p-4 sm:p-5"
                   }
                 >
-                  <div className="min-w-0">
+                  <div className="min-w-0 flex-1">
                     <div className="flex flex-wrap items-center gap-2">
                       <p className="text-base font-bold text-foreground">
                         {vehicle.label.split("|")[0]?.trim() ?? vehicle.label}
                       </p>
+                      {isSelected && pricingLoading && (
+                        <BookingShimmer variant="badge" />
+                      )}
                     </div>
-                    {gearbox && (
-                      <p className="text-xs font-semibold text-foreground/70">
+                    {compact && gearbox && (
+                      <span className="vehicle-gear-badge vehicle-gear-badge--inline">
                         {gearbox}
-                      </p>
+                      </span>
                     )}
                     {vehicle.co2Emission != null && (
-                      <p
-                        className={`text-sm text-foreground/60 ${
-                          gearbox ? "mt-1" : ""
-                        }`}
-                      >
+                      <p className="mt-1 text-sm text-foreground/60">
                         CO₂ {vehicle.co2Emission} 克／公里
-                        {vehicle.co2Note ? ` ${vehicle.co2Note}` : ""}
+                      </p>
+                    )}
+                    {vehicle.co2Note && (
+                      <p className="mt-1 flex items-center gap-1 text-sm font-medium text-emerald-700 dark:text-emerald-400">
+                        <EcoHybridIcon />
+                        <span>{vehicle.co2Note}</span>
                       </p>
                     )}
                     {vehicle.footnote && (
                       <p
                         className={`text-sm leading-relaxed text-foreground/70 ${
-                          vehicle.co2Emission != null || gearbox ? "mt-2" : ""
+                          vehicle.co2Emission != null || vehicle.co2Note
+                            ? "mt-2"
+                            : ""
                         }`}
                       >
                         {vehicle.footnote}
                       </p>
                     )}
-                    {showPricing && vehicle.addonTotal > 0 && (
-                      <p className="mt-2 text-xs font-medium text-primary-dark">
-                        升級 +{formatIsk(vehicle.addonTotal)}
-                      </p>
-                    )}
                   </div>
-                  <div className="flex flex-wrap gap-2">
+                  <div
+                    className={`flex flex-wrap gap-2 ${
+                      compact ? "" : "mt-3 justify-end"
+                    }`}
+                  >
                     {interactive && onSelect ? (
                       isSelected ? (
                         <span
@@ -512,11 +537,11 @@ type TripOptionPickersProps = {
   interactive?: boolean;
   accommodationInteractive?: boolean;
   vehicleInteractive?: boolean;
-  showPricing?: boolean;
   compact?: boolean;
   accommodationAvailability?: TierAvailabilityMap;
   availabilityLoading?: boolean;
   availabilityActive?: boolean;
+  pricingLoading?: boolean;
 };
 
 export function TripOptionPickers({
@@ -528,11 +553,11 @@ export function TripOptionPickers({
   interactive = false,
   accommodationInteractive,
   vehicleInteractive,
-  showPricing = false,
   compact = false,
   accommodationAvailability,
   availabilityLoading = false,
   availabilityActive = false,
+  pricingLoading = false,
 }: TripOptionPickersProps) {
   const accInteractive = accommodationInteractive ?? interactive;
   const vehInteractive = vehicleInteractive ?? interactive;
@@ -549,6 +574,7 @@ export function TripOptionPickers({
         tierAvailability={accommodationAvailability}
         availabilityLoading={availabilityLoading}
         availabilityActive={availabilityActive}
+        pricingLoading={pricingLoading}
       />
       <VehicleTypePicker
         vehicles={pricingConfig.vehicleTiers}
@@ -556,7 +582,7 @@ export function TripOptionPickers({
         selectedId={vehicleTier}
         onSelect={onVehicleChange}
         interactive={vehInteractive}
-        showPricing={showPricing}
+        pricingLoading={pricingLoading}
         compact={compact}
       />
     </div>

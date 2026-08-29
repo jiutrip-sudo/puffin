@@ -386,6 +386,90 @@ html {
   font-weight: 700;
 }
 
+.booking-price-shimmer {
+  display: block;
+  flex-shrink: 0;
+  border-radius: 0.375rem;
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--foreground) 7%, transparent) 0%,
+    color-mix(in srgb, var(--foreground) 14%, transparent) 45%,
+    color-mix(in srgb, var(--foreground) 7%, transparent) 90%
+  );
+  background-size: 200% 100%;
+  animation: booking-shimmer 1.35s ease-in-out infinite;
+}
+
+.booking-shimmer {
+  display: block;
+  flex-shrink: 0;
+  border-radius: 0.375rem;
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--foreground) 7%, transparent) 0%,
+    color-mix(in srgb, var(--foreground) 14%, transparent) 45%,
+    color-mix(in srgb, var(--foreground) 7%, transparent) 90%
+  );
+  background-size: 200% 100%;
+  animation: booking-shimmer 1.35s ease-in-out infinite;
+}
+
+.booking-shimmer--start,
+.booking-price-shimmer--start {
+  width: 7.25rem;
+  height: 1.5rem;
+}
+
+.booking-shimmer--total,
+.booking-price-shimmer--total {
+  width: 6.75rem;
+  height: 1.375rem;
+}
+
+.booking-shimmer--mobile,
+.booking-price-shimmer--mobile {
+  width: 5.75rem;
+  height: 1.125rem;
+}
+
+.booking-shimmer--field {
+  width: 4.75rem;
+  height: 0.9375rem;
+  margin-top: 0.125rem;
+}
+
+.booking-shimmer--field-wide {
+  width: 5.75rem;
+  height: 0.9375rem;
+  margin-top: 0.125rem;
+}
+
+.booking-shimmer--badge {
+  width: 3.75rem;
+  height: 1.25rem;
+  border-radius: 9999px;
+}
+
+@keyframes booking-shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+
+  100% {
+    background-position: -100% 0;
+  }
+}
+
+@keyframes booking-price-shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+
+  100% {
+    background-position: -100% 0;
+  }
+}
+
 .booking-field {
   position: relative;
   display: block;
@@ -494,6 +578,30 @@ html {
   font-size: 0.75rem;
   line-height: 1;
   letter-spacing: -0.12em;
+}
+
+.vehicle-gear-badge {
+  position: absolute;
+  top: 0.625rem;
+  right: 0.625rem;
+  z-index: 1;
+  border-radius: 9999px;
+  padding: 0.25rem 0.625rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--foreground);
+  background: color-mix(in srgb, var(--background) 90%, transparent);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12);
+  border: 1px solid color-mix(in srgb, var(--foreground) 10%, transparent);
+}
+
+.vehicle-gear-badge--inline {
+  position: static;
+  display: inline-block;
+  margin-top: 0.375rem;
 }
 
 .booking-panel-total-row {

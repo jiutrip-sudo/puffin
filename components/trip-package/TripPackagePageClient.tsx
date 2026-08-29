@@ -61,6 +61,7 @@ type TripPackageMainContentProps = {
   tierAvailability: TripAvailabilityResult | null;
   availabilityLoading: boolean;
   availabilityActive: boolean;
+  pricingLoading: boolean;
   requestAvailability: () => void;
 };
 
@@ -75,6 +76,7 @@ function TripPackageMainContent({
   tierAvailability,
   availabilityLoading,
   availabilityActive,
+  pricingLoading,
   requestAvailability,
 }: TripPackageMainContentProps) {
   const roomVehicleSectionRef = useRef<HTMLElement>(null);
@@ -174,6 +176,7 @@ function TripPackageMainContent({
               accommodationAvailability={tierAvailability?.accommodation}
               availabilityLoading={availabilityLoading}
               availabilityActive={availabilityActive}
+              pricingLoading={pricingLoading}
             />
           </section>
 
@@ -285,6 +288,7 @@ export function TripPackagePageClient({
           tierAvailability,
           availabilityLoading,
           availabilityActive,
+          pricingLoading,
           requestAvailability,
         }) => (
           <TripPackageMainContent
@@ -298,6 +302,7 @@ export function TripPackagePageClient({
             tierAvailability={tierAvailability}
             availabilityLoading={availabilityLoading}
             availabilityActive={availabilityActive}
+            pricingLoading={pricingLoading}
             requestAvailability={requestAvailability}
           />
         )}

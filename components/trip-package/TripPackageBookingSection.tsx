@@ -10,6 +10,7 @@ import type {
 import { isTierBookable, pickFirstBookableTier } from "@/lib/trip-pricing/corivo-availability";
 import { formatIsk } from "@/lib/trip-pricing/calculate";
 import { computeTripEndDate } from "@/lib/trip-date-utils";
+import { BookingShimmer } from "./BookingPriceShimmer";
 import { TripBookingPanel } from "./TripBookingPanel";
 
 function getDefaultDates(pricingConfig: PricingConfig) {
@@ -33,6 +34,7 @@ type TripPackageBookingSectionProps = {
     tierAvailability: TripAvailabilityResult | null;
     availabilityLoading: boolean;
     availabilityActive: boolean;
+    pricingLoading: boolean;
     requestAvailability: () => void;
   }) => ReactNode;
 };
@@ -257,13 +259,15 @@ export function TripPackageBookingSection({
           >
             <p className="text-xs text-foreground/55">套餐總價</p>
             <p className="text-lg font-bold tabular-nums text-foreground">
-              {pricingLoading
-                ? "計算中…"
-                : pricingError
-                  ? "請調整選項"
-                  : pricing
-                    ? formatIsk(pricing.total)
-                    : "—"}
+              {pricingLoading ? (
+                <BookingShimmer variant="mobile" />
+              ) : pricingError ? (
+                "請調整選項"
+              ) : pricing ? (
+                formatIsk(pricing.total)
+              ) : (
+                "—"
+              )}
             </p>
             <p className="text-xs text-foreground/55">
               {pricingLoading || !pricing
@@ -314,6 +318,7 @@ export function TripPackageBookingSection({
         tierAvailability,
         availabilityLoading,
         availabilityActive: availabilityRequested,
+        pricingLoading,
         requestAvailability,
       })}
       {mobileBar}

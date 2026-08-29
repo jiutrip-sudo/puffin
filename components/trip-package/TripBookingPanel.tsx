@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { COMPANY_INFO } from "@/lib/company-info";
 import { formatIsk } from "@/lib/trip-pricing/calculate";
+import { BookingShimmer } from "./BookingPriceShimmer";
 import { TripDateField } from "./TripDateField";
 import type {
   PricingConfig,
@@ -131,16 +132,22 @@ function OptionChip({
   label,
   value,
   onClick,
+  loading = false,
 }: {
   label: string;
   value: string;
   onClick: () => void;
+  loading?: boolean;
 }) {
   return (
     <button type="button" className="booking-option-chip" onClick={onClick}>
       <span className="min-w-0">
         <span className="booking-option-chip-label">{label}</span>
-        <span className="booking-option-chip-value">{value}</span>
+        {loading ? (
+          <BookingShimmer variant="field-wide" />
+        ) : (
+          <span className="booking-option-chip-value">{value}</span>
+        )}
       </span>
       <span className="booking-option-chevron" aria-hidden="true">››</span>
     </button>
@@ -248,16 +255,10 @@ export function TripBookingPanel({
     maxInfantsLimit,
     Math.max(0, maxTravelers - adults - children),
   );
-  const startPriceLabel = pricingLoading
-    ? "計算中…"
-    : pricing
-      ? formatIsk(pricing.perPersonDouble)
-      : "—";
-  const totalPriceLabel = pricingLoading
-    ? "計算中…"
-    : pricing
-      ? formatIsk(pricing.total)
-      : "—";
+  const startPriceLabel = pricing
+    ? formatIsk(pricing.perPersonDouble)
+    : "—";
+  const totalPriceLabel = pricing ? formatIsk(pricing.total) : "—";
 
   return (
     <div
@@ -279,7 +280,11 @@ export function TripBookingPanel({
       )}
 
       <p className="booking-panel-start-price tabular-nums">
-        {startPriceLabel}
+        {pricingLoading ? (
+          <BookingShimmer variant="start" />
+        ) : (
+          startPriceLabel
+        )}
         {!pricingLoading && pricing && (
           <span className="booking-panel-start-suffix">起</span>
         )}
@@ -298,9 +303,15 @@ export function TripBookingPanel({
             value={startDate}
             min={bookingMin}
             max={bookingMax}
+            loading={pricingLoading}
             onChange={(e) => onStartDateChange(e.target.value)}
           />
-          <TripDateField label="至" value={endDate} disabled />
+          <TripDateField
+            label="至"
+            value={endDate}
+            disabled
+            loading={pricingLoading}
+          />
         </div>
 
         <button
@@ -374,6 +385,7 @@ export function TripBookingPanel({
           <OptionChip
             label="住宿"
             value={accommodationLabel}
+            loading={pricingLoading}
             onClick={() =>
               scrollToSection("room-vehicle", isSheet, onCloseSheet)
             }
@@ -381,6 +393,7 @@ export function TripBookingPanel({
           <OptionChip
             label="租車"
             value={vehicleShort}
+            loading={pricingLoading}
             onClick={() =>
               scrollToSection("vehicle-options", isSheet, onCloseSheet)
             }
@@ -395,7 +408,11 @@ export function TripBookingPanel({
             priceFlash ? "is-flash" : ""
           }`}
         >
-          {totalPriceLabel}
+          {pricingLoading ? (
+            <BookingShimmer variant="total" />
+          ) : (
+            totalPriceLabel
+          )}
         </span>
       </div>
 

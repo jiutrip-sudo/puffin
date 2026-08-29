@@ -13,6 +13,7 @@ type TripRoomVehicleCardsProps = {
   accommodationAvailability?: TierAvailabilityMap;
   availabilityLoading?: boolean;
   availabilityActive?: boolean;
+  pricingLoading?: boolean;
 };
 
 export function TripRoomVehicleCards({
@@ -24,6 +25,7 @@ export function TripRoomVehicleCards({
   accommodationAvailability,
   availabilityLoading = false,
   availabilityActive = false,
+  pricingLoading = false,
 }: TripRoomVehicleCardsProps) {
   return (
     <TripOptionPickers
@@ -34,10 +36,10 @@ export function TripRoomVehicleCards({
       onVehicleChange={onVehicleChange}
       accommodationInteractive={Boolean(onAccommodationChange)}
       vehicleInteractive={Boolean(onVehicleChange)}
-      showPricing={Boolean(onVehicleChange)}
       accommodationAvailability={accommodationAvailability}
       availabilityLoading={availabilityLoading}
       availabilityActive={availabilityActive}
+      pricingLoading={pricingLoading}
     />
   );
 }
