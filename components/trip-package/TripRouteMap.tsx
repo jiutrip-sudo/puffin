@@ -5,6 +5,7 @@ import Map, { Layer, Marker, Source, type MapRef } from "react-map-gl/mapbox";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { fetchMapboxDrivingRoute } from "@/lib/mapbox/fetch-driving-route";
+import { getTripRouteLine } from "@/lib/trip-packages/route-lines";
 import type { RouteMapConfig } from "@/lib/trip-packages/types";
 
 const MAP_STYLES = {
@@ -42,9 +43,13 @@ export default function TripRouteMap({ routeMap }: TripRouteMapProps) {
   const accessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN;
   const theme = useSiteTheme();
   const [mapRef, setMapRef] = useState<MapRef | null>(null);
+  const presetLine =
+    routeMap.routeLineId
+      ? getTripRouteLine(routeMap.routeLineId)
+      : routeMap.lineCoordinates;
   const [routeCoordinates, setRouteCoordinates] = useState<
     [number, number][] | null
-  >(routeMap.lineCoordinates ?? null);
+  >(presetLine ?? null);
 
   const { waypoints } = routeMap;
   const waypointKey = waypoints

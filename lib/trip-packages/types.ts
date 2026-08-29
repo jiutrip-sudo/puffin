@@ -51,6 +51,8 @@ export type RouteMapConfig = {
   waypoints: RouteWaypoint[];
   /** 預先計算的路線座標 [lng, lat][]；有則免呼叫 Directions API */
   lineCoordinates?: [number, number][];
+  /** 大型路線資料改由 route-lines 模組載入，避免塞入頁面 RSC payload */
+  routeLineId?: string;
 };
 
 export type SimilarTrip = {

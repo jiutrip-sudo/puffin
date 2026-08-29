@@ -313,7 +313,7 @@ export function VehicleTypePicker({
 
   const vehicleListClass = compact
     ? "mt-2 space-y-2"
-    : "mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3";
+    : "mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3";
 
   return (
     <div
@@ -344,49 +344,49 @@ export function VehicleTypePicker({
             <li key={vehicle.id} className={compact ? undefined : "min-h-0"}>
               <article
                 className={`overflow-hidden rounded-2xl border transition-colors ${
-                  compact ? "p-4 sm:p-5" : "flex h-full flex-col"
-                } ${
                   isSelected
                     ? "border-primary bg-primary/10"
-                    : "border-foreground/10 bg-background"
+                    : "border-foreground/10 bg-primary-surface/15"
                 }`}
               >
                 {!compact && (
-                  <div className="relative aspect-[3/2] w-full overflow-hidden bg-primary-surface/15">
+                  <div className="relative aspect-[16/10] w-full overflow-hidden bg-primary-surface/25">
                     <Image
                       src={optionImageSrc(vehicle.imageUrl, 640)}
                       alt={vehicle.label}
                       fill
-                      className="object-contain object-center p-2"
+                      className="object-cover"
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     />
-                    {gearbox && (
-                      <span
-                        className="absolute left-3 top-3 rounded-full bg-background/95 px-3 py-1 text-xs font-semibold text-foreground shadow-sm"
-                      >
-                        {gearbox}
-                      </span>
-                    )}
                   </div>
                 )}
                 <div
                   className={
                     compact
-                      ? "flex flex-wrap items-start justify-between gap-3"
-                      : "flex flex-1 flex-col gap-3 p-4 sm:p-5"
+                      ? "flex flex-wrap items-start justify-between gap-3 p-4 sm:p-5"
+                      : "flex flex-col gap-3 p-4 sm:p-5"
                   }
                 >
-                  <div className="min-w-0 flex-1">
+                  <div className="min-w-0">
+                    {gearbox && (
+                      <p className="text-xs font-semibold text-foreground/70">
+                        {gearbox}
+                      </p>
+                    )}
                     {vehicle.co2Emission != null && (
-                      <p className="text-sm text-foreground/60">
+                      <p
+                        className={`text-sm text-foreground/60 ${
+                          gearbox ? "mt-1" : ""
+                        }`}
+                      >
                         CO₂ {vehicle.co2Emission} 克／公里
                         {vehicle.co2Note ? ` ${vehicle.co2Note}` : ""}
                       </p>
                     )}
                     {vehicle.footnote && (
                       <p
-                        className={`text-sm leading-relaxed text-foreground/80 ${
-                          vehicle.co2Emission != null ? "mt-1" : ""
+                        className={`text-sm leading-relaxed text-foreground/70 ${
+                          vehicle.co2Emission != null || gearbox ? "mt-2" : ""
                         }`}
                       >
                         {vehicle.footnote}
@@ -398,37 +398,33 @@ export function VehicleTypePicker({
                       </p>
                     )}
                   </div>
-                  {interactive && onSelect ? (
-                    isSelected ? (
-                      <span
-                        className={`rounded-full bg-primary-dark px-4 py-2 text-xs font-semibold text-white ${
-                          compact ? "shrink-0" : "self-start"
-                        }`}
-                      >
-                        已選
-                      </span>
+                  <div className="flex flex-wrap gap-2">
+                    {interactive && onSelect ? (
+                      isSelected ? (
+                        <span
+                          className="rounded-full bg-primary-dark px-4 py-2 text-xs font-semibold text-white"
+                        >
+                          已選
+                        </span>
+                      ) : (
+                        <button
+                          type="button"
+                          onClick={() => onSelect(vehicle.id)}
+                          className="rounded-full border border-foreground/20 px-4 py-2 text-xs font-semibold text-foreground transition-colors hover:border-primary hover:bg-primary/10"
+                        >
+                          選擇
+                        </button>
+                      )
                     ) : (
-                      <button
-                        type="button"
-                        onClick={() => onSelect(vehicle.id)}
-                        className={`rounded-full border border-foreground/20 px-4 py-2 text-xs font-semibold text-foreground transition-colors hover:border-primary hover:bg-primary/10 ${
-                          compact ? "shrink-0" : "self-start"
-                        }`}
-                      >
-                        選擇
-                      </button>
-                    )
-                  ) : (
-                    isSelected && (
-                      <span
-                        className={`rounded-full bg-primary-dark px-4 py-2 text-xs font-semibold text-white ${
-                          compact ? "shrink-0" : "self-start"
-                        }`}
-                      >
-                        已選
-                      </span>
-                    )
-                  )}
+                      isSelected && (
+                        <span
+                          className="rounded-full bg-primary-dark px-4 py-2 text-xs font-semibold text-white"
+                        >
+                          已選
+                        </span>
+                      )
+                    )}
+                  </div>
                 </div>
               </article>
             </li>

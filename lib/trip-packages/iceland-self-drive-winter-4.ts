@@ -11,7 +11,6 @@ import {
   icelandSelfDriveWinter4Day4Highlights,
   icelandSelfDriveWinter4Day4OptionalActivities,
 } from "./iceland-self-drive-winter-4-days2-4-cards";
-import { ICELAND_SELF_DRIVE_WINTER_4_ROUTE_LINE } from "./iceland-self-drive-winter-4-route-line";
 
 export const icelandSelfDriveWinter4: TripPackage = {
   id: "iceland-self-drive-winter-4",
@@ -295,7 +294,7 @@ export const icelandSelfDriveWinter4: TripPackage = {
         detail: "雷克雅未克市區（可選）→ 機場離境",
       },
     ],
-    lineCoordinates: ICELAND_SELF_DRIVE_WINTER_4_ROUTE_LINE,
+    routeLineId: "iceland-self-drive-winter-4",
   },
   itinerary: [
     {

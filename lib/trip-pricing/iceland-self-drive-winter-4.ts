@@ -4,7 +4,7 @@ const SLM_IMAGE = (file: string, width = 1200) =>
   `https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_${width},q_auto:good/${file}`;
 
 const SLM_CAR_IMAGE = (file: string, width = 1200) =>
-  `https://www.senlinmao.com/images/g_auto,f_auto,c_auto,w_${width},q_auto:good/${file}`;
+  `https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_${width},q_auto:good/${file}`;
 
 const CORIVO_INSTANCE_ID =
   process.env.CORIVO_CLIENT_ID ?? "ae034790-70dd-4df5-93a0-957be2883176";
