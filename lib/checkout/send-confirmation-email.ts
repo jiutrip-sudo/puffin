@@ -1,4 +1,7 @@
-import { CHECKOUT_OFFICE_EMAIL } from "./manual-payment";
+import {
+  CHECKOUT_OFFICE_EMAIL,
+  resolveCheckoutStaffNotificationEmails,
+} from "./manual-payment";
 import {
   buildCustomerConfirmationEmail,
   buildStaffBookingNotificationEmail,
@@ -22,15 +25,29 @@ function isValidEmail(value: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
 }
 
+function resolveConfirmationFromAddress(): string {
+  return (
+    process.env.CONFIRMATION_EMAIL_FROM?.trim() ??
+    `大樂旅行社 <${CHECKOUT_OFFICE_EMAIL}>`
+  );
+}
+
+function extractEmailAddress(value: string): string {
+  const trimmed = value.trim();
+  const bracketMatch = trimmed.match(/<([^>]+)>/);
+  if (bracketMatch) {
+    return bracketMatch[1].trim().toLowerCase();
+  }
+  return trimmed.toLowerCase();
+}
+
 async function sendViaResend(input: SendEmailInput): Promise<SendEmailResult> {
   const apiKey = process.env.RESEND_API_KEY?.trim();
   if (!apiKey) {
     return { sent: false, error: "RESEND_API_KEY 未設定" };
   }
 
-  const from =
-    process.env.CONFIRMATION_EMAIL_FROM?.trim() ??
-    `大樂旅行社 <${CHECKOUT_OFFICE_EMAIL}>`;
+  const from = resolveConfirmationFromAddress();
 
   const response = await fetch("https://api.resend.com/emails", {
     method: "POST",
@@ -80,17 +97,29 @@ export async function sendCheckoutConfirmationEmails(
       })
     : { sent: false, error: "旅客 Email 無效或未填寫" };
 
-  const staffInbox =
-    process.env.CONFIRMATION_EMAIL_STAFF?.trim() ?? CHECKOUT_OFFICE_EMAIL;
+  const fromEmail = extractEmailAddress(resolveConfirmationFromAddress());
+  const staffInboxes = resolveCheckoutStaffNotificationEmails().filter(
+    (inbox) => extractEmailAddress(inbox) !== fromEmail,
+  );
 
-  const staffResult = isValidEmail(staffInbox)
-    ? await sendViaResend({
-        to: [staffInbox],
-        subject: staffContent.subject,
-        html: staffContent.html,
-        text: staffContent.text,
-      })
-    : { sent: false, error: "內部通知信箱無效" };
+  let staffResult: SendEmailResult;
+
+  if (staffInboxes.length === 0) {
+    staffResult = {
+      sent: false,
+      error:
+        "內部通知信箱與寄件地址相同（vip@dollar-travel.com）。請在 Vercel 設定 CONFIRMATION_EMAIL_STAFF=你的 Gmail 或其他信箱。",
+    };
+  } else if (!staffInboxes.every(isValidEmail)) {
+    staffResult = { sent: false, error: "內部通知信箱無效" };
+  } else {
+    staffResult = await sendViaResend({
+      to: staffInboxes,
+      subject: staffContent.subject,
+      html: staffContent.html,
+      text: staffContent.text,
+    });
+  }
 
   return {
     customer: customerResult,

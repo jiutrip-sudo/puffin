@@ -30,6 +30,19 @@ export const CHECKOUT_OFFICE_EMAIL =
   COMPANY_INFO.contact.find((item) => item.label === "信箱")?.value ??
   "vip@dollar-travel.com";
 
+/** 內部預訂通知收件人；請設 CONFIRMATION_EMAIL_STAFF，勿與寄件地址相同 */
+export function resolveCheckoutStaffNotificationEmails(): string[] {
+  const configured = process.env.CONFIRMATION_EMAIL_STAFF?.trim();
+  if (!configured) {
+    return [CHECKOUT_OFFICE_EMAIL];
+  }
+
+  return configured
+    .split(/[,;]/)
+    .map((entry) => entry.trim())
+    .filter(Boolean);
+}
+
 const OFFICE_PHONE = CHECKOUT_OFFICE_PHONE;
 const OFFICE_EMAIL = CHECKOUT_OFFICE_EMAIL;
 
