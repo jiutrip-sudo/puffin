@@ -545,6 +545,15 @@ export function CheckoutStageConfirmation({
           <strong className="checkout-reference__code">{confirmationCode}</strong>
         </p>
       )}
+      {confirmationCode && (
+        <p className="checkout-block__hint checkout-reveal checkout-reveal--3">
+          <Link
+            href={`/booking/lookup?code=${encodeURIComponent(confirmationCode)}`}
+          >
+            之後可在此查詢訂單狀態
+          </Link>
+        </p>
+      )}
       <p className="checkout-block__hint checkout-reveal checkout-reveal--3">
         預訂 ID：{bookingId}
       </p>
@@ -629,6 +638,8 @@ export function CheckoutStageConfirmation({
         </Link>
       </div>
       <p className="checkout-block__hint checkout-confirmation-links checkout-reveal checkout-reveal--8">
+        <Link href="/booking/lookup">查詢訂單</Link>
+        <span aria-hidden="true"> · </span>
         <Link href={CHECKOUT_SERVICE_TERMS_URL}>服務條款與訂單須知</Link>
         <span aria-hidden="true"> · </span>
         <Link href="/iceland">冰島行程</Link>

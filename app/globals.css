@@ -2579,6 +2579,254 @@ html {
   text-align: center;
 }
 
+/* Booking lookup */
+.booking-lookup-page {
+  min-height: 60vh;
+  padding: 1.5rem 1rem 3rem;
+  background: color-mix(in srgb, var(--foreground) 4.5%, var(--background));
+}
+
+.booking-lookup {
+  max-width: 40rem;
+  margin: 0 auto;
+}
+
+.booking-lookup__title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--foreground);
+}
+
+.booking-lookup__desc {
+  margin-top: 0.5rem;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: color-mix(in srgb, var(--foreground) 68%, transparent);
+}
+
+.booking-lookup-form {
+  margin-top: 1.25rem;
+  display: grid;
+  gap: 0.85rem;
+  padding: 1.15rem 1.2rem;
+  border-radius: 0.75rem;
+  border: 1px solid color-mix(in srgb, var(--foreground) 8%, transparent);
+  background: var(--background);
+  box-shadow: 0 1px 4px color-mix(in srgb, var(--foreground) 6%, transparent);
+}
+
+.booking-lookup-field {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.booking-lookup-field__label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: color-mix(in srgb, var(--foreground) 72%, transparent);
+}
+
+.booking-lookup-field__input {
+  width: 100%;
+  min-height: 2.75rem;
+  padding: 0.65rem 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid color-mix(in srgb, var(--foreground) 14%, transparent);
+  background: var(--background);
+  font-size: 0.9375rem;
+  color: var(--foreground);
+}
+
+.booking-lookup-field__input:focus-visible {
+  outline: none;
+  border-color: color-mix(in srgb, var(--color-primary) 55%, transparent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 16%, transparent);
+}
+
+.booking-lookup-form__submit {
+  margin-top: 0.15rem;
+  width: 100%;
+  border: none;
+  border-radius: 9999px;
+  padding: 0.9rem 1.25rem;
+  background: var(--color-primary-dark);
+  color: #fff;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.booking-lookup-form__submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.booking-lookup-error {
+  margin-top: 1rem;
+  padding: 0.75rem 0.9rem;
+  border-radius: 0.5rem;
+  background: color-mix(in srgb, #c0392b 12%, var(--background));
+  border: 1px solid color-mix(in srgb, #c0392b 35%, transparent);
+  color: #a93226;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.booking-lookup-result {
+  margin-top: 1.25rem;
+  padding: 1.15rem 1.2rem 1.25rem;
+  border-radius: 0.75rem;
+  border: 1px solid color-mix(in srgb, var(--foreground) 8%, transparent);
+  background: var(--background);
+  box-shadow: 0 1px 4px color-mix(in srgb, var(--foreground) 6%, transparent);
+}
+
+.booking-lookup-result__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.booking-lookup-result__code-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: color-mix(in srgb, var(--foreground) 58%, transparent);
+}
+
+.booking-lookup-result__code {
+  font-size: 1.125rem;
+  font-weight: 800;
+  color: var(--foreground);
+}
+
+.booking-lookup-status {
+  flex-shrink: 0;
+  border-radius: 9999px;
+  padding: 0.25rem 0.65rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.booking-lookup-status--pending {
+  background: color-mix(in srgb, var(--color-primary) 18%, transparent);
+  color: var(--color-primary-dark);
+}
+
+.booking-lookup-status--confirmed {
+  background: color-mix(in srgb, #27ae60 18%, transparent);
+  color: #1e8449;
+}
+
+.booking-lookup-status--cancelled {
+  background: color-mix(in srgb, var(--foreground) 10%, transparent);
+  color: color-mix(in srgb, var(--foreground) 65%, transparent);
+}
+
+.booking-lookup-result__package {
+  margin-top: 0.85rem;
+  font-size: 1.0625rem;
+  font-weight: 800;
+  line-height: 1.45;
+}
+
+.booking-lookup-result__meta {
+  margin-top: 1rem;
+  display: grid;
+  gap: 0.65rem;
+}
+
+.booking-lookup-result__meta div {
+  display: grid;
+  grid-template-columns: 6.5rem minmax(0, 1fr);
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.45;
+}
+
+.booking-lookup-result__meta dt {
+  color: color-mix(in srgb, var(--foreground) 58%, transparent);
+  font-weight: 600;
+}
+
+.booking-lookup-result__meta dd {
+  color: var(--foreground);
+}
+
+.booking-lookup-result__amount-due {
+  font-weight: 800;
+}
+
+.booking-lookup-result__note,
+.booking-lookup-result__support {
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: color-mix(in srgb, var(--foreground) 72%, transparent);
+}
+
+.booking-lookup-payment {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid color-mix(in srgb, var(--foreground) 10%, transparent);
+}
+
+.booking-lookup-payment__title {
+  font-size: 0.9375rem;
+  font-weight: 800;
+}
+
+.booking-lookup-payment__steps {
+  margin: 0.75rem 0 0;
+  padding-left: 1.15rem;
+  display: grid;
+  gap: 0.45rem;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: color-mix(in srgb, var(--foreground) 78%, transparent);
+}
+
+.booking-lookup-payment__bank {
+  margin-top: 0.85rem;
+  padding: 0.75rem 0.85rem;
+  border-radius: 0.5rem;
+  background: color-mix(in srgb, var(--color-primary) 8%, var(--background));
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.booking-lookup-payment__notes {
+  margin: 0.75rem 0 0;
+  padding-left: 1.15rem;
+  display: grid;
+  gap: 0.35rem;
+  font-size: 0.8125rem;
+  line-height: 1.55;
+  color: color-mix(in srgb, var(--foreground) 62%, transparent);
+}
+
+.booking-lookup__footer-hint {
+  margin-top: 1.25rem;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  color: color-mix(in srgb, var(--foreground) 62%, transparent);
+}
+
+.booking-lookup__back {
+  margin-top: 0.75rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+.booking-lookup__back a {
+  color: var(--color-primary-dark);
+}
+
+.booking-lookup__back a:hover {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
 .trip-date-input-wrap {
   position: relative;
   display: flex;

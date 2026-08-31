@@ -1,5 +1,6 @@
 import fs from "node:fs/promises";
 import path from "node:path";
+import { writeBookingCodeIndex } from "./booking-code-index";
 import type { LocalBookingRecord } from "./types";
 
 function parseUpstashRedisUrl(redisUrl: string): { apiUrl: string; token: string } | null {
@@ -170,6 +171,8 @@ export async function persistLocalBooking(
       throw new Error("無法寫入預訂至 KV");
     }
 
+    await writeBookingCodeIndex(record.confirmationCode, record.id);
+
     if (!isServerlessRuntime()) {
       await mirrorBookingToFilesystem(record, appendIndex);
     }
@@ -189,6 +192,7 @@ export async function persistLocalBooking(
   if (appendIndex) {
     await appendFileBookingIndex(record);
   }
+  await writeBookingCodeIndex(record.confirmationCode, record.id);
 }
 
 export async function writeLocalBooking(record: LocalBookingRecord): Promise<void> {

@@ -1,4 +1,5 @@
 import { COMPANY_INFO } from "@/lib/company-info";
+import { buildBookingLookupUrl } from "@/lib/booking/booking-lookup-url";
 import {
   CHECKOUT_OFFICE_ADDRESS,
   CHECKOUT_OFFICE_EMAIL,
@@ -98,6 +99,23 @@ function buildBankAccountHtml(
                   戶名：<strong>${escapeHtml(bankAccount.holderName)}</strong><br />
                   機構名稱代號：${escapeHtml(bankAccount.institutionLine)}<br />
                   帳號：<strong style="font-size:15px;">${escapeHtml(bankAccount.accountNumber)}</strong>
+                </p>
+              </div>`;
+}
+
+function buildBookingLookupHtml(data: CheckoutConfirmationEmailData): string {
+  const lookupUrl = buildBookingLookupUrl(data.confirmationCode);
+  return `
+              <div style="margin:16px 0 0;padding:14px 16px;border-radius:10px;background:${EMAIL_THEME.surface};border:1px solid ${EMAIL_THEME.surfaceBorder};">
+                <p style="margin:0 0 8px;font-size:13px;font-weight:700;color:${EMAIL_THEME.text};">查詢訂單</p>
+                <p style="margin:0;font-size:14px;line-height:1.6;color:${EMAIL_THEME.textMuted};">
+                  使用訂單號與 Email 即可隨時查看付款狀態與匯款說明。
+                </p>
+                <p style="margin:10px 0 0;">
+                  <a href="${escapeHtml(lookupUrl)}" style="display:inline-block;padding:10px 18px;border-radius:999px;background:${EMAIL_THEME.accent};color:#fff;font-size:14px;font-weight:700;text-decoration:none;">查詢我的訂單</a>
+                </p>
+                <p style="margin:10px 0 0;font-size:12px;line-height:1.5;color:${EMAIL_THEME.textMuted};">
+                  或複製連結：<a href="${escapeHtml(lookupUrl)}" style="color:${EMAIL_THEME.link};text-decoration:none;">${escapeHtml(lookupUrl)}</a>
                 </p>
               </div>`;
 }
@@ -237,6 +255,7 @@ function buildSharedOrderBodyHtml(
 ): string {
   const parts = [
     buildOrderSummaryHtml(data),
+    buildBookingLookupHtml(data),
     options?.includeLeadContact ? buildLeadContactHtml(data) : "",
     buildPaymentSummaryHtml(data),
     buildPaymentInstructionsHtml(data),
@@ -277,6 +296,7 @@ export function buildCustomerConfirmationEmail(
       : null,
     `訂單號：${orderRef}`,
     `預訂 ID：${data.bookingId}`,
+    `查詢訂單：${buildBookingLookupUrl(data.confirmationCode)}`,
     "",
     "── 付款資訊 ──",
     `付款方式：${data.paymentMethodLabel}`,
