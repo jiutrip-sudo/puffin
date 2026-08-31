@@ -155,7 +155,7 @@ export function CheckoutStagePackage({
         onChange={onChange}
       />
 
-      <section className="checkout-block">
+      <section className="checkout-block checkout-block--accommodation">
         <h2 className="checkout-block__title">您的住宿</h2>
         <AccommodationTypePicker
           tiers={pricingConfig.tiers}
@@ -164,13 +164,14 @@ export function CheckoutStagePackage({
           interactive
           showHeading={false}
           rowLayout
+          mobileScroll
           tierAvailability={tierAvailability?.accommodation}
           availabilityLoading={availabilityLoading}
           availabilityActive
         />
       </section>
 
-      <section className="checkout-block">
+      <section className="checkout-block checkout-block--vehicle">
         <h2 className="checkout-block__title">您的租車</h2>
         <VehicleTypePicker
           vehicles={pricingConfig.vehicleTiers}
@@ -179,6 +180,7 @@ export function CheckoutStagePackage({
           interactive
           showHeading={false}
           rowLayout
+          mobileScroll
           tierAvailability={tierAvailability?.vehicles}
           availabilityLoading={availabilityLoading}
           availabilityActive

@@ -71,6 +71,8 @@ type AccommodationPickerProps = {
   showHeading?: boolean;
   /** Checkout 等場景：三種住宿並排一行 */
   rowLayout?: boolean;
+  /** 行動版改為橫向滑動（需搭配 rowLayout） */
+  mobileScroll?: boolean;
   tierAvailability?: TierAvailabilityMap;
   availabilityLoading?: boolean;
   availabilityActive?: boolean;
@@ -86,6 +88,7 @@ export function AccommodationTypePicker({
   compact = false,
   showHeading = true,
   rowLayout = false,
+  mobileScroll = false,
   tierAvailability,
   availabilityLoading = false,
   availabilityActive = false,
@@ -122,6 +125,7 @@ export function AccommodationTypePicker({
   }, [activeTier, closeModal]);
 
   const activeGallery = activeTier ? tierGallery(activeTier) : [];
+  const useMobileScroll = rowLayout && mobileScroll;
 
   const showGalleryPrev = useCallback(() => {
     setGalleryIndex((index) =>
@@ -155,11 +159,13 @@ export function AccommodationTypePicker({
         className={
           compact
             ? "space-y-2"
-            : rowLayout
-              ? "mt-3 grid grid-cols-3 gap-3"
-              : showHeading || intro
-                ? "mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
-                : "mt-3 grid grid-cols-1 gap-4 sm:grid-cols-2"
+            : useMobileScroll
+              ? "checkout-picker-scroll mt-3 flex gap-3 overflow-x-auto scroll-pl-4 scroll-pr-4 px-4 pb-2 snap-x snap-mandatory [-ms-overflow-style:none] [scrollbar-width:none] lg:grid lg:grid-cols-3 lg:gap-3 lg:overflow-visible lg:scroll-pl-0 lg:scroll-pr-0 lg:px-0 lg:pb-0 lg:snap-none [&::-webkit-scrollbar]:hidden"
+              : rowLayout
+                ? "mt-3 grid grid-cols-3 gap-3"
+                : showHeading || intro
+                  ? "mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
+                  : "mt-3 grid grid-cols-1 gap-4 sm:grid-cols-2"
         }
       >
         {tiers.map((tier) => {
@@ -177,7 +183,16 @@ export function AccommodationTypePicker({
           );
 
           return (
-            <li key={tier.id} className={compact ? undefined : "min-h-0"}>
+            <li
+              key={tier.id}
+              className={
+                compact
+                  ? undefined
+                  : useMobileScroll
+                    ? "min-w-[78%] max-w-[78%] shrink-0 snap-start lg:min-w-0 lg:max-w-none lg:shrink"
+                    : "min-h-0"
+              }
+            >
               <article
                 className={`overflow-hidden rounded-2xl border transition-colors ${
                   isSelected
@@ -412,6 +427,8 @@ type VehiclePickerProps = {
   showHeading?: boolean;
   /** Checkout 等場景：每行 3 張卡片 */
   rowLayout?: boolean;
+  /** 行動版改為橫向滑動（需搭配 rowLayout） */
+  mobileScroll?: boolean;
   tierAvailability?: TierAvailabilityMap;
   availabilityLoading?: boolean;
   availabilityActive?: boolean;
@@ -427,11 +444,13 @@ export function VehicleTypePicker({
   compact = false,
   showHeading = true,
   rowLayout = false,
+  mobileScroll = false,
   tierAvailability,
   availabilityLoading = false,
   availabilityActive = false,
 }: VehiclePickerProps) {
   const [showAll, setShowAll] = useState(false);
+  const useMobileScroll = rowLayout && mobileScroll;
 
   const selectedIndex = vehicles.findIndex((v) => v.id === selectedId);
   const hiddenCount = vehicles.length - VISIBLE_VEHICLE_COUNT;
@@ -442,17 +461,19 @@ export function VehicleTypePicker({
     }
   }, [selectedIndex]);
 
-  const visibleVehicles = showAll
+  const visibleVehicles = useMobileScroll || showAll
     ? vehicles
     : vehicles.slice(0, VISIBLE_VEHICLE_COUNT);
 
   const vehicleListClass = compact
     ? "mt-2 space-y-2"
-    : rowLayout
-      ? "mt-3 grid grid-cols-3 gap-3 items-stretch"
-      : showHeading || intro
-        ? "mt-6 grid grid-cols-1 items-stretch gap-4 sm:grid-cols-2 lg:grid-cols-3"
-        : "mt-3 grid grid-cols-1 items-stretch gap-4 sm:grid-cols-2";
+    : useMobileScroll
+      ? "checkout-picker-scroll mt-3 flex gap-3 overflow-x-auto scroll-pl-4 scroll-pr-4 px-4 pb-2 snap-x snap-mandatory [-ms-overflow-style:none] [scrollbar-width:none] lg:grid lg:grid-cols-3 lg:gap-3 lg:items-stretch lg:overflow-visible lg:scroll-pl-0 lg:scroll-pr-0 lg:px-0 lg:pb-0 lg:snap-none [&::-webkit-scrollbar]:hidden"
+      : rowLayout
+        ? "mt-3 grid grid-cols-3 gap-3 items-stretch"
+        : showHeading || intro
+          ? "mt-6 grid grid-cols-1 items-stretch gap-4 sm:grid-cols-2 lg:grid-cols-3"
+          : "mt-3 grid grid-cols-1 items-stretch gap-4 sm:grid-cols-2";
 
   return (
     <div
@@ -502,7 +523,11 @@ export function VehicleTypePicker({
             <li
               key={vehicle.id}
               className={
-                compact ? undefined : "min-h-0 h-full"
+                compact
+                  ? undefined
+                  : useMobileScroll
+                    ? "min-w-[78%] max-w-[78%] shrink-0 snap-start lg:min-w-0 lg:max-w-none lg:shrink lg:h-full"
+                    : "min-h-0 h-full"
               }
             >
               <article
@@ -685,7 +710,7 @@ export function VehicleTypePicker({
           );
         })}
       </ul>
-      {!showAll && hiddenCount > 0 && (
+      {!useMobileScroll && !showAll && hiddenCount > 0 && (
         <button
           type="button"
           onClick={() => setShowAll(true)}

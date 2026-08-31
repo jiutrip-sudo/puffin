@@ -8,6 +8,7 @@ import { occupanciesToRoomSlots } from "@/lib/checkout/room-occupancy";
 import { fireCheckoutSuccessConfetti } from "@/lib/checkout/fire-checkout-success-confetti";
 import { CheckoutStepper } from "./CheckoutStepper";
 import { CheckoutSidebar } from "./CheckoutSidebar";
+import { CheckoutMobileChrome } from "./CheckoutMobileChrome";
 import { CheckoutStagePackage } from "./CheckoutStagePackage";
 import { CheckoutStageTravelers, type CheckoutStageTravelersHandle } from "./CheckoutStageTravelers";
 import {
@@ -155,7 +156,29 @@ export function CheckoutFlow({
         <CheckoutStepper currentStep={step} />
       </header>
 
-      <div className="checkout-layout">
+      <div className="checkout-mobile-stack">
+        <CheckoutMobileChrome
+          pricingConfig={pricingConfig}
+          session={session}
+          step={step}
+          submitLoading={submitLoading}
+          acceptTerms={session.acceptTerms}
+          onPrimaryAction={
+            step === 4
+              ? handleSubmit
+              : step === 1 || step === 2 || step === 3
+                ? step === 3
+                  ? () => {
+                      if (travelersRef.current?.validate()) {
+                        goNext();
+                      }
+                    }
+                  : goNext
+                : undefined
+          }
+        />
+
+        <div className="checkout-layout">
         <main className="checkout-main">
           {step === 1 && (
             <>
@@ -164,7 +187,7 @@ export function CheckoutFlow({
                 session={session}
                 onChange={patchSession}
               />
-              <div className="checkout-actions checkout-step-footer">
+              <div className="checkout-actions checkout-step-footer checkout-step-footer--desktop">
                 <Link href={backHref} className="checkout-ghost-btn checkout-step-footer__back">
                   ‹ 返回
                 </Link>
@@ -185,7 +208,7 @@ export function CheckoutFlow({
                 session={session}
                 onChange={patchSession}
               />
-              <div className="checkout-actions checkout-step-footer">
+              <div className="checkout-actions checkout-step-footer checkout-step-footer--desktop">
                 <button
                   type="button"
                   className="checkout-ghost-btn checkout-step-footer__back"
@@ -211,7 +234,7 @@ export function CheckoutFlow({
                 session={session}
                 onChange={patchSession}
               />
-              <div className="checkout-actions checkout-step-footer">
+              <div className="checkout-actions checkout-step-footer checkout-step-footer--desktop">
                 <button
                   type="button"
                   className="checkout-ghost-btn checkout-step-footer__back"
@@ -244,7 +267,7 @@ export function CheckoutFlow({
                 onChange={patchSession}
                 onSubmit={handleSubmit}
               />
-              <div className="checkout-actions">
+              <div className="checkout-actions checkout-step-footer checkout-step-footer--desktop">
                 <button
                   type="button"
                   className="checkout-ghost-btn"
@@ -287,6 +310,7 @@ export function CheckoutFlow({
               : undefined
           }
         />
+      </div>
       </div>
     </div>
   );

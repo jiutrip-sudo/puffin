@@ -56,8 +56,8 @@ export function SiteHeader({
       <div className="mx-auto max-w-7xl">
         <div className="flex items-center justify-between gap-2 md:hidden">
           <SiteLogo />
-          <ThemeControlsBar />
           <div className="flex shrink-0 items-center justify-end gap-1.5">
+            <ThemeControlsBar />
             <HeaderActions rightSlot={rightSlot} />
           </div>
         </div>

@@ -459,7 +459,7 @@ export function CheckoutStagePayment({
 
       <button
         type="button"
-        className="checkout-primary-btn mt-6"
+        className="checkout-primary-btn mt-6 checkout-stage--payment__submit-desktop"
         disabled={loading || !session.acceptTerms}
         onClick={onSubmit}
       >

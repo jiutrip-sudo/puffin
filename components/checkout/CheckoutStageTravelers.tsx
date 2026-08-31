@@ -69,8 +69,15 @@ function FieldError({ message }: { message?: string }) {
   if (!message) return null;
   return (
     <p className="checkout-field__error" role="alert">
+      <span className="checkout-field__error-icon" aria-hidden="true">i</span>
       {message}
     </p>
+  );
+}
+
+function RequiredMark() {
+  return (
+    <span className="checkout-field__required" aria-hidden="true">*</span>
   );
 }
 
@@ -196,7 +203,10 @@ export const CheckoutStageTravelers = forwardRef<
                     {travelerIndex + 1}
                   </span>
                   <div className="checkout-traveler-block__head-text">
-                    <h3 className="checkout-traveler-block__title">{label}</h3>
+                    <h3 className="checkout-traveler-block__title">
+                      {label}
+                      {isLead ? " - 主要旅客" : ""}
+                    </h3>
                     {isLead && (
                       <span className="checkout-traveler-block__tag">主要旅客</span>
                     )}
@@ -205,7 +215,9 @@ export const CheckoutStageTravelers = forwardRef<
 
                 <div className="checkout-traveler-grid">
                   <label className="checkout-field checkout-field--span-half">
-                    <span className="checkout-field__label">名字</span>
+                    <span className="checkout-field__label">
+                      名字<RequiredMark />
+                    </span>
                     <input
                       className={`checkout-field__input${fieldErrors.firstName ? " checkout-field__input--error" : ""}`}
                       value={traveler.firstName}
@@ -225,7 +237,9 @@ export const CheckoutStageTravelers = forwardRef<
                   </label>
 
                   <label className="checkout-field checkout-field--span-half">
-                    <span className="checkout-field__label">姓氏</span>
+                    <span className="checkout-field__label">
+                      姓氏<RequiredMark />
+                    </span>
                     <input
                       className={`checkout-field__input${fieldErrors.lastName ? " checkout-field__input--error" : ""}`}
                       value={traveler.lastName}
@@ -247,7 +261,9 @@ export const CheckoutStageTravelers = forwardRef<
                   {isLead && (
                     <>
                       <label className="checkout-field checkout-field--full">
-                        <span className="checkout-field__label">電子郵件</span>
+                        <span className="checkout-field__label">
+                          電子郵件<RequiredMark />
+                        </span>
                         <input
                           type="email"
                           className={`checkout-field__input${fieldErrors.email ? " checkout-field__input--error" : ""}`}
@@ -268,7 +284,9 @@ export const CheckoutStageTravelers = forwardRef<
                       </label>
 
                       <div className="checkout-field checkout-field--full">
-                        <span className="checkout-field__label">電話號碼</span>
+                        <span className="checkout-field__label">
+                          電話號碼<RequiredMark />
+                        </span>
                         <div className="checkout-phone-row">
                           <select
                             className="checkout-field__select checkout-phone-row__country"
@@ -307,7 +325,9 @@ export const CheckoutStageTravelers = forwardRef<
                       </div>
 
                       <label className="checkout-field checkout-field--full">
-                        <span className="checkout-field__label">居住國家/地區</span>
+                        <span className="checkout-field__label">
+                          居住國家/地區<RequiredMark />
+                        </span>
                         <select
                           className={`checkout-field__select${fieldErrors.countryOfResidence ? " checkout-field__input--error" : ""}`}
                           value={traveler.countryOfResidence}
