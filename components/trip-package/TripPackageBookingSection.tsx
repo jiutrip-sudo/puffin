@@ -36,6 +36,7 @@ type TripPackageBookingSectionProps = {
     availabilityActive: boolean;
     pricingLoading: boolean;
     requestAvailability: () => void;
+    openMobileBooking: () => void;
   }) => ReactNode;
 };
 
@@ -257,7 +258,9 @@ export function TripPackageBookingSection({
   };
 
   const desktopPanel = (
-    <TripBookingPanel {...panelProps} variant="sidebar" />
+    <div id="trip-booking" className="scroll-mt-[calc(var(--trip-sticky-offset)+0.75rem)]">
+      <TripBookingPanel {...panelProps} variant="sidebar" />
+    </div>
   );
 
   const mobileBar = (
@@ -335,6 +338,7 @@ export function TripPackageBookingSection({
         availabilityActive: availabilityRequested,
         pricingLoading,
         requestAvailability,
+        openMobileBooking: () => setSheetOpen(true),
       })}
       {mobileBar}
     </>

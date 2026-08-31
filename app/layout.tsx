@@ -4,7 +4,10 @@ import { cookies, headers } from "next/headers";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteChrome } from "@/components/SiteChrome";
 import { SiteThemeBootstrap } from "@/components/SiteThemeBootstrap";
+import { AnalyticsBootstrap } from "@/components/analytics/AnalyticsBootstrap";
+import { SiteOrganizationJsonLd } from "@/components/seo/SiteJsonLd";
 import { BRAND_NAME } from "@/lib/company-info";
+import { buildPageMetadata } from "@/lib/seo/metadata";
 import {
   SITE_THEME_COOKIE,
   parseSiteThemePreference,
@@ -25,11 +28,12 @@ const syne = Syne({
   weight: ["400", "500", "600", "700", "800"],
 });
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: `${BRAND_NAME} | 冰島行程專賣`,
   description:
     "探索冰島，從這裡開始。台灣出發或冰島集合，為您量身規劃完美旅程。",
-};
+  path: "/",
+});
 
 export default async function RootLayout({ children }: LayoutProps<"/">) {
   const preference = parseSiteThemePreference(
@@ -63,6 +67,8 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
       </head>
       <body className="flex min-h-full w-full flex-col">
         <SiteThemeBootstrap />
+        <AnalyticsBootstrap />
+        <SiteOrganizationJsonLd />
         <SiteChrome />
         {children}
         <SiteFooter />

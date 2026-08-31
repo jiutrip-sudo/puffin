@@ -10,6 +10,7 @@ const OFFICE_EMAIL =
 const NAV_LINKS = [
   { label: "關於", href: "/" },
   { label: "行程", href: "/iceland" },
+  { label: "攻略", href: "/guides" },
   { label: "服務", href: "/terms-and-conditions" },
   { label: "聯絡", href: `mailto:${OFFICE_EMAIL}` },
 ];
@@ -24,20 +25,20 @@ type SiteHeaderProps = {
 function HeaderActions({ rightSlot }: { rightSlot?: React.ReactNode }) {
   return (
     rightSlot ?? (
-      <>
+      <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
         <Link
-          href="#"
-          className="hidden text-xs font-medium text-hero-text/85 transition-colors hover:text-hero-text sm:block"
+          href="/booking/lookup"
+          className="hidden rounded-full border border-foreground/15 px-3 py-2 text-xs font-semibold text-hero-text/85 transition-colors hover:bg-foreground/8 sm:inline-flex"
         >
-          登入
+          查詢訂單
         </Link>
-        <Link
-          href="#"
-          className="glass-hero rounded-full px-4 py-2 text-xs font-semibold text-hero-text transition-all hover:bg-white/25 sm:px-5"
+        <a
+          href={`mailto:${OFFICE_EMAIL}`}
+          className="glass-hero rounded-full px-3 py-2 text-xs font-semibold text-hero-text transition-all hover:bg-white/25 sm:px-4"
         >
-          註冊
-        </Link>
-      </>
+          需要幫助？
+        </a>
+      </div>
     )
   );
 }

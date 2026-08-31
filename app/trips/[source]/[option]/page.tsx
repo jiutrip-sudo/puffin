@@ -4,6 +4,7 @@ import { HeroSection } from "@/components/HeroSection";
 import { PillButton } from "@/components/PillButton";
 import { SiteHeader } from "@/components/SiteHeader";
 import { TransitionBar } from "@/components/TransitionBar";
+import { buildPageMetadata } from "@/lib/seo/metadata";
 import {
   COMING_SOON_TRIPS,
   ICELAND_GROUP_SEASON_OPTIONS,
@@ -15,6 +16,26 @@ import {
 type PageProps = {
   params: Promise<{ source: string; option: string }>;
 };
+
+export async function generateMetadata({ params }: PageProps) {
+  const { source, option } = await params;
+  const sourceLabel = SOURCE_LABELS[source];
+  const optionLabel = OPTION_LABELS[option];
+
+  if (!sourceLabel || !optionLabel) {
+    return buildPageMetadata({
+      title: "找不到行程 | 大樂旅行社",
+      description: "找不到您要的行程分類。",
+      noIndex: true,
+    });
+  }
+
+  return buildPageMetadata({
+    title: `${sourceLabel} · ${optionLabel} | 大樂旅行社`,
+    description: `選擇${sourceLabel}的${optionLabel}行程，規劃您的冰島之旅。`,
+    path: `/trips/${source}/${option}`,
+  });
+}
 
 export default async function TripsPage({ params }: PageProps) {
   const { source, option } = await params;

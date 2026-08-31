@@ -21,6 +21,7 @@ import { TripPackageBookingSection } from "./TripPackageBookingSection";
 import { TripPackageHero } from "./TripPackageHero";
 import { TripRoomVehicleCards } from "./TripRoomVehicleCards";
 import { TripSectionNav } from "./TripSectionNav";
+import { TripInlineCta } from "./TripInlineCta";
 import { TripSimilarPackages } from "./TripSimilarPackages";
 
 type TripPackagePageClientProps = {
@@ -63,6 +64,7 @@ type TripPackageMainContentProps = {
   availabilityActive: boolean;
   pricingLoading: boolean;
   requestAvailability: () => void;
+  openMobileBooking: () => void;
 };
 
 function TripPackageMainContent({
@@ -78,6 +80,7 @@ function TripPackageMainContent({
   availabilityActive,
   pricingLoading,
   requestAvailability,
+  openMobileBooking,
 }: TripPackageMainContentProps) {
   const roomVehicleSectionRef = useRef<HTMLElement>(null);
 
@@ -184,6 +187,17 @@ function TripPackageMainContent({
           <section>
             <SectionHeading id="faq" title="常見問題" />
             <TripFaqAccordion groups={pkg.faq} />
+            <TripInlineCta
+              onOpenBooking={() => {
+                if (window.matchMedia("(max-width: 1023px)").matches) {
+                  openMobileBooking();
+                } else {
+                  document
+                    .getElementById("trip-booking")
+                    ?.scrollIntoView({ behavior: "smooth", block: "start" });
+                }
+              }}
+            />
           </section>
         </main>
 
@@ -291,6 +305,7 @@ export function TripPackagePageClient({
           availabilityActive,
           pricingLoading,
           requestAvailability,
+          openMobileBooking,
         }) => (
           <TripPackageMainContent
             pkg={pkg}
@@ -305,6 +320,7 @@ export function TripPackagePageClient({
             availabilityActive={availabilityActive}
             pricingLoading={pricingLoading}
             requestAvailability={requestAvailability}
+            openMobileBooking={openMobileBooking}
           />
         )}
       </TripPackageBookingSection>

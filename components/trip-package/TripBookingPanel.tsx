@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { formatIsk } from "@/lib/trip-pricing/calculate";
+import { trackTripBookClick } from "@/lib/analytics/track";
 import { BookingShimmer } from "./BookingPriceShimmer";
 import { TripDateField } from "./TripDateField";
 import type {
@@ -400,6 +401,7 @@ export function TripBookingPanel({
       <a
         href={bookHref}
         className={`booking-panel-cta mt-4 ${pricingLoading || !pricing || !startDate ? "pointer-events-none opacity-60" : ""}`}
+        onClick={() => trackTripBookClick(packageId, variant ?? "sidebar")}
       >
         立即預訂
       </a>

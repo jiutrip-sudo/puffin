@@ -4,6 +4,7 @@ import { HeroSection } from "@/components/HeroSection";
 import { PillButton } from "@/components/PillButton";
 import { SiteHeader } from "@/components/SiteHeader";
 import { TransitionBar } from "@/components/TransitionBar";
+import { buildPageMetadata } from "@/lib/seo/metadata";
 import {
   COMING_SOON_TRIPS,
   ICELAND_GROUP_SUMMER_DAY_OPTIONS,
@@ -20,6 +21,40 @@ type PageProps = {
 
 const ICELAND_SEASON_TRIP_OPTIONS = new Set(["self-drive", "group"]);
 const SEASON_IDS = new Set(["summer", "winter"]);
+
+export async function generateMetadata({ params }: PageProps) {
+  const { source, option, suboption } = await params;
+
+  if (
+    source !== "iceland" ||
+    !ICELAND_SEASON_TRIP_OPTIONS.has(option) ||
+    !SEASON_IDS.has(suboption)
+  ) {
+    return buildPageMetadata({
+      title: "找不到行程 | 大樂旅行社",
+      description: "找不到您要的行程分類。",
+      noIndex: true,
+    });
+  }
+
+  const sourceLabel = SOURCE_LABELS[source];
+  const optionLabel = OPTION_LABELS[option];
+  const suboptionLabel = OPTION_LABELS[suboption];
+
+  if (!sourceLabel || !optionLabel || !suboptionLabel) {
+    return buildPageMetadata({
+      title: "找不到行程 | 大樂旅行社",
+      description: "找不到您要的行程分類。",
+      noIndex: true,
+    });
+  }
+
+  return buildPageMetadata({
+    title: `${sourceLabel} · ${optionLabel} · ${suboptionLabel} | 大樂旅行社`,
+    description: `選擇${suboptionLabel}${optionLabel}的天數與路線，規劃冰島之旅。`,
+    path: `/trips/${source}/${option}/${suboption}`,
+  });
+}
 
 export default async function TripSuboptionPage({ params }: PageProps) {
   const { source, option, suboption } = await params;

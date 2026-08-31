@@ -1,5 +1,13 @@
 import { SelectionPage } from "@/components/SelectionPage";
 import { ICELAND_OPTIONS } from "@/lib/trip-options";
+import { buildPageMetadata } from "@/lib/seo/metadata";
+
+export const metadata = buildPageMetadata({
+  title: "冰島集合行程 | 大樂旅行社",
+  description:
+    "冰島集合出發：自駕、跟團與體驗行程。選擇最適合你的冰島旅行方式。",
+  path: "/iceland",
+});
 
 export default function IcelandPage() {
   return (

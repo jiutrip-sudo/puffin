@@ -6,6 +6,11 @@ import type { PricingConfig } from "@/lib/trip-pricing/types";
 import type { CheckoutSession, CheckoutStepId } from "@/lib/checkout/types";
 import { occupanciesToRoomSlots } from "@/lib/checkout/room-occupancy";
 import { fireCheckoutSuccessConfetti } from "@/lib/checkout/fire-checkout-success-confetti";
+import {
+  trackCheckoutComplete,
+  trackCheckoutStart,
+  trackCheckoutStep,
+} from "@/lib/analytics/track";
 import { CheckoutStepper } from "./CheckoutStepper";
 import { CheckoutSidebar } from "./CheckoutSidebar";
 import { CheckoutMobileChrome } from "./CheckoutMobileChrome";
@@ -52,6 +57,14 @@ export function CheckoutFlow({
   const goBack = () => {
     setStep((prev) => Math.max(1, prev - 1) as CheckoutStepId);
   };
+
+  useEffect(() => {
+    trackCheckoutStart(session.packageId);
+  }, [session.packageId]);
+
+  useEffect(() => {
+    trackCheckoutStep(step, session.packageId);
+  }, [step, session.packageId]);
 
   useEffect(() => {
     const reduceMotion = window.matchMedia(
@@ -140,6 +153,10 @@ export function CheckoutFlow({
             : null,
         customerEmailSent: data.email?.customerSent ?? false,
       });
+      trackCheckoutComplete(
+        session.packageId,
+        data.confirmationCode ?? null,
+      );
       setStep(5);
     } catch (error) {
       setSubmitError(

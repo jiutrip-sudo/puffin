@@ -1,11 +1,14 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { TripPackagePage } from "@/components/trip-package/TripPackagePage";
+import { TripProductJsonLd } from "@/components/seo/SiteJsonLd";
 import { HeroSection } from "@/components/HeroSection";
 import { SiteHeader } from "@/components/SiteHeader";
 import { TransitionBar } from "@/components/TransitionBar";
 import Link from "next/link";
 import { getTripPackageWithPricing } from "@/lib/trip-packages/get-package-with-pricing";
+import { buildPageMetadata } from "@/lib/seo/metadata";
+import { absoluteUrl } from "@/lib/site-url";
 import {
   COMING_SOON_TRIPS,
   ICELAND_TRIP_SEASON_DAY_IDS,
@@ -28,15 +31,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const data = getTripPackageWithPricing(tripKey);
 
   if (data) {
-    return {
+    return buildPageMetadata({
       title: `${data.package.title} | 大樂旅行社`,
       description: data.package.intro.summary,
-      openGraph: {
-        title: data.package.title,
-        description: data.package.intro.summary,
-        images: [{ url: data.package.heroImage }],
-      },
-    };
+      path: `/trips/${tripKey}`,
+      ogImage: data.package.heroImage.startsWith("http")
+        ? data.package.heroImage
+        : absoluteUrl(data.package.heroImage),
+    });
   }
 
   const durationLabel = `${duration}日`;
@@ -63,10 +65,16 @@ export default async function TripDurationPage({ params }: PageProps) {
 
   if (packageData) {
     return (
-      <TripPackagePage
-        package={packageData.package}
-        pricingConfig={packageData.pricingConfig}
-      />
+      <>
+        <TripProductJsonLd
+          package={packageData.package}
+          pricingConfig={packageData.pricingConfig}
+        />
+        <TripPackagePage
+          package={packageData.package}
+          pricingConfig={packageData.pricingConfig}
+        />
+      </>
     );
   }
 
