@@ -53,6 +53,14 @@ function bookingIndexPath(): string {
   return path.join(bookingsDir(), "index.jsonl");
 }
 
+function isServerlessRuntime(): boolean {
+  return Boolean(
+    process.env.VERCEL ||
+      process.env.AWS_LAMBDA_FUNCTION_NAME ||
+      process.env.AWS_EXECUTION_ENV,
+  );
+}
+
 async function readKvBooking(bookingId: string): Promise<LocalBookingRecord | null> {
   const credentials = getKvRestCredentials();
   if (!credentials) return null;
@@ -135,20 +143,50 @@ export async function readLocalBooking(
   return readFileBooking(bookingId);
 }
 
+async function mirrorBookingToFilesystem(
+  record: LocalBookingRecord,
+  appendIndex: boolean,
+): Promise<void> {
+  try {
+    await writeFileBooking(record);
+    if (appendIndex) {
+      await appendFileBookingIndex(record);
+    }
+  } catch (error) {
+    console.warn("預訂本機備份寫入失敗", error);
+  }
+}
+
 export async function persistLocalBooking(
   record: LocalBookingRecord,
   options?: { appendIndex?: boolean },
 ): Promise<void> {
   const credentials = getKvRestCredentials();
+  const appendIndex = options?.appendIndex ?? false;
+
   if (credentials) {
     const ok = await writeKvBooking(record);
     if (!ok) {
       throw new Error("無法寫入預訂至 KV");
     }
+
+    if (!isServerlessRuntime()) {
+      await mirrorBookingToFilesystem(record, appendIndex);
+    }
+    return;
+  }
+
+  if (isServerlessRuntime()) {
+    console.error(
+      "預訂儲存未設定：serverless 環境缺少 KV_REST_API_URL / KV_REST_API_TOKEN",
+    );
+    throw new Error(
+      "暫時無法完成預訂，請稍後再試或聯絡客服信箱 vip@dollar-travel.com",
+    );
   }
 
   await writeFileBooking(record);
-  if (options?.appendIndex) {
+  if (appendIndex) {
     await appendFileBookingIndex(record);
   }
 }
