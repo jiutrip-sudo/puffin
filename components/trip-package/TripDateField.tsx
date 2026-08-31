@@ -19,6 +19,7 @@ type TripCalendarPopoverProps = {
   value: string;
   min?: string;
   max?: string;
+  dualMonth?: boolean;
   onSelect: (value: string) => void;
   onClose: () => void;
 };
@@ -44,11 +45,16 @@ function CalendarIcon() {
   );
 }
 
+function formatMonthTitle(month: Date): string {
+  return `${month.getFullYear()}年${month.getMonth() + 1}月`;
+}
+
 function TripCalendarPopover({
   anchorEl,
   value,
   min,
   max,
+  dualMonth = false,
   onSelect,
   onClose,
 }: TripCalendarPopoverProps) {
@@ -56,7 +62,17 @@ function TripCalendarPopover({
   const [viewMonth, setViewMonth] = useState(() =>
     getInitialViewMonth(value, min, max),
   );
-  const [position, setPosition] = useState({ top: 0, left: 0, width: 280 });
+  const [position, setPosition] = useState({
+    top: 0,
+    left: 0,
+    width: dualMonth ? 560 : 280,
+  });
+
+  const secondMonth = new Date(
+    viewMonth.getFullYear(),
+    viewMonth.getMonth() + 1,
+    1,
+  );
 
   useLayoutEffect(() => {
     if (!anchorEl || !popoverRef.current) return;
@@ -66,10 +82,11 @@ function TripCalendarPopover({
     const margin = 8;
     const viewportWidth = window.innerWidth;
     const viewportHeight = window.innerHeight;
+    const minWidth = dualMonth ? 560 : 280;
 
     let top = anchorRect.bottom + margin;
     let left = anchorRect.left;
-    const width = Math.max(anchorRect.width, 280);
+    const width = Math.max(anchorRect.width, minWidth);
 
     if (left + width > viewportWidth - margin) {
       left = viewportWidth - width - margin;
@@ -81,7 +98,7 @@ function TripCalendarPopover({
     }
 
     setPosition({ top, left, width });
-  }, [anchorEl, viewMonth]);
+  }, [anchorEl, viewMonth, dualMonth]);
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
@@ -92,9 +109,54 @@ function TripCalendarPopover({
   }, [onClose]);
 
   const todayIso = toISODate(new Date());
-  const cells = getCalendarCells(viewMonth);
   const canPrev = canNavigateMonth(viewMonth, -1, min, max);
   const canNext = canNavigateMonth(viewMonth, 1, min, max);
+
+  const renderDay = (date: Date, inMonth: boolean, monthKey: number) => {
+    const iso = toISODate(date);
+    const selectable = inMonth && isDateInRange(date, min, max);
+    const isSelected = value === iso;
+    const isToday = todayIso === iso;
+
+    return (
+      <button
+        key={`${monthKey}-${iso}-${inMonth}`}
+        type="button"
+        disabled={!selectable}
+        onClick={() => {
+          if (!selectable) return;
+          onSelect(iso);
+          onClose();
+        }}
+        className={`trip-calendar-day ${
+          inMonth ? "" : "is-outside"
+        } ${isSelected ? "is-selected" : ""} ${isToday ? "is-today" : ""}`}
+      >
+        {date.getDate()}
+      </button>
+    );
+  };
+
+  const renderMonthPanel = (month: Date) => {
+    const cells = getCalendarCells(month);
+    const monthKey = month.getFullYear() * 12 + month.getMonth();
+
+    return (
+      <div className="trip-calendar-month">
+        <p className="trip-calendar-month-label">{formatMonthTitle(month)}</p>
+        <div className="trip-calendar-weekdays">
+          {WEEKDAYS.map((day) => (
+            <span key={`${monthKey}-${day}`} className="trip-calendar-weekday">
+              {day}
+            </span>
+          ))}
+        </div>
+        <div className="trip-calendar-grid">
+          {cells.map(({ date, inMonth }) => renderDay(date, inMonth, monthKey))}
+        </div>
+      </div>
+    );
+  };
 
   return createPortal(
     <>
@@ -106,11 +168,14 @@ function TripCalendarPopover({
       />
       <div
         ref={popoverRef}
-        className="trip-calendar-popover fixed z-[120]"
+        className={`trip-calendar-popover fixed z-[120]${
+          dualMonth ? " trip-calendar-popover--dual" : ""
+        }`}
         style={{
           top: position.top,
           left: position.left,
           width: position.width,
+          minWidth: dualMonth ? 560 : undefined,
         }}
         role="dialog"
         aria-modal="true"
@@ -130,9 +195,15 @@ function TripCalendarPopover({
           >
             ‹
           </button>
-          <p className="trip-calendar-title">
-            {viewMonth.getFullYear()}年{viewMonth.getMonth() + 1}月
-          </p>
+          {dualMonth ? (
+            <p className="trip-calendar-title trip-calendar-title--dual">
+              {formatMonthTitle(viewMonth)}
+              <span className="trip-calendar-title__sep">—</span>
+              {formatMonthTitle(secondMonth)}
+            </p>
+          ) : (
+            <p className="trip-calendar-title">{formatMonthTitle(viewMonth)}</p>
+          )}
           <button
             type="button"
             className="trip-calendar-nav"
@@ -148,40 +219,29 @@ function TripCalendarPopover({
           </button>
         </div>
 
-        <div className="trip-calendar-weekdays">
-          {WEEKDAYS.map((day) => (
-            <span key={day} className="trip-calendar-weekday">{day}</span>
-          ))}
-        </div>
-
-        <div className="trip-calendar-grid">
-          {cells.map(({ date, inMonth }) => {
-            const iso = toISODate(date);
-            const selectable = inMonth && isDateInRange(date, min, max);
-            const isSelected = value === iso;
-            const isToday = todayIso === iso;
-
-            return (
-              <button
-                key={`${iso}-${inMonth}`}
-                type="button"
-                disabled={!selectable}
-                onClick={() => {
-                  if (!selectable) return;
-                  onSelect(iso);
-                  onClose();
-                }}
-                className={`trip-calendar-day ${
-                  inMonth ? "" : "is-outside"
-                } ${isSelected ? "is-selected" : ""} ${
-                  isToday ? "is-today" : ""
-                }`}
-              >
-                {date.getDate()}
-              </button>
-            );
-          })}
-        </div>
+        {dualMonth ? (
+          <div className="trip-calendar-months trip-calendar-months--dual">
+            {renderMonthPanel(viewMonth)}
+            {renderMonthPanel(secondMonth)}
+          </div>
+        ) : (
+          <>
+            <div className="trip-calendar-weekdays">
+              {WEEKDAYS.map((day) => (
+                <span key={day} className="trip-calendar-weekday">{day}</span>
+              ))}
+            </div>
+            <div className="trip-calendar-grid">
+              {getCalendarCells(viewMonth).map(({ date, inMonth }) =>
+                renderDay(
+                  date,
+                  inMonth,
+                  viewMonth.getFullYear() * 12 + viewMonth.getMonth(),
+                ),
+              )}
+            </div>
+          </>
+        )}
       </div>
     </>,
     document.body,
@@ -195,6 +255,8 @@ type TripDateFieldProps = {
   max?: string;
   disabled?: boolean;
   loading?: boolean;
+  /** 並排顯示兩個月份（Checkout 旅行日期等） */
+  dualMonth?: boolean;
   onChange?: (event: { target: { value: string } }) => void;
 };
 
@@ -205,6 +267,7 @@ export function TripDateField({
   max,
   disabled,
   loading = false,
+  dualMonth = false,
   onChange,
 }: TripDateFieldProps) {
   const [open, setOpen] = useState(false);
@@ -242,6 +305,7 @@ export function TripDateField({
           value={value}
           min={min}
           max={max}
+          dualMonth={dualMonth}
           onSelect={(nextValue) => onChange?.({ target: { value: nextValue } })}
           onClose={() => setOpen(false)}
         />

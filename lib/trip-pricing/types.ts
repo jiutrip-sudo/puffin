@@ -24,6 +24,12 @@ export type VehicleTier = {
   addonTotal: number;
   acriss?: string;
   gearType?: "automatic" | "manual";
+  /** 可乘人數 */
+  seats?: number;
+  /** 車門數 */
+  doors?: number;
+  /** 可放行李件數（大行李箱） */
+  luggage?: number;
 };
 
 export type PricingInput = {
@@ -37,6 +43,12 @@ export type PricingInput = {
   vehicleTier: string;
   /** Corivo packageItemId，用於 checkout 自選活動加價 */
   extraPackageItemIds?: number[];
+  /** Checkout 自訂每間房配置（覆寫預設 defaultRoomConfiguration） */
+  roomSlots?: Array<{
+    adults: number;
+    children: number;
+    roomTypeCategory: "TWIN" | "SINGLE" | "TRIPLE" | "DOUBLE";
+  }>;
 };
 
 export type PricingResult = {

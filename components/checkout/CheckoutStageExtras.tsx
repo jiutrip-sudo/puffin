@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
 import { formatIsk } from "@/lib/trip-pricing/calculate";
 import type { CheckoutSession } from "@/lib/checkout/types";
@@ -9,27 +10,45 @@ import {
   getManualPaymentInstructions,
 } from "@/lib/checkout/manual-payment";
 import {
-  formatExtraDepartureLabel,
-  toggleExtraSelection,
-} from "@/lib/checkout/extra-selection";
-import type { CorivoOptionalExtraDay } from "@/lib/checkout/corivo-optional-extras";
+  CHECKOUT_SERVICE_TERMS_PARAGRAPHS,
+  CHECKOUT_SERVICE_TERMS_URL,
+} from "@/lib/checkout/checkout-service-terms";
+import { toggleExtraSelection } from "@/lib/checkout/extra-selection";
+import { upsertExtraSelection, type ExtraParticipantCounts } from "@/lib/checkout/extra-participants";
+import type {
+  CorivoOptionalExtra,
+  CorivoOptionalExtraDay,
+  CorivoOptionalExtraDeparture,
+} from "@/lib/checkout/corivo-optional-extras";
+import {
+  formatCheckoutExtraDayDate,
+  getCheckoutExtraDayTitle,
+} from "@/lib/checkout/extra-day-labels";
 import { BookingShimmer } from "@/components/trip-package/BookingPriceShimmer";
+import { TripSpotDetailModal } from "@/components/trip-package/TripSpotDetailModal";
+import { resolveExtraTripAttraction } from "@/lib/checkout/extra-to-attraction";
+import { CheckoutExtraAddModal } from "./CheckoutExtraAddModal";
+
+type ExtraAddTarget = {
+  extra: CorivoOptionalExtra;
+  departure: CorivoOptionalExtraDeparture;
+};
 
 type StageExtrasProps = {
   session: CheckoutSession;
   onChange: (patch: Partial<CheckoutSession>) => void;
-  onContinue: () => void;
 };
 
 export function CheckoutStageExtras({
   session,
   onChange,
-  onContinue,
 }: StageExtrasProps) {
   const [days, setDays] = useState<CorivoOptionalExtraDay[]>([]);
   const [currency, setCurrency] = useState("ISK");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [infoExtra, setInfoExtra] = useState<CorivoOptionalExtra | null>(null);
+  const [addTarget, setAddTarget] = useState<ExtraAddTarget | null>(null);
 
   const requestBody = useMemo(
     () => ({
@@ -88,11 +107,19 @@ export function CheckoutStageExtras({
     session.selectedExtras.map((extra) => extra.packageItemId),
   );
 
-  const handleToggle = (
+  const handleOpenAddModal = (
+    extra: CorivoOptionalExtraDay["extras"][number],
+    departure: CorivoOptionalExtraDeparture,
+  ) => {
+    setAddTarget({ extra, departure });
+  };
+
+  const handleConfirmAdd = (
     extra: CorivoOptionalExtraDay["extras"][number],
     departureStartTime: string,
+    counts: ExtraParticipantCounts,
   ) => {
-    const next = toggleExtraSelection(
+    const next = upsertExtraSelection(
       session.selectedExtras,
       {
         packageItemId: extra.packageItemId,
@@ -103,18 +130,32 @@ export function CheckoutStageExtras({
         maxTravelers: extra.maxTravelers,
       },
       session.travelers,
+      counts,
+      session,
     );
     onChange({ selectedExtras: next });
   };
+  const infoAttraction = useMemo(
+    () =>
+      infoExtra
+        ? resolveExtraTripAttraction(session.packageId, infoExtra)
+        : null,
+    [infoExtra, session.packageId],
+  );
 
   const totalExtras = days.reduce((sum, day) => sum + day.extras.length, 0);
 
   return (
     <div className="checkout-stage">
-      <h2 className="checkout-block__title">活動與一日遊</h2>
-      <p className="checkout-block__desc">
-        依行程日加購南岸冰川徒步、藍冰洞、溫泉等自選項目。價格以冰島克朗（ISK）顯示。
-      </p>
+      <header className="checkout-extra-hero">
+        <div className="checkout-extra-hero__title-row">
+          <h2 className="checkout-extra-hero__title">套餐中的特色體驗</h2>
+          <span className="checkout-extra-hero__plus" aria-hidden="true">+</span>
+        </div>
+        <p className="checkout-extra-hero__desc">
+          您可以選擇額外的自選項目來豐富您的旅程
+        </p>
+      </header>
 
       {loading && (
         <div className="checkout-extra-loading">
@@ -137,106 +178,158 @@ export function CheckoutStageExtras({
 
       {!loading && !error && days.length > 0 && (
         <div className="checkout-extra-days">
-          {days.map((day) => (
-            <section key={day.packageTourDay} className="checkout-extra-day">
-              <h3 className="checkout-extra-day__title">
-                第 {day.packageTourDay} 天
-                <span className="checkout-extra-day__date">
-                  {formatDayDate(day.date)}
-                </span>
-              </h3>
+          {days.map((day) => {
+            const dayTitle = getCheckoutExtraDayTitle(
+              session.packageId,
+              day.packageTourDay,
+            );
 
-              {day.extras.length === 0 ? (
-                <p className="checkout-block__hint">本日無可加購項目</p>
-              ) : (
-                <ul className="checkout-extra-list">
-                  {day.extras.map((extra) => {
-                    const departure = extra.departures[0];
-                    if (!departure) return null;
+            return (
+              <section key={day.packageTourDay} className="checkout-extra-day">
+                <div className="checkout-extra-day__header">
+                  <h3 className="checkout-extra-day__heading">
+                    第 {day.packageTourDay} 天
+                    {dayTitle ? ` - ${dayTitle}` : ""}
+                  </h3>
+                  <p className="checkout-extra-day__date">
+                    <CheckoutExtraCalendarIcon />
+                    <span>{formatCheckoutExtraDayDate(day.date)}</span>
+                  </p>
+                </div>
 
-                    const selected = selectedIds.has(extra.packageItemId);
-                    const participantCount = session.adults + session.children;
-                    const disabled =
-                      participantCount < extra.minTravelers ||
-                      participantCount > extra.maxTravelers;
+                {day.extras.length === 0 ? (
+                  <p className="checkout-block__hint">本日無可加購項目</p>
+                ) : (
+                  <ul className="checkout-extra-grid">
+                    {day.extras.map((extra) => {
+                      const departure = extra.departures[0];
+                      if (!departure) return null;
 
-                    return (
-                      <li key={extra.packageItemId}>
-                        <button
-                          type="button"
-                          className={`checkout-extra-card${selected ? " checkout-extra-card--selected" : ""}`}
-                          disabled={disabled}
-                          onClick={() =>
-                            handleToggle(extra, departure.startTime)
-                          }
-                        >
-                          <div className="checkout-extra-card__body">
-                            <p className="checkout-extra-card__name">
-                              {extra.name}
-                            </p>
-                            {extra.durationLabel && (
-                              <p className="checkout-extra-card__meta">
-                                {extra.durationLabel}
-                              </p>
-                            )}
-                            <p className="checkout-extra-card__meta">
-                              {formatExtraDepartureLabel(departure.startTime)}
-                              {extra.minTravelers > 1
-                                ? ` · ${extra.minTravelers}–${extra.maxTravelers} 人`
-                                : ""}
-                            </p>
-                            {disabled && (
-                              <p className="checkout-extra-card__warn">
-                                目前旅客人數不符合此活動要求
-                              </p>
-                            )}
-                          </div>
-                          <div className="checkout-extra-card__price">
-                            <span className="checkout-extra-card__amount tabular-nums">
-                              {formatIsk(departure.priceInCurrency)}
-                            </span>
-                            <span className="checkout-extra-card__currency">
-                              {currency}
-                            </span>
-                            {extra.priceFromPerTravelerInCurrency > 0 &&
-                              session.adults + session.children > 1 && (
-                                <span className="checkout-extra-card__per-person">
-                                  約 {formatIsk(extra.priceFromPerTravelerInCurrency)} / 人
-                                </span>
+                      const selected = selectedIds.has(extra.packageItemId);
+                      const participantCount = session.adults + session.children;
+                      const disabled =
+                        participantCount < extra.minTravelers ||
+                        participantCount > extra.maxTravelers;
+                      const perPerson =
+                        extra.priceFromPerTravelerInCurrency > 0
+                          ? extra.priceFromPerTravelerInCurrency
+                          : departure.priceInCurrency;
+
+                      return (
+                        <li key={extra.packageItemId}>
+                          <article
+                            className={`checkout-extra-card${selected ? " checkout-extra-card--selected" : ""}`}
+                          >
+                            <div className="checkout-extra-card__media">
+                              {extra.imageUrl ? (
+                                <Image
+                                  src={extra.imageUrl}
+                                  alt=""
+                                  fill
+                                  className="checkout-extra-card__image"
+                                  sizes="(min-width: 1024px) 280px, (min-width: 640px) 45vw, 100vw"
+                                />
+                              ) : (
+                                <div
+                                  className="checkout-extra-card__image checkout-extra-card__image--placeholder"
+                                  aria-hidden="true"
+                                />
                               )}
-                          </div>
-                        </button>
-                      </li>
-                    );
-                  })}
-                </ul>
-              )}
-            </section>
-          ))}
+                            </div>
+
+                            <div className="checkout-extra-card__body">
+                              <p className="checkout-extra-card__name">
+                                {extra.name}
+                              </p>
+                              <p className="checkout-extra-card__price tabular-nums">
+                                {currency} {formatIsk(perPerson)}
+                                <span className="checkout-extra-card__per-person">
+                                  / 人
+                                </span>
+                              </p>
+                              {disabled && (
+                                <p className="checkout-extra-card__warn">
+                                  目前旅客人數不符合此活動要求
+                                </p>
+                              )}
+                              <div className="checkout-extra-card__actions">
+                                <button
+                                  type="button"
+                                  className="checkout-extra-card__info-btn"
+                                  onClick={() => setInfoExtra(extra)}
+                                >
+                                  查看資訊
+                                </button>
+                                <button
+                                  type="button"
+                                  className={`checkout-extra-card__add-btn${selected ? " checkout-extra-card__add-btn--selected" : ""}`}
+                                  disabled={disabled && !selected}
+                                  onClick={() => handleOpenAddModal(extra, departure)}
+                                >
+                                  {selected ? "已添加" : "添加"}
+                                </button>
+                              </div>
+                            </div>
+                          </article>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                )}
+              </section>
+            );
+          })}
         </div>
       )}
 
-      <button
-        type="button"
-        className="checkout-primary-btn mt-6"
-        onClick={onContinue}
-      >
-        {session.selectedExtras.length > 0
-          ? `已選 ${session.selectedExtras.length} 項，填寫旅客資訊`
-          : "略過，填寫旅客資訊"}
-      </button>
+      {addTarget && (
+        <CheckoutExtraAddModal
+          extra={addTarget.extra}
+          departure={addTarget.departure}
+          session={session}
+          currency={currency}
+          onClose={() => setAddTarget(null)}
+          onConfirm={(counts) =>
+            handleConfirmAdd(
+              addTarget.extra,
+              addTarget.departure.startTime,
+              counts,
+            )
+          }
+        />
+      )}
+
+      {infoAttraction && (
+        <TripSpotDetailModal
+          spot={infoAttraction}
+          onClose={() => setInfoExtra(null)}
+        />
+      )}
     </div>
   );
 }
 
-function formatDayDate(dateString: string): string {
-  const date = new Date(dateString);
-  if (Number.isNaN(date.getTime())) return dateString;
-  return date.toLocaleDateString("zh-TW", {
-    month: "short",
-    day: "numeric",
-    weekday: "short",
-  });
+function CheckoutExtraCalendarIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="checkout-extra-day__calendar" aria-hidden="true">
+      <rect
+        x="4"
+        y="5"
+        width="16"
+        height="16"
+        rx="2"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.75"
+      />
+      <path
+        d="M4 9h16M8 3v4M16 3v4"
+        stroke="currentColor"
+        strokeWidth="1.75"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
 }
 
 type StagePaymentProps = {
@@ -259,11 +352,8 @@ export function CheckoutStagePayment({
   const depositPercent = Math.round(depositRate * 100);
 
   return (
-    <div className="checkout-stage">
-      <h2 className="checkout-block__title">付款方式</h2>
-      <p className="checkout-block__desc">
-        本網站暫不提供線上刷卡。確認預訂後，訂單即成立；請依您選擇的方式於期限內完成付款，顧問將人工確認並更新訂單狀態。
-      </p>
+    <div className="checkout-stage checkout-stage--payment">
+      <h2 className="checkout-block__title">付款</h2>
 
       <div className="checkout-payment-section">
         <h3 className="checkout-payment-section__title">您打算支付多少？</h3>
@@ -333,16 +423,33 @@ export function CheckoutStagePayment({
         </dl>
       )}
 
-      <label className="checkout-terms mt-6 flex items-start gap-3">
-        <input
-          type="checkbox"
-          checked={session.acceptTerms}
-          onChange={(e) => onChange({ acceptTerms: e.target.checked })}
-        />
-        <span className="text-sm leading-relaxed text-foreground/80">
-          我已閱讀並同意服務條款；預訂者代表全團旅客接受條款並負責付款。
-        </span>
-      </label>
+      <section className="checkout-stage-card checkout-terms-card">
+        <h3 className="checkout-terms-card__title">服務條款</h3>
+        <div className="checkout-terms-card__body">
+          {CHECKOUT_SERVICE_TERMS_PARAGRAPHS.map((paragraph) => (
+            <p key={paragraph.slice(0, 32)}>{paragraph}</p>
+          ))}
+        </div>
+        <label className="checkout-terms-card__agree">
+          <input
+            type="checkbox"
+            checked={session.acceptTerms}
+            onChange={(event) =>
+              onChange({ acceptTerms: event.target.checked })
+            }
+          />
+          <span className="checkout-terms-card__agree-label">我同意服務條款</span>
+          <a
+            href={CHECKOUT_SERVICE_TERMS_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="checkout-terms-card__link"
+            aria-label="在新分頁開啟完整服務條款"
+          >
+            <ExternalLinkIcon />
+          </a>
+        </label>
+      </section>
 
       {error && (
         <p className="checkout-error mt-4" role="alert">{error}</p>
@@ -357,6 +464,21 @@ export function CheckoutStagePayment({
         {loading ? "建立訂單中…" : "確認預訂"}
       </button>
     </div>
+  );
+}
+
+function ExternalLinkIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="checkout-terms-card__link-icon" aria-hidden="true">
+      <path
+        d="M14 5h5v5M10 14 19 5M15 5h4v4M10 14v5h5"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.75"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
   );
 }
 

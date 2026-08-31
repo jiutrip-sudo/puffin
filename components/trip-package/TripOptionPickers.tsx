@@ -5,6 +5,7 @@ import { useCallback, useEffect, useState } from "react";
 import { isTierBookable } from "@/lib/trip-pricing/corivo-availability";
 import { BookingShimmer } from "./BookingPriceShimmer";
 import { EcoHybridIcon } from "./EcoHybridIcon";
+import { VehicleCapacitySpecs } from "./VehicleCapacitySpecs";
 import type {
   AccommodationTier,
   AvailabilityStatus,
@@ -28,6 +29,11 @@ function gearTypeLabel(gearType?: VehicleTier["gearType"]) {
   if (gearType === "manual") return "手排";
   if (gearType === "automatic") return "自排";
   return null;
+}
+
+/** 卡片主標題：優先使用含「或同級車型」的 footnote */
+function vehicleCardTitle(vehicle: VehicleTier): string {
+  return vehicle.footnote?.trim() || vehicle.label;
 }
 
 function availabilityBadgeLabel(
@@ -62,6 +68,9 @@ type AccommodationPickerProps = {
   onSelect?: (id: string) => void;
   interactive?: boolean;
   compact?: boolean;
+  showHeading?: boolean;
+  /** Checkout 等場景：三種住宿並排一行 */
+  rowLayout?: boolean;
   tierAvailability?: TierAvailabilityMap;
   availabilityLoading?: boolean;
   availabilityActive?: boolean;
@@ -75,6 +84,8 @@ export function AccommodationTypePicker({
   onSelect,
   interactive = false,
   compact = false,
+  showHeading = true,
+  rowLayout = false,
   tierAvailability,
   availabilityLoading = false,
   availabilityActive = false,
@@ -130,11 +141,11 @@ export function AccommodationTypePicker({
     <div id="accommodation-options">
       {compact ? (
         <p className="mb-2 text-sm font-semibold text-foreground">住宿類型</p>
-      ) : (
+      ) : showHeading ? (
         <h3 className="text-lg font-bold text-foreground md:text-xl">
           選擇您的住宿類型
         </h3>
-      )}
+      ) : null}
       {!compact && intro && (
         <p className="mt-3 text-sm leading-relaxed text-foreground/75">
           {intro}
@@ -144,7 +155,11 @@ export function AccommodationTypePicker({
         className={
           compact
             ? "space-y-2"
-            : "mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
+            : rowLayout
+              ? "mt-3 grid grid-cols-3 gap-3"
+              : showHeading || intro
+                ? "mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
+                : "mt-3 grid grid-cols-1 gap-4 sm:grid-cols-2"
         }
       >
         {tiers.map((tier) => {
@@ -171,13 +186,21 @@ export function AccommodationTypePicker({
                 } ${!selectable ? "opacity-60" : ""} ${compact ? "" : "flex flex-col"}`}
               >
                 {!compact && (
-                  <div className="relative aspect-[16/10] w-full overflow-hidden bg-primary-surface/25">
+                  <div
+                    className={`relative w-full overflow-hidden bg-primary-surface/25 ${
+                      rowLayout ? "aspect-[4/3]" : "aspect-[16/10]"
+                    }`}
+                  >
                     <Image
                       src={optionImageSrc(tier.imageUrl, 640)}
                       alt={tier.label}
                       fill
                       className="object-cover"
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      sizes={
+                        rowLayout
+                          ? "33vw"
+                          : "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      }
                     />
                   </div>
                 )}
@@ -185,12 +208,20 @@ export function AccommodationTypePicker({
                   className={
                     compact
                       ? "flex flex-col gap-3 p-4 sm:p-5"
-                      : "flex flex-1 flex-col p-4 sm:p-5"
+                      : rowLayout
+                        ? "flex flex-1 flex-col p-3"
+                        : "flex flex-1 flex-col p-4 sm:p-5"
                   }
                 >
                   <div className="min-w-0 flex-1">
                     <div className="flex flex-wrap items-center gap-2">
-                      <h4 className="text-base font-bold text-foreground">
+                      <h4
+                        className={
+                          rowLayout
+                            ? "text-sm font-bold text-foreground"
+                            : "text-base font-bold text-foreground"
+                        }
+                      >
                         {tier.label}
                       </h4>
                       {availabilityLoading && availabilityActive ? (
@@ -206,15 +237,29 @@ export function AccommodationTypePicker({
                         <BookingShimmer variant="badge" />
                       )}
                     </div>
-                    <p className="mt-2 text-sm leading-relaxed text-foreground/70">
+                    <p
+                      className={`leading-relaxed text-foreground/70 ${
+                        rowLayout
+                          ? "mt-1.5 line-clamp-2 text-xs"
+                          : "mt-2 text-sm"
+                      }`}
+                    >
                       {tier.description}
                     </p>
                   </div>
-                  <div className="mt-3 flex flex-wrap items-center justify-between gap-2">
+                  <div
+                    className={`flex flex-wrap items-center gap-2 ${
+                      rowLayout ? "mt-2" : "mt-3 justify-between"
+                    }`}
+                  >
                     <button
                       type="button"
                       onClick={() => openModal(tier)}
-                      className="rounded-full border border-foreground/15 px-4 py-2 text-xs font-semibold text-foreground/80 transition-colors hover:border-primary/40 hover:bg-primary/10"
+                      className={`rounded-full border border-foreground/15 font-semibold text-foreground/80 transition-colors hover:border-primary/40 hover:bg-primary/10 ${
+                        rowLayout
+                          ? "px-2.5 py-1.5 text-[11px]"
+                          : "px-4 py-2 text-xs"
+                      }`}
                     >
                       查看
                     </button>
@@ -222,7 +267,9 @@ export function AccommodationTypePicker({
                     {interactive && onSelect ? (
                       isSelected ? (
                         <span
-                          className="rounded-full bg-primary-dark px-4 py-2 text-xs font-semibold text-white"
+                          className={`rounded-full bg-primary-dark font-semibold text-white ${
+                            rowLayout ? "px-2.5 py-1.5 text-[11px]" : "px-4 py-2 text-xs"
+                          }`}
                         >
                           已選
                         </span>
@@ -230,13 +277,17 @@ export function AccommodationTypePicker({
                         <button
                           type="button"
                           onClick={() => onSelect(tier.id)}
-                          className="rounded-full bg-primary-dark px-4 py-2 text-xs font-semibold text-white transition-colors hover:bg-primary"
+                          className={`rounded-full bg-primary-dark font-semibold text-white transition-colors hover:bg-primary ${
+                            rowLayout ? "px-2.5 py-1.5 text-[11px]" : "px-4 py-2 text-xs"
+                          }`}
                         >
-                          挑選{tier.label}
+                          {rowLayout ? "選擇" : `挑選${tier.label}`}
                         </button>
                       ) : (
                         <span
-                          className="rounded-full border border-foreground/15 px-4 py-2 text-xs font-semibold text-foreground/55"
+                          className={`rounded-full border border-foreground/15 font-semibold text-foreground/55 ${
+                            rowLayout ? "px-2.5 py-1.5 text-[11px]" : "px-4 py-2 text-xs"
+                          }`}
                         >
                           暫不可訂
                         </span>
@@ -244,7 +295,9 @@ export function AccommodationTypePicker({
                     ) : (
                       isSelected && (
                         <span
-                          className="rounded-full bg-primary-dark px-4 py-2 text-xs font-semibold text-white"
+                          className={`rounded-full bg-primary-dark font-semibold text-white ${
+                            rowLayout ? "px-2.5 py-1.5 text-[11px]" : "px-4 py-2 text-xs"
+                          }`}
                         >
                           已選
                         </span>
@@ -356,6 +409,9 @@ type VehiclePickerProps = {
   interactive?: boolean;
   pricingLoading?: boolean;
   compact?: boolean;
+  showHeading?: boolean;
+  /** Checkout 等場景：每行 3 張卡片 */
+  rowLayout?: boolean;
   tierAvailability?: TierAvailabilityMap;
   availabilityLoading?: boolean;
   availabilityActive?: boolean;
@@ -369,6 +425,8 @@ export function VehicleTypePicker({
   interactive = false,
   pricingLoading = false,
   compact = false,
+  showHeading = true,
+  rowLayout = false,
   tierAvailability,
   availabilityLoading = false,
   availabilityActive = false,
@@ -390,7 +448,11 @@ export function VehicleTypePicker({
 
   const vehicleListClass = compact
     ? "mt-2 space-y-2"
-    : "mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3";
+    : rowLayout
+      ? "mt-3 grid grid-cols-3 gap-3 items-stretch"
+      : showHeading || intro
+        ? "mt-6 grid grid-cols-1 items-stretch gap-4 sm:grid-cols-2 lg:grid-cols-3"
+        : "mt-3 grid grid-cols-1 items-stretch gap-4 sm:grid-cols-2";
 
   return (
     <div
@@ -399,17 +461,25 @@ export function VehicleTypePicker({
     >
       {compact ? (
         <p className="mb-2 text-sm font-semibold text-foreground">租車車型</p>
-      ) : (
+      ) : showHeading ? (
         <h3 className="text-lg font-bold text-foreground md:text-xl">
           選擇您的租車車型
         </h3>
-      )}
+      ) : null}
       {!compact && intro && (
         <p className="mt-3 text-sm leading-relaxed text-foreground/75">
           {intro}
         </p>
       )}
-      <p className={compact ? "mt-3 text-sm font-medium text-foreground" : "mt-4 text-sm font-medium text-foreground"}>
+      <p
+        className={
+          compact
+            ? "mt-3 text-sm font-medium text-foreground"
+            : rowLayout
+              ? "mt-3 text-sm font-medium text-foreground"
+              : "mt-4 text-sm font-medium text-foreground"
+        }
+      >
         基礎碰撞險（CDW）
       </p>
       <ul className={vehicleListClass}>
@@ -429,22 +499,37 @@ export function VehicleTypePicker({
           );
 
           return (
-            <li key={vehicle.id} className={compact ? undefined : "min-h-0"}>
+            <li
+              key={vehicle.id}
+              className={
+                compact ? undefined : "min-h-0 h-full"
+              }
+            >
               <article
                 className={`overflow-hidden rounded-2xl border transition-colors ${
                   isSelected
                     ? "border-primary bg-primary/10"
                     : "border-foreground/10 bg-primary-surface/15"
-                } ${!selectable ? "opacity-60" : ""} ${compact ? "" : "flex flex-col"}`}
+                } ${!selectable ? "opacity-60" : ""} ${
+                  compact ? "" : "flex h-full flex-col"
+                }`}
               >
                 {!compact && (
-                  <div className="relative aspect-[16/10] w-full overflow-hidden bg-primary-surface/25">
+                  <div
+                    className={`relative w-full shrink-0 overflow-hidden bg-primary-surface/25 ${
+                      rowLayout ? "aspect-[4/3]" : "aspect-[16/10]"
+                    }`}
+                  >
                     <Image
                       src={optionImageSrc(vehicle.imageUrl, 640)}
-                      alt={vehicle.label}
+                      alt={vehicleCardTitle(vehicle)}
                       fill
                       className="object-cover"
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      sizes={
+                        rowLayout
+                          ? "33vw"
+                          : "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      }
                     />
                     {gearbox && (
                       <span className="vehicle-gear-badge">{gearbox}</span>
@@ -455,13 +540,36 @@ export function VehicleTypePicker({
                   className={
                     compact
                       ? "flex flex-wrap items-start justify-between gap-3 p-4 sm:p-5"
-                      : "flex flex-1 flex-col p-4 sm:p-5"
+                      : rowLayout
+                        ? "flex min-h-0 flex-1 flex-col p-3"
+                        : "flex flex-1 flex-col p-4 sm:p-5"
                   }
                 >
-                  <div className="min-w-0 flex-1">
-                    <div className="flex flex-wrap items-center gap-2">
-                      <p className="text-base font-bold text-foreground">
-                        {vehicle.label.split("|")[0]?.trim() ?? vehicle.label}
+                  <div className="min-h-0 flex-1">
+                    {vehicle.co2Emission != null && (
+                      <p
+                        className={
+                          rowLayout
+                            ? "text-xs text-foreground/60"
+                            : "text-sm text-foreground/60"
+                        }
+                      >
+                        CO₂ {vehicle.co2Emission} 克／公里
+                      </p>
+                    )}
+                    <div
+                      className={`flex flex-wrap items-start gap-2 ${
+                        vehicle.co2Emission != null ? "mt-1" : ""
+                      }`}
+                    >
+                      <p
+                        className={`font-bold text-foreground ${
+                          rowLayout
+                            ? "line-clamp-3 min-h-[3.75rem] text-sm leading-snug"
+                            : "text-base"
+                        }`}
+                      >
+                        {vehicleCardTitle(vehicle)}
                       </p>
                       {availabilityLoading && availabilityActive ? (
                         <BookingShimmer variant="badge" />
@@ -481,38 +589,62 @@ export function VehicleTypePicker({
                         {gearbox}
                       </span>
                     )}
-                    {vehicle.co2Emission != null && (
-                      <p className="mt-1 text-sm text-foreground/60">
-                        CO₂ {vehicle.co2Emission} 克／公里
-                      </p>
-                    )}
                     {vehicle.co2Note && (
-                      <p className="mt-1 flex items-center gap-1.5 text-sm font-medium text-emerald-700 dark:text-emerald-400">
+                      <p
+                        className={`flex items-center gap-1.5 font-medium text-emerald-700 dark:text-emerald-400 ${
+                          rowLayout ? "mt-1 text-xs" : "mt-1 text-sm"
+                        }`}
+                      >
                         <EcoHybridIcon />
                         <span>{vehicle.co2Note}</span>
                       </p>
                     )}
-                    {vehicle.footnote && (
+                    {vehicle.seats != null &&
+                      vehicle.doors != null &&
+                      vehicle.luggage != null && (
+                        <VehicleCapacitySpecs
+                          seats={vehicle.seats}
+                          doors={vehicle.doors}
+                          luggage={vehicle.luggage}
+                          compact={compact || rowLayout}
+                        />
+                      )}
+                    {vehicle.footnote &&
+                      vehicle.footnote.trim() !== vehicleCardTitle(vehicle) && (
                       <p
-                        className={`text-sm leading-relaxed text-foreground/70 ${
-                          vehicle.co2Emission != null || vehicle.co2Note
-                            ? "mt-2"
-                            : ""
+                        className={`leading-relaxed text-foreground/70 ${
+                          rowLayout
+                            ? "mt-1.5 line-clamp-2 min-h-[2.5rem] text-xs"
+                            : `text-sm ${
+                                vehicle.co2Emission != null || vehicle.co2Note
+                                  ? "mt-2"
+                                  : ""
+                              }`
                         }`}
                       >
                         {vehicle.footnote}
                       </p>
                     )}
+                    {rowLayout && !vehicle.footnote?.trim() && (
+                      <p
+                        className="mt-1.5 min-h-[2.5rem] text-xs text-transparent"
+                        aria-hidden="true"
+                      >
+                        —
+                      </p>
+                    )}
                   </div>
                   <div
-                    className={`flex flex-wrap gap-2 ${
-                      compact ? "" : "mt-3 justify-end"
+                    className={`flex shrink-0 flex-wrap gap-2 ${
+                      compact ? "" : rowLayout ? "mt-2 justify-end" : "mt-3 justify-end"
                     }`}
                   >
                     {interactive && onSelect ? (
                       isSelected ? (
                         <span
-                          className="rounded-full bg-primary-dark px-4 py-2 text-xs font-semibold text-white"
+                          className={`rounded-full bg-primary-dark font-semibold text-white ${
+                            rowLayout ? "px-2.5 py-1.5 text-[11px]" : "px-4 py-2 text-xs"
+                          }`}
                         >
                           已選
                         </span>
@@ -520,13 +652,17 @@ export function VehicleTypePicker({
                         <button
                           type="button"
                           onClick={() => onSelect(vehicle.id)}
-                          className="rounded-full border border-foreground/20 px-4 py-2 text-xs font-semibold text-foreground transition-colors hover:border-primary hover:bg-primary/10"
+                          className={`rounded-full border border-foreground/20 font-semibold text-foreground transition-colors hover:border-primary hover:bg-primary/10 ${
+                            rowLayout ? "px-2.5 py-1.5 text-[11px]" : "px-4 py-2 text-xs"
+                          }`}
                         >
                           選擇
                         </button>
                       ) : (
                         <span
-                          className="rounded-full border border-foreground/15 px-4 py-2 text-xs font-semibold text-foreground/55"
+                          className={`rounded-full border border-foreground/15 font-semibold text-foreground/55 ${
+                            rowLayout ? "px-2.5 py-1.5 text-[11px]" : "px-4 py-2 text-xs"
+                          }`}
                         >
                           暫不可訂
                         </span>
@@ -534,7 +670,9 @@ export function VehicleTypePicker({
                     ) : (
                       isSelected && (
                         <span
-                          className="rounded-full bg-primary-dark px-4 py-2 text-xs font-semibold text-white"
+                          className={`rounded-full bg-primary-dark font-semibold text-white ${
+                            rowLayout ? "px-2.5 py-1.5 text-[11px]" : "px-4 py-2 text-xs"
+                          }`}
                         >
                           已選
                         </span>
@@ -551,7 +689,9 @@ export function VehicleTypePicker({
         <button
           type="button"
           onClick={() => setShowAll(true)}
-          className="mt-4 w-full rounded-xl border border-foreground/15 py-3 text-sm font-semibold text-foreground/80 transition-colors hover:border-primary/40 hover:bg-primary/10"
+          className={`w-full rounded-xl border border-foreground/15 py-3 text-sm font-semibold text-foreground/80 transition-colors hover:border-primary/40 hover:bg-primary/10 ${
+            rowLayout ? "mt-3" : "mt-4"
+          }`}
         >
           顯示更多選項
         </button>

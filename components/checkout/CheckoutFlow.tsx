@@ -1,13 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import type { PricingConfig } from "@/lib/trip-pricing/types";
 import type { CheckoutSession, CheckoutStepId } from "@/lib/checkout/types";
+import { occupanciesToRoomSlots } from "@/lib/checkout/room-occupancy";
 import { CheckoutStepper } from "./CheckoutStepper";
 import { CheckoutSidebar } from "./CheckoutSidebar";
 import { CheckoutStagePackage } from "./CheckoutStagePackage";
-import { CheckoutStageTravelers } from "./CheckoutStageTravelers";
+import { CheckoutStageTravelers, type CheckoutStageTravelersHandle } from "./CheckoutStageTravelers";
 import {
   CheckoutStageExtras,
   CheckoutStagePayment,
@@ -29,6 +30,7 @@ export function CheckoutFlow({
   const [session, setSession] = useState<CheckoutSession>(initialSession);
   const [submitLoading, setSubmitLoading] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const travelersRef = useRef<CheckoutStageTravelersHandle>(null);
   const [bookingResult, setBookingResult] = useState<{
     bookingId: string;
     confirmationCode: string | null;
@@ -69,6 +71,7 @@ export function CheckoutFlow({
           accommodationTier: session.accommodationTier,
           roomType: "double",
           vehicleTier: session.vehicleTier,
+          roomSlots: occupanciesToRoomSlots(session.roomOccupancies),
           extraPackageItemIds:
             extraPackageItemIds.length > 0 ? extraPackageItemIds : undefined,
         }),
@@ -123,10 +126,6 @@ export function CheckoutFlow({
   return (
     <div className="checkout-page">
       <header className="checkout-header">
-        <div className="checkout-header__inner">
-          <Link href={backHref} className="checkout-back-link">← 返回行程</Link>
-          <p className="checkout-secure">線上預訂 · 人工收款</p>
-        </div>
         <CheckoutStepper currentStep={step} />
       </header>
 
@@ -139,13 +138,16 @@ export function CheckoutFlow({
                 session={session}
                 onChange={patchSession}
               />
-              <div className="checkout-actions">
+              <div className="checkout-actions checkout-step-footer">
+                <Link href={backHref} className="checkout-ghost-btn checkout-step-footer__back">
+                  ‹ 返回
+                </Link>
                 <button
                   type="button"
-                  className="checkout-primary-btn"
+                  className="checkout-primary-btn checkout-step-footer__next"
                   onClick={goNext}
                 >
-                  添加自選項目
+                  添加自選項目 ›
                 </button>
               </div>
             </>
@@ -156,15 +158,21 @@ export function CheckoutFlow({
               <CheckoutStageExtras
                 session={session}
                 onChange={patchSession}
-                onContinue={goNext}
               />
-              <div className="checkout-actions">
+              <div className="checkout-actions checkout-step-footer">
                 <button
                   type="button"
-                  className="checkout-ghost-btn"
+                  className="checkout-ghost-btn checkout-step-footer__back"
                   onClick={goBack}
                 >
-                  返回
+                  ‹ 返回
+                </button>
+                <button
+                  type="button"
+                  className="checkout-primary-btn checkout-step-footer__next"
+                  onClick={goNext}
+                >
+                  輸入旅客資訊 ›
                 </button>
               </div>
             </>
@@ -173,23 +181,28 @@ export function CheckoutFlow({
           {step === 3 && (
             <>
               <CheckoutStageTravelers
+                ref={travelersRef}
                 session={session}
-                onChange={(travelers) => patchSession({ travelers })}
+                onChange={patchSession}
               />
-              <div className="checkout-actions">
+              <div className="checkout-actions checkout-step-footer">
                 <button
                   type="button"
-                  className="checkout-ghost-btn"
+                  className="checkout-ghost-btn checkout-step-footer__back"
                   onClick={goBack}
                 >
-                  返回
+                  ‹ 返回
                 </button>
                 <button
                   type="button"
-                  className="checkout-primary-btn"
-                  onClick={goNext}
+                  className="checkout-primary-btn checkout-step-footer__next"
+                  onClick={() => {
+                    if (travelersRef.current?.validate()) {
+                      goNext();
+                    }
+                  }}
                 >
-                  前往付款方式
+                  前往付款 ›
                 </button>
               </div>
             </>
@@ -231,7 +244,22 @@ export function CheckoutFlow({
           )}
         </main>
 
-        <CheckoutSidebar pricingConfig={pricingConfig} session={session} />
+        <CheckoutSidebar
+          pricingConfig={pricingConfig}
+          session={session}
+          step={step}
+          onPrimaryAction={
+            step === 1 || step === 2 || step === 3
+              ? step === 3
+                ? () => {
+                    if (travelersRef.current?.validate()) {
+                      goNext();
+                    }
+                  }
+                : goNext
+              : undefined
+          }
+        />
       </div>
     </div>
   );

@@ -22,8 +22,8 @@ export const COMPANY_INFO = {
     { label: "傳真", value: "07-285-7885" },
     {
       label: "信箱",
-      value: "dollar17889dlk@gmail.com",
-      href: "mailto:dollar17889dlk@gmail.com",
+      value: "vip@dollar-travel.com",
+      href: "mailto:vip@dollar-travel.com",
     },
     { label: "地址", value: "高雄市新興區南台路1號3樓" },
   ],

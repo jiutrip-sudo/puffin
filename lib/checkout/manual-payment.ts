@@ -28,7 +28,7 @@ export const CHECKOUT_OFFICE_PHONE =
 
 export const CHECKOUT_OFFICE_EMAIL =
   COMPANY_INFO.contact.find((item) => item.label === "信箱")?.value ??
-  "dollar17889dlk@gmail.com";
+  "vip@dollar-travel.com";
 
 const OFFICE_PHONE = CHECKOUT_OFFICE_PHONE;
 const OFFICE_EMAIL = CHECKOUT_OFFICE_EMAIL;

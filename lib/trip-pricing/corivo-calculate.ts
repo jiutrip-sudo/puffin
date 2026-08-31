@@ -50,6 +50,7 @@ export async function calculateCorivoTripPrice(
     classificationId,
     vehicleItemId,
     travelers,
+    input.roomSlots,
   );
 
   const extraIds = input.extraPackageItemIds ?? [];
@@ -68,6 +69,7 @@ export async function calculateCorivoTripPrice(
     classificationId,
     baseVehicleItemId,
     travelers,
+    input.roomSlots,
   );
 
   const [price, basePrice] = await Promise.all([
@@ -105,6 +107,6 @@ export async function calculateCorivoTripPrice(
     currency: "ISK",
     travelerCount: travelers.adults + travelers.children + travelers.infants,
     vehicleLabel: vehicleTier.label,
-    roomTypeLabel: getRoomTypeLabel(travelers),
+    roomTypeLabel: getRoomTypeLabel(travelers, input.roomSlots),
   };
 }

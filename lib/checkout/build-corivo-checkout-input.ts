@@ -1,7 +1,13 @@
-import { buildCorivoPriceItems, resolveRoomConfig } from "@/lib/trip-pricing/corivo-rooms";
+import {
+  buildCorivoPriceItems,
+  buildTravelerRoomConfig,
+} from "@/lib/trip-pricing/corivo-rooms";
+import { occupanciesToRoomSlots } from "@/lib/checkout/room-occupancy";
 import type { CorivoPackageItem } from "@/lib/trip-pricing/corivo-client";
 import type { CorivoPricingConfig } from "@/lib/trip-pricing/types";
+import { toCorivoCountryCode } from "./country-codes";
 import { parseCorivoDateTime } from "./extra-selection";
+import { formatTravelerPhoneNumber } from "./validate-travelers";
 import type { CheckoutSession } from "./types";
 
 export type CorivoCheckoutPackageTourItem = {
@@ -16,7 +22,7 @@ export type CorivoCheckoutGraphqlInput = {
   from: string;
   preDays: number;
   postDays: number;
-  promoCode: string;
+  promoCode?: string;
   products: Array<{
     package: {
       packageTourItems: CorivoCheckoutPackageTourItem[];
@@ -30,7 +36,7 @@ export type CorivoCheckoutGraphqlInput = {
     email: string;
     phoneNumber: string;
     nationality: string;
-    dateOfBirth: string;
+    dateOfBirth?: string;
   }>;
   customer: {
     firstName: string;
@@ -42,11 +48,15 @@ export type CorivoCheckoutGraphqlInput = {
 };
 
 function assignRoomTravelerIds(session: CheckoutSession): number[][] {
-  const roomConfig = resolveRoomConfig({
-    adults: session.adults,
-    children: session.children,
-    infants: session.infants,
-  });
+  const roomSlots = occupanciesToRoomSlots(session.roomOccupancies);
+  const roomConfig = buildTravelerRoomConfig(
+    {
+      adults: session.adults,
+      children: session.children,
+      infants: session.infants,
+    },
+    roomSlots,
+  );
 
   const adultIds = session.travelers
     .filter((traveler) => traveler.type === "ADULT")
@@ -74,6 +84,16 @@ function assignRoomTravelerIds(session: CheckoutSession): number[][] {
   });
 }
 
+function toCorivoDateTime(date: string): string {
+  return date.includes("T") ? date : `${date}T00:00:00.000Z`;
+}
+
+function buildTravelerDateOfBirth(dateOfBirth: string): string | undefined {
+  const trimmed = dateOfBirth.trim();
+  if (!trimmed) return undefined;
+  return toCorivoDateTime(trimmed);
+}
+
 function vehicleTravelerIds(session: CheckoutSession): number[] {
   return session.travelers
     .filter((traveler) => traveler.type !== "INFANT")
@@ -92,11 +112,14 @@ function buildBasePackageTourItems(
     infants: session.infants,
   };
 
+  const roomSlots = occupanciesToRoomSlots(session.roomOccupancies);
+
   const priceItems = buildCorivoPriceItems(
     packageItems,
     classificationId,
     vehicleItemId,
     travelers,
+    roomSlots,
   );
 
   const roomTravelerIds = assignRoomTravelerIds(session);
@@ -131,15 +154,38 @@ function buildExtraPackageTourItems(
       itemId: extra.packageItemId,
       quantity: 1,
       travelers: extra.travelerCorrelationIds,
-      date,
-      time,
+      ...(date ? { date } : {}),
+      ...(time ? { time } : {}),
     };
   });
 }
 
+function resolveLeadCountryCode(session: CheckoutSession): string {
+  const lead =
+    session.travelers.find((t) => t.type === "ADULT") ?? session.travelers[0];
+  const raw =
+    lead?.countryOfResidence.trim() ||
+    lead?.nationality.trim() ||
+    "TW";
+  return toCorivoCountryCode(raw) || "TW";
+}
+
+function resolveTravelerNationality(
+  traveler: CheckoutSession["travelers"][number],
+  leadCountryCode: string,
+): string {
+  const raw =
+    traveler.nationality.trim() ||
+    traveler.countryOfResidence.trim() ||
+    leadCountryCode;
+  return toCorivoCountryCode(raw) || leadCountryCode;
+}
+
 /**
  * 將 checkout session 對應為 Corivo `checkout` mutation 的 CheckoutInput。
- * 付款以匯款／現金人工處理，不經線上閘道；ownerId 仍須依 Corivo 後台設定補齊。
+ *
+ * @deprecated 預訂已改由本站 `lib/booking/create-local-booking.ts` 處理，不再呼叫 Corivo checkout。
+ * 計價／可訂性仍使用 Corivo API 或快照。
  */
 export function buildCorivoCheckoutInput(
   config: CorivoPricingConfig,
@@ -156,6 +202,7 @@ export function buildCorivoCheckoutInput(
 
   const lead =
     session.travelers.find((t) => t.type === "ADULT") ?? session.travelers[0];
+  const leadCountryCode = resolveLeadCountryCode(session);
 
   const packageTourItems = [
     ...buildBasePackageTourItems(
@@ -171,7 +218,7 @@ export function buildCorivoCheckoutInput(
     from: session.startDate,
     preDays: session.preDays,
     postDays: session.postDays,
-    promoCode: session.promoCode,
+    ...(session.promoCode.trim() ? { promoCode: session.promoCode.trim() } : {}),
     products: [
       {
         package: {
@@ -179,24 +226,25 @@ export function buildCorivoCheckoutInput(
         },
       },
     ],
-    travelers: session.travelers.map((traveler) => ({
-      correlationId: traveler.correlationId,
-      type: traveler.type,
-      firstName: traveler.firstName,
-      lastName: traveler.lastName,
-      email: traveler.email,
-      phoneNumber: traveler.phoneNumber,
-      nationality: traveler.nationality,
-      dateOfBirth: traveler.dateOfBirth
-        ? `${traveler.dateOfBirth}T00:00:00.000Z`
-        : "",
-    })),
+    travelers: session.travelers.map((traveler) => {
+      const dateOfBirth = buildTravelerDateOfBirth(traveler.dateOfBirth);
+      return {
+        correlationId: traveler.correlationId,
+        type: traveler.type,
+        firstName: traveler.firstName.trim(),
+        lastName: traveler.lastName.trim(),
+        email: traveler.email.trim(),
+        phoneNumber: formatTravelerPhoneNumber(traveler),
+        nationality: resolveTravelerNationality(traveler, leadCountryCode),
+        ...(dateOfBirth ? { dateOfBirth } : {}),
+      };
+    }),
     customer: {
-      firstName: lead?.firstName ?? "",
-      lastName: lead?.lastName ?? "",
-      email: lead?.email ?? "",
-      phoneMobile: lead?.phoneNumber ?? "",
-      country: lead?.countryOfResidence ?? "",
+      firstName: lead?.firstName.trim() ?? "",
+      lastName: lead?.lastName.trim() ?? "",
+      email: lead?.email.trim() ?? "",
+      phoneMobile: lead ? formatTravelerPhoneNumber(lead) : "",
+      country: leadCountryCode,
     },
   };
 }

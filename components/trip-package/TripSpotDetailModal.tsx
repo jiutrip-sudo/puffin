@@ -1,0 +1,151 @@
+"use client";
+
+import Image from "next/image";
+import { useCallback, useEffect, useState } from "react";
+import type { TripAttraction } from "@/lib/trip-packages/types";
+import {
+  TRIP_SPOT_CARD_RADIUS,
+  spotGallery,
+  spotImageSrc,
+  spotParagraphs,
+} from "./trip-spot-media";
+
+type TripSpotDetailModalProps = {
+  spot: TripAttraction;
+  onClose: () => void;
+};
+
+export function TripSpotDetailModal({ spot, onClose }: TripSpotDetailModalProps) {
+  const [galleryIndex, setGalleryIndex] = useState(0);
+
+  const activeGallery = spotGallery(spot);
+  const activeParagraphs = spotParagraphs(spot);
+
+  const showGalleryPrev = useCallback(() => {
+    setGalleryIndex((index) =>
+      activeGallery.length === 0
+        ? 0
+        : (index - 1 + activeGallery.length) % activeGallery.length,
+    );
+  }, [activeGallery.length]);
+
+  const showGalleryNext = useCallback(() => {
+    setGalleryIndex((index) =>
+      activeGallery.length === 0 ? 0 : (index + 1) % activeGallery.length,
+    );
+  }, [activeGallery.length]);
+
+  useEffect(() => {
+    setGalleryIndex(0);
+  }, [spot.name, spot.imageUrl]);
+
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") onClose();
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [onClose]);
+
+  return (
+    <div
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 p-4 backdrop-blur-sm"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="spot-modal-title"
+      onClick={onClose}
+    >
+      <div
+        className="relative flex max-h-[90vh] w-full max-w-[800px] flex-col overflow-hidden rounded-[20px] bg-background shadow-xl"
+        onClick={(event) => event.stopPropagation()}
+      >
+        <button
+          type="button"
+          onClick={onClose}
+          className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-foreground/5 text-lg text-foreground/70 transition-colors hover:bg-foreground/10"
+          aria-label="關閉"
+        >
+          ×
+        </button>
+
+        <div className="overflow-y-auto">
+          <div className="px-6 pb-8 pt-10 md:px-10">
+            {spot.region && (
+              <p className="mb-3 text-sm font-semibold text-primary">
+                {spot.region}
+              </p>
+            )}
+
+            <h4
+              id="spot-modal-title"
+              className="pr-12 text-2xl font-bold leading-tight text-foreground md:text-[28px]"
+            >
+              {spot.nameEn ? `${spot.name} | ${spot.nameEn}` : spot.name}
+            </h4>
+
+            {spot.subtitle && (
+              <p className="mt-6 text-base font-bold leading-relaxed text-foreground">
+                {spot.subtitle}
+              </p>
+            )}
+
+            {activeParagraphs.length > 0 && (
+              <div className="mt-6 space-y-4 text-base leading-relaxed text-foreground/80">
+                {activeParagraphs.map((paragraph) => (
+                  <p key={paragraph.slice(0, 32)}>{paragraph}</p>
+                ))}
+              </div>
+            )}
+
+            {activeGallery.length > 0 && (
+              <div className="relative mt-8">
+                <div className={`overflow-hidden ${TRIP_SPOT_CARD_RADIUS}`}>
+                  <div
+                    className={`relative aspect-[16/10] w-full overflow-hidden ${TRIP_SPOT_CARD_RADIUS} bg-primary-surface/25`}
+                  >
+                    <Image
+                      src={spotImageSrc(activeGallery[galleryIndex], 1200)}
+                      alt={spot.name}
+                      fill
+                      className={`object-cover ${TRIP_SPOT_CARD_RADIUS}`}
+                      sizes="800px"
+                      priority
+                    />
+                  </div>
+                </div>
+
+                {activeGallery.length > 1 && (
+                  <>
+                    <button
+                      type="button"
+                      onClick={showGalleryPrev}
+                      className="absolute left-3 top-1/2 -translate-y-1/2 rounded-full bg-background/90 px-3 py-2 text-sm font-semibold text-foreground shadow-md transition-colors hover:bg-background"
+                      aria-label="上一張"
+                    >
+                      ←
+                    </button>
+                    <button
+                      type="button"
+                      onClick={showGalleryNext}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full bg-background/90 px-3 py-2 text-sm font-semibold text-foreground shadow-md transition-colors hover:bg-background"
+                      aria-label="下一張"
+                    >
+                      →
+                    </button>
+                  </>
+                )}
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

@@ -1,6 +1,7 @@
 import { getPricingConfig } from "@/lib/trip-pricing/fetch";
 import { getAllTripPackages } from "@/lib/trip-packages/registry";
 import { parseCheckoutSession } from "./parse-initial-session";
+import { createRoomOccupanciesFromCounts } from "./room-occupancy";
 import type { CheckoutPaymentMethod, CheckoutSession } from "./types";
 
 const DEFAULT_PACKAGE_ID = "iceland-self-drive-winter-4";
@@ -63,6 +64,20 @@ export function buildCheckoutEmailPreviewSession(
     packageId: definedOverrides.packageId ?? base.packageId,
     travelers: definedOverrides.travelers ?? base.travelers,
     selectedExtras: definedOverrides.selectedExtras ?? base.selectedExtras,
+    roomOccupancies:
+      definedOverrides.roomOccupancies ??
+      (definedOverrides.adults !== undefined ||
+      definedOverrides.children !== undefined ||
+      definedOverrides.infants !== undefined
+        ? createRoomOccupanciesFromCounts(
+            definedOverrides.adults ?? base.adults,
+            definedOverrides.children ?? base.children,
+            definedOverrides.infants ?? base.infants,
+          )
+        : base.roomOccupancies),
+    adults: definedOverrides.adults ?? base.adults,
+    children: definedOverrides.children ?? base.children,
+    infants: definedOverrides.infants ?? base.infants,
   };
 
   if (!definedOverrides.travelers) {

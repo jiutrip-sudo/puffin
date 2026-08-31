@@ -5,6 +5,10 @@ const PACKAGES: Record<string, TripPackage> = {
   [icelandSelfDriveWinter4.tripKey]: icelandSelfDriveWinter4,
 };
 
+export function getTripPackageByPackageId(packageId: string): TripPackage | undefined {
+  return Object.values(PACKAGES).find((pkg) => pkg.id === packageId);
+}
+
 export function getTripPackage(tripKey: string): TripPackage | undefined {
   return PACKAGES[tripKey];
 }

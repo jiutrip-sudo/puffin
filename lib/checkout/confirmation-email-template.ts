@@ -10,6 +10,25 @@ import type {
   CheckoutConfirmationEmailData,
 } from "./confirmation-email-types";
 
+/** 確認信淺色主題（對齊網站紫色品牌） */
+const EMAIL_THEME = {
+  pageBg: "#f5f3fa",
+  cardBg: "#ffffff",
+  cardBorder: "#e8e4f0",
+  headerBg: "#f3f0fa",
+  headerBorder: "#e0d9ef",
+  accentBar: "#b4a7d6",
+  text: "#1a1d21",
+  textMuted: "#5c6570",
+  accent: "#8b7ec4",
+  accentStrong: "#6d5f9e",
+  surface: "#f8f6fc",
+  surfaceBorder: "#e0d9ef",
+  footerBg: "#faf9fc",
+  link: "#7c6fad",
+  divider: "#ece9f4",
+} as const;
+
 function escapeHtml(value: string): string {
   return value
     .replace(/&/g, "&amp;")
@@ -39,7 +58,7 @@ function buildNotesHtml(notes: string[]): string {
   return notes
     .map(
       (note) =>
-        `<li style="margin:0 0 6px;color:#5c6370;">${escapeHtml(note)}</li>`,
+        `<li style="margin:0 0 6px;color:${EMAIL_THEME.textMuted};">${escapeHtml(note)}</li>`,
     )
     .join("");
 }
@@ -48,7 +67,7 @@ function buildTravelersHtml(data: CheckoutConfirmationEmailData): string {
   return data.travelers
     .map(
       (traveler) =>
-        `<tr><td style="padding:6px 0;border-bottom:1px solid #e8eaed;">${escapeHtml(traveler.name)}</td><td style="padding:6px 0;border-bottom:1px solid #e8eaed;color:#5c6370;">${escapeHtml(traveler.typeLabel)}</td></tr>`,
+        `<tr><td style="padding:6px 0;border-bottom:1px solid ${EMAIL_THEME.divider};">${escapeHtml(traveler.name)}</td><td style="padding:6px 0;border-bottom:1px solid ${EMAIL_THEME.divider};color:${EMAIL_THEME.textMuted};">${escapeHtml(traveler.typeLabel)}</td></tr>`,
     )
     .join("");
 }
@@ -73,12 +92,164 @@ function buildBankAccountHtml(
   >,
 ): string {
   return `
-              <div style="margin:0 0 16px;padding:14px 16px;border-radius:10px;background:#fff;border:1px solid #d9e5dd;">
-                <p style="margin:0 0 8px;font-size:13px;font-weight:700;color:#1a1d21;">匯款帳戶</p>
+              <div style="margin:0 0 16px;padding:14px 16px;border-radius:10px;background:${EMAIL_THEME.surface};border:1px solid ${EMAIL_THEME.surfaceBorder};">
+                <p style="margin:0 0 8px;font-size:13px;font-weight:700;color:${EMAIL_THEME.text};">匯款帳戶</p>
                 <p style="margin:0;font-size:14px;line-height:1.65;">
                   戶名：<strong>${escapeHtml(bankAccount.holderName)}</strong><br />
                   機構名稱代號：${escapeHtml(bankAccount.institutionLine)}<br />
                   帳號：<strong style="font-size:15px;">${escapeHtml(bankAccount.accountNumber)}</strong>
+                </p>
+              </div>`;
+}
+
+function buildOrderSummaryHtml(data: CheckoutConfirmationEmailData): string {
+  const orderRef = orderReference(data);
+  return `
+              <h2 style="margin:0 0 12px;font-size:15px;font-weight:700;color:${EMAIL_THEME.text};">訂單摘要</h2>
+              <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="font-size:14px;line-height:1.55;">
+                <tr><td style="padding:4px 0;color:${EMAIL_THEME.textMuted};width:96px;">行程</td><td style="padding:4px 0;color:${EMAIL_THEME.text};">${escapeHtml(data.packageTitle)}</td></tr>
+                <tr><td style="padding:4px 0;color:${EMAIL_THEME.textMuted};">出發日期</td><td style="padding:4px 0;color:${EMAIL_THEME.text};">${escapeHtml(data.startDate)} → ${escapeHtml(data.endDate)}（${data.tripDays} 天）</td></tr>
+                <tr><td style="padding:4px 0;color:${EMAIL_THEME.textMuted};">住宿</td><td style="padding:4px 0;color:${EMAIL_THEME.text};">${escapeHtml(data.accommodationLabel)}</td></tr>
+                <tr><td style="padding:4px 0;color:${EMAIL_THEME.textMuted};">租車</td><td style="padding:4px 0;color:${EMAIL_THEME.text};">${escapeHtml(data.vehicleLabel)}</td></tr>
+                <tr><td style="padding:4px 0;color:${EMAIL_THEME.textMuted};">旅客</td><td style="padding:4px 0;color:${EMAIL_THEME.text};">${escapeHtml(travelerSummary(data))}</td></tr>
+                ${
+                  data.selectedExtrasCount > 0
+                    ? `<tr><td style="padding:4px 0;color:${EMAIL_THEME.textMuted};">自選活動</td><td style="padding:4px 0;color:${EMAIL_THEME.text};">${data.selectedExtrasCount} 項</td></tr>`
+                    : ""
+                }
+                <tr><td style="padding:4px 0;color:${EMAIL_THEME.textMuted};">訂單號</td><td style="padding:4px 0;font-weight:700;color:${EMAIL_THEME.accentStrong};">${escapeHtml(orderRef)}</td></tr>
+                <tr><td style="padding:4px 0;color:${EMAIL_THEME.textMuted};">預訂 ID</td><td style="padding:4px 0;color:${EMAIL_THEME.text};font-size:13px;">${escapeHtml(data.bookingId)}</td></tr>
+              </table>`;
+}
+
+function buildPaymentSummaryHtml(data: CheckoutConfirmationEmailData): string {
+  return `
+              <div style="margin:20px 0;padding:16px;border-radius:10px;background:${EMAIL_THEME.surface};border:1px solid ${EMAIL_THEME.surfaceBorder};">
+                <p style="margin:0 0 6px;font-size:13px;color:${EMAIL_THEME.textMuted};">付款方式</p>
+                <p style="margin:0 0 10px;font-size:15px;font-weight:700;color:${EMAIL_THEME.text};">${escapeHtml(data.paymentMethodLabel)}</p>
+                <p style="margin:0;font-size:14px;line-height:1.6;color:${EMAIL_THEME.text};">
+                  套餐總價：<strong>${escapeHtml(data.totalAmountFormatted)}</strong><br />
+                  ${escapeHtml(data.amountDueLabel)}：<strong style="color:${EMAIL_THEME.accentStrong};">${escapeHtml(data.amountDueFormatted)}</strong>
+                </p>
+              </div>`;
+}
+
+function buildLeadContactHtml(data: CheckoutConfirmationEmailData): string {
+  return `
+              <div style="margin:0 0 20px;padding:16px;border-radius:10px;background:${EMAIL_THEME.surface};border:1px solid ${EMAIL_THEME.surfaceBorder};">
+                <p style="margin:0 0 8px;font-size:13px;font-weight:700;color:${EMAIL_THEME.text};">主要聯絡人</p>
+                <p style="margin:0;font-size:14px;line-height:1.65;color:${EMAIL_THEME.text};">
+                  ${escapeHtml(data.leadTravelerName)}<br />
+                  電話：${escapeHtml(data.leadTravelerPhone)}<br />
+                  信箱：<a href="mailto:${escapeHtml(data.leadTravelerEmail)}" style="color:${EMAIL_THEME.link};text-decoration:none;">${escapeHtml(data.leadTravelerEmail)}</a>
+                </p>
+              </div>`;
+}
+
+function buildPaymentInstructionsHtml(
+  data: CheckoutConfirmationEmailData,
+): string {
+  return `
+              <h2 style="margin:0 0 10px;font-size:15px;font-weight:700;color:${EMAIL_THEME.text};">${escapeHtml(data.paymentInstructions.title)}</h2>
+              ${
+                data.paymentInstructions.bankAccount
+                  ? buildBankAccountHtml(data.paymentInstructions.bankAccount)
+                  : ""
+              }
+              <ol style="margin:0 0 14px;padding-left:20px;font-size:14px;line-height:1.55;">
+                ${buildStepsHtml(data.paymentInstructions.steps)}
+              </ol>
+              <ul style="margin:0;padding-left:18px;font-size:13px;line-height:1.5;">
+                ${buildNotesHtml(data.paymentInstructions.notes)}
+              </ul>`;
+}
+
+function buildTravelersSectionHtml(data: CheckoutConfirmationEmailData): string {
+  return `
+              <h2 style="margin:24px 0 10px;font-size:15px;font-weight:700;color:${EMAIL_THEME.text};">旅客名單</h2>
+              <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="font-size:14px;">
+                ${buildTravelersHtml(data)}
+              </table>`;
+}
+
+function buildEmailFooterHtml(): string {
+  return `
+            <td style="padding:18px 28px;background:${EMAIL_THEME.footerBg};border-top:1px solid ${EMAIL_THEME.headerBorder};font-size:13px;line-height:1.6;color:${EMAIL_THEME.textMuted};">
+              <strong style="color:${EMAIL_THEME.text};">聯絡我們</strong><br />
+              地址：${escapeHtml(CHECKOUT_OFFICE_ADDRESS)}<br />
+              電話：${escapeHtml(CHECKOUT_OFFICE_PHONE)}<br />
+              信箱：<a href="mailto:${escapeHtml(CHECKOUT_OFFICE_EMAIL)}" style="color:${EMAIL_THEME.link};text-decoration:none;">${escapeHtml(CHECKOUT_OFFICE_EMAIL)}</a>
+              <p style="margin:12px 0 0;color:${EMAIL_THEME.textMuted};">${escapeHtml(COMPANY_INFO.name)}</p>
+            </td>`;
+}
+
+function buildEmailShell(options: {
+  subject: string;
+  headerBadge: string;
+  headerTitle: string;
+  headerIntro: string;
+  mainContentHtml: string;
+}): string {
+  return `
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>${escapeHtml(options.subject)}</title>
+</head>
+<body style="margin:0;padding:0;background:${EMAIL_THEME.pageBg};font-family:'PingFang TC','Microsoft JhengHei',sans-serif;color:${EMAIL_THEME.text};">
+  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background:${EMAIL_THEME.pageBg};padding:24px 12px;">
+    <tr>
+      <td align="center">
+        <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width:600px;background:${EMAIL_THEME.cardBg};border-radius:12px;overflow:hidden;border:1px solid ${EMAIL_THEME.cardBorder};box-shadow:0 2px 12px rgba(107,95,140,0.08);">
+          <tr>
+            <td style="height:4px;background:${EMAIL_THEME.accentBar};line-height:4px;font-size:0;">&nbsp;</td>
+          </tr>
+          <tr>
+            <td style="padding:28px 28px 20px;background:${EMAIL_THEME.headerBg};border-bottom:1px solid ${EMAIL_THEME.headerBorder};color:${EMAIL_THEME.text};">
+              <p style="margin:0 0 8px;font-size:13px;font-weight:600;color:${EMAIL_THEME.accentStrong};">${escapeHtml(options.headerBadge)}</p>
+              <h1 style="margin:0;font-size:22px;line-height:1.35;font-weight:700;color:${EMAIL_THEME.text};">${escapeHtml(options.headerTitle)}</h1>
+              <p style="margin:10px 0 0;font-size:14px;line-height:1.55;color:${EMAIL_THEME.textMuted};">
+                ${options.headerIntro}
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:24px 28px;">
+              ${options.mainContentHtml}
+            </td>
+          </tr>
+          <tr>
+            ${buildEmailFooterHtml()}
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>`;
+}
+
+function buildSharedOrderBodyHtml(
+  data: CheckoutConfirmationEmailData,
+  options?: { includeLeadContact?: boolean },
+): string {
+  const parts = [
+    buildOrderSummaryHtml(data),
+    options?.includeLeadContact ? buildLeadContactHtml(data) : "",
+    buildPaymentSummaryHtml(data),
+    buildPaymentInstructionsHtml(data),
+    buildTravelersSectionHtml(data),
+  ];
+  return parts.join("");
+}
+
+function buildStaffActionCalloutHtml(): string {
+  return `
+              <div style="margin:0 0 20px;padding:14px 16px;border-radius:10px;background:${EMAIL_THEME.headerBg};border:1px solid ${EMAIL_THEME.surfaceBorder};">
+                <p style="margin:0;font-size:14px;line-height:1.55;color:${EMAIL_THEME.text};">
+                  <strong style="color:${EMAIL_THEME.accentStrong};">待辦事項：</strong>請於 3 個工作天內聯絡旅客、確認付款入帳，並於系統更新訂單狀態。
                 </p>
               </div>`;
 }
@@ -127,93 +298,18 @@ export function buildCustomerConfirmationEmail(
     `${COMPANY_INFO.name}`,
   ].filter((line) => line !== null);
 
-  const html = `
-<!DOCTYPE html>
-<html lang="zh-Hant">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>${escapeHtml(subject)}</title>
-</head>
-<body style="margin:0;padding:0;background:#f4f5f7;font-family:'PingFang TC','Microsoft JhengHei',sans-serif;color:#1a1d21;">
-  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background:#f4f5f7;padding:24px 12px;">
-    <tr>
-      <td align="center">
-        <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width:600px;background:#ffffff;border-radius:12px;overflow:hidden;border:1px solid #e8eaed;">
-          <tr>
-            <td style="padding:28px 28px 20px;background:#1f4d3a;color:#ffffff;">
-              <p style="margin:0 0 8px;font-size:13px;opacity:0.9;">${escapeHtml(COMPANY_INFO.name)}</p>
-              <h1 style="margin:0;font-size:22px;line-height:1.35;font-weight:700;">預訂確認</h1>
-              <p style="margin:10px 0 0;font-size:14px;line-height:1.5;opacity:0.95;">
-                ${escapeHtml(data.leadTravelerName)} 您好，訂單已成立。請依下方說明完成付款，顧問將人工確認款項。
-              </p>
-            </td>
-          </tr>
-          <tr>
-            <td style="padding:24px 28px;">
-              <h2 style="margin:0 0 12px;font-size:15px;font-weight:700;">訂單摘要</h2>
-              <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="font-size:14px;line-height:1.55;">
-                <tr><td style="padding:4px 0;color:#5c6370;width:96px;">行程</td><td style="padding:4px 0;">${escapeHtml(data.packageTitle)}</td></tr>
-                <tr><td style="padding:4px 0;color:#5c6370;">出發日期</td><td style="padding:4px 0;">${escapeHtml(data.startDate)} → ${escapeHtml(data.endDate)}（${data.tripDays} 天）</td></tr>
-                <tr><td style="padding:4px 0;color:#5c6370;">住宿</td><td style="padding:4px 0;">${escapeHtml(data.accommodationLabel)}</td></tr>
-                <tr><td style="padding:4px 0;color:#5c6370;">租車</td><td style="padding:4px 0;">${escapeHtml(data.vehicleLabel)}</td></tr>
-                <tr><td style="padding:4px 0;color:#5c6370;">旅客</td><td style="padding:4px 0;">${escapeHtml(travelerSummary(data))}</td></tr>
-                ${
-                  data.selectedExtrasCount > 0
-                    ? `<tr><td style="padding:4px 0;color:#5c6370;">自選活動</td><td style="padding:4px 0;">${data.selectedExtrasCount} 項</td></tr>`
-                    : ""
-                }
-                <tr><td style="padding:4px 0;color:#5c6370;">訂單號</td><td style="padding:4px 0;font-weight:700;">${escapeHtml(orderRef)}</td></tr>
-              </table>
-
-              <div style="margin:20px 0;padding:16px;border-radius:10px;background:#f3f6f4;border:1px solid #d9e5dd;">
-                <p style="margin:0 0 6px;font-size:13px;color:#5c6370;">付款方式</p>
-                <p style="margin:0 0 10px;font-size:15px;font-weight:700;">${escapeHtml(data.paymentMethodLabel)}</p>
-                <p style="margin:0;font-size:14px;line-height:1.6;">
-                  套餐總價：<strong>${escapeHtml(data.totalAmountFormatted)}</strong><br />
-                  ${escapeHtml(data.amountDueLabel)}：<strong style="color:#1f4d3a;">${escapeHtml(data.amountDueFormatted)}</strong>
-                </p>
-              </div>
-
-              <h2 style="margin:0 0 10px;font-size:15px;font-weight:700;">${escapeHtml(data.paymentInstructions.title)}</h2>
-              ${
-                data.paymentInstructions.bankAccount
-                  ? buildBankAccountHtml(data.paymentInstructions.bankAccount)
-                  : ""
-              }
-              <ol style="margin:0 0 14px;padding-left:20px;font-size:14px;line-height:1.55;">
-                ${buildStepsHtml(data.paymentInstructions.steps)}
-              </ol>
-              <ul style="margin:0;padding-left:18px;font-size:13px;line-height:1.5;">
-                ${buildNotesHtml(data.paymentInstructions.notes)}
-              </ul>
-
-              <h2 style="margin:24px 0 10px;font-size:15px;font-weight:700;">旅客名單</h2>
-              <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="font-size:14px;">
-                ${buildTravelersHtml(data)}
-              </table>
-            </td>
-          </tr>
-          <tr>
-            <td style="padding:18px 28px;background:#f8f9fa;border-top:1px solid #e8eaed;font-size:13px;line-height:1.6;color:#5c6370;">
-              <strong style="color:#1a1d21;">聯絡我們</strong><br />
-              地址：${escapeHtml(CHECKOUT_OFFICE_ADDRESS)}<br />
-              電話：${escapeHtml(CHECKOUT_OFFICE_PHONE)}<br />
-              信箱：<a href="mailto:${escapeHtml(CHECKOUT_OFFICE_EMAIL)}" style="color:#1f4d3a;">${escapeHtml(CHECKOUT_OFFICE_EMAIL)}</a>
-              <p style="margin:12px 0 0;">${escapeHtml(COMPANY_INFO.name)}</p>
-            </td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-  </table>
-</body>
-</html>`;
+  const html = buildEmailShell({
+    subject,
+    headerBadge: COMPANY_INFO.name,
+    headerTitle: "預訂確認",
+    headerIntro: `${escapeHtml(data.leadTravelerName)} 您好，訂單已成立。請依下方說明完成付款，專員將人工確認款項。`,
+    mainContentHtml: buildSharedOrderBodyHtml(data),
+  });
 
   return { subject, html, text: textLines.join("\n") };
 }
 
-/** 內部通知信：提醒顧問人工跟進付款 */
+/** 內部通知信：提醒專員人工跟進付款 */
 export function buildStaffBookingNotificationEmail(
   data: CheckoutConfirmationEmailData,
 ): CheckoutConfirmationEmailContent {
@@ -226,9 +322,26 @@ export function buildStaffBookingNotificationEmail(
     `訂單號：${orderRef}`,
     `預訂 ID：${data.bookingId}`,
     `行程：${data.packageTitle}`,
-    `出發：${data.startDate} → ${data.endDate}`,
+    `出發：${data.startDate} → ${data.endDate}（${data.tripDays} 天）`,
+    `住宿：${data.accommodationLabel}`,
+    `租車：${data.vehicleLabel}`,
+    `旅客：${travelerSummary(data)}`,
+    data.selectedExtrasCount > 0
+      ? `自選活動：${data.selectedExtrasCount} 項`
+      : null,
+    "",
     `付款方式：${data.paymentMethodLabel}`,
-    `${data.amountDueLabel}：${data.amountDueFormatted}（總價 ${data.totalAmountFormatted}）`,
+    `套餐總價：${data.totalAmountFormatted}`,
+    `${data.amountDueLabel}：${data.amountDueFormatted}`,
+    "",
+    ...(data.paymentInstructions.bankAccount
+      ? buildBankAccountText(data.paymentInstructions.bankAccount)
+      : []),
+    data.paymentInstructions.title,
+    ...data.paymentInstructions.steps.map((step, index) => `${index + 1}. ${step}`),
+    "",
+    "注意：",
+    ...data.paymentInstructions.notes.map((note) => `· ${note}`),
     "",
     `主要聯絡人：${data.leadTravelerName}`,
     `Email：${data.leadTravelerEmail}`,
@@ -240,25 +353,18 @@ export function buildStaffBookingNotificationEmail(
     ),
     "",
     "請於 3 個工作天內聯絡旅客並確認付款。",
-  ];
+    "",
+    getCheckoutOfficeContactBlock(),
+  ].filter((line) => line !== null);
 
-  const html = `
-<!DOCTYPE html>
-<html lang="zh-Hant">
-<head><meta charset="utf-8" /><title>${escapeHtml(subject)}</title></head>
-<body style="font-family:'PingFang TC','Microsoft JhengHei',sans-serif;font-size:14px;line-height:1.6;color:#1a1d21;">
-  <h1 style="font-size:18px;margin:0 0 12px;">新預訂待收款</h1>
-  <p style="margin:0 0 16px;">請人工跟進付款與訂單狀態。</p>
-  <table style="border-collapse:collapse;width:100%;max-width:560px;">
-    <tr><td style="padding:4px 8px;color:#5c6370;">訂單號</td><td style="padding:4px 8px;"><strong>${escapeHtml(orderRef)}</strong></td></tr>
-    <tr><td style="padding:4px 8px;color:#5c6370;">預訂 ID</td><td style="padding:4px 8px;">${escapeHtml(data.bookingId)}</td></tr>
-    <tr><td style="padding:4px 8px;color:#5c6370;">行程</td><td style="padding:4px 8px;">${escapeHtml(data.packageTitle)}</td></tr>
-    <tr><td style="padding:4px 8px;color:#5c6370;">出發</td><td style="padding:4px 8px;">${escapeHtml(data.startDate)} → ${escapeHtml(data.endDate)}</td></tr>
-    <tr><td style="padding:4px 8px;color:#5c6370;">付款</td><td style="padding:4px 8px;">${escapeHtml(data.paymentMethodLabel)} · ${escapeHtml(data.amountDueLabel)} ${escapeHtml(data.amountDueFormatted)}</td></tr>
-    <tr><td style="padding:4px 8px;color:#5c6370;">聯絡人</td><td style="padding:4px 8px;">${escapeHtml(data.leadTravelerName)} / ${escapeHtml(data.leadTravelerPhone)} / ${escapeHtml(data.leadTravelerEmail)}</td></tr>
-  </table>
-</body>
-</html>`;
+  const html = buildEmailShell({
+    subject,
+    headerBadge: `${COMPANY_INFO.name} · 內部通知`,
+    headerTitle: "新預訂待收款",
+    headerIntro:
+      "有新的線上預訂待人工收款確認。請依下方訂單資訊聯絡旅客並完成入帳確認。",
+    mainContentHtml: `${buildStaffActionCalloutHtml()}${buildSharedOrderBodyHtml(data, { includeLeadContact: true })}`,
+  });
 
   return { subject, html, text: textLines.join("\n") };
 }

@@ -11,6 +11,7 @@ export type CheckoutTravelerForm = {
   firstName: string;
   lastName: string;
   email: string;
+  phoneCountryCode: string;
   phoneNumber: string;
   nationality: string;
   countryOfResidence: string;
@@ -26,6 +27,14 @@ export type CheckoutExtraSelection = {
   travelerCorrelationIds: number[];
 };
 
+/** 每間房的旅客與房型（Corivo roomTypeCategory） */
+export type CheckoutRoomOccupancy = {
+  adults: number;
+  children: number;
+  infants: number;
+  roomTypeCategory: "TWIN" | "SINGLE" | "TRIPLE" | "DOUBLE";
+};
+
 export type CheckoutSession = {
   packageId: string;
   packageTitle: string;
@@ -33,6 +42,7 @@ export type CheckoutSession = {
   adults: number;
   children: number;
   infants: number;
+  roomOccupancies: CheckoutRoomOccupancy[];
   accommodationTier: string;
   vehicleTier: string;
   preDays: number;
@@ -40,6 +50,8 @@ export type CheckoutSession = {
   promoCode: string;
   selectedExtras: CheckoutExtraSelection[];
   travelers: CheckoutTravelerForm[];
+  specialRequests: string;
+  agentName: string;
   acceptTerms: boolean;
   /** 是否一次付清全額；否則僅付訂金 */
   payFullAmount: boolean;
