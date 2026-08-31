@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Noto_Sans_TC, Syne } from "next/font/google";
 import { cookies, headers } from "next/headers";
 import { SiteFooter } from "@/components/SiteFooter";
+import { SiteChrome } from "@/components/SiteChrome";
 import { SiteThemeBootstrap } from "@/components/SiteThemeBootstrap";
 import { BRAND_NAME } from "@/lib/company-info";
 import {
@@ -62,6 +63,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
       </head>
       <body className="flex min-h-full w-full flex-col">
         <SiteThemeBootstrap />
+        <SiteChrome />
         {children}
         <SiteFooter />
       </body>

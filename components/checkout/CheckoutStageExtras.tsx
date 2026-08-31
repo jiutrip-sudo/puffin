@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { formatIsk } from "@/lib/trip-pricing/calculate";
 import type { CheckoutSession } from "@/lib/checkout/types";
@@ -9,6 +10,7 @@ import {
   CHECKOUT_BANK_ACCOUNT,
   getManualPaymentInstructions,
 } from "@/lib/checkout/manual-payment";
+import { CheckoutSuccessIcon } from "./CheckoutSuccessIcon";
 import {
   CHECKOUT_SERVICE_TERMS_PARAGRAPHS,
   CHECKOUT_SERVICE_TERMS_URL,
@@ -490,6 +492,7 @@ type StageConfirmationProps = {
   depositRate: number;
   totalAmount: number | null;
   customerEmailSent: boolean;
+  backHref: string;
 };
 
 export function CheckoutStageConfirmation({
@@ -500,6 +503,7 @@ export function CheckoutStageConfirmation({
   depositRate,
   totalAmount,
   customerEmailSent,
+  backHref,
 }: StageConfirmationProps) {
   const amountDue =
     totalAmount !== null
@@ -524,21 +528,30 @@ export function CheckoutStageConfirmation({
 
   return (
     <div className="checkout-stage checkout-confirmation">
-      <h2 className="checkout-block__title">預訂確認</h2>
-      <p className="checkout-success-banner">
-        訂單已成立！
-      </p>
-      <p className="checkout-block__desc">
+      <header className="checkout-confirmation-hero checkout-reveal checkout-reveal--1">
+        <CheckoutSuccessIcon />
+        <h2 className="checkout-block__title">預訂確認</h2>
+        <p className="checkout-success-banner checkout-success-banner--celebrate">
+          訂單已成立！
+        </p>
+      </header>
+
+      <p className="checkout-block__desc checkout-reveal checkout-reveal--2">
         {packageTitle}
       </p>
       {confirmationCode && (
-        <p className="checkout-reference">
-          訂單號：<strong>{confirmationCode}</strong>
+        <p className="checkout-reference checkout-reveal checkout-reveal--3">
+          訂單號：
+          <strong className="checkout-reference__code">{confirmationCode}</strong>
         </p>
       )}
-      <p className="checkout-block__hint">預訂 ID：{bookingId}</p>
+      <p className="checkout-block__hint checkout-reveal checkout-reveal--3">
+        預訂 ID：{bookingId}
+      </p>
 
-      <div className="checkout-manual-payment-summary">
+      <div
+        className="checkout-manual-payment-summary checkout-reveal checkout-reveal--4"
+      >
         <p>
           付款方式：<strong>{paymentLabel}</strong>
           {amountDue !== null && (
@@ -555,7 +568,9 @@ export function CheckoutStageConfirmation({
       </div>
 
       {instructions && (
-        <section className="checkout-manual-payment-instructions">
+        <section
+          className="checkout-manual-payment-instructions checkout-reveal checkout-reveal--5"
+        >
           <h3 className="checkout-manual-payment-instructions__title">
             {instructions.title}
           </h3>
@@ -590,11 +605,35 @@ export function CheckoutStageConfirmation({
         </section>
       )}
 
-      <p className="checkout-block__desc mt-4">
+      <p className="checkout-block__desc mt-4 checkout-reveal checkout-reveal--6">
         {customerEmailSent
           ? "確認信已寄至您填寫的 Email，請查收付款說明。"
           : "若未收到 Email，請聯絡顧問索取付款說明。"}
         出發前會提供完整行程文件與票券。
+      </p>
+
+      <div
+        className="checkout-actions checkout-step-footer checkout-confirmation-actions checkout-reveal checkout-reveal--7"
+      >
+        <Link
+          href={backHref}
+          className="checkout-ghost-btn checkout-step-footer__back"
+        >
+          ‹ 返回行程
+        </Link>
+        <Link
+          href="/"
+          className="checkout-primary-btn checkout-step-footer__next checkout-confirmation-actions__home"
+        >
+          返回首頁
+        </Link>
+      </div>
+      <p className="checkout-block__hint checkout-confirmation-links checkout-reveal checkout-reveal--8">
+        <Link href={CHECKOUT_SERVICE_TERMS_URL}>服務條款與訂單須知</Link>
+        <span aria-hidden="true"> · </span>
+        <Link href="/iceland">冰島行程</Link>
+        <span aria-hidden="true"> · </span>
+        <Link href="/taiwan">台灣行程</Link>
       </p>
     </div>
   );

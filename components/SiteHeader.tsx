@@ -1,12 +1,17 @@
 import Link from "next/link";
 import { SiteLogo } from "./SiteLogo";
 import { ThemeControlsBar } from "./ThemeControls";
+import { COMPANY_INFO } from "@/lib/company-info";
+
+const OFFICE_EMAIL =
+  COMPANY_INFO.contact.find((item) => item.label === "信箱")?.value ??
+  "vip@dollar-travel.com";
 
 const NAV_LINKS = [
-  { label: "關於", href: "#" },
-  { label: "行程", href: "#" },
-  { label: "服務", href: "#" },
-  { label: "聯絡", href: "#" },
+  { label: "關於", href: "/" },
+  { label: "行程", href: "/iceland" },
+  { label: "服務", href: "/terms-and-conditions" },
+  { label: "聯絡", href: `mailto:${OFFICE_EMAIL}` },
 ];
 
 type SiteHeaderProps = {

@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { ServiceTermsPage } from "@/components/legal/ServiceTermsPage";
 import { SERVICE_TERMS_PAGE_TITLE } from "@/lib/legal/service-terms-content";
 import { COMPANY_INFO } from "@/lib/company-info";
@@ -12,9 +11,6 @@ export default function TermsAndConditionsPage() {
   return (
     <div className="legal-page">
       <div className="legal-page__inner">
-        <Link href="/" className="legal-page__back">
-          ← 返回首頁
-        </Link>
         <ServiceTermsPage />
       </div>
     </div>

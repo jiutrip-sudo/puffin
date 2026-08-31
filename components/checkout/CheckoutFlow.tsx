@@ -1,10 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { PricingConfig } from "@/lib/trip-pricing/types";
 import type { CheckoutSession, CheckoutStepId } from "@/lib/checkout/types";
 import { occupanciesToRoomSlots } from "@/lib/checkout/room-occupancy";
+import { fireCheckoutSuccessConfetti } from "@/lib/checkout/fire-checkout-success-confetti";
 import { CheckoutStepper } from "./CheckoutStepper";
 import { CheckoutSidebar } from "./CheckoutSidebar";
 import { CheckoutStagePackage } from "./CheckoutStagePackage";
@@ -31,6 +32,7 @@ export function CheckoutFlow({
   const [submitLoading, setSubmitLoading] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const travelersRef = useRef<CheckoutStageTravelersHandle>(null);
+  const confettiFiredForBookingRef = useRef<string | null>(null);
   const [bookingResult, setBookingResult] = useState<{
     bookingId: string;
     confirmationCode: string | null;
@@ -49,6 +51,30 @@ export function CheckoutFlow({
   const goBack = () => {
     setStep((prev) => Math.max(1, prev - 1) as CheckoutStepId);
   };
+
+  useEffect(() => {
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: reduceMotion ? "auto" : "smooth",
+    });
+
+    if (step !== 5 || !bookingResult) return;
+    if (confettiFiredForBookingRef.current === bookingResult.bookingId) return;
+    confettiFiredForBookingRef.current = bookingResult.bookingId;
+
+    if (reduceMotion) return;
+
+    const timer = window.setTimeout(() => {
+      void fireCheckoutSuccessConfetti();
+    }, 320);
+
+    return () => window.clearTimeout(timer);
+  }, [step, bookingResult]);
 
   const handleSubmit = async () => {
     setSubmitLoading(true);
@@ -240,6 +266,7 @@ export function CheckoutFlow({
               depositRate={pricingConfig.depositRate ?? 0.2}
               totalAmount={bookingResult.totalAmount}
               customerEmailSent={bookingResult.customerEmailSent}
+              backHref={backHref}
             />
           )}
         </main>

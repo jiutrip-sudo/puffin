@@ -1302,6 +1302,23 @@ html {
   pointer-events: none;
 }
 
+.checkout-confirmation-actions__home {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.checkout-confirmation-links {
+  margin-top: 1rem;
+}
+
+.checkout-confirmation-links a {
+  color: var(--color-primary-dark);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
 .checkout-ghost-btn {
   border-radius: 9999px;
   border: 1px solid color-mix(in srgb, var(--foreground) 15%, transparent);
@@ -1883,6 +1900,169 @@ html {
   font-size: 1.25rem;
   font-weight: 700;
   color: var(--color-primary-dark);
+}
+
+.checkout-confirmation-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.checkout-confirmation-hero .checkout-block__title {
+  margin-top: 0.75rem;
+}
+
+.checkout-success-icon {
+  color: var(--color-primary-dark);
+  width: 3.25rem;
+  height: 3.25rem;
+}
+
+.checkout-success-icon__svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.checkout-success-icon__circle {
+  stroke-dasharray: 145;
+  stroke-dashoffset: 145;
+  animation: checkout-success-draw-circle 0.55s cubic-bezier(0.4, 0, 0.2, 1)
+    forwards;
+}
+
+.checkout-success-icon__check {
+  stroke-dasharray: 36;
+  stroke-dashoffset: 36;
+  animation: checkout-success-draw-check 0.4s cubic-bezier(0.4, 0, 0.2, 1)
+    0.4s forwards;
+}
+
+@keyframes checkout-success-draw-circle {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes checkout-success-draw-check {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.checkout-reveal {
+  opacity: 0;
+  transform: translateY(0.5rem);
+  animation: checkout-reveal-up 0.48s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.checkout-reveal--1 {
+  animation-delay: 0.05s;
+}
+
+.checkout-reveal--2 {
+  animation-delay: 0.12s;
+}
+
+.checkout-reveal--3 {
+  animation-delay: 0.2s;
+}
+
+.checkout-reveal--4 {
+  animation-delay: 0.28s;
+}
+
+.checkout-reveal--5 {
+  animation-delay: 0.36s;
+}
+
+.checkout-reveal--6 {
+  animation-delay: 0.44s;
+}
+
+.checkout-reveal--7 {
+  animation-delay: 0.52s;
+}
+
+.checkout-reveal--8 {
+  animation-delay: 0.6s;
+}
+
+@keyframes checkout-reveal-up {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.checkout-reference__code {
+  display: inline-block;
+  padding: 0.1em 0.35em;
+  margin-left: 0.15em;
+  border-radius: 0.35rem;
+  animation: checkout-order-highlight 1.1s ease-out 0.35s both;
+}
+
+@keyframes checkout-order-highlight {
+  0% {
+    background: transparent;
+    box-shadow: none;
+  }
+
+  35% {
+    background: color-mix(in srgb, var(--color-primary-dark) 16%, transparent);
+    box-shadow: 0 0 0 3px
+      color-mix(in srgb, var(--color-primary) 22%, transparent);
+  }
+
+  100% {
+    background: transparent;
+    box-shadow: none;
+  }
+}
+
+.checkout-success-banner--celebrate {
+  animation: checkout-success-pop 0.55s cubic-bezier(0.22, 1.12, 0.36, 1) both;
+}
+
+@keyframes checkout-success-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.92) translateY(0.35rem);
+  }
+
+  60% {
+    opacity: 1;
+    transform: scale(1.04) translateY(0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .checkout-success-banner--celebrate {
+    animation: none;
+  }
+
+  .checkout-success-icon__circle,
+  .checkout-success-icon__check {
+    stroke-dashoffset: 0;
+    animation: none;
+  }
+
+  .checkout-reveal {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+
+  .checkout-reference__code {
+    animation: none;
+  }
 }
 
 .checkout-reference {
@@ -2540,7 +2720,7 @@ html {
   justify-content: center;
   border: none;
   border-radius: 9999px;
-  background: #e8946f;
+  background: var(--color-primary-dark);
   padding: 0.875rem 1.5rem;
   font-size: 0.9375rem;
   font-weight: 700;
@@ -2552,11 +2732,16 @@ html {
 }
 
 .booking-panel-cta:hover {
-  background: #df7f56;
+  background: var(--color-primary);
 }
 
 .booking-panel-cta:active {
   transform: scale(0.98);
+}
+
+.booking-panel-cta:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--color-primary) 55%, transparent);
+  outline-offset: 2px;
 }
 
 .booking-panel-overlay {

@@ -1,6 +1,6 @@
 import { HeroMedia } from "./HeroMedia";
 import { HeroMediaFrame } from "./HeroMediaFrame";
-import { SiteHeader } from "./SiteHeader";
+import { SiteHeaderShell } from "./SiteHeaderShell";
 
 type HeroSectionProps = {
   title: string;
@@ -31,11 +31,7 @@ export function HeroSection({
 
   return (
     <section className="relative isolate w-full">
-      <div className="site-header-shell pointer-events-none fixed inset-x-0 top-0 z-[90]">
-        <div className="pointer-events-auto">
-          {header ?? <SiteHeader />}
-        </div>
-      </div>
+      <SiteHeaderShell variant="overlay">{header}</SiteHeaderShell>
 
       <HeroMediaFrame>
         <HeroMedia priority={priority} />
