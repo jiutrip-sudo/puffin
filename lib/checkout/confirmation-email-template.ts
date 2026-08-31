@@ -120,8 +120,14 @@ function buildBookingLookupHtml(data: CheckoutConfirmationEmailData): string {
               </div>`;
 }
 
-function buildOrderSummaryHtml(data: CheckoutConfirmationEmailData): string {
+function buildOrderSummaryHtml(
+  data: CheckoutConfirmationEmailData,
+  options?: { showBookingId?: boolean },
+): string {
   const orderRef = orderReference(data);
+  const bookingIdRow = options?.showBookingId
+    ? `<tr><td style="padding:4px 0;color:${EMAIL_THEME.textMuted};">預訂 ID</td><td style="padding:4px 0;color:${EMAIL_THEME.text};font-size:13px;">${escapeHtml(data.bookingId)}</td></tr>`
+    : "";
   return `
               <h2 style="margin:0 0 12px;font-size:15px;font-weight:700;color:${EMAIL_THEME.text};">訂單摘要</h2>
               <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="font-size:14px;line-height:1.55;">
@@ -136,7 +142,7 @@ function buildOrderSummaryHtml(data: CheckoutConfirmationEmailData): string {
                     : ""
                 }
                 <tr><td style="padding:4px 0;color:${EMAIL_THEME.textMuted};">訂單號</td><td style="padding:4px 0;font-weight:700;color:${EMAIL_THEME.accentStrong};">${escapeHtml(orderRef)}</td></tr>
-                <tr><td style="padding:4px 0;color:${EMAIL_THEME.textMuted};">預訂 ID</td><td style="padding:4px 0;color:${EMAIL_THEME.text};font-size:13px;">${escapeHtml(data.bookingId)}</td></tr>
+                ${bookingIdRow}
               </table>`;
 }
 
@@ -251,11 +257,15 @@ function buildEmailShell(options: {
 
 function buildSharedOrderBodyHtml(
   data: CheckoutConfirmationEmailData,
-  options?: { includeLeadContact?: boolean },
+  options?: {
+    includeLeadContact?: boolean;
+    showBookingId?: boolean;
+    includeBookingLookup?: boolean;
+  },
 ): string {
   const parts = [
-    buildOrderSummaryHtml(data),
-    buildBookingLookupHtml(data),
+    buildOrderSummaryHtml(data, { showBookingId: options?.showBookingId }),
+    options?.includeBookingLookup ? buildBookingLookupHtml(data) : "",
     options?.includeLeadContact ? buildLeadContactHtml(data) : "",
     buildPaymentSummaryHtml(data),
     buildPaymentInstructionsHtml(data),
@@ -295,7 +305,6 @@ export function buildCustomerConfirmationEmail(
       ? `自選活動：${data.selectedExtrasCount} 項`
       : null,
     `訂單號：${orderRef}`,
-    `預訂 ID：${data.bookingId}`,
     `查詢訂單：${buildBookingLookupUrl(data.confirmationCode)}`,
     "",
     "── 付款資訊 ──",
@@ -323,7 +332,7 @@ export function buildCustomerConfirmationEmail(
     headerBadge: COMPANY_INFO.name,
     headerTitle: "預訂確認",
     headerIntro: `${escapeHtml(data.leadTravelerName)} 您好，訂單已成立。請依下方說明完成付款，專員將人工確認款項。`,
-    mainContentHtml: buildSharedOrderBodyHtml(data),
+    mainContentHtml: buildSharedOrderBodyHtml(data, { includeBookingLookup: true }),
   });
 
   return { subject, html, text: textLines.join("\n") };
@@ -383,7 +392,11 @@ export function buildStaffBookingNotificationEmail(
     headerTitle: "新預訂待收款",
     headerIntro:
       "有新的線上預訂待人工收款確認。請依下方訂單資訊聯絡旅客並完成入帳確認。",
-    mainContentHtml: `${buildStaffActionCalloutHtml()}${buildSharedOrderBodyHtml(data, { includeLeadContact: true })}`,
+    mainContentHtml: `${buildStaffActionCalloutHtml()}${buildSharedOrderBodyHtml(data, {
+      includeLeadContact: true,
+      showBookingId: true,
+      includeBookingLookup: false,
+    })}`,
   });
 
   return { subject, html, text: textLines.join("\n") };

@@ -488,7 +488,6 @@ type StageConfirmationProps = {
   session: CheckoutSession;
   packageTitle: string;
   confirmationCode: string | null;
-  bookingId: string;
   depositRate: number;
   totalAmount: number | null;
   customerEmailSent: boolean;
@@ -499,7 +498,6 @@ export function CheckoutStageConfirmation({
   session,
   packageTitle,
   confirmationCode,
-  bookingId,
   depositRate,
   totalAmount,
   customerEmailSent,
@@ -554,10 +552,6 @@ export function CheckoutStageConfirmation({
           </Link>
         </p>
       )}
-      <p className="checkout-block__hint checkout-reveal checkout-reveal--3">
-        預訂 ID：{bookingId}
-      </p>
-
       <div
         className="checkout-manual-payment-summary checkout-reveal checkout-reveal--4"
       >

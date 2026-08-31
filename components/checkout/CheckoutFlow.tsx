@@ -285,7 +285,6 @@ export function CheckoutFlow({
               session={session}
               packageTitle={session.packageTitle}
               confirmationCode={bookingResult.confirmationCode}
-              bookingId={bookingResult.bookingId}
               depositRate={pricingConfig.depositRate ?? 0.2}
               totalAmount={bookingResult.totalAmount}
               customerEmailSent={bookingResult.customerEmailSent}
