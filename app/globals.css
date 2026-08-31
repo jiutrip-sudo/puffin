@@ -443,13 +443,6 @@ html {
   }
 }
 
-@media (min-width: 1024px) {
-  .checkout-mobile-chrome__compact,
-  .checkout-mobile-chrome__dock {
-    display: none;
-  }
-}
-
 .checkout-mobile-chrome__compact {
   padding: 0 1rem;
   max-width: 72rem;
@@ -712,6 +705,12 @@ html {
   .checkout-layout {
     grid-template-columns: minmax(0, 1fr) 360px;
     align-items: start;
+  }
+
+  .checkout-mobile-chrome__compact,
+  .checkout-mobile-chrome__dock,
+  .checkout-summary-sheet {
+    display: none !important;
   }
 }
 
