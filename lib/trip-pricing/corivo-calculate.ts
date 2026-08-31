@@ -52,6 +52,17 @@ export async function calculateCorivoTripPrice(
     travelers,
   );
 
+  const extraIds = input.extraPackageItemIds ?? [];
+  if (extraIds.length > 0) {
+    for (const itemId of extraIds) {
+      items.push({
+        id: itemId,
+        quantity: 1,
+        travelers,
+      });
+    }
+  }
+
   const baseItems = buildCorivoPriceItems(
     packageItems,
     classificationId,

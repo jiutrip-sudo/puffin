@@ -12,6 +12,7 @@ export type AvailabilitySnapshotKeyInput = {
   adults: number;
   children: number;
   infants: number;
+  accommodationTier: string;
 };
 
 export function buildPricingSnapshotKey(input: PricingSnapshotKeyInput): string {
@@ -33,6 +34,7 @@ export function buildAvailabilitySnapshotKey(
     input.adults,
     input.children,
     input.infants,
+    input.accommodationTier,
   ].join("|");
 }
 

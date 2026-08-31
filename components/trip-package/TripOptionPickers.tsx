@@ -356,6 +356,9 @@ type VehiclePickerProps = {
   interactive?: boolean;
   pricingLoading?: boolean;
   compact?: boolean;
+  tierAvailability?: TierAvailabilityMap;
+  availabilityLoading?: boolean;
+  availabilityActive?: boolean;
 };
 
 export function VehicleTypePicker({
@@ -366,6 +369,9 @@ export function VehicleTypePicker({
   interactive = false,
   pricingLoading = false,
   compact = false,
+  tierAvailability,
+  availabilityLoading = false,
+  availabilityActive = false,
 }: VehiclePickerProps) {
   const [showAll, setShowAll] = useState(false);
 
@@ -410,6 +416,17 @@ export function VehicleTypePicker({
         {visibleVehicles.map((vehicle) => {
           const isSelected = vehicle.id === selectedId;
           const gearbox = gearTypeLabel(vehicle.gearType);
+          const status = tierAvailability?.[vehicle.id];
+          const badge = availabilityBadgeLabel(
+            status,
+            availabilityLoading,
+            availabilityActive,
+          );
+          const selectable = tierIsSelectable(
+            status,
+            availabilityLoading,
+            availabilityActive,
+          );
 
           return (
             <li key={vehicle.id} className={compact ? undefined : "min-h-0"}>
@@ -418,7 +435,7 @@ export function VehicleTypePicker({
                   isSelected
                     ? "border-primary bg-primary/10"
                     : "border-foreground/10 bg-primary-surface/15"
-                } ${compact ? "" : "flex flex-col"}`}
+                } ${!selectable ? "opacity-60" : ""} ${compact ? "" : "flex flex-col"}`}
               >
                 {!compact && (
                   <div className="relative aspect-[16/10] w-full overflow-hidden bg-primary-surface/25">
@@ -446,6 +463,15 @@ export function VehicleTypePicker({
                       <p className="text-base font-bold text-foreground">
                         {vehicle.label.split("|")[0]?.trim() ?? vehicle.label}
                       </p>
+                      {availabilityLoading && availabilityActive ? (
+                        <BookingShimmer variant="badge" />
+                      ) : (
+                        badge && (
+                          <span className="rounded-full bg-foreground/8 px-2.5 py-0.5 text-xs font-semibold text-foreground/65">
+                            {badge}
+                          </span>
+                        )
+                      )}
                       {isSelected && pricingLoading && (
                         <BookingShimmer variant="badge" />
                       )}
@@ -490,7 +516,7 @@ export function VehicleTypePicker({
                         >
                           已選
                         </span>
-                      ) : (
+                      ) : selectable ? (
                         <button
                           type="button"
                           onClick={() => onSelect(vehicle.id)}
@@ -498,6 +524,12 @@ export function VehicleTypePicker({
                         >
                           選擇
                         </button>
+                      ) : (
+                        <span
+                          className="rounded-full border border-foreground/15 px-4 py-2 text-xs font-semibold text-foreground/55"
+                        >
+                          暫不可訂
+                        </span>
                       )
                     ) : (
                       isSelected && (
@@ -539,6 +571,7 @@ type TripOptionPickersProps = {
   vehicleInteractive?: boolean;
   compact?: boolean;
   accommodationAvailability?: TierAvailabilityMap;
+  vehicleAvailability?: TierAvailabilityMap;
   availabilityLoading?: boolean;
   availabilityActive?: boolean;
   pricingLoading?: boolean;
@@ -555,6 +588,7 @@ export function TripOptionPickers({
   vehicleInteractive,
   compact = false,
   accommodationAvailability,
+  vehicleAvailability,
   availabilityLoading = false,
   availabilityActive = false,
   pricingLoading = false,
@@ -584,6 +618,9 @@ export function TripOptionPickers({
         interactive={vehInteractive}
         pricingLoading={pricingLoading}
         compact={compact}
+        tierAvailability={vehicleAvailability}
+        availabilityLoading={availabilityLoading}
+        availabilityActive={availabilityActive}
       />
     </div>
   );

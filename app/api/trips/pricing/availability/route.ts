@@ -7,6 +7,7 @@ type AvailabilityRequest = {
   adults?: number;
   children?: number;
   infants?: number;
+  accommodationTier?: string;
 };
 
 export async function POST(request: Request) {
@@ -40,6 +41,8 @@ export async function POST(request: Request) {
         adults: body.adults ?? 2,
         children: body.children ?? 0,
         infants: body.infants ?? 0,
+        accommodationTier:
+          body.accommodationTier ?? config.tiers[0]?.id ?? "comfort",
       },
     );
 

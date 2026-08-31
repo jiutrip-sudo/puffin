@@ -11,6 +11,7 @@ type TripRoomVehicleCardsProps = {
   onAccommodationChange?: (id: string) => void;
   onVehicleChange?: (id: string) => void;
   accommodationAvailability?: TierAvailabilityMap;
+  vehicleAvailability?: TierAvailabilityMap;
   availabilityLoading?: boolean;
   availabilityActive?: boolean;
   pricingLoading?: boolean;
@@ -23,6 +24,7 @@ export function TripRoomVehicleCards({
   onAccommodationChange,
   onVehicleChange,
   accommodationAvailability,
+  vehicleAvailability,
   availabilityLoading = false,
   availabilityActive = false,
   pricingLoading = false,
@@ -37,6 +39,7 @@ export function TripRoomVehicleCards({
       accommodationInteractive={Boolean(onAccommodationChange)}
       vehicleInteractive={Boolean(onVehicleChange)}
       accommodationAvailability={accommodationAvailability}
+      vehicleAvailability={vehicleAvailability}
       availabilityLoading={availabilityLoading}
       availabilityActive={availabilityActive}
       pricingLoading={pricingLoading}

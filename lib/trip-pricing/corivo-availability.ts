@@ -1,9 +1,13 @@
 import {
+  cachedFetchCorivoPackageAvailability,
   cachedFetchCorivoPackageItems,
   cachedFetchCorivoPackageTourPrice,
 } from "./corivo-cached";
 import type { CorivoTravelerCounts } from "./corivo-client";
-import { buildCorivoPriceItems } from "./corivo-rooms";
+import {
+  buildCorivoAvailabilitySelections,
+  buildCorivoPriceItems,
+} from "./corivo-rooms";
 import { mapWithConcurrency } from "./map-with-concurrency";
 import type {
   AvailabilityStatus,
@@ -14,12 +18,14 @@ import type {
 
 const PROBE_TIMEOUT_MS = 25_000;
 const ACCOMMODATION_PROBE_CONCURRENCY = 2;
+const VEHICLE_PROBE_CONCURRENCY = 2;
 
 type AvailabilityInput = {
   startDate: string;
   adults: number;
   children: number;
   infants: number;
+  accommodationTier: string;
 };
 
 function isBookable(status: AvailabilityStatus | undefined): boolean {
@@ -30,12 +36,11 @@ export function isTierBookable(status: AvailabilityStatus | undefined): boolean 
   return isBookable(status);
 }
 
-function allVehiclesAvailable(
-  vehicleIds: string[],
-): TierAvailabilityMap {
-  return Object.fromEntries(
-    vehicleIds.map((id) => [id, "AVAILABLE"] as const),
-  );
+function mapCorivoAvailabilityStatus(status: string): AvailabilityStatus {
+  if (status === "AVAILABLE") return "AVAILABLE";
+  if (status === "FEW_REMAINING") return "FEW_REMAINING";
+  if (status === "SOLD_OUT") return "SOLD_OUT";
+  return "UNAVAILABLE";
 }
 
 async function probeTierPrice(
@@ -55,6 +60,34 @@ async function probeTierPrice(
       currencyCode: currency,
     });
     return "AVAILABLE";
+  } catch {
+    return "UNAVAILABLE";
+  }
+}
+
+async function probeVehicleAvailability(
+  instanceId: string,
+  packageTourId: number,
+  date: string,
+  travelers: CorivoTravelerCounts,
+  packageItems: Awaited<ReturnType<typeof cachedFetchCorivoPackageItems>>,
+  classificationId: number,
+  vehicleItemId: number,
+): Promise<AvailabilityStatus> {
+  try {
+    const itemSelections = buildCorivoAvailabilitySelections(
+      packageItems,
+      classificationId,
+      vehicleItemId,
+      travelers,
+    );
+    const result = await cachedFetchCorivoPackageAvailability(instanceId, {
+      packageTourId,
+      date,
+      allTravelers: travelers,
+      itemSelections,
+    });
+    return mapCorivoAvailabilityStatus(result.availabilityStatus);
   } catch {
     return "UNAVAILABLE";
   }
@@ -101,6 +134,14 @@ export async function fetchCorivoTierAvailability(
     throw new Error("找不到預設租車選項");
   }
 
+  const vehicleClassificationId =
+    corivo.classifications[input.accommodationTier] ??
+    corivo.classifications[config.tiers[0]?.id ?? ""];
+
+  if (!vehicleClassificationId) {
+    throw new Error("未知的住宿等級");
+  }
+
   const accommodationEntries = await mapWithConcurrency(
     Object.entries(corivo.classifications),
     ACCOMMODATION_PROBE_CONCURRENCY,
@@ -129,12 +170,38 @@ export async function fetchCorivoTierAvailability(
     },
   );
 
+  const vehicleEntries = await mapWithConcurrency(
+    config.vehicleTiers,
+    VEHICLE_PROBE_CONCURRENCY,
+    async (tier) => {
+      const vehicleItemId = corivo.vehicleItems[tier.id];
+      if (!vehicleItemId) {
+        return [tier.id, "UNAVAILABLE"] as const;
+      }
+
+      try {
+        const status = await probeWithTimeout(
+          probeVehicleAvailability(
+            corivo.instanceId,
+            corivo.packageTourId,
+            input.startDate,
+            travelers,
+            packageItems,
+            vehicleClassificationId,
+            vehicleItemId,
+          ),
+        );
+        return [tier.id, status] as const;
+      } catch {
+        return [tier.id, "UNAVAILABLE"] as const;
+      }
+    },
+  );
+
   const accommodation: TierAvailabilityMap = Object.fromEntries(
     accommodationEntries,
   );
-  const vehicles = allVehiclesAvailable(
-    config.vehicleTiers.map((tier) => tier.id),
-  );
+  const vehicles: TierAvailabilityMap = Object.fromEntries(vehicleEntries);
 
   return { accommodation, vehicles };
 }

@@ -12,6 +12,10 @@ import Map, { Layer, Marker, Source, type MapRef } from "react-map-gl/mapbox";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { fetchMapboxDrivingRoute } from "@/lib/mapbox/fetch-driving-route";
+import {
+  ICELAND_MAX_BOUNDS,
+  ICELAND_MIN_ZOOM,
+} from "@/lib/mapbox/iceland-bounds";
 import { getTripRouteLine } from "@/lib/trip-packages/route-lines";
 import type { RouteMapConfig } from "@/lib/trip-packages/types";
 import { ROUTE_MAP_CONTAINER_CLASS } from "./trip-route-map-layout";
@@ -187,6 +191,9 @@ export default function TripRouteMap({ routeMap }: TripRouteMapProps) {
           latitude: waypoints[0]?.lat ?? 64.1466,
           zoom: 7,
         }}
+        maxBounds={ICELAND_MAX_BOUNDS}
+        minZoom={ICELAND_MIN_ZOOM}
+        renderWorldCopies={false}
         style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
         doubleClickZoom={false}
         attributionControl={true}

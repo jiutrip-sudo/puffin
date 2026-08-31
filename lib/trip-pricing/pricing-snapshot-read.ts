@@ -24,6 +24,7 @@ type AvailabilityLookupInput = {
   adults: number;
   children: number;
   infants: number;
+  accommodationTier: string;
 };
 
 function getFreshPricingEntry(
@@ -52,6 +53,10 @@ export async function resolveCorivoTripPrice(
   config: CorivoPricingConfig,
   input: PricingInput,
 ): Promise<PricingResult> {
+  if (input.extraPackageItemIds?.length) {
+    return calculateCorivoTripPrice(config, input);
+  }
+
   const snapshot = await readPackagePricingSnapshot(config.packageId);
   const cached = getFreshPricingEntry(snapshot, input);
   if (cached) return cached.result;

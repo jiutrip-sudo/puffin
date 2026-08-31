@@ -174,6 +174,7 @@ function TripPackageMainContent({
               onAccommodationChange={setAccommodationTier}
               onVehicleChange={setVehicleTier}
               accommodationAvailability={tierAvailability?.accommodation}
+              vehicleAvailability={tierAvailability?.vehicles}
               availabilityLoading={availabilityLoading}
               availabilityActive={availabilityActive}
               pricingLoading={pricingLoading}

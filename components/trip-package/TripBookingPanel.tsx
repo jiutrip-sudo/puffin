@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { COMPANY_INFO } from "@/lib/company-info";
 import { formatIsk } from "@/lib/trip-pricing/calculate";
 import { BookingShimmer } from "./BookingPriceShimmer";
 import { TripDateField } from "./TripDateField";
@@ -155,6 +154,7 @@ function OptionChip({
 }
 
 export function TripBookingPanel({
+  packageId,
   packageTitle,
   pricingConfig,
   variant = "sidebar",
@@ -185,45 +185,26 @@ export function TripBookingPanel({
   }, [pricing?.total]);
 
   const bookHref = useMemo(() => {
-    const contact = COMPANY_INFO.contact.find((c) => c.label === "信箱");
-    const email = contact?.href?.replace("mailto:", "") ?? "";
-    const subject = encodeURIComponent(`預訂詢價：${packageTitle}`);
-    const tierLabel =
-      pricingConfig.tiers.find((t) => t.id === accommodationTier)?.label ??
-      accommodationTier;
-    const vehicleLabel =
-      pricing?.vehicleLabel ??
-      pricingConfig.vehicleTiers.find((v) => v.id === vehicleTier)?.label ??
-      vehicleTier;
-    const body = encodeURIComponent(
-      [
-        `行程：${packageTitle}`,
-        `出發日期（從）：${startDate || "未選擇"}`,
-        `結束日期（至）：${endDate || "未選擇"}`,
-        `成人：${adults}、兒童：${children}、嬰兒：${infants}`,
-        `住宿類型：${tierLabel}`,
-        `車型：${vehicleLabel}`,
-        pricing
-          ? `套餐總價：${formatIsk(pricing.total)}`
-          : "套餐總價：待計算",
-        pricing ? `訂金（20%）：${formatIsk(pricing.deposit)}` : "",
-      ]
-        .filter(Boolean)
-        .join("\n"),
-    );
-    return `mailto:${email}?subject=${subject}&body=${body}`;
+    const params = new URLSearchParams({
+      packageId,
+      packageTitle,
+      startDate: startDate || "",
+      adults: String(adults),
+      children: String(children),
+      infants: String(infants),
+      accommodationTier,
+      vehicleTier,
+    });
+    return `/checkout?${params.toString()}`;
   }, [
+    packageId,
     packageTitle,
     startDate,
-    endDate,
     adults,
     children,
     infants,
     accommodationTier,
     vehicleTier,
-    pricing,
-    pricingConfig.tiers,
-    pricingConfig.vehicleTiers,
   ]);
 
   const isSheet = variant === "sheet";
@@ -418,7 +399,7 @@ export function TripBookingPanel({
 
       <a
         href={bookHref}
-        className={`booking-panel-cta mt-4 ${pricingLoading || !pricing ? "pointer-events-none opacity-60" : ""}`}
+        className={`booking-panel-cta mt-4 ${pricingLoading || !pricing || !startDate ? "pointer-events-none opacity-60" : ""}`}
       >
         立即預訂
       </a>

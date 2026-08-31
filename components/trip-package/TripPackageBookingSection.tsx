@@ -141,8 +141,9 @@ export function TripPackageBookingSection({
       adults,
       children: childrenCount,
       infants,
+      accommodationTier,
     }),
-    [packageId, startDate, adults, childrenCount, infants],
+    [packageId, startDate, adults, childrenCount, infants, accommodationTier],
   );
 
   useEffect(() => {
@@ -200,12 +201,26 @@ export function TripPackageBookingSection({
         setAccommodationTier(nextAccommodation);
       }
     }
+
+    const vehicleIds = pricingConfig.vehicleTiers.map((tier) => tier.id);
+    if (!isTierBookable(tierAvailability.vehicles[vehicleTier])) {
+      const nextVehicle = pickFirstBookableTier(
+        vehicleIds,
+        tierAvailability.vehicles,
+        vehicleTier,
+      );
+      if (nextVehicle && nextVehicle !== vehicleTier) {
+        setVehicleTier(nextVehicle);
+      }
+    }
   }, [
     availabilityRequested,
     tierAvailability,
     availabilityLoading,
     accommodationTier,
+    vehicleTier,
     pricingConfig.tiers,
+    pricingConfig.vehicleTiers,
   ]);
 
   useEffect(() => {

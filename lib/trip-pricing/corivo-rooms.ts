@@ -1,19 +1,20 @@
 import type {
   CorivoHotelRoomChoice,
   CorivoPackageItem,
+  CorivoPackageItemSelection,
   CorivoPriceItem,
   CorivoTravelerCounts,
 } from "./corivo-client";
 
 export type RoomTypeCategory = "TWIN" | "SINGLE" | "TRIPLE" | "DOUBLE";
 
-type RoomSlot = {
+export type RoomSlot = {
   adults: number;
   children: number;
   roomTypeCategory: RoomTypeCategory;
 };
 
-type TravelerRoomConfig = {
+export type TravelerRoomConfig = {
   adults: number;
   children: number;
   infants: number;
@@ -200,6 +201,18 @@ function findRoomConfig(counts: CorivoTravelerCounts): TravelerRoomConfig {
   return match;
 }
 
+/** 依成人＋兒童人數取得 Corivo 預設房型配置（與森林猫 defaultRoomConfiguration 一致） */
+export function resolveRoomConfig(counts: CorivoTravelerCounts): TravelerRoomConfig {
+  return findRoomConfig(counts);
+}
+
+export function formatRoomSlotLabel(room: RoomSlot): string {
+  if (room.roomTypeCategory === "SINGLE") return "單人房";
+  if (room.roomTypeCategory === "TRIPLE") return "三人房";
+  if (room.roomTypeCategory === "DOUBLE") return "雙人房（一大床）";
+  return "雙床房";
+}
+
 function findHotelChoice(
   choices: CorivoHotelRoomChoice[],
   classificationId: number,
@@ -254,6 +267,24 @@ export function buildCorivoPriceItems(
   }
 
   return items;
+}
+
+export function buildCorivoAvailabilitySelections(
+  packageItems: CorivoPackageItem[],
+  classificationId: number,
+  vehicleItemId: number,
+  travelers: CorivoTravelerCounts,
+): CorivoPackageItemSelection[] {
+  return buildCorivoPriceItems(
+    packageItems,
+    classificationId,
+    vehicleItemId,
+    travelers,
+  ).map((item) => ({
+    itemId: item.id,
+    quantity: item.quantity,
+    travelers: item.travelers,
+  }));
 }
 
 export function getRoomTypeLabel(counts: CorivoTravelerCounts): string {

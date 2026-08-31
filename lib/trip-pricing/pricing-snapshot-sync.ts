@@ -76,6 +76,7 @@ type AvailabilitySyncTarget = {
   adults: number;
   children: number;
   infants: number;
+  accommodationTier: string;
 };
 
 function buildSyncTargets(config: PricingConfig): {
@@ -99,7 +100,11 @@ function buildSyncTargets(config: PricingConfig): {
         accommodationTier: DEFAULT_ACCOMMODATION_TIER,
         vehicleTier: DEFAULT_VEHICLE_TIER,
       });
-      availability.push({ startDate: date, ...travelers });
+      availability.push({
+        startDate: date,
+        ...travelers,
+        accommodationTier: DEFAULT_ACCOMMODATION_TIER,
+      });
     }
 
     for (const vehicleTier of vehicleIds) {

@@ -39,6 +39,22 @@ export type CorivoPackageTourPrice = {
   currency: string;
 };
 
+export type CorivoPackageItemSelection = {
+  itemId: number;
+  quantity: number;
+  travelers: CorivoTravelerCounts;
+};
+
+export type CorivoPackageAvailability = {
+  availabilityStatus: string;
+  isAvailable: boolean;
+  unavailableItems: number[];
+};
+
+function toCorivoDateTime(date: string): string {
+  return date.includes("T") ? date : `${date}T00:00:00.000Z`;
+}
+
 async function corivoRequest<T>(
   instanceId: string,
   query: string,
@@ -144,4 +160,44 @@ export async function fetchCorivoPackageTourPrice(
   );
 
   return data.packageTourPrice;
+}
+
+export async function fetchCorivoPackageAvailability(
+  instanceId: string,
+  input: {
+    packageTourId: number;
+    date: string;
+    allTravelers: CorivoTravelerCounts;
+    itemSelections: CorivoPackageItemSelection[];
+  },
+): Promise<CorivoPackageAvailability> {
+  const data = await corivoRequest<{
+    packageAvailability: CorivoPackageAvailability[];
+  }>(
+    instanceId,
+    `
+      query packageAvailability($input: PackageTourAvailabilityInput!) {
+        packageAvailability(input: $input) {
+          availabilityStatus
+          isAvailable
+          unavailableItems
+        }
+      }
+    `,
+    {
+      input: {
+        packageTourId: input.packageTourId,
+        date: toCorivoDateTime(input.date),
+        allTravelers: input.allTravelers,
+        packageSelections: [{ itemSelections: input.itemSelections }],
+      },
+    },
+  );
+
+  const entry = data.packageAvailability?.[0];
+  if (!entry) {
+    throw new Error("Corivo 可訂狀態回傳為空");
+  }
+
+  return entry;
 }

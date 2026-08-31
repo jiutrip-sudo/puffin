@@ -35,6 +35,8 @@ export type PricingInput = {
   accommodationTier: string;
   roomType: RoomType;
   vehicleTier: string;
+  /** Corivo packageItemId，用於 checkout 自選活動加價 */
+  extraPackageItemIds?: number[];
 };
 
 export type PricingResult = {
