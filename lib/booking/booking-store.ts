@@ -1,5 +1,6 @@
 import fs from "node:fs/promises";
 import path from "node:path";
+import { appendBookingListEntry, updateBookingListEntry } from "./booking-list";
 import { writeBookingCodeIndex } from "./booking-code-index";
 import type { LocalBookingRecord } from "./types";
 
@@ -172,6 +173,7 @@ export async function persistLocalBooking(
     }
 
     await writeBookingCodeIndex(record.confirmationCode, record.id);
+    await appendBookingListEntry(record);
 
     if (!isServerlessRuntime()) {
       await mirrorBookingToFilesystem(record, appendIndex);
@@ -193,6 +195,7 @@ export async function persistLocalBooking(
     await appendFileBookingIndex(record);
   }
   await writeBookingCodeIndex(record.confirmationCode, record.id);
+  await appendBookingListEntry(record);
 }
 
 export async function writeLocalBooking(record: LocalBookingRecord): Promise<void> {
@@ -213,5 +216,6 @@ export async function updateLocalBooking(
   };
 
   await persistLocalBooking(updated);
+  await updateBookingListEntry(updated);
   return updated;
 }

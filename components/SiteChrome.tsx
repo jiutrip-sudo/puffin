@@ -13,6 +13,10 @@ function pathHasBuiltInHeader(pathname: string): boolean {
     return true;
   }
 
+  if (pathname.startsWith("/admin")) {
+    return true;
+  }
+
   return false;
 }
 
