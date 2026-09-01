@@ -3,7 +3,7 @@ import { createLocalBooking } from "@/lib/booking/create-local-booking";
 import { updateLocalBooking } from "@/lib/booking/booking-store";
 import { buildCheckoutConfirmationEmailData } from "@/lib/checkout/build-confirmation-email-data";
 import { sendCheckoutConfirmationEmails } from "@/lib/checkout/send-confirmation-email";
-import { occupanciesToRoomSlots } from "@/lib/checkout/room-occupancy";
+import { buildCheckoutPricingInput } from "@/lib/checkout/build-pricing-input";
 import type { CheckoutSession } from "@/lib/checkout/types";
 import {
   hasTravelerFormErrors,
@@ -39,23 +39,10 @@ export async function POST(request: Request) {
 
     const corivoConfig = { ...config, corivo: config.corivo };
 
-    const extraPackageItemIds = session.selectedExtras.map(
-      (extra) => extra.packageItemId,
+    const pricing = await resolveCorivoTripPrice(
+      corivoConfig,
+      buildCheckoutPricingInput(session),
     );
-
-    const pricing = await resolveCorivoTripPrice(corivoConfig, {
-      packageId: session.packageId,
-      startDate: session.startDate,
-      adults: session.adults,
-      children: session.children,
-      infants: session.infants,
-      accommodationTier: session.accommodationTier,
-      roomType: "double",
-      vehicleTier: session.vehicleTier,
-      roomSlots: occupanciesToRoomSlots(session.roomOccupancies),
-      extraPackageItemIds:
-        extraPackageItemIds.length > 0 ? extraPackageItemIds : undefined,
-    });
 
     const booking = await createLocalBooking(session, pricing, corivoConfig);
 

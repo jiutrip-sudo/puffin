@@ -135,8 +135,11 @@ export async function fetchCorivoPackageTourPrice(
     allTravelers: CorivoTravelerCounts;
     items: CorivoPriceItem[];
     currencyCode: string;
+    promoCode?: string;
   },
 ): Promise<CorivoPackageTourPrice> {
+  const promoCode = input.promoCode?.trim() ?? "";
+
   const data = await corivoRequest<{ packageTourPrice: CorivoPackageTourPrice }>(
     instanceId,
     `
@@ -151,10 +154,14 @@ export async function fetchCorivoPackageTourPrice(
     `,
     {
       input: {
-        ...input,
+        packageTourId: input.packageTourId,
+        date: input.date,
+        allTravelers: input.allTravelers,
+        items: input.items,
+        currencyCode: input.currencyCode,
         preDays: 0,
         postDays: 0,
-        promoCode: "",
+        promoCode,
       },
     },
   );

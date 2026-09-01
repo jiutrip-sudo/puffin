@@ -1,16 +1,16 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import type { PricingConfig } from "@/lib/trip-pricing/types";
-import type { CheckoutSession, CheckoutStepId } from "@/lib/checkout/types";
+import type { CheckoutStepId } from "@/lib/checkout/types";
 import { formatIsk } from "@/lib/trip-pricing/calculate";
 import { BookingShimmer } from "@/components/trip-package/BookingPriceShimmer";
 import { CheckoutOrderSummaryPanel } from "./CheckoutOrderSummaryPanel";
-import { useCheckoutOrderSummary } from "./useCheckoutOrderSummary";
+import type { useCheckoutOrderSummary } from "./useCheckoutOrderSummary";
+
+type SummaryState = ReturnType<typeof useCheckoutOrderSummary>;
 
 type CheckoutMobileChromeProps = {
-  pricingConfig: PricingConfig;
-  session: CheckoutSession;
+  summary: SummaryState;
   step: CheckoutStepId;
   onPrimaryAction?: () => void;
   submitLoading?: boolean;
@@ -34,15 +34,13 @@ function ChevronUpIcon() {
 }
 
 export function CheckoutMobileChrome({
-  pricingConfig,
-  session,
+  summary,
   step,
   onPrimaryAction,
   submitLoading = false,
   acceptTerms = false,
 }: CheckoutMobileChromeProps) {
   const [sheetOpen, setSheetOpen] = useState(false);
-  const summary = useCheckoutOrderSummary(pricingConfig, session, step);
 
   useEffect(() => {
     setSheetOpen(false);

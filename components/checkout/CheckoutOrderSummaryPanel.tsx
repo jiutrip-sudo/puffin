@@ -319,6 +319,20 @@ export function CheckoutOrderSummaryPanel({
 
         <hr className="checkout-sidebar__total-divider" />
 
+        {pricing?.promoDiscount && pricing.promoDiscount > 0 && (
+          <div className="checkout-sidebar__promo-row">
+            <span>
+              優惠碼
+              {pricing.promoCodeApplied || session.promoCode
+                ? `（${pricing.promoCodeApplied ?? session.promoCode}）`
+                : ""}
+            </span>
+            <span className="checkout-sidebar__promo-value tabular-nums">
+              -{formatIsk(pricing.promoDiscount)}
+            </span>
+          </div>
+        )}
+
         <div className="checkout-sidebar__total-row checkout-sidebar__total-row--grand">
           <span>總計</span>
           <span className="checkout-sidebar__total-value tabular-nums">

@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { CheckoutPromoCode } from "./CheckoutPromoCode";
 import { useEffect, useMemo, useState } from "react";
 import { formatIsk } from "@/lib/trip-pricing/calculate";
 import type { CheckoutSession } from "@/lib/checkout/types";
@@ -339,6 +340,8 @@ type StagePaymentProps = {
   depositRate: number;
   loading: boolean;
   error: string | null;
+  pricingLoading: boolean;
+  promoDiscount: number;
   onChange: (patch: Partial<CheckoutSession>) => void;
   onSubmit: () => void;
 };
@@ -348,6 +351,8 @@ export function CheckoutStagePayment({
   depositRate,
   loading,
   error,
+  pricingLoading,
+  promoDiscount,
   onChange,
   onSubmit,
 }: StagePaymentProps) {
@@ -356,6 +361,17 @@ export function CheckoutStagePayment({
   return (
     <div className="checkout-stage checkout-stage--payment">
       <h2 className="checkout-block__title">付款</h2>
+
+      <div className="checkout-payment-section checkout-payment-section--promo">
+        <CheckoutPromoCode
+          session={session}
+          appliedCode={session.promoCode}
+          promoDiscount={promoDiscount}
+          pricingLoading={pricingLoading}
+          onApply={(code) => onChange({ promoCode: code })}
+          onRemove={() => onChange({ promoCode: "" })}
+        />
+      </div>
 
       <div className="checkout-payment-section">
         <h3 className="checkout-payment-section__title">您打算支付多少？</h3>

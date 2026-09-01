@@ -46,6 +46,7 @@ const getPackageTourPriceCached = unstable_cache(
     infants: number,
     currencyCode: string,
     itemsKey: string,
+    promoCode: string,
   ): Promise<CorivoPackageTourPrice> => {
     const items = JSON.parse(itemsKey) as CorivoPriceItem[];
     return fetchCorivoPackageTourPrice(instanceId, {
@@ -54,6 +55,7 @@ const getPackageTourPriceCached = unstable_cache(
       allTravelers: { adults, children, infants },
       items,
       currencyCode,
+      promoCode,
     });
   },
   ["corivo-package-tour-price"],
@@ -109,6 +111,7 @@ export async function cachedFetchCorivoPackageTourPrice(
     allTravelers: CorivoTravelerCounts;
     items: CorivoPriceItem[];
     currencyCode: string;
+    promoCode?: string;
   },
 ): Promise<CorivoPackageTourPrice> {
   if (useDirectCorivoFetch()) {
@@ -116,6 +119,7 @@ export async function cachedFetchCorivoPackageTourPrice(
   }
   const { packageTourId, date, allTravelers, items, currencyCode } = input;
   const itemsKey = JSON.stringify(items);
+  const promoCode = input.promoCode?.trim() ?? "";
 
   return getPackageTourPriceCached(
     instanceId,
@@ -126,6 +130,7 @@ export async function cachedFetchCorivoPackageTourPrice(
     allTravelers.infants,
     currencyCode,
     itemsKey,
+    promoCode,
   );
 }
 

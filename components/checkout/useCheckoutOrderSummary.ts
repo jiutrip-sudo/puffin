@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import type { PricingConfig, PricingResult } from "@/lib/trip-pricing/types";
 import type { CheckoutSession, CheckoutStepId } from "@/lib/checkout/types";
-import { occupanciesToRoomSlots } from "@/lib/checkout/room-occupancy";
+import { buildCheckoutPricingInput } from "@/lib/checkout/build-pricing-input";
+import type { PricingConfig, PricingResult } from "@/lib/trip-pricing/types";
 import { computeTripEndDate } from "@/lib/trip-date-utils";
 import type { CorivoOptionalExtraDay } from "@/lib/checkout/corivo-optional-extras";
 import {
@@ -43,40 +43,13 @@ export function useCheckoutOrderSummary(
     session.vehicleTier;
   const vehicleGear = gearTypeSuffix(vehicleTier?.gearType);
 
-  const extraPackageItemIds = useMemo(
-    () => session.selectedExtras.map((extra) => extra.packageItemId),
-    [session.selectedExtras],
-  );
-
   const pricingInput = useMemo(
-    () => ({
-      packageId: session.packageId,
-      startDate: session.startDate,
-      adults: session.adults,
-      children: session.children,
-      infants: session.infants,
-      accommodationTier: session.accommodationTier,
-      roomType: "double" as const,
-      vehicleTier: session.vehicleTier,
-      roomSlots: occupanciesToRoomSlots(session.roomOccupancies),
-      extraPackageItemIds:
-        extraPackageItemIds.length > 0 ? extraPackageItemIds : undefined,
-    }),
-    [session, extraPackageItemIds],
+    () => buildCheckoutPricingInput(session),
+    [session],
   );
 
   const pricingInputBase = useMemo(
-    () => ({
-      packageId: session.packageId,
-      startDate: session.startDate,
-      adults: session.adults,
-      children: session.children,
-      infants: session.infants,
-      accommodationTier: session.accommodationTier,
-      roomType: "double" as const,
-      vehicleTier: session.vehicleTier,
-      roomSlots: occupanciesToRoomSlots(session.roomOccupancies),
-    }),
+    () => buildCheckoutPricingInput(session, { includeExtras: false }),
     [session],
   );
 

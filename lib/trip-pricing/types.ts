@@ -49,6 +49,8 @@ export type PricingInput = {
     children: number;
     roomTypeCategory: "TWIN" | "SINGLE" | "TRIPLE" | "DOUBLE";
   }>;
+  /** Corivo 優惠碼 */
+  promoCode?: string;
 };
 
 export type PricingResult = {
@@ -62,6 +64,12 @@ export type PricingResult = {
   travelerCount: number;
   vehicleLabel: string;
   roomTypeLabel: string;
+  /** 已套用的優惠碼 */
+  promoCodeApplied?: string;
+  /** 優惠碼折抵金額（ISK） */
+  promoDiscount?: number;
+  /** 優惠碼無效或無折扣 */
+  promoCodeInvalid?: boolean;
 };
 
 export type AccommodationTier = {

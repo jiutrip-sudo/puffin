@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import type { PricingConfig } from "@/lib/trip-pricing/types";
 import type { CheckoutSession, CheckoutStepId } from "@/lib/checkout/types";
-import { occupanciesToRoomSlots } from "@/lib/checkout/room-occupancy";
+import { buildCheckoutPricingInput } from "@/lib/checkout/build-pricing-input";
 import { fireCheckoutSuccessConfetti } from "@/lib/checkout/fire-checkout-success-confetti";
 import {
   trackCheckoutComplete,
@@ -14,6 +14,7 @@ import {
 import { CheckoutStepper } from "./CheckoutStepper";
 import { CheckoutSidebar } from "./CheckoutSidebar";
 import { CheckoutMobileChrome } from "./CheckoutMobileChrome";
+import { useCheckoutOrderSummary } from "./useCheckoutOrderSummary";
 import { CheckoutStagePackage } from "./CheckoutStagePackage";
 import { CheckoutStageTravelers, type CheckoutStageTravelersHandle } from "./CheckoutStageTravelers";
 import {
@@ -45,6 +46,8 @@ export function CheckoutFlow({
     totalAmount: number | null;
     customerEmailSent: boolean;
   } | null>(null);
+
+  const orderSummary = useCheckoutOrderSummary(pricingConfig, session, step);
 
   const patchSession = (patch: Partial<CheckoutSession>) => {
     setSession((prev) => ({ ...prev, ...patch }));
@@ -95,26 +98,10 @@ export function CheckoutFlow({
     setSubmitError(null);
 
     try {
-      const extraPackageItemIds = session.selectedExtras.map(
-        (extra) => extra.packageItemId,
-      );
-
       const pricingResponse = await fetch("/api/trips/pricing/calculate", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({
-          packageId: session.packageId,
-          startDate: session.startDate,
-          adults: session.adults,
-          children: session.children,
-          infants: session.infants,
-          accommodationTier: session.accommodationTier,
-          roomType: "double",
-          vehicleTier: session.vehicleTier,
-          roomSlots: occupanciesToRoomSlots(session.roomOccupancies),
-          extraPackageItemIds:
-            extraPackageItemIds.length > 0 ? extraPackageItemIds : undefined,
-        }),
+        body: JSON.stringify(buildCheckoutPricingInput(session)),
       });
       const pricingData = (await pricingResponse.json()) as {
         total?: number;
@@ -175,8 +162,7 @@ export function CheckoutFlow({
 
       <div className="checkout-mobile-stack">
         <CheckoutMobileChrome
-          pricingConfig={pricingConfig}
-          session={session}
+          summary={orderSummary}
           step={step}
           submitLoading={submitLoading}
           acceptTerms={session.acceptTerms}
@@ -281,6 +267,8 @@ export function CheckoutFlow({
                 depositRate={pricingConfig.depositRate ?? 0.2}
                 loading={submitLoading}
                 error={submitError}
+                pricingLoading={orderSummary.loading}
+                promoDiscount={orderSummary.pricing?.promoDiscount ?? 0}
                 onChange={patchSession}
                 onSubmit={handleSubmit}
               />
@@ -311,8 +299,7 @@ export function CheckoutFlow({
         </main>
 
         <CheckoutSidebar
-          pricingConfig={pricingConfig}
-          session={session}
+          summary={orderSummary}
           step={step}
           onPrimaryAction={
             step === 1 || step === 2 || step === 3

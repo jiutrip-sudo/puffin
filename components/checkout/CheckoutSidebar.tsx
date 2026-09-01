@@ -1,24 +1,22 @@
 "use client";
 
-import type { PricingConfig } from "@/lib/trip-pricing/types";
-import type { CheckoutSession, CheckoutStepId } from "@/lib/checkout/types";
+import type { CheckoutStepId } from "@/lib/checkout/types";
 import { CheckoutOrderSummaryPanel } from "./CheckoutOrderSummaryPanel";
-import { useCheckoutOrderSummary } from "./useCheckoutOrderSummary";
+import type { useCheckoutOrderSummary } from "./useCheckoutOrderSummary";
+
+type SummaryState = ReturnType<typeof useCheckoutOrderSummary>;
 
 type CheckoutSidebarProps = {
-  pricingConfig: PricingConfig;
-  session: CheckoutSession;
+  summary: SummaryState;
   step?: CheckoutStepId;
   onPrimaryAction?: () => void;
 };
 
 export function CheckoutSidebar({
-  pricingConfig,
-  session,
+  summary,
   step = 1,
   onPrimaryAction,
 }: CheckoutSidebarProps) {
-  const summary = useCheckoutOrderSummary(pricingConfig, session, step);
   const showCta =
     summary.showPrimaryCta && Boolean(onPrimaryAction) && step <= 3;
 
