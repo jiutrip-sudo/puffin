@@ -21,6 +21,9 @@ export type CheckoutConfirmationEmailData = {
   paymentMethodLabel: string;
   payFullAmount: boolean;
   totalAmountFormatted: string;
+  corivoTotalFormatted: string | null;
+  promoCode: string | null;
+  promoDiscountFormatted: string | null;
   amountDueFormatted: string;
   amountDueLabel: string;
   leadTravelerName: string;

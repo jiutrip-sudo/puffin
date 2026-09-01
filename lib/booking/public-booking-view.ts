@@ -47,6 +47,9 @@ export type PublicBookingView = {
   paymentMethodLabel: string;
   payFullAmount: boolean;
   totalAmount: string;
+  corivoTotal: string | null;
+  promoCode: string | null;
+  promoDiscount: string | null;
   amountDue: string;
   amountDueLabel: string;
   leadTravelerName: string;
@@ -84,6 +87,8 @@ export function buildPublicBookingView(record: LocalBookingRecord): PublicBookin
     session.travelers[0];
 
   const amountDueLabel = session.payFullAmount ? "應付全額" : "應付訂金";
+  const promoDiscount = record.pricing.promoDiscount ?? 0;
+  const corivoTotalValue = record.pricing.corivoTotal ?? record.pricing.total;
 
   let paymentInfo: PublicBookingPaymentInfo | null = null;
 
@@ -126,6 +131,13 @@ export function buildPublicBookingView(record: LocalBookingRecord): PublicBookin
     paymentMethodLabel: PAYMENT_METHOD_LABELS[session.paymentMethod],
     payFullAmount: session.payFullAmount,
     totalAmount: formatIsk(record.pricing.total),
+    corivoTotal:
+      promoDiscount > 0 && corivoTotalValue > record.pricing.total
+        ? formatIsk(corivoTotalValue)
+        : null,
+    promoCode: record.pricing.promoCode ?? null,
+    promoDiscount:
+      promoDiscount > 0 ? formatIsk(promoDiscount) : null,
     amountDue: formatIsk(record.pricing.amountDue),
     amountDueLabel,
     leadTravelerName: formatTravelerName(

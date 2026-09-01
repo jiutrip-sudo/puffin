@@ -9,8 +9,10 @@ import {
   hasTravelerFormErrors,
   validateTravelerForms,
 } from "@/lib/checkout/validate-travelers";
-import { resolveCorivoTripPrice } from "@/lib/trip-pricing/pricing-snapshot-read";
+import { resolveTripPrice } from "@/lib/trip-pricing/resolve-trip-price";
 import { getPricingConfig, usesCorivoPricing } from "@/lib/trip-pricing/fetch";
+import { incrementPromoUseCount } from "@/lib/promo/promo-uses";
+import { normalizePromoCode } from "@/lib/promo/registry";
 
 export async function POST(request: Request) {
   try {
@@ -39,12 +41,23 @@ export async function POST(request: Request) {
 
     const corivoConfig = { ...config, corivo: config.corivo };
 
-    const pricing = await resolveCorivoTripPrice(
+    const pricing = await resolveTripPrice(
       corivoConfig,
       buildCheckoutPricingInput(session),
     );
 
+    if (session.promoCode.trim() && pricing.promoCodeInvalid) {
+      return NextResponse.json(
+        { error: "優惠碼無效或不符合使用條件" },
+        { status: 400 },
+      );
+    }
+
     const booking = await createLocalBooking(session, pricing, corivoConfig);
+
+    if (session.promoCode.trim() && pricing.promoDiscount && pricing.promoDiscount > 0) {
+      await incrementPromoUseCount(normalizePromoCode(session.promoCode));
+    }
 
     const emailData = buildCheckoutConfirmationEmailData(
       session,
@@ -53,7 +66,12 @@ export async function POST(request: Request) {
         bookingId: booking.bookingId,
         confirmationCode: booking.confirmationCode,
       },
-      pricing.total,
+      {
+        total: pricing.total,
+        corivoTotal: pricing.corivoTotal,
+        promoCode: booking.record.pricing.promoCode,
+        promoDiscount: booking.record.pricing.promoDiscount,
+      },
     );
 
     const emailResult = await sendCheckoutConfirmationEmails(emailData);

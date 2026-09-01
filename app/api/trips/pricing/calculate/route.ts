@@ -1,6 +1,5 @@
-import { resolveCorivoTripPrice } from "@/lib/trip-pricing/pricing-snapshot-read";
-import { calculateTripPrice } from "@/lib/trip-pricing/calculate";
-import { getPricingConfig, usesCorivoPricing } from "@/lib/trip-pricing/fetch";
+import { resolveTripPrice } from "@/lib/trip-pricing/resolve-trip-price";
+import { getPricingConfig } from "@/lib/trip-pricing/fetch";
 import type { PricingInput } from "@/lib/trip-pricing/types";
 
 export async function POST(request: Request) {
@@ -16,15 +15,7 @@ export async function POST(request: Request) {
       return Response.json({ error: "找不到價格設定" }, { status: 404 });
     }
 
-    if (usesCorivoPricing(config) && config.corivo) {
-      const result = await resolveCorivoTripPrice(
-        { ...config, corivo: config.corivo },
-        body,
-      );
-      return Response.json(result);
-    }
-
-    const result = calculateTripPrice(config, body);
+    const result = await resolveTripPrice(config, body);
     return Response.json(result);
   } catch (error) {
     const message =

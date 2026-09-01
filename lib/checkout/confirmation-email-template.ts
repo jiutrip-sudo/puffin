@@ -147,11 +147,21 @@ function buildOrderSummaryHtml(
 }
 
 function buildPaymentSummaryHtml(data: CheckoutConfirmationEmailData): string {
+  const promoLines =
+    data.promoDiscountFormatted && data.promoCode
+      ? `優惠碼 <strong>${escapeHtml(data.promoCode)}</strong>：-<strong>${escapeHtml(data.promoDiscountFormatted)}</strong><br />`
+      : "";
+  const originalLine = data.corivoTotalFormatted
+    ? `原價：<span style="color:${EMAIL_THEME.textMuted};">${escapeHtml(data.corivoTotalFormatted)}</span><br />`
+    : "";
+
   return `
               <div style="margin:20px 0;padding:16px;border-radius:10px;background:${EMAIL_THEME.surface};border:1px solid ${EMAIL_THEME.surfaceBorder};">
                 <p style="margin:0 0 6px;font-size:13px;color:${EMAIL_THEME.textMuted};">付款方式</p>
                 <p style="margin:0 0 10px;font-size:15px;font-weight:700;color:${EMAIL_THEME.text};">${escapeHtml(data.paymentMethodLabel)}</p>
                 <p style="margin:0;font-size:14px;line-height:1.6;color:${EMAIL_THEME.text};">
+                  ${originalLine}
+                  ${promoLines}
                   套餐總價：<strong>${escapeHtml(data.totalAmountFormatted)}</strong><br />
                   ${escapeHtml(data.amountDueLabel)}：<strong style="color:${EMAIL_THEME.accentStrong};">${escapeHtml(data.amountDueFormatted)}</strong>
                 </p>
@@ -309,6 +319,10 @@ export function buildCustomerConfirmationEmail(
     "",
     "── 付款資訊 ──",
     `付款方式：${data.paymentMethodLabel}`,
+    data.corivoTotalFormatted ? `原價：${data.corivoTotalFormatted}` : null,
+    data.promoDiscountFormatted && data.promoCode
+      ? `優惠碼 ${data.promoCode}：-${data.promoDiscountFormatted}`
+      : null,
     `套餐總價：${data.totalAmountFormatted}`,
     `${data.amountDueLabel}：${data.amountDueFormatted}`,
     "",

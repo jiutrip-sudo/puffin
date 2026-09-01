@@ -11,10 +11,12 @@ export function buildCheckoutPricingInput(
     (extra) => extra.packageItemId,
   );
   const includeExtras = options?.includeExtras ?? true;
-  const promo =
-    options?.promoCode?.trim() ||
-    session.promoCode.trim() ||
-    undefined;
+  let promo: string | undefined;
+  if (options?.promoCode !== undefined) {
+    promo = options.promoCode.trim() || undefined;
+  } else {
+    promo = session.promoCode.trim() || undefined;
+  }
 
   return {
     packageId: session.packageId,

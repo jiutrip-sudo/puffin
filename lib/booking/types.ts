@@ -15,7 +15,11 @@ export type LocalBookingStatus =
   | "cancelled";
 
 export type LocalBookingPricing = {
+  /** Corivo 原價（折前） */
+  corivoTotal?: number;
   total: number;
+  promoCode?: string | null;
+  promoDiscount?: number;
   deposit: number;
   amountDue: number;
   currency: string;

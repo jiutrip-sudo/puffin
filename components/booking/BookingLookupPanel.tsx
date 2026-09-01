@@ -168,6 +168,18 @@ export function BookingLookupPanel({
               <dt>付款方式</dt>
               <dd>{booking.paymentMethodLabel}</dd>
             </div>
+            {booking.corivoTotal && (
+              <div>
+                <dt>原價</dt>
+                <dd className="tabular-nums">{booking.corivoTotal}</dd>
+              </div>
+            )}
+            {booking.promoCode && booking.promoDiscount && (
+              <div>
+                <dt>優惠碼（{booking.promoCode}）</dt>
+                <dd className="tabular-nums">-{booking.promoDiscount}</dd>
+              </div>
+            )}
             <div>
               <dt>訂單總額</dt>
               <dd className="tabular-nums">{booking.totalAmount}</dd>

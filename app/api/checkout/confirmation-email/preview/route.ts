@@ -9,8 +9,9 @@ import {
   parsePreviewPayFullAmount,
   parsePreviewPaymentMethod,
 } from "@/lib/checkout/preview-email-session";
+import { buildCheckoutPricingInput } from "@/lib/checkout/build-pricing-input";
 import type { CheckoutSession } from "@/lib/checkout/types";
-import { calculateCorivoTripPrice } from "@/lib/trip-pricing/corivo-calculate";
+import { resolveTripPrice } from "@/lib/trip-pricing/resolve-trip-price";
 import { getPricingConfig, usesCorivoPricing } from "@/lib/trip-pricing/fetch";
 
 type PreviewRequest = CheckoutSession & {
@@ -33,25 +34,25 @@ async function buildPreviewPayload(
   }
 
   const corivoConfig = { ...config, corivo: config.corivo };
-  const extraPackageItemIds = session.selectedExtras.map(
-    (extra) => extra.packageItemId,
-  );
 
-  let total = PREVIEW_FALLBACK_TOTAL_ISK;
+  let pricing = {
+    total: PREVIEW_FALLBACK_TOTAL_ISK,
+    corivoTotal: PREVIEW_FALLBACK_TOTAL_ISK,
+    promoCode: session.promoCode.trim() || null,
+    promoDiscount: 0,
+  };
+
   try {
-    const pricing = await calculateCorivoTripPrice(corivoConfig, {
-      packageId: session.packageId,
-      startDate: session.startDate,
-      adults: session.adults,
-      children: session.children,
-      infants: session.infants,
-      accommodationTier: session.accommodationTier,
-      roomType: "double",
-      vehicleTier: session.vehicleTier,
-      extraPackageItemIds:
-        extraPackageItemIds.length > 0 ? extraPackageItemIds : undefined,
-    });
-    total = pricing.total;
+    const resolved = await resolveTripPrice(
+      corivoConfig,
+      buildCheckoutPricingInput(session),
+    );
+    pricing = {
+      total: resolved.total,
+      corivoTotal: resolved.corivoTotal ?? resolved.total,
+      promoCode: session.promoCode.trim() || null,
+      promoDiscount: resolved.promoDiscount ?? 0,
+    };
   } catch {
     // 預覽模式：計價失敗時用示範金額，仍可檢視 HTML 版型
   }
@@ -60,7 +61,7 @@ async function buildPreviewPayload(
     session,
     corivoConfig,
     booking,
-    total,
+    pricing,
   );
 
   return {

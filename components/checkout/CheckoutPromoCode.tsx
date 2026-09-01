@@ -1,9 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { buildCheckoutPricingInput } from "@/lib/checkout/build-pricing-input";
 import type { CheckoutSession } from "@/lib/checkout/types";
-import type { PricingResult } from "@/lib/trip-pricing/types";
 import { formatIsk } from "@/lib/trip-pricing/calculate";
 
 type CheckoutPromoCodeProps = {
@@ -15,20 +13,12 @@ type CheckoutPromoCodeProps = {
   onRemove: () => void;
 };
 
-async function fetchPricing(
-  input: ReturnType<typeof buildCheckoutPricingInput>,
-): Promise<PricingResult> {
-  const response = await fetch("/api/trips/pricing/calculate", {
-    method: "POST",
-    headers: { "content-type": "application/json" },
-    body: JSON.stringify(input),
-  });
-  const data = (await response.json()) as PricingResult & { error?: string };
-  if (!response.ok) {
-    throw new Error(data.error ?? "計價失敗");
-  }
-  return data;
-}
+type ValidateResponse = {
+  valid?: boolean;
+  error?: string;
+  code?: string;
+  discount?: number;
+};
 
 export function CheckoutPromoCode({
   session,
@@ -59,27 +49,20 @@ export function CheckoutPromoCode({
     setError(null);
 
     try {
-      const baseInput = buildCheckoutPricingInput(session);
-      const withPromo = await fetchPricing({
-        ...baseInput,
-        promoCode: code,
+      const response = await fetch("/api/checkout/promo/validate", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ code, session }),
       });
-      const withoutPromo = await fetchPricing({
-        ...baseInput,
-        promoCode: undefined,
-      });
+      const data = (await response.json()) as ValidateResponse;
 
-      const discount = Math.max(0, withoutPromo.total - withPromo.total);
-      const invalid =
-        withPromo.promoCodeInvalid === true || discount === 0;
-
-      if (invalid) {
-        setError("優惠碼無效或不符合使用條件");
+      if (!response.ok || !data.valid) {
+        setError(data.error ?? "優惠碼無效或不符合使用條件");
         if (appliedCode) onRemove();
         return;
       }
 
-      onApply(code);
+      onApply(data.code ?? code);
     } catch (err) {
       setError(
         err instanceof Error ? err.message : "無法驗證優惠碼，請稍後再試",

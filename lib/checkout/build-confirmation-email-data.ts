@@ -35,7 +35,12 @@ export function buildCheckoutConfirmationEmailData(
     bookingId: string;
     confirmationCode: string | null;
   },
-  totalAmount: number,
+  pricing: {
+    total: number;
+    corivoTotal?: number;
+    promoCode?: string | null;
+    promoDiscount?: number;
+  },
 ): CheckoutConfirmationEmailData {
   const tripDays = config.tripDurationDays ?? 1;
   const endDate = session.startDate
@@ -51,10 +56,14 @@ export function buildCheckoutConfirmationEmailData(
     vehicleTier?.label.split("|")[0]?.trim() ?? session.vehicleTier;
 
   const depositRate = config.depositRate ?? 0.2;
+  const totalAmount = pricing.total;
   const amountDue = session.payFullAmount
     ? totalAmount
     : Math.round(totalAmount * depositRate);
   const amountDueLabel = session.payFullAmount ? "應付全額" : "應付訂金";
+  const corivoTotal = pricing.corivoTotal ?? totalAmount;
+  const promoDiscount = pricing.promoDiscount ?? 0;
+  const promoCode = pricing.promoCode?.trim() || null;
 
   const lead =
     session.travelers.find((traveler) => traveler.type === "ADULT") ??
@@ -84,6 +93,13 @@ export function buildCheckoutConfirmationEmailData(
     paymentMethodLabel: PAYMENT_METHOD_LABELS[session.paymentMethod],
     payFullAmount: session.payFullAmount,
     totalAmountFormatted: formatIsk(totalAmount),
+    corivoTotalFormatted:
+      promoDiscount > 0 && corivoTotal > totalAmount
+        ? formatIsk(corivoTotal)
+        : null,
+    promoCode,
+    promoDiscountFormatted:
+      promoDiscount > 0 ? formatIsk(promoDiscount) : null,
     amountDueFormatted: formatIsk(amountDue),
     amountDueLabel,
     leadTravelerName: formatTravelerName(

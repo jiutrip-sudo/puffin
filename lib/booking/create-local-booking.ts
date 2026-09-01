@@ -26,6 +26,10 @@ export async function createLocalBooking(
     ? pricing.total
     : Math.round(pricing.total * depositRate);
 
+  const promoCode = session.promoCode.trim() || null;
+  const promoDiscount = pricing.promoDiscount ?? 0;
+  const corivoTotal = pricing.corivoTotal ?? pricing.total;
+
   const record: LocalBookingRecord = {
     id: randomUUID(),
     confirmationCode: generateConfirmationCode(),
@@ -34,7 +38,10 @@ export async function createLocalBooking(
     packageId: session.packageId,
     session,
     pricing: {
+      corivoTotal,
       total: pricing.total,
+      promoCode,
+      promoDiscount: promoDiscount > 0 ? promoDiscount : undefined,
       deposit: pricing.deposit,
       amountDue,
       currency: pricing.currency,
