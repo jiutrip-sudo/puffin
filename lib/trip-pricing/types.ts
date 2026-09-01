@@ -64,6 +64,8 @@ export type PricingResult = {
   travelerCount: number;
   vehicleLabel: string;
   roomTypeLabel: string;
+  /** Corivo 原價（折前）；有優惠碼時與 total 不同 */
+  corivoTotal?: number;
   /** 已套用的優惠碼 */
   promoCodeApplied?: string;
   /** 優惠碼折抵金額（ISK） */

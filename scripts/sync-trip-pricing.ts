@@ -25,6 +25,7 @@ function loadEnvLocal() {
 }
 
 loadEnvLocal();
+process.env.SYNC_PRICING_CLI = "1";
 
 async function main() {
   const hasKv =

@@ -90,6 +90,7 @@ export type TripPackage = {
   highlights: string[];
   attractions: TripAttraction[];
   routeStops: RouteStop[];
+  routeOverviewSubtitle?: string;
   routeMap?: RouteMapConfig;
   itinerary: ItineraryDay[];
   inclusions: { included: string[]; excluded: string[] };

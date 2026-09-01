@@ -62,7 +62,6 @@ export function calculateTripPrice(
 
   const total = subtotal + singleSupplement + vehicleAddon;
   const deposit = Math.round(total * config.depositRate);
-  const promoCode = input.promoCode?.trim();
 
   return {
     perPersonDouble,
@@ -75,13 +74,6 @@ export function calculateTripPrice(
     travelerCount: adultCount + childCount + infantCount,
     vehicleLabel: vehicle.label,
     roomTypeLabel: needsSingleSupplement ? "單人房" : "雙人房",
-    ...(promoCode
-      ? {
-          promoCodeApplied: promoCode,
-          promoDiscount: 0,
-          promoCodeInvalid: true,
-        }
-      : {}),
   };
 }
 

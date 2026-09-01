@@ -87,6 +87,32 @@ export const ICELAND_SELF_DRIVE_WINTER_DAY_OPTIONS: TripOption[] = Array.from(
   },
 );
 
+/** 需先選環島路線的冬季自駕天數 */
+export const ICELAND_SELF_DRIVE_WINTER_ROUTE_PICKER_DAY_IDS = new Set([
+  "8",
+  "9",
+  "10",
+]);
+
+export const ICELAND_SELF_DRIVE_WINTER_ROUTE_IDS = new Set(["ring", "non-ring"]);
+
+export function getIcelandSelfDriveWinterRouteOptions(
+  duration: string,
+): TripOption[] {
+  return [
+    {
+      id: "ring",
+      label: "環島",
+      href: `/trips/iceland/self-drive/winter/${duration}/ring`,
+    },
+    {
+      id: "non-ring",
+      label: "非環島",
+      href: `/trips/iceland/self-drive/winter/${duration}/non-ring`,
+    },
+  ];
+}
+
 export const ICELAND_SELF_DRIVE_SEASON_DAY_IDS: Record<string, Set<string>> = {
   summer: new Set(ICELAND_SELF_DRIVE_SUMMER_DAY_OPTIONS.map((option) => option.id)),
   winter: new Set(ICELAND_SELF_DRIVE_WINTER_DAY_OPTIONS.map((option) => option.id)),
@@ -130,8 +156,11 @@ export const COMING_SOON_TRIPS = new Set([
     (option) => `iceland/self-drive/summer/${option.id}`,
   ),
   ...ICELAND_SELF_DRIVE_WINTER_DAY_OPTIONS.filter(
-    (option) => option.id !== "4",
+    (option) => option.id !== "4" && option.id !== "5" && option.id !== "6" && option.id !== "7" && option.id !== "8" && option.id !== "9" && option.id !== "10" && option.id !== "11" && option.id !== "12",
   ).map((option) => `iceland/self-drive/winter/${option.id}`),
+  ...[...ICELAND_SELF_DRIVE_WINTER_ROUTE_PICKER_DAY_IDS]
+    .filter((day) => day !== "8" && day !== "9")
+    .map((day) => `iceland/self-drive/winter/${day}/non-ring`),
 ]);
 
 export type PlaceholderTrip = {

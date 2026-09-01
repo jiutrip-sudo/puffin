@@ -53,7 +53,7 @@ export async function resolveCorivoTripPrice(
   config: CorivoPricingConfig,
   input: PricingInput,
 ): Promise<PricingResult> {
-  if (input.extraPackageItemIds?.length || input.promoCode?.trim()) {
+  if (input.extraPackageItemIds?.length) {
     return calculateCorivoTripPrice(config, input);
   }
 

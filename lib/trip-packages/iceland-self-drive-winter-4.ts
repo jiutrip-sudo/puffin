@@ -483,10 +483,10 @@ export const icelandSelfDriveWinter4: TripPackage = {
     {
       tripKey: "iceland/self-drive/winter/8",
       title: "8 天 7 夜冰島冬季精選自駕",
-      tourCode: "SLMSD-084",
+      tourCode: "SLMSD-082",
       durationLabel: "8 天／7 夜",
       description:
-        "沿一號公路遊覽黃金圈、南岸風光、黑沙灘、冰河湖、鑽石沙灘與斯奈山半島。",
+        "沿一號公路環島，遊覽黃金圈、南岸、冰河湖、東部峽灣、米湖與西部白銀圈。",
     },
   ],
 };

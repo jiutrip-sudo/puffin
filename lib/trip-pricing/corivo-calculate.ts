@@ -72,45 +72,21 @@ export async function calculateCorivoTripPrice(
     input.roomSlots,
   );
 
-  const promoCode = input.promoCode?.trim() ?? "";
-
-  const priceInput = {
-    packageTourId: corivo.packageTourId,
-    date: input.startDate,
-    allTravelers: travelers,
-    items,
-    currencyCode: config.currency,
-    promoCode,
-  };
-
-  const basePriceInput = {
-    packageTourId: corivo.packageTourId,
-    date: input.startDate,
-    allTravelers: travelers,
-    items: baseItems,
-    currencyCode: config.currency,
-    promoCode: "",
-  };
-
-  const fetches: [
-    Promise<Awaited<ReturnType<typeof cachedFetchCorivoPackageTourPrice>>>,
-    Promise<Awaited<ReturnType<typeof cachedFetchCorivoPackageTourPrice>>>,
-    Promise<Awaited<ReturnType<typeof cachedFetchCorivoPackageTourPrice>>> | null,
-  ] = [
-    cachedFetchCorivoPackageTourPrice(corivo.instanceId, priceInput),
-    cachedFetchCorivoPackageTourPrice(corivo.instanceId, basePriceInput),
-    promoCode
-      ? cachedFetchCorivoPackageTourPrice(corivo.instanceId, {
-          ...priceInput,
-          promoCode: "",
-        })
-      : null,
-  ];
-
-  const [price, basePrice, priceNoPromo] = await Promise.all([
-    fetches[0],
-    fetches[1],
-    fetches[2] ?? Promise.resolve(null),
+  const [price, basePrice] = await Promise.all([
+    cachedFetchCorivoPackageTourPrice(corivo.instanceId, {
+      packageTourId: corivo.packageTourId,
+      date: input.startDate,
+      allTravelers: travelers,
+      items,
+      currencyCode: config.currency,
+    }),
+    cachedFetchCorivoPackageTourPrice(corivo.instanceId, {
+      packageTourId: corivo.packageTourId,
+      date: input.startDate,
+      allTravelers: travelers,
+      items: baseItems,
+      currencyCode: config.currency,
+    }),
   ]);
 
   const total = price.totalPriceInCurrency ?? price.totalPrice;
@@ -120,16 +96,6 @@ export async function calculateCorivoTripPrice(
     config.vehicleTiers[0];
 
   const deposit = Math.round(total * config.depositRate);
-
-  let promoDiscount = 0;
-  let promoCodeInvalid = false;
-
-  if (promoCode && priceNoPromo) {
-    const totalNoPromo =
-      priceNoPromo.totalPriceInCurrency ?? priceNoPromo.totalPrice;
-    promoDiscount = Math.max(0, totalNoPromo - total);
-    promoCodeInvalid = promoDiscount === 0;
-  }
 
   return {
     perPersonDouble: getPricePerPerson(total, travelers),
@@ -142,12 +108,5 @@ export async function calculateCorivoTripPrice(
     travelerCount: travelers.adults + travelers.children + travelers.infants,
     vehicleLabel: vehicleTier.label,
     roomTypeLabel: getRoomTypeLabel(travelers, input.roomSlots),
-    ...(promoCode
-      ? {
-          promoCodeApplied: promoCode,
-          promoDiscount,
-          promoCodeInvalid,
-        }
-      : {}),
   };
 }

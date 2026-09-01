@@ -146,7 +146,7 @@ function TripPackageMainContent({
             <SectionHeading
               id="route"
               title="路線概覽"
-              subtitle="南岸冬季自駕主要動線"
+              subtitle={pkg.routeOverviewSubtitle ?? "冬季自駕主要動線"}
             />
             <TripRouteOverview stops={pkg.routeStops} routeMap={pkg.routeMap} />
           </section>
