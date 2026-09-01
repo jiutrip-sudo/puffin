@@ -8,6 +8,7 @@ import { icelandSelfDriveWinter8NonRing } from "./iceland-self-drive-winter-8-no
 import { icelandSelfDriveWinter9 } from "./iceland-self-drive-winter-9";
 import { icelandSelfDriveWinter9NonRing } from "./iceland-self-drive-winter-9-non-ring";
 import { icelandSelfDriveWinter10 } from "./iceland-self-drive-winter-10";
+import { icelandSelfDriveWinter10NonRing } from "./iceland-self-drive-winter-10-non-ring";
 import { icelandSelfDriveWinter11 } from "./iceland-self-drive-winter-11";
 import { icelandSelfDriveWinter12 } from "./iceland-self-drive-winter-12";
 
@@ -21,6 +22,7 @@ const PACKAGES: Record<string, TripPackage> = {
   [icelandSelfDriveWinter9.tripKey]: icelandSelfDriveWinter9,
   [icelandSelfDriveWinter9NonRing.tripKey]: icelandSelfDriveWinter9NonRing,
   [icelandSelfDriveWinter10.tripKey]: icelandSelfDriveWinter10,
+  [icelandSelfDriveWinter10NonRing.tripKey]: icelandSelfDriveWinter10NonRing,
   [icelandSelfDriveWinter11.tripKey]: icelandSelfDriveWinter11,
   [icelandSelfDriveWinter12.tripKey]: icelandSelfDriveWinter12,
 };

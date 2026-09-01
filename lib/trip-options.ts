@@ -159,7 +159,7 @@ export const COMING_SOON_TRIPS = new Set([
     (option) => option.id !== "4" && option.id !== "5" && option.id !== "6" && option.id !== "7" && option.id !== "8" && option.id !== "9" && option.id !== "10" && option.id !== "11" && option.id !== "12",
   ).map((option) => `iceland/self-drive/winter/${option.id}`),
   ...[...ICELAND_SELF_DRIVE_WINTER_ROUTE_PICKER_DAY_IDS]
-    .filter((day) => day !== "8" && day !== "9")
+    .filter((day) => day !== "8" && day !== "9" && day !== "10")
     .map((day) => `iceland/self-drive/winter/${day}/non-ring`),
 ]);
 

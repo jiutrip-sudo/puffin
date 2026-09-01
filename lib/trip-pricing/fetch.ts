@@ -8,6 +8,7 @@ import { icelandSelfDriveWinter8NonRingPricing } from "./iceland-self-drive-wint
 import { icelandSelfDriveWinter9Pricing } from "./iceland-self-drive-winter-9";
 import { icelandSelfDriveWinter9NonRingPricing } from "./iceland-self-drive-winter-9-non-ring";
 import { icelandSelfDriveWinter10Pricing } from "./iceland-self-drive-winter-10";
+import { icelandSelfDriveWinter10NonRingPricing } from "./iceland-self-drive-winter-10-non-ring";
 import { icelandSelfDriveWinter11Pricing } from "./iceland-self-drive-winter-11";
 import { icelandSelfDriveWinter12Pricing } from "./iceland-self-drive-winter-12";
 
@@ -21,6 +22,7 @@ const CONFIGS: Record<string, PricingConfig> = {
   [icelandSelfDriveWinter9Pricing.packageId]: icelandSelfDriveWinter9Pricing,
   [icelandSelfDriveWinter9NonRingPricing.packageId]: icelandSelfDriveWinter9NonRingPricing,
   [icelandSelfDriveWinter10Pricing.packageId]: icelandSelfDriveWinter10Pricing,
+  [icelandSelfDriveWinter10NonRingPricing.packageId]: icelandSelfDriveWinter10NonRingPricing,
   [icelandSelfDriveWinter11Pricing.packageId]: icelandSelfDriveWinter11Pricing,
   [icelandSelfDriveWinter12Pricing.packageId]: icelandSelfDriveWinter12Pricing,
 };
