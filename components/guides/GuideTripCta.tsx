@@ -6,14 +6,25 @@ import { useSiteLocale } from "@/components/SiteLocaleProvider";
 import { localePath } from "@/lib/i18n/paths";
 import { localizeText } from "@/lib/i18n/localize";
 
-const FEATURED_TRIP_HREF = "/trips/iceland/self-drive/winter/4";
-const FEATURED_TRIP_TITLE = "4 天 3 夜冰島南岸冬季自駕遊";
+const DEFAULT_TRIP = {
+  href: "/trips/iceland/self-drive/winter/4",
+  title: "4 天 3 夜冰島南岸冬季自駕遊",
+  blurb: "冰川健行與南岸精華，含住宿、租車與 20% 訂金即可預訂。",
+};
 
 type GuideTripCtaProps = {
   className?: string;
+  tripHref?: string;
+  tripTitle?: string;
+  tripBlurb?: string;
 };
 
-export function GuideTripCta({ className = "" }: GuideTripCtaProps) {
+export function GuideTripCta({
+  className = "",
+  tripHref = DEFAULT_TRIP.href,
+  tripTitle = DEFAULT_TRIP.title,
+  tripBlurb = DEFAULT_TRIP.blurb,
+}: GuideTripCtaProps) {
   const locale = useSiteLocale();
 
   return (
@@ -24,17 +35,14 @@ export function GuideTripCta({ className = "" }: GuideTripCtaProps) {
         {localizeText("推薦行程", locale)}
       </p>
       <h2 className="mt-1 text-lg font-bold text-foreground md:text-xl">
-        {localizeText(FEATURED_TRIP_TITLE, locale)}
+        {localizeText(tripTitle, locale)}
       </h2>
       <p className="mt-2 text-sm leading-relaxed text-foreground/70">
-        {localizeText(
-          "冰川徒步與南岸精華，含住宿、租車與 20% 訂金即可預訂。",
-          locale,
-        )}
+        {localizeText(tripBlurb, locale)}
       </p>
       <div className="mt-4 flex flex-wrap gap-3">
         <Link
-          href={localePath(FEATURED_TRIP_HREF, locale)}
+          href={localePath(tripHref, locale)}
           className="guide-trip-cta__primary"
         >
           {localizeText("查看行程與費用", locale)}

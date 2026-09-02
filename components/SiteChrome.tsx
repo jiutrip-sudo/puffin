@@ -16,6 +16,10 @@ function pathHasBuiltInHeader(pathname: string): boolean {
     return true;
   }
 
+  if (path === "/guides" || path.startsWith("/guides/")) {
+    return true;
+  }
+
   if (path.startsWith("/admin")) {
     return true;
   }

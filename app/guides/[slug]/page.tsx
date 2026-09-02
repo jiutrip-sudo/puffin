@@ -1,13 +1,15 @@
-import { LocaleLink } from "@/components/LocaleLink";
 import { notFound } from "next/navigation";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 import { getAllGuideSlugs, getGuideBySlug } from "@/lib/guides/registry";
-import { GuideTripCta } from "@/components/guides/GuideTripCta";
+import { GuideArticleContent } from "@/components/guides/GuideArticleContent";
+import { GuideArticleShell } from "@/components/guides/GuideArticleShell";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { absoluteUrl } from "@/lib/site-url";
+import { COMPANY_INFO } from "@/lib/company-info";
 import { getRequestLocale } from "@/lib/i18n/server";
 import { localizeDeep, localizeText } from "@/lib/i18n/localize";
 import { localePath } from "@/lib/i18n/paths";
+import { t } from "@/lib/i18n/messages";
 
 type GuidePageProps = {
   params: Promise<{ slug: string }>;
@@ -37,6 +39,9 @@ export async function generateMetadata({ params }: GuidePageProps) {
     description: localized.description,
     path: `/guides/${slug}`,
     locale,
+    ogImage: localized.coverImage.startsWith("http")
+      ? localized.coverImage
+      : absoluteUrl(localized.coverImage),
   });
 }
 
@@ -57,52 +62,22 @@ export default async function GuideArticlePage({ params }: GuidePageProps) {
     "@type": "Article",
     headline: localized.title,
     description: localized.description,
+    image: localized.coverImage,
     datePublished: localized.publishedAt,
     author: {
       "@type": "Organization",
-      name: "大樂旅行社股份有限公司",
+      name: COMPANY_INFO.name,
     },
     mainEntityOfPage: pageUrl,
   };
 
   return (
-    <article className="guides-page">
-      <div className="guides-page__inner guides-article">
-        <JsonLd data={jsonLd} />
-        <header className="guides-article__header">
-          <p className="guides-article__eyebrow">
-            <LocaleLink href="/guides" locale={locale}>
-              {localizeText("攻略", locale)}
-            </LocaleLink>
-            <span aria-hidden="true"> · </span>
-            {localizeText("冰島自駕", locale)}
-          </p>
-          <h1 className="guides-article__title">{localized.title}</h1>
-          <p className="guides-article__lead">{localized.description}</p>
-        </header>
-
-        <div className="guides-article__body">
-          {localized.sections.map((section) => (
-            <section key={section.heading} className="guides-article__section">
-              <h2 className="guides-article__heading">{section.heading}</h2>
-              {section.paragraphs.map((paragraph) => (
-                <p key={paragraph} className="guides-article__paragraph">
-                  {paragraph}
-                </p>
-              ))}
-              {section.bullets && section.bullets.length > 0 && (
-                <ul className="guides-article__bullets">
-                  {section.bullets.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-              )}
-            </section>
-          ))}
-        </div>
-
-        <GuideTripCta className="mt-10" />
-      </div>
-    </article>
+    <GuideArticleShell
+      activeLabel={t("nav.guides", locale)}
+      coverImage={localized.coverImage}
+    >
+      <JsonLd data={jsonLd} />
+      <GuideArticleContent article={localized} locale={locale} />
+    </GuideArticleShell>
   );
 }

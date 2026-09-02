@@ -4510,64 +4510,178 @@ html[data-theme="dark"] .hero-bg-dark {
 
 /* ── Guides & trip inline CTA ── */
 
-.guides-page {
+.guides-index {
   flex: 1;
-  padding: 2rem 1rem 3rem;
 }
 
-.guides-page__inner {
+.guides-index__hero {
+  position: relative;
+  display: flex;
+  min-height: min(46vh, 22rem);
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.guides-index__backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.guides-index__backdrop .hero-bg-stack,
+.guides-index__backdrop .hero-pop-layer {
+  position: absolute;
+  inset: 0;
+}
+
+.guides-index__backdrop-fade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgb(0 0 0 / 10%) 0%,
+    rgb(0 0 0 / 42%) 72%,
+    var(--hero-fade-end) 100%
+  );
+}
+
+.guides-index__intro {
+  position: relative;
+  z-index: 1;
   margin: 0 auto;
+  width: 100%;
   max-width: 42rem;
+  padding: calc(env(safe-area-inset-top) + 4.5rem) 1rem 2rem;
+  text-align: center;
 }
 
-.guides-page__header {
-  margin-bottom: 2rem;
+.guides-index__eyebrow {
+  margin-bottom: 0.65rem;
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  color: rgb(255 255 255 / 78%);
 }
 
-.guides-page__title {
-  font-size: 1.75rem;
+.guides-index__title {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
   font-weight: 800;
-  line-height: 1.25;
+  line-height: 1.15;
+  color: #fff;
 }
 
-.guides-page__desc {
-  margin-top: 0.75rem;
+.guides-index__desc {
+  margin: 0.85rem auto 0;
+  max-width: 34rem;
   font-size: 0.9375rem;
   line-height: 1.65;
-  color: color-mix(in srgb, var(--foreground) 70%, transparent);
+  color: rgb(255 255 255 / 90%);
+}
+
+.guides-index__body {
+  position: relative;
+  z-index: 1;
+  margin-top: -1rem;
+  border-radius: 1.25rem 1.25rem 0 0;
+  background: var(--background);
+  padding: 1.75rem 0 3rem;
+  box-shadow: 0 -12px 40px rgb(0 0 0 / 8%);
+}
+
+.guides-index__body-inner {
+  margin: 0 auto;
+  max-width: 48rem;
+  padding: 0 1rem;
 }
 
 .guides-index-list {
   list-style: none;
   margin: 0;
   padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  display: grid;
+  gap: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .guides-index-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 .guides-index-card {
-  display: block;
-  padding: 1.25rem 1.35rem;
-  border-radius: 0.75rem;
-  border: 1px solid color-mix(in srgb, var(--foreground) 10%, transparent);
-  background: color-mix(in srgb, var(--primary-surface) 25%, var(--background));
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 1rem;
+  border: 1px solid color-mix(in srgb, var(--foreground) 8%, transparent);
+  background: color-mix(in srgb, var(--background) 96%, var(--foreground));
+  text-decoration: none;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease,
+    transform 0.15s ease;
 }
 
 .guides-index-card:hover {
-  border-color: color-mix(in srgb, var(--primary-dark) 35%, transparent);
-  box-shadow: 0 4px 16px color-mix(in srgb, var(--foreground) 6%, transparent);
+  border-color: color-mix(in srgb, var(--primary-dark) 28%, transparent);
+  box-shadow: 0 10px 28px color-mix(in srgb, var(--foreground) 8%, transparent);
+  transform: translateY(-2px);
+}
+
+.guides-index-card__media {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--foreground) 6%, var(--background));
+}
+
+.guides-index-card__image {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  transition: transform 0.25s ease;
+}
+
+.guides-index-card:hover .guides-index-card__image {
+  transform: scale(1.03);
+}
+
+.guides-index-card__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 1rem 1.1rem 1.15rem;
+}
+
+.guides-index-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: color-mix(in srgb, var(--foreground) 52%, transparent);
+}
+
+.guides-index-card__category {
+  color: var(--primary-dark);
 }
 
 .guides-index-card__title {
+  margin-top: 0.55rem;
   font-size: 1.0625rem;
   font-weight: 700;
   line-height: 1.35;
+  color: var(--foreground);
 }
 
 .guides-index-card__desc {
-  margin-top: 0.5rem;
+  margin-top: 0.45rem;
+  flex: 1;
   font-size: 0.875rem;
   line-height: 1.6;
   color: color-mix(in srgb, var(--foreground) 68%, transparent);
@@ -4575,14 +4689,109 @@ html[data-theme="dark"] .hero-bg-dark {
 
 .guides-index-card__link {
   display: inline-block;
-  margin-top: 0.75rem;
+  margin-top: 0.85rem;
   font-size: 0.8125rem;
   font-weight: 600;
   color: var(--primary-dark);
 }
 
+.guides-article-page {
+  flex: 1;
+  background: var(--background);
+}
+
+.guides-article-page__hero {
+  position: relative;
+  height: clamp(14rem, 34vw, 18rem);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.guides-article-page__cover {
+  object-fit: cover;
+  object-position: center;
+}
+
+.guides-article-page__hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgb(0 0 0 / 18%) 0%,
+    rgb(0 0 0 / 52%) 100%
+  );
+}
+
+.guides-article-page__surface {
+  margin-top: -1rem;
+  border-radius: 1.25rem 1.25rem 0 0;
+  background: var(--background);
+  box-shadow: 0 -10px 36px rgb(0 0 0 / 8%);
+}
+
+.guides-article-page__layout {
+  margin: 0 auto;
+  max-width: 72rem;
+  padding: 1.75rem 1rem 3rem;
+}
+
+@media (min-width: 1024px) {
+  .guides-article-page__layout {
+    display: grid;
+    grid-template-columns: 11rem minmax(0, 42rem);
+    justify-content: center;
+    gap: 2.5rem;
+    padding-top: 2.25rem;
+  }
+}
+
+.guides-article-page__toc {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .guides-article-page__toc {
+    display: block;
+    position: sticky;
+    top: 1.5rem;
+    align-self: start;
+  }
+}
+
+.guides-article-page__toc-label {
+  margin-bottom: 0.65rem;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--foreground) 48%, transparent);
+}
+
+.guides-article-page__toc-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.guides-article-page__toc-list a {
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: color-mix(in srgb, var(--foreground) 68%, transparent);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.guides-article-page__toc-list a:hover {
+  color: var(--primary-dark);
+}
+
 .guides-article__header {
   margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--foreground) 8%, transparent);
 }
 
 .guides-article__eyebrow {
@@ -4599,16 +4808,28 @@ html[data-theme="dark"] .hero-bg-dark {
 
 .guides-article__title {
   margin-top: 0.5rem;
-  font-size: 1.75rem;
+  font-size: clamp(1.75rem, 4vw, 2.25rem);
   font-weight: 800;
-  line-height: 1.25;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
 }
 
 .guides-article__lead {
-  margin-top: 0.85rem;
-  font-size: 0.9375rem;
-  line-height: 1.65;
+  margin-top: 0.9rem;
+  font-size: 1.0625rem;
+  line-height: 1.7;
   color: color-mix(in srgb, var(--foreground) 72%, transparent);
+}
+
+.guides-article__meta {
+  margin-top: 1rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: color-mix(in srgb, var(--foreground) 52%, transparent);
+}
+
+.guides-article__section {
+  scroll-margin-top: 5.5rem;
 }
 
 .guides-article__section + .guides-article__section {
@@ -4616,24 +4837,28 @@ html[data-theme="dark"] .hero-bg-dark {
 }
 
 .guides-article__heading {
-  font-size: 1.125rem;
+  font-size: 1.1875rem;
   font-weight: 700;
   line-height: 1.35;
 }
 
 .guides-article__paragraph {
-  margin-top: 0.65rem;
-  font-size: 0.9375rem;
-  line-height: 1.7;
-  color: color-mix(in srgb, var(--foreground) 82%, transparent);
+  margin-top: 0.75rem;
+  font-size: 1rem;
+  line-height: 1.75;
+  color: color-mix(in srgb, var(--foreground) 84%, transparent);
 }
 
 .guides-article__bullets {
-  margin: 0.65rem 0 0;
+  margin: 0.75rem 0 0;
   padding-left: 1.25rem;
-  font-size: 0.9375rem;
-  line-height: 1.65;
-  color: color-mix(in srgb, var(--foreground) 78%, transparent);
+  font-size: 1rem;
+  line-height: 1.7;
+  color: color-mix(in srgb, var(--foreground) 80%, transparent);
+}
+
+.guides-article__bullets li + li {
+  margin-top: 0.35rem;
 }
 
 .guide-trip-cta__primary {
