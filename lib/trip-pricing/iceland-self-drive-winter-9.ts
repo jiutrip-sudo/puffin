@@ -17,7 +17,7 @@ export const icelandSelfDriveWinter9Pricing: PricingConfig = {
   minAdults: 1,
   maxTravelers: 9,
   maxInfants: 2,
-  bookingDateRange: { min: "2026-11-01", max: "2027-03-31" },
+  bookingDateRange: { min: "2026-10-16", max: "2027-03-31" },
   tripDurationDays: 9,
   accommodationIntro:
     "在大樂旅行社的套餐中，住宿包含經濟型、舒適型、品質型，跟團套餐僅首都地區住宿可選等級，自駕套餐均可選等級，各等級住宿均含免費 WiFi 及每日早餐，其中經濟型住宿為公共衛浴。",

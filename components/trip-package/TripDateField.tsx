@@ -159,16 +159,16 @@ function TripCalendarPopover({
   };
 
   return createPortal(
-    <>
+    <div className="trip-calendar-portal" role="presentation">
       <button
         type="button"
-        className="fixed inset-0 z-[119] cursor-default bg-transparent"
+        className="trip-calendar-backdrop"
         aria-label="關閉日曆"
         onClick={onClose}
       />
       <div
         ref={popoverRef}
-        className={`trip-calendar-popover fixed z-[120]${
+        className={`trip-calendar-popover${
           dualMonth ? " trip-calendar-popover--dual" : ""
         }`}
         style={{
@@ -243,7 +243,7 @@ function TripCalendarPopover({
           </>
         )}
       </div>
-    </>,
+    </div>,
     document.body,
   );
 }

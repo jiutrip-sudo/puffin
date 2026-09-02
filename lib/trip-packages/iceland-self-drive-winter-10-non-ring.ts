@@ -32,7 +32,7 @@ export const icelandSelfDriveWinter10NonRing: TripPackage = {
   title: "冰島 10 天 9 夜冬季深度自駕遊",
   subtitle: "冰河湖 & 斯奈山 & 亞歐大陸橋",
   duration: { days: 10, nights: 9 },
-  season: { label: "冬季", months: "11 月–3 月" },
+  season: { label: "冬季", months: "10 月–4 月" },
   meta: {
     departure: "雷克雅未克",
     transport: "自駕",

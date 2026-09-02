@@ -3011,7 +3011,26 @@ html {
   color: color-mix(in srgb, var(--foreground) 48%, transparent);
 }
 
+.trip-calendar-portal {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  pointer-events: none;
+}
+
+.trip-calendar-backdrop {
+  position: absolute;
+  inset: 0;
+  border: none;
+  background: transparent;
+  cursor: default;
+  pointer-events: auto;
+}
+
 .trip-calendar-popover {
+  position: fixed;
+  z-index: 1;
+  pointer-events: auto;
   border-radius: 1rem;
   border: 1px solid var(--date-field-border);
   background: var(--background);

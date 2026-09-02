@@ -28,7 +28,7 @@ export const icelandSelfDriveWinter8: TripPackage = {
   title: "8 天 7 夜冰島冬季 1 號公路環島自駕",
   subtitle: "東部峽灣 & 米湖 & 環島一號公路",
   duration: { days: 8, nights: 7 },
-  season: { label: "冬季", months: "11 月–3 月" },
+  season: { label: "冬季", months: "10 月–4 月" },
   meta: {
     departure: "雷克雅未克",
     transport: "自駕",

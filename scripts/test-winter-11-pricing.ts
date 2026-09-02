@@ -33,7 +33,7 @@ async function main() {
   };
   const input = {
     packageId: "iceland-self-drive-winter-11",
-    startDate: "2026-11-01",
+    startDate: "2026-10-16",
     adults: 2,
     children: 0,
     infants: 0,

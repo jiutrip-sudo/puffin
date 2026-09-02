@@ -34,7 +34,7 @@ export const icelandSelfDriveWinter11: TripPackage = {
   title: "冰島 11 天 10 夜冬季深度環島自駕遊",
   subtitle: "斯奈山半島 & 藍冰洞",
   duration: { days: 11, nights: 10 },
-  season: { label: "冬季", months: "11 月–3 月" },
+  season: { label: "冬季", months: "10 月–4 月" },
   meta: {
     departure: "雷克雅未克",
     transport: "自駕",

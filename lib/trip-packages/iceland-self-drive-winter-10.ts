@@ -32,7 +32,7 @@ export const icelandSelfDriveWinter10: TripPackage = {
   title: "冰島 10 天 9 夜冬季深度環島自駕遊",
   subtitle: "黃金圈 & 斯奈山半島",
   duration: { days: 10, nights: 9 },
-  season: { label: "冬季", months: "11 月–3 月" },
+  season: { label: "冬季", months: "10 月–4 月" },
   meta: {
     departure: "雷克雅未克",
     transport: "自駕",

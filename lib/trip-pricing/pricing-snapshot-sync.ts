@@ -8,7 +8,6 @@ import {
 } from "./pricing-snapshot-keys";
 import {
   emptyPackageSnapshot,
-  readPackagePricingSnapshot,
   writePackagePricingSnapshot,
 } from "./pricing-snapshot-store";
 import type {
@@ -138,8 +137,7 @@ async function syncPackageSnapshot(
   }
 
   const corivoConfig = { ...config, corivo: config.corivo } as CorivoPricingConfig;
-  const existing = await readPackagePricingSnapshot(config.packageId);
-  const snapshot: PackagePricingSnapshot = existing ?? emptyPackageSnapshot(config.packageId);
+  const snapshot: PackagePricingSnapshot = emptyPackageSnapshot(config.packageId);
   const { prices, availability } = buildSyncTargets(config);
 
   let pricesSynced = 0;

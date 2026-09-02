@@ -30,7 +30,7 @@ export const icelandSelfDriveWinter9: TripPackage = {
   title: "冰島冬季 9 天深度環島自駕遊",
   subtitle: "阿克雷里 & 眾神瀑布",
   duration: { days: 9, nights: 8 },
-  season: { label: "冬季", months: "11 月–3 月" },
+  season: { label: "冬季", months: "10 月–4 月" },
   meta: {
     departure: "雷克雅未克",
     transport: "自駕",

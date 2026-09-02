@@ -36,7 +36,7 @@ export const icelandSelfDriveWinter12: TripPackage = {
   title: "冰島 12 天 11 夜冬季精選環島自駕遊",
   subtitle: "斯奈山半島 & 西部白銀圈",
   duration: { days: 12, nights: 11 },
-  season: { label: "冬季", months: "11 月–3 月" },
+  season: { label: "冬季", months: "10 月–4 月" },
   meta: {
     departure: "雷克雅未克",
     transport: "自駕",
