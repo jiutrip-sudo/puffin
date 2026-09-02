@@ -16,7 +16,6 @@ export const COMPANY_INFO = {
     { label: "統一編號", value: "22837947" },
   ],
   contact: [
-    { label: "執行董事長", value: "魏榮進" },
     { label: "聯絡人", value: "陳偉軒" },
     { label: "電話", value: "07-285-2002", href: "tel:+88672852002" },
     { label: "傳真", value: "07-285-7885" },
