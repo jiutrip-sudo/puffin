@@ -78,7 +78,7 @@ export const icelandSelfDriveWinter8NonRing: TripPackage = {
 
 您將造訪黃金圈三大景點——辛格維利爾國家公園（Þingvellir National Park）、蓋錫爾間歇泉地帶（Geysir）與黃金瀑布（Gullfoss）；沿南岸探索塞里雅蘭瀑布（Seljalandsfoss）、斯科加瀑布（Skógafoss）、索爾黑馬冰川（Sólheimajökull）與黑沙灘（Reynisfjara）等經典景觀，並造訪傑古沙龍冰河湖（Jökulsárlón）與鑽石沙灘（Diamond Beach）。
 
-行程另安排一日探索「冰島縮影」斯奈山半島（Snæfellsnes），以及一日雷克雅維克自由行，讓您依自己的步調造訪博物館、餐廳與地熱溫泉。途中亦可另行加購藍冰洞探險、冰川徒步、觀鯨或極光船遊等體驗。完成預訂後，您將收到行程策劃師為您客製的中文行程手冊，讓您輕鬆盡享冰島冬季西南岸精華。`,
+行程另安排一日探索「冰島縮影」斯奈山半島（Snæfellsnes），以及一日雷克雅維克自由行，讓您依自己的步調造訪博物館、餐廳與地熱溫泉。途中亦可另行加購藍冰洞探險、冰川健行、觀鯨或極光船遊等體驗。完成預訂後，您將收到行程策劃師為您客製的中文行程手冊，讓您輕鬆盡享冰島冬季西南岸精華。`,
   },
   gallery: [
     {
@@ -139,7 +139,7 @@ export const icelandSelfDriveWinter8NonRing: TripPackage = {
   highlights: [
     "8 天精選西南岸自駕，深度探索黃金圈、南岸與斯奈山半島",
     "有機會捕捉並欣賞舞動的北極光",
-    "打卡黃金圈與南岸瀑布、黑沙灘",
+    "造訪黃金圈與南岸瀑布、黑沙灘",
     "見證歐洲最大冰川瓦特納冰川的冬日奇景",
     "暢遊傑古沙龍冰河湖與鑽石沙灘",
     "多一日首都自由行，盡享雷克雅維克風情",
@@ -178,7 +178,7 @@ export const icelandSelfDriveWinter8NonRing: TripPackage = {
         "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/reynisfjara3_725ed9b454.jpg",
       ],
       paragraphs: [
-        "維克黑沙灘（Reynisfjara Black Sand Beach，音譯為雷尼斯黑沙灘）因其位於維克鎮（Vík í Mýrdal）附近而得名。沙灘位於冰島南岸的環島1號公路沿線，交通便捷，是冰島最著名的海灘之一。火山噴發形成的黝黑色砂石千百年來受到北大西洋的海浪拍打，每年有無數旅客被其魔幻、深邃又略顯恐怖的奇異景色而折服。",
+        "維克黑沙灘（Reynisfjara Black Sand Beach，音譯為雷尼斯黑沙灘）因其位於維克（Vík í Mýrdal）附近而得名。沙灘位於冰島南岸的環島1號公路沿線，交通便捷，是冰島最著名的海灘之一。火山噴發形成的黝黑色砂石千百年來受到北大西洋的海浪拍打，每年有無數旅客被其魔幻、深邃又略顯恐怖的奇異景色而折服。",
         "讓維克黑沙灘從冰島眾多海灘中脫穎而出的，不僅是自古以來火山爆發後岩漿遇到海水迅速冷卻而形成的黝黑砂石，還有這片沙灘所能捕獲的風景。漫步於黑沙灘之上，可以眺望不遠處的雷尼斯岩（Reynisdrangar）。據說這些怪異的海柱是石化的巨魔，也有人堅信它們實際上曾經是海岸線懸崖的一部分，在其他部分被海水沖垮後依然屹立不倒。無論哪種說法能打動你，它們都賦予了黑沙灘一道獨特壯觀的風景線。",
         "維克黑沙灘還有兩個著名的玄武岩柱景觀：加達爾懸崖（Gardar cliff）和Hálsanefshellir洞穴，它們像風琴管一樣駐守在暗黑色的灘原上。這些八角玄武岩柱是火山熔岩突然冷卻後形成的，石柱的高度不一，有的只有半米，有的則高達 20 米。夏季，加達爾懸崖還是成千上萬只海鸚和北極燕鷗等野生鳥類的棲息地。從海岸邊還可以看到迪霍拉里（Dyrhólaey）的拱門在大西洋上若隱若現的美妙景色。",
         "最後，也是最重要的一點，在維克黑沙灘遊玩時，切記注意安全！這裡雖然風景絕美，但卻是冰島最危險的地方之一。由於大西洋洋流在到達冰島之前毫無陸地阻擋，積蓄了巨大的能量，因此這裡經常會出現巨浪，而且水流非常湍急。當浪拍打上來時，如果被浪擊倒，會很難再站起來。海浪會產生一股吸力，沖走沙石，將你拖入水面。而一旦落水，水流就會把你拉離海岸，而冰冷的海水則會在幾分鐘內讓你失溫而造成生命危險。2021年，一名中國旅客因被捲入巨浪中而不幸遇難。因此，一定要與海水保持距離，保證生命安全！",
@@ -211,7 +211,7 @@ export const icelandSelfDriveWinter8NonRing: TripPackage = {
       name: "飛機殘骸",
       nameEn: "Solheimasandur Plane Wreck",
       region: "冰島南部",
-      subtitle: "南岸打卡奇景",
+      subtitle: "南岸必訪景點",
       imageUrl:
         "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/plane_wreck_unsplash2_34bf5e223d.jpg",
       galleryImages: [
@@ -219,7 +219,7 @@ export const icelandSelfDriveWinter8NonRing: TripPackage = {
         "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/Plane_DC_3_6a46d18e06.png",
       ],
       paragraphs: [
-        "飛機殘骸是冰島南岸一處非常有特點的景觀，是一個美麗的意外。這架道格拉斯 DC-3 飛機（R4D-8）原屬美國海軍所有，1973 年在南岸 Sólheimasandur 黑沙灘發生事故後迫降於沙灘之上，如今成為冰島南岸獨特的風景線，引得無數旅客前去打卡。",
+        "飛機殘骸是冰島南岸一處非常有特色的景觀，可說是美麗的意外。這架道格拉斯 DC-3 飛機（R4D-8）原屬美國海軍所有，1973 年在南岸 Sólheimasandur 黑沙灘發生事故後迫降於沙灘之上，如今成為冰島南岸獨特地標，吸引無數旅客前來造訪。",
         "若需前往 DC-3 飛機殘骸，可選擇從停車場徒步（單程約 1.5–2 小時），或搭乘擺渡車減輕體力負擔。冬季請注意保暖與路況安全。",
       ],
     },
@@ -236,8 +236,8 @@ export const icelandSelfDriveWinter8NonRing: TripPackage = {
       ],
       paragraphs: [
         "鑽石沙灘（The Diamond Beach）的原名是Breiðamerkursandur沙灘，位於冰島南部，瓦特納冰川（Vatnajökull）南端傑古沙龍冰河湖（Jökulsárlón）附近。鑽石沙灘的得名是因為沙灘上晶瑩剔透的透明體，而這些實際上並不是鑽石，而是傑古沙龍冰河湖上的漂浮的冰山隨河流流向大西洋中，擱淺在了黢黑的沙灘上。伴隨著洶湧的大西洋海浪，透亮的冰山與暗黑的沙灘透露著一絲詭譎異世的氣氛。",
-        "冰島以黑沙灘聞名於世，而鑽石海灘也當然不是冰島唯一的黑色海灘，其中最有名的黑沙灘之一當屬位於維克鎮（Vík í Mýrdal）附近的維克黑沙灘（Reynisfjara）。這些黑沙灘的形成得歸因於冰島的火山地貌。當火山熔岩與冰冷的海水接觸後迅速冷卻形成玄武岩，隨著時間的推移，碎裂的玄武岩變得越來越小，最終變成了沙子。",
-        "全年的任何時候都適合來鑽石海灘遊覽打卡。夏季陽光充足，日照時間長，在交通層面上更加安全和便捷，沙灘上的冰塊由於是冰川冰，在夏季也不會融化，反而光芒會更加耀眼。冬季，北大西洋海面狂野不羈，海浪拍打著黑色的沙灘，形成一幅更加壯觀的畫面。冬季的金色日落讓鑽石海灘在白天非常上鏡。幸運的話，您還有機會能夠在鑽石沙灘上看見北極光。不過冬天遊覽要特別注意兩點，一是一定要穿得暖和一些；二是一定要與海浪保持安全距離。",
+        "冰島以黑沙灘聞名於世，而鑽石海灘也當然不是冰島唯一的黑色海灘，其中最有名的黑沙灘之一當屬位於維克（Vík í Mýrdal）附近的維克黑沙灘（Reynisfjara）。這些黑沙灘的形成得歸因於冰島的火山地貌。當火山熔岩與冰冷的海水接觸後迅速冷卻形成玄武岩，隨著時間的推移，碎裂的玄武岩變得越來越小，最終變成了沙子。",
+        "全年的任何時候都適合造訪鑽石海灘。夏季陽光充足，日照時間長，交通也較為便利安全；沙灘上的冰塊來自冰川，夏季也不會融化，反而在陽光下更加耀眼。冬季北大西洋海面氣勢磅礡，海浪拍打黑色沙灘，景色更為壯觀；金色日落也讓白天格外上鏡。幸運的話，還有機會在鑽石海灘上看見北極光。冬季造訪請務必穿暖，並與海浪保持安全距離。",
       ],
     },
     {
@@ -253,7 +253,7 @@ export const icelandSelfDriveWinter8NonRing: TripPackage = {
         "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/gullfoss3_62d8e5e998.jpg",
       ],
       paragraphs: [
-        "黃金瀑布（Gullfoss）位於 Haukadalur 山谷的 Hvítá 河上，是冰島最受歡迎的旅遊景點之一，與辛格維利爾國家公園、間歇泉組成著名的黃金圈線路。",
+        "黃金瀑布（Gullfoss）位於 Haukadalur 山谷的 Hvítá 河上，是冰島最受歡迎的旅遊景點之一，與辛格維利爾國家公園、蓋錫爾間歇泉地帶組成著名的黃金圈線路。",
         "黃金瀑布由兩段瀑布組合而成，冬季地表被白雪覆蓋時景色尤為壯麗。走近瀑布時，您將被巨大的水流所震撼；在陽光照射下，水珠有時會散發金色光芒。冬季亦是拍攝北極光的熱門地點之一，請注意路面結冰，勿離開主路。",
       ],
     },
@@ -370,7 +370,7 @@ export const icelandSelfDriveWinter8NonRing: TripPackage = {
       title: "南岸瀑布與黑沙灘",
       accommodation: "南岸",
       description:
-        "今天請一早出發，沿冰島南岸一號公路南下。冬季南岸色調獨特：白雪覆蓋大地、天際染上一抹粉霞，為旅程增添溫暖氣息。\n\n造訪塞里雅蘭瀑布（Seljalandsfoss）與斯科加瀑布（Skógafoss）；冬季基於安全考量，塞里雅蘭瀑布後方小徑通常封閉。繼續南下造訪黑沙灘（Reynisfjara），沿岸玄武岩石柱層層疊疊，遠處可見雷尼斯岩（Reynisdrangar）矗立海中；沿途亦可安排 DC-3 飛機殘骸，或另行加購冰川徒步等戶外體驗。今晚入住南岸。",
+        "今天請一早出發，沿冰島南岸一號公路南下。冬季南岸色調獨特：白雪覆蓋大地、天際染上一抹粉霞，為旅程增添溫暖氣息。\n\n造訪塞里雅蘭瀑布（Seljalandsfoss）與斯科加瀑布（Skógafoss）；冬季基於安全考量，塞里雅蘭瀑布後方小徑通常封閉。繼續南下造訪黑沙灘（Reynisfjara），沿岸玄武岩石柱層層疊疊，遠處可見雷尼斯岩（Reynisdrangar）矗立海中；沿途亦可安排 DC-3 飛機殘骸，或另行加購冰川健行等戶外體驗。今晚入住南岸。",
       highlights: icelandSelfDriveWinter8NonRingDay2Highlights,
       optionalActivities: icelandSelfDriveWinter8NonRingDay2OptionalActivities,
     },
@@ -379,7 +379,7 @@ export const icelandSelfDriveWinter8NonRing: TripPackage = {
       title: "冰河湖風光",
       accommodation: "南岸",
       description:
-        "今日繼續往東南前進，進入瓦特納冰川國家公園，造訪傑古沙龍冰河湖（Jökulsárlón）與鑽石沙灘（Diamond Beach）。浮冰在黑色沙灘上晶瑩閃耀，黑白對比格外震撼。\n\n若時間充裕，亦可另行加購瓦特納冰川藍冰洞探險或斯卡夫塔山冰川徒步，深入認識歐洲最大冰川的冬日奇景。今晚繼續入住南岸。",
+        "今日繼續往東南前進，進入瓦特納冰川國家公園，造訪傑古沙龍冰河湖（Jökulsárlón）與鑽石沙灘（Diamond Beach）。浮冰在黑色沙灘上晶瑩閃耀，黑白對比格外震撼。\n\n若時間充裕，亦可另行加購瓦特納冰川藍冰洞探險或斯卡夫塔山冰川健行，深入認識歐洲最大冰川的冬日奇景。今晚繼續入住南岸。",
       highlights: icelandSelfDriveWinter8NonRingDay3Highlights,
       optionalActivities: icelandSelfDriveWinter8NonRingDay3OptionalActivities,
     },
@@ -524,7 +524,7 @@ export const icelandSelfDriveWinter8NonRing: TripPackage = {
         {
           question: "去冰島自駕需要準備什麼行李？",
           answer:
-            "無論哪個季節都可能遇到各種天氣，建議攜帶：防水冲锋衣褲、防水徒步鞋、透氣運動鞋、墨鏡、手套毛線帽圍巾、泳衣、羊毛衫或毛衣、羽絨衣、保濕霜與潤唇膏、手機支架，以及駕照翻譯公證文件。",
+            "無論哪個季節都可能遇到各種天氣，建議攜帶：防水防風外套與長褲、防水徒步鞋、透氣運動鞋、墨鏡、手套毛線帽圍巾、泳衣、羊毛衫或毛衣、羽絨衣、保濕霜與潤唇膏、手機支架，以及駕照翻譯公證文件。",
         },
         {
           question: "什麼是自選報名活動？",
@@ -573,7 +573,7 @@ export const icelandSelfDriveWinter8NonRing: TripPackage = {
       tourCode: "SLMSD-062",
       durationLabel: "6 天／5 夜",
       description:
-        "領略冰島冬日風光，打卡經典黃金圈、南岸小眾景點，體驗冰洞探險、追逐極光。",
+        "領略冰島冬日風光，造訪經典黃金圈與南岸小眾景點，體驗冰洞探險、追逐極光。",
     },
     {
       tripKey: "iceland/self-drive/winter/7",

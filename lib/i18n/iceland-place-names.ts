@@ -161,6 +161,13 @@ export const ICELAND_PLACES: IcelandPlace[] = [
     en: "Blue Lagoon",
     aliases: ["蓝湖温泉"],
   },
+  {
+    id: "hofn",
+    tw: "赫本",
+    cn: "霍芬",
+    en: "Höfn",
+    aliases: ["霍芬鎮", "霍芬"],
+  },
 ];
 
 export const PLACE_TW = Object.fromEntries(
