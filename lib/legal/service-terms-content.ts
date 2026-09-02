@@ -14,7 +14,7 @@ export const SERVICE_TERMS_PAGE_TITLE = "服務條款";
 export const SERVICE_TERMS_INTRO = {
   title: "服務條款",
   effectiveLabel: `本條款自 ${SERVICE_TERMS_EFFECTIVE_DATE} 起生效。`,
-  companyParagraph: `${COMPANY_INFO.name}（甲種旅行業，${COMPANY_INFO.registration.find((r) => r.label === "旅行業註冊")?.value ?? "交觀甲字第0613號"}）專營冰島套裝行程之銷售與代訂服務，合作夥伴包含冰島當地合格旅行供應商。冰島旅遊資源有限，建議及早預訂以取得較佳房型、車型與活動名額。`,
+  companyParagraph: `${COMPANY_INFO.name}（甲種旅行業，${COMPANY_INFO.registration.find((r) => r.label === "旅行業註冊")?.value ?? "556900"}）專營冰島套裝行程之銷售與代訂服務，合作夥伴包含冰島當地合格旅行供應商。冰島旅遊資源有限，建議及早預訂以取得較佳房型、車型與活動名額。`,
 };
 
 /** Checkout 步驟 4 卡片內顯示之條款摘要 */
