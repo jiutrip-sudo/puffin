@@ -17,13 +17,13 @@ export const COMPANY_INFO = {
   ],
   contact: [
     { label: "聯絡人", value: "林森木" },
-    { label: "電話", value: "07-285-2002", href: "tel:+88672852002" },
-    { label: "傳真", value: "07-285-7885" },
+    { label: "電話", value: "07-332-7375", href: "tel:+88673327375" },
+    { label: "傳真", value: "07-339-2355" },
     {
       label: "信箱",
       value: "vip@dollar-travel.com",
       href: "mailto:vip@dollar-travel.com",
     },
-    { label: "地址", value: "高雄市新興區南台路1號3樓" },
+    { label: "地址", value: "高雄市苓雅區中華四路126號11樓之1" },
   ],
 } as const;

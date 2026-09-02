@@ -154,7 +154,7 @@ export const SERVICE_TERMS_SECTIONS: ServiceTermsSection[] = [
     title: "申訴與消費者權益",
     paragraphs: [
       "若您對行程或服務不滿意，請於行程結束後 10 日內聯絡本公司，以便於消費者保護法及旅行業相關規定之期限內處理；逾期申訴可能影響您的權益。",
-      `聯絡方式：電話 ${COMPANY_INFO.contact.find((c) => c.label === "電話")?.value ?? "07-285-2002"}、電子郵件 ${COMPANY_INFO.contact.find((c) => c.label === "信箱")?.value ?? "vip@dollar-travel.com"}。`,
+      `聯絡方式：電話 ${COMPANY_INFO.contact.find((c) => c.label === "電話")?.value ?? "07-332-7375"}、電子郵件 ${COMPANY_INFO.contact.find((c) => c.label === "信箱")?.value ?? "vip@dollar-travel.com"}。`,
       "您亦得向主管機關交通部觀光署或地方消費者服務中心申訴。",
     ],
   },

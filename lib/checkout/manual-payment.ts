@@ -20,11 +20,11 @@ export const CHECKOUT_PAYMENT_OPTIONS: Array<{
 
 const OFFICE_ADDRESS =
   COMPANY_INFO.contact.find((item) => item.label === "地址")?.value ??
-  "高雄市新興區南台路1號3樓";
+  "高雄市苓雅區中華四路126號11樓之1";
 
 export const CHECKOUT_OFFICE_PHONE =
   COMPANY_INFO.contact.find((item) => item.label === "電話")?.value ??
-  "07-285-2002";
+  "07-332-7375";
 
 export const CHECKOUT_OFFICE_EMAIL =
   COMPANY_INFO.contact.find((item) => item.label === "信箱")?.value ??
