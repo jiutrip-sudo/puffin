@@ -1,5 +1,8 @@
 import Image from "next/image";
-import { BRAND_NAME, COMPANY_INFO, COMPANY_LOGO } from "@/lib/company-info";
+import type { SiteLocale } from "@/lib/site-locale";
+import { COMPANY_LOGO } from "@/lib/company-info";
+import { getLocalizedCompanyInfo } from "@/lib/i18n/company";
+import { t } from "@/lib/i18n/messages";
 
 type InfoItem = {
   label: string;
@@ -9,20 +12,12 @@ type InfoItem = {
 
 const WIDE_FIELD_LABELS = new Set(["地址", "信箱"]);
 
-function findItem(items: ReadonlyArray<InfoItem>, label: string) {
-  return items.find((item) => item.label === label);
-}
-
-function CompactFooterInfo() {
-  const registrationLine = COMPANY_INFO.registration
+function CompactFooterInfo({ locale }: { locale: SiteLocale }) {
+  const companyInfo = getLocalizedCompanyInfo(locale);
+  const registrationLine = companyInfo.registration
     .map((item) => item.value)
     .join(" · ");
-  const chairman = findItem(COMPANY_INFO.contact, "執行董事長");
-  const contact = findItem(COMPANY_INFO.contact, "聯絡人");
-  const phone = findItem(COMPANY_INFO.contact, "電話");
-  const fax = findItem(COMPANY_INFO.contact, "傳真");
-  const email = findItem(COMPANY_INFO.contact, "信箱");
-  const address = findItem(COMPANY_INFO.contact, "地址");
+  const [chairman, contact, phone, fax, email, address] = companyInfo.contact;
 
   const peopleLine = [chairman?.value, contact?.value].filter(Boolean).join(" / ");
 
@@ -77,7 +72,7 @@ function InfoColumn({
       </h3>
       <dl className="grid grid-cols-2 gap-x-3 gap-y-0.5">
         {items.map((item) => {
-          const isWide = WIDE_FIELD_LABELS.has(item.label);
+          const isWide = WIDE_FIELD_LABELS.has(item.label) || item.label === "邮箱";
 
           return (
             <div
@@ -107,7 +102,9 @@ function InfoColumn({
   );
 }
 
-export function SiteFooter() {
+export function SiteFooter({ locale }: { locale: SiteLocale }) {
+  const companyInfo = getLocalizedCompanyInfo(locale);
+
   return (
     <footer className="site-footer w-full px-4 py-4 sm:px-5 sm:py-8 md:px-8 md:py-2.5">
       <div className="mx-auto max-w-7xl">
@@ -122,25 +119,31 @@ export function SiteFooter() {
           />
           <div className="min-w-0 text-left">
             <p className="font-display hidden text-[8px] font-medium uppercase tracking-[0.2em] text-white/50 sm:block">
-              {BRAND_NAME}
+              Dollar Travel Service Ltd., Co.
             </p>
             <p className="text-sm font-semibold leading-none text-white sm:text-base md:text-sm">
-              {COMPANY_INFO.name}
+              {companyInfo.name}
             </p>
           </div>
         </div>
 
-        <CompactFooterInfo />
+        <CompactFooterInfo locale={locale} />
 
         <section className="site-footer-panel mt-2 hidden rounded-lg px-3 py-2 md:block">
           <div className="grid grid-cols-2 gap-x-5 gap-y-0">
-            <InfoColumn title="登記資訊" items={COMPANY_INFO.registration} />
-            <InfoColumn title="聯絡方式" items={COMPANY_INFO.contact} />
+            <InfoColumn
+              title={t("footer.registration", locale)}
+              items={companyInfo.registration}
+            />
+            <InfoColumn
+              title={t("footer.contact", locale)}
+              items={companyInfo.contact}
+            />
           </div>
         </section>
 
         <p className="mt-2 text-center text-[8px] tracking-wide text-white/35 sm:mt-5 sm:text-[10px] md:mt-1.5">
-          © {new Date().getFullYear()} {COMPANY_INFO.name}
+          © {new Date().getFullYear()} {companyInfo.name}
         </p>
       </div>
     </footer>

@@ -1,19 +1,16 @@
-import Link from "next/link";
+"use client";
+
+import { LocaleLink } from "@/components/LocaleLink";
 import { SiteLogo } from "./SiteLogo";
 import { ThemeControlsBar } from "./ThemeControls";
+import { LocaleControlsBar } from "./LocaleControls";
 import { COMPANY_INFO } from "@/lib/company-info";
+import { useSiteLocale } from "@/components/SiteLocaleProvider";
+import { t } from "@/lib/i18n/messages";
 
 const OFFICE_EMAIL =
   COMPANY_INFO.contact.find((item) => item.label === "信箱")?.value ??
   "vip@dollar-travel.com";
-
-const NAV_LINKS = [
-  { label: "關於", href: "/" },
-  { label: "行程", href: "/iceland" },
-  { label: "攻略", href: "/guides" },
-  { label: "服務", href: "/terms-and-conditions" },
-  { label: "聯絡", href: `mailto:${OFFICE_EMAIL}` },
-];
 
 type SiteHeaderProps = {
   activeLabel?: string;
@@ -23,20 +20,23 @@ type SiteHeaderProps = {
 };
 
 function HeaderActions({ rightSlot }: { rightSlot?: React.ReactNode }) {
+  const locale = useSiteLocale();
+
   return (
     rightSlot ?? (
       <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
-        <Link
+        <LocaleLink
           href="/booking/lookup"
+          locale={locale}
           className="hidden rounded-full border border-foreground/15 px-3 py-2 text-xs font-semibold text-hero-text/85 transition-colors hover:bg-foreground/8 sm:inline-flex"
         >
-          查詢訂單
-        </Link>
+          {t("nav.lookupBooking", locale)}
+        </LocaleLink>
         <a
           href={`mailto:${OFFICE_EMAIL}`}
           className="glass-hero rounded-full px-3 py-2 text-xs font-semibold text-hero-text transition-all hover:bg-white/25 sm:px-4"
         >
-          需要幫助？
+          {t("nav.needHelp", locale)}
         </a>
       </div>
     )
@@ -48,6 +48,16 @@ export function SiteHeader({
   rightSlot,
   onSurface = false,
 }: SiteHeaderProps) {
+  const locale = useSiteLocale();
+
+  const navLinks = [
+    { label: t("nav.about", locale), href: "/" },
+    { label: t("nav.trips", locale), href: "/iceland" },
+    { label: t("nav.guides", locale), href: "/guides" },
+    { label: t("nav.service", locale), href: "/terms-and-conditions" },
+    { label: t("nav.contact", locale), href: `mailto:${OFFICE_EMAIL}` },
+  ];
+
   return (
     <header
       className={`px-4 py-3 pt-[max(0.75rem,env(safe-area-inset-top))] md:px-8 md:py-4 ${
@@ -58,6 +68,7 @@ export function SiteHeader({
         <div className="flex items-center justify-between gap-2 md:hidden">
           <SiteLogo />
           <div className="flex shrink-0 items-center justify-end gap-1.5">
+            <LocaleControlsBar />
             <ThemeControlsBar />
             <HeaderActions rightSlot={rightSlot} />
           </div>
@@ -70,12 +81,13 @@ export function SiteHeader({
 
           <nav
             className="glass-hero flex items-center justify-self-center gap-1 rounded-full px-2 py-1.5"
-            aria-label="主導覽"
+            aria-label={t("nav.main", locale)}
           >
-            {NAV_LINKS.map((link) => (
-              <Link
-                key={link.label}
+            {navLinks.map((link) => (
+              <LocaleLink
+                key={link.href}
                 href={link.href}
+                locale={locale}
                 className={`rounded-full px-4 py-1.5 text-xs font-medium tracking-wide transition-all ${
                   activeLabel === link.label
                     ? onSurface
@@ -87,11 +99,12 @@ export function SiteHeader({
                 }`}
               >
                 {link.label}
-              </Link>
+              </LocaleLink>
             ))}
           </nav>
 
           <div className="flex shrink-0 items-center justify-end gap-2 justify-self-end">
+            <LocaleControlsBar />
             <ThemeControlsBar />
             <HeaderActions rightSlot={rightSlot} />
           </div>

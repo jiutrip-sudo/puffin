@@ -6,7 +6,8 @@ import { TripProductJsonLd } from "@/components/seo/SiteJsonLd";
 import { HeroSection } from "@/components/HeroSection";
 import { SiteHeader } from "@/components/SiteHeader";
 import { TransitionBar } from "@/components/TransitionBar";
-import { getTripPackageWithPricing } from "@/lib/trip-packages/get-package-with-pricing";
+import { getTripPackageWithPricingForRequest } from "@/lib/trip-packages/get-package-with-pricing";
+import { buildTripPackageMetadata, getLocalizedTripLabels } from "@/lib/i18n/trip-metadata";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 import { absoluteUrl } from "@/lib/site-url";
 import {
@@ -55,7 +56,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     ICELAND_GROUP_SUMMER_ROUTE_IDS.has(route)
   ) {
     const packageTripKey = getIcelandGroupSummerPackageTripKey(duration, route);
-    const data = getTripPackageWithPricing(packageTripKey);
+    const data = await getTripPackageWithPricingForRequest(packageTripKey);
 
     if (data) {
       return buildPageMetadata({
@@ -87,7 +88,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (route === "ring") {
     const tripKey = `${source}/${option}/${suboption}/${duration}`;
-    const data = getTripPackageWithPricing(tripKey);
+    const data = await getTripPackageWithPricingForRequest(tripKey);
 
     if (data) {
       return buildPageMetadata({
@@ -103,7 +104,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (route === "non-ring") {
     const tripKey = `${source}/${option}/${suboption}/${duration}/non-ring`;
-    const data = getTripPackageWithPricing(tripKey);
+    const data = await getTripPackageWithPricingForRequest(tripKey);
 
     if (data) {
       return buildPageMetadata({
@@ -146,7 +147,7 @@ export default async function TripDurationRoutePage({ params }: PageProps) {
 
   if (isSummerGroupRoute) {
     const packageTripKey = getIcelandGroupSummerPackageTripKey(duration, route);
-    const packageData = getTripPackageWithPricing(packageTripKey);
+    const packageData = await getTripPackageWithPricingForRequest(packageTripKey);
 
     if (packageData) {
       return (
@@ -226,7 +227,7 @@ export default async function TripDurationRoutePage({ params }: PageProps) {
     route === "ring" ? tripKey : `${tripKey}/${route}`;
 
   if (route === "ring" || route === "non-ring") {
-    const packageData = getTripPackageWithPricing(packageTripKey);
+    const packageData = await getTripPackageWithPricingForRequest(packageTripKey);
 
     if (packageData) {
       return (

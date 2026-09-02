@@ -1,5 +1,9 @@
+"use client";
+
 import { CircleButton } from "@/components/CircleButton";
 import { getIcelandGroupSummerRouteOptions } from "@/lib/trip-options";
+import { localizeTripOptions } from "@/lib/i18n/trip-options";
+import { useSiteLocale } from "@/components/SiteLocaleProvider";
 
 type SummerGroupRoutePickerProps = {
   duration: string;
@@ -8,7 +12,11 @@ type SummerGroupRoutePickerProps = {
 export function SummerGroupRoutePicker({
   duration,
 }: SummerGroupRoutePickerProps) {
-  const routeOptions = getIcelandGroupSummerRouteOptions(duration);
+  const locale = useSiteLocale();
+  const routeOptions = localizeTripOptions(
+    getIcelandGroupSummerRouteOptions(duration),
+    locale,
+  );
 
   return (
     <div className="flex items-center justify-center gap-10 md:gap-16">

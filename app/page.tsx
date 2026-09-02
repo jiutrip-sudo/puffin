@@ -3,25 +3,37 @@ import { CircleButton } from "@/components/CircleButton";
 import { TransitionBar } from "@/components/TransitionBar";
 import { DEPARTURE_OPTIONS } from "@/lib/trip-options";
 import { buildPageMetadata } from "@/lib/seo/metadata";
+import { getRequestLocale } from "@/lib/i18n/server";
+import { localizeText } from "@/lib/i18n/localize";
+import { localizeTripOptions } from "@/lib/i18n/trip-options";
 
-export const metadata = buildPageMetadata({
-  title: "探索冰島，從這裡開始 | 大樂旅行社",
-  description:
-    "選擇冰島集合或台灣出發，規劃您的冰島冬季自駕、南岸精華與冰川體驗。",
-  path: "/",
-});
+export async function generateMetadata() {
+  const locale = await getRequestLocale();
+  return buildPageMetadata({
+    title: localizeText("探索冰島，從這裡開始 | 大樂旅行社", locale),
+    description: localizeText(
+      "選擇冰島集合或台灣出發，規劃您的冰島冬季自駕、南岸精華與冰川體驗。",
+      locale,
+    ),
+    path: "/",
+    locale,
+  });
+}
 
-export default function Home() {
+export default async function Home() {
+  const locale = await getRequestLocale();
+  const departureOptions = localizeTripOptions(DEPARTURE_OPTIONS, locale);
+
   return (
     <HeroSection
       eyebrow="ICELAND TRAVEL"
-      title="探索冰島，從這裡開始。"
-      subtitle="選擇您的出發方式，我們將為您推薦最適合的行程。"
+      title={localizeText("探索冰島，從這裡開始。", locale)}
+      subtitle={localizeText("選擇您的出發方式，我們將為您推薦最適合的行程。", locale)}
       tagline="START YOUR JOURNEY WITH A WELL-PLANNED ITINERARY."
       footer={<TransitionBar />}
     >
       <div className="flex items-center justify-center gap-16 md:gap-24">
-        {DEPARTURE_OPTIONS.map((option) => (
+        {departureOptions.map((option) => (
           <CircleButton
             key={option.id}
             href={option.href}

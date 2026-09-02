@@ -1,22 +1,19 @@
-import {
-  DAY_TOUR_CANCELLATION_ROWS,
-  SELF_DRIVE_CANCELLATION_ROWS,
-  SERVICE_TERMS_INTRO,
-  SERVICE_TERMS_SECTIONS,
-} from "@/lib/legal/service-terms-content";
+import type { ServiceTermsSection } from "@/lib/legal/service-terms-content";
 
 function CancellationTable({
   rows,
+  headers,
 }: {
   rows: Array<{ period: string; refund: string }>;
+  headers: [string, string];
 }) {
   return (
     <div className="legal-terms__table-wrap">
       <table className="legal-terms__table">
         <thead>
           <tr>
-            <th>申請取消日期</th>
-            <th>退款金額</th>
+            <th>{headers[0]}</th>
+            <th>{headers[1]}</th>
           </tr>
         </thead>
         <tbody>
@@ -32,16 +29,34 @@ function CancellationTable({
   );
 }
 
-export function ServiceTermsContent() {
+type ServiceTermsContentProps = {
+  intro: {
+    title: string;
+    effectiveLabel: string;
+    companyParagraph: string;
+  };
+  sections: ServiceTermsSection[];
+  selfDriveCancellationRows: Array<{ period: string; refund: string }>;
+  dayTourCancellationRows: Array<{ period: string; refund: string }>;
+  tableHeaders: [string, string];
+};
+
+export function ServiceTermsContent({
+  intro,
+  sections,
+  selfDriveCancellationRows,
+  dayTourCancellationRows,
+  tableHeaders,
+}: ServiceTermsContentProps) {
   return (
     <article className="legal-terms">
       <header id="intro" className="legal-terms__header">
-        <h1 className="legal-terms__title">{SERVICE_TERMS_INTRO.title}</h1>
-        <p className="legal-terms__meta">{SERVICE_TERMS_INTRO.effectiveLabel}</p>
-        <p className="legal-terms__intro">{SERVICE_TERMS_INTRO.companyParagraph}</p>
+        <h1 className="legal-terms__title">{intro.title}</h1>
+        <p className="legal-terms__meta">{intro.effectiveLabel}</p>
+        <p className="legal-terms__intro">{intro.companyParagraph}</p>
       </header>
 
-      {SERVICE_TERMS_SECTIONS.map((section) => (
+      {sections.map((section) => (
         <section
           key={section.id}
           id={section.id}
@@ -61,10 +76,16 @@ export function ServiceTermsContent() {
             </ul>
           )}
           {section.id === "refund-self-drive" && (
-            <CancellationTable rows={SELF_DRIVE_CANCELLATION_ROWS} />
+            <CancellationTable
+              rows={selfDriveCancellationRows}
+              headers={tableHeaders}
+            />
           )}
           {section.id === "refund-day-tour" && (
-            <CancellationTable rows={DAY_TOUR_CANCELLATION_ROWS} />
+            <CancellationTable
+              rows={dayTourCancellationRows}
+              headers={tableHeaders}
+            />
           )}
         </section>
       ))}

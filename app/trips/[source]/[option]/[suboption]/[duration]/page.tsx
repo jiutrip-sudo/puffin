@@ -5,18 +5,16 @@ import { TripProductJsonLd } from "@/components/seo/SiteJsonLd";
 import { HeroSection } from "@/components/HeroSection";
 import { SiteHeader } from "@/components/SiteHeader";
 import { TransitionBar } from "@/components/TransitionBar";
-import Link from "next/link";
-import { getTripPackageWithPricing } from "@/lib/trip-packages/get-package-with-pricing";
+import { LocaleLink } from "@/components/LocaleLink";
+import { getTripPackageWithPricingForRequest } from "@/lib/trip-packages/get-package-with-pricing";
+import { buildTripPackageMetadata, getLocalizedTripLabels } from "@/lib/i18n/trip-metadata";
 import { buildPageMetadata } from "@/lib/seo/metadata";
-import { absoluteUrl } from "@/lib/site-url";
 import {
   COMING_SOON_TRIPS,
   ICELAND_GROUP_SUMMER_ROUTE_PICKER_DAY_IDS,
   ICELAND_GROUP_WINTER_ROUTE_PICKER_DAY_IDS,
   ICELAND_SELF_DRIVE_WINTER_ROUTE_PICKER_DAY_IDS,
   ICELAND_TRIP_SEASON_DAY_IDS,
-  OPTION_LABELS,
-  SOURCE_LABELS,
 } from "@/lib/trip-options";
 import { SummerGroupRoutePicker } from "@/components/SummerGroupRoutePicker";
 import { WinterRoutePicker } from "@/components/WinterRoutePicker";
@@ -33,31 +31,33 @@ type PageProps = {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { source, option, suboption, duration } = await params;
   const tripKey = `${source}/${option}/${suboption}/${duration}`;
-  const data = getTripPackageWithPricing(tripKey);
+  const packageMetadata = await buildTripPackageMetadata(
+    tripKey,
+    `/trips/${tripKey}`,
+  );
 
-  if (data) {
-    return buildPageMetadata({
-      title: `${data.package.title} | 大樂旅行社`,
-      description: data.package.intro.summary,
-      path: `/trips/${tripKey}`,
-      ogImage: data.package.heroImage.startsWith("http")
-        ? data.package.heroImage
-        : absoluteUrl(data.package.heroImage),
-    });
+  if (packageMetadata) {
+    return packageMetadata;
   }
 
+  const { locale, sourceLabels, optionLabels, localize } =
+    await getLocalizedTripLabels();
   const durationLabel = `${duration}日`;
-  const optionLabel = OPTION_LABELS[option];
-  const suboptionLabel = OPTION_LABELS[suboption];
+  const optionLabel = optionLabels[option];
+  const suboptionLabel = optionLabels[suboption];
 
-  return {
+  return buildPageMetadata({
     title: `${durationLabel}${optionLabel}行程 | 大樂旅行社`,
-    description: `${SOURCE_LABELS[source]} · ${optionLabel} · ${suboptionLabel} · ${durationLabel}`,
-  };
+    description: `${sourceLabels[source]} · ${optionLabel} · ${suboptionLabel} · ${durationLabel}`,
+    path: `/trips/${tripKey}`,
+    locale,
+  });
 }
 
 export default async function TripDurationPage({ params }: PageProps) {
   const { source, option, suboption, duration } = await params;
+  const { sourceLabels, optionLabels, localize, path, locale } =
+    await getLocalizedTripLabels();
 
   const seasonDayIds = ICELAND_TRIP_SEASON_DAY_IDS[option]?.[suboption];
 
@@ -72,35 +72,36 @@ export default async function TripDurationPage({ params }: PageProps) {
     suboption === "winter" &&
     ICELAND_SELF_DRIVE_WINTER_ROUTE_PICKER_DAY_IDS.has(duration)
   ) {
-    const sourceLabel = SOURCE_LABELS[source];
-    const optionLabel = OPTION_LABELS[option];
-    const suboptionLabel = OPTION_LABELS[suboption];
+    const sourceLabel = sourceLabels[source];
+    const optionLabel = optionLabels[option];
+    const suboptionLabel = optionLabels[suboption];
     const durationLabel = `${duration}日`;
 
     const header = (
       <SiteHeader
         rightSlot={
-          <Link
-            href={`/trips/iceland/${option}/${suboption}`}
+          <LocaleLink
+            href={path(`/trips/iceland/${option}/${suboption}`)}
+            locale={locale}
             className="glass-hero rounded-full px-5 py-2 text-xs font-medium text-hero-text/90 transition-all hover:bg-white/25"
           >
-            返回 {suboptionLabel}
-          </Link>
+            {localize("返回")} {suboptionLabel}
+          </LocaleLink>
         }
       />
     );
 
     const footer = (
       <TransitionBar
-        tags={[`#${durationLabel}`, `#${suboptionLabel}`, "#冰島之旅"]}
+        tags={[`#${durationLabel}`, `#${suboptionLabel}`, `#${localize("冰島之旅")}`]}
       />
     );
 
     return (
       <HeroSection
         eyebrow={`${sourceLabel} · ${optionLabel} · ${suboptionLabel}`}
-        title={`${durationLabel}冬季自駕`}
-        subtitle="選擇環島或非環島路線，我們將為您規劃最適合的行程。"
+        title={localize(`${durationLabel}冬季自駕`)}
+        subtitle={localize("選擇環島或非環島路線，我們將為您規劃最適合的行程。")}
         tagline={`CHOOSE RING ROAD OR NON-RING ROUTE FOR YOUR ${duration}-DAY TRIP.`}
         align="center"
         priority={false}
@@ -117,35 +118,36 @@ export default async function TripDurationPage({ params }: PageProps) {
     suboption === "summer" &&
     ICELAND_GROUP_SUMMER_ROUTE_PICKER_DAY_IDS.has(duration)
   ) {
-    const sourceLabel = SOURCE_LABELS[source];
-    const optionLabel = OPTION_LABELS[option];
-    const suboptionLabel = OPTION_LABELS[suboption];
+    const sourceLabel = sourceLabels[source];
+    const optionLabel = optionLabels[option];
+    const suboptionLabel = optionLabels[suboption];
     const durationLabel = `${duration}日`;
 
     const header = (
       <SiteHeader
         rightSlot={
-          <Link
-            href={`/trips/iceland/${option}/${suboption}`}
+          <LocaleLink
+            href={path(`/trips/iceland/${option}/${suboption}`)}
+            locale={locale}
             className="glass-hero rounded-full px-5 py-2 text-xs font-medium text-hero-text/90 transition-all hover:bg-white/25"
           >
-            返回 {suboptionLabel}
-          </Link>
+            {localize("返回")} {suboptionLabel}
+          </LocaleLink>
         }
       />
     );
 
     const footer = (
       <TransitionBar
-        tags={[`#${durationLabel}`, `#${suboptionLabel}`, "#冰島之旅"]}
+        tags={[`#${durationLabel}`, `#${suboptionLabel}`, `#${localize("冰島之旅")}`]}
       />
     );
 
     return (
       <HeroSection
         eyebrow={`${sourceLabel} · ${optionLabel} · ${suboptionLabel}`}
-        title={`${durationLabel}夏季跟團`}
-        subtitle="選擇您的路線變體，我們將為您規劃最適合的行程。"
+        title={localize(`${durationLabel}夏季跟團`)}
+        subtitle={localize("選擇您的路線變體，我們將為您規劃最適合的行程。")}
         tagline={`CHOOSE YOUR ROUTE VARIANT FOR YOUR ${duration}-DAY SUMMER GROUP TOUR.`}
         align="center"
         priority={false}
@@ -162,35 +164,36 @@ export default async function TripDurationPage({ params }: PageProps) {
     suboption === "winter" &&
     ICELAND_GROUP_WINTER_ROUTE_PICKER_DAY_IDS.has(duration)
   ) {
-    const sourceLabel = SOURCE_LABELS[source];
-    const optionLabel = OPTION_LABELS[option];
-    const suboptionLabel = OPTION_LABELS[suboption];
+    const sourceLabel = sourceLabels[source];
+    const optionLabel = optionLabels[option];
+    const suboptionLabel = optionLabels[suboption];
     const durationLabel = `${duration}日`;
 
     const header = (
       <SiteHeader
         rightSlot={
-          <Link
-            href={`/trips/iceland/${option}/${suboption}`}
+          <LocaleLink
+            href={path(`/trips/iceland/${option}/${suboption}`)}
+            locale={locale}
             className="glass-hero rounded-full px-5 py-2 text-xs font-medium text-hero-text/90 transition-all hover:bg-white/25"
           >
-            返回 {suboptionLabel}
-          </Link>
+            {localize("返回")} {suboptionLabel}
+          </LocaleLink>
         }
       />
     );
 
     const footer = (
       <TransitionBar
-        tags={[`#${durationLabel}`, `#${suboptionLabel}`, "#冰島之旅"]}
+        tags={[`#${durationLabel}`, `#${suboptionLabel}`, `#${localize("冰島之旅")}`]}
       />
     );
 
     return (
       <HeroSection
         eyebrow={`${sourceLabel} · ${optionLabel} · ${suboptionLabel}`}
-        title={`${durationLabel}冬季跟團`}
-        subtitle="選擇環島或非環島路線，我們將為您規劃最適合的行程。"
+        title={localize(`${durationLabel}冬季跟團`)}
+        subtitle={localize("選擇環島或非環島路線，我們將為您規劃最適合的行程。")}
         tagline={`CHOOSE RING ROAD OR NON-RING ROUTE FOR YOUR ${duration}-DAY GROUP TOUR.`}
         align="center"
         priority={false}
@@ -202,7 +205,7 @@ export default async function TripDurationPage({ params }: PageProps) {
     );
   }
 
-  const packageData = getTripPackageWithPricing(tripKey);
+  const packageData = await getTripPackageWithPricingForRequest(tripKey);
 
   if (packageData) {
     return (
@@ -219,28 +222,29 @@ export default async function TripDurationPage({ params }: PageProps) {
     );
   }
 
-  const sourceLabel = SOURCE_LABELS[source];
-  const optionLabel = OPTION_LABELS[option];
-  const suboptionLabel = OPTION_LABELS[suboption];
+  const sourceLabel = sourceLabels[source];
+  const optionLabel = optionLabels[option];
+  const suboptionLabel = optionLabels[suboption];
   const durationLabel = `${duration}日`;
   const isComingSoon = COMING_SOON_TRIPS.has(tripKey);
 
   const header = (
     <SiteHeader
       rightSlot={
-        <Link
-          href={`/trips/iceland/${option}/${suboption}`}
+        <LocaleLink
+          href={path(`/trips/iceland/${option}/${suboption}`)}
+          locale={locale}
           className="glass-hero rounded-full px-5 py-2 text-xs font-medium text-hero-text/90 transition-all hover:bg-white/25"
         >
-          返回 {suboptionLabel}
-        </Link>
+          {localize("返回")} {suboptionLabel}
+        </LocaleLink>
       }
     />
   );
 
   const footer = (
     <TransitionBar
-      tags={[`#${durationLabel}`, `#${suboptionLabel}`, "#冰島之旅"]}
+      tags={[`#${durationLabel}`, `#${suboptionLabel}`, `#${localize("冰島之旅")}`]}
     />
   );
 
@@ -248,7 +252,7 @@ export default async function TripDurationPage({ params }: PageProps) {
     return (
       <HeroSection
         eyebrow={`${sourceLabel} · ${optionLabel} · ${suboptionLabel}`}
-        title="即將推出，敬請期待"
+        title={localize("即將推出，敬請期待")}
         align="center"
         highlightTitle
         priority={false}
@@ -261,8 +265,10 @@ export default async function TripDurationPage({ params }: PageProps) {
   return (
     <HeroSection
       eyebrow={`${sourceLabel} · ${optionLabel} · ${suboptionLabel}`}
-      title={`${durationLabel}行程`}
-      subtitle={`為您精選的 ${sourceLabel} · ${optionLabel} · ${suboptionLabel} · ${durationLabel} 行程`}
+      title={localize(`${durationLabel}行程`)}
+      subtitle={localize(
+        `為您精選的 ${sourceLabel} · ${optionLabel} · ${suboptionLabel} · ${durationLabel} 行程`,
+      )}
       align="start"
       priority={false}
       footer={footer}

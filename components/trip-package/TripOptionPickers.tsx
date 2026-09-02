@@ -1,7 +1,8 @@
 "use client";
 
-import Image from "next/image";
+import { TripImage } from "@/components/trip-package/TripImage";
 import { useCallback, useEffect, useState } from "react";
+import { resizeTripImageSrc } from "@/lib/trip-image";
 import { isTierBookable } from "@/lib/trip-pricing/corivo-availability";
 import { BookingShimmer } from "./BookingPriceShimmer";
 import { EcoHybridIcon } from "./EcoHybridIcon";
@@ -18,11 +19,7 @@ const VISIBLE_VEHICLE_COUNT = 6;
 const CARD_RADIUS = "rounded-[10px]";
 
 function optionImageSrc(url: string, width: number) {
-  if (url.includes("senlinmao.com/images/")) {
-    return url.replace(/w_\d+/, `w_${width}`);
-  }
-  const separator = url.includes("?") ? "&" : "?";
-  return `${url}${separator}w=${width}&q=80`;
+  return resizeTripImageSrc(url, width);
 }
 
 function gearTypeLabel(gearType?: VehicleTier["gearType"]) {
@@ -206,7 +203,7 @@ export function AccommodationTypePicker({
                       rowLayout ? "aspect-[4/3]" : "aspect-[16/10]"
                     }`}
                   >
-                    <Image
+                    <TripImage
                       src={optionImageSrc(tier.imageUrl, 640)}
                       alt={tier.label}
                       fill
@@ -371,7 +368,7 @@ export function AccommodationTypePicker({
                       <div
                         className={`relative aspect-[16/10] w-full overflow-hidden ${CARD_RADIUS} bg-primary-surface/25`}
                       >
-                        <Image
+                        <TripImage
                           src={optionImageSrc(
                             activeGallery[galleryIndex],
                             1200,
@@ -545,7 +542,7 @@ export function VehicleTypePicker({
                       rowLayout ? "aspect-[4/3]" : "aspect-[16/10]"
                     }`}
                   >
-                    <Image
+                    <TripImage
                       src={optionImageSrc(vehicle.imageUrl, 640)}
                       alt={vehicleCardTitle(vehicle)}
                       fill

@@ -1,18 +1,18 @@
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { HeroSection } from "@/components/HeroSection";
 import { PillButton } from "@/components/PillButton";
 import { SiteHeader } from "@/components/SiteHeader";
 import { TransitionBar } from "@/components/TransitionBar";
+import { LocaleLink } from "@/components/LocaleLink";
 import { buildPageMetadata } from "@/lib/seo/metadata";
+import { getLocalizedTripLabels } from "@/lib/i18n/trip-metadata";
+import { localizeTripOptions } from "@/lib/i18n/trip-options";
 import {
   COMING_SOON_TRIPS,
   ICELAND_GROUP_SUMMER_DAY_OPTIONS,
   ICELAND_GROUP_WINTER_DAY_OPTIONS,
   ICELAND_SELF_DRIVE_SUMMER_DAY_OPTIONS,
   ICELAND_SELF_DRIVE_WINTER_DAY_OPTIONS,
-  OPTION_LABELS,
-  SOURCE_LABELS,
 } from "@/lib/trip-options";
 
 type PageProps = {
@@ -24,6 +24,8 @@ const SEASON_IDS = new Set(["summer", "winter"]);
 
 export async function generateMetadata({ params }: PageProps) {
   const { source, option, suboption } = await params;
+  const { locale, sourceLabels, optionLabels, localize } =
+    await getLocalizedTripLabels();
 
   if (
     source !== "iceland" ||
@@ -31,33 +33,40 @@ export async function generateMetadata({ params }: PageProps) {
     !SEASON_IDS.has(suboption)
   ) {
     return buildPageMetadata({
-      title: "找不到行程 | 大樂旅行社",
-      description: "找不到您要的行程分類。",
+      title: localize("找不到行程 | 大樂旅行社"),
+      description: localize("找不到您要的行程分類。"),
       noIndex: true,
+      locale,
     });
   }
 
-  const sourceLabel = SOURCE_LABELS[source];
-  const optionLabel = OPTION_LABELS[option];
-  const suboptionLabel = OPTION_LABELS[suboption];
+  const sourceLabel = sourceLabels[source];
+  const optionLabel = optionLabels[option];
+  const suboptionLabel = optionLabels[suboption];
 
   if (!sourceLabel || !optionLabel || !suboptionLabel) {
     return buildPageMetadata({
-      title: "找不到行程 | 大樂旅行社",
-      description: "找不到您要的行程分類。",
+      title: localize("找不到行程 | 大樂旅行社"),
+      description: localize("找不到您要的行程分類。"),
       noIndex: true,
+      locale,
     });
   }
 
   return buildPageMetadata({
     title: `${sourceLabel} · ${optionLabel} · ${suboptionLabel} | 大樂旅行社`,
-    description: `選擇${suboptionLabel}${optionLabel}的天數與路線，規劃冰島之旅。`,
+    description: localize(
+      `選擇${suboptionLabel}${optionLabel}的天數與路線，規劃冰島之旅。`,
+    ),
     path: `/trips/${source}/${option}/${suboption}`,
+    locale,
   });
 }
 
 export default async function TripSuboptionPage({ params }: PageProps) {
   const { source, option, suboption } = await params;
+  const { locale, sourceLabels, optionLabels, localize, path } =
+    await getLocalizedTripLabels();
 
   if (
     source !== "iceland" ||
@@ -67,9 +76,9 @@ export default async function TripSuboptionPage({ params }: PageProps) {
     notFound();
   }
 
-  const sourceLabel = SOURCE_LABELS[source];
-  const optionLabel = OPTION_LABELS[option];
-  const suboptionLabel = OPTION_LABELS[suboption];
+  const sourceLabel = sourceLabels[source];
+  const optionLabel = optionLabels[option];
+  const suboptionLabel = optionLabels[suboption];
 
   if (!sourceLabel || !optionLabel || !suboptionLabel) {
     notFound();
@@ -78,28 +87,40 @@ export default async function TripSuboptionPage({ params }: PageProps) {
   const header = (
     <SiteHeader
       rightSlot={
-        <Link
-          href={`/trips/iceland/${option}`}
+        <LocaleLink
+          href={path(`/trips/iceland/${option}`)}
+          locale={locale}
           className="glass-hero rounded-full px-5 py-2 text-xs font-medium text-hero-text/90 transition-all hover:bg-white/25"
         >
-          返回 {optionLabel}
-        </Link>
+          {localize("返回")} {optionLabel}
+        </LocaleLink>
       }
     />
   );
 
   const footer = (
     <TransitionBar
-      tags={[`#${suboptionLabel}`, `#${optionLabel}`, "#冰島之旅"]}
+      tags={[
+        `#${suboptionLabel}`,
+        `#${optionLabel}`,
+        `#${localize("冰島之旅")}`,
+      ]}
     />
   );
 
+  const daySubtitle = localize("選擇您的行程天數，我們將為您規劃最適合的路線。");
+
   if (option === "self-drive" && suboption === "summer") {
+    const dayOptions = localizeTripOptions(
+      ICELAND_SELF_DRIVE_SUMMER_DAY_OPTIONS,
+      locale,
+    );
+
     return (
       <HeroSection
         eyebrow={`${sourceLabel} · ${optionLabel} · ${suboptionLabel}`}
-        title="夏季自駕"
-        subtitle="選擇您的行程天數，我們將為您規劃最適合的路線。"
+        title={localize("夏季自駕")}
+        subtitle={daySubtitle}
         tagline="PICK YOUR IDEAL SUMMER SELF-DRIVE DURATION."
         align="center"
         priority={false}
@@ -107,7 +128,7 @@ export default async function TripSuboptionPage({ params }: PageProps) {
         header={header}
       >
         <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
-          {ICELAND_SELF_DRIVE_SUMMER_DAY_OPTIONS.map((dayOption) => (
+          {dayOptions.map((dayOption) => (
             <PillButton key={dayOption.id} href={dayOption.href} variant="glass">
               {dayOption.label}
             </PillButton>
@@ -118,11 +139,16 @@ export default async function TripSuboptionPage({ params }: PageProps) {
   }
 
   if (option === "group" && suboption === "summer") {
+    const dayOptions = localizeTripOptions(
+      ICELAND_GROUP_SUMMER_DAY_OPTIONS,
+      locale,
+    );
+
     return (
       <HeroSection
         eyebrow={`${sourceLabel} · ${optionLabel} · ${suboptionLabel}`}
-        title="夏季跟團"
-        subtitle="選擇您的行程天數，我們將為您規劃最適合的路線。"
+        title={localize("夏季跟團")}
+        subtitle={daySubtitle}
         tagline="PICK YOUR IDEAL SUMMER GROUP TOUR DURATION."
         align="center"
         priority={false}
@@ -130,7 +156,7 @@ export default async function TripSuboptionPage({ params }: PageProps) {
         header={header}
       >
         <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
-          {ICELAND_GROUP_SUMMER_DAY_OPTIONS.map((dayOption) => (
+          {dayOptions.map((dayOption) => (
             <PillButton key={dayOption.id} href={dayOption.href} variant="glass">
               {dayOption.label}
             </PillButton>
@@ -141,11 +167,16 @@ export default async function TripSuboptionPage({ params }: PageProps) {
   }
 
   if (option === "group" && suboption === "winter") {
+    const dayOptions = localizeTripOptions(
+      ICELAND_GROUP_WINTER_DAY_OPTIONS,
+      locale,
+    );
+
     return (
       <HeroSection
         eyebrow={`${sourceLabel} · ${optionLabel} · ${suboptionLabel}`}
-        title="冬季跟團"
-        subtitle="選擇您的行程天數，我們將為您規劃最適合的路線。"
+        title={localize("冬季跟團")}
+        subtitle={daySubtitle}
         tagline="PICK YOUR IDEAL WINTER GROUP TOUR DURATION."
         align="center"
         priority={false}
@@ -153,7 +184,7 @@ export default async function TripSuboptionPage({ params }: PageProps) {
         header={header}
       >
         <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
-          {ICELAND_GROUP_WINTER_DAY_OPTIONS.map((dayOption) => (
+          {dayOptions.map((dayOption) => (
             <PillButton key={dayOption.id} href={dayOption.href} variant="glass">
               {dayOption.label}
             </PillButton>
@@ -164,11 +195,16 @@ export default async function TripSuboptionPage({ params }: PageProps) {
   }
 
   if (option === "self-drive" && suboption === "winter") {
+    const dayOptions = localizeTripOptions(
+      ICELAND_SELF_DRIVE_WINTER_DAY_OPTIONS,
+      locale,
+    );
+
     return (
       <HeroSection
         eyebrow={`${sourceLabel} · ${optionLabel} · ${suboptionLabel}`}
-        title="冬季自駕"
-        subtitle="選擇您的行程天數，我們將為您規劃最適合的路線。"
+        title={localize("冬季自駕")}
+        subtitle={daySubtitle}
         tagline="PICK YOUR IDEAL WINTER SELF-DRIVE DURATION."
         align="center"
         priority={false}
@@ -176,7 +212,7 @@ export default async function TripSuboptionPage({ params }: PageProps) {
         header={header}
       >
         <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
-          {ICELAND_SELF_DRIVE_WINTER_DAY_OPTIONS.map((dayOption) => (
+          {dayOptions.map((dayOption) => (
             <PillButton key={dayOption.id} href={dayOption.href} variant="glass">
               {dayOption.label}
             </PillButton>
@@ -193,7 +229,7 @@ export default async function TripSuboptionPage({ params }: PageProps) {
     return (
       <HeroSection
         eyebrow={`${sourceLabel} · ${optionLabel} · ${suboptionLabel}`}
-        title="即將推出，敬請期待"
+        title={localize("即將推出，敬請期待")}
         align="center"
         highlightTitle
         priority={false}
@@ -206,8 +242,10 @@ export default async function TripSuboptionPage({ params }: PageProps) {
   return (
     <HeroSection
       eyebrow={`${sourceLabel} · ${optionLabel}`}
-      title={`${suboptionLabel}行程`}
-      subtitle={`為您精選的 ${sourceLabel} · ${optionLabel} · ${suboptionLabel} 行程`}
+      title={localize(`${suboptionLabel}行程`)}
+      subtitle={localize(
+        `為您精選的 ${sourceLabel} · ${optionLabel} · ${suboptionLabel} 行程`,
+      )}
       align="start"
       priority={false}
       footer={footer}

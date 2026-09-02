@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { TripImage } from "@/components/trip-package/TripImage";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { TripAttraction } from "@/lib/trip-packages/types";
 import { TripSpotDetailModal } from "./TripSpotDetailModal";
@@ -117,7 +117,7 @@ export function TripSpotCardGrid({
               aria-label={`${cardAriaLabelPrefix}：${spot.name}`}
             >
               <div className="relative h-[118px] w-full overflow-hidden rounded-t-[10px] bg-primary-surface/25">
-                <Image
+                <TripImage
                   src={spotImageSrc(spot.imageUrl, 320)}
                   alt={spot.name}
                   fill

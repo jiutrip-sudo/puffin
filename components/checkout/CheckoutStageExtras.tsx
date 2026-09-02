@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { TripImage } from "@/components/trip-package/TripImage";
 import Link from "next/link";
 import { CheckoutPromoCode } from "./CheckoutPromoCode";
 import { useEffect, useMemo, useState } from "react";
@@ -225,7 +225,7 @@ export function CheckoutStageExtras({
                           >
                             <div className="checkout-extra-card__media">
                               {extra.imageUrl ? (
-                                <Image
+                                <TripImage
                                   src={extra.imageUrl}
                                   alt=""
                                   fill

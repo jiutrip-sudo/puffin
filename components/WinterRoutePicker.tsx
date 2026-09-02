@@ -1,8 +1,12 @@
+"use client";
+
 import { CircleButton } from "@/components/CircleButton";
 import {
   getIcelandGroupWinterRouteOptions,
   getIcelandSelfDriveWinterRouteOptions,
 } from "@/lib/trip-options";
+import { localizeTripOptions } from "@/lib/i18n/trip-options";
+import { useSiteLocale } from "@/components/SiteLocaleProvider";
 
 type WinterRoutePickerProps = {
   duration: string;
@@ -13,10 +17,13 @@ export function WinterRoutePicker({
   duration,
   variant,
 }: WinterRoutePickerProps) {
-  const routeOptions =
+  const locale = useSiteLocale();
+  const routeOptions = localizeTripOptions(
     variant === "group"
       ? getIcelandGroupWinterRouteOptions(duration)
-      : getIcelandSelfDriveWinterRouteOptions(duration);
+      : getIcelandSelfDriveWinterRouteOptions(duration),
+    locale,
+  );
 
   return (
     <div className="flex items-center justify-center gap-10 md:gap-16">

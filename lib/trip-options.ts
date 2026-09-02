@@ -1,3 +1,6 @@
+import type { SiteLocale } from "@/lib/site-locale";
+import { localePath } from "@/lib/i18n/paths";
+
 export type TripOption = {
   id: string;
   label: string;
@@ -222,6 +225,68 @@ export function getIcelandGroupSummerPackageTripKey(
   }
 
   return `${baseTripKey}/${route}`;
+}
+
+/** 將套餐 tripKey 轉為可直達詳細頁的 URL 路徑（含路線變體後綴） */
+export function getTripPackageHref(
+  tripKey: string,
+  locale: SiteLocale = "zh-TW",
+): string {
+  const parts = tripKey.split("/");
+  if (parts.length < 4 || parts[0] !== "iceland") {
+    return localePath(`/trips/${tripKey}`, locale);
+  }
+
+  const [, option, suboption, duration, ...routeParts] = parts;
+
+  if (routeParts.length > 0) {
+    const route = routeParts[0];
+    if (
+      option === "group" &&
+      suboption === "summer" &&
+      ICELAND_GROUP_SUMMER_ROUTE_IDS.has(route)
+    ) {
+      return localePath(`/trips/${tripKey}`, locale);
+    }
+    if (ICELAND_WINTER_ROUTE_IDS.has(route)) {
+      return localePath(`/trips/${tripKey}`, locale);
+    }
+  }
+
+  if (
+    option === "self-drive" &&
+    suboption === "winter" &&
+    ICELAND_SELF_DRIVE_WINTER_ROUTE_PICKER_DAY_IDS.has(duration)
+  ) {
+    return localePath(
+      `/trips/iceland/self-drive/winter/${duration}/ring`,
+      locale,
+    );
+  }
+
+  if (
+    option === "group" &&
+    suboption === "winter" &&
+    ICELAND_GROUP_WINTER_ROUTE_PICKER_DAY_IDS.has(duration)
+  ) {
+    return localePath(`/trips/iceland/group/winter/${duration}/ring`, locale);
+  }
+
+  if (
+    option === "group" &&
+    suboption === "summer" &&
+    ICELAND_GROUP_SUMMER_ROUTE_PICKER_DAY_IDS.has(duration)
+  ) {
+    const defaultRoute = getIcelandGroupSummerRouteOptions(duration)[0]?.id;
+    if (defaultRoute) {
+      return localePath(
+        `/trips/iceland/group/summer/${duration}/${defaultRoute}`,
+        locale,
+      );
+    }
+  }
+
+  return localePath(`/trips/${tripKey}`, locale);
 }
 
 export const ICELAND_SELF_DRIVE_SEASON_DAY_IDS: Record<string, Set<string>> = {

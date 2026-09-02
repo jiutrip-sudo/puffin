@@ -1,6 +1,9 @@
 "use client";
 
 import { forwardRef, useEffect, useState } from "react";
+import { useSiteLocale } from "@/components/SiteLocaleProvider";
+import { t } from "@/lib/i18n/messages";
+import { localizeText } from "@/lib/i18n/localize";
 
 type TripSectionNavProps = {
   elevated?: boolean;
@@ -10,16 +13,17 @@ type TripSectionNavProps = {
 
 export const TripSectionNav = forwardRef<HTMLElement, TripSectionNavProps>(
   function TripSectionNav({ elevated = false, roomSectionLabel = "房型車型" }, ref) {
+  const locale = useSiteLocale();
   const [activeId, setActiveId] = useState<string>("overview");
 
   const sections = [
-    { id: "overview", label: "簡介" },
-    { id: "route", label: "路線" },
-    { id: "itinerary", label: "行程" },
-    { id: "inclusions", label: "費用包含" },
-    { id: "room-vehicle", label: roomSectionLabel },
-    { id: "faq", label: "常見問題" },
-    { id: "similar", label: "相似行程" },
+    { id: "overview", label: t("trip.section.overview", locale) },
+    { id: "route", label: t("trip.nav.route", locale) },
+    { id: "itinerary", label: t("trip.nav.itineraryShort", locale) },
+    { id: "inclusions", label: t("trip.nav.inclusionsShort", locale) },
+    { id: "room-vehicle", label: localizeText(roomSectionLabel, locale) },
+    { id: "faq", label: t("trip.section.faq", locale) },
+    { id: "similar", label: t("trip.nav.similarShort", locale) },
   ] as const;
 
   useEffect(() => {
@@ -41,7 +45,7 @@ export const TripSectionNav = forwardRef<HTMLElement, TripSectionNavProps>(
     });
 
     return () => observer.disconnect();
-  }, [roomSectionLabel]);
+  }, [roomSectionLabel, locale]);
 
   return (
     <nav
@@ -51,7 +55,7 @@ export const TripSectionNav = forwardRef<HTMLElement, TripSectionNavProps>(
           ? "glass-white"
           : "border-foreground/10 bg-background/90 backdrop-blur-md"
       }`}
-      aria-label="行程分頁"
+      aria-label={t("trip.nav.sections", locale)}
     >
       <div className="mx-auto flex max-w-7xl gap-1 overflow-x-auto px-4 py-2 md:px-8 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {sections.map(({ id, label }) => (

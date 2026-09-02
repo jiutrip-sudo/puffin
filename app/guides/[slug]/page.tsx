@@ -1,10 +1,13 @@
-import Link from "next/link";
+import { LocaleLink } from "@/components/LocaleLink";
 import { notFound } from "next/navigation";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 import { getAllGuideSlugs, getGuideBySlug } from "@/lib/guides/registry";
 import { GuideTripCta } from "@/components/guides/GuideTripCta";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { absoluteUrl } from "@/lib/site-url";
+import { getRequestLocale } from "@/lib/i18n/server";
+import { localizeDeep, localizeText } from "@/lib/i18n/localize";
+import { localePath } from "@/lib/i18n/paths";
 
 type GuidePageProps = {
   params: Promise<{ slug: string }>;
@@ -16,38 +19,45 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: GuidePageProps) {
   const { slug } = await params;
+  const locale = await getRequestLocale();
   const article = getGuideBySlug(slug);
   if (!article) {
     return buildPageMetadata({
-      title: "找不到攻略 | 大樂旅行社",
-      description: "找不到您要的攻略文章。",
+      title: localizeText("找不到攻略 | 大樂旅行社", locale),
+      description: localizeText("找不到您要的攻略文章。", locale),
       noIndex: true,
+      locale,
     });
   }
 
+  const localized = localizeDeep(article, locale);
+
   return buildPageMetadata({
-    title: `${article.title} | 大樂旅行社`,
-    description: article.description,
+    title: `${localized.title} | 大樂旅行社`,
+    description: localized.description,
     path: `/guides/${slug}`,
+    locale,
   });
 }
 
 export default async function GuideArticlePage({ params }: GuidePageProps) {
   const { slug } = await params;
+  const locale = await getRequestLocale();
   const article = getGuideBySlug(slug);
 
   if (!article) {
     notFound();
   }
 
-  const pageUrl = absoluteUrl(`/guides/${slug}`);
+  const localized = localizeDeep(article, locale);
+  const pageUrl = absoluteUrl(localePath(`/guides/${slug}`, locale));
 
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
-    headline: article.title,
-    description: article.description,
-    datePublished: article.publishedAt,
+    headline: localized.title,
+    description: localized.description,
+    datePublished: localized.publishedAt,
     author: {
       "@type": "Organization",
       name: "大樂旅行社股份有限公司",
@@ -61,16 +71,18 @@ export default async function GuideArticlePage({ params }: GuidePageProps) {
         <JsonLd data={jsonLd} />
         <header className="guides-article__header">
           <p className="guides-article__eyebrow">
-            <Link href="/guides">攻略</Link>
+            <LocaleLink href="/guides" locale={locale}>
+              {localizeText("攻略", locale)}
+            </LocaleLink>
             <span aria-hidden="true"> · </span>
-            冰島自駕
+            {localizeText("冰島自駕", locale)}
           </p>
-          <h1 className="guides-article__title">{article.title}</h1>
-          <p className="guides-article__lead">{article.description}</p>
+          <h1 className="guides-article__title">{localized.title}</h1>
+          <p className="guides-article__lead">{localized.description}</p>
         </header>
 
         <div className="guides-article__body">
-          {article.sections.map((section) => (
+          {localized.sections.map((section) => (
             <section key={section.heading} className="guides-article__section">
               <h2 className="guides-article__heading">{section.heading}</h2>
               {section.paragraphs.map((paragraph) => (

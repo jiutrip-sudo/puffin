@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { TripImage } from "@/components/trip-package/TripImage";
 import { useCallback, useEffect, useState } from "react";
 import type { TripAttraction } from "@/lib/trip-packages/types";
 import {
@@ -110,7 +110,7 @@ export function TripSpotDetailModal({ spot, onClose }: TripSpotDetailModalProps)
                   <div
                     className={`relative aspect-[16/10] w-full overflow-hidden ${TRIP_SPOT_CARD_RADIUS} bg-primary-surface/25`}
                   >
-                    <Image
+                    <TripImage
                       src={spotImageSrc(activeGallery[galleryIndex], 1200)}
                       alt={spot.name}
                       fill

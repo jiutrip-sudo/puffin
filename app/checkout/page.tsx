@@ -5,6 +5,9 @@ import { getDefaultVehicleTier } from "@/lib/trip-pricing/calculate";
 import { getPricingConfig } from "@/lib/trip-pricing/fetch";
 import { resolveDefaultStartDate } from "@/lib/trip-pricing/validate-booking-date";
 import { getAllTripPackages } from "@/lib/trip-packages/registry";
+import { getRequestLocale } from "@/lib/i18n/server";
+import { localizeDeep, localizeText } from "@/lib/i18n/localize";
+import { localePath } from "@/lib/i18n/paths";
 
 type CheckoutPageProps = {
   searchParams: Promise<Record<string, string | string[] | undefined>>;
@@ -18,6 +21,7 @@ function firstParam(
 }
 
 export default async function CheckoutPage({ searchParams }: CheckoutPageProps) {
+  const locale = await getRequestLocale();
   const params = await searchParams;
   const packageId =
     firstParam(params.packageId) ?? "iceland-self-drive-winter-4";
@@ -28,11 +32,18 @@ export default async function CheckoutPage({ searchParams }: CheckoutPageProps) 
   if (!pricingConfig) {
     return (
       <div className="checkout-empty">
-        <h1>找不到套餐</h1>
-        <Link href="/">返回首頁</Link>
+        <h1>{localizeText("找不到套餐", locale)}</h1>
+        <Link href={localePath("/", locale)}>
+          {localizeText("返回首頁", locale)}
+        </Link>
       </div>
     );
   }
+
+  const localizedPricing = localizeDeep(pricingConfig, locale);
+  const localizedPackage = tripPackage
+    ? localizeDeep(tripPackage, locale)
+    : undefined;
 
   const session = parseCheckoutSession(
     {
@@ -46,33 +57,36 @@ export default async function CheckoutPage({ searchParams }: CheckoutPageProps) 
       vehicleTier: firstParam(params.vehicleTier),
     },
     {
-      packageId: pricingConfig.packageId,
-      packageTitle: tripPackage?.title ?? "冰島行程套餐",
-      accommodationTier: pricingConfig.tiers[0]?.id ?? "comfort",
-      vehicleTier: getDefaultVehicleTier(pricingConfig),
-      startDate: resolveDefaultStartDate(pricingConfig),
+      packageId: localizedPricing.packageId,
+      packageTitle: localizedPackage?.title ?? localizeText("冰島行程套餐", locale),
+      accommodationTier: localizedPricing.tiers[0]?.id ?? "comfort",
+      vehicleTier: getDefaultVehicleTier(localizedPricing),
+      startDate: resolveDefaultStartDate(localizedPricing),
     },
   );
 
   if (!session) {
     return (
       <div className="checkout-empty">
-        <h1>無法開始預訂</h1>
-        <p>請先選擇出發日期與旅客人數。</p>
-        <Link href={tripPackage?.backHref ?? "/iceland"}>返回行程頁</Link>
+        <h1>{localizeText("無法開始預訂", locale)}</h1>
+        <p>{localizeText("請先選擇出發日期與旅客人數。", locale)}</p>
+        <Link href={localePath(localizedPackage?.backHref ?? "/iceland", locale)}>
+          {localizeText("返回行程頁", locale)}
+        </Link>
       </div>
     );
   }
 
   return (
     <CheckoutFlow
-      pricingConfig={pricingConfig}
+      pricingConfig={localizedPricing}
       initialSession={session}
-      backHref={
-        tripPackage
-          ? `/trips/${tripPackage.tripKey}`
-          : "/trips/iceland/self-drive/winter/4"
-      }
+      backHref={localePath(
+        localizedPackage
+          ? `/trips/${localizedPackage.tripKey}`
+          : "/trips/iceland/self-drive/winter/4",
+        locale,
+      )}
     />
   );
 }

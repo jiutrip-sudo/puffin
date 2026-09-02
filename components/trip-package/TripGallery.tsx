@@ -1,8 +1,9 @@
 "use client";
 
-import Image from "next/image";
+import { TripImage } from "@/components/trip-package/TripImage";
 import { useCallback, useEffect, useState } from "react";
 import type { GalleryImage } from "@/lib/trip-packages/types";
+import { resizeTripImageSrc } from "@/lib/trip-image";
 
 type TripGalleryProps = {
   images: GalleryImage[];
@@ -17,11 +18,6 @@ const MOSAIC_SLOTS = [
   "col-start-3 row-start-2",
   "col-start-4 row-start-2",
 ] as const;
-
-function gallerySrc(url: string, width: number) {
-  const separator = url.includes("?") ? "&" : "?";
-  return `${url}${separator}w=${width}&q=80`;
-}
 
 type MosaicTileProps = {
   image: GalleryImage;
@@ -49,8 +45,8 @@ function MosaicTile({
           : `放大檢視：${image.alt}`
       }
     >
-      <Image
-        src={gallerySrc(image.url, 640)}
+      <TripImage
+        src={resizeTripImageSrc(image.url, 640)}
         alt={image.alt}
         fill
         className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
@@ -119,8 +115,8 @@ export function TripGallery({ images }: TripGalleryProps) {
             className="group relative aspect-[16/10] w-full overflow-hidden bg-primary-surface/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             aria-label={`放大檢視：${images[0].alt}`}
           >
-            <Image
-              src={gallerySrc(images[0].url, 1200)}
+            <TripImage
+              src={resizeTripImageSrc(images[0].url, 1200)}
               alt={images[0].alt}
               fill
               className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
@@ -196,8 +192,8 @@ export function TripGallery({ images }: TripGalleryProps) {
             onClick={(event) => event.stopPropagation()}
           >
             <div className="relative h-[70vh] w-full">
-              <Image
-                src={gallerySrc(activeImage.url, 1600)}
+              <TripImage
+                src={resizeTripImageSrc(activeImage.url, 1600)}
                 alt={activeImage.alt}
                 fill
                 className="object-contain"

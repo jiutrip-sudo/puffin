@@ -58,7 +58,7 @@ export const icelandSelfDriveWinter9Pricing: PricingConfig = {
       modalTitle: "關於經濟型房型",
       paragraphs: [
         "民宿或同等級住宿標準，僅含基礎的房間設施，包含公共衛浴，免費 WiFi，每日早餐。如果您的預算有限，經濟型將是一個不錯的選擇。",
-        "注意：跟團套餐僅可選擇雷克雅未克地區的住宿等級，非首都區域的住宿等級僅限自駕套餐自由選擇。",
+        "注意：跟團套餐僅可選擇雷克雅維克地區的住宿等級，非首都區域的住宿等級僅限自駕套餐自由選擇。",
         "經濟型示例飯店：Guesthouse Aurora、Efstidalur Farm、Snorri Guesthouse、Skjaldarvík Guesthouse 等。",
       ],
       galleryImages: [
@@ -81,10 +81,10 @@ export const icelandSelfDriveWinter9Pricing: PricingConfig = {
       modalTitle: "關於舒適型房型",
       paragraphs: [
         "套餐內預設的住宿類型。三星級飯店或同等住宿標準，完善的飯店設施，包含獨立衛浴，免費 WiFi，每日早餐。舒適型住宿能夠滿足大多數旅客的住宿標準和需求，是我們推薦的住宿等級。",
-        "注意：跟團套餐僅可選擇雷克雅未克地區的住宿等級，非首都區域的住宿等級僅限自駕套餐自由選擇。",
+        "注意：跟團套餐僅可選擇雷克雅維克地區的住宿等級，非首都區域的住宿等級僅限自駕套餐自由選擇。",
         "舒適型示例飯店：",
-        "首都雷克雅未克地區：Hótel Klettur、Fosshótel Lind、Skuggi Hótel、Reykjavík Lights 等。",
-        "非首都雷克雅未克地區：Hótel Selfoss、Hótel Katla、Fosshótel Núpar、Fosshotel Vatnajökull、Seljavellir、Selhótel、Berjaya Iceland Hotels、Hótel Varmaland、Fosshótel Reykholt 等。",
+        "首都雷克雅維克地區：Hótel Klettur、Fosshótel Lind、Skuggi Hótel、Reykjavík Lights 等。",
+        "非首都雷克雅維克地區：Hótel Selfoss、Hótel Katla、Fosshótel Núpar、Fosshotel Vatnajökull、Seljavellir、Selhótel、Berjaya Iceland Hotels、Hótel Varmaland、Fosshótel Reykholt 等。",
       ],
       galleryImages: [
         SLM_IMAGE("lights1_99b9eac460.webp"),
@@ -108,10 +108,10 @@ export const icelandSelfDriveWinter9Pricing: PricingConfig = {
       modalTitle: "關於品質型房型",
       paragraphs: [
         "四星級飯店或該地區特色精品飯店：完善的飯店設施，包含獨立衛浴，免費 WiFi，早餐。選擇品質型住宿會幫您預訂比舒適型飯店更優質的飯店，或舒適型飯店中更高等級的房型，住宿空間更加寬敞舒適，視野更好。品質型住宿適合預算充足，並對住宿有較高要求的旅客。",
-        "注意：跟團套餐僅可選擇雷克雅未克地區的住宿等級，非首都區域的住宿等級僅限自駕套餐自由選擇。",
+        "注意：跟團套餐僅可選擇雷克雅維克地區的住宿等級，非首都區域的住宿等級僅限自駕套餐自由選擇。",
         "品質型示例飯店：",
-        "首都雷克雅未克地區：Alda Hótel、Fosshótel Reykjavík、Exeter、Reykjavík Marina、Hótel Óðinsvé 等。",
-        "非首都雷克雅未克地區：Hótel Geysir、Fosshótel Austfirðir、Landhótel、Stracta Hótel、Hótel Kría、Magma hótel、Fosshótel Glacier Lagoon、Hérað、1001 Nótt、Hótel Laxá、Sigló Hotel、Berjaya Iceland Hotels、Hótel KEA、Fosshótel Stykkishólmur 等。",
+        "首都雷克雅維克地區：Alda Hótel、Fosshótel Reykjavík、Exeter、Reykjavík Marina、Hótel Óðinsvé 等。",
+        "非首都雷克雅維克地區：Hótel Geysir、Fosshótel Austfirðir、Landhótel、Stracta Hótel、Hótel Kría、Magma hótel、Fosshótel Glacier Lagoon、Hérað、1001 Nótt、Hótel Laxá、Sigló Hotel、Berjaya Iceland Hotels、Hótel KEA、Fosshótel Stykkishólmur 等。",
       ],
       galleryImages: [
         SLM_IMAGE("skuggi_1_f16c0bb950.webp"),

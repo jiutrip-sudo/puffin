@@ -1,13 +1,11 @@
 import type { TripAttraction } from "@/lib/trip-packages/types";
 
+import { resizeTripImageSrc } from "@/lib/trip-image";
+
 export const TRIP_SPOT_CARD_RADIUS = "rounded-[10px]";
 
 export function spotImageSrc(url: string, width: number) {
-  if (url.includes("senlinmao.com/images/")) {
-    return url.replace(/w_\d+/, `w_${width}`);
-  }
-  const separator = url.includes("?") ? "&" : "?";
-  return `${url}${separator}w=${width}&q=80`;
+  return resizeTripImageSrc(url, width);
 }
 
 export function spotGallery(spot: TripAttraction) {

@@ -17,7 +17,7 @@ export const icelandGroupWinter5Pricing: PricingConfig = {
   bookingDateRange: { min: "2026-11-01", max: "2027-04-10" },
   tripDurationDays: 5,
   accommodationIntro:
-    "在大樂旅行社的跟團套餐中，僅雷克雅未克地區住宿可選等級（經濟型、舒適型、品質型），各等級均含免費 WiFi 及每日早餐，其中經濟型為公共衛浴。",
+    "在大樂旅行社的跟團套餐中，僅雷克雅維克地區住宿可選等級（經濟型、舒適型、品質型），各等級均含免費 WiFi 及每日早餐，其中經濟型為公共衛浴。",
   ageBands: {
     childMultiplier: 0.75,
     infantMultiplier: 0,
@@ -43,7 +43,7 @@ export const icelandGroupWinter5Pricing: PricingConfig = {
       modalTitle: "關於經濟型房型",
       paragraphs: [
         "民宿或同等級住宿標準，僅含基礎的房間設施，包含公共衛浴，免費 WiFi，每日早餐。如果您的預算有限，經濟型將是一個不錯的選擇。",
-        "注意：跟團套餐僅可選擇雷克雅未克地區的住宿等級。",
+        "注意：跟團套餐僅可選擇雷克雅維克地區的住宿等級。",
         "經濟型示例飯店：Guesthouse Aurora、Snorri Guesthouse、Skjaldarvík Guesthouse 等。",
       ],
       galleryImages: [
@@ -66,7 +66,7 @@ export const icelandGroupWinter5Pricing: PricingConfig = {
       modalTitle: "關於舒適型房型",
       paragraphs: [
         "套餐內預設的住宿類型。三星級飯店或同等住宿標準，完善的飯店設施，包含獨立衛浴，免費 WiFi，每日早餐。舒適型住宿能夠滿足大多數旅客的住宿標準和需求，是我們推薦的住宿等級。",
-        "注意：跟團套餐僅可選擇雷克雅未克地區的住宿等級。",
+        "注意：跟團套餐僅可選擇雷克雅維克地區的住宿等級。",
         "舒適型示例飯店：Hótel Klettur、Fosshótel Lind、Skuggi Hótel、Reykjavík Lights 等。",
       ],
       galleryImages: [
@@ -89,7 +89,7 @@ export const icelandGroupWinter5Pricing: PricingConfig = {
       modalTitle: "關於品質型房型",
       paragraphs: [
         "四星級飯店或該地區特色精品飯店：完善的飯店設施，包含獨立衛浴，免費 WiFi，早餐。品質型住宿適合預算充足、對住宿有較高要求的旅客。",
-        "注意：跟團套餐僅可選擇雷克雅未克地區的住宿等級。",
+        "注意：跟團套餐僅可選擇雷克雅維克地區的住宿等級。",
         "品質型示例飯店：Alda Hótel、Fosshótel Reykjavík、Reykjavík Marina、Hótel Óðinsvé 等。",
       ],
       galleryImages: [

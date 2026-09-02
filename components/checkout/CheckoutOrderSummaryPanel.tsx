@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { TripImage } from "@/components/trip-package/TripImage";
 import { formatIsk } from "@/lib/trip-pricing/calculate";
 import type { CheckoutSession } from "@/lib/checkout/types";
 import { BookingShimmer } from "@/components/trip-package/BookingPriceShimmer";
@@ -137,7 +137,7 @@ export function CheckoutOrderSummaryPanel({
       {isSheet && heroImage && (
         <div className="checkout-summary-sheet__head">
           <div className="checkout-summary-sheet__thumb">
-            <Image
+            <TripImage
               src={heroImage}
               alt=""
               width={72}
@@ -151,7 +151,7 @@ export function CheckoutOrderSummaryPanel({
 
       {!isSheet && showHero && heroImage && (
         <div className="checkout-sidebar__hero">
-          <Image
+          <TripImage
             src={heroImage}
             alt=""
             fill

@@ -34,7 +34,7 @@ export const icelandSelfDriveSummer10: TripPackage = {
   duration: { days: 10, nights: 9 },
   season: { label: "夏季", months: "4 月–10 月" },
   meta: {
-    departure: "雷克雅未克",
+    departure: "雷克雅維克",
     transport: "自駕",
     tourCode: "SLMSD-101",
   },
@@ -76,14 +76,14 @@ export const icelandSelfDriveSummer10: TripPackage = {
   ],
   intro: {
     summary:
-      "如果您有充足的假期，這個10天冰島自駕套餐將是您的不二之選。這個套餐可以帶您完整地體驗冰島最經典的1號公路自駕路線，同時遊覽著名的斯奈山半島。途中的風景將讓您的旅程充滿驚喜。",
-    full: `如果您有充足的假期，這個10天冰島自駕套餐將是您的不二之選。這個套餐可以帶您完整地體驗冰島最經典的1號公路自駕路線，同時遊覽著名的斯奈山半島。途中的風景將讓您的旅程充滿驚喜。
+      "這個 10 天 9 夜冰島夏季一號公路完整環島自駕，沿著冰島最著名的環島公路，盡覽黃金圈、南岸、東部峽灣、米湖、眾神瀑布、阿克雷里、西部白銀圈與斯奈山半島等夏日精華。夏季日照充沛、路況良好，節奏適中、安排務實。",
+    full: `這個 10 天 9 夜冰島夏季一號公路完整環島自駕，沿著冰島最著名的環島公路，盡覽黃金圈、南岸、東部峽灣、米湖、眾神瀑布、阿克雷里、西部白銀圈與斯奈山半島等夏日精華。套餐充分運用夏季長日照與良好路況，行程安排合理、節奏適中。
 
-您所期待的冰島著名景點例如藍湖溫泉（Blue Lagoon）、黃金圈（Golden Circle）、黑沙灘（Reynisfjara）、飛機殘骸（Plane DC-3 Wreck）、傑古沙龍冰河湖（Jökulsárlón）、鑽石沙灘（Diamond Beach）等都在行程中。除此之外，冰島北部的米湖（Lake Mývatn）、黛提瀑布（Dettifoss）、阿克雷裡（Akureyri）等均在線路中。同時在著名的斯奈山半島，您還會抵達風光攝影師們最愛的草帽山（Kirkjufell）與電影《白日夢想家》中的斯蒂基斯霍爾米小鎮（Stykkishólmur）。
+您將造訪黃金圈三大景點——辛格維利爾國家公園（Þingvellir National Park）、蓋錫爾間歇泉地帶（Geysir）與黃金瀑布（Gullfoss）；沿南岸探索壯麗瀑布、冰川與黑沙灘（Reynisfjara），夏季迪霍拉里（Dyrhólaey）可見海鸚棲息，亦可另行加購冰川徒步或冰河湖船遊。
 
-相比於跟團套餐，自駕遊套餐有著更多的自由空間，可以自由靈活的掌握時間，遊覽沿途更多的小眾景點。如果您對於戶外項目感興趣，那麼還可以選擇在套餐上客製增加例如騎冰島馬、冰川徒步、冰河湖船遊、絲浮拉大裂縫浮潛、胡薩維克觀鯨、火山內部探險等戶外項目。
+往東則穿越寧靜的東部峽灣海岸；北上米湖（Lake Mývatn）地區探索火山地質奇景，並造訪眾神瀑布（Goðafoss）與「北方之都」阿克雷里（Akureyri）。回程則遊覽西部白銀圈熔岩瀑布等風光，並安排一日探索「冰島縮影」斯奈山半島（Snæfellsnes），為環島旅程劃下句點。
 
-不如加入我們，這個為期十天的冰島夏季自駕遊將帶給您令人難以置信的自然美景和冒險體驗。無論是觀賞壯麗的瀑布、探索神秘的冰洞，還是沉浸在溫泉的懷抱中，您都將被冰島的原始與獨特所震撼。`,
+途中亦可另行加購觀鯨、溫泉體驗或絲浮拉浮潛等夏季活動。完成預訂後，您將收到行程策劃師為您客製的中文行程手冊，讓您輕鬆盡享冰島環島精華。`,
   },
   gallery: [
     {
@@ -172,7 +172,7 @@ export const icelandSelfDriveSummer10: TripPackage = {
       ],
       paragraphs: [
         "冰島“皇冠上的明珠”",
-        "傑古沙龍冰河湖（Jökulsárlón）是瓦特納冰川（Vatnajökull）南部出口冰川Breiðamerkurjökull冰川的一片瀉湖，靠近冰島1號環島公路，距離雷克雅未克約370公里，是冰島最偉大的自然奇觀之一。",
+        "傑古沙龍冰河湖（Jökulsárlón）是瓦特納冰川（Vatnajökull）南部出口冰川Breiðamerkurjökull冰川的一片瀉湖，靠近冰島1號環島公路，距離雷克雅維克約370公里，是冰島最偉大的自然奇觀之一。",
         "冰河湖的歷史不久，大約在20世紀30年代形成，氣候變暖是其主要成因。巨大的冰塊不斷從Breiðamerkurjökull冰川上斷裂掉落，漂浮在湖面上。湖面不寬，但深達250米，是冰島最深的湖泊。",
         "傑古沙龍冰河湖被《孤獨星球》列為此生必去景點之一。",
         "從水上游覽傑古沙龍冰河湖是最有趣且壯觀的方式。許多人喜歡乘船遊覽，因為這樣既能欣賞冰川湖，又能穿梭在冰山之間航行。有兩種船型——水陸兩棲船或衝鋒艇——可供選擇。其中最為熱門的選項就是傑古沙龍冰河湖水陸兩棲船遊。如果您想要更加沉浸式的體驗，那麼可以試試皮划艇項目，親手划船穿越鏡面般的水域，欣賞其充滿藍白色調的超現實環境。",
@@ -272,7 +272,7 @@ export const icelandSelfDriveSummer10: TripPackage = {
       ],
       paragraphs: [
         "美妙絕倫的30",
-        "眾神瀑布（Goðafoss）位於冰島北部鑽石圈線路內，位於米湖（Lake Mývatn）與阿克雷裡（Akureyri）的中間，靠近胡薩維克（Húsavík）、米湖地熱區（Mývatn Geothermal Area）、黛提瀑布（Dettifoss）等北部著名景點。",
+        "眾神瀑布（Goðafoss）位於冰島北部鑽石圈線路內，位於米湖（Lake Mývatn）與阿克雷里（Akureyri）的中間，靠近胡薩維克（Húsavík）、米湖地熱區（Mývatn Geothermal Area）、黛提瀑布（Dettifoss）等北部著名景點。",
         "眾神瀑布是冰島最壯觀的瀑布之一，Skjálfandafljót河的冰川河水從12米的半弧形懸崖上面落下，寬度則是達到了30米之寬，河水落下，形成了一幅藍綠色的漩渦圖案。",
         "而眾神瀑布在冰島這個遍佈著瀑布的國家脫穎而出，成為旅客之中最出名的景點之一，不僅是憑藉其景色之磅礴壯美，有關瀑布的古老故事更是為其增添了不少神話色彩，讓這支白霧籠罩的美麗瀑布再蒙上了一層歷史厚重金色的面紗。",
         "根據冰島傳說，在公元1000年，由於冰島信仰的宗教與歐洲主流的基督教不同，因而產生了矛盾，尤其是來自以挪威人為首的其他歐洲國家的壓力越來越大。當時的法律演講人Thorgeir Thorkelsson是一個受到冰島基督教派和舊教派雙方尊敬和敬仰的人物，他被選為最終作出決定的人。",
@@ -323,7 +323,7 @@ export const icelandSelfDriveSummer10: TripPackage = {
       ],
     },
     {
-      name: "赫倫瀑布",
+      name: "熔岩瀑布",
       nameEn: "Hraunfossar",
       region: "冰島西部",
       subtitle: "冰島西部熔岩地上冒出的壯觀瀑布群，您一定不想錯過。",
@@ -336,7 +336,7 @@ export const icelandSelfDriveSummer10: TripPackage = {
       ],
       paragraphs: [
         "上百條溪流匯聚而成的流水飛瀑",
-        "赫倫瀑布（Hraunfossar）又名熔岩瀑布，是一處位於冰島西部雷克霍特（Reykholt）附近的美麗而獨特的瀑布群，距離首都雷克雅未克約122公里，僅需1小時40分鐘的車程即可到達。",
+        "赫倫瀑布（Hraunfossar）又名熔岩瀑布，是一處位於冰島西部雷克霍特（Reykholt）附近的美麗而獨特的瀑布群，距離首都雷克雅維克約122公里，僅需1小時40分鐘的車程即可到達。",
         "就算在冰島這樣一個遍佈瀑布的國家，赫倫瀑布也憑藉其獨特的風景而成為了最有名的瀑布之一。赫倫瀑布並非像其他瀑布一樣，由一條河流流過懸崖而形成，而是上百條小溪流經這裡共同聚成了這一壯觀雄奇的水幕景觀。",
         "旅客們都說，瀑布的水似乎是從熔岩地底中生生冒出來的。然而實際上，赫倫瀑布與和它相鄰的兒童瀑布（Barnafossar）都是來自赫維塔河，這條冰川河發源自冰島西部的Hallmundarhraun熔岩原。",
         "在停車場旁的觀景臺上，旅客可以俯瞰赫倫瀑布、附近的兒童瀑布以及赫維塔河。當地人在1891年修建了一座橫跨河流的人行橋，並在整整一個世紀後對其進行了翻新。此外，還有一條徒步小徑可以從赫倫瀑布通往兒童瀑布。",
@@ -347,7 +347,7 @@ export const icelandSelfDriveSummer10: TripPackage = {
   ],
   routeOverviewSubtitle: "一號公路環島夏季自駕動線（含斯奈山半島）",
   routeStops: [
-    { label: "第 1 天", detail: "雷克雅未克（入境、取車、可選 Sky Lagoon）" },
+    { label: "第 1 天", detail: "雷克雅維克（入境、取車、可選 Sky Lagoon）" },
     { label: "第 2 天", detail: "黃金圈（辛格維利爾 → 間歇泉 → 黃金瀑布）→ 南岸" },
     { label: "第 3 天", detail: "南岸瀑布群 → 黑沙灘 → 維克 → 南岸住宿" },
     { label: "第 4 天", detail: "瓦特納冰川 → 傑古沙龍冰河湖 → 鑽石沙灘" },
@@ -355,8 +355,8 @@ export const icelandSelfDriveSummer10: TripPackage = {
     { label: "第 6 天", detail: "米湖及北部風光 → 米湖地區住宿" },
     { label: "第 7 天", detail: "眾神瀑布 → 阿克雷里 → 冰島北部" },
     { label: "第 8 天", detail: "斯奈山半島（教會山 → 斯蒂基斯霍爾米 → 海岸漁村）" },
-    { label: "第 9 天", detail: "西部白銀圈（熔岩瀑布、兒童瀑布）→ 雷克雅未克" },
-    { label: "第 10 天", detail: "雷克雅未克市區（可選）→ 機場離境" }
+    { label: "第 9 天", detail: "西部白銀圈（熔岩瀑布、兒童瀑布）→ 雷克雅維克" },
+    { label: "第 10 天", detail: "雷克雅維克市區（可選）→ 機場離境" }
   ],
   routeMap: {
     waypoints: [
@@ -364,7 +364,7 @@ export const icelandSelfDriveSummer10: TripPackage = {
         lng: -21.9426,
         lat: 64.1466,
         label: "第 1 天",
-        detail: "雷克雅未克（入境、取車）",
+        detail: "雷克雅維克（入境、取車）",
       },
       {
         lng: -20.5322,
@@ -412,13 +412,13 @@ export const icelandSelfDriveSummer10: TripPackage = {
         lng: -21.5,
         lat: 64.7,
         label: "第 9 天",
-        detail: "西部白銀圈 → 雷克雅未克",
+        detail: "西部白銀圈 → 雷克雅維克",
       },
       {
         lng: -21.9426,
         lat: 64.1466,
         label: "第 10 天",
-        detail: "雷克雅未克 → 機場離境",
+        detail: "雷克雅維克 → 機場離境",
       },
     ],
   },
@@ -426,9 +426,9 @@ export const icelandSelfDriveSummer10: TripPackage = {
     {
       day: 1,
       title: "入境日",
-      accommodation: "雷克雅未克",
+      accommodation: "雷克雅維克",
       description:
-        "到達冰島凱夫拉維克國際機場後，直接前往租車公司辦公室取車。工作人員會為您詳細講解冰島駕駛安全資訊，並帶你細緻的檢查車輛。之後您將駕車前往首都雷克雅未克，入住為您精心安排的飯店。如果您抵達冰島的時間較早，還可以提前準備好泳衣在取車後直接前往天空之境溫泉（Sky Lagoon），泡在清澈的溫泉中，面朝大海，身心放鬆下來，緩解飛行的疲勞，之後前往首都飯店。在安頓好之後， 如果時間充裕還可以遊覽一下市區。在色彩繽紛的房屋間穿行，體驗不一樣的建築風格。還可以在市中心Laugavegur購物主街逛逛各種設計品小店，登頂哈爾格林姆斯大教堂（Hallgrímskirkja），或在咖啡廳裡體驗一下冰島咖啡文化。除此之外雷克雅未克還有許多不錯的藝術館與博物館 ，如果您對藝術館、博物館感興趣不妨在市中心逛逛，隱藏在各個角落的藝術館會給你帶來不一樣的驚喜。當晚我們會安排您入住雷克雅未克市區的飯店。飯店處於交通便利，商業豐富的區域，您可以經歷了一天疲勞的形成之後，在市區體驗一下北歐的夜生活，泡一個溫泉喝一杯酒，睡個好覺，為第二天行程做準備。",
+        "今天是您入境冰島的第一天。抵達後請先至租車櫃檯取車，工作人員會協助檢查車輛，並說明冰島夏季環島安全駕駛須知。之後即可前往雷克雅維克精選飯店入住安頓。\n\n若時間充裕，可另行加購藍湖溫泉或 Sky Lagoon 天空之境溫泉放鬆身心，為接下來的環島自駕儲備體力。",
       highlights: icelandSelfDriveSummer10Day1Highlights,
       optionalActivities: icelandSelfDriveSummer10Day1OptionalActivities,
     },
@@ -437,7 +437,7 @@ export const icelandSelfDriveSummer10: TripPackage = {
       title: "黃金圈之旅",
       accommodation: "黃金圈地區",
       description:
-        "今天您將自駕前往冰島最著名也是最經典的路線黃金圈（Golden Circle）。 著名的辛格維利爾國家公園（Þingvellir National Park）、地質奇觀間歇泉（Geysir）與冰島第二大瀑布黃金瀑布（Gullfoss）均位於該路線上。辛格維利爾國家公園是冰島最重要的歷史和地質景點之一。當您進入公園時，您將被壯麗的自然景觀所包圍。公園內有清澈的湖泊和美麗的峽谷，以及宏偉的岩石和懸崖。在這裡，您可以欣賞到冰島地質板塊分裂的痕跡，站在歐洲和北美之間的大裂谷邊，感受到大自然的力量和壯觀。如果您會游泳，不妨前去公園內的絲浮拉裂谷（Silfra）感受一下浮潛 在兩大板塊之間的樂趣。在間歇泉，您會看到熱水和蒸汽會從地下噴湧而出，形成高達數十米的噴泉，這種景象絕對讓您終身難忘。要注意的是，現在最為活躍的史托克間歇泉（Strokkur）每隔5-10分鐘就會噴發，有時甚至猝不及防會連噴幾次，記得架好相機，屏息以待那一壯美瞬間。而在黃金圈的亮點之一：黃金瀑布，您會被它的巨大規模和威力所震撼。瀑布水流湍急，從數十米高的懸崖上奔流而下，形成了壯麗的白色水簾和噴射的水霧。幸運的話，還有彩虹相伴於上空，更加讓人心醉不已。",
+        "今日造訪冰島最著名的黃金圈路線，依序遊覽辛格維利爾國家公園、蓋錫爾間歇泉地帶與黃金瀑布（Gullfoss）三大景點。於辛格維利爾國家公園漫步時，亦可另行加購絲浮拉裂谷（Silfra）浮潛、騎馬或溫泉體驗。結束後繼續南下，今晚入住黃金圈地區。",
       highlights: icelandSelfDriveSummer10Day2Highlights,
       optionalActivities: icelandSelfDriveSummer10Day2OptionalActivities,
     },
@@ -446,7 +446,7 @@ export const icelandSelfDriveSummer10: TripPackage = {
       title: "冰島南岸風光",
       accommodation: "南部地區",
       description:
-        "今天您將沿著冰島1號環島公路南部線路繼續探險，去南岸看看那些讓人心潮澎湃的美景。首先，塞里雅蘭瀑布（Seljalandsfoss）和斯科加瀑布（Skógafoss）是絕對不能錯過的，這兩個瀑布的壯觀景象，絕對會讓你的相機快門停不下來。攝影師們超愛的飛機殘骸（Plane Wreck DC-3）和世界聞名的黑沙灘（Reynisfjara）也都在咱們的行程裡。如果你是在夏天，比如6月來自駕，那沿途的藍色魯冰花花海，絕對會讓你彷彿置身於夢幻之中。如果你覺得還不夠刺激，那就試試卡特拉冰洞（Katla Ice Cave）探險或者米達爾斯冰川雪地摩托，這些活動絕對能讓你的旅程更加精彩。遊覽完這些風光後，咱們可以在黑沙灘旁的維克鎮（Vík）好好休息一下。這個小鎮不僅風光秀麗，而且那些彩色的民居超級有冰島特色，給人一種安逸宜人的感覺。夏天來的話，還能看到南岸的午夜夕陽，那景色美得讓人心醉。",
+        "今天請一早出發，沿冰島南岸一號公路南下。夏季日照時數長，綠意盎然，沿途可見海鸚與野花點綴海岸。\n\n造訪塞里雅蘭瀑布（Seljalandsfoss）與斯科加瀑布（Skógafoss）；夏季可繞行至塞里雅蘭瀑布水幕後方小徑。繼續南下造訪黑沙灘（Reynisfjara），沿岸玄武岩石柱層層疊疊，遠處可見雷尼斯岩（Reynisdrangar）矗立海中；沿途亦可安排 DC-3 飛機殘骸，或另行加購冰川徒步等戶外體驗。今晚入住南岸。",
       highlights: icelandSelfDriveSummer10Day3Highlights,
       optionalActivities: icelandSelfDriveSummer10Day3OptionalActivities,
     },
@@ -455,7 +455,7 @@ export const icelandSelfDriveSummer10: TripPackage = {
       title: "傑古沙龍冰河湖、鑽石沙灘",
       accommodation: "東南部地區",
       description:
-        "今天您將繼續向東進發，到達斯卡夫塔山國家公園（Skaftafell National Park），此地最著名的莫過於斯卡夫塔冰川徒步項目，曾有多部電影在該冰川上進行拍攝，例如大家耳熟能詳的電影《星際穿越》、《蝙蝠俠：俠影之謎》、美劇《權力的遊戲》等等。位於斯卡夫塔保護區內的斯瓦提瀑布（Svartifoss）也正是冰島首都哈爾格林姆斯教堂和國家大劇院屋頂的設計靈感來源。 夏天是遊覽傑古沙龍冰河湖（Jökulsárlón）和鑽石沙灘（Diamond Beach）的絕佳時機，因為天氣較為溫暖，白晝時間長，可以更充分地欣賞到美景。當您到達冰河湖時，您會被那些巨大的浮冰所震撼。湖水呈現出藍綠色，而浮冰則在湖面上漂浮。您可以選擇參加遊船，駛近浮冰，近距離觀賞壯觀的冰川和冰山。在陽光的照射下，冰塊會反射出耀眼的光芒，令人歎為觀止。鑽石沙灘位於傑古沙龍冰河湖的出海口，是一個獨特的地方。沙灘上覆蓋著各種大小形狀各異的冰塊，宛如閃爍的鑽石散落在沙灘上，因此得名。您可以近距離觀察並觸摸這些冰塊，感受到它們的冰冷和獨特的質感。在一天的行程結束我們將入住冰河湖附近的小漁村：霍芬鎮（Höfn），又名赫本鎮，在這裡來品嚐一下最地道的冰島龍蝦，飽餐一頓後，在這個靜謐的漁港小鎮好夢到天亮。",
+        "今日繼續往東南前進，進入瓦特納冰川國家公園，造訪傑古沙龍冰河湖（Jökulsárlón）與鑽石沙灘（Diamond Beach）。夏季日照充足，浮冰在黑色沙灘上晶瑩閃耀，黑白對比格外震撼。\n\n若時間充裕，亦可另行加購冰河湖船遊或斯卡夫塔山冰川徒步，深入認識歐洲最大冰川的夏日奇景。今晚繼續入住南岸。",
       highlights: icelandSelfDriveSummer10Day4Highlights,
       optionalActivities: icelandSelfDriveSummer10Day4OptionalActivities,
     },
@@ -464,7 +464,7 @@ export const icelandSelfDriveSummer10: TripPackage = {
       title: "東部峽灣風光",
       accommodation: "東部峽灣",
       description:
-        "第五天您將來到冰島東部峽灣。 沿著1號公路繼續向東，就是都皮沃古爾（Djúpivogur）小鎮，而鎮上最特別的莫過於由冰島著名藝術家Sigurð Guðmundsson的作品Eggin í Gleðvík（快樂灣的蛋），代表著該區域34種不同鳥類， 如果您細細觀察會發現每一顆蛋的形狀都是不同的。冰島東部峽灣地區以其原始的自然景觀和迷人的小鎮而聞名。遊覽這些地方，您將有機會親身體驗冰島獨特而神奇的自然風光，感受到它們帶來的寧靜和宏偉。除了峽灣小鎮外，冰島東部地區還是冰島森林覆蓋面最大的地區也是馴鹿的出沒地，如果您足夠幸運，還能在途中遇到馴鹿群。同時，埃伊爾斯塔濟還以一個著名的湖泊而聞名——拉加爾湖（Lagarfjlót），傳說有人曾經在這裡目睹過水怪，如果您感興趣，不妨前來一探究竟。如果您今天的時間充足，那麼還可以在到達冰島東部最大城鎮埃伊爾斯塔濟（Egilsstaðir）的時候嘗試一下Vök Baths湖上溫泉，讓這個冰島唯一一個天然無味的溫泉洗去你一天的疲憊。",
+        "今日沿東部峽灣海岸公路北上，穿越幽靜峽灣與漁村，感受冰島東部壯闊而寧靜的夏日海岸風光。夏季東部綠意盎然，日照時數長，可從容探索沿途小鎮。今晚入住東部。",
       highlights: icelandSelfDriveSummer10Day5Highlights,
       optionalActivities: icelandSelfDriveSummer10Day5OptionalActivities,
     },
@@ -473,7 +473,7 @@ export const icelandSelfDriveSummer10: TripPackage = {
       title: "米湖及北部風光",
       accommodation: "米湖地區",
       description:
-        "這一天您將繼續向北進發，來到冰島北部的米湖地區（Lake Mývatn）。在到達米湖前您將來到全歐洲最大的瀑布：黛提瀑布（Dettifoss），這裡也是電影普羅米修斯開片段的場景拍攝地。從黛提瀑布繼續向北，就來到了歐洲的觀鯨之都胡薩維克（Húsavík），在這裡，您可以盡情享受出海追逐座頭鯨蹤影的奇幻旅程。米湖區有著與其他地區截然不同的地貌，這裡火山與地熱資源非常豐富，最有出名的幾個景區莫過於Námaskarð泥漿地熱區、Grjótagjá溫泉洞穴、Dimmuborgir黑暗城堡和Skútustaðagígar偽火山口。 其中，Námaskarð泥漿地熱區尤為特別，滿地沸騰的黑色泥漿池，地面蒸汽口散發著奇異的味道讓人印象深刻， 所以這裡也因此擁有了“惡魔的廚房” 的外號。 如果您更傾向於休閒，那麼一定不能錯過的就是北部的寶藏溫泉，米湖溫泉（Mývatn Nature Baths）與胡薩維克的Geosea海水溫泉。",
+        "今日前往北部米湖（Lake Mývatn）地區，探索偽火山口、熔岩地貌與地熱奇景等獨特火山地質景觀。夏季米湖水鳥豐富，是觀鳥的絕佳時節。亦可另行加購米湖溫泉等體驗。今晚入住米湖地區。",
       highlights: icelandSelfDriveSummer10Day6Highlights,
       optionalActivities: icelandSelfDriveSummer10Day6OptionalActivities,
     },
@@ -482,7 +482,7 @@ export const icelandSelfDriveSummer10: TripPackage = {
       title: "冰島北部",
       accommodation: "西北部地區",
       description:
-        "今天，您將在可愛的北部首府阿克雷裡（Akureyri）多做停留，隨後沿路北上游覽巨魔半島（Tröllaskagi）。在抵達阿克雷裡之前，還會前去象徵冰島教會信仰轉變的代表景點眾神瀑布（Goðafoss）一探究竟。到達阿克雷裡之後，你會驚奇的發現這裡所有的紅燈全部是愛心形狀的，這是政府為了讓大家走出08年金融危機的低迷，重新燃起對生活的信心與希望而精心設計。位於阿克雷裡市內的植物園（Akureyri Botanical Garden）也非常值得一看，這裡有著上百種冰島本都植物和上千種外來物種，完全免費，您可以隨意參觀。 隨後，您將繞開1號公路，將車頭轉向北面，從82號公路沿著峽灣一路行駛，探索巨魔半島。您將經過北部的美麗漁村達爾維克（Dalvík），再到冰島大陸最北部的小鎮錫格呂菲厄澤（Siglufjörður），最後抵達冰島西北部地區下榻飯店。",
+        "今日造訪冰島北部最具盛名的眾神瀑布（Goðafoss），冰川河水從弧形懸崖傾瀉而下，夏季綠意環繞尤為壯麗。之後可前往「北方之都」阿克雷里（Akureyri），漫步漁港城市街道，感受北部夏日風情。亦可另行加購觀鯨或米湖溫泉等體驗。今晚繼續入住北部。",
       highlights: icelandSelfDriveSummer10Day7Highlights,
       optionalActivities: icelandSelfDriveSummer10Day7OptionalActivities,
     },
@@ -491,16 +491,16 @@ export const icelandSelfDriveSummer10: TripPackage = {
       title: "斯奈山半島",
       accommodation: "西部地區",
       description:
-        "斯奈山半島（Snæfellsnes）堪稱是“冰島縮影” ，這裡有著豐富的地理地貌，也是儒勒·凡爾納小說《地心遊記》中的地心入口。大家一定更為熟知斯蒂基斯霍爾米（Stykkishólmur），這個小鎮又叫“白日夢想家小鎮”，因知名電影《白日夢想家》曾在此取景。接下來的景點，每一位來斯奈山半島的人都會被它的風光所折服，這就是著名的教會山（Kirkjufell）。作為斯奈山半島最著名的山峰，它同時是冰島最受歡迎的風光攝影地之一，您很有可能已經在環島途中各地的明信片中見過它的風采。Djúpalónssandur黑沙灘和怪物海岸（Lóndrangar）的海洋風光，一點也不輸給冰島南岸的景色。在被譽為“最美漁村”的阿爾納斯塔皮（Arnarstapi）旁，您可以找到布迪爾黑教堂（Búðakirkja），教堂本身是一座木製的小教堂，外牆漆成了黑色，與周圍的環境形成鮮明的對比。在陽光的照射下，黑教堂顯得神秘而莊嚴。您可以漫步在教堂周圍，感受它與周圍景色的和諧融合，",
+        "斯奈山半島被稱為「冰島縮影」，一日之內可見火山、冰川、黑沙灘、漁村與海岸峭壁等多元地貌。今日將造訪教會山（Kirkjufell）、布迪爾黑教堂、阿爾納斯塔皮海岸與斯蒂基斯霍爾米漁村，夏季日照時數長，可從容探索半島風光。傍晚返回西部住宿。",
       highlights: icelandSelfDriveSummer10Day8Highlights,
       optionalActivities: icelandSelfDriveSummer10Day8OptionalActivities,
     },
     {
       day: 9,
       title: "冰島西部白銀圈",
-      accommodation: "雷克雅未克",
+      accommodation: "雷克雅維克",
       description:
-        "今天的終點就是整個環島行程的起點首都雷克雅未克，在回到雷克雅未克之前還可以遊覽冰島白銀圈的景點。例如熔岩瀑布（Hraunfossar）、兒童瀑布（Barnafoss）、德爾達圖赫菲地熱溫泉（Deildartunguhver）等。 其中最有特色的莫過於熔岩瀑布，實際上，熔岩瀑布並不只是一條瀑布，而是一整個由地下水形成的瀑布群。無數條清澈的泉水從熔岩裂縫中流出，形成了全冰島最獨特的瀑布。如果是靠近秋季來訪，周圍的植被會全部變成金黃色，非常美麗。就在熔岩瀑布的上游，就是著名的兒童瀑布，其名字的由來還藏著一段悲傷的故事，不妨在參觀的時候一併瞭解下。如果您對於徒步感興趣那麼位於附近的Húsafell峽谷一定會是你的最愛，這裡是冰島西部地區最大的度假區，有著眾多的夏季別墅以及十幾條的徒步路線，您可以在這一地區盡情探索。",
+        "今日從西部返回雷克雅維克，沿途遊覽西部白銀圈（Silver Circle）風光：德爾達圖赫菲溫泉（Deildartunguhver）、熔岩瀑布（Hraunfossar）、兒童瀑布（Barnafoss）等西部特色景觀。夏季植被翠綠，瀑布群景色尤為秀麗。傍晚回到雷克雅維克住宿。",
       highlights: icelandSelfDriveSummer10Day9Highlights,
       optionalActivities: icelandSelfDriveSummer10Day9OptionalActivities,
     },
@@ -509,7 +509,7 @@ export const icelandSelfDriveSummer10: TripPackage = {
       title: "離境日",
       accommodation: "—",
       description:
-        "今天是您的離境日，您將驅車前往凱夫拉維克國際機場，並還車。如果您的航班時間較晚，可以將藍湖溫泉（Blue Lagoon）安排在本日前往，也可以利用時間更深入的遊覽首都雷克雅未克，探索一些街邊精品小店，購買一些伴手禮給親朋好友，或是品嚐一下獨特的冰島咖啡，度過悠閒時光。同時也別忘了在離境前到機場一樓大廳辦理退稅，或者到機場內的免稅店給親朋帶一些冰島特產的伴手禮。祝您一路順風。大樂旅行社旅行期待與您下次再相見！",
+        "歡樂時光總是過得特別快。今天是離境日，請預留時間前往凱夫拉維克國際機場辦理還車與退稅。若班機時間較晚，可在雷克雅維克市區多留片刻，最後感受這座北歐首都的夏日氛圍。期待您下次再來冰島！",
       highlights: icelandSelfDriveSummer10Day10Highlights,
       optionalActivities: icelandSelfDriveSummer10Day10OptionalActivities,
     }
@@ -607,7 +607,7 @@ export const icelandSelfDriveSummer10: TripPackage = {
         {
           question: "套餐單人間為什麼需要補差價？",
           answer:
-            "[{\"tag\":\"PARAGRAPH\",\"content\":[{\"tag\":null,\"content\":[\"因為冰島的單人間房價要高於雙人間房價的一半，而預定時的默認房價是按雙人間均攤至每人的價格來計算的。因此套餐內的單人間需要補交一筆差價。由於旅行團套餐系統設定在預定環節僅可以選首都雷克雅未克地區的房間數量，如果需要將套餐中包含的旅行團增加單人間，那麼需要在初始頁面選中1人來查看全程單人間價格，具體細節可諮詢客服。\"]",
+            "[{\"tag\":\"PARAGRAPH\",\"content\":[{\"tag\":null,\"content\":[\"因為冰島的單人間房價要高於雙人間房價的一半，而預定時的默認房價是按雙人間均攤至每人的價格來計算的。因此套餐內的單人間需要補交一筆差價。由於旅行團套餐系統設定在預定環節僅可以選首都雷克雅維克地區的房間數量，如果需要將套餐中包含的旅行團增加單人間，那麼需要在初始頁面選中1人來查看全程單人間價格，具體細節可諮詢客服。\"]",
         }
       ],
     },

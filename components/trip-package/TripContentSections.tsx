@@ -4,6 +4,8 @@ import dynamic from "next/dynamic";
 import { useState } from "react";
 import type { RouteMapConfig, ValueProp } from "@/lib/trip-packages/types";
 import { ROUTE_MAP_SKELETON_CLASS } from "./trip-route-map-layout";
+import { useSiteLocale } from "@/components/SiteLocaleProvider";
+import { t } from "@/lib/i18n/messages";
 
 const TripRouteMap = dynamic(() => import("./TripRouteMap"), {
   ssr: false,
@@ -19,6 +21,7 @@ type TripIntroSectionProps = {
 
 export function TripIntroSection({ summary, full }: TripIntroSectionProps) {
   const [expanded, setExpanded] = useState(false);
+  const locale = useSiteLocale();
 
   return (
     <div className="text-sm leading-relaxed text-foreground/80">
@@ -39,7 +42,7 @@ export function TripIntroSection({ summary, full }: TripIntroSectionProps) {
         onClick={() => setExpanded((v) => !v)}
         className="mt-4 text-sm font-semibold text-primary-dark hover:underline"
       >
-        {expanded ? "收合全文" : "展開全文"}
+        {expanded ? t("trip.intro.collapse", locale) : t("trip.intro.expand", locale)}
       </button>
     </div>
   );

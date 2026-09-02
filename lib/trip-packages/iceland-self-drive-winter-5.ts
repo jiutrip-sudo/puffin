@@ -24,7 +24,7 @@ export const icelandSelfDriveWinter5: TripPackage = {
   duration: { days: 5, nights: 4 },
   season: { label: "冬季", months: "11 月–3 月" },
   meta: {
-    departure: "雷克雅未克",
+    departure: "雷克雅維克",
     transport: "自駕",
     tourCode: "SLMSD-052",
   },
@@ -67,12 +67,12 @@ export const icelandSelfDriveWinter5: TripPackage = {
   ],
   intro: {
     summary:
-      "這個 5 天 4 夜冰島冬季精簡自駕套餐是冬季自駕的首選，不僅能將冬季極致美景收入眼中，還有機會看見舞動的北極光。行程充分考量冬季日照與路況，節奏適中、安排合理。",
-    full: `這個 5 天 4 夜冰島冬季精簡自駕套餐是冬季自駕的首選，不僅能將冬季極致的美景收入眼中，還有機會能看到舞動的北極光。這個自駕遊套餐充分考慮了冬季的日照時長以及路況，令行程變得更加合理、節奏也適中。行程中的南岸路線與黃金圈路線（Golden Circle）更是冰島最熱門路線，其中冬季的傑古沙龍冰河湖（Jökulsárlón）、獨一無二的藍冰洞（Blue Ice Cave）、還有地表被白雪覆蓋的黄金瀑布（Gullfoss）也是冬季最獨特的存在。
+      "這個 5 天 4 夜冰島冬季精簡自駕套餐是冬季自駕的入門首選，不僅能把冬季極致美景盡收眼底，還有機會看見舞動的北極光。行程充分顧及冬季日照與路況，節奏適中、安排務實。",
+    full: `這個 5 天 4 夜冰島冬季精簡自駕套餐是冬季自駕的入門首選，不僅能把冬季極致美景盡收眼底，還有機會看見舞動的北極光。套餐充分顧及冬季日照時數與路況，行程安排合理、節奏適中。南岸動線與黃金圈（Golden Circle）是冰島最熱門的路線；冬季的傑古沙龍冰河湖（Jökulsárlón）、獨一無二的藍冰洞（Blue Ice Cave），以及白雪覆蓋的黃金瀑布（Gullfoss），都是這個季節最值得造訪的風景。
 
-途中除了自然景觀外，您還可以搭配選擇一些戶外項目，比如在湛藍的冰川上徒步、參加冰河湖船遊、探險藍冰洞、感受獨一無二的冰島溫泉等眾多項目，為您的行程增加不一樣的樂趣。同時，您還可以靈活自主地掌握行程節奏，決定每一處停留的時長。
+途中您還可選擇戶外體驗，例如在湛藍冰川上徒步、參加冰河湖船遊、進入藍冰洞探險，或浸泡冰島地熱溫泉，為旅程增添不同樂趣；同時也能靈活掌握停留時間，依自己的步調安排每一天。
 
-在您預訂套餐後，您還會收到一份由行程策劃師單獨為您客製的行程路書，對於沿途景點、人文、歷史等都有詳細的介紹，並且還會根據您的時間來為您設計出最適合觀看極光的路線，讓您可以輕鬆地收穫南岸地區所有美景，同時專注地享受在冰島的旅程。不論是在藍湖溫泉中享受大自然的饋贈，還是在黑沙灘上聆聽地球的心跳，您都將留下獨一無二的回憶。`,
+完成預訂後，您將收到行程策劃師為您客製的中文行程手冊，沿途景點、人文、歷史與自然皆有詳盡說明，並會依您的班機與行程時間，規劃適合追極光的路線，讓您輕鬆盡享南岸與黃金圈精華。不論是在藍湖溫泉中放鬆身心，或是在黑沙灘聆聽海浪聲，都將留下獨一無二的回憶。`,
   },
   gallery: [
     {
@@ -194,7 +194,7 @@ export const icelandSelfDriveWinter5: TripPackage = {
         "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/jokulsarlon_unsplash2_3ff49270dd.jpg",
       ],
       paragraphs: [
-        "傑古沙龍冰河湖（Jökulsárlón）是瓦特納冰川（Vatnajökull）南部出口冰川Breiðamerkurjökull冰川的一片瀉湖，靠近冰島1號環島公路，距離雷克雅未克約370公里，是冰島最偉大的自然奇觀之一。",
+        "傑古沙龍冰河湖（Jökulsárlón）是瓦特納冰川（Vatnajökull）南部出口冰川Breiðamerkurjökull冰川的一片瀉湖，靠近冰島1號環島公路，距離雷克雅維克約370公里，是冰島最偉大的自然奇觀之一。",
         "冰河湖的歷史不久，大約在20世紀30年代形成，氣候變暖是其主要成因。巨大的冰塊不斷從Breiðamerkurjökull冰川上斷裂掉落，漂浮在湖面上。湖面不寬，但深達250米，是冰島最深的湖泊。",
         "傑古沙龍冰河湖被《孤獨星球》列為此生必去景點之一。它從一個狹窄的入口流入大西洋，隨河同流的冰塊被沖刷在黑沙灘上，留下了鑽石沙灘（Diamond Beach）這一壯觀景象。魚類豐富的冰河湖旁棲息著許多海豹，它們在湛藍的冰塊上曬著太陽，偶爾跳入湖中美美地飽餐一頓。景區全年開放，湖畔的小餐館也是如此。對於徒步愛好者來說，可以在傑古沙龍冰河湖與小冰河湖（Fjallsárlón）之間發現一條徒步路線，沿途風景優美，令人難忘。",
         "從水上游覽傑古沙龍冰河湖是最有趣且壯觀的方式。許多人喜歡乘船遊覽，因為這樣既能欣賞冰川湖，又能穿梭在冰山之間航行。有兩種船型——水陸兩棲船或衝鋒艇——可供選擇。其中最為熱門的選項就是傑古沙龍冰河湖水陸兩棲船遊。如果您想要更加沉浸式的體驗，那麼可以試試皮划艇項目，親手划船穿越鏡面般的水域，欣賞其充滿藍白色調的超現實環境。",
@@ -235,7 +235,7 @@ export const icelandSelfDriveWinter5: TripPackage = {
       ],
     },
     {
-      name: "黄金瀑布",
+      name: "黃金瀑布",
       nameEn: "Gullfoss",
       region: "冰島南部",
       subtitle: "在陽光下流動的黃金",
@@ -252,7 +252,7 @@ export const icelandSelfDriveWinter5: TripPackage = {
       ],
     },
     {
-      name: "間歇泉",
+      name: "蓋錫爾間歇泉地帶",
       nameEn: "The Great Geysir and Strokkur",
       region: "冰島南部",
       subtitle: "感受來自地表之下的自然力量",
@@ -271,11 +271,11 @@ export const icelandSelfDriveWinter5: TripPackage = {
   ],
   routeOverviewSubtitle: "南岸與黃金圈冬季自駕動線",
   routeStops: [
-    { label: "第 1 天", detail: "雷克雅未克（入境、取車、市區初探）" },
+    { label: "第 1 天", detail: "雷克雅維克（入境、取車、市區初探）" },
     { label: "第 2 天", detail: "南岸一號公路 → 瀑布群 → 黑沙灘 → 南岸住宿" },
     { label: "第 3 天", detail: "瓦特納冰川 → 傑古沙龍冰河湖 → 鑽石沙灘 → 南部住宿" },
-    { label: "第 4 天", detail: "黃金圈（辛格維利爾 → 間歇泉 → 黃金瀑布）→ 雷克雅未克" },
-    { label: "第 5 天", detail: "雷克雅未克市區（可選）→ 機場離境" },
+    { label: "第 4 天", detail: "黃金圈（辛格維利爾 → 間歇泉 → 黃金瀑布）→ 雷克雅維克" },
+    { label: "第 5 天", detail: "雷克雅維克市區（可選）→ 機場離境" },
   ],
   routeMap: {
     waypoints: [
@@ -283,7 +283,7 @@ export const icelandSelfDriveWinter5: TripPackage = {
         lng: -21.9426,
         lat: 64.1466,
         label: "第 1 天",
-        detail: "雷克雅未克（入境、取車）",
+        detail: "雷克雅維克（入境、取車）",
       },
       {
         lng: -18.057,
@@ -301,13 +301,13 @@ export const icelandSelfDriveWinter5: TripPackage = {
         lng: -20.5322,
         lat: 64.3271,
         label: "第 4 天",
-        detail: "黃金圈 → 黃金瀑布 → 雷克雅未克",
+        detail: "黃金圈 → 黃金瀑布 → 雷克雅維克",
       },
       {
         lng: -21.9426,
         lat: 64.1466,
         label: "第 5 天",
-        detail: "雷克雅未克 → 機場離境",
+        detail: "雷克雅維克 → 機場離境",
       },
     ],
   },
@@ -315,9 +315,9 @@ export const icelandSelfDriveWinter5: TripPackage = {
     {
       day: 1,
       title: "入境日",
-      accommodation: "雷克雅未克",
+      accommodation: "雷克雅維克",
       description:
-        "今天您將在抵達後，直接前往冰島首都雷克雅未克精選的飯店安頓。在此之前您需要在下飛機後到租車辦公室取車。首都雷克雅未克也是非常值得一逛的小城市，市中心一棟棟五彩的小房子讓這個世界最北首都充滿童話色彩。您可以登上哈爾格林姆斯大教堂（Hallgrímskirkja）觀景，造訪舊港旁的哈帕音樂廳（Harpa Concert Hall），在彩虹街走走逛逛，留下對冰島的初印象，然後回到飯店好好休息，準備接下來的旅途。",
+        "今天是您入境冰島的第一天。抵達後請先至租車櫃檯取車，工作人員會協助檢查車輛，並說明冰島安全駕駛須知。之後即可前往雷克雅維克精選飯店入住安頓。\n\n首都雷克雅維克值得細細走走：市中心一棟棟五彩小屋，讓這座世界最北的首都充滿童話感。不妨登上哈爾格林姆斯大教堂（Hallgrímskirkja）俯瞰市景，造訪舊港旁的哈帕音樂廳（Harpa），在彩虹街隨意逛逛，留下對冰島的初印象，然後回飯店好好休息，為接下來的旅程儲備體力。",
       highlights: icelandSelfDriveWinter5Day1Highlights,
       optionalActivities: icelandSelfDriveWinter5Day1OptionalActivities,
     },
@@ -326,7 +326,7 @@ export const icelandSelfDriveWinter5: TripPackage = {
       title: "冰島南岸風光",
       accommodation: "南岸",
       description:
-        "今天您將開往冰島南岸。來到塞里雅蘭瀑布（Seljalandsfoss），您將從遠處就可以看到巨大的水柱從峭壁上垂直降落；冬季因安全考量，瀑布後方小道可能封閉。隨後您將來到斯科加瀑布（Skógafoss），若足夠幸運還能看見彩虹。您將去到熱門打卡景點飛機殘骸（Plan Wreck DC-3），繼續向前則是著名的黑沙灘（Reynisfjara），旁邊岩壁有冰島特色的黑色六邊形玄武岩石柱。您將看到大西洋衝擊岸邊，創造出壯麗而神秘的景象。",
+        "今天請一早出發，沿冰島南岸一號公路南下。冬季南岸色調獨特：白雪覆蓋大地、天際染上一抹粉霞，為旅程增添溫暖氣息。\n\n首先來到塞里雅蘭瀑布（Seljalandsfoss），遠眺即可見巨大水柱自峭壁垂直落下；冬季基於安全考量，瀑布後方小徑通常封閉。接著前往斯科加瀑布（Skógafoss），晴朗時常可見彩虹。沿途亦可造訪著名的 DC-3 飛機殘骸（Solheimasandur Plane Wreck）。繼續南下則來到黑沙灘（Reynisfjara），沿岸玄武岩石柱層層疊疊，極具冰島特色；遠處可見雷尼斯岩（Reynisdrangar）矗立海中。大西洋拍打岸邊，景色壯麗而神秘。今晚入住南岸附近飯店。",
       highlights: icelandSelfDriveWinter5Day2Highlights,
       optionalActivities: icelandSelfDriveWinter5Day2OptionalActivities,
     },
@@ -335,16 +335,16 @@ export const icelandSelfDriveWinter5: TripPackage = {
       title: "冰河湖風光",
       accommodation: "南部",
       description:
-        "第三天您將來到瓦特納冰川（Vatnajökull）腳下，瓦特納冰川也是全歐洲最大的冰川；讓人夢寐以求的藍冰洞（Crystal Ice Cave）就藏在瓦特納冰川中。您將來到斯卡夫塔自然保護區（Skaftafell），之後前往瓦特納冰川國家公園內最著名的景點：傑古沙龍冰河湖（Jökulsárlón）。與冰河湖相鄰的鑽石沙灘（Diamond Beach）更是南岸的珍寶。若精力允許，不妨參加斯卡夫塔冰川徒步和藍冰洞探險。",
+        "今日繼續往東南前進，來到瓦特納冰川（Vatnajökull）腳下——全歐洲最大的冰川，夢寐以求的藍冰洞（Crystal Ice Cave）便藏於其間。您將經過斯卡夫塔自然保護區（Skaftafell），進入瓦特納冰川國家公園，造訪最著名的傑古沙龍冰河湖（Jökulsárlón）；與冰河湖相鄰的鑽石沙灘（Diamond Beach）更是南岸珍寶。\n\n若時間充裕，亦可另行加購斯卡夫塔山冰川徒步或藍冰洞探險，深入認識冰川的奧妙。結束後前往南部住宿。",
       highlights: icelandSelfDriveWinter5Day3Highlights,
       optionalActivities: icelandSelfDriveWinter5Day3OptionalActivities,
     },
     {
       day: 4,
       title: "黃金圈",
-      accommodation: "雷克雅未克",
+      accommodation: "雷克雅維克",
       description:
-        "今天您將來到冰島最著名的黃金圈路線，造訪辛格維利爾國家公園、蓋歇爾間歇泉和黃金瀑布三大景點。走近黃金瀑布（Gullfoss）時，您將被巨大的水流所震撼；陽光下水珠有時散發金色光芒。在間歇泉（Geysir）地區，您將目睹史托克間歇泉（Strokkur）週期性噴發的熱水柱。在辛格維利爾國家公園（Þingvellir National Park）漫步，還可選擇體驗絲浮拉裂谷（Silfra）浮潛。",
+        "今日造訪冰島最著名的黃金圈路線，依序遊覽辛格維利爾國家公園、蓋錫爾間歇泉地帶與黃金瀑布（Gullfoss）三大景點。走近黃金瀑布時，您將被巨大的水流所震撼；陽光下水珠有時散發金色光芒。在間歇泉區，可目睹史托克間歇泉（Strokkur）每隔數分鐘噴發的熱水柱。於辛格維利爾國家公園（Þingvellir National Park）漫步時，亦可另行加購絲浮拉裂谷（Silfra）浮潛體驗。傍晚返回雷克雅維克住宿。",
       highlights: icelandSelfDriveWinter5Day4Highlights,
       optionalActivities: icelandSelfDriveWinter5Day4OptionalActivities,
     },
@@ -353,14 +353,14 @@ export const icelandSelfDriveWinter5: TripPackage = {
       title: "離境日",
       accommodation: "—",
       description:
-        "若離境航班時間較晚，還可充分利用時間走訪雷克雅未克市中心各個地標：登頂哈爾格林姆大教堂、到托寧湖（Tjörnin）與天鵝親近、在舊港品嚐冰島網紅熱狗、到 Laugavegur 購物街逛逛精品小店。若時間充裕，也可聯絡行程策劃師延長旅行天數。",
+        "歡樂時光總是過得特別快。今天是離境日，請預留時間前往機場辦理退稅。若班機時間較晚，可在雷克雅維克市區多留片刻：登上哈爾格林姆斯大教堂、到托寧湖（Tjörnin）與天鵝親近、在舊港品嚐人氣熱狗、到 Laugavegur 購物街逛逛精品小店。若希望延長旅程，歡迎聯絡行程策劃師協助調整。期待您下次再來冰島！",
       highlights: icelandSelfDriveWinter5Day5Highlights,
       optionalActivities: icelandSelfDriveWinter5Day5OptionalActivities,
     },
   ],
   inclusions: {
     included: [
-      "專業行程策劃師為您獨家客製的中文路書（包含冰島駕駛實用資訊，以及各類景點、歷史、文化和自然等資訊描述）",
+      "專業行程策劃師為您獨家客製的中文行程手冊（包含冰島駕駛實用資訊，以及各類景點、歷史、文化和自然等資訊描述）",
       "4 整天租車（多種車型可選，包含 CDW 碰撞險）",
       "冰島行程期間 4 晚住宿",
       "簽證輔助行程單材料提供",
@@ -399,9 +399,9 @@ export const icelandSelfDriveWinter5: TripPackage = {
         },
         {
           question:
-            "環島自駕前後在雷克雅未克額外停留幾日，是否會自動添加相應的租車價格？",
+            "環島自駕前後在雷克雅維克額外停留幾日，是否會自動添加相應的租車價格？",
           answer:
-            "若在客製行程時添加了在雷克雅未克的額外停留日，套餐總價不會自動包含額外日期的租車費用。若希望這段期間也能用車，請聯絡我們，我們會重新確認訂單，額外租車費用將計入您的旅行餘額。若更希望在雷克雅未克步行或搭乘大眾運輸，您可以在 BSÍ 公車站搭乘 Flybus 前往機場。",
+            "若在客製行程時添加了在雷克雅維克的額外停留日，套餐總價不會自動包含額外日期的租車費用。若希望這段期間也能用車，請聯絡我們，我們會重新確認訂單，額外租車費用將計入您的旅行餘額。若更希望在雷克雅維克步行或搭乘大眾運輸，您可以在 BSÍ 公車站搭乘 Flybus 前往機場。",
         },
       ],
     },
@@ -469,7 +469,7 @@ export const icelandSelfDriveWinter5: TripPackage = {
         {
           question: "為什麼冰島的大床房都是兩張床拼起來的？",
           answer:
-            "冰島旅宿業為提高入住率，雙人房大床多由兩張床拼接，前台會依預訂要求合併或拆分。僅首都個別豪華或精品飯店的高級房與套房有完整大床。您可在預訂頁選擇雷克雅未克地區的住宿級別，建議提早預訂以有更多選擇。",
+            "冰島旅宿業為提高入住率，雙人房大床多由兩張床拼接，前台會依預訂要求合併或拆分。僅首都個別豪華或精品飯店的高級房與套房有完整大床。您可在預訂頁選擇雷克雅維克地區的住宿級別，建議提早預訂以有更多選擇。",
         },
         {
           question: "套餐單人房為什麼需要補差價？",

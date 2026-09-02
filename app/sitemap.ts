@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { absoluteUrl } from "@/lib/site-url";
+import { localePath } from "@/lib/i18n/paths";
 import { getAllGuideSlugs } from "@/lib/guides/registry";
 import { getAllTripPackages } from "@/lib/trip-packages/registry";
 import {
@@ -11,6 +12,18 @@ import {
   ICELAND_GROUP_SUMMER_DAY_OPTIONS,
   ICELAND_GROUP_WINTER_DAY_OPTIONS,
 } from "@/lib/trip-options";
+
+function withZhCnVariants(entries: MetadataRoute.Sitemap): MetadataRoute.Sitemap {
+  const zhCnEntries = entries.map((entry) => {
+    const pathname = new URL(entry.url).pathname;
+    return {
+      ...entry,
+      url: absoluteUrl(localePath(pathname, "zh-CN")),
+    };
+  });
+
+  return [...entries, ...zhCnEntries];
+}
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
@@ -102,5 +115,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     });
   }
 
-  return [...staticPages, ...guidePages, ...tripPackages, ...funnelPages];
+  return withZhCnVariants([
+    ...staticPages,
+    ...guidePages,
+    ...tripPackages,
+    ...funnelPages,
+  ]);
 }

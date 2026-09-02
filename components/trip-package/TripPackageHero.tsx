@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { TripImage } from "@/components/trip-package/TripImage";
 import type { TripPackage } from "@/lib/trip-packages/types";
 
 type TripPackageHeroProps = {
@@ -8,7 +8,7 @@ type TripPackageHeroProps = {
 export function TripPackageHero({ package: pkg }: TripPackageHeroProps) {
   return (
     <section className="trip-package-hero">
-      <Image
+      <TripImage
         src={pkg.heroImage}
         alt=""
         fill

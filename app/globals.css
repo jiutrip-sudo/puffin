@@ -96,6 +96,10 @@ body {
   font-family: var(--font-noto-sans-tc), "PingFang TC", "Microsoft JhengHei", sans-serif;
 }
 
+html[data-locale="zh-CN"] body {
+  font-family: var(--font-noto-sans-sc), "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
 html {
   width: 100%;
 }
@@ -3995,6 +3999,54 @@ html[data-theme="dark"] .hero-bg-dark {
 }
 
 .site-theme-toggle__btn.is-active {
+  background: var(--theme-toggle-active-bg);
+  color: var(--theme-toggle-active-text);
+}
+
+.site-locale-toggle {
+  display: inline-flex;
+  gap: 2px;
+  padding: 3px;
+  border-radius: 999px;
+  background: var(--glass-hero-bg);
+  border: 1px solid var(--glass-hero-border);
+  box-shadow: var(--glass-hero-shadow);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  position: relative;
+  z-index: 10;
+}
+
+.site-locale-toggle--compact .site-locale-toggle__btn {
+  min-width: 1.75rem;
+  padding: 5px 7px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.site-locale-toggle__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 999px;
+  padding: 6px 8px;
+  background: transparent;
+  color: var(--theme-toggle-muted);
+  cursor: pointer;
+  text-decoration: none;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    color 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.site-locale-toggle__btn:hover {
+  color: var(--color-hero-text);
+}
+
+.site-locale-toggle__btn.is-active {
   background: var(--theme-toggle-active-bg);
   color: var(--theme-toggle-active-text);
 }

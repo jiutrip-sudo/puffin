@@ -6,6 +6,10 @@ import type { TripPackage } from "@/lib/trip-packages/types";
 import type { PricingConfig, TripAvailabilityResult } from "@/lib/trip-pricing/types";
 import { packageIncludesVehicle } from "@/lib/trip-pricing/calculate";
 import { SiteHeader } from "@/components/SiteHeader";
+import { useSiteLocale } from "@/components/SiteLocaleProvider";
+import { localePath } from "@/lib/i18n/paths";
+import { t } from "@/lib/i18n/messages";
+import { localizeText } from "@/lib/i18n/localize";
 import { TripAttractionGrid } from "./TripAttractionGrid";
 import {
   TripIntroSection,
@@ -83,7 +87,13 @@ function TripPackageMainContent({
   requestAvailability,
   openMobileBooking,
 }: TripPackageMainContentProps) {
+  const locale = useSiteLocale();
   const roomVehicleSectionRef = useRef<HTMLElement>(null);
+  const includesVehicle = packageIncludesVehicle(pricingConfig);
+  const itinerarySubtitle = localizeText(
+    `您的 ${pkg.duration.days} 天 ${pkg.duration.nights} 夜行程概覽`,
+    locale,
+  );
 
   useEffect(() => {
     const section = roomVehicleSectionRef.current;
@@ -107,7 +117,7 @@ function TripPackageMainContent({
       <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_380px] lg:gap-10">
         <main className="min-w-0 space-y-14 pb-24 lg:pb-10">
           <section>
-            <SectionHeading id="overview" title="簡介" />
+            <SectionHeading id="overview" title={t("trip.section.overview", locale)} />
             <TripMetaGrid package={pkg} />
             <div className="mt-8">
               <TripIntroSection
@@ -124,21 +134,21 @@ function TripPackageMainContent({
 
           <section>
             <h3 className="mb-4 text-lg font-bold text-foreground">
-              此次旅行您將
+              {t("trip.section.travelHighlights", locale)}
             </h3>
             <TripHighlightList highlights={pkg.highlights} />
           </section>
 
           <section>
             <h3 className="mb-4 text-lg font-bold text-foreground">
-              景點高光
+              {t("trip.section.attractionHighlights", locale)}
             </h3>
             <TripAttractionGrid attractions={pkg.attractions} />
           </section>
 
           <section>
             <h3 className="mb-4 text-lg font-bold text-foreground">
-              為什麼選擇大樂旅行社？
+              {t("trip.section.whyChooseBrand", locale)}
             </h3>
             <TripWhyChooseUs items={pkg.whyChooseUs} />
           </section>
@@ -146,8 +156,11 @@ function TripPackageMainContent({
           <section>
             <SectionHeading
               id="route"
-              title="路線概覽"
-              subtitle={pkg.routeOverviewSubtitle ?? "冬季自駕主要動線"}
+              title={t("trip.section.routeOverview", locale)}
+              subtitle={
+                pkg.routeOverviewSubtitle ??
+                t("trip.section.routeDefaultSubtitle", locale)
+              }
             />
             <TripRouteOverview stops={pkg.routeStops} routeMap={pkg.routeMap} />
           </section>
@@ -155,14 +168,17 @@ function TripPackageMainContent({
           <section>
             <SectionHeading
               id="itinerary"
-              title="每日行程"
-              subtitle={`您的 ${pkg.duration.days} 天 ${pkg.duration.nights} 夜行程概覽`}
+              title={t("trip.section.itinerary", locale)}
+              subtitle={itinerarySubtitle}
             />
             <TripItineraryAccordion days={pkg.itinerary} />
           </section>
 
           <section>
-            <SectionHeading id="inclusions" title="費用包含與不含" />
+            <SectionHeading
+              id="inclusions"
+              title={t("trip.section.inclusions", locale)}
+            />
             <TripInclusionsPanel
               included={pkg.inclusions.included}
               excluded={pkg.inclusions.excluded}
@@ -172,7 +188,11 @@ function TripPackageMainContent({
           <section ref={roomVehicleSectionRef}>
             <SectionHeading
               id="room-vehicle"
-              title={packageIncludesVehicle(pricingConfig) ? "房型與車型" : "房型"}
+              title={
+                includesVehicle
+                  ? t("trip.section.roomVehicle", locale)
+                  : t("trip.section.roomOnly", locale)
+              }
             />
             <TripRoomVehicleCards
               pricingConfig={pricingConfig}
@@ -189,7 +209,7 @@ function TripPackageMainContent({
           </section>
 
           <section>
-            <SectionHeading id="faq" title="常見問題" />
+            <SectionHeading id="faq" title={t("trip.section.faq", locale)} />
             <TripFaqAccordion groups={pkg.faq} />
             <TripInlineCta
               onOpenBooking={() => {
@@ -213,7 +233,7 @@ function TripPackageMainContent({
       </div>
 
       <section className="mt-14 lg:mt-16">
-        <SectionHeading id="similar" title="更多相似套餐" />
+        <SectionHeading id="similar" title={t("trip.section.similar", locale)} />
         <TripSimilarPackages trips={pkg.similarTrips} />
       </section>
     </div>
@@ -224,6 +244,7 @@ export function TripPackagePageClient({
   package: pkg,
   pricingConfig,
 }: TripPackagePageClientProps) {
+  const locale = useSiteLocale();
   const pageRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const heroRef = useRef<HTMLDivElement>(null);
@@ -279,7 +300,7 @@ export function TripPackagePageClient({
           onSurface={headerElevated}
           rightSlot={
             <Link
-              href={pkg.backHref}
+              href={localePath(pkg.backHref, locale)}
               className="glass-hero rounded-full px-5 py-2 text-xs font-medium text-hero-text/90 transition-all hover:bg-white/25"
             >
               {pkg.backLabel}
@@ -295,7 +316,9 @@ export function TripPackagePageClient({
         ref={navRef}
         elevated={headerElevated}
         roomSectionLabel={
-          packageIncludesVehicle(pricingConfig) ? "房型車型" : "房型"
+          packageIncludesVehicle(pricingConfig)
+            ? t("trip.nav.roomVehicleShort", locale)
+            : t("trip.nav.roomOnlyShort", locale)
         }
       />
 

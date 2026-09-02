@@ -1,10 +1,14 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import type { SiteLocale } from "@/lib/site-locale";
 import {
+  DAY_TOUR_CANCELLATION_ROWS,
+  SELF_DRIVE_CANCELLATION_ROWS,
   SERVICE_TERMS_INTRO,
   SERVICE_TERMS_SECTIONS,
 } from "@/lib/legal/service-terms-content";
+import { localizeDeep, localizeText } from "@/lib/i18n/localize";
 import { ServiceTermsContent } from "./ServiceTermsContent";
 
 function BookmarkIcon() {
@@ -25,18 +29,43 @@ function BookmarkIcon() {
   );
 }
 
-export function ServiceTermsPage() {
+export function ServiceTermsPage({ locale }: { locale: SiteLocale }) {
   const [activeId, setActiveId] = useState("intro");
+
+  const intro = useMemo(
+    () => localizeDeep(SERVICE_TERMS_INTRO, locale),
+    [locale],
+  );
+  const sections = useMemo(
+    () => localizeDeep(SERVICE_TERMS_SECTIONS, locale),
+    [locale],
+  );
+  const selfDriveCancellationRows = useMemo(
+    () => localizeDeep(SELF_DRIVE_CANCELLATION_ROWS, locale),
+    [locale],
+  );
+  const dayTourCancellationRows = useMemo(
+    () => localizeDeep(DAY_TOUR_CANCELLATION_ROWS, locale),
+    [locale],
+  );
+  const tableHeaders = useMemo(
+    () =>
+      [
+        localizeText("申請取消日期", locale),
+        localizeText("退款金額", locale),
+      ] as [string, string],
+    [locale],
+  );
 
   const navItems = useMemo(
     () => [
-      { id: "intro", label: SERVICE_TERMS_INTRO.title },
-      ...SERVICE_TERMS_SECTIONS.map((section) => ({
+      { id: "intro", label: intro.title },
+      ...sections.map((section) => ({
         id: section.id,
         label: section.title,
       })),
     ],
-    [],
+    [intro.title, sections],
   );
 
   useEffect(() => {
@@ -80,11 +109,11 @@ export function ServiceTermsPage() {
     <div className="legal-page__layout">
       <nav
         className="legal-terms-nav"
-        aria-label="服務條款頁面導航"
+        aria-label={localizeText("服務條款頁面導航", locale)}
       >
         <div className="legal-terms-nav__head">
           <BookmarkIcon />
-          <span>頁面導航</span>
+          <span>{localizeText("頁面導航", locale)}</span>
         </div>
         <ul className="legal-terms-nav__list">
           {navItems.map((item) => {
@@ -105,7 +134,13 @@ export function ServiceTermsPage() {
         </ul>
       </nav>
 
-      <ServiceTermsContent />
+      <ServiceTermsContent
+        intro={intro}
+        sections={sections}
+        selfDriveCancellationRows={selfDriveCancellationRows}
+        dayTourCancellationRows={dayTourCancellationRows}
+        tableHeaders={tableHeaders}
+      />
     </div>
   );
 }
