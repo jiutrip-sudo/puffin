@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { SiteLocale } from "@/lib/site-locale";
 import { t } from "@/lib/i18n/messages";
@@ -32,7 +31,7 @@ export function LocaleControlsBar({ className = "" }: LocaleControlsBarProps) {
         const href = switchLocalePath(pathname, option.value);
 
         return (
-          <Link
+          <a
             key={option.value}
             href={href}
             className={`site-locale-toggle__btn${isActive ? " is-active" : ""}`}
@@ -40,7 +39,7 @@ export function LocaleControlsBar({ className = "" }: LocaleControlsBarProps) {
             onClick={() => setPuffinLocale(option.value)}
           >
             {t(option.labelKey, option.value)}
-          </Link>
+          </a>
         );
       })}
     </div>

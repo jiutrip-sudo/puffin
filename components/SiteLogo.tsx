@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
-import Link from "next/link";
+import { LocaleLink } from "@/components/LocaleLink";
+import { useSiteLocale } from "@/components/SiteLocaleProvider";
 import { BRAND_NAME } from "@/lib/company-info";
 
 const LOGO_SRC = "/images/puffin-logo.png";
@@ -9,9 +12,12 @@ type SiteLogoProps = {
 };
 
 export function SiteLogo({ className = "" }: SiteLogoProps) {
+  const locale = useSiteLocale();
+
   return (
-    <Link
+    <LocaleLink
       href="/"
+      locale={locale}
       aria-label={`${BRAND_NAME} 首頁`}
       className={`glass-hero flex items-center justify-center rounded-full p-2 transition-all hover:bg-white/25 ${className}`}
     >
@@ -24,7 +30,7 @@ export function SiteLogo({ className = "" }: SiteLogoProps) {
         className="h-9 w-9 shrink-0 rounded-full"
         priority
       />
-    </Link>
+    </LocaleLink>
   );
 }
 
