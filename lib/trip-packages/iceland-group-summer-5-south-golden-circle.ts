@@ -1,0 +1,418 @@
+import type { TripPackage } from "./types";
+import {
+  icelandGroupSummer5GoldenCircleDay1Highlights,
+  icelandGroupSummer5GoldenCircleDay1OptionalActivities,
+} from "./iceland-group-summer-5-south-golden-circle-day1-cards";
+import {
+  icelandGroupSummer5GoldenCircleDay2Highlights,
+  icelandGroupSummer5GoldenCircleDay2OptionalActivities,
+  icelandGroupSummer5GoldenCircleDay3Highlights,
+  icelandGroupSummer5GoldenCircleDay3OptionalActivities,
+  icelandGroupSummer5GoldenCircleDay4Highlights,
+  icelandGroupSummer5GoldenCircleDay4OptionalActivities,
+  icelandGroupSummer5GoldenCircleDay5Highlights,
+  icelandGroupSummer5GoldenCircleDay5OptionalActivities,
+} from "./iceland-group-summer-5-south-golden-circle-days2-5-cards";
+
+export const icelandGroupSummer5SouthGoldenCircle: TripPackage = {
+  id: "iceland-group-summer-5-south-golden-circle",
+  tripKey: "iceland/group/summer/5/south-golden-circle",
+  slug: "iceland-summer-5-day-tour-package-golden-circle-south-coast-jokulsarlon",
+  tourCode: "SLMMD-053",
+  title: "5 天 4 夜冰島夏季精華跟團遊",
+  subtitle: "黃金圈&南岸風光&傑古沙龍冰河湖",
+  duration: { days: 5, nights: 4 },
+  season: { label: "夏季", months: "5 月–10 月" },
+  meta: {
+    departure: "雷克雅未克",
+    transport: "跟團",
+    tourCode: "SLMMD-053",
+  },
+  eyebrow: "冰島集合 · 跟團 · 夏季",
+  backHref: "/trips/iceland/group/summer",
+  backLabel: "返回夏季跟團",
+  heroImage: "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1920,q_auto:good/gyesir_eruption_group_watching_sightseeing_iceland_summer_35a76fb314.png",
+  whyChooseUs: [
+    {
+      id: "deposit",
+      title: "20% 訂金",
+      description: "輕鬆預訂，無需一次付清全額",
+    },
+    {
+      id: "booking",
+      title: "安心預訂",
+      description: "行程變更可協助調整",
+    },
+    {
+      id: "refund",
+      title: "退款保證",
+      description: "依條款提供退款保障",
+    },
+    {
+      id: "flexible",
+      title: "彈性出發日",
+      description: "依您的班機與假期安排出發",
+    },
+    {
+      id: "reviews",
+      title: "好評口碑",
+      description: "豐富冰島跟團服務經驗",
+    },
+    {
+      id: "local",
+      title: "本地優選供應商",
+      description: "直連冰島在地嚮導與住宿",
+    },
+  ],
+  intro: {
+    summary:
+      "冰島夏季5日精華巡禮套餐包含冰島的兩大黃金路線——黃金圈以及南岸，能夠帶領您遊覽冰島最出彩的景點。其中包括：辛格維利爾國家公園（Þingvellir National Park）、間歇泉（Geysir）、黃金瀑布（Gullfoss）、黑沙灘（Reynisfjara）以及傑古沙龍冰河湖（Jökulsárlón）。",
+    full: `冰島夏季5日精華巡禮套餐包含冰島的兩大黃金路線——黃金圈以及南岸，能夠帶領您遊覽冰島最出彩的景點。其中包括：辛格維利爾國家公園（Þingvellir National Park）、間歇泉（Geysir）、黃金瀑布（Gullfoss）、黑沙灘（Reynisfjara）以及傑古沙龍冰河湖（Jökulsárlón）。
+
+相信您或多或少聽說過它們的名字，這些景點也的確不負盛名：在黃金圈內，您可以體驗到一步跨越歐洲大陸與美洲大陸的新奇體驗，感受地熱力量一飛沖天的震撼；在黑沙灘，您能見到冰島特有的玄武岩景觀與黝黑海岸線，體會何謂大西洋風浪；在傑古沙龍冰河湖，您有機會在冰藍色的世界裡與千年冰山對話。
+
+此外，行程還包括了冰島最有名的景觀——瀑布。您將遊覽黃金瀑布、斯科加瀑布、塞里雅蘭瀑布等世大名鼎鼎的瀑布，感受它們的不同特點帶來的不同感受，無論哪條瀑布，哪個角度，都會帶來新鮮的感受。
+
+加入大樂旅行社旅行，行程為您專屬服務，為您精心出具中文行程單 ，住宿一鍵搞定！`,
+  },
+  gallery: [
+    {
+      id: "gyesir_eruption_group_wa",
+      url: "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/gyesir_eruption_group_watching_sightseeing_iceland_summer_35a76fb314.png",
+      alt: "冰島夏季跟團",
+      caption: "冰島夏季南岸",
+    },
+    {
+      id: "Seljalandsfoss_5864fea1e",
+      url: "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/Seljalandsfoss_5864fea1ea.jpg",
+      alt: "冰島夏季跟團",
+      caption: "冰島夏季南岸",
+    },
+    {
+      id: "View_over_Reynisdrangar_",
+      url: "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/View_over_Reynisdrangar_97bb3d41fd.jpg",
+      alt: "冰島夏季跟團",
+      caption: "冰島夏季南岸",
+    },
+    {
+      id: "laila_gebhard_Rt4p0_K_Mo",
+      url: "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/laila_gebhard_Rt4p0_K_Mo86k_unsplash_c8a960fa02.jpg",
+      alt: "冰島夏季跟團",
+      caption: "冰島夏季南岸",
+    }
+  ],
+  highlights: [
+    "遊覽冰島黃金圈的三大著名景點",
+    "探索黃金圈小眾絕美火山口",
+    "一網打盡南岸瀑布與海岸景觀",
+    "置身於異星球般的黑沙灘上",
+    "感受千年冰山的震撼與壯美",
+    "深度體驗冰島地熱溫泉",
+  ],
+  attractions: [
+    {
+      name: "黃金瀑布",
+      nameEn: "Gullfoss",
+      region: "冰島南部",
+      subtitle: "一起探索通往冰島最大瀑布之一的道路",
+      imageUrl: "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/gullfoss1_9c5319c04c.jpg",
+      galleryImages: [
+        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/gullfoss1_9c5319c04c.jpg",
+        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/gullfoss2_4aa3699337.jpg",
+        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/gullfoss3_62d8e5e998.jpg",
+      ],
+      paragraphs: [
+        "在陽光下流動的黃金",
+        "黃金瀑布（Gullfoss）位於Haukadalur山谷的Hvítá河上，是冰島最受歡迎的旅遊景點之一，也和辛格維利爾國家公園（Þingvellir National Park）、間歇泉（Geysir）組成了著名的黃金圈線路。許多人認為這裡是冰島最美的瀑布，沒錯，即使冰島有數以千計的瀑布，但也許沒有一條像黃金瀑布一樣聞名於世。",
+        "黃金瀑布的得名，是因為在陽光明媚的日子裡，瀑布的水會呈現出美妙夢幻的金褐色。從科學的角度解釋，是因為瀑布水是冰川水，攜帶著多年來大量冰川冰從陸地上鑿下的沉積物。",
+        "黃金瀑布由兩段瀑布組合而成，一段高11米，另一段高21米，流入下方長達2.5公里寬約20米的裂縫中。在冰河時代末期，巨大的洪水造成了這條裂縫，而不斷的水流侵蝕使它每年延長25釐米。這裡平均水流速度為每秒109立方米，冬季平均流速為每秒80立方米，夏季的水流速度會提高至每秒130立方米。",
+        "在冬季，黃金瀑布是最受風光攝影師們歡迎的地方之一，因為這裡是拍攝北極光的絕佳地點。不過，瀑布周圍狹窄的小路上可能會結冰，因此如果您在冬季遊覽黃金瀑布，我們強烈建議您不要離開主路。",
+      ],
+    },
+    {
+      name: "間歇泉",
+      nameEn: "The Great Geysir and Strokkur",
+      region: "冰島南部",
+      subtitle: "感受來自地表之下的自然力量",
+      imageUrl: "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/be5ba64f349aa795f653231dac5e44a_fa8600600a.jpg",
+      galleryImages: [
+        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/be5ba64f349aa795f653231dac5e44a_fa8600600a.jpg",
+        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/geysir_unsplash_83e7e7b45e.jpg",
+        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/geysir_unsplash2_dd17e22e52.jpg",
+        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/geysir_unsplash3_82d9f4f9ea.jpg",
+      ],
+      paragraphs: [
+        "見證間歇泉噴發時刻",
+        "Geysir間歇泉被人們稱為大間歇泉（The Great Geysir），有時又譯為蓋歇爾間歇泉，是現代歐洲人所知的第一個間歇泉，甚至英文中表示“間歇泉”的單詞“Geyser”就是因它而得名。它坐落於冰島西南岸的Haukadalur山谷中，與辛格維利爾國家公園（Þingvellir National Park）和黃金瀑布（Gullfoss）共同組成了聞名遐邇的冰島黃金圈線路。",
+        "研究表明，蓋歇爾間歇泉已經存在了約1萬年，它最高的一次噴發是在1845年，噴發高度約為170米。但由於地殼運動和人類行為，它目前處於沉寂狀態。上世紀，冰島人曾嘗試多種方法使其噴發，例如在噴口周圍開鑿通道以降低地下水位，或是向噴泉口丟入肥皂，但這些行為後來引發了關於環境保護的爭議，因此在上世紀90年代被叫停。",
+        "不過旅客倒不必擔心無法看到間歇泉噴發，Geysir間歇泉向南50米的史托克間歇泉（Strokkur）是目前最為活躍的間歇泉，也是吸引旅客數量最多的間歇泉。 它每5-10分鐘噴發一次，高達約30米左右，噴發出的水柱溫度超過100攝氏度。",
+        "需要注意的是，由於間歇泉的水溫極高，可能導致嚴重的人員傷亡，其周圍設有指定區域，出於安全考慮，一定要呆在這些區域內，確保與間歇泉保持一定的距離，也不要向間歇泉、地熱池和火山噴氣口扔東西。",
+      ],
+    },
+    {
+      name: "辛格維利爾國家公園",
+      nameEn: "Þingvellir National Park",
+      region: "冰島南部",
+      subtitle: "穿越時空，近距離了解最冰島的自然和文化。",
+      imageUrl: "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/thingve_Ilir_unsplash_bea6a68605.jpg",
+      galleryImages: [
+        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/thingve_Ilir_unsplash_bea6a68605.jpg",
+        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/thingvellir_unsplash3_4b40480cfd.jpg",
+        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/thingvellir_unsplash2_ebd6ece138.jpg",
+      ],
+      paragraphs: [
+        "在辛格維利爾國家公園追隨維京人的腳步",
+        "辛格維利爾國家公園（Þingvellir National Park，又譯為辛格維勒國家公園）位於冰島西南部，距離冰島首都雷克雅未克東北約40公里，是冰島著名黃金圈路線的三大景點之一。辛格維利爾國家公園地處北美板塊和歐亞板塊分離所產生的巨大裂谷邊緣，也是冰島最早議會所在地，是一個具有重要歷史、文化和自然意義的地方，也是冰島最受歡迎的旅遊目的地之一。",
+        "公元930年，議會在辛格維利爾的平原上成立，標誌著冰島作為一個獨立國家的存在。園內地標法律石（Lögberg ）據說是世界上第一個議會聚集的地方，自930年以來，這裡見證了無數法律的裁決與正義的伸張。1928年，冰島通過立法保護議會遺址，兩年後，辛格維利爾國家公園正式建成，成為了冰島全國第一個國家公園。",
+        "Öxarárfoss是園內最受歡迎的景點之一，這條高13米、寬20米的瀑布在冬季會完全凍結，是攀冰愛好者的最愛。旅客除了通過步行路線遊覽公園，還可以體驗例如垂釣和浮潛等多種多樣的活動。公園南側的辛格瓦德拉湖是冰島境內最大的天然湖泊，湖中有褐鱒魚和各式的北極鮭魚，是全國數一數二的垂釣地點。另外，因驚人的能見度而世界聞名的絲浮拉大裂縫（Silfra）也位於國家公園範圍內。如果滿足有關潛水資格和規定，則能夠潛入清澈冰冷的地下水一探究竟。如果沒有潛水證，那麼參加大樂旅行社旅行的浮潛團則是一個更好的選擇，潛水小白也能夠自在地領略絲浮拉的美麗。",
+        "在冰島，或許沒有任何一個地方比辛格維利爾國家公園在歷史、文化和自然方面更加重要。由於其獨特的地位和對世界以及冰島本國的重要價值，辛格維利爾國家公園在2004年被列為聯合國教科文組織世界遺產。",
+      ],
+    },
+    {
+      name: "塞里雅蘭瀑布",
+      nameEn: "Seljalandsfoss",
+      region: "冰島南部",
+      subtitle: "繞行至塞里雅蘭瀑布的身後領略不一樣的風景",
+      imageUrl: "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/seljalandsfoss1_b6412d5d4e.jpg",
+      galleryImages: [
+        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/seljalandsfoss1_b6412d5d4e.jpg",
+        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/seljalandsfoss2_6d4717fdda.jpg",
+        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/seljalandsfoss3_531d93910f.jpg",
+      ],
+      paragraphs: [
+        "塞里雅蘭瀑布之美的不同角度",
+        "塞里雅蘭瀑布（Seljalandsfoss）位於冰島南部1號公路旁，是一個落差達60米的巨大瀑布。在冰島這樣一個瀑布遍佈的國家，它的獨特之處就在於瀑布之後有一個寬闊的洞穴可供人穿行，旅客繞行至瀑布背後能夠透過水簾欣賞落日晚霞和冰島南岸的美麗景色。",
+        "瀑布所在的塞里雅蘭河（Seljalandsá）發源於埃亞菲亞德拉冰蓋（Eyjafjallajökull），河水充滿冰川融水，奔流向南，在陡峭的懸崖上飛瀉而下，這也是塞里雅蘭瀑布得名的原因。塞里雅蘭瀑布在過去直接流入大西洋，而現在由於海平面的下降，海洋和瀑布之間出現了一片低地。站在瀑布頂端，您可以看到大西洋和冰島南海岸的壯麗景色。",
+        "由於其雄偉壯觀和極其獨特的景觀，塞里雅蘭瀑布也出現在了許多膾炙人口的影視作品當中，例如《星際迷航》第三季和賈斯汀·比伯的《I'll Show You》MV中，以及在一檔美國真人秀節目《極速前進》第六季當中，它也被用作挑戰關卡。",
+        "需要提醒旅客的是，無論是夏季還是冬季前往塞里雅蘭瀑布，都需要注意這條小路極其溼滑，由於瀑布落差巨大，因此無論是否有風，瀑布都會打溼這條隱藏在其後的小路。冬季，這條小路有可能會因為安全原因而封路，如果幸運沒有遇到道路封閉的情況，請一定要注意腳下，另外還要注意頭上可能會落下的冰柱。",
+        "在距離幾百米塞里雅蘭外的地方，還有另外一條令人驚歎叫絕的瀑布，它近幾年才被人們發掘，被稱為秘密瀑布（Gljúfrabúi）。落差高達40米，秘密瀑布隱藏在一個狹窄而神秘的峽谷中，也正是因此特性而得名。在前往秘密瀑布的途中，還能看到另一個迷人的小瀑布，在群山、河流和清新的空氣環繞之處驕傲地展示著自己的美麗。",
+      ],
+    },
+    {
+      name: "黑沙灘",
+      nameEn: "Reynisfjara Black Sand Beach",
+      region: "冰島南部",
+      subtitle: "在洶湧詭譎的黑沙灘留下你的腳印",
+      imageUrl: "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/reynisfjara1_ef5a24c2b7.jpg",
+      galleryImages: [
+        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/reynisfjara1_ef5a24c2b7.jpg",
+        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/reynisfjara2_b3ec97ed1f.jpg",
+        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/reynisfjara3_725ed9b454.jpg",
+      ],
+      paragraphs: [
+        "讓人萌生「這是地球嗎？」疑問的異世黑沙灘",
+        "維克黑沙灘（Reynisfjara Black Sand Beach，音譯為雷尼斯黑沙灘）因其位於維克鎮（Vík í Mýrdal）附近而得名。沙灘位於冰島南岸的環島1號公路沿線，交通便捷，是冰島最著名的海灘之一。火山噴發形成的黝黑色砂石千百年來受到北大西洋的海浪拍打，每年有無數旅客被其魔幻、深邃又略顯恐怖的奇異景色而折服。",
+        "讓維克黑沙灘從冰島眾多海灘中脫穎而出的，不僅是自古以來火山爆發後岩漿遇到海水迅速冷卻而形成的黝黑砂石，還有這片沙灘所能捕獲的風景。漫步於黑沙灘之上，可以眺望不遠處的雷尼斯岩（Reynisdrangar）。據說這些怪異的海柱是石化的巨魔，也有人堅信它們實際上曾經是海岸線懸崖的一部分，在其他部分被海水沖垮後依然屹立不倒。無論哪種說法能打動你，它們都賦予了黑沙灘一道獨特壯觀的風景線。",
+        "維克黑沙灘還有兩個著名的玄武岩柱景觀：加達爾懸崖（Gardar cliff）和Hálsanefshellir洞穴，它們像風琴管一樣駐守在暗黑色的灘原上。這些八角玄武岩柱是火山熔岩突然冷卻後形成的，石柱的高度不一，有的只有半米，有的則高達 20 米。夏季，加達爾懸崖還是成千上萬只海鸚和北極燕鷗等野生鳥類的棲息地。從海岸邊還可以看到迪霍拉里（Dyrhólaey）的拱門在大西洋上若隱若現的美妙景色。",
+        "最後，也是最重要的一點，在維克黑沙灘遊玩時，切記注意安全！",
+        "目前，為了保障旅客的生命安全，維克黑沙灘根據具體情況劃分了不同區域，並設置了相應的燈光。當黃燈和紅燈亮起時，旅客均不得進入相應顏色的區域。不必擔心，在安全的距離內，您完全可以看到同樣壯觀的景色。請注意，維克黑沙灘是沒有救生員或其他有人值守的，因此，請不要冒險靠近大海，為您的生命負責。",
+      ],
+    },
+    {
+      name: "傑古沙龍冰河湖",
+      nameEn: "Jökulsárlón",
+      region: "冰島東部",
+      subtitle: "在壯觀的傑古沙龍冰河湖親身體驗冰島的自然奇觀。",
+      imageUrl: "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/DSC_00389_4_cadb104463.jpg",
+      galleryImages: [
+        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/DSC_00389_4_cadb104463.jpg",
+        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/jokulsarlon_unsplash4_afb37701fc.jpg",
+        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/jokulsarlon_unsplash6_8247d88371.jpg",
+        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/jokulsarlon_unsplash5_67dfcff32b.jpg",
+        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/jokulsarlon_unsplash2_3ff49270dd.jpg",
+      ],
+      paragraphs: [
+        "冰島“皇冠上的明珠”",
+        "傑古沙龍冰河湖（Jökulsárlón）是瓦特納冰川（Vatnajökull）南部出口冰川Breiðamerkurjökull冰川的一片瀉湖，靠近冰島1號環島公路，距離雷克雅未克約370公里，是冰島最偉大的自然奇觀之一。",
+        "冰河湖的歷史不久，大約在20世紀30年代形成，氣候變暖是其主要成因。巨大的冰塊不斷從Breiðamerkurjökull冰川上斷裂掉落，漂浮在湖面上。湖面不寬，但深達250米，是冰島最深的湖泊。",
+        "傑古沙龍冰河湖被《孤獨星球》列為此生必去景點之一。",
+        "從水上游覽傑古沙龍冰河湖是最有趣且壯觀的方式。許多人喜歡乘船遊覽，因為這樣既能欣賞冰川湖，又能穿梭在冰山之間航行。有兩種船型——水陸兩棲船或衝鋒艇——可供選擇。其中最為熱門的選項就是傑古沙龍冰河湖水陸兩棲船遊。如果您想要更加沉浸式的體驗，那麼可以試試皮划艇項目，親手划船穿越鏡面般的水域，欣賞其充滿藍白色調的超現實環境。",
+        "眾多流行文化的名篇曾在傑古沙龍冰河湖留下印跡，《007之雷霆殺機》和《007之擇日而亡》的動作場面在這裡攝製，《勞拉：古墓麗影》《蝙蝠俠：俠影之謎》以及綜藝《極速前進》等諸多頂級的製作都曾在此取景拍攝。",
+      ],
+    },
+  ],
+  routeOverviewSubtitle: "南岸與黃金圈夏季跟團動線",
+  routeStops: [
+    { label: "第 1 天", detail: "雷克雅未克（入境、機場接送、Sky Lagoon 溫泉）" },
+    { label: "第 2 天", detail: "黃金圈（辛格維利爾 → 間歇泉 → 黃金瀑布 → 凱瑞斯火山口）" },
+    { label: "第 3 天", detail: "塞里雅蘭／斯科加瀑布 → 冰川徒步 → 黑沙灘" },
+    { label: "第 4 天", detail: "傑古沙龍冰河湖 → 鑽石沙灘 → 維克" },
+    { label: "第 5 天", detail: "雷克雅未克 → 機場離境" }
+  ],
+  routeMap: {
+    waypoints: [
+      {
+        lng: -21.9426,
+        lat: 64.1466,
+        label: "第 1 天",
+        detail: "雷克雅未克（入境、機場接送）",
+      },
+      {
+        lng: -21.1274,
+        lat: 64.255,
+        label: "第 2 天",
+        detail: "黃金圈經典路線",
+      },
+      {
+        lng: -19.511,
+        lat: 63.615,
+        label: "第 3 天",
+        detail: "南岸瀑布 → 冰川徒步 → 黑沙灘",
+      },
+      {
+        lng: -16.179,
+        lat: 64.0484,
+        label: "第 4 天",
+        detail: "傑古沙龍冰河湖 → 鑽石沙灘 → 維克",
+      },
+      {
+        lng: -21.9426,
+        lat: 64.1466,
+        label: "第 5 天",
+        detail: "雷克雅未克 → 機場離境",
+      },
+    ],
+  },
+  itinerary: [
+    {
+      day: 1,
+      title: "入境日：雷克雅未克 & Sky Lagoon溫泉",
+      accommodation: "雷克雅未克",
+      description:
+        "在長時間的飛行過後，歡迎您入境冰島！隨後您將乘坐機場大巴抵達雷克雅未克——世界最北部的首都。我們為您精心安排了包含接送的天空之境溫泉（Sky Lagoon）體驗。這個位在首都區域的溫泉新貴，設計融合了現代與傳統，讓您在享受溫泉的同時，也能體驗到冰島的歷史和文化，您可以欣賞到壯麗的大西洋海景和周圍的自然風光，體驗其獨家的7步療法，包含溫泉池、冷水池、幹蒸桑拿、霧汽房、身體清潔磨砂、蒸汽溼蒸和品嚐特色飲品等，讓您的肌膚和身體都得到放鬆，為接下來的旅途做好準備。泡完溫泉，您不妨早早回飯店休整，睡個好覺，以迎接接下來令人激動的行程和冒險。",
+      highlights: icelandGroupSummer5GoldenCircleDay1Highlights,
+      optionalActivities: icelandGroupSummer5GoldenCircleDay1OptionalActivities,
+    },
+    {
+      day: 2,
+      title: "黃金圈3+1：辛格維利爾國家公園 & 間歇泉 & 黃金瀑布 & 凱瑞斯火山口",
+      accommodation: "南岸",
+      description:
+        "您將探索景點的黃金圈三大景點：辛格維利爾國家公園（Þingvellir National Park）、間歇泉（Geysir）以及黃金瀑布（Gullfoss）。在這裡您不僅能夠領略到冰島獨特的地質地貌，同時還能感受冰島在世界範圍內特殊的地理以及歷史地位。辛格維利爾國家公園是冰島歷史上重要的文化遺址，公元930年，維京人在此建立了世界上最古老的議會——阿爾辛基（Alþingi）。這裡不僅是冰島民族精神的象徵，也是亞歐板塊與北美板塊交界的地方，您可以親身體驗腳踏兩大板塊的奇妙感受。間歇泉地熱區是世界上“間歇泉”一詞的發源地。雖然蓋歇爾間歇泉（Geysir）如今已處於半休眠狀態，但活躍的史托克間歇泉（Strokkur）每隔5-10分鐘便會噴發，水柱高達20-40米，場面震撼無比。同時，參觀冰島最壯觀瀑布之一的黃金瀑布，這裡的水流在陽光的照射下常常形成美麗的彩虹，景色如畫，搭設好的觀景臺也為您提供了絕佳的拍照機會，作為本次行程的獨特特點之一，我們還將帶您體驗更深度的黃金圈玩法，前往凱瑞斯火山口（Kerid Crater），探索這片色彩斑斕的小眾之地。這是一個有著三千年歷史的休眠火山口，是附近火山群中最大的一個火山口。",
+      highlights: icelandGroupSummer5GoldenCircleDay2Highlights,
+      optionalActivities: icelandGroupSummer5GoldenCircleDay2OptionalActivities,
+    },
+    {
+      day: 3,
+      title: "塞里雅蘭瀑布 & 斯科加瀑布 & 索爾黑馬冰川 & 黑沙灘",
+      accommodation: "南岸",
+      description:
+        "冰島的南海岸以其景點之密集而聞名，在這條漫長的海岸線長，分佈著數十個世界級的景點，我們今天就將到訪其中最值得期待的幾處美景。塞里雅蘭瀑布（Seljalandsfoss）與秘密瀑布（Gljúfrabúi）是兩個親密無間的鄰居，但又各有性格，一個外放，一個害羞，從它們的名字也可略知一二。幾十公里外的斯科加瀑布（Skógafoss）則更加奔放，高達60米的水幕直接奔流而下，晴天時候還常常可以見到彩虹。在前往劉昊然同款打卡的黑沙灘（Reynisfjara）的路上，您將經過索爾黑馬冰川（Sólheimajökull），這裡是冰島進行冰川徒步的首選冰川。索爾黑馬冰川發源於米達爾斯冰川（Mýrdalsjökull），而這裡也是著名的卡特拉火山（Katla）的所在地。在大本營與認證冰川嚮導會合後，您將獲得相應的專業裝備（登山杖、冰鎬和安全帶等），然後開始您的冰川徒步之旅，嚮導將帶領您環繞的壯麗的冰川及其形成的裂縫，感受古老冰川的壯闊之美。（注：冰川徒步體驗僅限10月前，10月開始將替換為藍冰洞體驗）。最後，來到黑沙灘，您將感慨於北大西洋的洶湧動力，白色浪花拍打海岸，場面神奇而特別。而這片黑沙灘的魔力也吸引著世界無數的人每天到訪，不過一定要注意安全，美麗的事物比你想像中還要危險，千萬要遠離海浪。",
+      highlights: icelandGroupSummer5GoldenCircleDay3Highlights,
+      optionalActivities: icelandGroupSummer5GoldenCircleDay3OptionalActivities,
+    },
+    {
+      day: 4,
+      title: "傑古沙龍冰河湖 & 鑽石沙灘 & 維克鎮",
+      accommodation: "雷克雅未克",
+      description:
+        "今天，您將繼續向東前往瓦特納冰川國家公園（Vatnajökull National Park），在那裡您將領略歐洲最大冰川的雄偉：絢麗的藍白色冰川綿延 150 多公里，冰舌伸向四面八方。在這個區域，無數形態各異的冰山漂浮其中的傑古沙龍冰河湖（Jökulsárlón）曾經被《孤獨星球》列為此生必去景點之一，是冰島最偉大的自然奇觀之一。電影《007》、蝙蝠俠系列也曾在這裡留下瀟灑的背影。神奇而夢幻的冰河湖也塑造了另一大神奇的風景，即鑽石沙灘（Diamond Beach）。漂浮到北大西洋的冰山被沖刷至此，晶瑩剔透的冰山碎片陳列在黝黑的沙灘，經過陽光的照射，組成了一幅奇妙而不真實的風景畫。在返回首都的途中，您將會遊覽鋪陳著綠色苔蘚的埃爾德熔岩原（Eldhraun）和冰島最南端的可愛小鎮維克鎮（Vík）等地，看紅頂教堂如何點綴其間。旅程結束，相信充滿驚喜的南海岸一定大大滿足了您的期待。",
+      highlights: icelandGroupSummer5GoldenCircleDay4Highlights,
+      optionalActivities: icelandGroupSummer5GoldenCircleDay4OptionalActivities,
+    },
+    {
+      day: 5,
+      title: "離境日",
+      accommodation: "—",
+      description:
+        "今天您將結束此次在冰島的旅行，最後一天您將根據航班的時間來自由安排自己的行程。雷克雅未克這一世界最北部的首都隱藏著許多可愛、充滿靈氣的角落，等待著有緣的旅客的發掘。在這一小城閒逛，或是前往哈爾格林姆斯大教堂（Hallgrímskirkja）、哈帕音樂廳（Harpa Concert Hall）、托寧湖（Tjörnin）等景點，還是就在市中心各小店走走逛逛，充分融入當地人生活，都是不錯的選擇。如果您沒來得及品嚐據說世界上最好吃的冰島熱狗，不妨趁著今天的時間去嘗試一番。到了機場，請您不要忘記到櫃檯辦理退稅，在免稅店為親朋好友挑選一些冰島特色伴手禮。最後，祝您旅途愉快，大樂旅行社旅行期待與您下次再相見！",
+      highlights: icelandGroupSummer5GoldenCircleDay5Highlights,
+      optionalActivities: icelandGroupSummer5GoldenCircleDay5OptionalActivities,
+    }
+  ],
+  inclusions: {
+    included: [
+
+    ],
+    excluded: [
+
+    ],
+  },
+  faq: [
+    {
+      id: "trip",
+      title: "行程與跟團",
+      items: [
+        {
+          question: "大樂旅行社旅行的旅行團套餐是什麼？是自營的嗎？",
+          answer:
+            "[{\"tag\":\"PARAGRAPH\",\"content\":[{\"tag\":null,\"content\":[\"大樂旅行社旅行的旅行團套餐是我們最熱門的產品。在旅行團套餐中，我們將為您提供線路合理、景點全面的觀光套餐，均包含機場往返首都接送、首都參團接送、冰島本地優選供應商的一日遊與多日遊（含司機兼嚮導）、住宿（含早餐）、獨家客製的中文路書（含各類景點、歷史、文化、自然等資訊描述）、台灣冰島雙時區的中文客服等服務，並提供行程客製服務。\"]",
+        },
+        {
+          question: "什麼是自選報名活動？",
+          answer:
+            "[{\"tag\":\"PARAGRAPH\",\"content\":[{\"tag\":null,\"content\":[\"大樂旅行社旅行在每一天的行程下方增加了對應的自選報名活動，您可以根據自己的需求選擇是否自費參加這些額外的活動。\"]",
+        },
+        {
+          question: "預定後多久能收到相關的參團資料？",
+          answer:
+            "[{\"tag\":\"PARAGRAPH\",\"content\":[{\"tag\":null,\"content\":[\"在您付完定金後的5-7個工作日內（且在參團前），我們會提供行程相關的訂單資訊清單（包含預定飯店資訊等）及簽證輔助材料；在付完全款並提供航班資訊等所有有效資訊後的5-7個工作日內（且在參團前），我們會提供完整的行程路書等。路書包含中文行程單、接送地址、各類景點、歷史、文化、自然等資訊描述。\"]",
+        },
+        {
+          question: "為什麼我只能選擇首都雷克雅未克地區的飯店等級？",
+          answer:
+            "[{\"tag\":\"PARAGRAPH\",\"content\":[{\"tag\":null,\"content\":[\"因為首都雷克雅未克的飯店選擇更多，且行程相對更靈活。而套餐內冰島其他地區的行程中，參團的顧客都是統一行動的，有固定的行程路線和固定的飯店。因此為保障行程的統一性與合理性，並不浪費顧客的遊覽時間，其他地區暫時無法選擇飯店等級，請您體諒。\"]",
+        },
+        {
+          question: "套餐單人間為什麼需要補差價？",
+          answer:
+            "[{\"tag\":\"PARAGRAPH\",\"content\":[{\"tag\":null,\"content\":[\"因為冰島的單人間房價要高於雙人間房價的一半，而預定時的默認房價是按雙人間均攤至每人的價格來計算的。因此套餐內的單人間需要補交一筆差價。由於旅行團套餐系統設定在預定環節僅可以選首都雷克雅未克地區的房間數量，如果需要將套餐中包含的旅行團增加單人間，那麼需要在初始頁面選中1人來查看全程單人間價格，具體細節可諮詢客服。\"]",
+        },
+        {
+          question: "為什麼不是所有飯店都能到飯店門口接團？",
+          answer:
+            "[{\"tag\":\"PARAGRAPH\",\"content\":[{\"tag\":null,\"content\":[\"為了維持雷克雅未克市中心舒適安全的城市環境，冰島政府規定旅遊巴士不可隨意進入市中心區域，而必須在附近指定的接車地點接送旅客。\"]",
+        },
+        {
+          question: "冰島哪個季節最適合旅遊？",
+          answer:
+            "[{\"tag\":\"PARAGRAPH\",\"content\":[{\"tag\":null,\"content\":[\"這個問題要取決於您的旅行計劃和安排，對於想體驗不同景觀和項目的旅客來說，答案也會有所不同：\"]",
+        },
+        {
+          question: "去冰島旅遊需要準備什麼行李？",
+          answer:
+            "[{\"tag\":\"PARAGRAPH\",\"content\":[{\"tag\":null,\"content\":[\"雖然比世界上緯度相近的許多地方都要溫暖，但冰島總體上還是一個寒冷的國家，特別是在冬季，平均氣溫在0攝氏度左右，而夏季的平均氣溫約在10-15度。\"]",
+        },
+        {
+          question: "在冰島旅遊需要嚮導嗎？",
+          answer:
+            "[{\"tag\":\"PARAGRAPH\",\"content\":[{\"tag\":null,\"content\":[\"冰島固然以其神奇且的自然景觀而聞名於世，但是同樣不可忽視的是冰島的歷史、文化以及地理資訊。\"]",
+        },
+        {
+          question: "我應該提前多久預訂冰島行程？",
+          answer:
+            "[{\"tag\":\"PARAGRAPH\",\"content\":[{\"tag\":null,\"content\":[\"由於冰島的旅遊業資源有限，為了保障您的出行品質，我們建議您\"]},{\"tag\":\"STRONG\",\"content\":[{\"tag\":null,\"content\":[\"至少在出行前幾週開始在我們的官網預訂行程\"]",
+        }
+      ],
+    },
+    {
+      id: "accommodation",
+      title: "住宿相關",
+      items: [
+        {
+          question: "為什麼冰島的大床房都是兩張床拼起來的？",
+          answer:
+            "[{\"tag\":\"PARAGRAPH\",\"content\":[{\"tag\":null,\"content\":[\"冰島作為旅遊業國家，所有飯店不論是首都還是郊外的雙人間或雙床間幾乎都是同樣的房型和床型。飯店為了保證入住率，大床由兩張床拼接而成，飯店前臺會根據預定的要求將床鋪合併或拆分。\"]",
+        }
+      ],
+    }
+  ],
+  similarTrips: [
+    {
+      tripKey: "iceland/group/summer/5/south-snaefellsnes",
+      title: "5 天 4 夜冰島夏季夢幻跟團遊",
+      tourCode: "SLMMD-051",
+      durationLabel: "5 天／4 夜",
+      description:
+        "斯奈山半島與南岸精華，適合想兼顧西線風光的旅客。",
+    },
+    {
+      tripKey: "iceland/group/summer/6/south-snaefellsnes-golden-circle",
+      title: "6 天 5 夜冰島夏季跟團遊",
+      tourCode: "SLMMD-061",
+      durationLabel: "6 天／5 夜",
+      description:
+        "黃金圈、南岸與斯奈山半島一次走遍的樂享路線。",
+    },
+  ],
+};

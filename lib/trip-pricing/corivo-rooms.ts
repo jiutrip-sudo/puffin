@@ -244,20 +244,21 @@ function findHotelChoice(
 export function buildCorivoPriceItems(
   packageItems: CorivoPackageItem[],
   classificationId: number,
-  vehicleItemId: number,
+  vehicleItemId: number | undefined,
   travelers: CorivoTravelerCounts,
   customRooms?: RoomSlot[],
 ): CorivoPriceItem[] {
   const roomConfig = buildTravelerRoomConfig(travelers, customRooms);
   const hotelSegments = packageItems.filter((item) => item.type === "HOTEL_ROOM");
 
-  const items: CorivoPriceItem[] = [
-    {
+  const items: CorivoPriceItem[] = [];
+  if (vehicleItemId != null) {
+    items.push({
       id: vehicleItemId,
       quantity: 1,
       travelers,
-    },
-  ];
+    });
+  }
 
   for (const segment of hotelSegments) {
     for (const room of roomConfig.rooms) {
@@ -283,13 +284,27 @@ export function buildCorivoPriceItems(
     }
   }
 
+  for (const segment of packageItems) {
+    if (segment.type !== "SERVICE") continue;
+
+    for (const choice of segment.choices ?? []) {
+      if (!choice.isMandatory) continue;
+
+      items.push({
+        id: choice.id,
+        quantity: 1,
+        travelers,
+      });
+    }
+  }
+
   return items;
 }
 
 export function buildCorivoAvailabilitySelections(
   packageItems: CorivoPackageItem[],
   classificationId: number,
-  vehicleItemId: number,
+  vehicleItemId: number | undefined,
   travelers: CorivoTravelerCounts,
   customRooms?: RoomSlot[],
 ): CorivoPackageItemSelection[] {

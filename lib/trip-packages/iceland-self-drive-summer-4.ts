@@ -1,0 +1,493 @@
+import type { TripPackage } from "./types";
+import {
+  icelandSelfDriveSummer4Day1Highlights,
+  icelandSelfDriveSummer4Day1OptionalActivities,
+} from "./iceland-self-drive-summer-4-day1-cards";
+import {
+  icelandSelfDriveSummer4Day2Highlights,
+  icelandSelfDriveSummer4Day2OptionalActivities,
+  icelandSelfDriveSummer4Day3Highlights,
+  icelandSelfDriveSummer4Day3OptionalActivities,
+  icelandSelfDriveSummer4Day4Highlights,
+  icelandSelfDriveSummer4Day4OptionalActivities,
+} from "./iceland-self-drive-summer-4-days2-4-cards";
+
+export const icelandSelfDriveSummer4: TripPackage = {
+  id: "iceland-self-drive-summer-4",
+  tripKey: "iceland/self-drive/summer/4",
+  slug: "4-days-summer-self-drive-south-coast-express",
+  tourCode: "SLMSD-041",
+  title: "4 天 3 夜冰島南岸夏季自駕遊",
+  subtitle: "冰河湖 & 黑沙灘",
+  duration: { days: 4, nights: 3 },
+  season: { label: "夏季", months: "4 月–10 月" },
+  meta: {
+    departure: "雷克雅未克",
+    transport: "自駕",
+    tourCode: "SLMSD-041",
+  },
+  eyebrow: "冰島集合 · 自駕 · 夏季",
+  backHref: "/trips/iceland/self-drive/summer",
+  backLabel: "返回夏季自駕",
+  heroImage:
+    "https://images.unsplash.com/photo-1504829857797-ddff29c27927?w=1920&q=80",
+  whyChooseUs: [
+    {
+      id: "deposit",
+      title: "20% 訂金",
+      description: "輕鬆預訂，無需一次付清全額",
+    },
+    {
+      id: "booking",
+      title: "安心預訂",
+      description: "行程變更可協助調整",
+    },
+    {
+      id: "refund",
+      title: "退款保證",
+      description: "依條款提供退款保障",
+    },
+    {
+      id: "flexible",
+      title: "彈性出發日",
+      description: "依您的班機與假期安排出發",
+    },
+    {
+      id: "reviews",
+      title: "好評口碑",
+      description: "豐富冰島自駕服務經驗",
+    },
+    {
+      id: "local",
+      title: "本地優選供應商",
+      description: "直連冰島合規車行與住宿",
+    },
+  ],
+  intro: {
+    summary:
+      "若您時間較為短暫，這個 4 日南岸夏季自駕最適合不過。夏季風光秀麗壯美，可欣賞傑古沙龍冰河湖、鑽石沙灘與黑沙灘，還能體驗冰川徒步與冰河湖船遊。",
+    full: `如果您時間較為短暫，這個行程最適合您不過。4 天的時間我們將帶您瀏覽冰島南岸經典景點。
+
+冰島的夏日風景和冬日風景各異，夏季的景色別有一番風味。夏季風光除了秀麗壯美的瀑布之外，您還可以欣賞到無限浪漫的傑古沙龍冰河湖（Jökulsárlón）和鑽石沙灘（Diamond Beach），或是在黑沙灘（Reynisfjara）漫步看海蝕柱從大西洋中升起。
+
+除了單純的觀賞，您還可以體驗冰川徒步，穿上專業裝備，跟隨經驗豐富的導遊，踏上冰川之旅，感受到大自然的力量和宏偉。如果是在盛夏時間，還可以感受午夜日落，享受連續 3 小時之久的日落日出相連接的盛景。
+
+我們會為您設計最佳路線，確保您的行程兼顧休閒和體驗，同時為您安排住宿和交通等方面的一切，讓您可以全情投入，跟隨我們的步調，盡情領略冰島的迷人之處！`,
+  },
+  gallery: [
+    {
+      id: "aurora",
+      url: "https://images.unsplash.com/photo-1504829857797-ddff29c27927",
+      alt: "冰島夏季南岸",
+      caption: "南岸夏日風光",
+    },
+    {
+      id: "glacier-lagoon",
+      url: "https://images.unsplash.com/photo-1483347756197-71ef80e95f73",
+      alt: "傑古沙龍冰河湖",
+      caption: "傑古沙龍冰河湖",
+    },
+    {
+      id: "south-coast",
+      url: "https://images.unsplash.com/photo-1518837695005-2083093ee35b",
+      alt: "冰島南岸海岸",
+      caption: "南岸一號公路",
+    },
+    {
+      id: "waterfall",
+      url: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05",
+      alt: "冰島瀑布與雪景",
+      caption: "斯科加瀑布",
+    },
+    {
+      id: "highland",
+      url: "https://images.unsplash.com/photo-1469474968028-56623f02e42e",
+      alt: "冰島高地風光",
+      caption: "瓦特納冰川國家公園",
+    },
+    {
+      id: "mountain-lake",
+      url: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4",
+      alt: "冰島山湖雪景",
+      caption: "鑽石沙灘沿岸",
+    },
+    {
+      id: "reykjavik",
+      url: "https://images.unsplash.com/photo-1494783367193-149034c05e8f",
+      alt: "雷克雅未克天際線",
+      caption: "雷克雅未克",
+    },
+    {
+      id: "black-beach",
+      url: "https://images.unsplash.com/photo-1439066615861-d1af74d74000",
+      alt: "黑沙灘與海蝕柱",
+      caption: "黑沙灘",
+    },
+    {
+      id: "iceland-horses",
+      url: "https://images.unsplash.com/photo-1548199973-03cce0bbc87b",
+      alt: "冰島馬",
+      caption: "冰島馬",
+    },
+  ],
+  highlights: [
+    "全程由您掌控方向盤，自主設定行程節奏",
+    "自駕探索冰島南岸夏日風光",
+    "欣賞冰島南岸瀑布的神奇壯麗",
+    "駐足黑沙灘，體驗異星末世感",
+    "欣賞鑽石沙灘的璀璨閃耀",
+    "漫步雷克雅未克，感受北歐城市風情",
+  ],
+  attractions: [
+    {
+      name: "塞里雅蘭瀑布",
+      nameEn: "Seljalandsfoss",
+      region: "冰島南部",
+      subtitle: "塞里雅蘭瀑布之美的不同角度",
+      imageUrl:
+        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/seljalandsfoss1_b6412d5d4e.jpg",
+      galleryImages: [
+        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/seljalandsfoss1_b6412d5d4e.jpg",
+        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/seljalandsfoss2_6d4717fdda.jpg",
+        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/seljalandsfoss3_531d93910f.jpg",
+      ],
+      paragraphs: [
+        "塞里雅蘭瀑布（Seljalandsfoss）位於冰島南部1號公路旁，是一個落差達60米的巨大瀑布。在冰島這樣一個瀑布遍佈的國家，它的獨特之處就在於瀑布之後有一個寬闊的洞穴可供人穿行，旅客繞行至瀑布背後能夠透過水簾欣賞落日晚霞和冰島南岸的美麗景色。",
+        "瀑布所在的塞里雅蘭河（Seljalandsá）發源於埃亞菲亞德拉冰蓋（Eyjafjallajökull），河水充滿冰川融水，奔流向南，在陡峭的懸崖上飛瀉而下，這也是塞里雅蘭瀑布得名的原因。塞里雅蘭瀑布在過去直接流入大西洋，而現在由於海平面的下降，海洋和瀑布之間出現了一片低地。站在瀑布頂端，您可以看到大西洋和冰島南海岸的壯麗景色。",
+        "由於其雄偉壯觀和極其獨特的景觀，塞里雅蘭瀑布也出現在了許多膾炙人口的影視作品當中，例如《星際迷航》第三季和賈斯汀·比伯的《I'll Show You》MV中，以及在一檔美國真人秀節目《極速前進》第六季當中，它也被用作挑戰關卡。",
+        "需要提醒旅客的是，無論是夏季還是冬季前往塞里雅蘭瀑布，都需要注意這條小路極其濕滑，由於瀑布落差巨大，因此無論是否有風，瀑布都會打濕這條隱藏在其後的小路。冬季，這條小路有可能會因為安全原因而封路，如果幸運沒有遇到道路封閉的情況，請一定要注意腳下，另外還要注意頭上可能會落下的冰柱。",
+        "在距離幾百米塞里雅蘭外的地方，還有另外一條令人驚嘆叫絕的瀑布，它近幾年才被人們發掘，被稱為秘密瀑布（Gljúfrabúi）。落差高達40米，秘密瀑布隱藏在一個狹窄而神秘的峽谷中，也正是因此特性而得名。在前往秘密瀑布的途中，還能看到另一個迷人的小瀑布，在群山、河流和清新的空氣環繞之處驕傲地展示著自己的美麗。",
+      ],
+    },
+    {
+      name: "斯科加瀑布",
+      nameEn: "Skógafoss",
+      region: "冰島南部",
+      subtitle: "沉浸在冰島斯科加瀑布的難忘美景中",
+      imageUrl:
+        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/skogafoss2_67abee5632.jpg",
+      galleryImages: [
+        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/skogafoss2_67abee5632.jpg",
+        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/skogafoss1_7e720b62ca.jpg",
+        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/skogafoss3_d680db80b4.jpg",
+      ],
+      paragraphs: [
+        "斯科加瀑布（Skógafoss）是位於冰島南部的一個瀑布，高60米，寬25米，直接來自兩座冰川：埃亞菲亞德拉冰蓋（Eyjafjallajökull）和米達爾斯冰原（Mýrdalsjökull）。斯科加瀑布流經的懸崖是上個冰河時代冰島海岸線的一部分，由於冰雪消融導致冰島的陸地面積上升，它目前距離海岸線已有5公里距離。",
+        "斯科加瀑布一年四季都十分壯觀，高達60米的水幕令人印象深刻，走近水幕，旅客會被籠罩在水花、雲霧和巨大的聲響之中。由於瀑布持續噴出大量水花，在晴朗的日子裡，通常可以看到一道或兩道彩虹。如果您願意攀登500多級階梯到達瀑布頂端的平台，您將欣賞到冰島南部海岸線的壯麗景色，這裡也是著名的Fimmvorduhals徒步路線的起點。",
+        "斯科加瀑布的魅力遠不止於此，它還有一個美麗的古老傳說。據傳，一位叫Þrasi的維京人將一箱財寶扔進了河裡，許多人試圖撈起這個寶箱，但都失敗了。直到有一天，有人爬進了瀑布，但只能抓住箱子側面的把手。由於木頭已經腐朽，把手斷裂，寶物墜入瀑布底部，再也找不到了。有一段時間，這個把手一直掛在瀑布旁斯科加教堂的門上。如今，如果您參觀斯科加博物館，您可以親眼目睹這枚當地人所說的寶箱的「戒指」。",
+        "在斯科加瀑布不遠處的塞里雅蘭瀑布（Seljalandsfoss）同樣十分受旅客歡迎，在那裡人們可以繞到瀑布背後，拍下一張逆光的完美照片。",
+      ],
+    },
+    {
+      name: "黑沙灘",
+      nameEn: "Reynisfjara Black Sand Beach",
+      region: "冰島南部",
+      subtitle: "讓人萌生「這是地球嗎？」疑問的異世黑沙灘",
+      imageUrl:
+        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/reynisfjara1_ef5a24c2b7.jpg",
+      galleryImages: [
+        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/reynisfjara2_b3ec97ed1f.jpg",
+        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/reynisfjara1_ef5a24c2b7.jpg",
+        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/reynisfjara3_725ed9b454.jpg",
+      ],
+      paragraphs: [
+        "維克黑沙灘（Reynisfjara Black Sand Beach，音譯為雷尼斯黑沙灘）因其位於維克鎮（Vík í Mýrdal）附近而得名。沙灘位於冰島南岸的環島1號公路沿線，交通便捷，是冰島最著名的海灘之一。火山噴發形成的黝黑色砂石千百年來受到北大西洋的海浪拍打，每年有無數旅客被其魔幻、深邃又略顯恐怖的奇異景色而折服。",
+        "讓維克黑沙灘從冰島眾多海灘中脫穎而出的，不僅是自古以來火山爆發後岩漿遇到海水迅速冷卻而形成的黝黑砂石，還有這片沙灘所能捕獲的風景。漫步於黑沙灘之上，可以眺望不遠處的雷尼斯岩（Reynisdrangar）。據說這些怪異的海柱是石化的巨魔，也有人堅信它們實際上曾經是海岸線懸崖的一部分，在其他部分被海水沖垮後依然屹立不倒。無論哪種說法能打動你，它們都賦予了黑沙灘一道獨特壯觀的風景線。",
+        "維克黑沙灘還有兩個著名的玄武岩柱景觀：加達爾懸崖（Gardar cliff）和Hálsanefshellir洞穴，它們像風琴管一樣駐守在暗黑色的灘原上。這些八角玄武岩柱是火山熔岩突然冷卻後形成的，石柱的高度不一，有的只有半米，有的則高達 20 米。夏季，加達爾懸崖還是成千上萬只海鸚和北極燕鷗等野生鳥類的棲息地。從海岸邊還可以看到迪霍拉里（Dyrhólaey）的拱門在大西洋上若隱若現的美妙景色。",
+        "最後，也是最重要的一點，在維克黑沙灘遊玩時，切記注意安全！這裡雖然風景絕美，但卻是冰島最危險的地方之一。由於大西洋洋流在到達冰島之前毫無陸地阻擋，積蓄了巨大的能量，因此這裡經常會出現巨浪，而且水流非常湍急。當浪拍打上來時，如果被浪擊倒，會很難再站起來。海浪會產生一股吸力，沖走沙石，將你拖入水面。而一旦落水，水流就會把你拉離海岸，而冰冷的海水則會在幾分鐘內讓你失溫而造成生命危險。2021年，一名中國旅客因被捲入巨浪中而不幸遇難。因此，一定要與海水保持距離，保證生命安全！",
+        "目前，為了保障旅客的生命安全，維克黑沙灘根據具體情況劃分了不同區域，並設置了相應的燈光。當黃燈和紅燈亮起時，旅客均不得進入相應顏色的區域。不必擔心，在安全的距離內，您完全可以看到同樣壯觀的景色。請注意，維克黑沙灘是沒有救生員或其他有人值守的，因此，請不要冒險靠近大海，為您的生命負責。",
+      ],
+    },
+    {
+      name: "傑古沙龍冰河湖",
+      nameEn: "Jökulsárlón",
+      region: "冰島東部",
+      subtitle: "冰島「皇冠上的明珠」",
+      imageUrl:
+        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/DSC_00389_4_cadb104463.jpg",
+      galleryImages: [
+        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/DSC_00389_4_cadb104463.jpg",
+        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/jokulsarlon_unsplash4_afb37701fc.jpg",
+        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/jokulsarlon_unsplash6_8247d88371.jpg",
+        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/jokulsarlon_unsplash5_67dfcff32b.jpg",
+        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/jokulsarlon_unsplash2_3ff49270dd.jpg",
+      ],
+      paragraphs: [
+        "傑古沙龍冰河湖（Jökulsárlón）是瓦特納冰川（Vatnajökull）南部出口冰川Breiðamerkurjökull冰川的一片瀉湖，靠近冰島1號環島公路，距離雷克雅未克約370公里，是冰島最偉大的自然奇觀之一。",
+        "冰河湖的歷史不久，大約在20世紀30年代形成，氣候變暖是其主要成因。巨大的冰塊不斷從Breiðamerkurjökull冰川上斷裂掉落，漂浮在湖面上。湖面不寬，但深達250米，是冰島最深的湖泊。",
+        "傑古沙龍冰河湖被《孤獨星球》列為此生必去景點之一。它從一個狹窄的入口流入大西洋，隨河同流的冰塊被沖刷在黑沙灘上，留下了鑽石沙灘（Diamond Beach）這一壯觀景象。魚類豐富的冰河湖旁棲息著許多海豹，它們在湛藍的冰塊上曬著太陽，偶爾跳入湖中美美地飽餐一頓。景區全年開放，湖畔的小餐館也是如此。對於徒步愛好者來說，可以在傑古沙龍冰河湖與小冰河湖（Fjallsárlón）之間發現一條徒步路線，沿途風景優美，令人難忘。",
+        "從水上游覽傑古沙龍冰河湖是最有趣且壯觀的方式。許多人喜歡乘船遊覽，因為這樣既能欣賞冰川湖，又能穿梭在冰山之間航行。有兩種船型——水陸兩棲船或衝鋒艇——可供選擇。其中最為熱門的選項就是傑古沙龍冰河湖水陸兩棲船遊。如果您想要更加沉浸式的體驗，那麼可以試試皮划艇項目，親手划船穿越鏡面般的水域，欣賞其充滿藍白色調的超現實環境。",
+        "眾多流行文化的名篇曾在傑古沙龍冰河湖留下印跡，《007之雷霆殺機》和《007之擇日而亡》的動作場面在這裡攝製，《勞拉：古墓麗影》《蝙蝠俠：俠影之謎》以及綜藝《極速前進》等諸多頂級的製作都曾在此取景拍攝。",
+      ],
+    },
+    {
+      name: "鑽石沙灘",
+      nameEn: "The Diamond Beach",
+      region: "冰島東部",
+      subtitle: "當冰山遇上黑沙灘",
+      imageUrl:
+        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/diamond_beach_unsplash_11020ebd2f.jpg",
+      galleryImages: [
+        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/diamond_beach_unsplash_11020ebd2f.jpg",
+        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/diamond_beach_unsplash2_8710988286.jpg",
+      ],
+      paragraphs: [
+        "鑽石沙灘（The Diamond Beach）的原名是Breiðamerkursandur沙灘，位於冰島南部，瓦特納冰川（Vatnajökull）南端傑古沙龍冰河湖（Jökulsárlón）附近。鑽石沙灘的得名是因為沙灘上晶瑩剔透的透明體，而這些實際上並不是鑽石，而是傑古沙龍冰河湖上的漂浮的冰山隨河流流向大西洋中，擱淺在了黢黑的沙灘上。伴隨著洶湧的大西洋海浪，透亮的冰山與暗黑的沙灘透露著一絲詭譎異世的氣氛。",
+        "冰島以黑沙灘聞名於世，而鑽石海灘也當然不是冰島唯一的黑色海灘，其中最有名的黑沙灘之一當屬位於維克鎮（Vík í Mýrdal）附近的維克黑沙灘（Reynisfjara）。這些黑沙灘的形成得歸因於冰島的火山地貌。當火山熔岩與冰冷的海水接觸後迅速冷卻形成玄武岩，隨著時間的推移，碎裂的玄武岩變得越來越小，最終變成了沙子。",
+        "全年的任何時候都適合來鑽石海灘遊覽打卡。夏季陽光充足，日照時間長，在交通層面上更加安全和便捷，沙灘上的冰塊由於是冰川冰，在夏季也不會融化，反而光芒會更加耀眼。夏季，北大西洋海面狂野不羈，海浪拍打著黑色的沙灘，形成一幅更加壯觀的畫面。夏季的金色日落讓鑽石海灘在白天非常上鏡。幸運的話，您還有機會能夠在鑽石沙灘上看見北極光。不過冬天遊覽要特別注意兩點，一是一定要穿得暖和一些；二是一定要與海浪保持安全距離。",
+      ],
+    },
+    {
+      name: "雷克雅未克",
+      nameEn: "Reykjavík",
+      region: "冰島西南部",
+      imageUrl:
+        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/Reykjavik_bathed_in_sunset_2b179f83fe.jpg",
+      galleryImages: [
+        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/Reykjavik_bathed_in_sunset_2b179f83fe.jpg",
+        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/reykjavik1_839e01ff5d.jpg",
+        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/reykjavik_cityscape_in_iceland_158525984_5c1182144cedfd00018fbb38_7f469e1459.jpg",
+        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/Reykjavik_d71a13c273.jpg",
+      ],
+      paragraphs: [
+        "雷克雅未克（Reykjavík）是冰島共和國的首都，冰島第一大城市。這裡一面臨海，雙面環山，是一個充滿活力和文化氛圍的城市，融合著現代都市生活與自然美景。位於冰島西南海岸的雷克雅未克，也是世界上最北的主權國家首都。市區人口約為13萬，整個大都會區人口超過23萬，是冰島經濟、政治和文化生活的中心。",
+        "雷克雅未克的歷史可以追溯到9世紀，當時由Ingólfr Arnarson帶領的諾斯人定居者建立了第一個永久性定居點。雷克雅未克這個名字在冰島語中意為「煙霧灣」，指的是當地的溫泉蒸汽。如今，雷克雅未克以其清潔、綠色和安全的環境而聞名，在全球生活品質指數中始終排名靠前。市區範圍內，擁有多個帶有溫泉池的公共泳池，以及唯一的精品溫泉Sky Lagoon。",
+        "雷克雅未克緊湊的市中心充滿了各種景點。最具標誌性的地標之一是哈爾格林姆斯教堂（Hallgrímskirkja），這座高聳的教堂從觀景塔上可以俯瞰城市全景。其建築靈感來自冰島的玄武岩熔岩壁，既引人注目又象徵著城市的創新精神。坐落在海岸線上的哈帕音樂廳（Harpa），其玻璃外牆反射著海洋和天空，是另一座現代建築奇觀，也是大型文化活動的中心，包括音樂會、展覽和節日活動等等。",
+        "藝術和文化是雷克雅未克身份的重要組成部分。城市擁有眾多博物館、畫廊和劇院。冰島國家美術館和雷克雅未克藝術博物館為藝術愛好者提供了欣賞當代藝術的平台。街頭藝術和壁畫裝飾了許多建築，為城市增添了生機。雷克雅未克還有多個年度節日，如雷克雅未克藝術節、冰島Airwaves音樂節和夏季燈光節，吸引了大量國際旅客，展示了城市的活力文化景觀。",
+        "在雷克雅未克，自然同樣近在咫尺。城市坐落在Faxaflói峽灣，有著壯麗的海岸景色，旅客可以輕鬆地從舊港踏上出海觀鯨、觀海鸚以及海釣之旅。僅需很短的距離，旅客便可探索黃金圈，線路包括辛格維利爾國家公園、間歇泉和壯觀的黃金瀑布三大冰島最熱門旅遊景點。城市本身也擁有眾多公園和綠地，如Laugardalur公園、植物園、動物園以及各種運動公園。",
+        "雷克雅未克的美食場景多種多樣且富有創新，反映了傳統的冰島菜餚和國際風味的融合。新鮮的海鮮、羊肉和乳製品在當地菜餚中佔據重要位置，而眾多餐館和咖啡館提供從米其林Fine Dining到休閒街頭小吃的各種選擇。城市的夜生活同樣充滿活力，擁有各種酒吧、俱樂部和現場音樂演出，特別是在週末生機勃勃。",
+        "可持續發展和創新是雷克雅未克發展的關鍵。這裡是全球可再生能源城市模型的先驅，幾乎所有的電力和供暖需求都由地熱和水電滿足。這種可持續性也在城市的公共交通系統、自行車道和眾多綠色倡議中得到了體現。",
+        "雷克雅未克完美地融合了過去與現在，提供了豐富的城市文化生活和自然美景。無論您是想享受便利的都市生活、探索充滿活力的藝術場景，還是深入冰島令人驚嘆的自然風光，雷克雅未克作為您到達冰島的第一站，一定能為您帶來難忘的體驗。",
+      ],
+    },
+  ],
+  routeOverviewSubtitle: "南岸夏季自駕主要動線",
+  routeStops: [
+    { label: "第 1 天", detail: "雷克雅未克（入境、取車、可選藍湖）" },
+    { label: "第 2 天", detail: "南岸一號公路 → 塞里雅蘭／斯科加瀑布 → 黑沙灘 → 維克 → 教堂鎮住宿" },
+    { label: "第 3 天", detail: "瓦特納冰川國家公園 → 傑古沙龍冰河湖 → 鑽石沙灘 → 返回雷克雅未克" },
+    { label: "第 4 天", detail: "雷克雅未克市區（可選）→ 機場離境" },
+  ],
+  routeMap: {
+    waypoints: [
+      {
+        lng: -21.9426,
+        lat: 64.1466,
+        label: "第 1 天",
+        detail: "雷克雅未克（入境、取車、可選藍湖）",
+      },
+      {
+        lng: -18.057,
+        lat: 63.794,
+        label: "第 2 天",
+        detail: "南岸一號公路 → 塞里雅蘭／斯科加瀑布 → 黑沙灘 → 維克 → 教堂鎮住宿",
+      },
+      {
+        lng: -16.179,
+        lat: 64.0484,
+        label: "第 3 天",
+        detail: "瓦特納冰川國家公園 → 傑古沙龍冰河湖 → 鑽石沙灘 → 返回雷克雅未克",
+      },
+      {
+        lng: -21.9426,
+        lat: 64.1466,
+        label: "第 4 天",
+        detail: "雷克雅未克市區（可選）→ 機場離境",
+      },
+    ],
+    routeLineId: "iceland-self-drive-winter-4",
+  },
+  itinerary: [
+    {
+      day: 1,
+      title: "入境日",
+      accommodation: "雷克雅未克",
+      description:
+        "今天是您來到冰島的第一天，到達冰島後，您將在設立於凱夫拉維克機場區的租車辦公室取車，工作人員會為您詳細講解冰島安全駕駛資訊，並檢查好車輛。隨後您將前往我們為您在首都雷克雅未克地區精心挑選的飯店辦理入住。如果您抵達冰島的時間較早，還可以在前往酒店前，先到藍湖溫泉（Blue Lagoon）享受天然溫泉來緩解長途飛行的疲倦。",
+      highlights: icelandSelfDriveSummer4Day1Highlights,
+      optionalActivities: icelandSelfDriveSummer4Day1OptionalActivities,
+    },
+    {
+      day: 2,
+      title: "冰島南岸風光",
+      accommodation: "南岸",
+      description:
+        "今天您將前往南岸，探索冰島的自然風光。您將遊覽冰島南部著名的兩座瀑布：塞里雅蘭瀑布（Seljalandsfoss）和斯科加瀑布（Skógafoss）。在塞里雅蘭瀑布，您可以穿上防水服，勇敢地走進瀑布後方，感受清新而略帶寒意的水霧。在斯科加瀑布，瀑布從 60 米高的懸崖上傾瀉而下，晴天時還可能看見彩虹。繼續向南則是冰島著名的黑沙灘（Reynisfjara），巨大的玄武岩石柱矗立在岸邊。您還可以參加索爾黑马冰川徒步，或在維克鎮（Vík）附近住宿過夜。",
+      highlights: icelandSelfDriveSummer4Day2Highlights,
+      optionalActivities: icelandSelfDriveSummer4Day2OptionalActivities,
+    },
+    {
+      day: 3,
+      title: "冰河湖風光",
+      accommodation: "雷克雅未克",
+      description:
+        "今天將前往傑古沙龍冰河湖（Jökulsárlón）和鑽石沙灘（Diamond Beach）。湖中漂浮著各種形狀和尺寸的冰山，呈現出純白到透明藍綠的多種色彩。您的冰河湖船遊將帶您駛入冰湖，近距離接觸冰川，行程約 35–40 分鐘。結束後返回雷克雅未克地區住宿。",
+      highlights: icelandSelfDriveSummer4Day3Highlights,
+      optionalActivities: icelandSelfDriveSummer4Day3OptionalActivities,
+    },
+    {
+      day: 4,
+      title: "離境日",
+      accommodation: "—",
+      description:
+        "快樂的時光總是短暫，今天是您離境冰島的日子，別忘了前往機場退稅。若時間充裕，您還可以在雷克雅未克走走逛逛，探索博物館、藝術畫廊、咖啡館和購物區等。您可以漫步在街頭巷尾，感受這座城市的獨特氛圍，並整理好滿滿的回憶。我們歡迎您下次再來冰島！",
+      highlights: icelandSelfDriveSummer4Day4Highlights,
+      optionalActivities: icelandSelfDriveSummer4Day4OptionalActivities,
+    },
+  ],
+  inclusions: {
+    included: [
+      "專業行程策劃師為您獨家客製的中文路書（包含冰島駕駛實用資訊，以及各類景點、歷史、文化和自然等資訊描述）",
+      "3 整天租車（多種車型可選，包含 CDW 碰撞險）",
+      "冰島行程期間 3 晚住宿",
+      "簽證輔助行程單材料提供",
+      "台灣冰島雙時區服務",
+      "VAT 增值稅",
+    ],
+    excluded: [
+      "午餐",
+      "晚餐",
+      "自選報名活動",
+      "個人旅行保險",
+      "車輛升級保險",
+      "途中各種其他費用（包括油費、停車費、罰款等）",
+      "里程稅",
+    ],
+  },
+  faq: [
+    {
+      id: "rental",
+      title: "租車相關",
+      items: [
+        {
+          question: "在冰島租車有什麼要求？最低年齡是多少？",
+          answer:
+            "透過大樂旅行社租車，SUV、越野車、商務旅行等車型的最低年齡限制為 23 歲，其他小型轎車最低年齡限制為 20 歲。租車時，您必須持有合法且有效的駕照至少一年。台灣旅客需在來冰島之前申請駕照的英文版翻譯公證文件以及國際駕照。取車時，需出示國際駕照與駕照公證文件。注意：您需要準備一張主駕駛人名下的信用卡，並在租車時出示，用於處理車輛出現任何損壞或其他額外費用時的押金。我們接受美國運通卡、萬事達卡和 VISA 卡。",
+        },
+        {
+          question: "在冰島租車需要什麼證件？",
+          answer:
+            "取車時需要駕駛人攜帶以下 3 種證件：駕照原件；駕照的英文翻譯公證文件；駕駛人本人名下的信用卡（用於支付汽車出現任何損壞或其他額外費用的押金）。我們接受萬事達卡、VISA 卡以及美國運通卡。",
+        },
+        {
+          question: "你們的租車時間怎麼計算？",
+          answer:
+            "租車服務供應商以 24 小時為最小租賃單位，因此若還車時間晚於租車時間，需支付額外 24 小時的租車費用。例如今天上午 8 點開始租車，明天上午 11 點還車，將需支付 2 天的租車費用。",
+        },
+        {
+          question:
+            "環島自駕前後在雷克雅未克額外停留幾日，是否會自動添加相應的租車價格？",
+          answer:
+            "若在客製行程時添加了在雷克雅未克的額外停留日，套餐總價不會自動包含額外日期的租車費用。若希望這段期間也能用車，請聯絡我們，我們會重新確認訂單，額外租車費用將計入您的旅行餘額。若更希望在雷克雅未克步行或搭乘大眾運輸，您可以在 BSÍ 公車站搭乘 Flybus 前往機場。",
+        },
+      ],
+    },
+    {
+      id: "insurance",
+      title: "保險相關",
+      items: [
+        {
+          question: "租車包含什麼保險？",
+          answer:
+            "我們提供的租車服務均包含基本責任保險和防撞險。防撞險有自付額（免賠額），發生事故時需由您支付，金額因租車類型與供應商而異。取車時可選擇支付額外費用以降低自付額。您也可購買額外保險，以防碎石路和灰土路行駛造成的損壞，額外保險可在取車時於服務台購買。我們也建議所有前往冰島的旅客提前購買旅行保險，為取消行程、行李遺失或被盗、醫療費用等提供保障。",
+        },
+        {
+          question: "在冰島自駕租車保險主要包括哪幾種？",
+          answer:
+            "主要包括：1. 基礎碰撞險（CDW）— 覆蓋租賃車輛自身碰撞損傷，自付額最高約 35 萬 ISK。2. 超級碰撞險（SCDW）— CDW 升級版，大幅降低自付額。3. 碎石防護險（GP）— 覆蓋碎石路況造成的擋風玻璃、車燈、車身漆面、後視鏡損傷，自付額約 4 萬 ISK。4. 盜竊保護險（TP）— 覆蓋租賃車輛整車被盜，不包含車內個人財物。5. 第三方責任險 — 覆蓋事故中對第三方車輛或財產的損害。自付額因車行及車型可能有差異，預訂時請仔細核對條款。",
+        },
+        {
+          question: "為什麼必須透過冰島本地車行購買保險？",
+          answer:
+            "目的是避開第三方平台「全險」陷阱，保障您的權益。國內第三方平台宣傳的「全險」常由中國境內保險公司承保，與冰島本地車行保險體系脫鉤；條款往往未覆蓋冰島常見風險（如 SAAP 沙塵險），理賠流程繁瑣且易遭拒賠。冰島本地車行保險專為冰島環境設計，提供 SAAP 沙塵與火山灰保險、GP 碎石險等；出險由車行直接處理，還車驗車透明。建議拒絕國內第三方平台保險，透過大樂旅行社直連本地合規車行預訂，取車時核對保單並拍攝驗車影片。",
+        },
+        {
+          question: "為什麼建議購買全險或零賠付保險套餐？",
+          answer:
+            "冰島路況與氣候特殊，碎石飛濺、極端天氣、狹窄單行橋與融雪濕滑路面等風險較高。強烈建議升級全險或零賠付（Zero Excess）套餐，確認 0 自付額的覆蓋範圍，讓旅程專注享受而非擔憂賠償。",
+        },
+        {
+          question: "即便購買全險，哪些情況仍不賠付？",
+          answer:
+            "以下情況任何保險均不覆蓋，租車人需承擔全額維修及罰金：故意損壞車輛；酒駕／毒駕、危險駕駛；越野駕駛（Off-road）或闖入禁行區；疏忽造成的離合器、手煞車損壞；遺失車鑰匙、GPS；加油錯誤；車內燃燒物或腐蝕液體損壞；涉水損壞（部分零賠付套餐可賠，需提前確認）；動物碰撞（需停車報警 112）；陷車拖車費；交通違規罰單；車內財物被盜。",
+        },
+      ],
+    },
+    {
+      id: "trip",
+      title: "行程與自駕",
+      items: [
+        {
+          question: "夏季在冰島自駕有什麼特色？",
+          answer:
+            "夏季日照時間長、路況相對穩定，是冰島最受歡迎的自駕季節。傑古沙龍冰河湖船遊等體驗在夏季開放時間最長，您也可以靈活安排午夜日落等夏季限定風光。",
+        },
+        {
+          question: "在冰島自駕可以玩些什麼？",
+          answer:
+            "自駕讓您依自己的節奏前往喜歡的地方。可沿南岸觀賞瀑布、前往瓦特納冰川國家公園、體驗冰川徒步與冰河湖船遊、參觀黃金圈、探索斯奈山半島、在藍湖溫泉放鬆、品嚐當地美食、乘船觀鯨等。",
+        },
+        {
+          question: "去冰島自駕需要準備什麼行李？",
+          answer:
+            "無論哪個季節都可能遇到各種天氣，建議攜帶：防水冲锋衣褲、防水徒步鞋、透氣運動鞋、墨鏡、手套毛線帽圍巾、泳衣、羊毛衫或毛衣、羽絨衣、保濕霜與潤唇膏、手機支架，以及駕照翻譯公證文件。",
+        },
+        {
+          question: "什麼是自選報名活動？",
+          answer:
+            "每一天行程下方列有對應的自選報名活動，您可依需求選擇是否自費參加。這些活動經嚴選，最能體現冰島當地風土人情或特色文化，可依喜好放心選擇。",
+        },
+      ],
+    },
+    {
+      id: "accommodation",
+      title: "住宿相關",
+      items: [
+        {
+          question: "為什麼冰島的大床房都是兩張床拼起來的？",
+          answer:
+            "冰島旅宿業為提高入住率，雙人房大床多由兩張床拼接，前台會依預訂要求合併或拆分。僅首都個別豪華或精品飯店的高級房與套房有完整大床。您可在預訂頁選擇雷克雅未克地區的住宿級別，建議提早預訂以有更多選擇。",
+        },
+        {
+          question: "套餐單人房為什麼需要補差價？",
+          answer:
+            "冰島單人房房價高於雙人房房價的一半，預設房價按雙人房均攤計算，因此單人房需補差價。若需全程單人房，可在初始頁面選 1 人查看全程單人房價格，細節可諮詢客服。",
+        },
+      ],
+    },
+  ],
+  similarTrips: [
+    {
+      tripKey: "iceland/self-drive/summer/5",
+      title: "5 天 4 夜冰島夏季精簡自駕套餐",
+      tourCode: "SLMSD-052",
+      durationLabel: "5 天／4 夜",
+      description:
+        "將冰島南部精華收入囊中，搭配戶外體驗，並有機會看見舞動的北極光！",
+    },
+    {
+      tripKey: "iceland/self-drive/summer/6",
+      title: "6 天 5 夜冰島夏季經典自駕遊",
+      tourCode: "SLMSD-062",
+      durationLabel: "6 天／5 夜",
+      description:
+        "領略冰島冬日風光，打卡經典黃金圈、南岸小眾景點，體驗冰洞探險、追逐極光。",
+    },
+    {
+      tripKey: "iceland/self-drive/summer/7",
+      title: "冰島西南岸 7 天 6 夜夏季自駕遊",
+      tourCode: "SLMSD-072",
+      durationLabel: "7 天／6 夜",
+      description:
+        "黃金圈、南岸與斯奈山半島盡收囊中，途中還有機會看見舞動的北極光。",
+    },
+    {
+      tripKey: "iceland/self-drive/summer/8",
+      title: "8 天 7 夜冰島夏季精選自駕",
+      tourCode: "SLMSD-082",
+      durationLabel: "8 天／7 夜",
+      description:
+        "沿一號公路環島，遊覽黃金圈、南岸、冰河湖、東部峽灣、米湖與西部白銀圈。",
+    },
+  ],
+};

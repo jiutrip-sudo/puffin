@@ -111,7 +111,10 @@ export function CheckoutStagePackage({
     }
 
     const vehicleIds = pricingConfig.vehicleTiers.map((tier) => tier.id);
-    if (!isTierBookable(tierAvailability.vehicles[session.vehicleTier])) {
+    if (
+      vehicleIds.length > 0 &&
+      !isTierBookable(tierAvailability.vehicles[session.vehicleTier])
+    ) {
       const nextVehicle = pickFirstBookableTier(
         vehicleIds,
         tierAvailability.vehicles,
@@ -143,6 +146,7 @@ export function CheckoutStagePackage({
           value={session.startDate}
           min={pricingConfig.bookingDateRange?.min}
           max={pricingConfig.bookingDateRange?.max}
+          exclusions={pricingConfig.bookingDateExclusions}
           dualMonth
           onChange={(e) => onChange({ startDate: e.target.value })}
         />
@@ -171,6 +175,7 @@ export function CheckoutStagePackage({
         />
       </section>
 
+      {pricingConfig.vehicleTiers.length > 0 && (
       <section className="checkout-block checkout-block--vehicle">
         <h2 className="checkout-block__title">您的租車</h2>
         <VehicleTypePicker
@@ -186,6 +191,7 @@ export function CheckoutStagePackage({
           availabilityActive
         />
       </section>
+      )}
     </div>
   );
 }

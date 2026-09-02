@@ -1,5 +1,6 @@
 import { resolveTripPrice } from "@/lib/trip-pricing/resolve-trip-price";
 import { getPricingConfig } from "@/lib/trip-pricing/fetch";
+import { assertBookableStartDate } from "@/lib/trip-pricing/validate-booking-date";
 import type { PricingInput } from "@/lib/trip-pricing/types";
 
 export async function POST(request: Request) {
@@ -14,6 +15,8 @@ export async function POST(request: Request) {
     if (!config) {
       return Response.json({ error: "找不到價格設定" }, { status: 404 });
     }
+
+    assertBookableStartDate(config, body.startDate);
 
     const result = await resolveTripPrice(config, body);
     return Response.json(result);

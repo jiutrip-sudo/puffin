@@ -4,6 +4,7 @@ import {
 } from "./corivo-cached";
 import type { CorivoTravelerCounts } from "./corivo-client";
 import { buildCorivoPriceItems, getRoomTypeLabel } from "./corivo-rooms";
+import { getDefaultVehicleTier, packageIncludesVehicle } from "./calculate";
 import type { CorivoPricingConfig, PricingInput, PricingResult } from "./types";
 
 export function getPricePerPerson(
@@ -31,13 +32,19 @@ export async function calculateCorivoTripPrice(
     throw new Error("未知的住宿等級");
   }
 
-  const vehicleItemId = corivo.vehicleItems[input.vehicleTier];
-  if (!vehicleItemId) {
-    throw new Error("未知的租車車型");
-  }
+  const includesVehicle = packageIncludesVehicle(config);
+  let vehicleItemId: number | undefined;
+  let baseVehicleItemId: number | undefined;
 
-  const baseVehicleItemId =
-    corivo.vehicleItems[corivo.baseVehicleTier] ?? vehicleItemId;
+  if (includesVehicle) {
+    vehicleItemId = corivo.vehicleItems?.[input.vehicleTier];
+    if (!vehicleItemId) {
+      throw new Error("未知的租車車型");
+    }
+
+    baseVehicleItemId =
+      corivo.vehicleItems?.[corivo.baseVehicleTier ?? ""] ?? vehicleItemId;
+  }
 
   const packageItems = await cachedFetchCorivoPackageItems(
     corivo.instanceId,
@@ -64,13 +71,15 @@ export async function calculateCorivoTripPrice(
     }
   }
 
-  const baseItems = buildCorivoPriceItems(
-    packageItems,
-    classificationId,
-    baseVehicleItemId,
-    travelers,
-    input.roomSlots,
-  );
+  const baseItems = includesVehicle
+    ? buildCorivoPriceItems(
+        packageItems,
+        classificationId,
+        baseVehicleItemId,
+        travelers,
+        input.roomSlots,
+      )
+    : items;
 
   const [price, basePrice] = await Promise.all([
     cachedFetchCorivoPackageTourPrice(corivo.instanceId, {
@@ -91,9 +100,12 @@ export async function calculateCorivoTripPrice(
 
   const total = price.totalPriceInCurrency ?? price.totalPrice;
   const baseTotal = basePrice.totalPriceInCurrency ?? basePrice.totalPrice;
-  const vehicleTier =
-    config.vehicleTiers.find((tier) => tier.id === input.vehicleTier) ??
-    config.vehicleTiers[0];
+  const vehicleTier = includesVehicle
+    ? (config.vehicleTiers.find((tier) => tier.id === input.vehicleTier) ??
+      config.vehicleTiers.find(
+        (tier) => tier.id === getDefaultVehicleTier(config),
+      ))
+    : undefined;
 
   const deposit = Math.round(total * config.depositRate);
 
@@ -101,12 +113,12 @@ export async function calculateCorivoTripPrice(
     perPersonDouble: getPricePerPerson(total, travelers),
     subtotal: total,
     singleSupplement: 0,
-    vehicleAddon: Math.max(0, total - baseTotal),
+    vehicleAddon: includesVehicle ? Math.max(0, total - baseTotal) : 0,
     total,
     deposit,
     currency: "ISK",
     travelerCount: travelers.adults + travelers.children + travelers.infants,
-    vehicleLabel: vehicleTier.label,
+    vehicleLabel: vehicleTier?.label ?? "",
     roomTypeLabel: getRoomTypeLabel(travelers, input.roomSlots),
   };
 }

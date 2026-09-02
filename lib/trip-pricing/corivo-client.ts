@@ -19,6 +19,7 @@ export type CorivoPriceItem = {
 
 export type CorivoHotelRoomChoice = {
   id: number;
+  isMandatory?: boolean;
   product: {
     category: string;
     classification: { id: number; code: string; name: string };
@@ -106,6 +107,7 @@ export async function fetchCorivoPackageItems(
           dayTo
           choices @include(if: $choices) {
             id
+            isMandatory
             product @include(if: $product) {
               ... on HotelRoom {
                 category

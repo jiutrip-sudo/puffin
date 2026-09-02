@@ -102,12 +102,19 @@ export type BookingDateRange = {
   max: string;
 };
 
+/** 休運／不可選的出發日區間（含起迄日） */
+export type BookingDateExclusion = {
+  from: string;
+  to: string;
+};
+
 export type CorivoPricingBinding = {
   instanceId: string;
   packageTourId: number;
   classifications: Record<string, number>;
-  vehicleItems: Record<string, number>;
-  baseVehicleTier: string;
+  /** 跟團等不含租車的套餐可省略 */
+  vehicleItems?: Record<string, number>;
+  baseVehicleTier?: string;
 };
 
 export type PricingConfig = {
@@ -120,6 +127,7 @@ export type PricingConfig = {
   ageBands: AgeBandRates;
   seasonalMultipliers?: SeasonalMultiplier[];
   bookingDateRange?: BookingDateRange;
+  bookingDateExclusions?: BookingDateExclusion[];
   tripDurationDays?: number;
   minAdults?: number;
   /** 成人＋兒童＋嬰兒合計上限 */

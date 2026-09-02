@@ -1,5 +1,6 @@
 import { resolveCorivoTierAvailability } from "@/lib/trip-pricing/pricing-snapshot-read";
 import { getPricingConfig, usesCorivoPricing } from "@/lib/trip-pricing/fetch";
+import { assertBookableStartDate } from "@/lib/trip-pricing/validate-booking-date";
 
 type AvailabilityRequest = {
   packageId?: string;
@@ -22,6 +23,8 @@ export async function POST(request: Request) {
     if (!config) {
       return Response.json({ error: "找不到價格設定" }, { status: 404 });
     }
+
+    assertBookableStartDate(config, body.startDate);
 
     if (!usesCorivoPricing(config) || !config.corivo) {
       return Response.json({

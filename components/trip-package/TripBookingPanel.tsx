@@ -211,6 +211,7 @@ export function TripBookingPanel({
   const isSheet = variant === "sheet";
   const bookingMin = pricingConfig.bookingDateRange?.min;
   const bookingMax = pricingConfig.bookingDateRange?.max;
+  const bookingExclusions = pricingConfig.bookingDateExclusions;
 
   const accommodationLabel =
     pricingConfig.tiers.find((t) => t.id === accommodationTier)?.label ??
@@ -285,6 +286,7 @@ export function TripBookingPanel({
             value={startDate}
             min={bookingMin}
             max={bookingMax}
+            exclusions={bookingExclusions}
             loading={pricingLoading}
             onChange={(e) => onStartDateChange(e.target.value)}
           />
@@ -363,7 +365,13 @@ export function TripBookingPanel({
           </div>
         )}
 
-        <div className="grid grid-cols-2 gap-2.5">
+        <div
+          className={
+            pricingConfig.vehicleTiers.length > 0
+              ? "grid grid-cols-2 gap-2.5"
+              : "grid grid-cols-1 gap-2.5"
+          }
+        >
           <OptionChip
             label="住宿"
             value={accommodationLabel}
@@ -372,6 +380,7 @@ export function TripBookingPanel({
               scrollToSection("room-vehicle", isSheet, onCloseSheet)
             }
           />
+          {pricingConfig.vehicleTiers.length > 0 && (
           <OptionChip
             label="租車"
             value={vehicleShort}
@@ -380,6 +389,7 @@ export function TripBookingPanel({
               scrollToSection("vehicle-options", isSheet, onCloseSheet)
             }
           />
+          )}
         </div>
       </div>
 

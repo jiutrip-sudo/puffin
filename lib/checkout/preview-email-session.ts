@@ -1,3 +1,4 @@
+import { getDefaultVehicleTier } from "@/lib/trip-pricing/calculate";
 import { getPricingConfig } from "@/lib/trip-pricing/fetch";
 import { getAllTripPackages } from "@/lib/trip-packages/registry";
 import { parseCheckoutSession } from "./parse-initial-session";
@@ -51,7 +52,7 @@ export function buildCheckoutEmailPreviewSession(
         packageId: pricingConfig.packageId,
         packageTitle: tripPackage?.title ?? "冰島冬季自駕 4 日",
         accommodationTier: pricingConfig.tiers[0]?.id ?? "comfort",
-        vehicleTier: pricingConfig.vehicleTiers[0]?.id ?? "cfmn",
+        vehicleTier: getDefaultVehicleTier(pricingConfig),
         startDate: pricingConfig.bookingDateRange?.min ?? "2026-11-01",
       },
     );

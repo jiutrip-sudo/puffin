@@ -29,6 +29,11 @@ export function formatDisplayDate(value: string): string {
   return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
 }
 
+export type DateRange = {
+  from: string;
+  to: string;
+};
+
 export function isDateInRange(
   date: Date,
   min?: string,
@@ -38,6 +43,68 @@ export function isDateInRange(
   if (min && iso < min) return false;
   if (max && iso > max) return false;
   return true;
+}
+
+export function isDateInExclusion(
+  iso: string,
+  exclusions?: DateRange[],
+): boolean {
+  if (!exclusions?.length) return false;
+  return exclusions.some((range) => iso >= range.from && iso <= range.to);
+}
+
+export function isDateSelectable(
+  date: Date,
+  min?: string,
+  max?: string,
+  exclusions?: DateRange[],
+): boolean {
+  if (!isDateInRange(date, min, max)) return false;
+  return !isDateInExclusion(toISODate(date), exclusions);
+}
+
+export function getFirstSelectableDate(
+  min?: string,
+  max?: string,
+  exclusions?: DateRange[],
+): string {
+  if (!min) return "";
+
+  let cursor = min;
+  for (let attempt = 0; attempt < 400; attempt += 1) {
+    if (max && cursor > max) break;
+    if (!isDateInExclusion(cursor, exclusions)) return cursor;
+
+    const block = exclusions?.find(
+      (range) => cursor >= range.from && cursor <= range.to,
+    );
+    cursor = addDaysISO(block?.to ?? cursor, 1);
+  }
+
+  return min;
+}
+
+export function sampleMonthlyDates(
+  min: string,
+  max: string,
+  exclusions?: DateRange[],
+): string[] {
+  const dates: string[] = [];
+  const cursor = new Date(`${min}T12:00:00`);
+  const end = new Date(`${max}T12:00:00`);
+  if (Number.isNaN(cursor.getTime()) || Number.isNaN(end.getTime())) {
+    return dates;
+  }
+
+  while (cursor <= end) {
+    const iso = toISODate(cursor);
+    if (!isDateInExclusion(iso, exclusions)) {
+      dates.push(iso);
+    }
+    cursor.setMonth(cursor.getMonth() + 1);
+  }
+
+  return dates;
 }
 
 export function clampViewMonth(
@@ -83,9 +150,10 @@ export function getInitialViewMonth(
   value?: string,
   min?: string,
   max?: string,
+  exclusions?: DateRange[],
 ): Date {
   const fromValue = value ? parseISODate(value) : null;
-  if (fromValue) {
+  if (fromValue && isDateSelectable(fromValue, min, max, exclusions)) {
     return clampViewMonth(
       new Date(fromValue.getFullYear(), fromValue.getMonth(), 1),
       min,
@@ -95,19 +163,18 @@ export function getInitialViewMonth(
 
   const today = new Date();
   const todayMonth = new Date(today.getFullYear(), today.getMonth(), 1);
-  if (isDateInRange(today, min, max)) {
+  if (isDateSelectable(today, min, max, exclusions)) {
     return clampViewMonth(todayMonth, min, max);
   }
 
-  if (min) {
-    const minDate = parseISODate(min);
-    if (minDate) {
-      return clampViewMonth(
-        new Date(minDate.getFullYear(), minDate.getMonth(), 1),
-        min,
-        max,
-      );
-    }
+  const firstSelectable = getFirstSelectableDate(min, max, exclusions);
+  const firstDate = firstSelectable ? parseISODate(firstSelectable) : null;
+  if (firstDate) {
+    return clampViewMonth(
+      new Date(firstDate.getFullYear(), firstDate.getMonth(), 1),
+      min,
+      max,
+    );
   }
 
   return todayMonth;

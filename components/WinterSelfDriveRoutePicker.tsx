@@ -1,22 +1,12 @@
-import { CircleButton } from "@/components/CircleButton";
-import { getIcelandSelfDriveWinterRouteOptions } from "@/lib/trip-options";
+import { WinterRoutePicker } from "@/components/WinterRoutePicker";
 
 type WinterSelfDriveRoutePickerProps = {
   duration: string;
 };
 
+/** @deprecated 請改用 WinterRoutePicker */
 export function WinterSelfDriveRoutePicker({
   duration,
 }: WinterSelfDriveRoutePickerProps) {
-  const routeOptions = getIcelandSelfDriveWinterRouteOptions(duration);
-
-  return (
-    <div className="flex items-center justify-center gap-10 md:gap-16">
-      {routeOptions.map((routeOption) => (
-        <CircleButton key={routeOption.id} href={routeOption.href}>
-          {routeOption.label}
-        </CircleButton>
-      ))}
-    </div>
-  );
+  return <WinterRoutePicker duration={duration} variant="self-drive" />;
 }

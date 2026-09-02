@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { CheckoutFlow } from "@/components/checkout/CheckoutFlow";
 import { parseCheckoutSession } from "@/lib/checkout/parse-initial-session";
+import { getDefaultVehicleTier } from "@/lib/trip-pricing/calculate";
 import { getPricingConfig } from "@/lib/trip-pricing/fetch";
+import { resolveDefaultStartDate } from "@/lib/trip-pricing/validate-booking-date";
 import { getAllTripPackages } from "@/lib/trip-packages/registry";
 
 type CheckoutPageProps = {
@@ -47,8 +49,8 @@ export default async function CheckoutPage({ searchParams }: CheckoutPageProps) 
       packageId: pricingConfig.packageId,
       packageTitle: tripPackage?.title ?? "冰島行程套餐",
       accommodationTier: pricingConfig.tiers[0]?.id ?? "comfort",
-      vehicleTier: pricingConfig.vehicleTiers[0]?.id ?? "cfmn",
-      startDate: pricingConfig.bookingDateRange?.min ?? "",
+      vehicleTier: getDefaultVehicleTier(pricingConfig),
+      startDate: resolveDefaultStartDate(pricingConfig),
     },
   );
 

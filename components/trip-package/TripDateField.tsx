@@ -7,8 +7,9 @@ import {
   formatDisplayDate,
   getCalendarCells,
   getInitialViewMonth,
-  isDateInRange,
+  isDateSelectable,
   toISODate,
+  type DateRange,
 } from "@/lib/trip-date-utils";
 import { BookingShimmer } from "./BookingPriceShimmer";
 
@@ -19,6 +20,7 @@ type TripCalendarPopoverProps = {
   value: string;
   min?: string;
   max?: string;
+  exclusions?: DateRange[];
   dualMonth?: boolean;
   onSelect: (value: string) => void;
   onClose: () => void;
@@ -54,13 +56,14 @@ function TripCalendarPopover({
   value,
   min,
   max,
+  exclusions,
   dualMonth = false,
   onSelect,
   onClose,
 }: TripCalendarPopoverProps) {
   const popoverRef = useRef<HTMLDivElement>(null);
   const [viewMonth, setViewMonth] = useState(() =>
-    getInitialViewMonth(value, min, max),
+    getInitialViewMonth(value, min, max, exclusions),
   );
   const [position, setPosition] = useState({
     top: 0,
@@ -75,29 +78,52 @@ function TripCalendarPopover({
   );
 
   useLayoutEffect(() => {
-    if (!anchorEl || !popoverRef.current) return;
+    if (!anchorEl) return;
 
-    const anchorRect = anchorEl.getBoundingClientRect();
-    const popoverRect = popoverRef.current.getBoundingClientRect();
-    const margin = 8;
-    const viewportWidth = window.innerWidth;
-    const viewportHeight = window.innerHeight;
-    const minWidth = dualMonth ? 560 : 280;
+    const updatePosition = () => {
+      const popoverEl = popoverRef.current;
+      if (!popoverEl) return;
 
-    let top = anchorRect.bottom + margin;
-    let left = anchorRect.left;
-    const width = Math.max(anchorRect.width, minWidth);
+      const anchorRect = anchorEl.getBoundingClientRect();
+      const popoverRect = popoverEl.getBoundingClientRect();
+      const margin = 8;
+      const viewportWidth = window.innerWidth;
+      const viewportHeight = window.innerHeight;
+      const minWidth = dualMonth ? 560 : 280;
 
-    if (left + width > viewportWidth - margin) {
-      left = viewportWidth - width - margin;
-    }
-    if (left < margin) left = margin;
+      let top = anchorRect.bottom + margin;
+      let left = anchorRect.left;
+      const width = Math.max(anchorRect.width, minWidth);
 
-    if (top + popoverRect.height > viewportHeight - margin) {
-      top = anchorRect.top - popoverRect.height - margin;
-    }
+      if (left + width > viewportWidth - margin) {
+        left = viewportWidth - width - margin;
+      }
+      if (left < margin) left = margin;
 
-    setPosition({ top, left, width });
+      if (top + popoverRect.height > viewportHeight - margin) {
+        top = anchorRect.top - popoverRect.height - margin;
+      }
+
+      setPosition({ top, left, width });
+    };
+
+    updatePosition();
+
+    const onReposition = () => {
+      requestAnimationFrame(updatePosition);
+    };
+
+    window.addEventListener("resize", onReposition);
+    window.addEventListener("scroll", onReposition, true);
+    window.visualViewport?.addEventListener("resize", onReposition);
+    window.visualViewport?.addEventListener("scroll", onReposition);
+
+    return () => {
+      window.removeEventListener("resize", onReposition);
+      window.removeEventListener("scroll", onReposition, true);
+      window.visualViewport?.removeEventListener("resize", onReposition);
+      window.visualViewport?.removeEventListener("scroll", onReposition);
+    };
   }, [anchorEl, viewMonth, dualMonth]);
 
   useEffect(() => {
@@ -114,7 +140,8 @@ function TripCalendarPopover({
 
   const renderDay = (date: Date, inMonth: boolean, monthKey: number) => {
     const iso = toISODate(date);
-    const selectable = inMonth && isDateInRange(date, min, max);
+    const selectable =
+      inMonth && isDateSelectable(date, min, max, exclusions);
     const isSelected = value === iso;
     const isToday = todayIso === iso;
 
@@ -253,6 +280,7 @@ type TripDateFieldProps = {
   value?: string;
   min?: string;
   max?: string;
+  exclusions?: DateRange[];
   disabled?: boolean;
   loading?: boolean;
   /** 並排顯示兩個月份（Checkout 旅行日期等） */
@@ -265,6 +293,7 @@ export function TripDateField({
   value = "",
   min,
   max,
+  exclusions,
   disabled,
   loading = false,
   dualMonth = false,
@@ -305,6 +334,7 @@ export function TripDateField({
           value={value}
           min={min}
           max={max}
+          exclusions={exclusions}
           dualMonth={dualMonth}
           onSelect={(nextValue) => onChange?.({ target: { value: nextValue } })}
           onClose={() => setOpen(false)}

@@ -11,12 +11,15 @@ import { buildPageMetadata } from "@/lib/seo/metadata";
 import { absoluteUrl } from "@/lib/site-url";
 import {
   COMING_SOON_TRIPS,
+  ICELAND_GROUP_SUMMER_ROUTE_PICKER_DAY_IDS,
+  ICELAND_GROUP_WINTER_ROUTE_PICKER_DAY_IDS,
   ICELAND_SELF_DRIVE_WINTER_ROUTE_PICKER_DAY_IDS,
   ICELAND_TRIP_SEASON_DAY_IDS,
   OPTION_LABELS,
   SOURCE_LABELS,
 } from "@/lib/trip-options";
-import { WinterSelfDriveRoutePicker } from "@/components/WinterSelfDriveRoutePicker";
+import { SummerGroupRoutePicker } from "@/components/SummerGroupRoutePicker";
+import { WinterRoutePicker } from "@/components/WinterRoutePicker";
 
 type PageProps = {
   params: Promise<{
@@ -104,7 +107,97 @@ export default async function TripDurationPage({ params }: PageProps) {
         footer={footer}
         header={header}
       >
-        <WinterSelfDriveRoutePicker duration={duration} />
+        <WinterRoutePicker duration={duration} variant="self-drive" />
+      </HeroSection>
+    );
+  }
+
+  if (
+    option === "group" &&
+    suboption === "summer" &&
+    ICELAND_GROUP_SUMMER_ROUTE_PICKER_DAY_IDS.has(duration)
+  ) {
+    const sourceLabel = SOURCE_LABELS[source];
+    const optionLabel = OPTION_LABELS[option];
+    const suboptionLabel = OPTION_LABELS[suboption];
+    const durationLabel = `${duration}日`;
+
+    const header = (
+      <SiteHeader
+        rightSlot={
+          <Link
+            href={`/trips/iceland/${option}/${suboption}`}
+            className="glass-hero rounded-full px-5 py-2 text-xs font-medium text-hero-text/90 transition-all hover:bg-white/25"
+          >
+            返回 {suboptionLabel}
+          </Link>
+        }
+      />
+    );
+
+    const footer = (
+      <TransitionBar
+        tags={[`#${durationLabel}`, `#${suboptionLabel}`, "#冰島之旅"]}
+      />
+    );
+
+    return (
+      <HeroSection
+        eyebrow={`${sourceLabel} · ${optionLabel} · ${suboptionLabel}`}
+        title={`${durationLabel}夏季跟團`}
+        subtitle="選擇您的路線變體，我們將為您規劃最適合的行程。"
+        tagline={`CHOOSE YOUR ROUTE VARIANT FOR YOUR ${duration}-DAY SUMMER GROUP TOUR.`}
+        align="center"
+        priority={false}
+        footer={footer}
+        header={header}
+      >
+        <SummerGroupRoutePicker duration={duration} />
+      </HeroSection>
+    );
+  }
+
+  if (
+    option === "group" &&
+    suboption === "winter" &&
+    ICELAND_GROUP_WINTER_ROUTE_PICKER_DAY_IDS.has(duration)
+  ) {
+    const sourceLabel = SOURCE_LABELS[source];
+    const optionLabel = OPTION_LABELS[option];
+    const suboptionLabel = OPTION_LABELS[suboption];
+    const durationLabel = `${duration}日`;
+
+    const header = (
+      <SiteHeader
+        rightSlot={
+          <Link
+            href={`/trips/iceland/${option}/${suboption}`}
+            className="glass-hero rounded-full px-5 py-2 text-xs font-medium text-hero-text/90 transition-all hover:bg-white/25"
+          >
+            返回 {suboptionLabel}
+          </Link>
+        }
+      />
+    );
+
+    const footer = (
+      <TransitionBar
+        tags={[`#${durationLabel}`, `#${suboptionLabel}`, "#冰島之旅"]}
+      />
+    );
+
+    return (
+      <HeroSection
+        eyebrow={`${sourceLabel} · ${optionLabel} · ${suboptionLabel}`}
+        title={`${durationLabel}冬季跟團`}
+        subtitle="選擇環島或非環島路線，我們將為您規劃最適合的行程。"
+        tagline={`CHOOSE RING ROAD OR NON-RING ROUTE FOR YOUR ${duration}-DAY GROUP TOUR.`}
+        align="center"
+        priority={false}
+        footer={footer}
+        header={header}
+      >
+        <WinterRoutePicker duration={duration} variant="group" />
       </HeroSection>
     );
   }

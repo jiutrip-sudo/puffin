@@ -19,9 +19,36 @@ function getTier(config: PricingConfig, tierId: string) {
   return config.tiers.find((tier) => tier.id === tierId) ?? config.tiers[0];
 }
 
+export function packageIncludesVehicle(config: PricingConfig): boolean {
+  return config.vehicleTiers.length > 0;
+}
+
+export function getDefaultVehicleTier(config: PricingConfig): string {
+  if (!packageIncludesVehicle(config)) {
+    return "";
+  }
+  const fromCorivo = config.corivo?.baseVehicleTier;
+  if (
+    fromCorivo &&
+    config.vehicleTiers.some((tier) => tier.id === fromCorivo)
+  ) {
+    return fromCorivo;
+  }
+  return config.vehicleTiers[0]?.id ?? "cfmn";
+}
+
 function getVehicle(config: PricingConfig, vehicleTierId: string) {
+  if (!packageIncludesVehicle(config)) {
+    return {
+      id: "",
+      label: "",
+      imageUrl: "",
+      addonTotal: 0,
+    };
+  }
   return (
     config.vehicleTiers.find((tier) => tier.id === vehicleTierId) ??
+    config.vehicleTiers.find((tier) => tier.id === getDefaultVehicleTier(config)) ??
     config.vehicleTiers[0]
   );
 }

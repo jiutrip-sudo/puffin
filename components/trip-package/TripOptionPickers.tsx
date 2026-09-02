@@ -775,6 +775,7 @@ export function TripOptionPickers({
         availabilityActive={availabilityActive}
         pricingLoading={pricingLoading}
       />
+      {pricingConfig.vehicleTiers.length > 0 && (
       <VehicleTypePicker
         vehicles={pricingConfig.vehicleTiers}
         intro={pricingConfig.vehicleIntro}
@@ -787,6 +788,7 @@ export function TripOptionPickers({
         availabilityLoading={availabilityLoading}
         availabilityActive={availabilityActive}
       />
+    )}
     </div>
   );
 }

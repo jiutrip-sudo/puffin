@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import type { TripPackage } from "@/lib/trip-packages/types";
 import type { PricingConfig, TripAvailabilityResult } from "@/lib/trip-pricing/types";
+import { packageIncludesVehicle } from "@/lib/trip-pricing/calculate";
 import { SiteHeader } from "@/components/SiteHeader";
 import { TripAttractionGrid } from "./TripAttractionGrid";
 import {
@@ -169,7 +170,10 @@ function TripPackageMainContent({
           </section>
 
           <section ref={roomVehicleSectionRef}>
-            <SectionHeading id="room-vehicle" title="房型與車型" />
+            <SectionHeading
+              id="room-vehicle"
+              title={packageIncludesVehicle(pricingConfig) ? "房型與車型" : "房型"}
+            />
             <TripRoomVehicleCards
               pricingConfig={pricingConfig}
               accommodationTier={accommodationTier}
@@ -287,7 +291,13 @@ export function TripPackagePageClient({
       <div ref={heroRef}>
         <TripPackageHero package={pkg} />
       </div>
-      <TripSectionNav ref={navRef} elevated={headerElevated} />
+      <TripSectionNav
+        ref={navRef}
+        elevated={headerElevated}
+        roomSectionLabel={
+          packageIncludesVehicle(pricingConfig) ? "房型車型" : "房型"
+        }
+      />
 
       <TripPackageBookingSection
         packageId={pkg.id}

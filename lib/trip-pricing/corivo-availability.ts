@@ -4,6 +4,7 @@ import {
   cachedFetchCorivoPackageTourPrice,
 } from "./corivo-cached";
 import type { CorivoTravelerCounts } from "./corivo-client";
+import { packageIncludesVehicle } from "./calculate";
 import {
   buildCorivoAvailabilitySelections,
   buildCorivoPriceItems,
@@ -126,11 +127,13 @@ export async function fetchCorivoTierAvailability(
     travelers,
   );
 
-  const baseVehicleItemId =
-    corivo.vehicleItems[corivo.baseVehicleTier] ??
-    Object.values(corivo.vehicleItems)[0];
+  const includesVehicle = packageIncludesVehicle(config);
+  const baseVehicleItemId = includesVehicle
+    ? (corivo.vehicleItems?.[corivo.baseVehicleTier ?? ""] ??
+      Object.values(corivo.vehicleItems ?? {})[0])
+    : undefined;
 
-  if (!baseVehicleItemId) {
+  if (includesVehicle && !baseVehicleItemId) {
     throw new Error("找不到預設租車選項");
   }
 
@@ -170,33 +173,35 @@ export async function fetchCorivoTierAvailability(
     },
   );
 
-  const vehicleEntries = await mapWithConcurrency(
-    config.vehicleTiers,
-    VEHICLE_PROBE_CONCURRENCY,
-    async (tier) => {
-      const vehicleItemId = corivo.vehicleItems[tier.id];
-      if (!vehicleItemId) {
-        return [tier.id, "UNAVAILABLE"] as const;
-      }
+  const vehicleEntries = includesVehicle
+    ? await mapWithConcurrency(
+        config.vehicleTiers,
+        VEHICLE_PROBE_CONCURRENCY,
+        async (tier) => {
+          const vehicleItemId = corivo.vehicleItems?.[tier.id];
+          if (!vehicleItemId) {
+            return [tier.id, "UNAVAILABLE"] as const;
+          }
 
-      try {
-        const status = await probeWithTimeout(
-          probeVehicleAvailability(
-            corivo.instanceId,
-            corivo.packageTourId,
-            input.startDate,
-            travelers,
-            packageItems,
-            vehicleClassificationId,
-            vehicleItemId,
-          ),
-        );
-        return [tier.id, status] as const;
-      } catch {
-        return [tier.id, "UNAVAILABLE"] as const;
-      }
-    },
-  );
+          try {
+            const status = await probeWithTimeout(
+              probeVehicleAvailability(
+                corivo.instanceId,
+                corivo.packageTourId,
+                input.startDate,
+                travelers,
+                packageItems,
+                vehicleClassificationId,
+                vehicleItemId,
+              ),
+            );
+            return [tier.id, status] as const;
+          } catch {
+            return [tier.id, "UNAVAILABLE"] as const;
+          }
+        },
+      )
+    : [];
 
   const accommodation: TierAvailabilityMap = Object.fromEntries(
     accommodationEntries,

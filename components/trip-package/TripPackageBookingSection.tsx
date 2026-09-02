@@ -8,15 +8,15 @@ import type {
   TripAvailabilityResult,
 } from "@/lib/trip-pricing/types";
 import { isTierBookable, pickFirstBookableTier } from "@/lib/trip-pricing/corivo-availability";
-import { formatIsk } from "@/lib/trip-pricing/calculate";
+import { formatIsk, getDefaultVehicleTier } from "@/lib/trip-pricing/calculate";
 import { computeTripEndDate } from "@/lib/trip-date-utils";
+import { resolveDefaultStartDate } from "@/lib/trip-pricing/validate-booking-date";
 import { BookingShimmer } from "./BookingPriceShimmer";
 import { TripBookingPanel } from "./TripBookingPanel";
 
 function getDefaultDates(pricingConfig: PricingConfig) {
-  const min = pricingConfig.bookingDateRange?.min ?? "";
   const tripDays = pricingConfig.tripDurationDays ?? 1;
-  const startDate = min;
+  const startDate = resolveDefaultStartDate(pricingConfig);
   const endDate = startDate ? computeTripEndDate(startDate, tripDays) : "";
   return { startDate, endDate };
 }
@@ -49,7 +49,7 @@ export function TripPackageBookingSection({
   const [sheetOpen, setSheetOpen] = useState(false);
 
   const defaultTier = pricingConfig.tiers[0]?.id ?? "budget";
-  const defaultVehicle = pricingConfig.vehicleTiers[0]?.id ?? "cfmn";
+  const defaultVehicle = getDefaultVehicleTier(pricingConfig);
   const defaultDates = getDefaultDates(pricingConfig);
   const [startDate, setStartDate] = useState(defaultDates.startDate);
   const [endDate, setEndDate] = useState(defaultDates.endDate);
@@ -204,7 +204,10 @@ export function TripPackageBookingSection({
     }
 
     const vehicleIds = pricingConfig.vehicleTiers.map((tier) => tier.id);
-    if (!isTierBookable(tierAvailability.vehicles[vehicleTier])) {
+    if (
+      vehicleIds.length > 0 &&
+      !isTierBookable(tierAvailability.vehicles[vehicleTier])
+    ) {
       const nextVehicle = pickFirstBookableTier(
         vehicleIds,
         tierAvailability.vehicles,

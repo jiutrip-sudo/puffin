@@ -4,6 +4,7 @@ import {
 } from "@/lib/trip-pricing/corivo-rooms";
 import { occupanciesToRoomSlots } from "@/lib/checkout/room-occupancy";
 import type { CorivoPackageItem } from "@/lib/trip-pricing/corivo-client";
+import { packageIncludesVehicle } from "@/lib/trip-pricing/calculate";
 import type { CorivoPricingConfig } from "@/lib/trip-pricing/types";
 import { toCorivoCountryCode } from "./country-codes";
 import { parseCorivoDateTime } from "./extra-selection";
@@ -103,7 +104,7 @@ function vehicleTravelerIds(session: CheckoutSession): number[] {
 function buildBasePackageTourItems(
   packageItems: CorivoPackageItem[],
   classificationId: number,
-  vehicleItemId: number,
+  vehicleItemId: number | undefined,
   session: CheckoutSession,
 ): CorivoCheckoutPackageTourItem[] {
   const travelers = {
@@ -127,7 +128,8 @@ function buildBasePackageTourItems(
   let roomIndex = 0;
 
   return priceItems.map((item) => {
-    const isVehicle = item.id === vehicleItemId;
+    const isVehicle =
+      vehicleItemId != null && item.id === vehicleItemId;
     const travelersForItem = isVehicle
       ? vehicleIds
       : (roomTravelerIds[roomIndex] ?? vehicleIds);
@@ -194,9 +196,12 @@ export function buildCorivoCheckoutInput(
 ): CorivoCheckoutGraphqlInput {
   const corivo = config.corivo;
   const classificationId = corivo.classifications[session.accommodationTier];
-  const vehicleItemId = corivo.vehicleItems[session.vehicleTier];
+  const includesVehicle = packageIncludesVehicle(config);
+  const vehicleItemId = includesVehicle
+    ? corivo.vehicleItems?.[session.vehicleTier]
+    : undefined;
 
-  if (!classificationId || !vehicleItemId) {
+  if (!classificationId || (includesVehicle && !vehicleItemId)) {
     throw new Error("住宿或租車選項無效");
   }
 

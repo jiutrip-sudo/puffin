@@ -1,3 +1,4 @@
+import { sampleMonthlyDates } from "@/lib/trip-date-utils";
 import { calculateCorivoTripPrice } from "./corivo-calculate";
 import { fetchCorivoTierAvailability } from "./corivo-availability";
 import { getAllPricingConfigs, usesCorivoPricing } from "./fetch";
@@ -82,9 +83,10 @@ function buildSyncTargets(config: PricingConfig): {
   prices: PriceSyncTarget[];
   availability: AvailabilitySyncTarget[];
 } {
-  const dates = sampleSyncDates(
+  const dates = sampleMonthlyDates(
     config.bookingDateRange?.min ?? "2026-11-01",
     config.bookingDateRange?.max ?? "2027-03-31",
+    config.bookingDateExclusions,
   );
 
   const vehicleIds = config.vehicleTiers.map((tier) => tier.id);
@@ -97,7 +99,10 @@ function buildSyncTargets(config: PricingConfig): {
         startDate: date,
         ...travelers,
         accommodationTier: DEFAULT_ACCOMMODATION_TIER,
-        vehicleTier: DEFAULT_VEHICLE_TIER,
+        vehicleTier:
+          config.vehicleTiers.length > 0
+            ? DEFAULT_VEHICLE_TIER
+            : "",
       });
       availability.push({
         startDate: date,
@@ -107,6 +112,7 @@ function buildSyncTargets(config: PricingConfig): {
     }
 
     for (const vehicleTier of vehicleIds) {
+      if (!vehicleTier) continue;
       prices.push({
         startDate: date,
         ...TWO_ADULT_TRAVELERS,
