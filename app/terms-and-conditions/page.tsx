@@ -13,7 +13,7 @@ export async function generateMetadata() {
   return buildPageMetadata({
     title: `${title} | ${companyName}`,
     description: localizeText(
-      `${COMPANY_INFO.name} 冰島套裝行程預訂、付款、取消退款及旅遊服務條款。`,
+      `${COMPANY_INFO.name} 冰島自駕及跟團套裝之預訂申請、供應商確認、付款、取消退款及旅遊服務條款。`,
       locale,
     ),
     path: "/terms-and-conditions",

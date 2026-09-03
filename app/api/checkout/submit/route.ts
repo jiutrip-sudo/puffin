@@ -25,7 +25,10 @@ export async function POST(request: Request) {
     }
 
     if (!session.acceptTerms) {
-      return NextResponse.json({ error: "請同意服務條款" }, { status: 400 });
+      return NextResponse.json(
+        { error: "請同意服務條款及隱私權政策" },
+        { status: 400 },
+      );
     }
 
     const travelerErrors = validateTravelerForms(session.travelers);
