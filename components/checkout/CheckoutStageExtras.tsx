@@ -4,12 +4,11 @@ import { TripImage } from "@/components/trip-package/TripImage";
 import Link from "next/link";
 import { CheckoutPromoCode } from "./CheckoutPromoCode";
 import { useEffect, useMemo, useState } from "react";
-import { formatIsk } from "@/lib/trip-pricing/calculate";
+import { useFormatMoney } from "@/lib/i18n/use-format-money";
 import type { CheckoutSession } from "@/lib/checkout/types";
 import {
   CHECKOUT_PAYMENT_OPTIONS,
   CHECKOUT_BANK_ACCOUNT,
-  getManualPaymentInstructions,
 } from "@/lib/checkout/manual-payment";
 import { CheckoutSuccessIcon } from "./CheckoutSuccessIcon";
 import {
@@ -46,6 +45,7 @@ export function CheckoutStageExtras({
   session,
   onChange,
 }: StageExtrasProps) {
+  const { formatMoney } = useFormatMoney();
   const [days, setDays] = useState<CorivoOptionalExtraDay[]>([]);
   const [currency, setCurrency] = useState("ISK");
   const [loading, setLoading] = useState(true);
@@ -245,7 +245,7 @@ export function CheckoutStageExtras({
                                 {extra.name}
                               </p>
                               <p className="checkout-extra-card__price tabular-nums">
-                                {currency} {formatIsk(perPerson)}
+                                {formatMoney(perPerson)} / 人
                                 <span className="checkout-extra-card__per-person">
                                   / 人
                                 </span>
@@ -519,6 +519,8 @@ export function CheckoutStageConfirmation({
   customerEmailSent,
   backHref,
 }: StageConfirmationProps) {
+  const { formatMoney, fxDisclaimer } = useFormatMoney();
+
   const amountDue =
     totalAmount !== null
       ? session.payFullAmount
@@ -526,27 +528,13 @@ export function CheckoutStageConfirmation({
         : Math.round(totalAmount * depositRate)
       : null;
 
-  const paymentLabel =
-    session.paymentMethod === "bank_transfer" ? "銀行匯款" : "現金付款";
-
-  const instructions =
-    amountDue !== null
-      ? getManualPaymentInstructions(
-          session.paymentMethod,
-          confirmationCode,
-          amountDue,
-          session.payFullAmount,
-          formatIsk,
-        )
-      : null;
-
   return (
     <div className="checkout-stage checkout-confirmation">
       <header className="checkout-confirmation-hero checkout-reveal checkout-reveal--1">
         <CheckoutSuccessIcon />
-        <h2 className="checkout-block__title">預訂確認</h2>
+        <h2 className="checkout-block__title">預訂申請</h2>
         <p className="checkout-success-banner checkout-success-banner--celebrate">
-          訂單已成立！
+          預訂申請已收到！
         </p>
       </header>
 
@@ -568,67 +556,26 @@ export function CheckoutStageConfirmation({
           </Link>
         </p>
       )}
-      <div
-        className="checkout-manual-payment-summary checkout-reveal checkout-reveal--4"
-      >
-        <p>
-          付款方式：<strong>{paymentLabel}</strong>
-          {amountDue !== null && (
-            <>
-              {" · "}
-              {instructions?.amountLabel}：
-              <strong className="tabular-nums">{formatIsk(amountDue)}</strong>
-            </>
-          )}
-        </p>
-        <p className="checkout-block__hint">
-          顧問將人工確認款項後通知您；未於期限內付款，訂單可能被取消。
-        </p>
-      </div>
 
-      {instructions && (
-        <section
-          className="checkout-manual-payment-instructions checkout-reveal checkout-reveal--5"
-        >
-          <h3 className="checkout-manual-payment-instructions__title">
-            {instructions.title}
-          </h3>
-          {instructions.bankAccount && (
-            <dl className="checkout-bank-account">
-              <div>
-                <dt>戶名</dt>
-                <dd>{instructions.bankAccount.holderName}</dd>
-              </div>
-              <div>
-                <dt>機構名稱代號</dt>
-                <dd>{instructions.bankAccount.institutionLine}</dd>
-              </div>
-              <div>
-                <dt>帳號</dt>
-                <dd className="checkout-bank-account__number">
-                  {instructions.bankAccount.accountNumber}
-                </dd>
-              </div>
-            </dl>
-          )}
-          <ol className="checkout-manual-payment-instructions__steps">
-            {instructions.steps.map((step) => (
-              <li key={step}>{step}</li>
-            ))}
-          </ol>
-          <ul className="checkout-manual-payment-instructions__notes">
-            {instructions.notes.map((note) => (
-              <li key={note}>{note}</li>
-            ))}
-          </ul>
-        </section>
-      )}
+      <div className="checkout-manual-payment-summary checkout-reveal checkout-reveal--4">
+        <p>
+          我們已收到您的預訂申請。專員將於 <strong>3 個工作天內</strong>與您聯絡，向供應商確認可成團後另行通知付款方式。
+        </p>
+        {amountDue !== null && (
+          <p className="checkout-block__hint mt-2">
+            參考價格：
+            <strong className="tabular-nums">{formatMoney(amountDue)}</strong>
+            {session.payFullAmount ? "（全額）" : "（訂金）"}
+          </p>
+        )}
+        <p className="checkout-block__hint mt-2">{fxDisclaimer}</p>
+      </div>
 
       <p className="checkout-block__desc mt-4 checkout-reveal checkout-reveal--6">
         {customerEmailSent
-          ? "確認信已寄至您填寫的 Email，請查收付款說明。"
-          : "若未收到 Email，請聯絡顧問索取付款說明。"}
-        出發前會提供完整行程文件與票券。
+          ? "確認信已寄至您填寫的 Email，請查收申請摘要。"
+          : "若未收到 Email，請聯絡顧問確認申請狀態。"}
+        供應商確認後，我們將寄送付款說明。
       </p>
 
       <div

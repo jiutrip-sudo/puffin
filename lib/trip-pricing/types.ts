@@ -64,14 +64,25 @@ export type PricingResult = {
   travelerCount: number;
   vehicleLabel: string;
   roomTypeLabel: string;
-  /** Corivo 原價（折前）；有優惠碼時與 total 不同 */
+  /** 供應商／Corivo 原價（加價前） */
+  supplierTotal?: number;
+  /** 零售價（加價後、優惠前） */
+  retailTotal?: number;
+  /** @deprecated 請用 supplierTotal；與供應商價相同 */
   corivoTotal?: number;
   /** 已套用的優惠碼 */
   promoCodeApplied?: string;
-  /** 優惠碼折抵金額（ISK） */
+  /** 優惠碼折抵金額（ISK，套在零售價上） */
   promoDiscount?: number;
   /** 優惠碼無效或無折扣 */
   promoCodeInvalid?: boolean;
+  /** 展示幣別（依語系） */
+  displayCurrency?: "TWD" | "CNY";
+  displayTotal?: number;
+  displayDeposit?: number;
+  displayPerPersonDouble?: number;
+  fxRate?: number;
+  fxAsOf?: string;
 };
 
 export type AccommodationTier = {

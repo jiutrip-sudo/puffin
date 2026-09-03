@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { formatIsk } from "@/lib/trip-pricing/calculate";
+import { useFormatMoney } from "@/lib/i18n/use-format-money";
 import type { CheckoutSession } from "@/lib/checkout/types";
 import type {
   CorivoOptionalExtra,
@@ -104,6 +104,7 @@ export function CheckoutExtraAddModal({
   onClose,
   onConfirm,
 }: CheckoutExtraAddModalProps) {
+  const { formatMoney } = useFormatMoney();
   const existing = session.selectedExtras.find(
     (item) => item.packageItemId === extra.packageItemId,
   );
@@ -165,7 +166,7 @@ export function CheckoutExtraAddModal({
           <TravelerRow
             count={counts.adults}
             label=" 位成人"
-            priceLabel={`${currency} ${formatIsk(adultPrice)} / 人`}
+            priceLabel={`${formatMoney(adultPrice)} / 人`}
             max={session.adults}
             onDecrease={() =>
               setCounts((prev) => ({
@@ -186,7 +187,7 @@ export function CheckoutExtraAddModal({
             label=" 位兒童"
             priceLabel={
               childPrice !== undefined
-                ? `${currency} ${formatIsk(childPrice)} / 人`
+                ? `${formatMoney(childPrice)} / 人`
                 : null
             }
             max={session.children}
@@ -210,7 +211,7 @@ export function CheckoutExtraAddModal({
             label=" 位嬰兒"
             priceLabel={
               infantPrice !== undefined && infantPrice > 0
-                ? `${currency} ${formatIsk(infantPrice)} / 人`
+                ? `${formatMoney(infantPrice)} / 人`
                 : infantPrice === 0
                   ? "免費"
                   : null

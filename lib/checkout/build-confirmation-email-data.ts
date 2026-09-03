@@ -1,5 +1,11 @@
 import { COMPANY_INFO } from "@/lib/company-info";
-import { formatIsk } from "@/lib/trip-pricing/calculate";
+import {
+  formatDisplayMoney,
+  formatFrozenDisplayAmount,
+  formatIskAdmin,
+  getFxDisclaimer,
+} from "@/lib/i18n/display-money";
+import type { SiteLocale } from "@/lib/site-locale";
 import { formatDisplayDate, computeTripEndDate } from "@/lib/trip-date-utils";
 import type { PricingConfig } from "@/lib/trip-pricing/types";
 import type { CheckoutSession } from "./types";
@@ -37,11 +43,21 @@ export function buildCheckoutConfirmationEmailData(
   },
   pricing: {
     total: number;
+    supplierTotal?: number;
+    retailTotalIsk?: number;
     corivoTotal?: number;
     promoCode?: string | null;
     promoDiscount?: number;
+    displayAmountDue?: number;
+    displayTotal?: number;
+  },
+  options: {
+    locale: SiteLocale;
+    awaitingSupplier?: boolean;
   },
 ): CheckoutConfirmationEmailData {
+  const locale = options.locale;
+  const awaitingSupplier = options.awaitingSupplier ?? true;
   const tripDays = config.tripDurationDays ?? 1;
   const endDate = session.startDate
     ? computeTripEndDate(session.startDate, tripDays)
@@ -57,11 +73,13 @@ export function buildCheckoutConfirmationEmailData(
 
   const depositRate = config.depositRate ?? 0.2;
   const totalAmount = pricing.total;
-  const amountDue = session.payFullAmount
+  const supplierTotal =
+    pricing.supplierTotal ?? pricing.corivoTotal ?? totalAmount;
+  const retailTotalIsk = pricing.retailTotalIsk ?? totalAmount;
+  const amountDueIsk = session.payFullAmount
     ? totalAmount
     : Math.round(totalAmount * depositRate);
   const amountDueLabel = session.payFullAmount ? "應付全額" : "應付訂金";
-  const corivoTotal = pricing.corivoTotal ?? totalAmount;
   const promoDiscount = pricing.promoDiscount ?? 0;
   const promoCode = pricing.promoCode?.trim() || null;
 
@@ -69,13 +87,23 @@ export function buildCheckoutConfirmationEmailData(
     session.travelers.find((traveler) => traveler.type === "ADULT") ??
     session.travelers[0];
 
-  const paymentInstructions = getManualPaymentInstructions(
-    session.paymentMethod,
-    booking.confirmationCode,
-    amountDue,
-    session.payFullAmount,
-    formatIsk,
-  );
+  const formatDisplay = (isk: number) => formatDisplayMoney(isk, locale);
+
+  const paymentInstructions = awaitingSupplier
+    ? null
+    : getManualPaymentInstructions(
+        session.paymentMethod,
+        booking.confirmationCode,
+        pricing.displayAmountDue ?? amountDueIsk,
+        session.payFullAmount,
+        (amount) =>
+          pricing.displayAmountDue !== undefined
+            ? formatFrozenDisplayAmount(
+                amount,
+                locale === "zh-CN" ? "CNY" : "TWD",
+              )
+            : formatDisplay(amountDueIsk),
+      );
 
   return {
     packageTitle: session.packageTitle,
@@ -92,15 +120,19 @@ export function buildCheckoutConfirmationEmailData(
     bookingId: booking.bookingId,
     paymentMethodLabel: PAYMENT_METHOD_LABELS[session.paymentMethod],
     payFullAmount: session.payFullAmount,
-    totalAmountFormatted: formatIsk(totalAmount),
+    totalAmountFormatted: formatDisplay(totalAmount),
     corivoTotalFormatted:
-      promoDiscount > 0 && corivoTotal > totalAmount
-        ? formatIsk(corivoTotal)
+      promoDiscount > 0 && retailTotalIsk > totalAmount
+        ? formatDisplay(retailTotalIsk)
         : null,
+    supplierTotalFormatted: formatIskAdmin(supplierTotal),
+    retailTotalFormatted: formatDisplay(retailTotalIsk),
     promoCode,
     promoDiscountFormatted:
-      promoDiscount > 0 ? formatIsk(promoDiscount) : null,
-    amountDueFormatted: formatIsk(amountDue),
+      promoDiscount > 0 ? formatDisplay(promoDiscount) : null,
+    amountDueFormatted: awaitingSupplier
+      ? null
+      : formatDisplay(amountDueIsk),
     amountDueLabel,
     leadTravelerName: formatTravelerName(
       lead?.firstName ?? "",
@@ -113,6 +145,9 @@ export function buildCheckoutConfirmationEmailData(
       name: formatTravelerName(traveler.firstName, traveler.lastName),
       typeLabel: TRAVELER_TYPE_LABELS[traveler.type] ?? traveler.type,
     })),
+    awaitingSupplier,
+    corivoPackageTourId: config.corivo?.packageTourId,
+    fxDisclaimer: getFxDisclaimer(locale),
   };
 }
 

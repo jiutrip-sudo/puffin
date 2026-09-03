@@ -1,3 +1,9 @@
+import {
+  formatDisplayMoney,
+  formatFrozenDisplayAmount,
+  formatIskAdmin,
+  localeFromDisplayCurrency,
+} from "@/lib/i18n/display-money";
 import { formatIsk } from "@/lib/trip-pricing/calculate";
 import { getPricingConfig } from "@/lib/trip-pricing/fetch";
 import { formatDisplayDate, computeTripEndDate } from "@/lib/trip-date-utils";
@@ -9,6 +15,7 @@ import type { CheckoutPaymentMethod } from "@/lib/checkout/types";
 import type { LocalBookingRecord, LocalBookingStatus } from "./types";
 
 const STATUS_LABELS: Record<LocalBookingStatus, string> = {
+  awaiting_supplier: "待供應商確認",
   pending_payment: "待付款",
   payment_confirmed: "款項已確認",
   cancelled: "已取消",
@@ -56,11 +63,36 @@ export type PublicBookingView = {
   createdAt: string;
   paymentInfo: PublicBookingPaymentInfo | null;
   supportEmail: string;
+  awaitingSupplierMessage: string | null;
+  fxDisclaimer: string | null;
 };
 
 function formatTravelerName(firstName: string, lastName: string): string {
   const parts = [firstName.trim(), lastName.trim()].filter(Boolean);
   return parts.length > 0 ? parts.join(" ") : "—";
+}
+
+function formatBookingMoney(
+  record: LocalBookingRecord,
+  iskAmount: number,
+): string {
+  const pricing = record.pricing;
+  if (pricing.displayCurrency && pricing.fxRate) {
+    const locale = localeFromDisplayCurrency(pricing.displayCurrency);
+    return formatDisplayMoney(iskAmount, locale);
+  }
+  return formatIsk(iskAmount);
+}
+
+function formatBookingAmountDue(record: LocalBookingRecord): string {
+  const pricing = record.pricing;
+  if (pricing.displayAmountDue !== undefined && pricing.displayCurrency) {
+    return formatFrozenDisplayAmount(
+      pricing.displayAmountDue,
+      pricing.displayCurrency,
+    );
+  }
+  return formatIsk(pricing.amountDue);
 }
 
 export function buildPublicBookingView(record: LocalBookingRecord): PublicBookingView | null {
@@ -88,17 +120,29 @@ export function buildPublicBookingView(record: LocalBookingRecord): PublicBookin
 
   const amountDueLabel = session.payFullAmount ? "應付全額" : "應付訂金";
   const promoDiscount = record.pricing.promoDiscount ?? 0;
-  const corivoTotalValue = record.pricing.corivoTotal ?? record.pricing.total;
+  const retailTotal =
+    record.pricing.retailTotalIsk ??
+    record.pricing.corivoTotal ??
+    record.pricing.total;
 
   let paymentInfo: PublicBookingPaymentInfo | null = null;
+  let awaitingSupplierMessage: string | null = null;
 
-  if (record.status === "pending_payment") {
+  if (record.status === "awaiting_supplier") {
+    awaitingSupplierMessage =
+      "我們已收到您的預訂申請，專員將於 3 個工作天內與您聯絡。供應商確認可成團後，將另行通知付款方式與金額。";
+  } else if (record.status === "pending_payment") {
+    const formatAmount = (amount: number) =>
+      record.pricing.displayCurrency
+        ? formatFrozenDisplayAmount(amount, record.pricing.displayCurrency)
+        : formatIsk(amount);
+
     const instructions = getManualPaymentInstructions(
       session.paymentMethod,
       record.confirmationCode,
-      record.pricing.amountDue,
+      record.pricing.displayAmountDue ?? record.pricing.amountDue,
       session.payFullAmount,
-      formatIsk,
+      formatAmount,
     );
     paymentInfo = {
       title: instructions.title,
@@ -130,15 +174,17 @@ export function buildPublicBookingView(record: LocalBookingRecord): PublicBookin
     vehicleLabel,
     paymentMethodLabel: PAYMENT_METHOD_LABELS[session.paymentMethod],
     payFullAmount: session.payFullAmount,
-    totalAmount: formatIsk(record.pricing.total),
+    totalAmount: formatBookingMoney(record, record.pricing.total),
     corivoTotal:
-      promoDiscount > 0 && corivoTotalValue > record.pricing.total
-        ? formatIsk(corivoTotalValue)
+      promoDiscount > 0 && retailTotal > record.pricing.total
+        ? formatBookingMoney(record, retailTotal)
         : null,
     promoCode: record.pricing.promoCode ?? null,
     promoDiscount:
-      promoDiscount > 0 ? formatIsk(promoDiscount) : null,
-    amountDue: formatIsk(record.pricing.amountDue),
+      promoDiscount > 0
+        ? formatBookingMoney(record, promoDiscount)
+        : null,
+    amountDue: formatBookingAmountDue(record),
     amountDueLabel,
     leadTravelerName: formatTravelerName(
       lead?.firstName ?? "",
@@ -147,5 +193,9 @@ export function buildPublicBookingView(record: LocalBookingRecord): PublicBookin
     createdAt: record.createdAt,
     paymentInfo,
     supportEmail: CHECKOUT_OFFICE_EMAIL,
+    awaitingSupplierMessage,
+    fxDisclaimer: record.pricing.fxAsOf
+      ? `參考匯率截至 ${record.pricing.fxAsOf}`
+      : null,
   };
 }

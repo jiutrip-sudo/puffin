@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import type { CheckoutSession } from "@/lib/checkout/types";
-import { formatIsk } from "@/lib/trip-pricing/calculate";
+import { useFormatMoney } from "@/lib/i18n/use-format-money";
 
 type CheckoutPromoCodeProps = {
   session: CheckoutSession;
@@ -28,6 +28,7 @@ export function CheckoutPromoCode({
   onApply,
   onRemove,
 }: CheckoutPromoCodeProps) {
+  const { formatMoney } = useFormatMoney();
   const [inputValue, setInputValue] = useState(appliedCode);
   const [applying, setApplying] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -96,7 +97,7 @@ export function CheckoutPromoCode({
               {appliedCode}
             </span>
             <span className="checkout-promo__saved tabular-nums">
-              已折抵 {formatIsk(promoDiscount)}
+              已折抵 {formatMoney(promoDiscount)}
             </span>
           </div>
           <button

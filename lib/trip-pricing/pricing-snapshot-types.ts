@@ -27,7 +27,11 @@ export type PricingSyncJobReport = {
   errors: string[];
 };
 
-export const PRICING_SNAPSHOT_MAX_AGE_MS = 24 * 60 * 60 * 1000;
+/** 價格快照有效期（30 天）；價格穩定時以手動同步更新 */
+export const PRICING_SNAPSHOT_MAX_AGE_MS = 30 * 24 * 60 * 60 * 1000;
+
+/** 可訂狀態快照有效期（24 小時） */
+export const AVAILABILITY_SNAPSHOT_MAX_AGE_MS = 24 * 60 * 60 * 1000;
 
 export function isSnapshotFresh(syncedAt: string, maxAgeMs = PRICING_SNAPSHOT_MAX_AGE_MS): boolean {
   const synced = Date.parse(syncedAt);

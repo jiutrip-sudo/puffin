@@ -204,7 +204,16 @@ export async function writeLocalBooking(record: LocalBookingRecord): Promise<voi
 
 export async function updateLocalBooking(
   bookingId: string,
-  patch: Partial<Pick<LocalBookingRecord, "status" | "email">>,
+  patch: Partial<
+    Pick<
+      LocalBookingRecord,
+      | "status"
+      | "email"
+      | "supplierStatus"
+      | "supplierConfirmedAt"
+      | "supplierNote"
+    >
+  >,
 ): Promise<LocalBookingRecord | null> {
   const existing = await readLocalBooking(bookingId);
   if (!existing) return null;

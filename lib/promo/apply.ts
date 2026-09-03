@@ -6,15 +6,22 @@ export function applyPromoDiscount(
   promoCode: string,
   depositRate: number,
 ): PricingResult {
-  const corivoTotal = base.total;
-  const promoDiscount = Math.min(corivoTotal, Math.max(0, Math.round(discount)));
-  const total = Math.max(0, corivoTotal - promoDiscount);
+  const supplierTotal =
+    base.supplierTotal ?? base.corivoTotal ?? base.retailTotal ?? base.total;
+  const retailBeforePromo = base.retailTotal ?? base.total;
+  const promoDiscount = Math.min(
+    retailBeforePromo,
+    Math.max(0, Math.round(discount)),
+  );
+  const total = Math.max(0, retailBeforePromo - promoDiscount);
   const deposit = Math.round(total * depositRate);
   const travelerCount = base.travelerCount;
 
   return {
     ...base,
-    corivoTotal,
+    supplierTotal,
+    retailTotal: retailBeforePromo,
+    corivoTotal: supplierTotal,
     subtotal: total,
     total,
     deposit,
@@ -30,9 +37,15 @@ export function markPromoInvalid(
   base: PricingResult,
   promoCode: string,
 ): PricingResult {
+  const supplierTotal =
+    base.supplierTotal ?? base.corivoTotal ?? base.retailTotal ?? base.total;
+  const retailTotal = base.retailTotal ?? base.total;
+
   return {
     ...base,
-    corivoTotal: base.total,
+    supplierTotal,
+    retailTotal,
+    corivoTotal: supplierTotal,
     promoCodeApplied: normalizePromoCodeSafe(promoCode),
     promoDiscount: 0,
     promoCodeInvalid: true,

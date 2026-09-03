@@ -22,15 +22,21 @@ export type CheckoutConfirmationEmailData = {
   payFullAmount: boolean;
   totalAmountFormatted: string;
   corivoTotalFormatted: string | null;
+  supplierTotalFormatted: string | null;
+  retailTotalFormatted: string | null;
   promoCode: string | null;
   promoDiscountFormatted: string | null;
-  amountDueFormatted: string;
+  amountDueFormatted: string | null;
   amountDueLabel: string;
   leadTravelerName: string;
   leadTravelerEmail: string;
   leadTravelerPhone: string;
-  paymentInstructions: ManualPaymentInstructions;
+  paymentInstructions: ManualPaymentInstructions | null;
   travelers: CheckoutConfirmationTravelerLine[];
+  /** 新單預設 true：僅通知已收到申請，不含匯款說明 */
+  awaitingSupplier: boolean;
+  corivoPackageTourId?: number;
+  fxDisclaimer?: string;
 };
 
 export type CheckoutConfirmationEmailContent = {

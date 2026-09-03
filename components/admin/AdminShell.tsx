@@ -28,6 +28,7 @@ export function AdminShell({ title, children }: AdminShellProps) {
         </div>
         <nav className="admin-shell__nav">
           <Link href="/admin/bookings">訂單</Link>
+          <Link href="/admin/pricing">計價</Link>
           <Link href="/admin/ops">營運工具</Link>
           <button type="button" className="admin-shell__logout" onClick={() => void logout()}>
             登出

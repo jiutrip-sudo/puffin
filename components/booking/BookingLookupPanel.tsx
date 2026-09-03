@@ -205,6 +205,12 @@ export function BookingLookupPanel({
             </p>
           )}
 
+          {booking.awaitingSupplierMessage && (
+            <p className="booking-lookup-result__note">
+              {booking.awaitingSupplierMessage}
+            </p>
+          )}
+
           {booking.paymentInfo && (
             <section className="booking-lookup-payment">
               <h3 className="booking-lookup-payment__title">

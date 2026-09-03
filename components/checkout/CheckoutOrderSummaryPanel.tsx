@@ -1,7 +1,7 @@
 "use client";
 
 import { TripImage } from "@/components/trip-package/TripImage";
-import { formatIsk } from "@/lib/trip-pricing/calculate";
+import { useFormatMoney } from "@/lib/i18n/use-format-money";
 import type { CheckoutSession } from "@/lib/checkout/types";
 import { BookingShimmer } from "@/components/trip-package/BookingPriceShimmer";
 import { RoomTypeBedIcon } from "@/components/trip-package/RoomTypeBedIcon";
@@ -103,6 +103,7 @@ export function CheckoutOrderSummaryPanel({
   ctaLoading = false,
   onPrimaryAction,
 }: CheckoutOrderSummaryPanelProps) {
+  const { formatMoney } = useFormatMoney();
   const {
     session,
     loading,
@@ -218,7 +219,7 @@ export function CheckoutOrderSummaryPanel({
                   {loading ? (
                     <BookingShimmer variant="badge" />
                   ) : pricing ? (
-                    `${formatIsk(pricing.perPersonDouble)} / 人`
+                    `${formatMoney(pricing.perPersonDouble)} / 人`
                   ) : (
                     "—"
                   )}
@@ -255,7 +256,7 @@ export function CheckoutOrderSummaryPanel({
               {loading || (hasExtras && !packagePricing) ? (
                 <BookingShimmer variant="badge" />
               ) : packageSubtotal !== null ? (
-                formatIsk(packageSubtotal)
+                formatMoney(packageSubtotal)
               ) : (
                 "—"
               )}
@@ -296,7 +297,7 @@ export function CheckoutOrderSummaryPanel({
                       {extrasLinesLoading ? (
                         <BookingShimmer variant="badge" />
                       ) : (
-                        formatIsk(line.amount)
+                        formatMoney(line.amount)
                       )}
                     </span>
                   </li>
@@ -310,7 +311,7 @@ export function CheckoutOrderSummaryPanel({
                 {loading || extrasLinesLoading || (hasExtras && !packagePricing) ? (
                   <BookingShimmer variant="badge" />
                 ) : (
-                  formatIsk(extrasSubtotal)
+                  formatMoney(extrasSubtotal)
                 )}
               </span>
             </div>
@@ -328,7 +329,7 @@ export function CheckoutOrderSummaryPanel({
                 : ""}
             </span>
             <span className="checkout-sidebar__promo-value tabular-nums">
-              -{formatIsk(pricing.promoDiscount)}
+              -{formatMoney(pricing.promoDiscount)}
             </span>
           </div>
         )}
@@ -341,7 +342,7 @@ export function CheckoutOrderSummaryPanel({
             ) : pricing ? (
               <>
                 {isSheet && <span className="checkout-sidebar__approx">大約 </span>}
-                {formatIsk(pricing.total)}
+                {formatMoney(pricing.total)}
               </>
             ) : (
               "—"
@@ -353,14 +354,14 @@ export function CheckoutOrderSummaryPanel({
           <div className="checkout-sidebar__isk-settlement">
             <p>將以冰島克朗（ISK）價格為準進行結算：</p>
             <p className="checkout-sidebar__isk-amount tabular-nums">
-              {formatIsk(pricing.total)}
+              {formatMoney(pricing.total)}
             </p>
           </div>
         )}
 
         {!showCta && pricing && !loading && !isSheet && (
           <p className="checkout-sidebar__deposit">
-            訂金（{Math.round(depositRate * 100)}%）約 {formatIsk(deposit)}
+            訂金（{Math.round(depositRate * 100)}%）約 {formatMoney(deposit)}
           </p>
         )}
 

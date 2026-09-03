@@ -75,7 +75,7 @@ function buildTravelersHtml(data: CheckoutConfirmationEmailData): string {
 
 function buildBankAccountText(
   bankAccount: NonNullable<
-    CheckoutConfirmationEmailData["paymentInstructions"]["bankAccount"]
+    NonNullable<CheckoutConfirmationEmailData["paymentInstructions"]>["bankAccount"]
   >,
 ): string[] {
   return [
@@ -89,7 +89,7 @@ function buildBankAccountText(
 
 function buildBankAccountHtml(
   bankAccount: NonNullable<
-    CheckoutConfirmationEmailData["paymentInstructions"]["bankAccount"]
+    NonNullable<CheckoutConfirmationEmailData["paymentInstructions"]>["bankAccount"]
   >,
 ): string {
   return `
@@ -154,17 +154,29 @@ function buildPaymentSummaryHtml(data: CheckoutConfirmationEmailData): string {
   const originalLine = data.corivoTotalFormatted
     ? `原價：<span style="color:${EMAIL_THEME.textMuted};">${escapeHtml(data.corivoTotalFormatted)}</span><br />`
     : "";
+  const amountDueLine =
+    data.amountDueFormatted !== null
+      ? `${escapeHtml(data.amountDueLabel)}：<strong style="color:${EMAIL_THEME.accentStrong};">${escapeHtml(data.amountDueFormatted)}</strong><br />`
+      : "";
+  const awaitingNote = data.awaitingSupplier
+    ? `<p style="margin:10px 0 0;font-size:13px;line-height:1.55;color:${EMAIL_THEME.textMuted};">以上為參考價格；供應商確認可成團後，我們將另行通知付款方式與金額。</p>`
+    : "";
+  const fxNote = data.fxDisclaimer
+    ? `<p style="margin:8px 0 0;font-size:12px;line-height:1.5;color:${EMAIL_THEME.textMuted};">${escapeHtml(data.fxDisclaimer)}</p>`
+    : "";
 
   return `
               <div style="margin:20px 0;padding:16px;border-radius:10px;background:${EMAIL_THEME.surface};border:1px solid ${EMAIL_THEME.surfaceBorder};">
-                <p style="margin:0 0 6px;font-size:13px;color:${EMAIL_THEME.textMuted};">付款方式</p>
-                <p style="margin:0 0 10px;font-size:15px;font-weight:700;color:${EMAIL_THEME.text};">${escapeHtml(data.paymentMethodLabel)}</p>
+                <p style="margin:0 0 6px;font-size:13px;color:${EMAIL_THEME.textMuted};">${data.awaitingSupplier ? "參考價格" : "付款方式"}</p>
+                ${data.awaitingSupplier ? "" : `<p style="margin:0 0 10px;font-size:15px;font-weight:700;color:${EMAIL_THEME.text};">${escapeHtml(data.paymentMethodLabel)}</p>`}
                 <p style="margin:0;font-size:14px;line-height:1.6;color:${EMAIL_THEME.text};">
                   ${originalLine}
                   ${promoLines}
                   套餐總價：<strong>${escapeHtml(data.totalAmountFormatted)}</strong><br />
-                  ${escapeHtml(data.amountDueLabel)}：<strong style="color:${EMAIL_THEME.accentStrong};">${escapeHtml(data.amountDueFormatted)}</strong>
+                  ${amountDueLine}
                 </p>
+                ${awaitingNote}
+                ${fxNote}
               </div>`;
 }
 
@@ -183,6 +195,8 @@ function buildLeadContactHtml(data: CheckoutConfirmationEmailData): string {
 function buildPaymentInstructionsHtml(
   data: CheckoutConfirmationEmailData,
 ): string {
+  if (!data.paymentInstructions) return "";
+
   return `
               <h2 style="margin:0 0 10px;font-size:15px;font-weight:700;color:${EMAIL_THEME.text};">${escapeHtml(data.paymentInstructions.title)}</h2>
               ${
@@ -196,6 +210,20 @@ function buildPaymentInstructionsHtml(
               <ul style="margin:0;padding-left:18px;font-size:13px;line-height:1.5;">
                 ${buildNotesHtml(data.paymentInstructions.notes)}
               </ul>`;
+}
+
+function buildStaffSupplierInfoHtml(data: CheckoutConfirmationEmailData): string {
+  if (!data.supplierTotalFormatted && !data.corivoPackageTourId) return "";
+
+  return `
+              <div style="margin:0 0 20px;padding:14px 16px;border-radius:10px;background:${EMAIL_THEME.surface};border:1px solid ${EMAIL_THEME.surfaceBorder};">
+                <p style="margin:0 0 8px;font-size:13px;font-weight:700;color:${EMAIL_THEME.text};">供應商資訊（內部）</p>
+                <p style="margin:0;font-size:14px;line-height:1.6;color:${EMAIL_THEME.text};">
+                  ${data.corivoPackageTourId ? `Corivo packageTourId：<strong>${data.corivoPackageTourId}</strong><br />` : ""}
+                  ${data.supplierTotalFormatted ? `供應商價：<strong>${escapeHtml(data.supplierTotalFormatted)}</strong><br />` : ""}
+                  ${data.retailTotalFormatted ? `前台售價：<strong>${escapeHtml(data.retailTotalFormatted)}</strong>` : ""}
+                </p>
+              </div>`;
 }
 
 function buildTravelersSectionHtml(data: CheckoutConfirmationEmailData): string {
@@ -271,11 +299,13 @@ function buildSharedOrderBodyHtml(
     includeLeadContact?: boolean;
     showBookingId?: boolean;
     includeBookingLookup?: boolean;
+    includeSupplierInfo?: boolean;
   },
 ): string {
   const parts = [
     buildOrderSummaryHtml(data, { showBookingId: options?.showBookingId }),
     options?.includeBookingLookup ? buildBookingLookupHtml(data) : "",
+    options?.includeSupplierInfo ? buildStaffSupplierInfoHtml(data) : "",
     options?.includeLeadContact ? buildLeadContactHtml(data) : "",
     buildPaymentSummaryHtml(data),
     buildPaymentInstructionsHtml(data),
@@ -284,26 +314,37 @@ function buildSharedOrderBodyHtml(
   return parts.join("");
 }
 
-function buildStaffActionCalloutHtml(): string {
+function buildStaffActionCalloutHtml(data: CheckoutConfirmationEmailData): string {
+  const message = data.awaitingSupplier
+    ? "請先向供應商（森林貓）確認可成團，再於後台標記「供應商已確認」並通知旅客付款。"
+    : "請於 3 個工作天內聯絡旅客、確認付款入帳，並於系統更新訂單狀態。";
+
   return `
               <div style="margin:0 0 20px;padding:14px 16px;border-radius:10px;background:${EMAIL_THEME.headerBg};border:1px solid ${EMAIL_THEME.surfaceBorder};">
                 <p style="margin:0;font-size:14px;line-height:1.55;color:${EMAIL_THEME.text};">
-                  <strong style="color:${EMAIL_THEME.accentStrong};">待辦事項：</strong>請於 3 個工作天內聯絡旅客、確認付款入帳，並於系統更新訂單狀態。
+                  <strong style="color:${EMAIL_THEME.accentStrong};">待辦事項：</strong>${escapeHtml(message)}
                 </p>
               </div>`;
 }
 
-/** 旅客預訂確認信（匯款／現金人工收款） */
+/** 旅客預訂確認信 */
 export function buildCustomerConfirmationEmail(
   data: CheckoutConfirmationEmailData,
 ): CheckoutConfirmationEmailContent {
   const orderRef = orderReference(data);
-  const subject = `【預訂確認】${data.packageTitle} · 訂單 ${orderRef}`;
+  const awaiting = data.awaitingSupplier;
+  const subject = awaiting
+    ? `【預訂申請已收到】${data.packageTitle} · ${orderRef}`
+    : `【預訂確認】${data.packageTitle} · 訂單 ${orderRef}`;
+
+  const introLine = awaiting
+    ? "感謝您透過大樂旅行社提交冰島行程預訂申請。我們已收到您的申請，專員將於 3 個工作天內與您聯絡。"
+    : "感謝您透過大樂旅行社預訂冰島行程，您的訂單已確認可付款。";
 
   const textLines = [
     `${data.leadTravelerName} 您好，`,
     "",
-    "感謝您透過大樂旅行社預訂冰島行程，您的訂單已成立。",
+    introLine,
     "",
     "── 訂單摘要 ──",
     `行程：${data.packageTitle}`,
@@ -317,23 +358,30 @@ export function buildCustomerConfirmationEmail(
     `訂單號：${orderRef}`,
     `查詢訂單：${buildBookingLookupUrl(data.confirmationCode)}`,
     "",
-    "── 付款資訊 ──",
-    `付款方式：${data.paymentMethodLabel}`,
+    awaiting ? "── 參考價格 ──" : "── 付款資訊 ──",
+    awaiting ? null : `付款方式：${data.paymentMethodLabel}`,
     data.corivoTotalFormatted ? `原價：${data.corivoTotalFormatted}` : null,
     data.promoDiscountFormatted && data.promoCode
       ? `優惠碼 ${data.promoCode}：-${data.promoDiscountFormatted}`
       : null,
     `套餐總價：${data.totalAmountFormatted}`,
-    `${data.amountDueLabel}：${data.amountDueFormatted}`,
+    data.amountDueFormatted
+      ? `${data.amountDueLabel}：${data.amountDueFormatted}`
+      : null,
+    awaiting
+      ? "供應商確認可成團後，我們將另行通知付款方式與金額。"
+      : null,
+    data.fxDisclaimer ?? null,
     "",
-    ...(data.paymentInstructions.bankAccount
+    ...(data.paymentInstructions?.bankAccount
       ? buildBankAccountText(data.paymentInstructions.bankAccount)
       : []),
-    data.paymentInstructions.title,
-    ...data.paymentInstructions.steps.map((step, index) => `${index + 1}. ${step}`),
-    "",
-    "注意：",
-    ...data.paymentInstructions.notes.map((note) => `· ${note}`),
+    data.paymentInstructions?.title ?? null,
+    ...(data.paymentInstructions?.steps.map((step, index) => `${index + 1}. ${step}`) ??
+      []),
+    data.paymentInstructions
+      ? ["", "注意：", ...data.paymentInstructions.notes.map((note) => `· ${note}`)]
+      : [],
     "",
     "── 聯絡我們 ──",
     getCheckoutOfficeContactBlock(),
@@ -344,26 +392,36 @@ export function buildCustomerConfirmationEmail(
   const html = buildEmailShell({
     subject,
     headerBadge: COMPANY_INFO.name,
-    headerTitle: "預訂確認",
-    headerIntro: `${escapeHtml(data.leadTravelerName)} 您好，訂單已成立。請依下方說明完成付款，專員將人工確認款項。`,
+    headerTitle: awaiting ? "預訂申請已收到" : "預訂確認",
+    headerIntro: awaiting
+      ? `${escapeHtml(data.leadTravelerName)} 您好，我們已收到您的預訂申請。專員將於 3 個工作天內與您聯絡確認行程細節。`
+      : `${escapeHtml(data.leadTravelerName)} 您好，供應商已確認可成團。請依下方說明完成付款，專員將人工確認款項。`,
     mainContentHtml: buildSharedOrderBodyHtml(data, { includeBookingLookup: true }),
   });
 
   return { subject, html, text: textLines.join("\n") };
 }
 
-/** 內部通知信：提醒專員人工跟進付款 */
+/** 內部通知信 */
 export function buildStaffBookingNotificationEmail(
   data: CheckoutConfirmationEmailData,
 ): CheckoutConfirmationEmailContent {
   const orderRef = orderReference(data);
-  const subject = `【新預訂待收款】${orderRef} · ${data.paymentMethodLabel}`;
+  const awaiting = data.awaitingSupplier;
+  const subject = awaiting
+    ? `【新預訂待供應商確認】${orderRef}`
+    : `【新預訂待收款】${orderRef} · ${data.paymentMethodLabel}`;
 
   const textLines = [
-    "有新的線上預訂待人工收款確認：",
+    awaiting
+      ? "有新的線上預訂申請，待向供應商確認："
+      : "有新的線上預訂待人工收款確認：",
     "",
     `訂單號：${orderRef}`,
     `預訂 ID：${data.bookingId}`,
+    data.corivoPackageTourId
+      ? `Corivo packageTourId：${data.corivoPackageTourId}`
+      : null,
     `行程：${data.packageTitle}`,
     `出發：${data.startDate} → ${data.endDate}（${data.tripDays} 天）`,
     `住宿：${data.accommodationLabel}`,
@@ -373,18 +431,26 @@ export function buildStaffBookingNotificationEmail(
       ? `自選活動：${data.selectedExtrasCount} 項`
       : null,
     "",
-    `付款方式：${data.paymentMethodLabel}`,
-    `套餐總價：${data.totalAmountFormatted}`,
-    `${data.amountDueLabel}：${data.amountDueFormatted}`,
+    data.supplierTotalFormatted
+      ? `供應商價：${data.supplierTotalFormatted}`
+      : null,
+    data.retailTotalFormatted
+      ? `前台售價：${data.retailTotalFormatted}`
+      : null,
+    `套餐總價（客人）：${data.totalAmountFormatted}`,
+    data.amountDueFormatted
+      ? `${data.amountDueLabel}：${data.amountDueFormatted}`
+      : null,
     "",
-    ...(data.paymentInstructions.bankAccount
+    ...(data.paymentInstructions?.bankAccount
       ? buildBankAccountText(data.paymentInstructions.bankAccount)
       : []),
-    data.paymentInstructions.title,
-    ...data.paymentInstructions.steps.map((step, index) => `${index + 1}. ${step}`),
-    "",
-    "注意：",
-    ...data.paymentInstructions.notes.map((note) => `· ${note}`),
+    data.paymentInstructions?.title ?? null,
+    ...(data.paymentInstructions?.steps.map((step, index) => `${index + 1}. ${step}`) ??
+      []),
+    data.paymentInstructions
+      ? ["", "注意：", ...data.paymentInstructions.notes.map((note) => `· ${note}`)]
+      : [],
     "",
     `主要聯絡人：${data.leadTravelerName}`,
     `Email：${data.leadTravelerEmail}`,
@@ -395,7 +461,9 @@ export function buildStaffBookingNotificationEmail(
       (traveler) => `· ${traveler.name}（${traveler.typeLabel}）`,
     ),
     "",
-    "請於 3 個工作天內聯絡旅客並確認付款。",
+    awaiting
+      ? "請先向供應商確認可成團，再通知旅客付款。"
+      : "請於 3 個工作天內聯絡旅客並確認付款。",
     "",
     getCheckoutOfficeContactBlock(),
   ].filter((line) => line !== null);
@@ -403,13 +471,15 @@ export function buildStaffBookingNotificationEmail(
   const html = buildEmailShell({
     subject,
     headerBadge: `${COMPANY_INFO.name} · 內部通知`,
-    headerTitle: "新預訂待收款",
-    headerIntro:
-      "有新的線上預訂待人工收款確認。請依下方訂單資訊聯絡旅客並完成入帳確認。",
-    mainContentHtml: `${buildStaffActionCalloutHtml()}${buildSharedOrderBodyHtml(data, {
+    headerTitle: awaiting ? "新預訂待供應商確認" : "新預訂待收款",
+    headerIntro: awaiting
+      ? "有新的線上預訂申請。請先向供應商確認可成團，再於後台標記並通知旅客付款。"
+      : "有新的線上預訂待人工收款確認。請依下方訂單資訊聯絡旅客並完成入帳確認。",
+    mainContentHtml: `${buildStaffActionCalloutHtml(data)}${buildSharedOrderBodyHtml(data, {
       includeLeadContact: true,
       showBookingId: true,
       includeBookingLookup: false,
+      includeSupplierInfo: true,
     })}`,
   });
 

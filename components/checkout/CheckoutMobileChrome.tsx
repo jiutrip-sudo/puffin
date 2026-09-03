@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import type { CheckoutStepId } from "@/lib/checkout/types";
-import { formatIsk } from "@/lib/trip-pricing/calculate";
+import { useFormatMoney } from "@/lib/i18n/use-format-money";
 import { BookingShimmer } from "@/components/trip-package/BookingPriceShimmer";
 import { CheckoutOrderSummaryPanel } from "./CheckoutOrderSummaryPanel";
 import type { useCheckoutOrderSummary } from "./useCheckoutOrderSummary";
@@ -40,6 +40,7 @@ export function CheckoutMobileChrome({
   submitLoading = false,
   acceptTerms = false,
 }: CheckoutMobileChromeProps) {
+  const { formatMoney } = useFormatMoney();
   const [sheetOpen, setSheetOpen] = useState(false);
 
   useEffect(() => {
@@ -74,7 +75,7 @@ export function CheckoutMobileChrome({
   const totalLabel = loading
     ? "計算中…"
     : pricing
-      ? formatIsk(pricing.total)
+      ? formatMoney(pricing.total)
       : "—";
 
   const ctaDisabled = step === 4 && !acceptTerms;

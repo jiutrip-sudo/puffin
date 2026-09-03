@@ -8,7 +8,8 @@ import type {
   TripAvailabilityResult,
 } from "@/lib/trip-pricing/types";
 import { isTierBookable, pickFirstBookableTier } from "@/lib/trip-pricing/corivo-availability";
-import { formatIsk, getDefaultVehicleTier } from "@/lib/trip-pricing/calculate";
+import { getDefaultVehicleTier } from "@/lib/trip-pricing/calculate";
+import { useFormatMoney } from "@/lib/i18n/use-format-money";
 import { computeTripEndDate } from "@/lib/trip-date-utils";
 import { resolveDefaultStartDate } from "@/lib/trip-pricing/validate-booking-date";
 import { BookingShimmer } from "./BookingPriceShimmer";
@@ -46,6 +47,7 @@ export function TripPackageBookingSection({
   pricingConfig,
   children,
 }: TripPackageBookingSectionProps) {
+  const { formatMoney } = useFormatMoney();
   const [sheetOpen, setSheetOpen] = useState(false);
 
   const defaultTier = pricingConfig.tiers[0]?.id ?? "budget";
@@ -285,7 +287,7 @@ export function TripPackageBookingSection({
               ) : pricingError ? (
                 "請調整選項"
               ) : pricing ? (
-                formatIsk(pricing.total)
+                formatMoney(pricing.total)
               ) : (
                 "—"
               )}
@@ -293,7 +295,7 @@ export function TripPackageBookingSection({
             <p className="text-xs text-foreground/55">
               {pricingLoading || !pricing
                 ? "依出發日與選項計算"
-                : `訂金 ${formatIsk(pricing.deposit)}`}
+                : `訂金 ${formatMoney(pricing.deposit)}`}
             </p>
           </button>
           <button

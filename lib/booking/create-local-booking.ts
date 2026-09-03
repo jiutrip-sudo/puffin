@@ -1,8 +1,13 @@
 import { randomInt, randomUUID } from "node:crypto";
 import type { CheckoutSession } from "@/lib/checkout/types";
+import type { SiteLocale } from "@/lib/site-locale";
 import type { PricingConfig, PricingResult } from "@/lib/trip-pricing/types";
 import { writeLocalBooking } from "./booking-store";
-import type { CreateLocalBookingResult, LocalBookingRecord } from "./types";
+import {
+  buildBookingPricingFromResult,
+  type CreateLocalBookingResult,
+  type LocalBookingRecord,
+} from "./types";
 
 const DEFAULT_CODE_PREFIX = "DLT";
 
@@ -20,33 +25,26 @@ export async function createLocalBooking(
   session: CheckoutSession,
   pricing: PricingResult,
   config: PricingConfig,
+  locale: SiteLocale,
 ): Promise<CreateLocalBookingResult> {
-  const depositRate = config.depositRate ?? 0.2;
-  const amountDue = session.payFullAmount
-    ? pricing.total
-    : Math.round(pricing.total * depositRate);
-
-  const promoCode = session.promoCode.trim() || null;
-  const promoDiscount = pricing.promoDiscount ?? 0;
-  const corivoTotal = pricing.corivoTotal ?? pricing.total;
+  const bookingPricing = buildBookingPricingFromResult(
+    pricing,
+    session,
+    config,
+    locale,
+  );
 
   const record: LocalBookingRecord = {
     id: randomUUID(),
     confirmationCode: generateConfirmationCode(),
     createdAt: new Date().toISOString(),
-    status: "pending_payment",
+    status: "awaiting_supplier",
     packageId: session.packageId,
     session,
-    pricing: {
-      corivoTotal,
-      total: pricing.total,
-      promoCode,
-      promoDiscount: promoDiscount > 0 ? promoDiscount : undefined,
-      deposit: pricing.deposit,
-      amountDue,
-      currency: pricing.currency,
-    },
+    pricing: bookingPricing,
     email: null,
+    supplierStatus: "pending",
+    corivoPackageTourId: config.corivo?.packageTourId,
   };
 
   await writeLocalBooking(record);

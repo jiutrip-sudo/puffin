@@ -8,6 +8,7 @@ import {
   readPackagePricingSnapshot,
 } from "./pricing-snapshot-store";
 import {
+  AVAILABILITY_SNAPSHOT_MAX_AGE_MS,
   isSnapshotFresh,
   type StoredAvailabilityEntry,
   type StoredPricingEntry,
@@ -45,7 +46,12 @@ function getFreshAvailabilityEntry(
   if (!snapshot) return null;
   const key = buildAvailabilitySnapshotKey(input);
   const entry = snapshot.availability[key];
-  if (!entry || !isSnapshotFresh(entry.syncedAt)) return null;
+  if (
+    !entry ||
+    !isSnapshotFresh(entry.syncedAt, AVAILABILITY_SNAPSHOT_MAX_AGE_MS)
+  ) {
+    return null;
+  }
   return entry;
 }
 

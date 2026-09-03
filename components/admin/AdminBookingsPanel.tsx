@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import { AdminShell } from "./AdminShell";
-import { formatIsk } from "@/lib/trip-pricing/calculate";
+import { formatIskAdmin } from "@/lib/i18n/display-money";
 
 type BookingRow = {
   id: string;
@@ -20,6 +20,7 @@ type BookingRow = {
 };
 
 const STATUS_LABELS: Record<string, string> = {
+  awaiting_supplier: "待供應商確認",
   pending_payment: "待付款",
   payment_confirmed: "款項已確認",
   cancelled: "已取消",
@@ -86,6 +87,7 @@ export function AdminBookingsPanel() {
             onChange={(event) => setStatus(event.target.value)}
           >
             <option value="">全部狀態</option>
+            <option value="awaiting_supplier">待供應商確認</option>
             <option value="pending_payment">待付款</option>
             <option value="payment_confirmed">款項已確認</option>
             <option value="cancelled">已取消</option>
@@ -128,7 +130,7 @@ export function AdminBookingsPanel() {
                       <div className="admin-muted">{booking.leadEmail}</div>
                     </td>
                     <td>{booking.startDate}</td>
-                    <td className="tabular-nums">{formatIsk(booking.amountDue)}</td>
+                    <td className="tabular-nums">{formatIskAdmin(booking.amountDue)}</td>
                     <td>
                       <Link href={`/admin/bookings/${booking.id}`} className="admin-link">
                         詳情

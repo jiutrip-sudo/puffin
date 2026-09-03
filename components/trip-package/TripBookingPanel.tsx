@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { formatIsk } from "@/lib/trip-pricing/calculate";
+import { useFormatMoney } from "@/lib/i18n/use-format-money";
 import { trackTripBookClick } from "@/lib/analytics/track";
 import { BookingShimmer } from "./BookingPriceShimmer";
 import { TripDateField } from "./TripDateField";
@@ -175,6 +175,7 @@ export function TripBookingPanel({
   pricingLoading = false,
   pricingError = null,
 }: TripBookingPanelControlledProps) {
+  const { formatMoney } = useFormatMoney();
   const [priceFlash, setPriceFlash] = useState(false);
   const [pickerOpen, setPickerOpen] = useState<PickerMode>(null);
 
@@ -239,9 +240,9 @@ export function TripBookingPanel({
     Math.max(0, maxTravelers - adults - children),
   );
   const startPriceLabel = pricing
-    ? formatIsk(pricing.perPersonDouble)
+    ? formatMoney(pricing.perPersonDouble)
     : "—";
-  const totalPriceLabel = pricing ? formatIsk(pricing.total) : "—";
+  const totalPriceLabel = pricing ? formatMoney(pricing.total) : "—";
 
   return (
     <div

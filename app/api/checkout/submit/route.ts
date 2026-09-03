@@ -9,6 +9,7 @@ import {
   hasTravelerFormErrors,
   validateTravelerForms,
 } from "@/lib/checkout/validate-travelers";
+import { getLocaleFromRequest } from "@/lib/i18n/request-locale";
 import { resolveTripPrice } from "@/lib/trip-pricing/resolve-trip-price";
 import { getPricingConfig, usesCorivoPricing } from "@/lib/trip-pricing/fetch";
 import { incrementPromoUseCount } from "@/lib/promo/promo-uses";
@@ -17,6 +18,7 @@ import { normalizePromoCode } from "@/lib/promo/registry";
 export async function POST(request: Request) {
   try {
     const session = (await request.json()) as CheckoutSession;
+    const locale = getLocaleFromRequest(request);
 
     if (!session.packageId || !session.startDate) {
       return NextResponse.json({ error: "缺少必要參數" }, { status: 400 });
@@ -53,7 +55,12 @@ export async function POST(request: Request) {
       );
     }
 
-    const booking = await createLocalBooking(session, pricing, corivoConfig);
+    const booking = await createLocalBooking(
+      session,
+      pricing,
+      corivoConfig,
+      locale,
+    );
 
     if (session.promoCode.trim() && pricing.promoDiscount && pricing.promoDiscount > 0) {
       await incrementPromoUseCount(normalizePromoCode(session.promoCode));
@@ -67,11 +74,16 @@ export async function POST(request: Request) {
         confirmationCode: booking.confirmationCode,
       },
       {
-        total: pricing.total,
-        corivoTotal: pricing.corivoTotal,
+        total: booking.record.pricing.total,
+        supplierTotal: booking.record.pricing.supplierTotal,
+        retailTotalIsk: booking.record.pricing.retailTotalIsk,
+        corivoTotal: booking.record.pricing.corivoTotal,
         promoCode: booking.record.pricing.promoCode,
         promoDiscount: booking.record.pricing.promoDiscount,
+        displayAmountDue: booking.record.pricing.displayAmountDue,
+        displayTotal: booking.record.pricing.displayTotal,
       },
+      { locale, awaitingSupplier: true },
     );
 
     const emailResult = await sendCheckoutConfirmationEmails(emailData);
@@ -88,6 +100,7 @@ export async function POST(request: Request) {
     return NextResponse.json({
       bookingId: booking.bookingId,
       confirmationCode: booking.confirmationCode,
+      status: booking.record.status,
       email: {
         customerSent: emailResult.customer.sent,
         staffSent: emailResult.staff.sent,
@@ -101,3 +114,4 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: message }, { status: 400 });
   }
 }
+

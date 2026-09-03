@@ -16,8 +16,12 @@ type PromoRow = {
 
 type SyncReport = {
   packageId: string;
-  ok: boolean;
-  error?: string;
+  pricesSynced: number;
+  pricesFailed: number;
+  availabilitySynced: number;
+  availabilityFailed: number;
+  durationMs: number;
+  errors: string[];
 };
 
 export function AdminOpsPanel() {
@@ -26,6 +30,7 @@ export function AdminOpsPanel() {
   const [syncLoading, setSyncLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [syncResult, setSyncResult] = useState<string | null>(null);
+  const [reports, setReports] = useState<SyncReport[]>([]);
 
   const loadPromos = useCallback(async () => {
     setLoading(true);
@@ -58,6 +63,7 @@ export function AdminOpsPanel() {
     setSyncLoading(true);
     setSyncResult(null);
     setError(null);
+    setReports([]);
 
     try {
       const response = await fetch("/api/admin/ops/sync-pricing", {
@@ -74,10 +80,15 @@ export function AdminOpsPanel() {
         throw new Error(data.error ?? "同步失敗");
       }
 
-      const failed = (data.reports ?? []).filter((report) => !report.ok);
+      const reportList = data.reports ?? [];
+      setReports(reportList);
+
+      const failed = reportList.filter(
+        (report) => report.pricesFailed > 0 || report.errors.length > 0,
+      );
       setSyncResult(
         failed.length > 0
-          ? `同步完成（${data.syncedAt}），${failed.length} 個套餐失敗`
+          ? `同步完成（${data.syncedAt}），${failed.length} 個套餐有失敗項目`
           : `同步成功（${data.syncedAt}）`,
       );
     } catch (err) {
@@ -93,7 +104,7 @@ export function AdminOpsPanel() {
         <section className="admin-card">
           <h3 className="admin-card__title">計價同步</h3>
           <p className="admin-muted">
-            手動觸發 Corivo 計價快照同步（與每日 cron 相同）。
+            手動觸發 Corivo 計價快照全量同步。價格快照有效期 30 天；調價或上新套餐後請執行。
           </p>
           <button
             type="button"
@@ -104,6 +115,41 @@ export function AdminOpsPanel() {
             {syncLoading ? "同步中…" : "立即同步計價"}
           </button>
           {syncResult && <p className="admin-notice">{syncResult}</p>}
+
+          {reports.length > 0 && (
+            <div className="admin-table-wrap">
+              <table className="admin-table">
+                <thead>
+                  <tr>
+                    <th>套餐</th>
+                    <th>價格成功</th>
+                    <th>價格失敗</th>
+                    <th>可訂成功</th>
+                    <th>可訂失敗</th>
+                    <th>耗時</th>
+                    <th>錯誤</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {reports.map((report) => (
+                    <tr key={report.packageId}>
+                      <td className="admin-table__mono">{report.packageId}</td>
+                      <td>{report.pricesSynced}</td>
+                      <td>{report.pricesFailed}</td>
+                      <td>{report.availabilitySynced}</td>
+                      <td>{report.availabilityFailed}</td>
+                      <td>{Math.round(report.durationMs / 1000)}s</td>
+                      <td>
+                        {report.errors.length > 0
+                          ? report.errors.slice(0, 2).join("；")
+                          : "—"}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
         </section>
 
         <section className="admin-card">

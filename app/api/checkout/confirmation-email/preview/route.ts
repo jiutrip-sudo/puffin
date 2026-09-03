@@ -12,6 +12,7 @@ import {
 import { buildCheckoutPricingInput } from "@/lib/checkout/build-pricing-input";
 import type { CheckoutSession } from "@/lib/checkout/types";
 import { resolveTripPrice } from "@/lib/trip-pricing/resolve-trip-price";
+import { getLocaleFromRequest } from "@/lib/i18n/request-locale";
 import { getPricingConfig, usesCorivoPricing } from "@/lib/trip-pricing/fetch";
 
 type PreviewRequest = CheckoutSession & {
@@ -27,6 +28,7 @@ const PREVIEW_FALLBACK_TOTAL_ISK = 189372;
 async function buildPreviewPayload(
   session: CheckoutSession,
   booking: { bookingId: string; confirmationCode: string },
+  request?: Request,
 ) {
   const config = getPricingConfig(session.packageId);
   if (!config || !usesCorivoPricing(config) || !config.corivo) {
@@ -62,6 +64,10 @@ async function buildPreviewPayload(
     corivoConfig,
     booking,
     pricing,
+    {
+      locale: request ? getLocaleFromRequest(request) : "zh-TW",
+      awaitingSupplier: true,
+    },
   );
 
   return {
@@ -100,7 +106,7 @@ export async function GET(request: Request) {
     const payload = await buildPreviewPayload(session, {
       bookingId: "preview-booking-id",
       confirmationCode: "PREVIEW-001",
-    });
+    }, request);
 
     const content =
       variant === "staff" ? payload.staff : payload.customer;
@@ -132,7 +138,7 @@ export async function POST(request: Request) {
     const payload = await buildPreviewPayload(body, {
       bookingId: body.bookingId ?? "preview-booking-id",
       confirmationCode: body.confirmationCode ?? "PREVIEW-001",
-    });
+    }, request);
 
     return NextResponse.json(payload);
   } catch (error) {

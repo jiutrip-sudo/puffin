@@ -37,7 +37,6 @@ const SYNC_TRAVELER_SETS: TravelerSet[] = [
   { adults: 7, children: 2, infants: 0 },
 ];
 
-const DEFAULT_ACCOMMODATION_TIER = "comfort";
 const DEFAULT_VEHICLE_TIER = "cfmn";
 const TWO_ADULT_TRAVELERS: TravelerSet = { adults: 2, children: 0, infants: 0 };
 
@@ -90,35 +89,36 @@ function buildSyncTargets(config: PricingConfig): {
   );
 
   const vehicleIds = config.vehicleTiers.map((tier) => tier.id);
+  const accommodationTierIds = config.tiers.map((tier) => tier.id);
   const prices: PriceSyncTarget[] = [];
   const availability: AvailabilitySyncTarget[] = [];
 
   for (const date of dates) {
-    for (const travelers of SYNC_TRAVELER_SETS) {
-      prices.push({
-        startDate: date,
-        ...travelers,
-        accommodationTier: DEFAULT_ACCOMMODATION_TIER,
-        vehicleTier:
-          config.vehicleTiers.length > 0
-            ? DEFAULT_VEHICLE_TIER
-            : "",
-      });
-      availability.push({
-        startDate: date,
-        ...travelers,
-        accommodationTier: DEFAULT_ACCOMMODATION_TIER,
-      });
-    }
+    for (const accommodationTier of accommodationTierIds) {
+      for (const travelers of SYNC_TRAVELER_SETS) {
+        prices.push({
+          startDate: date,
+          ...travelers,
+          accommodationTier,
+          vehicleTier:
+            config.vehicleTiers.length > 0 ? DEFAULT_VEHICLE_TIER : "",
+        });
+        availability.push({
+          startDate: date,
+          ...travelers,
+          accommodationTier,
+        });
+      }
 
-    for (const vehicleTier of vehicleIds) {
-      if (!vehicleTier) continue;
-      prices.push({
-        startDate: date,
-        ...TWO_ADULT_TRAVELERS,
-        accommodationTier: DEFAULT_ACCOMMODATION_TIER,
-        vehicleTier,
-      });
+      for (const vehicleTier of vehicleIds) {
+        if (!vehicleTier) continue;
+        prices.push({
+          startDate: date,
+          ...TWO_ADULT_TRAVELERS,
+          accommodationTier,
+          vehicleTier,
+        });
+      }
     }
   }
 

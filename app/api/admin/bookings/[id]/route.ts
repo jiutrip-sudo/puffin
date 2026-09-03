@@ -30,6 +30,7 @@ export async function PATCH(request: Request, context: RouteContext) {
     const body = (await request.json()) as { status?: LocalBookingStatus };
 
     if (
+      body.status !== "awaiting_supplier" &&
       body.status !== "pending_payment" &&
       body.status !== "payment_confirmed" &&
       body.status !== "cancelled"
