@@ -1,5 +1,5 @@
 import { readLocalBooking } from "./booking-store";
-import { findBookingIdByConfirmationCode } from "./booking-code-index";
+import { findBookingIdByConfirmationCode } from "./booking-list";
 import {
   isValidConfirmationCodeInput,
   normalizeConfirmationCode,

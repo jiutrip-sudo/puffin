@@ -108,7 +108,7 @@ export async function sendCheckoutConfirmationEmails(
     staffResult = {
       sent: false,
       error:
-        "內部通知信箱與寄件地址相同（vip@dollar-travel.com）。請在 Vercel 設定 CONFIRMATION_EMAIL_STAFF=你的 Gmail 或其他信箱。",
+        `內部通知信箱與寄件地址相同（${CHECKOUT_OFFICE_EMAIL}）。請在 Vercel 設定 CONFIRMATION_EMAIL_STAFF=你的 Gmail 或其他信箱。`,
     };
   } else if (!staffInboxes.every(isValidEmail)) {
     staffResult = { sent: false, error: "內部通知信箱無效" };

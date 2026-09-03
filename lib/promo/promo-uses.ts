@@ -1,39 +1,8 @@
 import fs from "node:fs/promises";
 import path from "node:path";
+import { listBookingEntries } from "@/lib/booking/booking-list";
+import { kvCommand } from "./kv";
 import { normalizePromoCode } from "./registry";
-
-function parseUpstashRedisUrl(redisUrl: string): { apiUrl: string; token: string } | null {
-  try {
-    const url = new URL(redisUrl);
-    const token = url.password;
-    const hostname = url.hostname;
-    if (!token || !hostname) return null;
-    if (!hostname.includes("upstash.io")) return null;
-    return {
-      apiUrl: `https://${hostname}`,
-      token,
-    };
-  } catch {
-    return null;
-  }
-}
-
-function getKvRestCredentials(): { apiUrl: string; token: string } | null {
-  const apiUrl =
-    process.env.KV_REST_API_URL ??
-    process.env.UPSTASH_KV_REST_API_URL ??
-    process.env.UPSTASH_REDIS_REST_URL;
-  const token =
-    process.env.KV_REST_API_TOKEN ??
-    process.env.UPSTASH_KV_REST_API_TOKEN ??
-    process.env.UPSTASH_REDIS_REST_TOKEN;
-  if (apiUrl && token) return { apiUrl, token };
-
-  const redisUrl = process.env.REDIS_URL;
-  if (redisUrl) return parseUpstashRedisUrl(redisUrl);
-
-  return null;
-}
 
 function promoUsesKvKey(code: string): string {
   return `puffin:promo:uses:${normalizePromoCode(code)}`;
@@ -83,29 +52,14 @@ async function countPromoUsesFromFile(code: string): Promise<number> {
   }
 }
 
-async function kvCommand(command: unknown[]): Promise<unknown> {
-  const credentials = getKvRestCredentials();
-  if (!credentials) return null;
-
-  const response = await fetch(credentials.apiUrl, {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${credentials.token}`,
-      "content-type": "application/json",
-    },
-    body: JSON.stringify(command),
-  });
-
-  if (!response.ok) return null;
-
-  const payload = (await response.json()) as { result?: unknown };
-  return payload.result ?? null;
+async function kvCommandLocal(command: unknown[]): Promise<unknown> {
+  return kvCommand(command);
 }
 
 /** 讀取優惠碼已使用次數（成功建立訂單） */
 export async function getPromoUseCount(code: string): Promise<number> {
   const normalized = normalizePromoCode(code);
-  const kvResult = await kvCommand(["GET", promoUsesKvKey(normalized)]);
+  const kvResult = await kvCommandLocal(["GET", promoUsesKvKey(normalized)]);
 
   if (kvResult !== null && kvResult !== undefined) {
     const parsed = Number(kvResult);
@@ -118,8 +72,23 @@ export async function getPromoUseCount(code: string): Promise<number> {
 /** 訂單成立後遞增使用次數 */
 export async function incrementPromoUseCount(code: string): Promise<void> {
   const normalized = normalizePromoCode(code);
-  const credentials = getKvRestCredentials();
-  if (!credentials) return;
+  await kvCommandLocal(["INCR", promoUsesKvKey(normalized)]);
+}
 
-  await kvCommand(["INCR", promoUsesKvKey(normalized)]);
+/** 讀取同一 email 已使用次數 */
+export async function getPromoUseCountByEmail(
+  code: string,
+  email: string,
+): Promise<number> {
+  const normalized = normalizePromoCode(code);
+  const normalizedEmail = email.trim().toLowerCase();
+  if (!normalizedEmail) return 0;
+
+  const entries = await listBookingEntries();
+  return entries.filter(
+    (entry) =>
+      entry.promoCode &&
+      normalizePromoCode(entry.promoCode) === normalized &&
+      entry.leadEmail.trim().toLowerCase() === normalizedEmail,
+  ).length;
 }

@@ -3,6 +3,7 @@ import type { PromoCodeDefinition } from "./types";
 /**
  * 本站優惠碼表（Git 管理，改碼後 deploy 生效）。
  * 不在 Corivo 後台建立優惠碼。
+ * 營運可於後台覆寫 active / maxUses / validUntil。
  */
 export const PROMO_CODES: PromoCodeDefinition[] = [
   {
@@ -11,7 +12,7 @@ export const PROMO_CODES: PromoCodeDefinition[] = [
     type: "percent",
     value: 10,
     active: true,
-    packageIds: ["iceland-self-drive-winter-4", "iceland-self-drive-winter-5", "iceland-self-drive-winter-6", "iceland-self-drive-winter-7", "iceland-self-drive-winter-8", "iceland-self-drive-winter-8-non-ring", "iceland-self-drive-winter-9", "iceland-self-drive-winter-9-non-ring", "iceland-self-drive-winter-10", "iceland-self-drive-winter-10-non-ring", "iceland-self-drive-winter-11", "iceland-self-drive-winter-12"],
+    categories: ["winter-self-drive"],
     validFrom: "2026-01-01",
     validUntil: "2026-04-30",
     departureFrom: "2026-01-01",
@@ -25,7 +26,7 @@ export const PROMO_CODES: PromoCodeDefinition[] = [
     type: "fixed_isk",
     value: 50000,
     active: true,
-    packageIds: ["iceland-self-drive-winter-4", "iceland-self-drive-winter-5", "iceland-self-drive-winter-6", "iceland-self-drive-winter-7", "iceland-self-drive-winter-8", "iceland-self-drive-winter-8-non-ring", "iceland-self-drive-winter-9", "iceland-self-drive-winter-9-non-ring", "iceland-self-drive-winter-10", "iceland-self-drive-winter-10-non-ring", "iceland-self-drive-winter-11", "iceland-self-drive-winter-12"],
+    categories: ["winter-self-drive"],
     validFrom: "2026-01-01",
     validUntil: "2026-12-31",
     maxUses: 20,

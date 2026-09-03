@@ -1,32 +1,30 @@
 import { NextResponse } from "next/server";
-import { PROMO_CODES } from "@/lib/promo/registry";
-import { getPromoUseCount } from "@/lib/promo/promo-uses";
+import {
+  createAdminPromo,
+  listAdminPromos,
+} from "@/lib/admin/promo-admin";
 
 export async function GET() {
   try {
-    const promos = await Promise.all(
-      PROMO_CODES.map(async (promo) => {
-        const used = await getPromoUseCount(promo.code);
-        return {
-          code: promo.code,
-          label: promo.label,
-          type: promo.type,
-          value: promo.value,
-          active: promo.active,
-          maxUses: promo.maxUses ?? null,
-          used,
-          remaining:
-            promo.maxUses != null ? Math.max(0, promo.maxUses - used) : null,
-          validFrom: promo.validFrom ?? null,
-          validUntil: promo.validUntil ?? null,
-        };
-      }),
-    );
-
+    const promos = await listAdminPromos();
     return NextResponse.json({ promos });
   } catch (error) {
     const message =
       error instanceof Error ? error.message : "讀取優惠碼用量失敗";
     return NextResponse.json({ error: message }, { status: 500 });
+  }
+}
+
+export async function POST(request: Request) {
+  try {
+    const body = (await request.json()) as Record<string, unknown>;
+    const promo = await createAdminPromo(body);
+    return NextResponse.json({ promo }, { status: 201 });
+  } catch (error) {
+    const message =
+      error instanceof Error ? error.message : "建立優惠碼失敗";
+    const status =
+      error instanceof Error && error.message.includes("已存在") ? 409 : 400;
+    return NextResponse.json({ error: message }, { status });
   }
 }

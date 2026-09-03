@@ -11,15 +11,7 @@ import {
   writeOtpRecord,
 } from "@/lib/admin/auth/otp-store";
 import { sendAdminOtpEmail } from "@/lib/admin/email/send-admin-otp-email";
-
-function resolveOtpPepper(): string {
-  const secret = process.env.ADMIN_SESSION_SECRET?.trim();
-  if (secret) return secret;
-  if (process.env.NODE_ENV === "production") {
-    throw new Error("ADMIN_SESSION_SECRET 未設定");
-  }
-  return "dev-admin-session-secret-change-me";
-}
+import { resolveOtpPepper } from "@/lib/admin/auth/otp-pepper";
 
 const GENERIC_ERROR = "無法登入，請確認 Email 是否正確或稍後再試";
 
@@ -52,9 +44,8 @@ export async function POST(request: Request) {
     }
 
     const code = generateOtpCode();
-    const pepper = resolveOtpPepper();
     const stored = await writeOtpRecord(email, {
-      hash: hashOtpCode(code, pepper),
+      hash: hashOtpCode(code, resolveOtpPepper()),
       attempts: 0,
       createdAt: new Date().toISOString(),
     });

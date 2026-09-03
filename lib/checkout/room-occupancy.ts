@@ -7,7 +7,9 @@ import type { CheckoutRoomOccupancy } from "./types";
 
 const MAX_OCCUPANTS_PER_ROOM = 3;
 export const MAX_CHECKOUT_ROOMS = 4;
-export const CHECKOUT_ROOM_LIMIT_EMAIL = "vip@dollar-travel.com";
+import { COMPANY_EMAIL } from "@/lib/company-info";
+
+export const CHECKOUT_ROOM_LIMIT_EMAIL = COMPANY_EMAIL;
 
 export function inferRoomTypeCategory(
   adults: number,

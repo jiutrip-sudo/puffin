@@ -18,7 +18,7 @@ function generateConfirmationCode(): string {
 }
 
 /**
- * 建立本站訂單並寫入 KV／本機 `.data/bookings/`。
+ * 建立本站訂單並寫入 Neon（或本機 `.data/bookings/` 備援）。
  * 不呼叫 Corivo `checkout` mutation。
  */
 export async function createLocalBooking(

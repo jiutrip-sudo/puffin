@@ -12,6 +12,7 @@ import {
 } from "@/lib/checkout/manual-payment";
 import { CheckoutSuccessIcon } from "./CheckoutSuccessIcon";
 import {
+  CHECKOUT_PRIVACY_POLICY_URL,
   CHECKOUT_SERVICE_TERMS_PARAGRAPHS,
   CHECKOUT_SERVICE_TERMS_URL,
 } from "@/lib/checkout/checkout-service-terms";
@@ -456,7 +457,26 @@ export function CheckoutStagePayment({
               onChange({ acceptTerms: event.target.checked })
             }
           />
-          <span className="checkout-terms-card__agree-label">我同意服務條款</span>
+          <span className="checkout-terms-card__agree-label">
+            我同意
+            <a
+              href={CHECKOUT_SERVICE_TERMS_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="checkout-terms-card__inline-link"
+            >
+              服務條款
+            </a>
+            及
+            <a
+              href={CHECKOUT_PRIVACY_POLICY_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="checkout-terms-card__inline-link"
+            >
+              隱私權政策
+            </a>
+          </span>
           <a
             href={CHECKOUT_SERVICE_TERMS_URL}
             target="_blank"
@@ -597,7 +617,9 @@ export function CheckoutStageConfirmation({
       <p className="checkout-block__hint checkout-confirmation-links checkout-reveal checkout-reveal--8">
         <Link href="/booking/lookup">查詢訂單</Link>
         <span aria-hidden="true"> · </span>
-        <Link href={CHECKOUT_SERVICE_TERMS_URL}>服務條款與訂單須知</Link>
+        <Link href={CHECKOUT_SERVICE_TERMS_URL}>服務條款</Link>
+        <span aria-hidden="true"> · </span>
+        <Link href={CHECKOUT_PRIVACY_POLICY_URL}>隱私權政策</Link>
         <span aria-hidden="true"> · </span>
         <Link href="/iceland">冰島行程</Link>
         <span aria-hidden="true"> · </span>

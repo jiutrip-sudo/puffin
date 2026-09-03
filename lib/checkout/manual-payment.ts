@@ -1,4 +1,4 @@
-import { COMPANY_INFO } from "@/lib/company-info";
+import { COMPANY_EMAIL, COMPANY_INFO } from "@/lib/company-info";
 import type { CheckoutPaymentMethod } from "./types";
 
 export const CHECKOUT_PAYMENT_OPTIONS: Array<{
@@ -28,7 +28,7 @@ export const CHECKOUT_OFFICE_PHONE =
 
 export const CHECKOUT_OFFICE_EMAIL =
   COMPANY_INFO.contact.find((item) => item.label === "信箱")?.value ??
-  "vip@dollar-travel.com";
+  COMPANY_EMAIL;
 
 /** 內部預訂通知收件人；請設 CONFIRMATION_EMAIL_STAFF，勿與寄件地址相同 */
 export function resolveCheckoutStaffNotificationEmails(): string[] {

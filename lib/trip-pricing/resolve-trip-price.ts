@@ -55,6 +55,7 @@ export async function resolveTripPrice(
     children: input.children,
     infants: input.infants,
     corivoTotal: base.retailTotal ?? base.total,
+    customerEmail: input.customerEmail,
   });
 
   if (!validation.valid) {

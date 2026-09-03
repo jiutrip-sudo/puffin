@@ -1,5 +1,8 @@
-import { findPromoDefinition, normalizePromoCode } from "./registry";
-import { getPromoUseCount } from "./promo-uses";
+import { lookupPromoDefinition } from "./lookup";
+import { getPromoUseCount, getPromoUseCountByEmail } from "./promo-uses";
+import { getPromoOverride } from "./overrides";
+import { promoAppliesToPackage } from "./package-match";
+import { resolvePromoDefinition } from "./resolve";
 import type {
   PromoCodeDefinition,
   PromoValidationContext,
@@ -30,19 +33,27 @@ function computeDiscountAmount(
   return Math.min(corivoTotal, Math.max(0, Math.round(promo.value)));
 }
 
+function normalizeEmail(email: string): string {
+  return email.trim().toLowerCase();
+}
+
 export async function validatePromoCode(
   code: string,
   context: PromoValidationContext,
 ): Promise<PromoValidationResult> {
-  const normalized = normalizePromoCode(code);
+  const normalized = code.trim().toUpperCase();
   if (!normalized) {
     return { valid: false, error: "請輸入優惠碼" };
   }
 
-  const promo = findPromoDefinition(normalized);
-  if (!promo) {
+  const lookup = await lookupPromoDefinition(normalized);
+  if (!lookup) {
     return { valid: false, error: "優惠碼無效或不符合使用條件" };
   }
+
+  const override =
+    lookup.source === "registry" ? await getPromoOverride(normalized) : null;
+  const promo = resolvePromoDefinition(lookup.promo, override);
 
   if (!promo.active) {
     return { valid: false, error: "此優惠碼已停用" };
@@ -53,10 +64,7 @@ export async function validatePromoCode(
     return { valid: false, error: "此優惠碼不在有效期限內" };
   }
 
-  if (
-    promo.packageIds?.length &&
-    !promo.packageIds.includes(context.packageId)
-  ) {
+  if (!promoAppliesToPackage(promo, context.packageId)) {
     return { valid: false, error: "此優惠碼不適用於所選套餐" };
   }
 
@@ -83,10 +91,27 @@ export async function validatePromoCode(
     };
   }
 
+  if (promo.minOrderTotal && context.corivoTotal < promo.minOrderTotal) {
+    return {
+      valid: false,
+      error: `訂單金額須達 ISK ${promo.minOrderTotal.toLocaleString("en-US")} 才可使用`,
+    };
+  }
+
   if (promo.maxUses) {
     const used = await getPromoUseCount(normalized);
     if (used >= promo.maxUses) {
       return { valid: false, error: "此優惠碼已達使用上限" };
+    }
+  }
+
+  if (promo.perCustomerLimit && context.customerEmail?.trim()) {
+    const usedByCustomer = await getPromoUseCountByEmail(
+      normalized,
+      normalizeEmail(context.customerEmail),
+    );
+    if (usedByCustomer >= promo.perCustomerLimit) {
+      return { valid: false, error: "此優惠碼已達個人使用上限" };
     }
   }
 

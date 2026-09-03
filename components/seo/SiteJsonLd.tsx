@@ -2,7 +2,7 @@ import type { TripPackage } from "@/lib/trip-packages/types";
 import type { PricingConfig } from "@/lib/trip-pricing/types";
 import type { SiteLocale } from "@/lib/site-locale";
 import { absoluteUrl } from "@/lib/site-url";
-import { COMPANY_INFO } from "@/lib/company-info";
+import { COMPANY_EMAIL, COMPANY_INFO } from "@/lib/company-info";
 import { buildTripStructuredData } from "@/lib/seo/trip-json-ld";
 import { JsonLd } from "./JsonLd";
 
@@ -23,7 +23,7 @@ export function TripProductJsonLd({
 export function SiteOrganizationJsonLd() {
   const email =
     COMPANY_INFO.contact.find((item) => item.label === "信箱")?.value ??
-    "vip@dollar-travel.com";
+    COMPANY_EMAIL;
   const phone =
     COMPANY_INFO.contact.find((item) => item.label === "電話")?.value ?? "";
   const address =

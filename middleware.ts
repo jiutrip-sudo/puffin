@@ -1,15 +1,17 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { ADMIN_SESSION_COOKIE } from "@/lib/admin/auth/constants";
-import { verifyAdminSessionTokenEdge } from "@/lib/admin/auth/session-edge";
+import NextAuth from "next-auth";
+import { authConfig } from "@/lib/admin/auth/auth.config";
 import {
   SITE_LOCALE_COOKIE,
   SITE_LOCALE_HEADER,
 } from "@/lib/site-locale";
 import { LOCALE_PREFIX } from "@/lib/i18n/paths";
 
+const { auth } = NextAuth(authConfig);
+
 const PUBLIC_ADMIN_PATHS = ["/admin/login"];
-const PUBLIC_ADMIN_API_PREFIX = "/api/admin/auth/";
+const PUBLIC_ADMIN_API_PATHS = ["/api/admin/auth/request-otp"];
 
 function applyLocaleCookie(response: NextResponse, locale: string) {
   response.cookies.set(SITE_LOCALE_COOKIE, locale, {
@@ -48,44 +50,34 @@ function handleLocale(request: NextRequest): NextResponse {
   }
 
   response.headers.set(SITE_LOCALE_HEADER, locale);
-
   applyLocaleCookie(response, locale);
-
   return response;
 }
 
-async function handleAdminAuth(request: NextRequest): Promise<NextResponse> {
-  const { pathname } = request.nextUrl;
-
-  if (PUBLIC_ADMIN_PATHS.includes(pathname)) {
-    return NextResponse.next();
-  }
-
-  if (pathname.startsWith(PUBLIC_ADMIN_API_PREFIX)) {
-    return NextResponse.next();
-  }
-
-  const token = request.cookies.get(ADMIN_SESSION_COOKIE)?.value;
-  const session = await verifyAdminSessionTokenEdge(token);
-
-  if (!session) {
-    if (pathname.startsWith("/api/admin")) {
-      return NextResponse.json({ error: "未授權" }, { status: 401 });
-    }
-
-    const loginUrl = new URL("/admin/login", request.url);
-    loginUrl.searchParams.set("next", pathname + request.nextUrl.search);
-    return NextResponse.redirect(loginUrl);
-  }
-
-  return NextResponse.next();
+function isPublicAdminPath(pathname: string): boolean {
+  if (PUBLIC_ADMIN_PATHS.includes(pathname)) return true;
+  return PUBLIC_ADMIN_API_PATHS.includes(pathname);
 }
 
-export async function middleware(request: NextRequest) {
+export default auth(async (request) => {
   const { pathname } = request.nextUrl;
 
+  if (pathname.startsWith("/api/auth")) {
+    return NextResponse.next();
+  }
+
   if (pathname.startsWith("/admin") || pathname.startsWith("/api/admin")) {
-    return handleAdminAuth(request);
+    if (!isPublicAdminPath(pathname) && !request.auth) {
+      if (pathname.startsWith("/api/")) {
+        return NextResponse.json({ error: "未授權" }, { status: 401 });
+      }
+
+      const loginUrl = new URL("/admin/login", request.url);
+      loginUrl.searchParams.set("next", pathname + request.nextUrl.search);
+      return NextResponse.redirect(loginUrl);
+    }
+
+    return NextResponse.next();
   }
 
   if (pathname.startsWith("/api/")) {
@@ -93,12 +85,13 @@ export async function middleware(request: NextRequest) {
   }
 
   return handleLocale(request);
-}
+});
 
 export const config = {
   matcher: [
     "/admin/:path*",
     "/api/admin/:path*",
+    "/api/auth/:path*",
     "/((?!_next/static|_next/image|favicon.ico|apple-icon.png|.*\\..*).*)",
   ],
 };

@@ -2,9 +2,14 @@
 
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
+import { signIn } from "next-auth/react";
 import { useState } from "react";
 
-export function AdminLoginForm() {
+type AdminLoginFormProps = {
+  googleEnabled?: boolean;
+};
+
+export function AdminLoginForm({ googleEnabled = false }: AdminLoginFormProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const nextPath = searchParams.get("next") ?? "/admin/bookings";
@@ -15,6 +20,17 @@ export function AdminLoginForm() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+
+  const signInWithGoogle = async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      await signIn("google", { callbackUrl: nextPath });
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Google 登入失敗");
+      setLoading(false);
+    }
+  };
 
   const requestOtp = async () => {
     setLoading(true);
@@ -47,15 +63,14 @@ export function AdminLoginForm() {
     setError(null);
 
     try {
-      const response = await fetch("/api/admin/auth/verify-otp", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({ email, code }),
+      const result = await signIn("admin-otp", {
+        email,
+        code,
+        redirect: false,
       });
-      const data = (await response.json()) as { error?: string };
 
-      if (!response.ok) {
-        throw new Error(data.error ?? "驗證失敗");
+      if (result?.error) {
+        throw new Error("驗證碼無效或已過期");
       }
 
       router.replace(nextPath);
@@ -72,8 +87,24 @@ export function AdminLoginForm() {
       <div className="admin-login__card">
         <h1 className="admin-login__title">營運後台登入</h1>
         <p className="admin-login__desc">
-          使用公司授權 Email 收取一次性驗證碼登入。
+          使用 Google 或授權 Email 驗證碼登入。
         </p>
+
+        {googleEnabled && (
+          <>
+            <button
+              type="button"
+              className="admin-btn admin-btn--google"
+              disabled={loading}
+              onClick={() => void signInWithGoogle()}
+            >
+              使用 Google 登入
+            </button>
+            <p className="admin-login__divider">
+              <span>或使用 Email 驗證碼</span>
+            </p>
+          </>
+        )}
 
         {step === "email" ? (
           <form
@@ -114,14 +145,20 @@ export function AdminLoginForm() {
                 type="text"
                 className="admin-field__input admin-field__input--otp"
                 value={code}
-                onChange={(event) => setCode(event.target.value.replace(/\D/g, "").slice(0, 6))}
+                onChange={(event) =>
+                  setCode(event.target.value.replace(/\D/g, "").slice(0, 6))
+                }
                 placeholder="000000"
                 inputMode="numeric"
                 autoComplete="one-time-code"
                 required
               />
             </label>
-            <button type="submit" className="admin-btn admin-btn--primary" disabled={loading || code.length < 6}>
+            <button
+              type="submit"
+              className="admin-btn admin-btn--primary"
+              disabled={loading || code.length < 6}
+            >
               {loading ? "驗證中…" : "登入"}
             </button>
             <button
@@ -141,7 +178,9 @@ export function AdminLoginForm() {
 
         {message && <p className="admin-login__message">{message}</p>}
         {error && (
-          <p className="admin-login__error" role="alert">{error}</p>
+          <p className="admin-login__error" role="alert">
+            {error}
+          </p>
         )}
 
         <p className="admin-login__footer">

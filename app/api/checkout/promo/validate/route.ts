@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { buildCheckoutPricingInput } from "@/lib/checkout/build-pricing-input";
+import { getCheckoutLeadEmail } from "@/lib/checkout/lead-email";
 import type { CheckoutSession } from "@/lib/checkout/types";
 import { resolveTripPriceForPackage } from "@/lib/trip-pricing/resolve-trip-price";
 import { validatePromoCode } from "@/lib/promo/validate";
@@ -43,6 +44,7 @@ export async function POST(request: Request) {
       children: session.children,
       infants: session.infants,
       corivoTotal: basePricing.total,
+      customerEmail: getCheckoutLeadEmail(session),
     });
 
     if (!validation.valid) {

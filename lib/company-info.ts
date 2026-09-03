@@ -3,6 +3,9 @@ export const BRAND_NAME = "Tomoaki Travel Service Ltd., Co.";
 /** 前台對外品牌名稱（頁面 title、OG、郵件等） */
 export const SITE_DISPLAY_NAME = "帕芬假期";
 
+/** 對外客服／聯絡信箱 */
+export const COMPANY_EMAIL = "vip@puffinholiday.com";
+
 export const COMPANY_LOGO = {
   src: "/images/dollar-travel-logo.png",
   width: 399,
@@ -24,8 +27,8 @@ export const COMPANY_INFO = {
     { label: "傳真", value: "07-339-2355" },
     {
       label: "信箱",
-      value: "vip@dollar-travel.com",
-      href: "mailto:vip@dollar-travel.com",
+      value: COMPANY_EMAIL,
+      href: `mailto:${COMPANY_EMAIL}`,
     },
     { label: "地址", value: "高雄市苓雅區中華四路126號11樓之1" },
   ],

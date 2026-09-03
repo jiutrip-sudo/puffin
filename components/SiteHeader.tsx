@@ -4,13 +4,13 @@ import { LocaleLink } from "@/components/LocaleLink";
 import { SiteLogo } from "./SiteLogo";
 import { ThemeControlsBar } from "./ThemeControls";
 import { LocaleControlsBar } from "./LocaleControls";
-import { COMPANY_INFO } from "@/lib/company-info";
+import { COMPANY_EMAIL, COMPANY_INFO } from "@/lib/company-info";
 import { useSiteLocale } from "@/components/SiteLocaleProvider";
 import { t } from "@/lib/i18n/messages";
 
 const OFFICE_EMAIL =
   COMPANY_INFO.contact.find((item) => item.label === "信箱")?.value ??
-  "vip@dollar-travel.com";
+  COMPANY_EMAIL;
 
 type SiteHeaderProps = {
   activeLabel?: string;

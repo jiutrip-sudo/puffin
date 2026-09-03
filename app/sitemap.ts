@@ -50,6 +50,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: absoluteUrl("/guides"), lastModified: now, changeFrequency: "weekly", priority: 0.85 },
     { url: absoluteUrl("/booking/lookup"), lastModified: now, changeFrequency: "monthly", priority: 0.6 },
     { url: absoluteUrl("/terms-and-conditions"), lastModified: now, changeFrequency: "yearly", priority: 0.3 },
+    { url: absoluteUrl("/privacy-policy"), lastModified: now, changeFrequency: "yearly", priority: 0.3 },
   ];
 
   const guidePages = getAllGuideSlugs().map((slug) => ({

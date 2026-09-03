@@ -2169,6 +2169,17 @@ html {
   color: var(--foreground);
 }
 
+.checkout-terms-card__inline-link {
+  margin: 0 0.15rem;
+  color: var(--color-primary-dark);
+  text-decoration: underline;
+  text-underline-offset: 0.12em;
+}
+
+.checkout-terms-card__inline-link:hover {
+  color: var(--color-primary);
+}
+
 .checkout-terms-card__link {
   display: inline-flex;
   align-items: center;
@@ -4981,6 +4992,31 @@ html[data-theme="dark"] .hero-bg-dark {
   color: color-mix(in srgb, var(--foreground) 62%, transparent);
 }
 
+.admin-btn--google {
+  width: 100%;
+  margin-top: 1rem;
+  background: #fff;
+  color: #1f1f1f;
+  border: 1px solid color-mix(in srgb, var(--foreground) 18%, transparent);
+}
+
+.admin-login__divider {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 1rem 0 0.25rem;
+  font-size: 0.8125rem;
+  color: color-mix(in srgb, var(--foreground) 55%, transparent);
+}
+
+.admin-login__divider::before,
+.admin-login__divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: color-mix(in srgb, var(--foreground) 14%, transparent);
+}
+
 .admin-login__form {
   margin-top: 1.25rem;
   display: flex;
@@ -5034,6 +5070,17 @@ html[data-theme="dark"] .hero-bg-dark {
   margin-top: 0.15rem;
   font-size: 0.75rem;
   color: color-mix(in srgb, var(--foreground) 58%, transparent);
+}
+
+.admin-shell__role {
+  display: inline-block;
+  margin-top: 0.35rem;
+  padding: 0.1rem 0.45rem;
+  border-radius: 999px;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: color-mix(in srgb, var(--foreground) 72%, transparent);
+  background: color-mix(in srgb, var(--foreground) 8%, transparent);
 }
 
 .admin-shell__nav {
@@ -5162,6 +5209,97 @@ html[data-theme="dark"] .hero-bg-dark {
 .admin-table__mono {
   font-family: ui-monospace, monospace;
   font-weight: 700;
+}
+
+.admin-promo-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.admin-promo-input {
+  padding: 0.45rem 0.6rem;
+  font-size: 0.8125rem;
+}
+
+.admin-promo-input--number {
+  width: 6rem;
+}
+
+.admin-promo-hint {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+}
+
+.admin-card__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.admin-card__subtitle {
+  margin: 0 0 0.75rem;
+  font-size: 0.9375rem;
+}
+
+.admin-promo-form {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+  padding: 1rem;
+  border: 1px solid var(--admin-border, rgba(0, 0, 0, 0.08));
+  border-radius: 0.75rem;
+  background: var(--admin-surface-muted, rgba(0, 0, 0, 0.02));
+}
+
+.admin-promo-form__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  gap: 0.75rem;
+}
+
+.admin-promo-form__categories {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.admin-promo-form__category-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1rem;
+  margin-top: 0.5rem;
+}
+
+.admin-promo-form__category {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.875rem;
+}
+
+.admin-promo-form__active {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.admin-promo-code-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.admin-promo-edit-panel {
+  margin-bottom: 1.25rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--admin-border, rgba(0, 0, 0, 0.08));
 }
 
 .admin-status {

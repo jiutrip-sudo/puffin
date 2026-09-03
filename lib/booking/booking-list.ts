@@ -1,110 +1,21 @@
-import fs from "node:fs/promises";
-import path from "node:path";
-import { kvGet, kvSet } from "@/lib/kv/rest-client";
+import { hasBookingDatabase } from "@/lib/db/client";
+import {
+  findBookingIdByConfirmationCodeInDb,
+  listBookingRecords,
+  readBookingRecord,
+  upsertBookingRecord,
+} from "./booking-db";
+import type { BookingListEntry } from "./summarize-booking";
+import { summarizeBooking } from "./summarize-booking";
 import type { LocalBookingRecord, LocalBookingStatus } from "./types";
 
-export type BookingListEntry = {
-  id: string;
-  confirmationCode: string;
-  createdAt: string;
-  packageId: string;
-  status: LocalBookingStatus;
-  packageTitle: string;
-  leadEmail: string;
-  leadName: string;
-  startDate: string;
-  total: number;
-  amountDue: number;
-  promoCode: string | null;
-};
-
-const BOOKING_INDEX_KV_KEY = "puffin:booking:index";
-
-function bookingsDir(): string {
-  return (
-    process.env.BOOKING_STORE_DIR ?? path.join(process.cwd(), ".data/bookings")
-  );
-}
-
-function bookingIndexPath(): string {
-  return path.join(bookingsDir(), "index.jsonl");
-}
-
-function summarizeBooking(record: LocalBookingRecord): BookingListEntry {
-  const lead =
-    record.session.travelers.find((traveler) => traveler.type === "ADULT") ??
-    record.session.travelers[0];
-
-  return {
-    id: record.id,
-    confirmationCode: record.confirmationCode,
-    createdAt: record.createdAt,
-    packageId: record.packageId,
-    status: record.status,
-    packageTitle: record.session.packageTitle,
-    leadEmail: lead?.email?.trim() ?? "",
-    leadName: [lead?.firstName, lead?.lastName].filter(Boolean).join(" ").trim(),
-    startDate: record.session.startDate,
-    total: record.pricing.total,
-    amountDue: record.pricing.amountDue,
-    promoCode: record.pricing.promoCode ?? record.session.promoCode?.trim() ?? null,
-  };
-}
-
-async function readKvBookingIndex(): Promise<BookingListEntry[]> {
-  const raw = await kvGet(BOOKING_INDEX_KV_KEY);
-  if (!raw) return [];
-  try {
-    return JSON.parse(raw) as BookingListEntry[];
-  } catch {
-    return [];
-  }
-}
-
-async function writeKvBookingIndex(entries: BookingListEntry[]): Promise<void> {
-  await kvSet(BOOKING_INDEX_KV_KEY, JSON.stringify(entries));
-}
-
-async function readFileBookingIndex(): Promise<BookingListEntry[]> {
-  try {
-    const raw = await fs.readFile(bookingIndexPath(), "utf8");
-    const lines = raw.split("\n").filter(Boolean);
-    const entries: BookingListEntry[] = [];
-
-    for (const line of lines) {
-      try {
-        const meta = JSON.parse(line) as {
-          id?: string;
-          confirmationCode?: string;
-          createdAt?: string;
-          packageId?: string;
-          status?: LocalBookingStatus;
-        };
-        if (!meta.id) continue;
-
-        const filePath = path.join(bookingsDir(), `${meta.id}.json`);
-        const bookingRaw = await fs.readFile(filePath, "utf8");
-        const record = JSON.parse(bookingRaw) as LocalBookingRecord;
-        entries.push(summarizeBooking(record));
-      } catch {
-        continue;
-      }
-    }
-
-    return entries;
-  } catch {
-    return [];
-  }
-}
+export type { BookingListEntry } from "./summarize-booking";
 
 export async function appendBookingListEntry(
   record: LocalBookingRecord,
 ): Promise<void> {
-  const entry = summarizeBooking(record);
-  const existing = await readKvBookingIndex();
-  const withoutDup = existing.filter((item) => item.id !== entry.id);
-  withoutDup.unshift(entry);
-  await writeKvBookingIndex(withoutDup.slice(0, 500));
+  if (!hasBookingDatabase()) return;
+  await upsertBookingRecord(record);
 }
 
 export async function updateBookingListEntry(
@@ -113,14 +24,17 @@ export async function updateBookingListEntry(
   await appendBookingListEntry(record);
 }
 
-export async function listBookingEntries(): Promise<BookingListEntry[]> {
-  const fromKv = await readKvBookingIndex();
-  if (fromKv.length > 0) {
-    return fromKv.sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+export async function listBookingEntries(query?: {
+  status?: LocalBookingStatus;
+  q?: string;
+}): Promise<BookingListEntry[]> {
+  if (hasBookingDatabase()) {
+    return listBookingRecords(query);
   }
 
-  const fromFile = await readFileBookingIndex();
-  return fromFile.sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+  const { listBookingEntriesFromFile } = await import("./booking-file-store");
+  const entries = await listBookingEntriesFromFile();
+  return filterBookingEntries(entries, query ?? {});
 }
 
 export function filterBookingEntries(
@@ -162,4 +76,17 @@ export async function getAdminBookingDetail(
     ...summarizeBooking(record),
     record,
   };
+}
+
+export async function findBookingIdByConfirmationCode(
+  confirmationCode: string,
+): Promise<string | null> {
+  if (hasBookingDatabase()) {
+    return findBookingIdByConfirmationCodeInDb(confirmationCode);
+  }
+
+  const { findBookingIdByConfirmationCodeFromFile } = await import(
+    "./booking-file-store"
+  );
+  return findBookingIdByConfirmationCodeFromFile(confirmationCode);
 }

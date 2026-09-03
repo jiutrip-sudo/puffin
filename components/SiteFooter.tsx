@@ -1,5 +1,7 @@
+import { LocaleLink } from "@/components/LocaleLink";
 import type { SiteLocale } from "@/lib/site-locale";
 import { getLocalizedBrandName, getLocalizedCompanyInfo } from "@/lib/i18n/company";
+import { PRIVACY_POLICY_URL } from "@/lib/legal/privacy-policy-content";
 import { t } from "@/lib/i18n/messages";
 
 type InfoItem = {
@@ -78,6 +80,24 @@ export function SiteFooter({ locale }: { locale: SiteLocale }) {
             />
           </div>
         </section>
+
+        <div className="mt-3 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-[10px] text-white/45">
+          <LocaleLink
+            href="/terms-and-conditions"
+            locale={locale}
+            className="transition-colors hover:text-primary-light"
+          >
+            服務條款
+          </LocaleLink>
+          <span aria-hidden="true">·</span>
+          <LocaleLink
+            href={PRIVACY_POLICY_URL}
+            locale={locale}
+            className="transition-colors hover:text-primary-light"
+          >
+            隱私權政策
+          </LocaleLink>
+        </div>
 
         <p className="mt-2 text-center text-[8px] tracking-wide text-white/35 sm:mt-5 sm:text-[10px] md:mt-1.5">
           © {new Date().getFullYear()}

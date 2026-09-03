@@ -51,6 +51,8 @@ export type PricingInput = {
   }>;
   /** Corivo 優惠碼 */
   promoCode?: string;
+  /** 主聯絡人 email（檢查 perCustomerLimit） */
+  customerEmail?: string;
 };
 
 export type PricingResult = {

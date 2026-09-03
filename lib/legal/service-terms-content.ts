@@ -1,11 +1,8 @@
-import { COMPANY_INFO } from "@/lib/company-info";
+import { COMPANY_EMAIL, COMPANY_INFO } from "@/lib/company-info";
 
-export type ServiceTermsSection = {
-  id: string;
-  title: string;
-  paragraphs: string[];
-  bullets?: string[];
-};
+import type { LegalSection } from "./types";
+
+export type ServiceTermsSection = LegalSection;
 
 export const SERVICE_TERMS_EFFECTIVE_DATE = "2026 年 1 月 1 日";
 
@@ -154,7 +151,7 @@ export const SERVICE_TERMS_SECTIONS: ServiceTermsSection[] = [
     title: "申訴與消費者權益",
     paragraphs: [
       "若您對行程或服務不滿意，請於行程結束後 10 日內聯絡本公司，以便於消費者保護法及旅行業相關規定之期限內處理；逾期申訴可能影響您的權益。",
-      `聯絡方式：電話 ${COMPANY_INFO.contact.find((c) => c.label === "電話")?.value ?? "07-332-7375"}、電子郵件 ${COMPANY_INFO.contact.find((c) => c.label === "信箱")?.value ?? "vip@dollar-travel.com"}。`,
+      `聯絡方式：電話 ${COMPANY_INFO.contact.find((c) => c.label === "電話")?.value ?? "07-332-7375"}、電子郵件 ${COMPANY_INFO.contact.find((c) => c.label === "信箱")?.value ?? COMPANY_EMAIL}。`,
       "您亦得向主管機關交通部觀光署或地方消費者服務中心申訴。",
     ],
   },
@@ -169,7 +166,7 @@ export const SERVICE_TERMS_SECTIONS: ServiceTermsSection[] = [
     id: "privacy",
     title: "個人資料保護",
     paragraphs: [
-      "本公司依個人資料保護法蒐集、處理及利用您之個人資料，用於預訂確認、聯絡、開立憑證及履行契約所需。詳細內容請參閱網站隱私權聲明。",
+      "本公司依個人資料保護法蒐集、處理及利用您之個人資料，用於預訂確認、聯絡、開立憑證及履行契約所需。詳細內容請參閱網站隱私權政策。",
       "您同意本條款，即表示同意本公司於提供服務所需範圍內處理您的個人資料；本公司不會超出目的之必要範圍使用。",
     ],
   },

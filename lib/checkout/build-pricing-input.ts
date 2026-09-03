@@ -1,4 +1,5 @@
 import { occupanciesToRoomSlots } from "@/lib/checkout/room-occupancy";
+import { getCheckoutLeadEmail } from "@/lib/checkout/lead-email";
 import type { CheckoutSession } from "@/lib/checkout/types";
 import type { PricingInput } from "@/lib/trip-pricing/types";
 
@@ -33,5 +34,6 @@ export function buildCheckoutPricingInput(
         ? extraPackageItemIds
         : undefined,
     promoCode: promo,
+    customerEmail: getCheckoutLeadEmail(session),
   };
 }

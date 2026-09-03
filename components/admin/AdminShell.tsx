@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { signOut, useSession } from "next-auth/react";
+import { ADMIN_ROLE_LABELS } from "@/lib/admin/auth/roles";
 
 type AdminShellProps = {
   title: string;
@@ -9,12 +10,11 @@ type AdminShellProps = {
 };
 
 export function AdminShell({ title, children }: AdminShellProps) {
-  const router = useRouter();
+  const { data: session } = useSession();
+  const role = session?.user?.role;
 
   const logout = async () => {
-    await fetch("/api/admin/auth/logout", { method: "POST" });
-    router.replace("/admin/login");
-    router.refresh();
+    await signOut({ callbackUrl: "/admin/login" });
   };
 
   return (
@@ -25,12 +25,20 @@ export function AdminShell({ title, children }: AdminShellProps) {
             帕芬假期營運後台
           </Link>
           <span className="admin-shell__subtitle">{title}</span>
+          {role && (
+            <span className="admin-shell__role">{ADMIN_ROLE_LABELS[role]}</span>
+          )}
         </div>
         <nav className="admin-shell__nav">
           <Link href="/admin/bookings">訂單</Link>
           <Link href="/admin/pricing">計價</Link>
           <Link href="/admin/ops">營運工具</Link>
-          <button type="button" className="admin-shell__logout" onClick={() => void logout()}>
+          {role === "super_admin" && <Link href="/admin/admins">管理員</Link>}
+          <button
+            type="button"
+            className="admin-shell__logout"
+            onClick={() => void logout()}
+          >
             登出
           </button>
         </nav>
