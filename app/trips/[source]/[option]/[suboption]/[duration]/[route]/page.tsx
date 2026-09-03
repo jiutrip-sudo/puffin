@@ -80,7 +80,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (packageTripKey) {
     if (COMING_SOON_TRIPS.has(packageTripKey)) {
       return buildPageMetadata({
-        title: localize("即將推出 | 大樂旅行社"),
+        title: localize("即將推出 | 帕芬假期"),
         description: localize("此行程即將推出，敬請期待。"),
         path,
         locale,
@@ -103,7 +103,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const suboptionLabel = optionLabels[suboption];
 
   return buildPageMetadata({
-    title: `${durationLabel}${routeLabel}${suboptionLabel}${optionLabel} | 大樂旅行社`,
+    title: `${durationLabel}${routeLabel}${suboptionLabel}${optionLabel} | 帕芬假期`,
     description: `${sourceLabels[source]} · ${optionLabel} · ${suboptionLabel} · ${durationLabel} · ${routeLabel}`,
     path,
     locale,

@@ -60,7 +60,7 @@ const samples = [
   },
   {
     name: "company",
-    tw: "大樂旅行社股份有限公司 · 聯絡人 · 品質認證",
+    tw: "帕芬假期股份有限公司 · 聯絡人 · 品質認證",
   },
   {
     name: "reykjavik",

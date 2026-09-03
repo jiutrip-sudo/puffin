@@ -132,7 +132,7 @@ export const icelandSelfDriveSummer7: TripPackage = {
         "如今，藍湖溫泉以奢華和放鬆而聞名，但起初，藍湖溫泉的水源其實是來自附近熱發電廠的廢水。然而，1981年，當地人發現了這種水有著利於身體健康的特性，後來經過測試，確實發現湖水有助於治療牛皮癬和皮炎等疾病。",
         "實驗證明，藍湖溫泉的水富含二氧化硅、藻類和礦物質，這些生物活性元素賦予了這種獨特的水以治療、恢復活力和滋養的能力。",
         "除了迷人的環境和溫泉之外，藍湖現在還提供美容和按摩服務，讓您體驗奢華的SPA。此外，您還可以在飯店內的三家創新餐廳用餐，包括景如其名的熔岩餐廳（Lava Restaurant）和苔蘚餐廳（Moss Restaurant）。",
-        "現在，您可以輕鬆通過大樂旅行社的多日遊套餐當中找到包含藍湖溫泉的行程，當然，在我們的自駕遊或私人嚮導頁面也可以很方便地將藍湖溫泉添加到行程當中。",
+        "現在，您可以輕鬆通過帕芬假期的多日遊套餐當中找到包含藍湖溫泉的行程，當然，在我們的自駕遊或私人嚮導頁面也可以很方便地將藍湖溫泉添加到行程當中。",
       ],
     },
     {
@@ -461,12 +461,12 @@ export const icelandSelfDriveSummer7: TripPackage = {
         {
           question: "在冰島租車有什麼要求？最低年齡是多少？",
           answer:
-            "[{\"tag\":\"PARAGRAPH\",\"content\":[{\"tag\":null,\"content\":[\"在大樂旅行社旅行租車，SUV、越野車、商務旅行等車型的最低年齡限制為\"]},{\"tag\":\"STRONG\",\"content\":[{\"tag\":null,\"content\":[\"23\"]",
+            "[{\"tag\":\"PARAGRAPH\",\"content\":[{\"tag\":null,\"content\":[\"在帕芬假期旅行租車，SUV、越野車、商務旅行等車型的最低年齡限制為\"]},{\"tag\":\"STRONG\",\"content\":[{\"tag\":null,\"content\":[\"23\"]",
         },
         {
           question: "在冰島租車需要什麼證件？",
           answer:
-            "[{\"tag\":\"PARAGRAPH\",\"content\":[{\"tag\":null,\"content\":[\"通過大樂旅行社旅行租車，在取車時需要駕駛員攜帶以下3種證件：\"]",
+            "[{\"tag\":\"PARAGRAPH\",\"content\":[{\"tag\":null,\"content\":[\"通過帕芬假期旅行租車，在取車時需要駕駛員攜帶以下3種證件：\"]",
         },
         {
           question: "到冰島後在哪裡租車？",
@@ -508,7 +508,7 @@ export const icelandSelfDriveSummer7: TripPackage = {
         {
           question: "什麼是自選報名活動？",
           answer:
-            "[{\"tag\":\"PARAGRAPH\",\"content\":[{\"tag\":null,\"content\":[\"大樂旅行社旅行在每一天的行程下方增加了對應的自選報名活動，您可以根據自己的需求選擇是否自費參加這些額外的活動。\"]",
+            "[{\"tag\":\"PARAGRAPH\",\"content\":[{\"tag\":null,\"content\":[\"帕芬假期旅行在每一天的行程下方增加了對應的自選報名活動，您可以根據自己的需求選擇是否自費參加這些額外的活動。\"]",
         },
         {
           question: "冰島哪個季節最適合自駕遊？",

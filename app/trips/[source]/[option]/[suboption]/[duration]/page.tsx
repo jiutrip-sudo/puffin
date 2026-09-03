@@ -54,21 +54,21 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const path = `/trips/${tripKey}`;
 
   if (isTripRoutePickerPage(option, suboption, duration)) {
-    let title = `${durationLabel}${optionLabel}行程 | 大樂旅行社`;
+    let title = `${durationLabel}${optionLabel}行程 | 帕芬假期`;
     let description = `${sourceLabels[source]} · ${optionLabel} · ${suboptionLabel} · ${durationLabel}`;
 
     if (option === "self-drive" && suboption === "winter") {
-      title = `${durationLabel}冬季自駕 — 選擇路線 | 大樂旅行社`;
+      title = `${durationLabel}冬季自駕 — 選擇路線 | 帕芬假期`;
       description = localize(
         `選擇環島或非環島路線，規劃您的${durationLabel}冰島冬季自駕行程。`,
       );
     } else if (option === "group" && suboption === "summer") {
-      title = `${durationLabel}夏季跟團 — 選擇路線 | 大樂旅行社`;
+      title = `${durationLabel}夏季跟團 — 選擇路線 | 帕芬假期`;
       description = localize(
         `選擇路線變體，規劃您的${durationLabel}冰島夏季跟團行程。`,
       );
     } else if (option === "group" && suboption === "winter") {
-      title = `${durationLabel}冬季跟團 — 選擇路線 | 大樂旅行社`;
+      title = `${durationLabel}冬季跟團 — 選擇路線 | 帕芬假期`;
       description = localize(
         `選擇環島或非環島路線，規劃您的${durationLabel}冰島冬季跟團行程。`,
       );
@@ -85,7 +85,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (COMING_SOON_TRIPS.has(tripKey)) {
     return buildPageMetadata({
-      title: localize("即將推出 | 大樂旅行社"),
+      title: localize("即將推出 | 帕芬假期"),
       description: localize("此行程即將推出，敬請期待。"),
       path,
       locale,
@@ -99,7 +99,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   return buildPageMetadata({
-    title: `${durationLabel}${optionLabel}行程 | 大樂旅行社`,
+    title: `${durationLabel}${optionLabel}行程 | 帕芬假期`,
     description: `${sourceLabels[source]} · ${optionLabel} · ${suboptionLabel} · ${durationLabel}`,
     path,
     locale,

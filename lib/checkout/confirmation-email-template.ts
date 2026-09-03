@@ -338,8 +338,8 @@ export function buildCustomerConfirmationEmail(
     : `【預訂確認】${data.packageTitle} · 訂單 ${orderRef}`;
 
   const introLine = awaiting
-    ? "感謝您透過大樂旅行社提交冰島行程預訂申請。我們已收到您的申請，專員將於 3 個工作天內與您聯絡。"
-    : "感謝您透過大樂旅行社預訂冰島行程，您的訂單已確認可付款。";
+    ? "感謝您透過帕芬假期提交冰島行程預訂申請。我們已收到您的申請，專員將於 3 個工作天內與您聯絡。"
+    : "感謝您透過帕芬假期預訂冰島行程，您的訂單已確認可付款。";
 
   const textLines = [
     `${data.leadTravelerName} 您好，`,

@@ -26,7 +26,7 @@ export const MESSAGES = {
   "trip.section.similar": "更多相似套餐",
   "trip.section.travelHighlights": "此次旅行您將",
   "trip.section.attractionHighlights": "景點高光",
-  "trip.section.whyChooseBrand": "為什麼選擇大樂旅行社？",
+  "trip.section.whyChooseBrand": "為什麼選擇帕芬假期？",
   "trip.section.routeOverview": "路線概覽",
   "trip.section.routeDefaultSubtitle": "冬季自駕主要動線",
   "trip.section.itinerarySubtitle": "您的 {days} 天 {nights} 夜行程概覽",

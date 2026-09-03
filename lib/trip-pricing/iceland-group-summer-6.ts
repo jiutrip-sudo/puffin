@@ -23,7 +23,7 @@ export const icelandGroupSummer6Pricing: PricingConfig = {
   ],
   tripDurationDays: 6,
   accommodationIntro:
-    "在大樂旅行社的跟團套餐中，僅雷克雅維克地區住宿可選等級（經濟型、舒適型、品質型），各等級均含免費 WiFi 及每日早餐，其中經濟型為公共衛浴。",
+    "在帕芬假期的跟團套餐中，僅雷克雅維克地區住宿可選等級（經濟型、舒適型、品質型），各等級均含免費 WiFi 及每日早餐，其中經濟型為公共衛浴。",
   ageBands: {
     childMultiplier: 0.75,
     infantMultiplier: 0,

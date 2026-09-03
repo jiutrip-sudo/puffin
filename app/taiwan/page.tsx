@@ -8,7 +8,7 @@ import { localizeTripOptions } from "@/lib/i18n/trip-options";
 export async function generateMetadata() {
   const locale = await getRequestLocale();
   return buildPageMetadata({
-    title: localizeText("台灣出發行程 | 大樂旅行社", locale),
+    title: localizeText("台灣出發行程 | 帕芬假期", locale),
     description: localizeText(
       "從台灣出發的精選行程，夏季與冬季方案陸續推出。",
       locale,

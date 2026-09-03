@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: PageProps) {
 
   if (!sourceLabel || !optionLabel) {
     return buildPageMetadata({
-      title: localize("找不到行程 | 大樂旅行社"),
+      title: localize("找不到行程 | 帕芬假期"),
       description: localize("找不到您要的行程分類。"),
       noIndex: true,
       locale,
@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: PageProps) {
   }
 
   return buildPageMetadata({
-    title: `${sourceLabel} · ${optionLabel} | 大樂旅行社`,
+    title: `${sourceLabel} · ${optionLabel} | 帕芬假期`,
     description: localize(`選擇${sourceLabel}的${optionLabel}行程，規劃您的冰島之旅。`),
     path: `/trips/${source}/${option}`,
     locale,

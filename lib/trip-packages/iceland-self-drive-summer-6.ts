@@ -440,12 +440,12 @@ export const icelandSelfDriveSummer6: TripPackage = {
         {
           question: "在冰島租車有什麼要求？最低年齡是多少？",
           answer:
-            "[{\"tag\":\"PARAGRAPH\",\"content\":[{\"tag\":null,\"content\":[\"在大樂旅行社旅行租車，SUV、越野車、商務旅行等車型的最低年齡限制為\"]},{\"tag\":\"STRONG\",\"content\":[{\"tag\":null,\"content\":[\"23\"]",
+            "[{\"tag\":\"PARAGRAPH\",\"content\":[{\"tag\":null,\"content\":[\"在帕芬假期旅行租車，SUV、越野車、商務旅行等車型的最低年齡限制為\"]},{\"tag\":\"STRONG\",\"content\":[{\"tag\":null,\"content\":[\"23\"]",
         },
         {
           question: "在冰島租車需要什麼證件？",
           answer:
-            "[{\"tag\":\"PARAGRAPH\",\"content\":[{\"tag\":null,\"content\":[\"通過大樂旅行社旅行租車，在取車時需要駕駛員攜帶以下3種證件：\"]",
+            "[{\"tag\":\"PARAGRAPH\",\"content\":[{\"tag\":null,\"content\":[\"通過帕芬假期旅行租車，在取車時需要駕駛員攜帶以下3種證件：\"]",
         },
         {
           question: "在冰島自駕租車保險主要包括哪幾種？",
@@ -502,7 +502,7 @@ export const icelandSelfDriveSummer6: TripPackage = {
         {
           question: "什麼是自選報名活動？",
           answer:
-            "[{\"tag\":\"PARAGRAPH\",\"content\":[{\"tag\":null,\"content\":[\"大樂旅行社旅行在每一天的行程下方增加了對應的自選報名活動，您可以根據自己的需求選擇是否自費參加這些額外的活動。\"]",
+            "[{\"tag\":\"PARAGRAPH\",\"content\":[{\"tag\":null,\"content\":[\"帕芬假期旅行在每一天的行程下方增加了對應的自選報名活動，您可以根據自己的需求選擇是否自費參加這些額外的活動。\"]",
         },
         {
           question: "套餐單人間為什麼需要補差價？",

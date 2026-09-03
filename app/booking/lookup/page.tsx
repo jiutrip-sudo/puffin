@@ -10,7 +10,7 @@ function firstParam(value: string | string[] | undefined): string | undefined {
 }
 
 export const metadata = {
-  title: "查詢訂單 | 大樂旅行社",
+  title: "查詢訂單 | 帕芬假期",
   description: "使用訂單號與 Email 查詢預訂狀態與付款說明。",
 };
 

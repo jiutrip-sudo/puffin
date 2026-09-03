@@ -2,7 +2,7 @@ import { Suspense } from "react";
 import { AdminLoginForm } from "@/components/admin/AdminLoginForm";
 
 export const metadata = {
-  title: "後台登入 | 大樂旅行社",
+  title: "後台登入 | 帕芬假期",
   robots: { index: false, follow: false },
 };
 

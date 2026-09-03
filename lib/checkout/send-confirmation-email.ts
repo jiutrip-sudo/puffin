@@ -28,7 +28,7 @@ function isValidEmail(value: string): boolean {
 function resolveConfirmationFromAddress(): string {
   return (
     process.env.CONFIRMATION_EMAIL_FROM?.trim() ??
-    `大樂旅行社 <${CHECKOUT_OFFICE_EMAIL}>`
+    `帕芬假期 <${CHECKOUT_OFFICE_EMAIL}>`
   );
 }
 

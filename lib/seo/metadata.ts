@@ -3,6 +3,7 @@ import { absoluteUrl } from "@/lib/site-url";
 import type { SiteLocale } from "@/lib/site-locale";
 import { siteLocaleToOpenGraphLocale } from "@/lib/site-locale";
 import { localePath } from "@/lib/i18n/paths";
+import { SITE_DISPLAY_NAME } from "@/lib/company-info";
 
 const DEFAULT_OG_IMAGE = "/images/dollar-travel-logo.png";
 
@@ -45,7 +46,7 @@ export function buildPageMetadata(options: {
       title: options.title,
       description: options.description,
       url: canonical,
-      siteName: "大樂旅行社",
+      siteName: SITE_DISPLAY_NAME,
       locale: siteLocaleToOpenGraphLocale(locale),
       alternateLocale: siteLocaleToOpenGraphLocale(alternateLocale),
       type: "website",

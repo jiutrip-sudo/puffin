@@ -50,7 +50,7 @@ export const CHECKOUT_OFFICE_ADDRESS = OFFICE_ADDRESS;
 
 /** 固定匯款帳戶（台新銀行高雄分行） */
 export const CHECKOUT_BANK_ACCOUNT = {
-  holderName: "大樂旅行社股份有限公司",
+  holderName: "帕芬假期股份有限公司",
   accountNumber: "2009-01-0000103-2",
   institutionLine: "台新國際商業銀行 812 高雄分行 0090",
 } as const;

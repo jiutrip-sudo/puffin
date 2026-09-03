@@ -1,7 +1,7 @@
 import { AdminBookingDetailPanel } from "@/components/admin/AdminBookingDetailPanel";
 
 export const metadata = {
-  title: "訂單詳情 | 大樂後台",
+  title: "訂單詳情 | 帕芬假期後台",
   robots: { index: false, follow: false },
 };
 

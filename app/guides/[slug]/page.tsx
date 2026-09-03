@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: GuidePageProps) {
   const article = getGuideBySlug(slug);
   if (!article) {
     return buildPageMetadata({
-      title: localizeText("找不到攻略 | 大樂旅行社", locale),
+      title: localizeText("找不到攻略 | 帕芬假期", locale),
       description: localizeText("找不到您要的攻略文章。", locale),
       noIndex: true,
       locale,
@@ -35,7 +35,7 @@ export async function generateMetadata({ params }: GuidePageProps) {
   const localized = localizeDeep(article, locale);
 
   return buildPageMetadata({
-    title: `${localized.title} | 大樂旅行社`,
+    title: `${localized.title} | 帕芬假期`,
     description: localized.description,
     path: `/guides/${slug}`,
     locale,

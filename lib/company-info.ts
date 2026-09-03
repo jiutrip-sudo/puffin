@@ -1,5 +1,8 @@
 export const BRAND_NAME = "Tomoaki Travel Service Ltd., Co.";
 
+/** 前台對外品牌名稱（頁面 title、OG、郵件等） */
+export const SITE_DISPLAY_NAME = "帕芬假期";
+
 export const COMPANY_LOGO = {
   src: "/images/dollar-travel-logo.png",
   width: 399,

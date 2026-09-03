@@ -10,7 +10,7 @@ import { t } from "@/lib/i18n/messages";
 export async function generateMetadata() {
   const locale = await getRequestLocale();
   return buildPageMetadata({
-    title: localizeText("冰島旅遊攻略 | 大樂旅行社", locale),
+    title: localizeText("冰島旅遊攻略 | 帕芬假期", locale),
     description: localizeText(
       "冰島冬季自駕、南岸行程天數、行前準備與預訂付款說明，幫助您安心規劃冰島之旅。",
       locale,

@@ -22,7 +22,7 @@ export function AdminShell({ title, children }: AdminShellProps) {
       <header className="admin-shell__header">
         <div className="admin-shell__brand">
           <Link href="/admin/bookings" className="admin-shell__title">
-            大樂營運後台
+            帕芬假期營運後台
           </Link>
           <span className="admin-shell__subtitle">{title}</span>
         </div>

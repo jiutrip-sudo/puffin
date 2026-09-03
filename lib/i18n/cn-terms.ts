@@ -51,5 +51,5 @@ export const CN_TERMS: ReadonlyArray<readonly [string, string]> = [
   ["被盜", "被盗"],
   ["行程手冊", "行程手册"],
   ["冰川健行", "冰川徒步"],
-  ["大樂旅行社", "大樂旅行社"],
+  ["帕芬假期", "帕芬假期"],
 ];

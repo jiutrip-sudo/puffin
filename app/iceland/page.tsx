@@ -8,7 +8,7 @@ import { localizeTripOptions } from "@/lib/i18n/trip-options";
 export async function generateMetadata() {
   const locale = await getRequestLocale();
   return buildPageMetadata({
-    title: localizeText("冰島集合行程 | 大樂旅行社", locale),
+    title: localizeText("冰島集合行程 | 帕芬假期", locale),
     description: localizeText(
       "冰島集合出發：自駕、跟團與體驗行程。選擇最適合你的冰島旅行方式。",
       locale,

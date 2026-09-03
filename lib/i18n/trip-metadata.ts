@@ -12,6 +12,7 @@ import {
   OPTION_LABELS,
   SOURCE_LABELS,
 } from "@/lib/trip-options";
+import { SITE_DISPLAY_NAME } from "@/lib/company-info";
 
 export async function buildTripPackageMetadata(
   tripKey: string,
@@ -24,7 +25,7 @@ export async function buildTripPackageMetadata(
   }
 
   return buildPageMetadata({
-    title: `${data.package.title} | 大樂旅行社`,
+    title: `${data.package.title} | ${SITE_DISPLAY_NAME}`,
     description: data.package.intro.summary,
     path: getTripPackageHref(tripKey, "zh-TW"),
     locale,

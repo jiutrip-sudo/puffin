@@ -33,7 +33,7 @@ export async function generateMetadata({ params }: PageProps) {
     !SEASON_IDS.has(suboption)
   ) {
     return buildPageMetadata({
-      title: localize("找不到行程 | 大樂旅行社"),
+      title: localize("找不到行程 | 帕芬假期"),
       description: localize("找不到您要的行程分類。"),
       noIndex: true,
       locale,
@@ -46,7 +46,7 @@ export async function generateMetadata({ params }: PageProps) {
 
   if (!sourceLabel || !optionLabel || !suboptionLabel) {
     return buildPageMetadata({
-      title: localize("找不到行程 | 大樂旅行社"),
+      title: localize("找不到行程 | 帕芬假期"),
       description: localize("找不到您要的行程分類。"),
       noIndex: true,
       locale,
@@ -54,7 +54,7 @@ export async function generateMetadata({ params }: PageProps) {
   }
 
   return buildPageMetadata({
-    title: `${sourceLabel} · ${optionLabel} · ${suboptionLabel} | 大樂旅行社`,
+    title: `${sourceLabel} · ${optionLabel} · ${suboptionLabel} | 帕芬假期`,
     description: localize(
       `選擇${suboptionLabel}${optionLabel}的天數與路線，規劃冰島之旅。`,
     ),
