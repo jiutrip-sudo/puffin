@@ -602,7 +602,7 @@ export const icelandGroupSummer5: TripPackage = {
   id: "iceland-group-summer-5",
   tripKey: "iceland/group/summer/5",
   slug: "iceland-summer-5-day-tour-package-snaefellsnes-reynisfjara-jokulsarlon",
-  tourCode: "SLMMD-051",
+  tourCode: "SMD-051",
   title: "5 天 4 夜冰島夏季夢幻跟團遊",
   subtitle: "${esc(toTw(meta.subtitle))}",
   duration: { days: 5, nights: 4 },
@@ -610,7 +610,7 @@ export const icelandGroupSummer5: TripPackage = {
   meta: {
     departure: "雷克雅未克",
     transport: "跟團",
-    tourCode: "SLMMD-051",
+    tourCode: "SMD-051",
   },
   eyebrow: "冰島集合 · 跟團 · 夏季",
   backHref: "/trips/iceland/group/summer",
@@ -718,7 +718,7 @@ ${faq}
     {
       tripKey: "iceland/group/summer/4",
       title: "4 天 3 夜冰島夏季精簡跟團遊",
-      tourCode: "SLMMD-041",
+      tourCode: "SMD-041",
       durationLabel: "4 天／3 夜",
       description:
         "藍冰洞探險與南岸精華，適合時間有限的夏季旅客。",
@@ -726,7 +726,7 @@ ${faq}
     {
       tripKey: "iceland/group/summer/6",
       title: "6 天 5 夜冰島夏季跟團遊",
-      tourCode: "SLMMD-061",
+      tourCode: "SMD-061",
       durationLabel: "6 天／5 夜",
       description:
         "更完整的夏季跟團路線，涵蓋更多冰島精華景點。",

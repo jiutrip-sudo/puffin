@@ -11,7 +11,7 @@ const PACKAGE_ID = "iceland-group-summer-7-south-golden-circle-hiking";
 const TRIP_KEY = "iceland/group/summer/7/south-golden-circle-hiking";
 const PACKAGE_SLUG =
   "iceland-summer-7-day-adventure-tour-package-whale-watching-inside-volcano";
-const TOUR_CODE = "SLMMD-073";
+const TOUR_CODE = "SMD-073";
 const IMG_BASE =
   "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good";
 const HERO_BASE =
@@ -741,7 +741,7 @@ ${faq}
     {
       tripKey: "iceland/group/summer/7/south-snaefellsnes-golden-circle",
       title: "7 天 6 夜冰島夏季經典跟團遊",
-      tourCode: "SLMMD-071",
+      tourCode: "SMD-071",
       durationLabel: "7 天／6 夜",
       description:
         "黃金圈、南岸與斯奈山半島，含高地徒步自由日。",
@@ -749,7 +749,7 @@ ${faq}
     {
       tripKey: "iceland/group/summer/6/south-hiking",
       title: "6 天 5 夜冰島夏季徒步探險跟團遊",
-      tourCode: "SLMMD-063",
+      tourCode: "SMD-063",
       durationLabel: "6 天／5 夜",
       description:
         "冰川徒步、火山探險與觀鯨，適合時間較緊的探險旅客。",

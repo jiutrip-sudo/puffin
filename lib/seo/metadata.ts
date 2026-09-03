@@ -22,6 +22,9 @@ export function buildPageMetadata(options: {
   const alternatePath = canonicalPath
     ? absoluteUrl(localePath(canonicalPath, alternateLocale))
     : undefined;
+  const defaultPath = canonicalPath
+    ? absoluteUrl(localePath(canonicalPath, "zh-TW"))
+    : undefined;
 
   return {
     title: options.title,
@@ -33,6 +36,7 @@ export function buildPageMetadata(options: {
             ? {
                 [locale]: canonical,
                 [alternateLocale]: alternatePath,
+                ...(defaultPath ? { "x-default": defaultPath } : {}),
               }
             : undefined,
         }

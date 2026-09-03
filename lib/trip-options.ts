@@ -289,6 +289,66 @@ export function getTripPackageHref(
   return localePath(`/trips/${tripKey}`, locale);
 }
 
+/** 四段 tripKey 是否為路線選擇頁（非產品 canonical 頁） */
+export function isTripRoutePickerPage(
+  option: string,
+  suboption: string,
+  duration: string,
+): boolean {
+  return (
+    (option === "self-drive" &&
+      suboption === "winter" &&
+      ICELAND_SELF_DRIVE_WINTER_ROUTE_PICKER_DAY_IDS.has(duration)) ||
+    (option === "group" &&
+      suboption === "summer" &&
+      ICELAND_GROUP_SUMMER_ROUTE_PICKER_DAY_IDS.has(duration)) ||
+    (option === "group" &&
+      suboption === "winter" &&
+      ICELAND_GROUP_WINTER_ROUTE_PICKER_DAY_IDS.has(duration))
+  );
+}
+
+export function isTripRoutePickerTripKey(tripKey: string): boolean {
+  const parts = tripKey.split("/");
+  if (parts.length !== 4 || parts[0] !== "iceland") return false;
+  return isTripRoutePickerPage(parts[1], parts[2], parts[3]);
+}
+
+export function isTripRoutePickerHref(href: string): boolean {
+  const match = href.match(
+    /^\/trips\/iceland\/(self-drive|group)\/(summer|winter)\/(\d+)$/,
+  );
+  if (!match) return false;
+  const [, option, suboption, duration] = match;
+  return isTripRoutePickerPage(option, suboption, duration);
+}
+
+/** 五段路線頁 URL 參數 → 套餐 tripKey */
+export function resolveRoutePagePackageTripKey(
+  source: string,
+  option: string,
+  suboption: string,
+  duration: string,
+  route: string,
+): string | null {
+  if (
+    option === "group" &&
+    suboption === "summer" &&
+    ICELAND_GROUP_SUMMER_ROUTE_PICKER_DAY_IDS.has(duration) &&
+    ICELAND_GROUP_SUMMER_ROUTE_IDS.has(route)
+  ) {
+    return getIcelandGroupSummerPackageTripKey(duration, route);
+  }
+
+  const tripKey = `${source}/${option}/${suboption}/${duration}`;
+
+  if (ICELAND_WINTER_ROUTE_IDS.has(route)) {
+    return route === "ring" ? tripKey : `${tripKey}/${route}`;
+  }
+
+  return null;
+}
+
 export const ICELAND_SELF_DRIVE_SEASON_DAY_IDS: Record<string, Set<string>> = {
   summer: new Set(ICELAND_SELF_DRIVE_SUMMER_DAY_OPTIONS.map((option) => option.id)),
   winter: new Set(ICELAND_SELF_DRIVE_WINTER_DAY_OPTIONS.map((option) => option.id)),

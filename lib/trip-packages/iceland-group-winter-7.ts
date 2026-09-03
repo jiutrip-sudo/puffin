@@ -22,7 +22,7 @@ export const icelandGroupWinter7: TripPackage = {
   id: "iceland-group-winter-7",
   tripKey: "iceland/group/winter/7",
   slug: "iceland-winter-package-7-days-south-coast-and-snaefellsnes",
-  tourCode: "SLMMD-072",
+  tourCode: "SMD-072",
   title: "7 天 6 夜冰島冬季跟團遊",
   subtitle: "藍冰洞探險 & 斯奈山半島",
   duration: { days: 7, nights: 6 },
@@ -30,7 +30,7 @@ export const icelandGroupWinter7: TripPackage = {
   meta: {
     departure: "雷克雅維克",
     transport: "跟團",
-    tourCode: "SLMMD-072",
+    tourCode: "SMD-072",
   },
   eyebrow: "冰島集合 · 跟團 · 冬季",
   backHref: "/trips/iceland/group/winter",
@@ -575,7 +575,7 @@ export const icelandGroupWinter7: TripPackage = {
     {
       tripKey: "iceland/group/winter/6",
       title: "6 天 5 夜冰島冬季跟團遊",
-      tourCode: "SLMMD-062",
+      tourCode: "SMD-062",
       durationLabel: "6 天／5 夜",
       description:
         "南岸、黃金圈與斯奈山半島，冬季跟團精選路線。",
@@ -583,7 +583,7 @@ export const icelandGroupWinter7: TripPackage = {
     {
       tripKey: "iceland/group/winter/8",
       title: "8 天 7 夜冰島冬季跟團遊",
-      tourCode: "SLMMD-082",
+      tourCode: "SMD-082",
       durationLabel: "8 天／7 夜",
       description:
         "更充裕的冬季跟團天數，深度探索冰島環島精華。",

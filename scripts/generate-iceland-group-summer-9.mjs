@@ -611,7 +611,7 @@ export const icelandGroupSummer9: TripPackage = {
   id: "iceland-group-summer-9",
   tripKey: "iceland/group/summer/9",
   slug: "iceland-summer-9-day-tour-package-whale-watching-south-coast-west-iceland",
-  tourCode: "SLMMD-093",
+  tourCode: "SMD-093",
   title: "9 天 8 夜冰島夏季深度體驗跟團遊",
   subtitle: "${esc(toTw(meta.subtitle))}",
   duration: { days: 9, nights: 8 },
@@ -619,7 +619,7 @@ export const icelandGroupSummer9: TripPackage = {
   meta: {
     departure: "雷克雅未克",
     transport: "跟團",
-    tourCode: "SLMMD-093",
+    tourCode: "SMD-093",
   },
   eyebrow: "冰島集合 · 跟團 · 夏季",
   backHref: "/trips/iceland/group/summer",
@@ -751,7 +751,7 @@ ${faq}
     {
       tripKey: "iceland/group/summer/8",
       title: "8 天 7 夜冰島夏季冰與火跟團遊",
-      tourCode: "SLMMD-083",
+      tourCode: "SMD-083",
       durationLabel: "8 天／7 夜",
       description:
         "斯奈山半島、火山與冰河湖，適合時間較緊的夏季旅客。",
@@ -759,7 +759,7 @@ ${faq}
     {
       tripKey: "iceland/group/summer/10",
       title: "10 天 9 夜冰島夏季跟團遊",
-      tourCode: "SLMMD-103",
+      tourCode: "SMD-103",
       durationLabel: "10 天／9 夜",
       description:
         "更完整的夏季跟團路線，涵蓋更多冰島精華景點。",

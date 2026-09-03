@@ -18,7 +18,7 @@ export const icelandGroupSummer5SouthGoldenCircle: TripPackage = {
   id: "iceland-group-summer-5-south-golden-circle",
   tripKey: "iceland/group/summer/5/south-golden-circle",
   slug: "iceland-summer-5-day-tour-package-golden-circle-south-coast-jokulsarlon",
-  tourCode: "SLMMD-053",
+  tourCode: "SMD-053",
   title: "5 天 4 夜冰島夏季精華跟團遊",
   subtitle: "黃金圈&南岸風光&傑古沙龍冰河湖",
   duration: { days: 5, nights: 4 },
@@ -26,7 +26,7 @@ export const icelandGroupSummer5SouthGoldenCircle: TripPackage = {
   meta: {
     departure: "雷克雅維克",
     transport: "跟團",
-    tourCode: "SLMMD-053",
+    tourCode: "SMD-053",
   },
   eyebrow: "冰島集合 · 跟團 · 夏季",
   backHref: "/trips/iceland/group/summer",
@@ -397,7 +397,7 @@ export const icelandGroupSummer5SouthGoldenCircle: TripPackage = {
     {
       tripKey: "iceland/group/summer/5/south-snaefellsnes",
       title: "5 天 4 夜冰島夏季夢幻跟團遊",
-      tourCode: "SLMMD-051",
+      tourCode: "SMD-051",
       durationLabel: "5 天／4 夜",
       description:
         "斯奈山半島與南岸精華，適合想兼顧西線風光的旅客。",
@@ -405,7 +405,7 @@ export const icelandGroupSummer5SouthGoldenCircle: TripPackage = {
     {
       tripKey: "iceland/group/summer/6/south-snaefellsnes-golden-circle",
       title: "6 天 5 夜冰島夏季跟團遊",
-      tourCode: "SLMMD-061",
+      tourCode: "SMD-061",
       durationLabel: "6 天／5 夜",
       description:
         "黃金圈、南岸與斯奈山半島一次走遍的樂享路線。",

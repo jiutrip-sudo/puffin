@@ -15,9 +15,24 @@ import {
   ICELAND_GROUP_WINTER_ROUTE_PICKER_DAY_IDS,
   ICELAND_SELF_DRIVE_WINTER_ROUTE_PICKER_DAY_IDS,
   ICELAND_TRIP_SEASON_DAY_IDS,
+  isTripRoutePickerPage,
 } from "@/lib/trip-options";
 import { SummerGroupRoutePicker } from "@/components/SummerGroupRoutePicker";
 import { WinterRoutePicker } from "@/components/WinterRoutePicker";
+import { getAllTripProductStaticParams } from "@/lib/seo/trip-static-params";
+
+export const revalidate = 86_400;
+
+export async function generateStaticParams() {
+  return getAllTripProductStaticParams()
+    .filter((params) => !params.route)
+    .map(({ source, option, suboption, duration }) => ({
+      source,
+      option,
+      suboption,
+      duration,
+    }));
+}
 
 type PageProps = {
   params: Promise<{
@@ -30,26 +45,63 @@ type PageProps = {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { source, option, suboption, duration } = await params;
+  const { locale, sourceLabels, optionLabels, localize } =
+    await getLocalizedTripLabels();
   const tripKey = `${source}/${option}/${suboption}/${duration}`;
-  const packageMetadata = await buildTripPackageMetadata(
-    tripKey,
-    `/trips/${tripKey}`,
-  );
+  const durationLabel = `${duration}日`;
+  const optionLabel = optionLabels[option];
+  const suboptionLabel = optionLabels[suboption];
+  const path = `/trips/${tripKey}`;
 
+  if (isTripRoutePickerPage(option, suboption, duration)) {
+    let title = `${durationLabel}${optionLabel}行程 | 大樂旅行社`;
+    let description = `${sourceLabels[source]} · ${optionLabel} · ${suboptionLabel} · ${durationLabel}`;
+
+    if (option === "self-drive" && suboption === "winter") {
+      title = `${durationLabel}冬季自駕 — 選擇路線 | 大樂旅行社`;
+      description = localize(
+        `選擇環島或非環島路線，規劃您的${durationLabel}冰島冬季自駕行程。`,
+      );
+    } else if (option === "group" && suboption === "summer") {
+      title = `${durationLabel}夏季跟團 — 選擇路線 | 大樂旅行社`;
+      description = localize(
+        `選擇路線變體，規劃您的${durationLabel}冰島夏季跟團行程。`,
+      );
+    } else if (option === "group" && suboption === "winter") {
+      title = `${durationLabel}冬季跟團 — 選擇路線 | 大樂旅行社`;
+      description = localize(
+        `選擇環島或非環島路線，規劃您的${durationLabel}冰島冬季跟團行程。`,
+      );
+    }
+
+    return buildPageMetadata({
+      title: localize(title),
+      description,
+      path,
+      locale,
+      noIndex: true,
+    });
+  }
+
+  if (COMING_SOON_TRIPS.has(tripKey)) {
+    return buildPageMetadata({
+      title: localize("即將推出 | 大樂旅行社"),
+      description: localize("此行程即將推出，敬請期待。"),
+      path,
+      locale,
+      noIndex: true,
+    });
+  }
+
+  const packageMetadata = await buildTripPackageMetadata(tripKey);
   if (packageMetadata) {
     return packageMetadata;
   }
 
-  const { locale, sourceLabels, optionLabels, localize } =
-    await getLocalizedTripLabels();
-  const durationLabel = `${duration}日`;
-  const optionLabel = optionLabels[option];
-  const suboptionLabel = optionLabels[suboption];
-
   return buildPageMetadata({
     title: `${durationLabel}${optionLabel}行程 | 大樂旅行社`,
     description: `${sourceLabels[source]} · ${optionLabel} · ${suboptionLabel} · ${durationLabel}`,
-    path: `/trips/${tripKey}`,
+    path,
     locale,
   });
 }
@@ -213,6 +265,7 @@ export default async function TripDurationPage({ params }: PageProps) {
         <TripProductJsonLd
           package={packageData.package}
           pricingConfig={packageData.pricingConfig}
+          locale={locale}
         />
         <TripPackagePage
           package={packageData.package}

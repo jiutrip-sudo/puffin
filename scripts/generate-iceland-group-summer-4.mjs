@@ -580,7 +580,7 @@ export const icelandGroupSummer4: TripPackage = {
   id: "iceland-group-summer-4",
   tripKey: "iceland/group/summer/4",
   slug: "iceland-summer-4-day-tour-package-south-coast-jokulsarlon",
-  tourCode: "SLMMD-041",
+  tourCode: "SMD-041",
   title: "4 天 3 夜冰島夏季輕鬆跟團遊",
   subtitle: "${esc(toTw(meta.subtitle))}",
   duration: { days: 4, nights: 3 },
@@ -588,7 +588,7 @@ export const icelandGroupSummer4: TripPackage = {
   meta: {
     departure: "雷克雅未克",
     transport: "跟團",
-    tourCode: "SLMMD-041",
+    tourCode: "SMD-041",
   },
   eyebrow: "冰島集合 · 跟團 · 夏季",
   backHref: "/trips/iceland/group/summer",
@@ -690,7 +690,7 @@ ${faq}
     {
       tripKey: "iceland/group/summer/5",
       title: "5 天 4 夜冰島夏季跟團遊",
-      tourCode: "SLMMD-051",
+      tourCode: "SMD-051",
       durationLabel: "5 天／4 夜",
       description:
         "更充裕的夏季跟團天數，深度探索南岸與冰河湖。",

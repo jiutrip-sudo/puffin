@@ -617,7 +617,7 @@ export const icelandGroupSummer8: TripPackage = {
   id: "iceland-group-summer-8",
   tripKey: "iceland/group/summer/8",
   slug: "iceland-summer-8-day-fire-and-ice-tour-package-snaefellsnes-volcano-jokulsarlon",
-  tourCode: "SLMMD-083",
+  tourCode: "SMD-083",
   title: "8 天 7 夜冰島夏季冰與火跟團遊",
   subtitle: "${esc(toTw(meta.subtitle))}",
   duration: { days: 8, nights: 7 },
@@ -625,7 +625,7 @@ export const icelandGroupSummer8: TripPackage = {
   meta: {
     departure: "雷克雅未克",
     transport: "跟團",
-    tourCode: "SLMMD-083",
+    tourCode: "SMD-083",
   },
   eyebrow: "冰島集合 · 跟團 · 夏季",
   backHref: "/trips/iceland/group/summer",
@@ -751,7 +751,7 @@ ${faq}
     {
       tripKey: "iceland/group/summer/7",
       title: "7 天 6 夜冰島夏季經典跟團遊",
-      tourCode: "SLMMD-071",
+      tourCode: "SMD-071",
       durationLabel: "7 天／6 夜",
       description:
         "黃金圈、南岸、斯奈山半島與自由活動日，適合時間較緊的夏季旅客。",
@@ -759,7 +759,7 @@ ${faq}
     {
       tripKey: "iceland/group/summer/9",
       title: "9 天 8 夜冰島夏季跟團遊",
-      tourCode: "SLMMD-093",
+      tourCode: "SMD-093",
       durationLabel: "9 天／8 夜",
       description:
         "更完整的夏季跟團路線，涵蓋更多冰島精華景點。",

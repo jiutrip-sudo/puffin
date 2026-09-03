@@ -3,19 +3,18 @@ import { buildPageMetadata } from "@/lib/seo/metadata";
 import { absoluteUrl } from "@/lib/site-url";
 import { getRequestLocale } from "@/lib/i18n/server";
 import { localizeText } from "@/lib/i18n/localize";
-import { getTripPackageWithPricing } from "@/lib/trip-packages/get-package-with-pricing";
 import { localePath } from "@/lib/i18n/paths";
+import { getTripPackageWithPricing } from "@/lib/trip-packages/get-package-with-pricing";
+import { localizeRecordLabels } from "@/lib/i18n/trip-options";
 import {
-  localizeRecordLabels,
-} from "@/lib/i18n/trip-options";
-import {
+  COMING_SOON_TRIPS,
+  getTripPackageHref,
   OPTION_LABELS,
   SOURCE_LABELS,
 } from "@/lib/trip-options";
 
 export async function buildTripPackageMetadata(
   tripKey: string,
-  path: string,
 ): Promise<Metadata | undefined> {
   const locale = await getRequestLocale();
   const data = getTripPackageWithPricing(tripKey, locale);
@@ -27,8 +26,9 @@ export async function buildTripPackageMetadata(
   return buildPageMetadata({
     title: `${data.package.title} | 大樂旅行社`,
     description: data.package.intro.summary,
-    path,
+    path: getTripPackageHref(tripKey, "zh-TW"),
     locale,
+    noIndex: COMING_SOON_TRIPS.has(tripKey),
     ogImage: data.package.heroImage.startsWith("http")
       ? data.package.heroImage
       : absoluteUrl(data.package.heroImage),

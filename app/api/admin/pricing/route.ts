@@ -3,8 +3,8 @@ import { listPricingPackageSummaries } from "@/lib/admin/pricing-overview";
 
 export async function GET() {
   try {
-    const packages = await listPricingPackageSummaries();
-    return NextResponse.json({ packages });
+    const overview = await listPricingPackageSummaries();
+    return NextResponse.json(overview);
   } catch (error) {
     const message =
       error instanceof Error ? error.message : "讀取計價總覽失敗";

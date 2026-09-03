@@ -16,7 +16,7 @@ export const icelandSelfDriveSummer4: TripPackage = {
   id: "iceland-self-drive-summer-4",
   tripKey: "iceland/self-drive/summer/4",
   slug: "4-days-summer-self-drive-south-coast-express",
-  tourCode: "SLMSD-041",
+  tourCode: "SSD-041",
   title: "4 天 3 夜冰島南岸夏季自駕遊",
   subtitle: "冰河湖 & 黑沙灘",
   duration: { days: 4, nights: 3 },
@@ -24,7 +24,7 @@ export const icelandSelfDriveSummer4: TripPackage = {
   meta: {
     departure: "雷克雅維克",
     transport: "自駕",
-    tourCode: "SLMSD-041",
+    tourCode: "SSD-041",
   },
   eyebrow: "冰島集合 · 自駕 · 夏季",
   backHref: "/trips/iceland/self-drive/summer",
@@ -458,7 +458,7 @@ export const icelandSelfDriveSummer4: TripPackage = {
     {
       tripKey: "iceland/self-drive/summer/5",
       title: "5 天 4 夜冰島夏季精簡自駕套餐",
-      tourCode: "SLMSD-052",
+      tourCode: "SSD-052",
       durationLabel: "5 天／4 夜",
       description:
         "將冰島南部精華收入囊中，搭配戶外體驗，並有機會看見舞動的北極光！",
@@ -466,7 +466,7 @@ export const icelandSelfDriveSummer4: TripPackage = {
     {
       tripKey: "iceland/self-drive/summer/6",
       title: "6 天 5 夜冰島夏季經典自駕遊",
-      tourCode: "SLMSD-062",
+      tourCode: "SSD-062",
       durationLabel: "6 天／5 夜",
       description:
         "領略冰島冬日風光，造訪經典黃金圈與南岸小眾景點，體驗冰洞探險、追逐極光。",
@@ -474,7 +474,7 @@ export const icelandSelfDriveSummer4: TripPackage = {
     {
       tripKey: "iceland/self-drive/summer/7",
       title: "冰島西南岸 7 天 6 夜夏季自駕遊",
-      tourCode: "SLMSD-072",
+      tourCode: "SSD-072",
       durationLabel: "7 天／6 夜",
       description:
         "黃金圈、南岸與斯奈山半島盡收囊中，途中還有機會看見舞動的北極光。",
@@ -482,7 +482,7 @@ export const icelandSelfDriveSummer4: TripPackage = {
     {
       tripKey: "iceland/self-drive/summer/8",
       title: "8 天 7 夜冰島夏季精選自駕",
-      tourCode: "SLMSD-082",
+      tourCode: "SSD-082",
       durationLabel: "8 天／7 夜",
       description:
         "沿一號公路環島，遊覽黃金圈、南岸、冰河湖、東部峽灣、米湖與西部白銀圈。",

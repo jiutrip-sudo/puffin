@@ -22,6 +22,8 @@ type MatrixRow = {
 
 type PackageMeta = {
   tripDays: number | null;
+  tourCode: string | null;
+  packageTitle: string | null;
   corivoPackageTourId: number | null;
   tiers: Array<{ id: string; label: string }>;
   vehicleTiers: Array<{ id: string; label: string }>;
@@ -160,13 +162,18 @@ export function AdminPricingDetailPanel({ packageId }: { packageId: string }) {
 
         <header className="admin-detail__header">
           <div>
-            <h2 className="admin-detail__title">{packageId}</h2>
-            {meta && (
-              <p className="admin-muted">
-                {meta.tripDays ? `${meta.tripDays} 天 · ` : ""}
-                Corivo ID {meta.corivoPackageTourId ?? "—"} · 共 {total} 筆
-              </p>
+            <h2 className="admin-detail__title">
+              {meta?.tourCode ?? packageId}
+            </h2>
+            {meta?.packageTitle && (
+              <p className="admin-muted">{meta.packageTitle}</p>
             )}
+            <p className="admin-muted admin-detail__subtitle-mono">
+              系統代碼 {packageId}
+              {meta
+                ? ` · ${meta.tripDays ? `${meta.tripDays} 天 · ` : ""}Corivo ID ${meta.corivoPackageTourId ?? "—"} · 共 ${total} 筆`
+                : ""}
+            </p>
           </div>
         </header>
 

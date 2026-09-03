@@ -18,7 +18,7 @@ export const icelandGroupWinter5: TripPackage = {
   id: "iceland-group-winter-5",
   tripKey: "iceland/group/winter/5",
   slug: "5-days-winter-package-golden-circle-south-coast-jokulsarlon-glacier-lagoon",
-  tourCode: "SLMMD-052",
+  tourCode: "SMD-052",
   title: "5 天 4 夜冰島冬季超值跟團遊",
   subtitle: "傑古沙龍冰河湖 & 黃金圈",
   duration: { days: 5, nights: 4 },
@@ -26,7 +26,7 @@ export const icelandGroupWinter5: TripPackage = {
   meta: {
     departure: "雷克雅維克",
     transport: "跟團",
-    tourCode: "SLMMD-052",
+    tourCode: "SMD-052",
   },
   eyebrow: "冰島集合 · 跟團 · 冬季",
   backHref: "/trips/iceland/group/winter",
@@ -457,7 +457,7 @@ export const icelandGroupWinter5: TripPackage = {
     {
       tripKey: "iceland/group/winter/4",
       title: "4 天 3 夜冰島冬日精簡跟團遊",
-      tourCode: "SLMMD-042",
+      tourCode: "SMD-042",
       durationLabel: "4 天／3 夜",
       description:
         "藍冰洞探險與南岸精華，適合時間有限的冬季旅客。",
@@ -465,7 +465,7 @@ export const icelandGroupWinter5: TripPackage = {
     {
       tripKey: "iceland/group/winter/6",
       title: "6 天 5 夜冰島冬季跟團遊",
-      tourCode: "SLMMD-062",
+      tourCode: "SMD-062",
       durationLabel: "6 天／5 夜",
       description:
         "南岸、黃金圈與斯奈山半島，冬季跟團一次走遍冰島西部精華。",

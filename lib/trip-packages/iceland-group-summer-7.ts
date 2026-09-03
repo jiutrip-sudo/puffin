@@ -22,7 +22,7 @@ export const icelandGroupSummer7: TripPackage = {
   id: "iceland-group-summer-7",
   tripKey: "iceland/group/summer/7",
   slug: "iceland-summer-7-day-classic-tour-package-golden-circle-snaefellsnes-inside-the-volcano",
-  tourCode: "SLMMD-071",
+  tourCode: "SMD-071",
   title: "7 天 6 夜冰島夏季經典跟團遊",
   subtitle: "黃金圈&斯奈山半島&可選高地徒步",
   duration: { days: 7, nights: 6 },
@@ -30,7 +30,7 @@ export const icelandGroupSummer7: TripPackage = {
   meta: {
     departure: "雷克雅維克",
     transport: "跟團",
-    tourCode: "SLMMD-071",
+    tourCode: "SMD-071",
   },
   eyebrow: "冰島集合 · 跟團 · 夏季",
   backHref: "/trips/iceland/group/summer",
@@ -464,7 +464,7 @@ export const icelandGroupSummer7: TripPackage = {
     {
       tripKey: "iceland/group/summer/6",
       title: "6 天 5 夜冰島夏季樂享跟團遊",
-      tourCode: "SLMMD-061",
+      tourCode: "SMD-061",
       durationLabel: "6 天／5 夜",
       description:
         "黃金圈、南岸與斯奈山半島，適合時間較緊的夏季旅客。",
@@ -472,7 +472,7 @@ export const icelandGroupSummer7: TripPackage = {
     {
       tripKey: "iceland/group/summer/8",
       title: "8 天 7 夜冰島夏季跟團遊",
-      tourCode: "SLMMD-083",
+      tourCode: "SMD-083",
       durationLabel: "8 天／7 夜",
       description:
         "更完整的夏季跟團路線，涵蓋更多冰島精華景點。",

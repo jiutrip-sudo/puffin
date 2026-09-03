@@ -26,7 +26,7 @@ export const icelandGroupWinter9NonRing: TripPackage = {
   id: "iceland-group-winter-9-non-ring",
   tripKey: "iceland/group/winter/9/non-ring",
   slug: "iceland-9-days-winter-package-south-coast-and-snaefellsnes-adventure",
-  tourCode: "SLMMD-094",
+  tourCode: "SMD-094",
   title: "9 天 8 夜冰島冬季南岸輕奢跟團遊",
   subtitle: "黃金圈&南岸&斯奈山&浮潛體驗",
   duration: { days: 9, nights: 8 },
@@ -34,7 +34,7 @@ export const icelandGroupWinter9NonRing: TripPackage = {
   meta: {
     departure: "雷克雅維克",
     transport: "跟團",
-    tourCode: "SLMMD-094",
+    tourCode: "SMD-094",
   },
   eyebrow: "冰島集合 · 跟團 · 冬季",
   backHref: "/trips/iceland/group/winter/9",
@@ -605,7 +605,7 @@ export const icelandGroupWinter9NonRing: TripPackage = {
     {
       tripKey: "iceland/group/winter/9/ring",
       title: "9 天 8 夜冰島冬季跟團遊",
-      tourCode: "SLMMD-092",
+      tourCode: "SMD-092",
       durationLabel: "9 天／8 夜",
       description:
         "冬季環島跟團：黃金圈、南岸、東部峽灣與北部精華。",
@@ -613,7 +613,7 @@ export const icelandGroupWinter9NonRing: TripPackage = {
     {
       tripKey: "iceland/group/winter/8/non-ring",
       title: "8 天 7 夜冰島冬季南岸精華跟團遊",
-      tourCode: "SLMMD-084",
+      tourCode: "SMD-084",
       durationLabel: "8 天／7 夜",
       description:
         "南岸、黃金圈、西部與斯奈山半島，冬季非環島精選。",

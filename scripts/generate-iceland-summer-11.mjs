@@ -610,7 +610,7 @@ export const icelandSelfDriveSummer11: TripPackage = {
   id: "iceland-self-drive-summer-11",
   tripKey: "iceland/self-drive/summer/11",
   slug: "summer-self-drive-around-iceland-in-11-days",
-  tourCode: "SLMSD-111",
+  tourCode: "SSD-111",
   title: "11 天 10 夜冰島夏季驚喜環島自駕",
   subtitle: "${esc(toTw(meta.subtitle))}",
   duration: { days: 11, nights: 10 },
@@ -618,7 +618,7 @@ export const icelandSelfDriveSummer11: TripPackage = {
   meta: {
     departure: "雷克雅未克",
     transport: "自駕",
-    tourCode: "SLMSD-111",
+    tourCode: "SSD-111",
   },
   eyebrow: "冰島集合 · 自駕 · 夏季",
   backHref: "/trips/iceland/self-drive/summer",
@@ -762,7 +762,7 @@ ${faq}
     {
       tripKey: "iceland/self-drive/summer/6",
       title: "6 天 5 夜冰島夏季精選自駕遊",
-      tourCode: "SLMSD-061",
+      tourCode: "SSD-061",
       durationLabel: "6 天／5 夜",
       description:
         "南岸、冰河湖與黃金圈，並造訪斯奈山半島精華景點。",
@@ -770,7 +770,7 @@ ${faq}
     {
       tripKey: "iceland/self-drive/summer/7",
       title: "7 天 6 夜冰島夏季暢享自駕遊",
-      tourCode: "SLMSD-071",
+      tourCode: "SSD-071",
       durationLabel: "7 天／6 夜",
       description:
         "黃金圈、南岸與斯奈山半島盡收囊中，更從容探索冰島西南部。",
@@ -778,7 +778,7 @@ ${faq}
     {
       tripKey: "iceland/self-drive/summer/8",
       title: "8 天 7 夜冰島夏季環島自駕",
-      tourCode: "SLMSD-081",
+      tourCode: "SSD-081",
       durationLabel: "8 天／7 夜",
       description:
         "夏季版一號公路環島，涵蓋黃金圈、南岸、冰河湖、東部峽灣、米湖與西部白銀圈。",
@@ -786,7 +786,7 @@ ${faq}
     {
       tripKey: "iceland/self-drive/summer/10",
       title: "10 天 9 夜冰島夏季深度環島自駕",
-      tourCode: "SLMSD-101",
+      tourCode: "SSD-101",
       durationLabel: "10 天／9 夜",
       description:
         "一號公路環島並造訪斯奈山半島，涵蓋黃金圈、南岸、冰河湖至北部精華。",

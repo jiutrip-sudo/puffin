@@ -29,7 +29,7 @@ function roomConfig(
   return { adults, children, infants: 0, rooms };
 }
 
-// 與森林猫 SLMSD-042 defaultRoomConfiguration 一致（36 種旅客組合）
+// 與森林猫 SSD-042 defaultRoomConfiguration 一致（36 種旅客組合）
 const DEFAULT_ROOM_CONFIGS: TravelerRoomConfig[] = [
   roomConfig(2, 0, [{ adults: 2, children: 0, roomTypeCategory: "TWIN" }]),
   roomConfig(1, 0, [{ adults: 1, children: 0, roomTypeCategory: "SINGLE" }]),

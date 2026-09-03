@@ -38,6 +38,7 @@ export async function generateMetadata({ params }: PageProps) {
     description: localize(`選擇${sourceLabel}的${optionLabel}行程，規劃您的冰島之旅。`),
     path: `/trips/${source}/${option}`,
     locale,
+    noIndex: COMING_SOON_TRIPS.has(`${source}/${option}`),
   });
 }
 

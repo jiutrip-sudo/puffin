@@ -22,7 +22,7 @@ export const icelandGroupSummer7SouthGoldenCircleHiking: TripPackage = {
   id: "iceland-group-summer-7-south-golden-circle-hiking",
   tripKey: "iceland/group/summer/7/south-golden-circle-hiking",
   slug: "iceland-summer-7-day-adventure-tour-package-whale-watching-inside-volcano",
-  tourCode: "SLMMD-073",
+  tourCode: "SMD-073",
   title: "7 天 6 夜冰島夏季多巴胺跟團遊",
   subtitle: "觀鯨&火山&可選徒步",
   duration: { days: 7, nights: 6 },
@@ -30,7 +30,7 @@ export const icelandGroupSummer7SouthGoldenCircleHiking: TripPackage = {
   meta: {
     departure: "雷克雅維克",
     transport: "跟團",
-    tourCode: "SLMMD-073",
+    tourCode: "SMD-073",
   },
   eyebrow: "冰島集合 · 跟團 · 夏季",
   backHref: "/trips/iceland/group/summer",
@@ -433,7 +433,7 @@ export const icelandGroupSummer7SouthGoldenCircleHiking: TripPackage = {
     {
       tripKey: "iceland/group/summer/7/south-snaefellsnes-golden-circle",
       title: "7 天 6 夜冰島夏季經典跟團遊",
-      tourCode: "SLMMD-071",
+      tourCode: "SMD-071",
       durationLabel: "7 天／6 夜",
       description:
         "黃金圈、南岸與斯奈山半島，含高地徒步自由日。",
@@ -441,7 +441,7 @@ export const icelandGroupSummer7SouthGoldenCircleHiking: TripPackage = {
     {
       tripKey: "iceland/group/summer/6/south-hiking",
       title: "6 天 5 夜冰島夏季徒步探險跟團遊",
-      tourCode: "SLMMD-063",
+      tourCode: "SMD-063",
       durationLabel: "6 天／5 夜",
       description:
         "冰川健行、火山探險與觀鯨，適合時間較緊的探險旅客。",

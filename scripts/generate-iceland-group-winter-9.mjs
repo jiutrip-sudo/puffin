@@ -636,7 +636,7 @@ export const icelandGroupWinter9: TripPackage = {
   id: "iceland-group-winter-9",
   tripKey: "iceland/group/winter/9",
   slug: "iceland-9-days-winter-package-ring-road-of-iceland-and-reykjavik",
-  tourCode: "SLMMD-092",
+  tourCode: "SMD-092",
   title: "9 天 8 夜冰島冬季跟團遊",
   subtitle: "${esc(toTw(meta.subtitle))}",
   duration: { days: 9, nights: 8 },
@@ -644,7 +644,7 @@ export const icelandGroupWinter9: TripPackage = {
   meta: {
     departure: "雷克雅未克",
     transport: "跟團",
-    tourCode: "SLMMD-092",
+    tourCode: "SMD-092",
   },
   eyebrow: "冰島集合 · 跟團 · 冬季",
   backHref: "/trips/iceland/group/winter",
@@ -776,7 +776,7 @@ ${faq}
     {
       tripKey: "iceland/group/winter/8",
       title: "8 天 7 夜冰島冬季跟團遊",
-      tourCode: "SLMMD-082",
+      tourCode: "SMD-082",
       durationLabel: "8 天／7 夜",
       description:
         "冬季環島跟團：黃金圈、南岸、東部峽灣與北部精華。",
@@ -784,7 +784,7 @@ ${faq}
     {
       tripKey: "iceland/group/winter/10",
       title: "10 天 9 夜冰島冬季跟團遊",
-      tourCode: "SLMMD-102",
+      tourCode: "SMD-102",
       durationLabel: "10 天／9 夜",
       description:
         "最充裕的冬季環島天數，完整探索冰島環島路線。",

@@ -1,21 +1,37 @@
+import { getAllTripPackages, getTripPackageByPackageId } from "@/lib/trip-packages/registry";
 import { formatIskAdmin } from "@/lib/i18n/display-money";
+import {
+  classifyPricingPackage,
+  comparePricingPackages,
+  countPricingPackagesByCategory,
+  getPricingPackageCategoryLabel,
+  type PricingPackageCategory,
+} from "@/lib/admin/pricing-package-category";
 import { applyRetailMarkupAmount } from "@/lib/trip-pricing/retail-markup";
 import {
   getAllPricingConfigs,
   usesCorivoPricing,
   getPricingConfig,
 } from "@/lib/trip-pricing/fetch";
+import {
+  buildOverviewEntryFromSnapshot,
+  readPricingOverviewIndex,
+  writePricingOverviewIndex,
+} from "@/lib/trip-pricing/pricing-overview-index";
 import { readPackagePricingSnapshot } from "@/lib/trip-pricing/pricing-snapshot-store";
 import {
   isSnapshotFresh,
   PRICING_SNAPSHOT_MAX_AGE_MS,
   type PackagePricingSnapshot,
 } from "@/lib/trip-pricing/pricing-snapshot-types";
-import type { PricingResult } from "@/lib/trip-pricing/types";
 
 export type PricingPackageSummary = {
   packageId: string;
+  tourCode: string | null;
+  packageTitle: string | null;
   tripDays: number | null;
+  category: PricingPackageCategory | null;
+  categoryLabel: string | null;
   corivoPackageTourId: number | null;
   snapshotCount: number;
   availabilityCount: number;
@@ -50,22 +66,6 @@ export type PricingMatrixFilters = {
   adults?: number;
 };
 
-function findReferencePrice(
-  snapshot: PackagePricingSnapshot | null,
-): PricingResult | null {
-  if (!snapshot) return null;
-
-  for (const [key, entry] of Object.entries(snapshot.prices)) {
-    const [, adults, , , accTier] = key.split("|");
-    if (accTier === "comfort" && adults === "2") {
-      return entry.result;
-    }
-  }
-
-  const first = Object.values(snapshot.prices)[0];
-  return first?.result ?? null;
-}
-
 function parseMatrixKey(key: string): Omit<PricingMatrixRow, "supplierTotal" | "retailTotal" | "deposit" | "perPersonDouble" | "syncedAt"> {
   const [startDate, adults, children, infants, accommodationTier, vehicleTier] =
     key.split("|");
@@ -81,41 +81,91 @@ function parseMatrixKey(key: string): Omit<PricingMatrixRow, "supplierTotal" | "
   };
 }
 
-export async function listPricingPackageSummaries(): Promise<
-  PricingPackageSummary[]
-> {
+export type PricingOverviewResult = {
+  total: number;
+  categoryCounts: Record<PricingPackageCategory, number>;
+  packages: PricingPackageSummary[];
+};
+
+function buildSummaryFromIndexEntry(
+  config: ReturnType<typeof getAllPricingConfigs>[number],
+  entry: ReturnType<typeof buildOverviewEntryFromSnapshot>,
+  tripPackage: ReturnType<typeof getTripPackageByPackageId>,
+): PricingPackageSummary {
+  const supplierTotal = entry.referenceSupplierTotal;
+  const retailTotal =
+    supplierTotal !== null ? applyRetailMarkupAmount(supplierTotal) : null;
+  const category = classifyPricingPackage(config.packageId);
+
+  return {
+    packageId: config.packageId,
+    tourCode: tripPackage?.tourCode ?? null,
+    packageTitle: tripPackage?.title ?? null,
+    tripDays: config.tripDurationDays ?? null,
+    category,
+    categoryLabel: category ? getPricingPackageCategoryLabel(category) : null,
+    corivoPackageTourId: config.corivo?.packageTourId ?? null,
+    snapshotCount: entry.snapshotCount,
+    availabilityCount: entry.availabilityCount,
+    updatedAt: entry.updatedAt,
+    isExpired: entry.updatedAt
+      ? !isSnapshotFresh(entry.updatedAt, PRICING_SNAPSHOT_MAX_AGE_MS)
+      : true,
+    referenceSupplierPrice: supplierTotal,
+    referenceRetailPrice: retailTotal,
+    referenceSupplierPriceLabel:
+      supplierTotal !== null ? formatIskAdmin(supplierTotal) : null,
+    referenceRetailPriceLabel:
+      retailTotal !== null ? formatIskAdmin(retailTotal) : null,
+  };
+}
+
+export async function listPricingPackageSummaries(): Promise<PricingOverviewResult> {
   const configs = getAllPricingConfigs().filter(usesCorivoPricing);
-  const summaries: PricingPackageSummary[] = [];
+  const tripPackagesById = new Map(
+    getAllTripPackages().map((pkg) => [pkg.id, pkg]),
+  );
 
-  for (const config of configs) {
-    const snapshot = await readPackagePricingSnapshot(config.packageId);
-    const reference = findReferencePrice(snapshot);
-    const supplierTotal = reference?.total ?? null;
-    const retailTotal =
-      supplierTotal !== null ? applyRetailMarkupAmount(supplierTotal) : null;
+  let index = await readPricingOverviewIndex();
+  const missingIds = configs
+    .map((config) => config.packageId)
+    .filter((packageId) => !index?.packages[packageId]);
 
-    summaries.push({
-      packageId: config.packageId,
-      tripDays: config.tripDurationDays ?? null,
-      corivoPackageTourId: config.corivo?.packageTourId ?? null,
-      snapshotCount: snapshot ? Object.keys(snapshot.prices).length : 0,
-      availabilityCount: snapshot
-        ? Object.keys(snapshot.availability).length
-        : 0,
-      updatedAt: snapshot?.updatedAt ?? null,
-      isExpired: snapshot?.updatedAt
-        ? !isSnapshotFresh(snapshot.updatedAt, PRICING_SNAPSHOT_MAX_AGE_MS)
-        : true,
-      referenceSupplierPrice: supplierTotal,
-      referenceRetailPrice: retailTotal,
-      referenceSupplierPriceLabel:
-        supplierTotal !== null ? formatIskAdmin(supplierTotal) : null,
-      referenceRetailPriceLabel:
-        retailTotal !== null ? formatIskAdmin(retailTotal) : null,
+  if (missingIds.length > 0) {
+    const snapshots = await Promise.all(
+      missingIds.map((packageId) => readPackagePricingSnapshot(packageId)),
+    );
+
+    index = index ?? {
+      updatedAt: new Date().toISOString(),
+      packages: {},
+    };
+
+    missingIds.forEach((packageId, indexOffset) => {
+      index!.packages[packageId] = buildOverviewEntryFromSnapshot(
+        snapshots[indexOffset] ?? null,
+      );
     });
+    index.updatedAt = new Date().toISOString();
+    await writePricingOverviewIndex(index);
   }
 
-  return summaries.sort((a, b) => a.packageId.localeCompare(b.packageId));
+  const summaries = configs.map((config) =>
+    buildSummaryFromIndexEntry(
+      config,
+      index!.packages[config.packageId] ??
+        buildOverviewEntryFromSnapshot(null),
+      tripPackagesById.get(config.packageId),
+    ),
+  );
+
+  summaries.sort(comparePricingPackages);
+
+  return {
+    total: summaries.length,
+    categoryCounts: countPricingPackagesByCategory(summaries),
+    packages: summaries,
+  };
 }
 
 export function listPricingMatrixRows(
@@ -227,6 +277,12 @@ export async function getPricingPackageDetail(packageId: string) {
     return null;
   }
 
+  const tripPackage = getTripPackageByPackageId(packageId);
   const snapshot = await readPackagePricingSnapshot(packageId);
-  return { config, snapshot };
+  return {
+    config,
+    snapshot,
+    tourCode: tripPackage?.tourCode ?? null,
+    packageTitle: tripPackage?.title ?? null,
+  };
 }

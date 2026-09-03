@@ -575,7 +575,7 @@ export const icelandGroupWinter4: TripPackage = {
   id: "iceland-group-winter-4",
   tripKey: "iceland/group/winter/4",
   slug: "iceland-4-days-express-winter-package-south-coast-ice-cave",
-  tourCode: "SLMMD-042",
+  tourCode: "SMD-042",
   title: "4 天 3 夜冰島冬日精簡跟團遊",
   subtitle: "${esc(toTw(meta.subtitle))}",
   duration: { days: 4, nights: 3 },
@@ -583,7 +583,7 @@ export const icelandGroupWinter4: TripPackage = {
   meta: {
     departure: "雷克雅未克",
     transport: "跟團",
-    tourCode: "SLMMD-042",
+    tourCode: "SMD-042",
   },
   eyebrow: "冰島集合 · 跟團 · 冬季",
   backHref: "/trips/iceland/group/winter",
@@ -685,7 +685,7 @@ ${faq}
     {
       tripKey: "iceland/group/winter/5",
       title: "5 天 4 夜冰島冬季跟團遊",
-      tourCode: "SLMMD-052",
+      tourCode: "SMD-052",
       durationLabel: "5 天／4 夜",
       description:
         "更充裕的冬季跟團天數，深度探索南岸與冰河湖。",

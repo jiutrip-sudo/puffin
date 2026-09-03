@@ -7,12 +7,13 @@ import { HeroSection } from "@/components/HeroSection";
 import { SiteHeader } from "@/components/SiteHeader";
 import { TransitionBar } from "@/components/TransitionBar";
 import { getTripPackageWithPricingForRequest } from "@/lib/trip-packages/get-package-with-pricing";
-import { buildTripPackageMetadata, getLocalizedTripLabels } from "@/lib/i18n/trip-metadata";
+import {
+  buildTripPackageMetadata,
+  getLocalizedTripLabels,
+} from "@/lib/i18n/trip-metadata";
 import { buildPageMetadata } from "@/lib/seo/metadata";
-import { absoluteUrl } from "@/lib/site-url";
 import {
   COMING_SOON_TRIPS,
-  getIcelandGroupSummerPackageTripKey,
   getIcelandGroupSummerRouteOptions,
   ICELAND_GROUP_SUMMER_ROUTE_IDS,
   ICELAND_GROUP_SUMMER_ROUTE_PICKER_DAY_IDS,
@@ -20,9 +21,26 @@ import {
   ICELAND_SELF_DRIVE_WINTER_ROUTE_PICKER_DAY_IDS,
   ICELAND_TRIP_SEASON_DAY_IDS,
   ICELAND_WINTER_ROUTE_IDS,
-  OPTION_LABELS,
-  SOURCE_LABELS,
+  resolveRoutePagePackageTripKey,
 } from "@/lib/trip-options";
+import { getAllTripProductStaticParams } from "@/lib/seo/trip-static-params";
+
+export const revalidate = 86_400;
+
+export async function generateStaticParams() {
+  return getAllTripProductStaticParams()
+    .filter(
+      (params): params is typeof params & { route: string } =>
+        params.route !== undefined,
+    )
+    .map(({ source, option, suboption, duration, route }) => ({
+      source,
+      option,
+      suboption,
+      duration,
+      route,
+    }));
+}
 
 type PageProps = {
   params: Promise<{
@@ -48,85 +66,54 @@ function getSummerRouteLabel(duration: string, route: string): string {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { source, option, suboption, duration, route } = await params;
+  const { locale, sourceLabels, optionLabels, localize } =
+    await getLocalizedTripLabels();
+  const path = `/trips/${source}/${option}/${suboption}/${duration}/${route}`;
+  const packageTripKey = resolveRoutePagePackageTripKey(
+    source,
+    option,
+    suboption,
+    duration,
+    route,
+  );
 
-  if (
-    option === "group" &&
-    suboption === "summer" &&
-    ICELAND_GROUP_SUMMER_ROUTE_PICKER_DAY_IDS.has(duration) &&
-    ICELAND_GROUP_SUMMER_ROUTE_IDS.has(route)
-  ) {
-    const packageTripKey = getIcelandGroupSummerPackageTripKey(duration, route);
-    const data = await getTripPackageWithPricingForRequest(packageTripKey);
-
-    if (data) {
+  if (packageTripKey) {
+    if (COMING_SOON_TRIPS.has(packageTripKey)) {
       return buildPageMetadata({
-        title: `${data.package.title} | 大樂旅行社`,
-        description: data.package.intro.summary,
-        path: `/trips/${source}/${option}/${suboption}/${duration}/${route}`,
-        ogImage: data.package.heroImage.startsWith("http")
-          ? data.package.heroImage
-          : absoluteUrl(data.package.heroImage),
+        title: localize("即將推出 | 大樂旅行社"),
+        description: localize("此行程即將推出，敬請期待。"),
+        path,
+        locale,
+        noIndex: true,
       });
     }
 
-    const routeLabel = getSummerRouteLabel(duration, route);
-    const durationLabel = `${duration}日`;
-    const optionLabel = OPTION_LABELS[option];
-    const suboptionLabel = OPTION_LABELS[suboption];
-
-    return buildPageMetadata({
-      title: `${durationLabel}${routeLabel}夏季${optionLabel} | 大樂旅行社`,
-      description: `${SOURCE_LABELS[source]} · ${optionLabel} · ${suboptionLabel} · ${durationLabel} · ${routeLabel}`,
-      path: `/trips/${source}/${option}/${suboption}/${duration}/${route}`,
-    });
+    const packageMetadata = await buildTripPackageMetadata(packageTripKey);
+    if (packageMetadata) {
+      return packageMetadata;
+    }
   }
 
-  const routeLabel = WINTER_ROUTE_LABELS[route] ?? route;
+  const routeLabel =
+    option === "group" && suboption === "summer"
+      ? getSummerRouteLabel(duration, route)
+      : (WINTER_ROUTE_LABELS[route] ?? route);
   const durationLabel = `${duration}日`;
-  const optionLabel = OPTION_LABELS[option];
-  const suboptionLabel = OPTION_LABELS[suboption];
-
-  if (route === "ring") {
-    const tripKey = `${source}/${option}/${suboption}/${duration}`;
-    const data = await getTripPackageWithPricingForRequest(tripKey);
-
-    if (data) {
-      return buildPageMetadata({
-        title: `${data.package.title} | 大樂旅行社`,
-        description: data.package.intro.summary,
-        path: `/trips/${source}/${option}/${suboption}/${duration}/${route}`,
-        ogImage: data.package.heroImage.startsWith("http")
-          ? data.package.heroImage
-          : absoluteUrl(data.package.heroImage),
-      });
-    }
-  }
-
-  if (route === "non-ring") {
-    const tripKey = `${source}/${option}/${suboption}/${duration}/non-ring`;
-    const data = await getTripPackageWithPricingForRequest(tripKey);
-
-    if (data) {
-      return buildPageMetadata({
-        title: `${data.package.title} | 大樂旅行社`,
-        description: data.package.intro.summary,
-        path: `/trips/${source}/${option}/${suboption}/${duration}/${route}`,
-        ogImage: data.package.heroImage.startsWith("http")
-          ? data.package.heroImage
-          : absoluteUrl(data.package.heroImage),
-      });
-    }
-  }
+  const optionLabel = optionLabels[option];
+  const suboptionLabel = optionLabels[suboption];
 
   return buildPageMetadata({
-    title: `${durationLabel}${routeLabel}冬季${optionLabel} | 大樂旅行社`,
-    description: `${SOURCE_LABELS[source]} · ${optionLabel} · ${suboptionLabel} · ${durationLabel} · ${routeLabel}`,
-    path: `/trips/${source}/${option}/${suboption}/${duration}/${route}`,
+    title: `${durationLabel}${routeLabel}${suboptionLabel}${optionLabel} | 大樂旅行社`,
+    description: `${sourceLabels[source]} · ${optionLabel} · ${suboptionLabel} · ${durationLabel} · ${routeLabel}`,
+    path,
+    locale,
+    noIndex: true,
   });
 }
 
 export default async function TripDurationRoutePage({ params }: PageProps) {
   const { source, option, suboption, duration, route } = await params;
+  const { locale, sourceLabels, optionLabels } = await getLocalizedTripLabels();
 
   const seasonDayIds = ICELAND_TRIP_SEASON_DAY_IDS[option]?.[suboption];
 
@@ -146,7 +133,17 @@ export default async function TripDurationRoutePage({ params }: PageProps) {
         ICELAND_GROUP_WINTER_ROUTE_PICKER_DAY_IDS.has(duration)));
 
   if (isSummerGroupRoute) {
-    const packageTripKey = getIcelandGroupSummerPackageTripKey(duration, route);
+    const packageTripKey = resolveRoutePagePackageTripKey(
+      source,
+      option,
+      suboption,
+      duration,
+      route,
+    );
+    if (!packageTripKey) {
+      notFound();
+    }
+
     const packageData = await getTripPackageWithPricingForRequest(packageTripKey);
 
     if (packageData) {
@@ -155,6 +152,7 @@ export default async function TripDurationRoutePage({ params }: PageProps) {
           <TripProductJsonLd
             package={packageData.package}
             pricingConfig={packageData.pricingConfig}
+            locale={locale}
           />
           <TripPackagePage
             package={packageData.package}
@@ -165,9 +163,9 @@ export default async function TripDurationRoutePage({ params }: PageProps) {
     }
 
     const routeLabel = getSummerRouteLabel(duration, route);
-    const sourceLabel = SOURCE_LABELS[source];
-    const optionLabel = OPTION_LABELS[option];
-    const suboptionLabel = OPTION_LABELS[suboption];
+    const sourceLabel = sourceLabels[source];
+    const optionLabel = optionLabels[option];
+    const suboptionLabel = optionLabels[suboption];
     const durationLabel = `${duration}日`;
     const isComingSoon = COMING_SOON_TRIPS.has(packageTripKey);
 
@@ -216,15 +214,22 @@ export default async function TripDurationRoutePage({ params }: PageProps) {
     notFound();
   }
 
-  const tripKey = `${source}/${option}/${suboption}/${duration}`;
   const routeLabel = WINTER_ROUTE_LABELS[route] ?? route;
-  const sourceLabel = SOURCE_LABELS[source];
-  const optionLabel = OPTION_LABELS[option];
-  const suboptionLabel = OPTION_LABELS[suboption];
+  const sourceLabel = sourceLabels[source];
+  const optionLabel = optionLabels[option];
+  const suboptionLabel = optionLabels[suboption];
   const durationLabel = `${duration}日`;
 
-  const packageTripKey =
-    route === "ring" ? tripKey : `${tripKey}/${route}`;
+  const packageTripKey = resolveRoutePagePackageTripKey(
+    source,
+    option,
+    suboption,
+    duration,
+    route,
+  );
+  if (!packageTripKey) {
+    notFound();
+  }
 
   if (route === "ring" || route === "non-ring") {
     const packageData = await getTripPackageWithPricingForRequest(packageTripKey);
@@ -235,6 +240,7 @@ export default async function TripDurationRoutePage({ params }: PageProps) {
           <TripProductJsonLd
             package={packageData.package}
             pricingConfig={packageData.pricingConfig}
+            locale={locale}
           />
           <TripPackagePage
             package={packageData.package}
@@ -245,8 +251,7 @@ export default async function TripDurationRoutePage({ params }: PageProps) {
     }
   }
 
-  const routeTripKey = packageTripKey;
-  const isComingSoon = COMING_SOON_TRIPS.has(routeTripKey);
+  const isComingSoon = COMING_SOON_TRIPS.has(packageTripKey);
 
   const header = (
     <SiteHeader

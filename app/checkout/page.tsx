@@ -8,6 +8,7 @@ import { getAllTripPackages } from "@/lib/trip-packages/registry";
 import { getRequestLocale } from "@/lib/i18n/server";
 import { localizeDeep, localizeText } from "@/lib/i18n/localize";
 import { localePath } from "@/lib/i18n/paths";
+import { getTripPackageHref } from "@/lib/trip-options";
 
 type CheckoutPageProps = {
   searchParams: Promise<Record<string, string | string[] | undefined>>;
@@ -81,12 +82,11 @@ export default async function CheckoutPage({ searchParams }: CheckoutPageProps) 
     <CheckoutFlow
       pricingConfig={localizedPricing}
       initialSession={session}
-      backHref={localePath(
+      backHref={
         localizedPackage
-          ? `/trips/${localizedPackage.tripKey}`
-          : "/trips/iceland/self-drive/winter/4",
-        locale,
-      )}
+          ? getTripPackageHref(localizedPackage.tripKey, locale)
+          : localePath("/trips/iceland/self-drive/winter/4", locale)
+      }
     />
   );
 }

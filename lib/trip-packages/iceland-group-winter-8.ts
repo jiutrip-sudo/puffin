@@ -24,7 +24,7 @@ export const icelandGroupWinter8: TripPackage = {
   id: "iceland-group-winter-8",
   tripKey: "iceland/group/winter/8",
   slug: "8-days-winter-package-circle-of-iceland-blue-ice-cave",
-  tourCode: "SLMMD-082",
+  tourCode: "SMD-082",
   title: "8 天 7 夜冰島冬季跟團遊",
   subtitle: "溫泉文化 & 黃金圈",
   duration: { days: 8, nights: 7 },
@@ -32,7 +32,7 @@ export const icelandGroupWinter8: TripPackage = {
   meta: {
     departure: "雷克雅維克",
     transport: "跟團",
-    tourCode: "SLMMD-082",
+    tourCode: "SMD-082",
   },
   eyebrow: "冰島集合 · 跟團 · 冬季",
   backHref: "/trips/iceland/group/winter",
@@ -612,7 +612,7 @@ export const icelandGroupWinter8: TripPackage = {
     {
       tripKey: "iceland/group/winter/7",
       title: "7 天 6 夜冰島冬季跟團遊",
-      tourCode: "SLMMD-072",
+      tourCode: "SMD-072",
       durationLabel: "7 天／6 夜",
       description:
         "南岸、黃金圈、西部與斯奈山，冬季跟團精選路線。",
@@ -620,7 +620,7 @@ export const icelandGroupWinter8: TripPackage = {
     {
       tripKey: "iceland/group/winter/9",
       title: "9 天 8 夜冰島冬季跟團遊",
-      tourCode: "SLMMD-092",
+      tourCode: "SMD-092",
       durationLabel: "9 天／8 夜",
       description:
         "更充裕的冬季環島天數，深度探索冰島北部與西部。",

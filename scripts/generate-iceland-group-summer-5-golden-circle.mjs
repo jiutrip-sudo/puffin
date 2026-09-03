@@ -11,7 +11,7 @@ const PACKAGE_ID = "iceland-group-summer-5-south-golden-circle";
 const TRIP_KEY = "iceland/group/summer/5/south-golden-circle";
 const PACKAGE_SLUG =
   "iceland-summer-5-day-tour-package-golden-circle-south-coast-jokulsarlon";
-const TOUR_CODE = "SLMMD-053";
+const TOUR_CODE = "SMD-053";
 const IMG_BASE =
   "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good";
 const HERO_BASE =
@@ -727,7 +727,7 @@ ${faq}
     {
       tripKey: "iceland/group/summer/5/south-snaefellsnes",
       title: "5 天 4 夜冰島夏季夢幻跟團遊",
-      tourCode: "SLMMD-051",
+      tourCode: "SMD-051",
       durationLabel: "5 天／4 夜",
       description:
         "斯奈山半島與南岸精華，適合想兼顧西線風光的旅客。",
@@ -735,7 +735,7 @@ ${faq}
     {
       tripKey: "iceland/group/summer/6/south-snaefellsnes-golden-circle",
       title: "6 天 5 夜冰島夏季跟團遊",
-      tourCode: "SLMMD-061",
+      tourCode: "SMD-061",
       durationLabel: "6 天／5 夜",
       description:
         "黃金圈、南岸與斯奈山半島一次走遍的樂享路線。",

@@ -28,7 +28,7 @@ export const icelandGroupSummer10: TripPackage = {
   id: "iceland-group-summer-10",
   tripKey: "iceland/group/summer/10",
   slug: "iceland-summer-10-day-tour-package-south-coast-jokulsarlon-adventures",
-  tourCode: "SLMMD-103",
+  tourCode: "SMD-103",
   title: "10 天 9 夜冰島夏季深度跟團遊",
   subtitle: "瀑布 & 黑沙灘&冰川健行&潮汐溫泉",
   duration: { days: 10, nights: 9 },
@@ -36,7 +36,7 @@ export const icelandGroupSummer10: TripPackage = {
   meta: {
     departure: "雷克雅維克",
     transport: "跟團",
-    tourCode: "SLMMD-103",
+    tourCode: "SMD-103",
   },
   eyebrow: "冰島集合 · 跟團 · 夏季",
   backHref: "/trips/iceland/group/summer",
@@ -507,7 +507,7 @@ export const icelandGroupSummer10: TripPackage = {
     {
       tripKey: "iceland/group/summer/9",
       title: "9 天 8 夜冰島夏季深度體驗跟團遊",
-      tourCode: "SLMMD-093",
+      tourCode: "SMD-093",
       durationLabel: "9 天／8 夜",
       description:
         "觀鯨、黑沙灘與西部小眾景觀，適合時間較緊的夏季旅客。",
@@ -515,7 +515,7 @@ export const icelandGroupSummer10: TripPackage = {
     {
       tripKey: "iceland/group/summer/11",
       title: "11 天 10 夜冰島夏季跟團遊",
-      tourCode: "SLMMD-113",
+      tourCode: "SMD-113",
       durationLabel: "11 天／10 夜",
       description:
         "更完整的夏季跟團路線，涵蓋更多冰島精華景點。",

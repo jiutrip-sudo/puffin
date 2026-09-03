@@ -26,7 +26,7 @@ export const icelandSelfDriveWinter9NonRing: TripPackage = {
   id: "iceland-self-drive-winter-9-non-ring",
   tripKey: "iceland/self-drive/winter/9/non-ring",
   slug: "9-days-winter-self-drive-tour-golden-circle-south-west-iceland",
-  tourCode: "SLMSD-094",
+  tourCode: "SSD-094",
   title: "冰島 9 天 8 夜冬季精選自駕遊",
   subtitle: "黃金圈 & 南岸 & 西部白銀圈",
   duration: { days: 9, nights: 8 },
@@ -34,7 +34,7 @@ export const icelandSelfDriveWinter9NonRing: TripPackage = {
   meta: {
     departure: "雷克雅維克",
     transport: "自駕",
-    tourCode: "SLMSD-094",
+    tourCode: "SSD-094",
   },
   eyebrow: "冰島集合 · 自駕 · 冬季",
   backHref: "/trips/iceland/self-drive/winter/9",
@@ -573,7 +573,7 @@ export const icelandSelfDriveWinter9NonRing: TripPackage = {
     {
       tripKey: "iceland/self-drive/winter/4",
       title: "4 天 3 夜冰島南岸冬季自駕遊",
-      tourCode: "SLMSD-042",
+      tourCode: "SSD-042",
       durationLabel: "4 天／3 夜",
       description:
         "在有限的冬季日照裡，將南岸精華景點一網打盡，包含傑古沙龍冰河湖、藍冰洞、黃金瀑布。",
@@ -581,7 +581,7 @@ export const icelandSelfDriveWinter9NonRing: TripPackage = {
     {
       tripKey: "iceland/self-drive/winter/5",
       title: "5 天 4 夜冰島冬季精簡自駕套餐",
-      tourCode: "SLMSD-052",
+      tourCode: "SSD-052",
       durationLabel: "5 天／4 夜",
       description:
         "將冰島南部精華收入囊中，搭配戶外體驗，並有機會看見舞動的北極光！",
@@ -589,7 +589,7 @@ export const icelandSelfDriveWinter9NonRing: TripPackage = {
     {
       tripKey: "iceland/self-drive/winter/6",
       title: "6 天 5 夜冰島冬季經典自駕遊",
-      tourCode: "SLMSD-062",
+      tourCode: "SSD-062",
       durationLabel: "6 天／5 夜",
       description:
         "領略冰島冬日風光，造訪經典黃金圈與南岸小眾景點，體驗冰洞探險、追逐極光。",
@@ -597,7 +597,7 @@ export const icelandSelfDriveWinter9NonRing: TripPackage = {
     {
       tripKey: "iceland/self-drive/winter/8/non-ring",
       title: "冰島 8 天 7 夜冬季精選自駕遊",
-      tourCode: "SLMSD-084",
+      tourCode: "SSD-084",
       durationLabel: "8 天／7 夜",
       description:
         "造訪黃金圈、南岸、冰河湖與斯奈山半島，並留有一日首都自由行。",

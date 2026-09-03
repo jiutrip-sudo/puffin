@@ -3,6 +3,10 @@ import path from "node:path";
 import {
   packageSnapshotKvKey,
 } from "./pricing-snapshot-keys";
+import {
+  buildOverviewEntryFromSnapshot,
+  upsertOverviewIndexEntry,
+} from "./pricing-overview-index";
 import type { PackagePricingSnapshot } from "./pricing-snapshot-types";
 
 function parseUpstashRedisUrl(redisUrl: string): { apiUrl: string; token: string } | null {
@@ -132,6 +136,11 @@ export async function writePackagePricingSnapshot(
   if (!credentials || process.env.SYNC_PRICING_CLI === "1") {
     await writeFileSnapshot(snapshot);
   }
+
+  await upsertOverviewIndexEntry(
+    snapshot.packageId,
+    buildOverviewEntryFromSnapshot(snapshot),
+  );
 }
 
 export function emptyPackageSnapshot(packageId: string): PackagePricingSnapshot {
