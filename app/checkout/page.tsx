@@ -8,6 +8,7 @@ import { getAllTripPackages } from "@/lib/trip-packages/registry";
 import { getRequestLocale } from "@/lib/i18n/server";
 import { localizeDeep, localizeText } from "@/lib/i18n/localize";
 import { localePath } from "@/lib/i18n/paths";
+import { normalizeTripPackageModalContent } from "@/lib/trip-packages/localize-trip-spot";
 import { getTripPackageHref } from "@/lib/trip-options";
 
 type CheckoutPageProps = {
@@ -42,8 +43,11 @@ export default async function CheckoutPage({ searchParams }: CheckoutPageProps) 
   }
 
   const localizedPricing = localizeDeep(pricingConfig, locale);
-  const localizedPackage = tripPackage
-    ? localizeDeep(tripPackage, locale)
+  const twPackage = tripPackage ? normalizeTripPackageModalContent(tripPackage) : undefined;
+  const localizedPackage = twPackage
+    ? locale === "zh-TW"
+      ? twPackage
+      : localizeDeep(twPackage, locale)
     : undefined;
 
   const session = parseCheckoutSession(

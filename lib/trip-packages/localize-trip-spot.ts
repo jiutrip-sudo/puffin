@@ -1,7 +1,7 @@
 import { localizeDeep } from "@/lib/i18n/localize";
 import { normalizeContentForTaiwan } from "@/lib/i18n/tw-content-normalize";
 import type { SiteLocale } from "@/lib/site-locale";
-import type { TripAttraction } from "./types";
+import type { TripAttraction, TripPackage } from "./types";
 
 function normalizeTripSpotFields(spot: TripAttraction): TripAttraction {
   return {
@@ -31,4 +31,18 @@ export function localizeTripSpot(
   }
 
   return localizeDeep(twNormalized, locale);
+}
+
+export function normalizeTripPackageModalContent(pkg: TripPackage): TripPackage {
+  return {
+    ...pkg,
+    attractions: pkg.attractions.map((spot) => localizeTripSpot(spot, "zh-TW")),
+    itinerary: pkg.itinerary.map((day) => ({
+      ...day,
+      highlights: day.highlights?.map((spot) => localizeTripSpot(spot, "zh-TW")),
+      optionalActivities: day.optionalActivities?.map((spot) =>
+        localizeTripSpot(spot, "zh-TW"),
+      ),
+    })),
+  };
 }

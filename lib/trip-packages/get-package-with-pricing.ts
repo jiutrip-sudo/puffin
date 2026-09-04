@@ -1,4 +1,5 @@
 import { getTripPackage } from "@/lib/trip-packages/registry";
+import { normalizeTripPackageModalContent } from "@/lib/trip-packages/localize-trip-spot";
 import { getPricingConfig } from "@/lib/trip-pricing/fetch";
 import { localizeDeep } from "@/lib/i18n/localize";
 import type { SiteLocale } from "@/lib/site-locale";
@@ -21,12 +22,14 @@ function buildLocalized(
   const pricingConfig = getPricingConfig(packageData.id);
   if (!pricingConfig) return undefined;
 
+  const twPackage = normalizeTripPackageModalContent(packageData);
+
   if (locale === "zh-TW") {
-    return { package: packageData, pricingConfig };
+    return { package: twPackage, pricingConfig };
   }
 
   return {
-    package: localizeDeep(packageData, locale),
+    package: localizeDeep(twPackage, locale),
     pricingConfig: localizeDeep(pricingConfig, locale),
   };
 }
@@ -42,7 +45,8 @@ export function getTripPackageWithPricing(
   if (!pricingConfig) return undefined;
 
   if (!locale || locale === "zh-TW") {
-    return { package: packageData, pricingConfig };
+    const twPackage = normalizeTripPackageModalContent(packageData);
+    return { package: twPackage, pricingConfig };
   }
 
   const cacheKey = `${locale}:${tripKey}`;

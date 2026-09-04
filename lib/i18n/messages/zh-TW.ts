@@ -1,5 +1,5 @@
 export const MESSAGES = {
-  "nav.about": "關於",
+  "nav.about": "首頁",
   "nav.trips": "行程",
   "nav.guides": "攻略",
   "nav.service": "服務",
@@ -25,8 +25,8 @@ export const MESSAGES = {
   "trip.section.faq": "常見問題",
   "trip.section.similar": "更多相似套餐",
   "trip.section.travelHighlights": "此次旅行您將",
-  "trip.section.attractionHighlights": "熱點景點",
-  "trip.attractionGrid.scrollAria": "熱點景點，可左右滑動瀏覽",
+  "trip.section.attractionHighlights": "熱門景點",
+  "trip.attractionGrid.scrollAria": "熱門景點，可左右滑動瀏覽",
   "trip.section.whyChooseBrand": "為什麼選擇帕芬假期？",
   "trip.section.routeOverview": "路線概覽",
   "trip.section.routeDefaultSubtitle": "冬季自駕主要動線",
