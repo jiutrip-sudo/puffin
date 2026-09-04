@@ -2,8 +2,7 @@
 
 import { LocaleLink } from "@/components/LocaleLink";
 import { SiteLogo } from "./SiteLogo";
-import { ThemeControlsBar } from "./ThemeControls";
-import { LocaleControlsBar } from "./LocaleControls";
+import { SitePreferencesBar } from "./SitePreferencesBar";
 import { useSiteLocale } from "@/components/SiteLocaleProvider";
 import { t } from "@/lib/i18n/messages";
 
@@ -37,8 +36,7 @@ export function SiteHeader({
         <div className="flex items-center justify-between gap-2 md:hidden">
           <SiteLogo />
           <div className="flex shrink-0 items-center justify-end gap-1.5">
-            <LocaleControlsBar />
-            <ThemeControlsBar />
+            <SitePreferencesBar />
             {rightSlot}
           </div>
         </div>
@@ -73,8 +71,7 @@ export function SiteHeader({
           </nav>
 
           <div className="flex shrink-0 items-center justify-end gap-2 justify-self-end">
-            <LocaleControlsBar />
-            <ThemeControlsBar />
+            <SitePreferencesBar />
             {rightSlot}
           </div>
         </div>

@@ -58,8 +58,18 @@ const THEME_OPTIONS: {
     label: "系統",
     icon: (
       <svg viewBox="0 0 24 24" className="site-theme-toggle__icon" aria-hidden="true">
+        <rect
+          x="3"
+          y="4"
+          width="18"
+          height="12"
+          rx="2"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+        />
         <path
-          d="M12 2v2M14.837 16.385a6 6 0 1 1-7.223-7.222c.624-.147.97.66.715 1.248a4 4 0 0 0 5.26 5.259c.589-.255 1.396.09 1.248.715M16 12a4 4 0 0 0-4-4"
+          d="M8 20h8M12 16v4"
           fill="none"
           stroke="currentColor"
           strokeWidth="2"

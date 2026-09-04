@@ -3991,9 +3991,13 @@ html[data-theme="dark"] .hero-bg-dark {
   -webkit-backdrop-filter: blur(12px);
 }
 
-.site-theme-toggle {
+.site-theme-toggle,
+.site-locale-toggle {
   display: inline-flex;
+  align-items: center;
   gap: 2px;
+  box-sizing: border-box;
+  height: 2rem;
   padding: 3px;
   border-radius: 999px;
   background: var(--glass-hero-bg);
@@ -4005,8 +4009,15 @@ html[data-theme="dark"] .hero-bg-dark {
   z-index: 10;
 }
 
+.site-theme-toggle--compact .site-theme-toggle__btn,
+.site-locale-toggle--compact .site-locale-toggle__btn {
+  box-sizing: border-box;
+  height: 1.5rem;
+}
+
 .site-theme-toggle--compact .site-theme-toggle__btn {
-  padding: 5px;
+  width: 1.5rem;
+  padding: 0;
 }
 
 .site-theme-toggle__btn {
@@ -4019,6 +4030,7 @@ html[data-theme="dark"] .hero-bg-dark {
   background: transparent;
   color: var(--theme-toggle-muted);
   cursor: pointer;
+  line-height: 1;
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
   transition:
@@ -4031,6 +4043,14 @@ html[data-theme="dark"] .hero-bg-dark {
     min-width: 2.75rem;
     min-height: 2.75rem;
     padding: 8px;
+  }
+
+  .site-theme-toggle--compact .site-theme-toggle__btn {
+    min-width: 1.5rem;
+    min-height: 1.5rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    padding: 0;
   }
 
   .site-theme-toggle__icon {
@@ -4054,23 +4074,9 @@ html[data-theme="dark"] .hero-bg-dark {
   color: var(--theme-toggle-active-text);
 }
 
-.site-locale-toggle {
-  display: inline-flex;
-  gap: 2px;
-  padding: 3px;
-  border-radius: 999px;
-  background: var(--glass-hero-bg);
-  border: 1px solid var(--glass-hero-border);
-  box-shadow: var(--glass-hero-shadow);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  position: relative;
-  z-index: 10;
-}
-
 .site-locale-toggle--compact .site-locale-toggle__btn {
   min-width: 1.75rem;
-  padding: 5px 7px;
+  padding: 0 7px;
   font-size: 11px;
   font-weight: 600;
 }
@@ -4086,6 +4092,7 @@ html[data-theme="dark"] .hero-bg-dark {
   color: var(--theme-toggle-muted);
   cursor: pointer;
   text-decoration: none;
+  line-height: 1;
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
   transition:
@@ -4100,6 +4107,45 @@ html[data-theme="dark"] .hero-bg-dark {
 .site-locale-toggle__btn.is-active {
   background: var(--theme-toggle-active-bg);
   color: var(--theme-toggle-active-text);
+}
+
+/* 手機：語言＋主題整合為單一 glass 膠囊 */
+.site-preferences-bar {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 3px;
+  border-radius: 999px;
+  background: var(--glass-hero-bg);
+  border: 1px solid var(--glass-hero-border);
+  box-shadow: var(--glass-hero-shadow);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  position: relative;
+  z-index: 10;
+}
+
+.site-preferences-bar .site-locale-toggle,
+.site-preferences-bar .site-theme-toggle {
+  height: auto;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.site-preferences-bar__divider {
+  flex-shrink: 0;
+  width: 1px;
+  height: 1.25rem;
+  margin-inline: 1px;
+  background: color-mix(in srgb, var(--color-hero-text) 22%, transparent);
+}
+
+.site-header--on-surface .site-preferences-bar__divider {
+  background: color-mix(in srgb, var(--foreground) 18%, transparent);
 }
 
 /* Circle button — glass + aurora hover */
@@ -4647,16 +4693,7 @@ html[data-theme="dark"] .hero-bg-dark {
   padding: 0 1rem;
 }
 
-/* ── Iceland trip catalog (compact hero + wide grid) ── */
-
-.iceland-catalog .guides-index__hero {
-  min-height: min(32vh, 18rem);
-}
-
-.iceland-catalog .guides-index__intro {
-  padding-top: calc(env(safe-area-inset-top) + 3.75rem);
-  padding-bottom: 1.5rem;
-}
+/* ── Iceland trip catalog (wide grid) ── */
 
 .iceland-catalog .guides-index__body-inner {
   max-width: 80rem;
