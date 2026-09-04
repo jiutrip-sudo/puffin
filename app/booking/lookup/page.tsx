@@ -19,10 +19,14 @@ export default async function BookingLookupPage({
 }: BookingLookupPageProps) {
   const params = await searchParams;
   const initialConfirmationCode = firstParam(params.code) ?? "";
+  const initialEmail = (firstParam(params.email) ?? "").trim().toLowerCase();
 
   return (
     <div className="booking-lookup-page">
-      <BookingLookupPanel initialConfirmationCode={initialConfirmationCode} />
+      <BookingLookupPanel
+        initialConfirmationCode={initialConfirmationCode}
+        initialEmail={initialEmail}
+      />
     </div>
   );
 }

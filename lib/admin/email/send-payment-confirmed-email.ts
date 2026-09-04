@@ -25,7 +25,7 @@ export async function sendPaymentConfirmedEmail(
     ? computeTripEndDate(session.startDate, tripDays)
     : "";
 
-  const lookupUrl = buildBookingLookupUrl(record.confirmationCode);
+  const lookupUrl = buildBookingLookupUrl(record.confirmationCode, email);
   const amountDueLabel = session.payFullAmount ? "已付全額" : "已付訂金";
 
   const subject = `款項已確認 — 訂單 ${record.confirmationCode}`;

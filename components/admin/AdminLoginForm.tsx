@@ -3,7 +3,11 @@
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { signIn } from "next-auth/react";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { AdminOtpInput } from "./AdminOtpInput";
+
+const RESEND_COOLDOWN_SECONDS = 60;
+const DEFAULT_OTP_TTL_SECONDS = 600;
 
 type AdminLoginFormProps = {
   googleEnabled?: boolean;
@@ -20,6 +24,20 @@ export function AdminLoginForm({ googleEnabled = false }: AdminLoginFormProps) {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [resendCooldown, setResendCooldown] = useState(0);
+  const [otpExpiresInSeconds, setOtpExpiresInSeconds] = useState(
+    DEFAULT_OTP_TTL_SECONDS,
+  );
+
+  useEffect(() => {
+    if (resendCooldown <= 0) return;
+
+    const timer = window.setInterval(() => {
+      setResendCooldown((previous) => Math.max(0, previous - 1));
+    }, 1000);
+
+    return () => window.clearInterval(timer);
+  }, [resendCooldown]);
 
   const signInWithGoogle = async () => {
     setLoading(true);
@@ -32,7 +50,7 @@ export function AdminLoginForm({ googleEnabled = false }: AdminLoginFormProps) {
     }
   };
 
-  const requestOtp = async () => {
+  const requestOtp = useCallback(async () => {
     setLoading(true);
     setError(null);
     setMessage(null);
@@ -43,44 +61,57 @@ export function AdminLoginForm({ googleEnabled = false }: AdminLoginFormProps) {
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ email }),
       });
-      const data = (await response.json()) as { error?: string; message?: string };
+      const data = (await response.json()) as {
+        error?: string;
+        message?: string;
+        expiresInSeconds?: number;
+      };
 
       if (!response.ok) {
         throw new Error(data.error ?? "無法寄送驗證碼");
       }
 
       setMessage(data.message ?? "驗證碼已寄出");
+      setOtpExpiresInSeconds(data.expiresInSeconds ?? DEFAULT_OTP_TTL_SECONDS);
+      setResendCooldown(RESEND_COOLDOWN_SECONDS);
+      setCode("");
       setStep("otp");
     } catch (err) {
       setError(err instanceof Error ? err.message : "寄送失敗");
     } finally {
       setLoading(false);
     }
-  };
+  }, [email]);
 
-  const verifyOtp = async () => {
-    setLoading(true);
-    setError(null);
+  const verifyOtp = useCallback(
+    async (codeOverride?: string) => {
+      const otp = (codeOverride ?? code).trim();
+      if (otp.length < 6 || loading) return;
 
-    try {
-      const result = await signIn("admin-otp", {
-        email,
-        code,
-        redirect: false,
-      });
+      setLoading(true);
+      setError(null);
 
-      if (result?.error) {
-        throw new Error("驗證碼無效或已過期");
+      try {
+        const result = await signIn("admin-otp", {
+          email,
+          code: otp,
+          redirect: false,
+        });
+
+        if (result?.error) {
+          throw new Error("驗證碼無效或已過期");
+        }
+
+        router.replace(nextPath);
+        router.refresh();
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "驗證失敗");
+      } finally {
+        setLoading(false);
       }
-
-      router.replace(nextPath);
-      router.refresh();
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "驗證失敗");
-    } finally {
-      setLoading(false);
-    }
-  };
+    },
+    [code, email, loading, nextPath, router],
+  );
 
   return (
     <div className="admin-login">
@@ -120,7 +151,7 @@ export function AdminLoginForm({ googleEnabled = false }: AdminLoginFormProps) {
                 type="email"
                 className="admin-field__input"
                 value={email}
-                onChange={(event) => setEmail(event.target.value)}
+                onChange={(event) => setEmail(event.target.value.trim().toLowerCase())}
                 placeholder="your@email.com"
                 autoComplete="email"
                 required
@@ -139,19 +170,17 @@ export function AdminLoginForm({ googleEnabled = false }: AdminLoginFormProps) {
             }}
           >
             <p className="admin-login__email-hint">驗證碼已寄至 {email}</p>
+            <p className="admin-login__otp-meta">
+              驗證碼 {Math.max(1, Math.round(otpExpiresInSeconds / 60))} 分鐘內有效
+            </p>
             <label className="admin-field">
               <span className="admin-field__label">6 位驗證碼</span>
-              <input
-                type="text"
-                className="admin-field__input admin-field__input--otp"
+              <AdminOtpInput
                 value={code}
-                onChange={(event) =>
-                  setCode(event.target.value.replace(/\D/g, "").slice(0, 6))
-                }
-                placeholder="000000"
-                inputMode="numeric"
-                autoComplete="one-time-code"
-                required
+                onChange={setCode}
+                onComplete={(completed) => void verifyOtp(completed)}
+                disabled={loading}
+                autoFocus
               />
             </label>
             <button
@@ -161,18 +190,31 @@ export function AdminLoginForm({ googleEnabled = false }: AdminLoginFormProps) {
             >
               {loading ? "驗證中…" : "登入"}
             </button>
-            <button
-              type="button"
-              className="admin-btn admin-btn--ghost"
-              onClick={() => {
-                setStep("email");
-                setCode("");
-                setMessage(null);
-                setError(null);
-              }}
-            >
-              更換 Email
-            </button>
+            <div className="admin-login__otp-actions">
+              <button
+                type="button"
+                className="admin-btn admin-btn--ghost"
+                disabled={loading || resendCooldown > 0}
+                onClick={() => void requestOtp()}
+              >
+                {resendCooldown > 0
+                  ? `${resendCooldown} 秒後可重送`
+                  : "重新寄送驗證碼"}
+              </button>
+              <button
+                type="button"
+                className="admin-btn admin-btn--ghost"
+                onClick={() => {
+                  setStep("email");
+                  setCode("");
+                  setMessage(null);
+                  setError(null);
+                  setResendCooldown(0);
+                }}
+              >
+                更換 Email
+              </button>
+            </div>
           </form>
         )}
 

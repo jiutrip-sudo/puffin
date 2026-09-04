@@ -2646,6 +2646,46 @@ html {
   font-size: 1rem;
 }
 
+.checkout-confirmation-lookup {
+  margin-top: 1rem;
+}
+
+.checkout-confirmation-lookup__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  margin-top: 0.75rem;
+}
+
+.checkout-copy-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.65rem 1rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--foreground) 14%, transparent);
+  background: transparent;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--foreground);
+  cursor: pointer;
+}
+
+.checkout-copy-btn:hover {
+  background: color-mix(in srgb, var(--foreground) 6%, transparent);
+}
+
+.booking-lookup-form__prefill-hint {
+  margin: 0 0 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  background: color-mix(in srgb, var(--color-primary) 12%, var(--background));
+  border: 1px solid color-mix(in srgb, var(--color-primary) 24%, transparent);
+  font-size: 0.875rem;
+  color: color-mix(in srgb, var(--foreground) 78%, transparent);
+}
+
 .checkout-email-preview-index {
   max-width: 42rem;
   margin: 2rem auto;
@@ -5143,6 +5183,45 @@ html[data-theme="dark"] .hero-bg-dark {
   font-size: 1.25rem;
   letter-spacing: 0.2em;
   text-align: center;
+}
+
+.admin-otp-input {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 0.5rem;
+  max-width: 18rem;
+}
+
+.admin-otp-input__cell {
+  width: 100%;
+  aspect-ratio: 1;
+  max-width: 2.75rem;
+  padding: 0;
+  text-align: center;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  border-radius: 0.625rem;
+  border: 1px solid color-mix(in srgb, var(--foreground) 14%, transparent);
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.admin-otp-input__cell:focus {
+  outline: 2px solid color-mix(in srgb, var(--color-primary) 45%, transparent);
+  outline-offset: 1px;
+}
+
+.admin-login__otp-meta {
+  margin: 0;
+  font-size: 0.75rem;
+  color: color-mix(in srgb, var(--foreground) 55%, transparent);
+}
+
+.admin-login__otp-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 .admin-btn {

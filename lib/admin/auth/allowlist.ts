@@ -1,19 +1,19 @@
-import { resolveCheckoutStaffNotificationEmails } from "@/lib/checkout/manual-payment";
-
 function normalizeEmail(email: string): string {
   return email.trim().toLowerCase();
 }
 
+export function isAdminAllowlistConfigured(): boolean {
+  return Boolean(process.env.ADMIN_ALLOWED_EMAILS?.trim());
+}
+
 export function resolveAdminAllowedEmails(): string[] {
   const configured = process.env.ADMIN_ALLOWED_EMAILS?.trim();
-  if (configured) {
-    return configured
-      .split(/[,;]/)
-      .map((entry) => normalizeEmail(entry))
-      .filter(Boolean);
+  if (!configured) {
+    return [];
   }
 
-  return resolveCheckoutStaffNotificationEmails()
+  return configured
+    .split(/[,;]/)
     .map((entry) => normalizeEmail(entry))
     .filter(Boolean);
 }

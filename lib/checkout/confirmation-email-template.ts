@@ -104,7 +104,7 @@ function buildBankAccountHtml(
 }
 
 function buildBookingLookupHtml(data: CheckoutConfirmationEmailData): string {
-  const lookupUrl = buildBookingLookupUrl(data.confirmationCode);
+  const lookupUrl = buildBookingLookupUrl(data.confirmationCode, data.leadTravelerEmail);
   return `
               <div style="margin:16px 0 0;padding:14px 16px;border-radius:10px;background:${EMAIL_THEME.surface};border:1px solid ${EMAIL_THEME.surfaceBorder};">
                 <p style="margin:0 0 8px;font-size:13px;font-weight:700;color:${EMAIL_THEME.text};">查詢訂單</p>
@@ -356,7 +356,7 @@ export function buildCustomerConfirmationEmail(
       ? `自選活動：${data.selectedExtrasCount} 項`
       : null,
     `訂單號：${orderRef}`,
-    `查詢訂單：${buildBookingLookupUrl(data.confirmationCode)}`,
+    `查詢訂單：${buildBookingLookupUrl(data.confirmationCode, data.leadTravelerEmail)}`,
     "",
     awaiting ? "── 參考價格 ──" : "── 付款資訊 ──",
     awaiting ? null : `付款方式：${data.paymentMethodLabel}`,

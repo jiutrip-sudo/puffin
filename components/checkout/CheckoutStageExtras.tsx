@@ -10,6 +10,7 @@ import {
   CHECKOUT_PAYMENT_OPTIONS,
   CHECKOUT_BANK_ACCOUNT,
 } from "@/lib/checkout/manual-payment";
+import { buildBookingLookupPath } from "@/lib/booking/booking-lookup-url";
 import { CheckoutSuccessIcon } from "./CheckoutSuccessIcon";
 import {
   CHECKOUT_PRIVACY_POLICY_URL,
@@ -520,6 +521,37 @@ function ExternalLinkIcon() {
   );
 }
 
+function resolveLeadTravelerEmail(session: CheckoutSession): string {
+  const lead =
+    session.travelers.find((traveler) => traveler.type === "ADULT") ??
+    session.travelers[0];
+  return lead?.email?.trim().toLowerCase() ?? "";
+}
+
+function CopyConfirmationCode({ code }: { code: string }) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(code);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 2000);
+    } catch {
+      setCopied(false);
+    }
+  };
+
+  return (
+    <button
+      type="button"
+      className="checkout-copy-btn"
+      onClick={() => void handleCopy()}
+    >
+      {copied ? "已複製" : "複製訂單號"}
+    </button>
+  );
+}
+
 type StageConfirmationProps = {
   session: CheckoutSession;
   packageTitle: string;
@@ -540,6 +572,10 @@ export function CheckoutStageConfirmation({
   backHref,
 }: StageConfirmationProps) {
   const { formatMoney, fxDisclaimer } = useFormatMoney();
+  const leadEmail = resolveLeadTravelerEmail(session);
+  const lookupHref = confirmationCode
+    ? buildBookingLookupPath(confirmationCode, leadEmail)
+    : "/booking/lookup";
 
   const amountDue =
     totalAmount !== null
@@ -562,19 +598,23 @@ export function CheckoutStageConfirmation({
         {packageTitle}
       </p>
       {confirmationCode && (
-        <p className="checkout-reference checkout-reveal checkout-reveal--3">
-          訂單號：
+        <div className="checkout-reference checkout-reveal checkout-reveal--3">
+          <span>訂單號：</span>
           <strong className="checkout-reference__code">{confirmationCode}</strong>
-        </p>
+        </div>
       )}
       {confirmationCode && (
-        <p className="checkout-block__hint checkout-reveal checkout-reveal--3">
-          <Link
-            href={`/booking/lookup?code=${encodeURIComponent(confirmationCode)}`}
-          >
-            之後可在此查詢訂單狀態
-          </Link>
-        </p>
+        <div className="checkout-confirmation-lookup checkout-reveal checkout-reveal--3">
+          <p className="checkout-block__hint">
+            請保存訂單號；確認信寄出後，也可隨時查詢申請進度。
+          </p>
+          <div className="checkout-confirmation-lookup__actions">
+            <Link href={lookupHref} className="checkout-primary-btn">
+              查詢訂單狀態
+            </Link>
+            <CopyConfirmationCode code={confirmationCode} />
+          </div>
+        </div>
       )}
 
       <div className="checkout-manual-payment-summary checkout-reveal checkout-reveal--4">
@@ -615,7 +655,7 @@ export function CheckoutStageConfirmation({
         </Link>
       </div>
       <p className="checkout-block__hint checkout-confirmation-links checkout-reveal checkout-reveal--8">
-        <Link href="/booking/lookup">查詢訂單</Link>
+        <Link href={lookupHref}>查詢訂單</Link>
         <span aria-hidden="true"> · </span>
         <Link href={CHECKOUT_SERVICE_TERMS_URL}>服務條款</Link>
         <span aria-hidden="true"> · </span>

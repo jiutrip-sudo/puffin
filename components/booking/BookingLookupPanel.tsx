@@ -2,11 +2,13 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { normalizeConfirmationCode } from "@/lib/booking/normalize-confirmation-code";
 import type { PublicBookingView } from "@/lib/booking/public-booking-view";
 import { CHECKOUT_OFFICE_EMAIL } from "@/lib/checkout/manual-payment";
 
 type BookingLookupPanelProps = {
   initialConfirmationCode?: string;
+  initialEmail?: string;
 };
 
 function travelerSummary(booking: PublicBookingView): string {
@@ -24,12 +26,18 @@ function statusClass(status: PublicBookingView["status"]): string {
 
 export function BookingLookupPanel({
   initialConfirmationCode = "",
+  initialEmail = "",
 }: BookingLookupPanelProps) {
-  const [confirmationCode, setConfirmationCode] = useState(initialConfirmationCode);
-  const [email, setEmail] = useState("");
+  const [confirmationCode, setConfirmationCode] = useState(() =>
+    initialConfirmationCode
+      ? normalizeConfirmationCode(initialConfirmationCode)
+      : "",
+  );
+  const [email, setEmail] = useState(() => initialEmail.trim().toLowerCase());
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [booking, setBooking] = useState<PublicBookingView | null>(null);
+  const hasPrefill = Boolean(initialConfirmationCode || initialEmail);
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -37,11 +45,17 @@ export function BookingLookupPanel({
     setError(null);
     setBooking(null);
 
+    const normalizedCode = normalizeConfirmationCode(confirmationCode);
+    const normalizedEmail = email.trim().toLowerCase();
+
     try {
       const response = await fetch("/api/booking/lookup", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ confirmationCode, email }),
+        body: JSON.stringify({
+          confirmationCode: normalizedCode,
+          email: normalizedEmail,
+        }),
       });
       const data = (await response.json()) as {
         booking?: PublicBookingView;
@@ -77,6 +91,12 @@ export function BookingLookupPanel({
         </p>
       </header>
 
+      {hasPrefill && (
+        <p className="booking-lookup-form__prefill-hint">
+          已從連結帶入部分資料，請確認後查詢。
+        </p>
+      )}
+
       <form className="booking-lookup-form" onSubmit={handleSubmit}>
         <label className="booking-lookup-field">
           <span className="booking-lookup-field__label">訂單號</span>
@@ -84,9 +104,12 @@ export function BookingLookupPanel({
             type="text"
             className="booking-lookup-field__input"
             value={confirmationCode}
-            onChange={(event) => setConfirmationCode(event.target.value)}
+            onChange={(event) =>
+              setConfirmationCode(normalizeConfirmationCode(event.target.value))
+            }
             placeholder="DLT-123456"
             autoComplete="off"
+            spellCheck={false}
             required
           />
         </label>
@@ -98,6 +121,9 @@ export function BookingLookupPanel({
             className="booking-lookup-field__input"
             value={email}
             onChange={(event) => setEmail(event.target.value)}
+            onBlur={(event) =>
+              setEmail(event.target.value.trim().toLowerCase())
+            }
             placeholder="與預訂時填寫的 Email 相同"
             autoComplete="email"
             required
