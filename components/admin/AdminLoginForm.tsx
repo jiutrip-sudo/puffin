@@ -43,7 +43,14 @@ export function AdminLoginForm({ googleEnabled = false }: AdminLoginFormProps) {
     setLoading(true);
     setError(null);
     try {
-      await signIn("google", { callbackUrl: nextPath });
+      const result = await signIn("google", { callbackUrl: nextPath, redirect: false });
+      if (result?.error) {
+        throw new Error("Google 登入失敗，請確認後台 Auth 設定");
+      }
+      if (result?.url) {
+        window.location.assign(result.url);
+        return;
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : "Google 登入失敗");
       setLoading(false);

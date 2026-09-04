@@ -2,6 +2,10 @@ import type { NextAuthConfig } from "next-auth";
 import type { AdminRole } from "./roles";
 import { isAdminEmailAllowed } from "./allowlist";
 
+function resolveAuthSecret(): string | undefined {
+  return process.env.AUTH_SECRET?.trim() || process.env.ADMIN_SESSION_SECRET?.trim();
+}
+
 export const authConfig = {
   providers: [],
   pages: {
@@ -12,7 +16,7 @@ export const authConfig = {
     maxAge: 24 * 60 * 60,
   },
   trustHost: true,
-  secret: process.env.AUTH_SECRET ?? process.env.ADMIN_SESSION_SECRET,
+  secret: resolveAuthSecret(),
   callbacks: {
     async signIn({ user, account }) {
       const email = user.email?.trim().toLowerCase();
