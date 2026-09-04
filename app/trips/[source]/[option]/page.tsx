@@ -2,7 +2,6 @@ import { notFound } from "next/navigation";
 import { HeroSection } from "@/components/HeroSection";
 import { PillButton } from "@/components/PillButton";
 import { SiteHeader } from "@/components/SiteHeader";
-import { TransitionBar } from "@/components/TransitionBar";
 import { LocaleLink } from "@/components/LocaleLink";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 import { getLocalizedTripLabels } from "@/lib/i18n/trip-metadata";
@@ -72,12 +71,6 @@ export default async function TripsPage({ params }: PageProps) {
     />
   );
 
-  const footer = (
-    <TransitionBar
-      tags={[`#${optionLabel}`, `#${sourceLabel}`, `#${localize("冰島之旅")}`]}
-    />
-  );
-
   if (source === "iceland" && option === "self-drive") {
     const seasonOptions = localizeTripOptions(ICELAND_SELF_DRIVE_OPTIONS, locale);
 
@@ -89,7 +82,6 @@ export default async function TripsPage({ params }: PageProps) {
         tagline="CHOOSE YOUR SEASON FOR THE PERFECT SELF-DRIVE ADVENTURE."
         align="center"
         priority={false}
-        footer={footer}
         header={header}
       >
         <div className="flex flex-col items-center justify-center gap-4 sm:flex-row sm:flex-wrap">
@@ -114,7 +106,6 @@ export default async function TripsPage({ params }: PageProps) {
         tagline="CHOOSE YOUR SEASON FOR THE PERFECT GROUP TOUR."
         align="center"
         priority={false}
-        footer={footer}
         header={header}
       >
         <div className="flex flex-col items-center justify-center gap-4 sm:flex-row sm:flex-wrap">
@@ -138,7 +129,6 @@ export default async function TripsPage({ params }: PageProps) {
         align="center"
         highlightTitle
         priority={false}
-        footer={footer}
         header={header}
       />
     );
@@ -151,7 +141,6 @@ export default async function TripsPage({ params }: PageProps) {
       subtitle={localize(`為您精選的 ${sourceLabel} · ${optionLabel} 行程`)}
       align="start"
       priority={false}
-      footer={footer}
       header={header}
     />
   );

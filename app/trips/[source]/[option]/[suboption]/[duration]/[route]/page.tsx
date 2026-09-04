@@ -5,7 +5,6 @@ import { TripPackagePage } from "@/components/trip-package/TripPackagePage";
 import { TripProductJsonLd } from "@/components/seo/SiteJsonLd";
 import { HeroSection } from "@/components/HeroSection";
 import { SiteHeader } from "@/components/SiteHeader";
-import { TransitionBar } from "@/components/TransitionBar";
 import { getTripPackageWithPricingForRequest } from "@/lib/trip-packages/get-package-with-pricing";
 import {
   buildTripPackageMetadata,
@@ -182,12 +181,6 @@ export default async function TripDurationRoutePage({ params }: PageProps) {
       />
     );
 
-    const footer = (
-      <TransitionBar
-        tags={[`#${routeLabel}`, `#${durationLabel}`, "#冰島之旅"]}
-      />
-    );
-
     if (isComingSoon) {
       return (
         <HeroSection
@@ -196,7 +189,6 @@ export default async function TripDurationRoutePage({ params }: PageProps) {
           align="center"
           highlightTitle
           priority={false}
-          footer={footer}
           header={header}
         />
       );
@@ -266,12 +258,6 @@ export default async function TripDurationRoutePage({ params }: PageProps) {
     />
   );
 
-  const footer = (
-    <TransitionBar
-      tags={[`#${routeLabel}`, `#${durationLabel}`, "#冰島之旅"]}
-    />
-  );
-
   if (isComingSoon) {
     return (
       <HeroSection
@@ -280,7 +266,6 @@ export default async function TripDurationRoutePage({ params }: PageProps) {
         align="center"
         highlightTitle
         priority={false}
-        footer={footer}
         header={header}
       />
     );

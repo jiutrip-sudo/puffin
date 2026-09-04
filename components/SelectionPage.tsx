@@ -1,6 +1,5 @@
 import { HeroSection } from "./HeroSection";
 import { PillButton } from "./PillButton";
-import { TransitionBar } from "./TransitionBar";
 import type { TripOption } from "@/lib/trip-options";
 
 type SelectionPageProps = {
@@ -9,6 +8,7 @@ type SelectionPageProps = {
   eyebrow: string;
   tagline?: string;
   options: TripOption[];
+  belowOptions?: React.ReactNode;
 };
 
 export function SelectionPage({
@@ -17,6 +17,7 @@ export function SelectionPage({
   eyebrow,
   tagline,
   options,
+  belowOptions,
 }: SelectionPageProps) {
   return (
     <HeroSection
@@ -24,7 +25,6 @@ export function SelectionPage({
       subtitle={subtitle}
       eyebrow={eyebrow}
       tagline={tagline}
-      footer={<TransitionBar />}
     >
       <div className="flex flex-col items-center justify-center gap-4 sm:flex-row sm:flex-wrap">
         {options.map((option) => (
@@ -33,6 +33,7 @@ export function SelectionPage({
           </PillButton>
         ))}
       </div>
+      {belowOptions}
     </HeroSection>
   );
 }

@@ -1,6 +1,5 @@
 import { HeroSection } from "@/components/HeroSection";
 import { CircleButton } from "@/components/CircleButton";
-import { TransitionBar } from "@/components/TransitionBar";
 import { DEPARTURE_OPTIONS } from "@/lib/trip-options";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 import { getRequestLocale } from "@/lib/i18n/server";
@@ -30,7 +29,6 @@ export default async function Home() {
       title={localizeText("探索冰島，從這裡開始。", locale)}
       subtitle={localizeText("選擇您的出發方式，我們將為您推薦最適合的行程。", locale)}
       tagline="START YOUR JOURNEY WITH A WELL-PLANNED ITINERARY."
-      footer={<TransitionBar />}
     >
       <div className="flex items-center justify-center gap-16 md:gap-24">
         {departureOptions.map((option) => (

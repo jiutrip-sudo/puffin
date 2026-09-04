@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { AdminFxRateNote } from "./AdminIskTwdAmount";
+import { AdminReferencePriceBlock } from "./AdminReferencePriceBlock";
 import { AdminShell } from "./AdminShell";
-import { formatIskAdmin } from "@/lib/i18n/display-money";
 
 type MatrixRow = {
   key: string;
@@ -25,17 +26,44 @@ type PackageMeta = {
   tourCode: string | null;
   packageTitle: string | null;
   corivoPackageTourId: number | null;
+  depositRate: number;
   tiers: Array<{ id: string; label: string }>;
   vehicleTiers: Array<{ id: string; label: string }>;
 };
 
+function formatShortDateTime(value: string): string {
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return "—";
+
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  const hours = date.getHours().toString().padStart(2, "0");
+  const minutes = date.getMinutes().toString().padStart(2, "0");
+  return `${month}/${day} ${hours}:${minutes}`;
+}
+
+function resolveTierLabel(
+  tierId: string,
+  tiers: Array<{ id: string; label: string }>,
+): string {
+  return tiers.find((tier) => tier.id === tierId)?.label ?? tierId;
+}
+
+function formatPartySize(row: MatrixRow): string {
+  return `${row.adults}/${row.children}/${row.infants}`;
+}
+
 export function AdminPricingDetailPanel({ packageId }: { packageId: string }) {
   const [rows, setRows] = useState<MatrixRow[]>([]);
   const [meta, setMeta] = useState<PackageMeta | null>(null);
+  const [snapshotUpdatedAt, setSnapshotUpdatedAt] = useState<string | null>(
+    null,
+  );
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [syncing, setSyncing] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
   const [quoteLoadingKey, setQuoteLoadingKey] = useState<string | null>(null);
@@ -61,6 +89,22 @@ export function AdminPricingDetailPanel({ packageId }: { packageId: string }) {
     return params.toString();
   }, [page, startDateFrom, startDateTo, accommodationTier, vehicleTier, adults]);
 
+  const hasActiveFilters =
+    startDateFrom.length > 0 ||
+    startDateTo.length > 0 ||
+    accommodationTier.length > 0 ||
+    vehicleTier.length > 0 ||
+    adults.length > 0;
+
+  const clearFilters = () => {
+    setPage(1);
+    setStartDateFrom("");
+    setStartDateTo("");
+    setAccommodationTier("");
+    setVehicleTier("");
+    setAdults("");
+  };
+
   const load = useCallback(async () => {
     setLoading(true);
     setError(null);
@@ -74,6 +118,7 @@ export function AdminPricingDetailPanel({ packageId }: { packageId: string }) {
         config?: PackageMeta;
         total?: number;
         totalPages?: number;
+        snapshotUpdatedAt?: string | null;
         error?: string;
       };
 
@@ -85,6 +130,7 @@ export function AdminPricingDetailPanel({ packageId }: { packageId: string }) {
       setMeta(data.config ?? null);
       setTotal(data.total ?? 0);
       setTotalPages(data.totalPages ?? 1);
+      setSnapshotUpdatedAt(data.snapshotUpdatedAt ?? null);
     } catch (err) {
       setError(err instanceof Error ? err.message : "讀取失敗");
     } finally {
@@ -96,9 +142,12 @@ export function AdminPricingDetailPanel({ packageId }: { packageId: string }) {
     void load();
   }, [load]);
 
+  const depositRate = meta?.depositRate ?? 0.2;
+
   const runLiveQuote = async (row: MatrixRow) => {
     setQuoteLoadingKey(row.key);
     setError(null);
+    setNotice(null);
 
     try {
       const response = await fetch(
@@ -137,11 +186,37 @@ export function AdminPricingDetailPanel({ packageId }: { packageId: string }) {
             fetchedAt: data.fetchedAt ?? new Date().toISOString(),
           },
         }));
+        setNotice("已更新即時查價結果（僅影響目前頁面顯示，不會寫入快照）。");
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : "查價失敗");
     } finally {
       setQuoteLoadingKey(null);
+    }
+  };
+
+  const syncPackage = async () => {
+    setSyncing(true);
+    setError(null);
+    setNotice(null);
+
+    try {
+      const response = await fetch(`/api/admin/pricing/${packageId}/sync`, {
+        method: "POST",
+      });
+      const data = (await response.json()) as { error?: string };
+
+      if (!response.ok) {
+        throw new Error(data.error ?? "同步失敗");
+      }
+
+      setLiveQuotes({});
+      setNotice("快照同步完成。");
+      await load();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "同步失敗");
+    } finally {
+      setSyncing(false);
     }
   };
 
@@ -155,31 +230,97 @@ export function AdminPricingDetailPanel({ packageId }: { packageId: string }) {
 
   return (
     <AdminShell title="計價矩陣">
-      <div className="admin-panel">
-        <p>
-          <Link href="/admin/pricing" className="admin-link">← 返回計價總覽</Link>
-        </p>
+      <div className="admin-panel admin-pricing">
+        <div className="admin-pricing-detail__topbar">
+          <Link href="/admin/pricing" className="admin-link">
+            ← 返回計價總覽
+          </Link>
+          <div className="admin-pricing-detail__topbar-actions">
+            <button
+              type="button"
+              className="admin-btn admin-btn--ghost admin-btn--sm"
+              disabled={loading}
+              onClick={() => void load()}
+            >
+              {loading ? "載入中…" : "重新載入"}
+            </button>
+            <button
+              type="button"
+              className="admin-btn admin-btn--ghost admin-btn--sm"
+              disabled={syncing}
+              onClick={() => void syncPackage()}
+            >
+              {syncing ? "同步中…" : "同步快照"}
+            </button>
+            <button
+              type="button"
+              className="admin-btn admin-btn--primary admin-btn--sm"
+              onClick={exportCsv}
+            >
+              匯出 CSV
+            </button>
+          </div>
+        </div>
 
-        <header className="admin-detail__header">
+        <header className="admin-card admin-pricing-detail__header">
           <div>
+            <p className="admin-pricing-detail__eyebrow">計價矩陣</p>
             <h2 className="admin-detail__title">
               {meta?.tourCode ?? packageId}
             </h2>
-            {meta?.packageTitle && (
-              <p className="admin-muted">{meta.packageTitle}</p>
-            )}
-            <p className="admin-muted admin-detail__subtitle-mono">
-              系統代碼 {packageId}
-              {meta
-                ? ` · ${meta.tripDays ? `${meta.tripDays} 天 · ` : ""}Corivo ID ${meta.corivoPackageTourId ?? "—"} · 共 ${total} 筆`
-                : ""}
-            </p>
+            {meta?.packageTitle ? (
+              <p className="admin-pricing-detail__subtitle">{meta.packageTitle}</p>
+            ) : null}
           </div>
+          <dl className="admin-pricing-detail__meta">
+            <div>
+              <dt>系統代碼</dt>
+              <dd className="admin-detail__subtitle-mono">{packageId}</dd>
+            </div>
+            <div>
+              <dt>天數</dt>
+              <dd>{meta?.tripDays ? `${meta.tripDays} 天` : "—"}</dd>
+            </div>
+            <div>
+              <dt>Corivo ID</dt>
+              <dd>{meta?.corivoPackageTourId ?? "—"}</dd>
+            </div>
+            <div>
+              <dt>矩陣筆數</dt>
+              <dd>{total}</dd>
+            </div>
+            <div>
+              <dt>快照更新</dt>
+              <dd
+                title={
+                  snapshotUpdatedAt
+                    ? new Date(snapshotUpdatedAt).toLocaleString("zh-TW")
+                    : undefined
+                }
+              >
+                {snapshotUpdatedAt
+                  ? formatShortDateTime(snapshotUpdatedAt)
+                  : "—"}
+              </dd>
+            </div>
+          </dl>
         </header>
 
-        <section className="admin-card">
-          <h3 className="admin-card__title">篩選</h3>
-          <div className="admin-filter-grid">
+        <details className="admin-pricing-note">
+          <summary>使用說明</summary>
+          <p>
+            瀏覽此套餐的 Corivo 計價快照矩陣。價格欄顯示供應商價、前台售價（+15%）與訂金（
+            {Math.round(depositRate * 100)}%）；台幣為政策參考匯率換算（
+            <AdminFxRateNote />
+            ）。「即時查價」會向 Corivo 重新取價，僅更新目前頁面顯示，不會寫入快照。
+          </p>
+        </details>
+
+        {notice && <p className="admin-notice">{notice}</p>}
+        {error && <p className="admin-error" role="alert">{error}</p>}
+
+        <section className="admin-card admin-pricing-toolbar">
+          <div className="admin-filter-grid admin-pricing-detail__filters">
             <label className="admin-field">
               <span className="admin-field__label">出發日起</span>
               <input
@@ -254,73 +395,155 @@ export function AdminPricingDetailPanel({ packageId }: { packageId: string }) {
               />
             </label>
           </div>
-          <div className="admin-actions">
-            <button
-              type="button"
-              className="admin-btn admin-btn--ghost"
-              onClick={exportCsv}
-            >
-              匯出 CSV
-            </button>
+
+          <div className="admin-pricing-toolbar__actions">
+            {hasActiveFilters ? (
+              <button
+                type="button"
+                className="admin-btn admin-btn--ghost admin-btn--sm"
+                onClick={clearFilters}
+              >
+                清除篩選
+              </button>
+            ) : null}
+            {!loading && rows.length !== total ? (
+              <p className="admin-pricing-toolbar__meta admin-muted">
+                本頁 <strong>{rows.length}</strong> 筆 · 篩選後共{" "}
+                <strong>{total}</strong> 筆
+              </p>
+            ) : null}
           </div>
         </section>
 
-        {notice && <p className="admin-notice">{notice}</p>}
-        {error && <p className="admin-error" role="alert">{error}</p>}
-
         {loading ? (
-          <p className="admin-muted">載入中…</p>
-        ) : (
-          <div className="admin-table-wrap">
-            <table className="admin-table">
+          <div className="admin-table-wrap admin-table-wrap--sticky">
+            <table className="admin-table admin-table--pricing admin-table--matrix">
               <thead>
                 <tr>
                   <th>出發日</th>
                   <th>人數</th>
                   <th>房型</th>
                   <th>車型</th>
-                  <th>供應商價</th>
-                  <th>前台售價</th>
-                  <th>訂金</th>
-                  <th>同步時間</th>
-                  <th>即時</th>
+                  <th>價格</th>
+                  <th>同步</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                {Array.from({ length: 8 }, (_, index) => (
+                  <tr key={index} className="admin-table__skeleton-row">
+                    {Array.from({ length: 7 }, (__, cellIndex) => (
+                      <td key={cellIndex}>
+                        <span className="admin-skeleton" />
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        ) : rows.length === 0 ? (
+          <section className="admin-card admin-pricing-empty">
+            <p className="admin-pricing-empty__title">沒有符合條件的組合</p>
+            <p className="admin-muted">
+              {hasActiveFilters
+                ? "請調整篩選條件，或清除篩選後再試。"
+                : "此套餐尚無計價快照，請先同步。"}
+            </p>
+            {hasActiveFilters ? (
+              <button
+                type="button"
+                className="admin-btn admin-btn--ghost"
+                onClick={clearFilters}
+              >
+                清除篩選
+              </button>
+            ) : (
+              <button
+                type="button"
+                className="admin-btn admin-btn--primary"
+                disabled={syncing}
+                onClick={() => void syncPackage()}
+              >
+                {syncing ? "同步中…" : "同步快照"}
+              </button>
+            )}
+          </section>
+        ) : (
+          <div className="admin-table-wrap admin-table-wrap--sticky">
+            <table className="admin-table admin-table--pricing admin-table--matrix">
+              <thead>
+                <tr>
+                  <th className="admin-table__sticky-col">出發日</th>
+                  <th>
+                    人數
+                    <span className="admin-table__th-hint">成/兒/嬰</span>
+                  </th>
+                  <th>房型</th>
+                  <th>車型</th>
+                  <th>價格</th>
+                  <th>同步</th>
+                  <th>操作</th>
                 </tr>
               </thead>
               <tbody>
                 {rows.map((row) => {
                   const live = liveQuotes[row.key];
+                  const supplierTotal = live?.supplierTotal ?? row.supplierTotal;
+                  const retailTotal = live?.retailTotal ?? row.retailTotal;
+                  const deposit = Math.round(retailTotal * depositRate);
+
                   return (
-                    <tr key={row.key}>
-                      <td>{row.startDate}</td>
-                      <td>
-                        {row.adults}/{row.children}/{row.infants}
+                    <tr
+                      key={row.key}
+                      className={`admin-table__data-row${
+                        live ? " admin-table__data-row--live" : ""
+                      }`}
+                    >
+                      <td className="admin-table__sticky-col admin-table__date">
+                        {row.startDate}
                       </td>
-                      <td>{row.accommodationTier}</td>
-                      <td>{row.vehicleTier || "—"}</td>
-                      <td className="tabular-nums">
-                        {live
-                          ? formatIskAdmin(live.supplierTotal)
-                          : formatIskAdmin(row.supplierTotal)}
+                      <td
+                        className="tabular-nums admin-table__party"
+                        title={`成人 ${row.adults} · 兒童 ${row.children} · 嬰兒 ${row.infants}`}
+                      >
+                        {formatPartySize(row)}
                       </td>
-                      <td className="tabular-nums">
-                        {live
-                          ? formatIskAdmin(live.retailTotal)
-                          : formatIskAdmin(row.retailTotal)}
+                      <td className="admin-table__tier">
+                        {resolveTierLabel(row.accommodationTier, meta?.tiers ?? [])}
                       </td>
-                      <td className="tabular-nums">
-                        {formatIskAdmin(row.deposit)}
+                      <td className="admin-table__tier">
+                        {row.vehicleTier
+                          ? resolveTierLabel(
+                              row.vehicleTier,
+                              meta?.vehicleTiers ?? [],
+                            )
+                          : "—"}
                       </td>
-                      <td>
-                        {new Date(row.syncedAt).toLocaleString("zh-TW")}
+                      <td className="admin-table__prices">
+                        {live ? (
+                          <span className="admin-matrix-live-badge">即時</span>
+                        ) : null}
+                        <AdminReferencePriceBlock
+                          supplier={supplierTotal}
+                          retail={retailTotal}
+                          deposit={deposit}
+                        />
+                      </td>
+                      <td
+                        className="admin-table__updated"
+                        title={new Date(row.syncedAt).toLocaleString("zh-TW")}
+                      >
+                        {formatShortDateTime(row.syncedAt)}
                       </td>
                       <td>
                         <button
                           type="button"
-                          className="admin-btn admin-btn--ghost"
+                          className="admin-btn admin-btn--ghost admin-btn--sm"
                           disabled={quoteLoadingKey === row.key}
                           onClick={() => void runLiveQuote(row)}
                         >
-                          {quoteLoadingKey === row.key ? "查詢中…" : "查價"}
+                          {quoteLoadingKey === row.key ? "查詢中…" : "即時查價"}
                         </button>
                       </td>
                     </tr>
@@ -335,19 +558,19 @@ export function AdminPricingDetailPanel({ packageId }: { packageId: string }) {
           <div className="admin-pagination">
             <button
               type="button"
-              className="admin-btn admin-btn--ghost"
-              disabled={page <= 1}
+              className="admin-btn admin-btn--ghost admin-btn--sm"
+              disabled={page <= 1 || loading}
               onClick={() => setPage((value) => value - 1)}
             >
               上一頁
             </button>
             <span className="admin-muted">
-              第 {page} / {totalPages} 頁
+              第 {page} / {totalPages} 頁 · 共 {total} 筆
             </span>
             <button
               type="button"
-              className="admin-btn admin-btn--ghost"
-              disabled={page >= totalPages}
+              className="admin-btn admin-btn--ghost admin-btn--sm"
+              disabled={page >= totalPages || loading}
               onClick={() => setPage((value) => value + 1)}
             >
               下一頁

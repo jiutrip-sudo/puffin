@@ -1,10 +1,26 @@
 import type { SiteLocale } from "@/lib/site-locale";
-import { FX_ISK_TO_DISPLAY, FX_UPDATED_AT, getFxRateForCurrency } from "./fx-rates";
+import {
+  FX_DISPLAY_ROUND_TO,
+  FX_ISK_TO_DISPLAY,
+  FX_UPDATED_AT,
+  getFxRateForCurrency,
+} from "./fx-rates";
 
 export type DisplayCurrency = "TWD" | "CNY";
 
 export function getDisplayCurrency(locale: SiteLocale): DisplayCurrency {
   return locale === "zh-CN" ? "CNY" : "TWD";
+}
+
+function roundDisplayAmountUp(
+  amount: number,
+  currency: DisplayCurrency,
+): number {
+  const roundTo = FX_DISPLAY_ROUND_TO[currency];
+  if (roundTo <= 1) {
+    return Math.ceil(amount);
+  }
+  return Math.ceil(amount / roundTo) * roundTo;
 }
 
 export function convertIskToDisplay(
@@ -13,7 +29,7 @@ export function convertIskToDisplay(
 ): number {
   const currency = getDisplayCurrency(locale);
   const rate = getFxRateForCurrency(currency);
-  return Math.round(iskAmount * rate);
+  return roundDisplayAmountUp(iskAmount * rate, currency);
 }
 
 function formatIntegerWithCommas(amount: number): string {

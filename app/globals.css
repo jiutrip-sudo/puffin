@@ -4647,6 +4647,46 @@ html[data-theme="dark"] .hero-bg-dark {
   padding: 0 1rem;
 }
 
+/* ── Iceland trip catalog (compact hero + wide grid) ── */
+
+.iceland-catalog .guides-index__hero {
+  min-height: min(32vh, 18rem);
+}
+
+.iceland-catalog .guides-index__intro {
+  padding-top: calc(env(safe-area-inset-top) + 3.75rem);
+  padding-bottom: 1.5rem;
+}
+
+.iceland-catalog .guides-index__body-inner {
+  max-width: 80rem;
+}
+
+.iceland-catalog__sidebar {
+  position: sticky;
+  top: calc(env(safe-area-inset-top) + 4.5rem);
+  align-self: start;
+}
+
+.iceland-catalog__filter-sheet {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background: rgb(0 0 0 / 45%);
+}
+
+.iceland-catalog__filter-sheet-panel {
+  max-height: min(85vh, 36rem);
+  overflow-y: auto;
+  border-radius: 1.25rem 1.25rem 0 0;
+  background: var(--background);
+  padding: 1rem 1rem calc(1rem + env(safe-area-inset-bottom));
+  box-shadow: 0 -12px 40px rgb(0 0 0 / 12%);
+}
+
 .guides-index-list {
   list-style: none;
   margin: 0;
@@ -5146,6 +5186,56 @@ html[data-theme="dark"] .hero-bg-dark {
   margin: 0 auto;
 }
 
+.admin-shell__main:has(.admin-pricing) {
+  max-width: 88rem;
+}
+
+.admin-fx-warning {
+  margin: 0;
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid color-mix(in srgb, #c2410c 25%, transparent);
+  background: color-mix(in srgb, #fb923c 14%, var(--background));
+  color: #9a3412;
+}
+
+.admin-fx-warning--muted {
+  border-bottom-color: color-mix(in srgb, var(--foreground) 12%, transparent);
+  background: color-mix(in srgb, var(--color-primary-surface) 35%, var(--background));
+  color: color-mix(in srgb, var(--foreground) 72%, transparent);
+}
+
+.admin-fx-warning__title {
+  margin: 0;
+  font-size: 0.875rem;
+  font-weight: 800;
+}
+
+.admin-fx-warning__body {
+  margin: 0.35rem 0 0;
+  font-size: 0.8125rem;
+  line-height: 1.55;
+}
+
+.admin-fx-warning__meta {
+  margin: 0.45rem 0 0;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  opacity: 0.9;
+}
+
+.admin-isk-twd {
+  display: flex;
+  flex-direction: column;
+  gap: 0.12rem;
+  line-height: 1.35;
+}
+
+.admin-isk-twd__twd {
+  font-size: 0.75rem;
+  color: color-mix(in srgb, var(--foreground) 58%, transparent);
+  font-weight: 600;
+}
+
 .admin-panel {
   display: flex;
   flex-direction: column;
@@ -5557,6 +5647,13 @@ html[data-theme="dark"] .hero-bg-dark {
   white-space: nowrap;
 }
 
+.admin-table__package-title {
+  min-width: 10rem;
+  max-width: 16rem;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+}
+
 .admin-table__system-code {
   font-size: 0.75rem;
   color: color-mix(in srgb, var(--foreground) 62%, transparent);
@@ -5581,4 +5678,524 @@ html[data-theme="dark"] .hero-bg-dark {
 .admin-status--awaiting_supplier {
   background: color-mix(in srgb, #d97706 18%, transparent);
   color: #92400e;
+}
+
+/* ── Admin pricing overview ── */
+
+.admin-pricing {
+  gap: 1.25rem;
+}
+
+.admin-pricing-note {
+  font-size: 0.8125rem;
+  color: color-mix(in srgb, var(--foreground) 68%, transparent);
+}
+
+.admin-pricing-note summary {
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  user-select: none;
+}
+
+.admin-pricing-note p {
+  margin: 0.5rem 0 0;
+  line-height: 1.55;
+}
+
+.admin-pricing-kpis {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.625rem;
+}
+
+@media (min-width: 640px) {
+  .admin-pricing-kpis {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.admin-pricing-kpi {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.15rem;
+  padding: 0.75rem 0.9rem;
+  border-radius: 0.75rem;
+  border: 1px solid color-mix(in srgb, var(--foreground) 10%, transparent);
+  background: var(--background);
+  text-align: left;
+  cursor: pointer;
+  transition:
+    border-color 0.15s ease,
+    background 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.admin-pricing-kpi:hover:not(:disabled) {
+  border-color: color-mix(in srgb, var(--color-primary) 35%, transparent);
+}
+
+.admin-pricing-kpi--active {
+  border-color: color-mix(in srgb, var(--color-primary) 45%, transparent);
+  background: color-mix(in srgb, var(--color-primary) 10%, var(--background));
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-primary) 18%, transparent);
+}
+
+.admin-pricing-kpi:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.admin-pricing-kpi__value {
+  font-size: 1.375rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+}
+
+.admin-pricing-kpi__label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: color-mix(in srgb, var(--foreground) 62%, transparent);
+}
+
+.admin-pricing-kpi--expired .admin-pricing-kpi__value {
+  color: #b45309;
+}
+
+.admin-pricing-kpi--missing .admin-pricing-kpi__value {
+  color: #b42318;
+}
+
+.admin-pricing-toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.admin-pricing-toolbar__search {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 0.75rem;
+}
+
+.admin-field--grow {
+  flex: 1 1 14rem;
+  min-width: 0;
+}
+
+.admin-pricing-toolbar__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.admin-pricing-toolbar__categories {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.admin-pricing-toolbar__categories-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: color-mix(in srgb, var(--foreground) 62%, transparent);
+}
+
+.admin-pricing-toolbar__categories .admin-category-summary {
+  margin-top: 0;
+}
+
+.admin-pricing-toolbar__fx {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  padding-top: 0.15rem;
+  border-top: 1px solid color-mix(in srgb, var(--foreground) 8%, transparent);
+}
+
+.admin-fx-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--color-primary) 28%, transparent);
+  background: color-mix(in srgb, var(--color-primary) 8%, var(--background));
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-primary-dark);
+  cursor: help;
+}
+
+.admin-fx-chip--warning {
+  border-color: color-mix(in srgb, #ea580c 45%, transparent);
+  background: color-mix(in srgb, #fb923c 14%, var(--background));
+  color: #9a3412;
+}
+
+.admin-fx-chip__label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: color-mix(in srgb, currentColor 72%, transparent);
+}
+
+.admin-fx-chip__value {
+  font-weight: 800;
+}
+
+.admin-fx-chip__date {
+  padding: 0.05rem 0.4rem;
+  border-radius: 999px;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  background: color-mix(in srgb, currentColor 10%, transparent);
+}
+
+.admin-fx-chip__alert {
+  padding: 0.05rem 0.4rem;
+  border-radius: 999px;
+  font-size: 0.6875rem;
+  font-weight: 800;
+  color: #9a3412;
+  background: color-mix(in srgb, #ea580c 20%, transparent);
+}
+
+.admin-pricing-toolbar__meta {
+  margin: 0;
+  font-size: 0.8125rem;
+}
+
+.admin-pricing-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.admin-pricing-empty__title {
+  margin: 0;
+  font-size: 0.9375rem;
+  font-weight: 800;
+}
+
+.admin-table-wrap--sticky {
+  max-height: min(72vh, 960px);
+  overflow: auto;
+}
+
+.admin-table--pricing thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  box-shadow: 0 1px 0 color-mix(in srgb, var(--foreground) 8%, transparent);
+}
+
+.admin-table--pricing .admin-table__sticky-col {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background: var(--background);
+  box-shadow: 1px 0 0 color-mix(in srgb, var(--foreground) 8%, transparent);
+}
+
+.admin-table--pricing thead .admin-table__sticky-col {
+  z-index: 3;
+}
+
+.admin-table--pricing .admin-table__data-row:hover td {
+  background: color-mix(in srgb, var(--color-primary) 4%, var(--background));
+}
+
+.admin-table--pricing .admin-table__data-row:hover .admin-table__sticky-col {
+  background: color-mix(in srgb, var(--color-primary) 4%, var(--background));
+}
+
+.admin-table__th-hint {
+  display: block;
+  margin-top: 0.15rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: color-mix(in srgb, var(--foreground) 50%, transparent);
+}
+
+.admin-table__trip {
+  min-width: 11rem;
+  max-width: 18rem;
+}
+
+.admin-table__trip-link {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  color: inherit;
+  text-decoration: none;
+}
+
+.admin-table__trip-link:hover .admin-table__tour-code {
+  color: var(--color-primary-dark);
+  text-decoration: underline;
+}
+
+.admin-table__trip-link .admin-table__package-title {
+  display: block;
+  max-width: none;
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1.4;
+  color: color-mix(in srgb, var(--foreground) 68%, transparent);
+}
+
+.admin-table__category {
+  white-space: nowrap;
+  font-size: 0.75rem;
+}
+
+.admin-table__updated {
+  white-space: nowrap;
+  font-size: 0.75rem;
+  color: color-mix(in srgb, var(--foreground) 72%, transparent);
+}
+
+.admin-table__prices {
+  min-width: 11.5rem;
+}
+
+.admin-ref-prices {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.admin-ref-prices__row {
+  display: grid;
+  grid-template-columns: 2.75rem minmax(0, 1fr);
+  gap: 0.35rem;
+  align-items: start;
+}
+
+.admin-ref-prices__row--balance .admin-ref-prices__label {
+  color: color-mix(in srgb, var(--color-primary-dark) 75%, transparent);
+}
+
+.admin-ref-prices__row--balance .admin-isk-twd > span:first-child {
+  color: var(--color-primary-dark);
+}
+
+.admin-ref-prices__label {
+  margin: 0;
+  padding-top: 0.1rem;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: color-mix(in srgb, var(--foreground) 52%, transparent);
+}
+
+.admin-ref-prices__amount {
+  margin: 0;
+}
+
+.admin-ref-prices .admin-isk-twd {
+  gap: 0;
+}
+
+.admin-ref-prices .admin-isk-twd > span:first-child {
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.admin-ref-prices .admin-isk-twd__twd {
+  font-size: 0.6875rem;
+}
+
+.admin-snapshot-status {
+  display: inline-flex;
+  padding: 0.18rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.admin-snapshot-status--healthy {
+  background: color-mix(in srgb, #16a34a 16%, transparent);
+  color: #166534;
+}
+
+.admin-snapshot-status--expired {
+  background: color-mix(in srgb, #f59e0b 18%, transparent);
+  color: #92400e;
+}
+
+.admin-snapshot-status--missing {
+  background: color-mix(in srgb, #ef4444 14%, transparent);
+  color: #b42318;
+}
+
+.admin-btn--sm {
+  padding: 0.4rem 0.65rem;
+  font-size: 0.75rem;
+}
+
+.admin-pricing-row-actions {
+  min-width: 7rem;
+}
+
+.admin-skeleton {
+  display: block;
+  height: 0.85rem;
+  width: 72%;
+  border-radius: 0.35rem;
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--foreground) 6%, transparent) 0%,
+    color-mix(in srgb, var(--foreground) 12%, transparent) 50%,
+    color-mix(in srgb, var(--foreground) 6%, transparent) 100%
+  );
+  background-size: 200% 100%;
+  animation: admin-skeleton-shimmer 1.2s ease-in-out infinite;
+}
+
+.admin-table__skeleton-row td {
+  padding-top: 0.85rem;
+  padding-bottom: 0.85rem;
+}
+
+@keyframes admin-skeleton-shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}
+
+.admin-pricing-detail__topbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.admin-pricing-detail__topbar-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.admin-pricing-detail__header {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media (min-width: 900px) {
+  .admin-pricing-detail__header {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+}
+
+.admin-pricing-detail__eyebrow {
+  margin: 0 0 0.25rem;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--foreground) 52%, transparent);
+}
+
+.admin-pricing-detail__subtitle {
+  margin: 0.35rem 0 0;
+  font-size: 0.875rem;
+  line-height: 1.45;
+  color: color-mix(in srgb, var(--foreground) 72%, transparent);
+}
+
+.admin-pricing-detail__meta {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.65rem 1rem;
+  margin: 0;
+  min-width: min(100%, 22rem);
+}
+
+@media (min-width: 640px) {
+  .admin-pricing-detail__meta {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.admin-pricing-detail__meta div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.admin-pricing-detail__meta dt {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: color-mix(in srgb, var(--foreground) 52%, transparent);
+}
+
+.admin-pricing-detail__meta dd {
+  margin: 0;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.admin-pricing-detail__filters {
+  margin-bottom: 0.75rem;
+}
+
+.admin-table--matrix .admin-table__date {
+  white-space: nowrap;
+  font-weight: 700;
+}
+
+.admin-table--matrix .admin-table__party {
+  white-space: nowrap;
+  font-size: 0.75rem;
+}
+
+.admin-table--matrix .admin-table__tier {
+  min-width: 5.5rem;
+  max-width: 10rem;
+  font-size: 0.75rem;
+  line-height: 1.4;
+}
+
+.admin-table__data-row--live td {
+  background: color-mix(in srgb, #16a34a 5%, var(--background));
+}
+
+.admin-table__data-row--live .admin-table__sticky-col {
+  background: color-mix(in srgb, #16a34a 5%, var(--background));
+}
+
+.admin-table__data-row--live:hover td,
+.admin-table__data-row--live:hover .admin-table__sticky-col {
+  background: color-mix(in srgb, #16a34a 8%, var(--background));
+}
+
+.admin-table__prices {
+  position: relative;
+}
+
+.admin-matrix-live-badge {
+  display: inline-flex;
+  margin-bottom: 0.25rem;
+  padding: 0.1rem 0.4rem;
+  border-radius: 999px;
+  font-size: 0.625rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  color: #166534;
+  background: color-mix(in srgb, #16a34a 18%, transparent);
 }

@@ -59,6 +59,7 @@ export async function GET(request: Request, context: RouteContext) {
         tourCode: detail.tourCode,
         packageTitle: detail.packageTitle,
         corivoPackageTourId: detail.config.corivo?.packageTourId ?? null,
+        depositRate: detail.config.depositRate ?? 0.2,
         tiers: detail.config.tiers.map((tier) => ({
           id: tier.id,
           label: tier.label,

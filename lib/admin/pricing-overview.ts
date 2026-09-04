@@ -39,8 +39,10 @@ export type PricingPackageSummary = {
   isExpired: boolean;
   referenceSupplierPrice: number | null;
   referenceRetailPrice: number | null;
+  referenceDeposit: number | null;
   referenceSupplierPriceLabel: string | null;
   referenceRetailPriceLabel: string | null;
+  referenceDepositLabel: string | null;
 };
 
 export type PricingMatrixRow = {
@@ -95,6 +97,9 @@ function buildSummaryFromIndexEntry(
   const supplierTotal = entry.referenceSupplierTotal;
   const retailTotal =
     supplierTotal !== null ? applyRetailMarkupAmount(supplierTotal) : null;
+  const depositRate = config.depositRate ?? 0.2;
+  const depositTotal =
+    retailTotal !== null ? Math.round(retailTotal * depositRate) : null;
   const category = classifyPricingPackage(config.packageId);
 
   return {
@@ -113,10 +118,13 @@ function buildSummaryFromIndexEntry(
       : true,
     referenceSupplierPrice: supplierTotal,
     referenceRetailPrice: retailTotal,
+    referenceDeposit: depositTotal,
     referenceSupplierPriceLabel:
       supplierTotal !== null ? formatIskAdmin(supplierTotal) : null,
     referenceRetailPriceLabel:
       retailTotal !== null ? formatIskAdmin(retailTotal) : null,
+    referenceDepositLabel:
+      depositTotal !== null ? formatIskAdmin(depositTotal) : null,
   };
 }
 

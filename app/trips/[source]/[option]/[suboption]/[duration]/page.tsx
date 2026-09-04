@@ -4,7 +4,6 @@ import { TripPackagePage } from "@/components/trip-package/TripPackagePage";
 import { TripProductJsonLd } from "@/components/seo/SiteJsonLd";
 import { HeroSection } from "@/components/HeroSection";
 import { SiteHeader } from "@/components/SiteHeader";
-import { TransitionBar } from "@/components/TransitionBar";
 import { LocaleLink } from "@/components/LocaleLink";
 import { getTripPackageWithPricingForRequest } from "@/lib/trip-packages/get-package-with-pricing";
 import { buildTripPackageMetadata, getLocalizedTripLabels } from "@/lib/i18n/trip-metadata";
@@ -143,12 +142,6 @@ export default async function TripDurationPage({ params }: PageProps) {
       />
     );
 
-    const footer = (
-      <TransitionBar
-        tags={[`#${durationLabel}`, `#${suboptionLabel}`, `#${localize("冰島之旅")}`]}
-      />
-    );
-
     return (
       <HeroSection
         eyebrow={`${sourceLabel} · ${optionLabel} · ${suboptionLabel}`}
@@ -157,7 +150,6 @@ export default async function TripDurationPage({ params }: PageProps) {
         tagline={`CHOOSE RING ROAD OR NON-RING ROUTE FOR YOUR ${duration}-DAY TRIP.`}
         align="center"
         priority={false}
-        footer={footer}
         header={header}
       >
         <WinterRoutePicker duration={duration} variant="self-drive" />
@@ -189,12 +181,6 @@ export default async function TripDurationPage({ params }: PageProps) {
       />
     );
 
-    const footer = (
-      <TransitionBar
-        tags={[`#${durationLabel}`, `#${suboptionLabel}`, `#${localize("冰島之旅")}`]}
-      />
-    );
-
     return (
       <HeroSection
         eyebrow={`${sourceLabel} · ${optionLabel} · ${suboptionLabel}`}
@@ -203,7 +189,6 @@ export default async function TripDurationPage({ params }: PageProps) {
         tagline={`CHOOSE YOUR ROUTE VARIANT FOR YOUR ${duration}-DAY SUMMER GROUP TOUR.`}
         align="center"
         priority={false}
-        footer={footer}
         header={header}
       >
         <SummerGroupRoutePicker duration={duration} />
@@ -235,12 +220,6 @@ export default async function TripDurationPage({ params }: PageProps) {
       />
     );
 
-    const footer = (
-      <TransitionBar
-        tags={[`#${durationLabel}`, `#${suboptionLabel}`, `#${localize("冰島之旅")}`]}
-      />
-    );
-
     return (
       <HeroSection
         eyebrow={`${sourceLabel} · ${optionLabel} · ${suboptionLabel}`}
@@ -249,7 +228,6 @@ export default async function TripDurationPage({ params }: PageProps) {
         tagline={`CHOOSE RING ROAD OR NON-RING ROUTE FOR YOUR ${duration}-DAY GROUP TOUR.`}
         align="center"
         priority={false}
-        footer={footer}
         header={header}
       >
         <WinterRoutePicker duration={duration} variant="group" />
@@ -295,12 +273,6 @@ export default async function TripDurationPage({ params }: PageProps) {
     />
   );
 
-  const footer = (
-    <TransitionBar
-      tags={[`#${durationLabel}`, `#${suboptionLabel}`, `#${localize("冰島之旅")}`]}
-    />
-  );
-
   if (isComingSoon) {
     return (
       <HeroSection
@@ -309,7 +281,6 @@ export default async function TripDurationPage({ params }: PageProps) {
         align="center"
         highlightTitle
         priority={false}
-        footer={footer}
         header={header}
       />
     );
@@ -324,7 +295,6 @@ export default async function TripDurationPage({ params }: PageProps) {
       )}
       align="start"
       priority={false}
-      footer={footer}
       header={header}
     />
   );

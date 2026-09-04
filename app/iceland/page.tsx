@@ -1,16 +1,18 @@
-import { SelectionPage } from "@/components/SelectionPage";
-import { ICELAND_OPTIONS } from "@/lib/trip-options";
+import { Suspense } from "react";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 import { getRequestLocale } from "@/lib/i18n/server";
 import { localizeText } from "@/lib/i18n/localize";
-import { localizeTripOptions } from "@/lib/i18n/trip-options";
+import { t } from "@/lib/i18n/messages";
+import { getTripCatalogItemsWithFromPrices } from "@/lib/trip-packages/catalog-server";
+import { TripCatalogGrid } from "@/components/trips/TripCatalogGrid";
+import { TripsCatalogShell } from "@/components/trips/TripsCatalogShell";
 
 export async function generateMetadata() {
   const locale = await getRequestLocale();
   return buildPageMetadata({
     title: localizeText("冰島集合行程 | 帕芬假期", locale),
     description: localizeText(
-      "冰島集合出發：自駕、跟團與體驗行程。選擇最適合你的冰島旅行方式。",
+      "一次瀏覽帕芬假期全部冰島自駕與跟團行程，可依類型、季節、天數與路線篩選比較。",
       locale,
     ),
     path: "/iceland",
@@ -20,17 +22,22 @@ export async function generateMetadata() {
 
 export default async function IcelandPage() {
   const locale = await getRequestLocale();
+  const items = await getTripCatalogItemsWithFromPrices(locale);
 
   return (
-    <SelectionPage
+    <TripsCatalogShell
+      activeLabel={t("nav.trips", locale)}
+      variant="compact"
       eyebrow="MEET IN ICELAND"
       title={localizeText("冰島集合", locale)}
-      subtitle={localizeText(
-        "選擇您的旅行方式，跟團、自駕或體驗，各有精彩。",
+      description={localizeText(
+        `${items.length} 套精選自駕與跟團行程，可依天數與季節篩選比較。`,
         locale,
       )}
-      tagline="GROUP TOUR, SELF-DRIVE, OR UNIQUE EXPERIENCES AWAIT."
-      options={localizeTripOptions(ICELAND_OPTIONS, locale)}
-    />
+    >
+      <Suspense fallback={<p className="text-sm text-foreground/60">載入行程中…</p>}>
+        <TripCatalogGrid items={items} layout="sidebar" />
+      </Suspense>
+    </TripsCatalogShell>
   );
 }

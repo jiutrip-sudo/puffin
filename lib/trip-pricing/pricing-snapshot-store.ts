@@ -117,6 +117,13 @@ async function writeFileSnapshot(snapshot: PackagePricingSnapshot): Promise<void
 export async function readPackagePricingSnapshot(
   packageId: string,
 ): Promise<PackagePricingSnapshot | null> {
+  const preferLocal = process.env.PRICING_SNAPSHOT_PREFER_LOCAL === "1";
+
+  if (preferLocal) {
+    const fileSnapshot = await readFileSnapshot(packageId);
+    if (fileSnapshot) return fileSnapshot;
+  }
+
   const kvSnapshot = await readKvSnapshot(packageId);
   if (kvSnapshot) return kvSnapshot;
   return readFileSnapshot(packageId);

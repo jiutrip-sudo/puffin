@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
+import { AdminFxDriftBanner } from "@/components/admin/AdminFxDriftBanner";
 import { ADMIN_ROLE_LABELS } from "@/lib/admin/auth/roles";
 
 type AdminShellProps = {
@@ -43,6 +44,7 @@ export function AdminShell({ title, children }: AdminShellProps) {
           </button>
         </nav>
       </header>
+      <AdminFxDriftBanner />
       <main className="admin-shell__main">{children}</main>
     </div>
   );

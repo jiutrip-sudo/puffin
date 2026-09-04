@@ -9,6 +9,7 @@
     "lint": "eslint",
     "generate-hero": "node scripts/generate-hero.mjs",
     "sync-pricing": "SYNC_PRICING_CLI=1 npx tsx scripts/sync-trip-pricing.ts",
+    "suggest-fx": "node scripts/suggest-fx-rate.mjs",
     "audit:places": "node scripts/audit-place-names.mjs --fail",
     "audit:tw": "node scripts/audit-tw-terms.mjs",
     "db:migrate-bookings": "node scripts/migrate-bookings-to-neon.mjs",

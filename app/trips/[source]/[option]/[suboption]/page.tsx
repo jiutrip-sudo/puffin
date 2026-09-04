@@ -2,7 +2,6 @@ import { notFound } from "next/navigation";
 import { HeroSection } from "@/components/HeroSection";
 import { PillButton } from "@/components/PillButton";
 import { SiteHeader } from "@/components/SiteHeader";
-import { TransitionBar } from "@/components/TransitionBar";
 import { LocaleLink } from "@/components/LocaleLink";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 import { getLocalizedTripLabels } from "@/lib/i18n/trip-metadata";
@@ -98,16 +97,6 @@ export default async function TripSuboptionPage({ params }: PageProps) {
     />
   );
 
-  const footer = (
-    <TransitionBar
-      tags={[
-        `#${suboptionLabel}`,
-        `#${optionLabel}`,
-        `#${localize("冰島之旅")}`,
-      ]}
-    />
-  );
-
   const daySubtitle = localize("選擇您的行程天數，我們將為您規劃最適合的路線。");
 
   if (option === "self-drive" && suboption === "summer") {
@@ -124,7 +113,6 @@ export default async function TripSuboptionPage({ params }: PageProps) {
         tagline="PICK YOUR IDEAL SUMMER SELF-DRIVE DURATION."
         align="center"
         priority={false}
-        footer={footer}
         header={header}
       >
         <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
@@ -152,7 +140,6 @@ export default async function TripSuboptionPage({ params }: PageProps) {
         tagline="PICK YOUR IDEAL SUMMER GROUP TOUR DURATION."
         align="center"
         priority={false}
-        footer={footer}
         header={header}
       >
         <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
@@ -180,7 +167,6 @@ export default async function TripSuboptionPage({ params }: PageProps) {
         tagline="PICK YOUR IDEAL WINTER GROUP TOUR DURATION."
         align="center"
         priority={false}
-        footer={footer}
         header={header}
       >
         <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
@@ -208,7 +194,6 @@ export default async function TripSuboptionPage({ params }: PageProps) {
         tagline="PICK YOUR IDEAL WINTER SELF-DRIVE DURATION."
         align="center"
         priority={false}
-        footer={footer}
         header={header}
       >
         <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
@@ -233,7 +218,6 @@ export default async function TripSuboptionPage({ params }: PageProps) {
         align="center"
         highlightTitle
         priority={false}
-        footer={footer}
         header={header}
       />
     );
@@ -248,7 +232,6 @@ export default async function TripSuboptionPage({ params }: PageProps) {
       )}
       align="start"
       priority={false}
-      footer={footer}
       header={header}
     />
   );
