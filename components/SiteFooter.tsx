@@ -83,6 +83,14 @@ export function SiteFooter({ locale }: { locale: SiteLocale }) {
 
         <div className="mt-3 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-[10px] text-white/45">
           <LocaleLink
+            href="/booking/lookup"
+            locale={locale}
+            className="transition-colors hover:text-primary-light"
+          >
+            {t("nav.lookupBooking", locale)}
+          </LocaleLink>
+          <span aria-hidden="true">·</span>
+          <LocaleLink
             href="/terms-and-conditions"
             locale={locale}
             className="transition-colors hover:text-primary-light"
@@ -100,7 +108,7 @@ export function SiteFooter({ locale }: { locale: SiteLocale }) {
         </div>
 
         <p className="mt-2 text-center text-[8px] tracking-wide text-white/35 sm:mt-5 sm:text-[10px] md:mt-1.5">
-          © {new Date().getFullYear()}
+          © {new Date().getFullYear()} Puffin Holiday｜帕芬假期
         </p>
       </div>
     </footer>

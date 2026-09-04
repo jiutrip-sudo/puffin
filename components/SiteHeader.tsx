@@ -19,30 +19,6 @@ type SiteHeaderProps = {
   onSurface?: boolean;
 };
 
-function HeaderActions({ rightSlot }: { rightSlot?: React.ReactNode }) {
-  const locale = useSiteLocale();
-
-  return (
-    rightSlot ?? (
-      <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
-        <LocaleLink
-          href="/booking/lookup"
-          locale={locale}
-          className="hidden rounded-full border border-foreground/15 px-3 py-2 text-xs font-semibold text-hero-text/85 transition-colors hover:bg-foreground/8 sm:inline-flex"
-        >
-          {t("nav.lookupBooking", locale)}
-        </LocaleLink>
-        <a
-          href={`mailto:${OFFICE_EMAIL}`}
-          className="glass-hero rounded-full px-3 py-2 text-xs font-semibold text-hero-text transition-all hover:bg-white/25 sm:px-4"
-        >
-          {t("nav.needHelp", locale)}
-        </a>
-      </div>
-    )
-  );
-}
-
 export function SiteHeader({
   activeLabel,
   rightSlot,
@@ -70,7 +46,7 @@ export function SiteHeader({
           <div className="flex shrink-0 items-center justify-end gap-1.5">
             <LocaleControlsBar />
             <ThemeControlsBar />
-            <HeaderActions rightSlot={rightSlot} />
+            {rightSlot}
           </div>
         </div>
 
@@ -106,7 +82,7 @@ export function SiteHeader({
           <div className="flex shrink-0 items-center justify-end gap-2 justify-self-end">
             <LocaleControlsBar />
             <ThemeControlsBar />
-            <HeaderActions rightSlot={rightSlot} />
+            {rightSlot}
           </div>
         </div>
       </div>
