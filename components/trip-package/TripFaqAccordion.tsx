@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import type { FaqGroup } from "@/lib/trip-packages/types";
+import { FaqAnswerContent } from "./FaqAnswerContent";
 
 type TripFaqAccordionProps = {
   groups: FaqGroup[];
@@ -49,9 +50,7 @@ export function TripFaqAccordion({ groups }: TripFaqAccordionProps) {
                   </button>
                   {isOpen && (
                     <div className="border-t border-foreground/10 px-5 py-4">
-                      <p className="text-sm leading-relaxed text-foreground/75 whitespace-pre-line">
-                        {item.answer}
-                      </p>
+                      <FaqAnswerContent answer={item.answer} />
                     </div>
                   )}
                 </div>

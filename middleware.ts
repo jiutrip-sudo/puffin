@@ -22,7 +22,27 @@ function applyLocaleCookie(response: NextResponse, locale: string) {
   });
 }
 
+function parseLocaleHeader(value: string | null): "zh-CN" | "zh-TW" | null {
+  if (value === "zh-CN" || value === "zh-TW") {
+    return value;
+  }
+  return null;
+}
+
 function handleLocale(request: NextRequest): NextResponse {
+  // `/zh-cn/*` rewrite 會再觸發一次 middleware；保留已判定的語系，避免被覆寫成 zh-TW。
+  const resolvedLocale = parseLocaleHeader(
+    request.headers.get(SITE_LOCALE_HEADER),
+  );
+  if (resolvedLocale) {
+    const response = NextResponse.next({
+      request: { headers: request.headers },
+    });
+    response.headers.set(SITE_LOCALE_HEADER, resolvedLocale);
+    applyLocaleCookie(response, resolvedLocale);
+    return response;
+  }
+
   const { pathname } = request.nextUrl;
   const isZhCn =
     pathname === LOCALE_PREFIX || pathname.startsWith(`${LOCALE_PREFIX}/`);
