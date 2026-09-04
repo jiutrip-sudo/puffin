@@ -12,6 +12,7 @@
     "suggest-fx": "node scripts/suggest-fx-rate.mjs",
     "audit:places": "node scripts/audit-place-names.mjs --fail",
     "audit:tw": "node scripts/audit-tw-terms.mjs",
+    "normalize:modal-tw": "npx tsx scripts/normalize-trip-spot-modals.ts --phase=all",
     "db:migrate-bookings": "node scripts/migrate-bookings-to-neon.mjs",
     "db:migrate-dynamic-promos": "node scripts/migrate-dynamic-promos-to-neon.mjs",
     "db:ensure-auth": "node scripts/ensure-auth-tables.mjs"

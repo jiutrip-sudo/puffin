@@ -1,7 +1,9 @@
 "use client";
 
 import { TripImage } from "@/components/trip-package/TripImage";
-import { useCallback, useEffect, useState } from "react";
+import { useSiteLocale } from "@/components/SiteLocaleProvider";
+import { localizeTripSpot } from "@/lib/trip-packages/localize-trip-spot";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import type { TripAttraction } from "@/lib/trip-packages/types";
 import {
   TRIP_SPOT_CARD_RADIUS,
@@ -16,10 +18,15 @@ type TripSpotDetailModalProps = {
 };
 
 export function TripSpotDetailModal({ spot, onClose }: TripSpotDetailModalProps) {
+  const locale = useSiteLocale();
+  const displaySpot = useMemo(
+    () => localizeTripSpot(spot, locale),
+    [spot, locale],
+  );
   const [galleryIndex, setGalleryIndex] = useState(0);
 
-  const activeGallery = spotGallery(spot);
-  const activeParagraphs = spotParagraphs(spot);
+  const activeGallery = spotGallery(displaySpot);
+  const activeParagraphs = spotParagraphs(displaySpot);
 
   const showGalleryPrev = useCallback(() => {
     setGalleryIndex((index) =>
@@ -37,7 +44,7 @@ export function TripSpotDetailModal({ spot, onClose }: TripSpotDetailModalProps)
 
   useEffect(() => {
     setGalleryIndex(0);
-  }, [spot.name, spot.imageUrl]);
+  }, [displaySpot.name, displaySpot.imageUrl]);
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -77,9 +84,9 @@ export function TripSpotDetailModal({ spot, onClose }: TripSpotDetailModalProps)
 
         <div className="overflow-y-auto">
           <div className="px-6 pb-8 pt-10 md:px-10">
-            {spot.region && (
+            {displaySpot.region && (
               <p className="mb-3 text-sm font-semibold text-primary">
-                {spot.region}
+                {displaySpot.region}
               </p>
             )}
 
@@ -87,12 +94,14 @@ export function TripSpotDetailModal({ spot, onClose }: TripSpotDetailModalProps)
               id="spot-modal-title"
               className="pr-12 text-2xl font-bold leading-tight text-foreground md:text-[28px]"
             >
-              {spot.nameEn ? `${spot.name} | ${spot.nameEn}` : spot.name}
+              {displaySpot.nameEn
+                ? `${displaySpot.name} | ${displaySpot.nameEn}`
+                : displaySpot.name}
             </h4>
 
-            {spot.subtitle && (
+            {displaySpot.subtitle && (
               <p className="mt-6 text-base font-bold leading-relaxed text-foreground">
-                {spot.subtitle}
+                {displaySpot.subtitle}
               </p>
             )}
 
@@ -112,7 +121,7 @@ export function TripSpotDetailModal({ spot, onClose }: TripSpotDetailModalProps)
                   >
                     <TripImage
                       src={spotImageSrc(activeGallery[galleryIndex], 1200)}
-                      alt={spot.name}
+                      alt={displaySpot.name}
                       fill
                       className={`object-cover ${TRIP_SPOT_CARD_RADIUS}`}
                       sizes="800px"

@@ -205,6 +205,17 @@ export const PLACE_CN_OVERRIDES = buildPlaceCnOverrides();
 export function normalizePlaceAliases(text: string): string {
   let out = text;
   for (const [alias, tw] of PLACE_ALIAS_TO_TW) {
+    if (alias === tw) continue;
+
+    const suffix = tw.slice(alias.length);
+    if (suffix) {
+      const escapedAlias = alias.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      const escapedSuffix = suffix.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      const re = new RegExp(`${escapedAlias}(?!${escapedSuffix})`, "g");
+      out = out.replace(re, tw);
+      continue;
+    }
+
     out = out.split(alias).join(tw);
   }
   return out;

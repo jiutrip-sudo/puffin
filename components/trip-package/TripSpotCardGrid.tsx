@@ -1,7 +1,9 @@
 "use client";
 
 import { TripImage } from "@/components/trip-package/TripImage";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useSiteLocale } from "@/components/SiteLocaleProvider";
+import { localizeTripSpot } from "@/lib/trip-packages/localize-trip-spot";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { TripAttraction } from "@/lib/trip-packages/types";
 import { TripSpotDetailModal } from "./TripSpotDetailModal";
 import { TRIP_SPOT_CARD_RADIUS, spotImageSrc } from "./trip-spot-media";
@@ -25,6 +27,11 @@ export function TripSpotCardGrid({
   prevButtonLabel = "上一組",
   nextButtonLabel = "下一組",
 }: TripSpotCardGridProps) {
+  const locale = useSiteLocale();
+  const displayItems = useMemo(
+    () => items.map((spot) => localizeTripSpot(spot, locale)),
+    [items, locale],
+  );
   const scrollRef = useRef<HTMLDivElement>(null);
   const [activeSpot, setActiveSpot] = useState<TripAttraction | null>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
@@ -70,11 +77,11 @@ export function TripSpotCardGrid({
       el.removeEventListener("scroll", updateScrollButtons);
       window.removeEventListener("resize", updateScrollButtons);
     };
-  }, [items.length, updateScrollButtons]);
+  }, [displayItems.length, updateScrollButtons]);
 
-  const showCarouselArrows = items.length > 1;
+  const showCarouselArrows = displayItems.length > 1;
 
-  if (items.length === 0) {
+  if (displayItems.length === 0) {
     return null;
   }
 
@@ -108,11 +115,11 @@ export function TripSpotCardGrid({
           className="trip-spot-scroll -mx-4 flex gap-6 overflow-x-auto scroll-pl-4 scroll-pr-4 px-4 pb-1 md:mx-0 md:scroll-pl-0 md:scroll-pr-0 md:px-0 snap-x snap-mandatory [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           aria-label={scrollAriaLabel}
         >
-          {items.map((spot) => (
+          {displayItems.map((spot, index) => (
             <button
               key={`${spot.nameEn ?? spot.name}-${spot.imageUrl}`}
               type="button"
-              onClick={() => openSpot(spot)}
+              onClick={() => openSpot(items[index])}
               className={`group w-[159px] shrink-0 cursor-pointer snap-start overflow-hidden ${TRIP_SPOT_CARD_RADIUS} border border-foreground/5 bg-background text-left shadow-sm transition-[transform,box-shadow,ring-color] hover:scale-[1.02] hover:shadow-md hover:ring-2 hover:ring-primary/35 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2`}
               aria-label={`${cardAriaLabelPrefix}：${spot.name}`}
             >
