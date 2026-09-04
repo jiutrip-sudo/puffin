@@ -6,16 +6,17 @@ export const diamondBeachSpot: TripAttraction = {
   name: PLACE_TW.diamondBeach,
   nameEn: "The Diamond Beach",
   region: "冰島東部",
-  subtitle: "雕琢於大海之中，閃耀在陽光之下。親身前往鑽石沙灘，捕捉千年冰山的異世景象。",
+  subtitle: "冰河湖漂來的浮冰，躺在黑沙灘上",
   imageUrl: IMG("diamond_beach_unsplash_11020ebd2f.jpg"),
   galleryImages: [
     IMG("diamond_beach_unsplash_11020ebd2f.jpg"),
     IMG("diamond_beach_unsplash2_8710988286.jpg"),
   ],
   paragraphs: [
-    "當冰山遇上黑沙灘",
-    `鑽石沙灘（The Diamond Beach）的原名是Breiðamerkursandur沙灘，位於冰島南部，瓦特納冰川（Vatnajökull）南端${PLACE_TW.jokulsarlon}附近。鑽石沙灘的得名是因為沙灘上晶瑩剔透的透明體，而這些實際上並不是鑽石，而是傑古沙龍冰河湖上的漂浮的冰山隨河流流向大西洋中，擱淺在了黢黑的沙灘上。伴隨著洶湧的大西洋海浪，透亮的冰山與暗黑的沙灘透露著一絲詭譎異世的氣氛。`,
-    `冰島以黑沙灘聞名於世，而鑽石海灘也當然不是冰島唯一的黑色海灘，其中最有名的黑沙灘之一當屬位於${PLACE_TW.vik}附近的${PLACE_TW.reynisfjara}。這些黑沙灘的形成得歸因於冰島的火山地貌。當火山熔岩與冰冷的海水接觸後迅速冷卻形成玄武岩，隨著時間的推移，碎裂的玄武岩變得越來越小，最終變成了沙子。`,
-    "全年的任何時候都適合造訪鑽石海灘。夏季陽光充足，日照時間長，交通也較為便利安全；沙灘上的冰塊來自冰川，夏季也不會融化，反而在陽光下更加耀眼。冬季北大西洋海面氣勢磅礡，海浪拍打黑色沙灘，景色更為壯觀；金色日落也讓白天格外上鏡。幸運的話，還有機會在鑽石海灘上看見北極光。冬季造訪請務必穿暖，並與海浪保持安全距離。",
+    "浮冰與黑沙形成的強烈對比",
+    `${PLACE_TW.diamondBeach}（The Diamond Beach，Breiðamerkursandur）位在${PLACE_TW.jokulsarlon}出口河道旁。冰河湖上的浮冰經河水帶向大海，部分碎冰被海浪推回岸邊，散落在黑色沙灘上，在陽光下晶亮閃爍，因而得名。`,
+    `冰島以火山地貌聞名，黑色沙灘來自玄武岩長年風化；南岸的${PLACE_TW.reynisfjara}是另一處代表。鑽石沙灘的獨特之處，在於「透明浮冰 × 黑沙」的視覺反差——同一條海岸線上，冰川與大海在此交會。`,
+    "全年皆可造訪：夏季日照充足，冰塊在陽光下更為剔透；冬季海浪氣勢磅礡，搭配日落或極光時，畫面格外上鏡。請穿防滑鞋、注意保暖，並與海浪保持安全距離——此處同樣可能出現突如其來的大浪。",
+    `建議與${PLACE_TW.jokulsarlon}排在一起：先在瀉湖岸邊看遠方冰川，再步行至鑽石沙灘近距離觀察碎冰。請勿踩踏或搬動浮冰，也避免為了拍照而靠近危險浪區。`,
   ],
 };

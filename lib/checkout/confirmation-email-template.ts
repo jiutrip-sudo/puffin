@@ -316,7 +316,7 @@ function buildSharedOrderBodyHtml(
 
 function buildStaffActionCalloutHtml(data: CheckoutConfirmationEmailData): string {
   const message = data.awaitingSupplier
-    ? "請先向供應商（森林貓）確認可成團，再於後台標記「供應商已確認」並通知旅客付款。"
+    ? "請先向供應商（帕芬假期）確認可成團，再於後台標記「供應商已確認」並通知旅客付款。"
     : "請於 3 個工作天內聯絡旅客、確認付款入帳，並於系統更新訂單狀態。";
 
   return `

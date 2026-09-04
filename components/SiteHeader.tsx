@@ -28,7 +28,7 @@ export function SiteHeader({
 
   const navLinks = [
     { label: t("nav.about", locale), href: "/" },
-    { label: t("nav.trips", locale), href: "/iceland" },
+    { label: t("nav.trips", locale), href: "/trips" },
     { label: t("nav.guides", locale), href: "/guides" },
     { label: t("nav.service", locale), href: "/terms-and-conditions" },
     { label: t("nav.contact", locale), href: `mailto:${OFFICE_EMAIL}` },

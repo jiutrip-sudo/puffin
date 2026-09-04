@@ -1,1607 +1,181 @@
 import type { TripAttraction } from "./types";
+import { beerSpaSpot } from "./spots/beer-spa";
+import { hauganesWhaleFishingSpot } from "./spots/hauganes-whale-fishing";
+import { geoseaSpot } from "./spots/geosea";
+import { geothermalHorseRidingSpot } from "./spots/geothermal-horse-riding";
+import { reykjavikSeaAnglingSpot } from "./spots/reykjavik-sea-angling";
+import { vokBathsSpot } from "./spots/vok-baths";
+import { fjallsarlonBoatSpot } from "./spots/fjallsarlon-boat";
+import { jokulsarlonZodiacBoatSpot } from "./spots/jokulsarlon-zodiac-boat";
+import { jokulsarlonKayakSpot } from "./spots/jokulsarlon-kayak";
+import { jokulsarlonAmphibianBoatSpot } from "./spots/jokulsarlon-amphibian-boat";
+import { reynisfjaraAtvSpot } from "./spots/reynisfjara-atv";
+import { hvammsvikTicketSpot } from "./spots/hvammsvik-ticket";
+import { laugarasLagoonSpot } from "./spots/laugaras-lagoon";
+import { vikHorseRidingSpot } from "./spots/vik-horse-riding";
+import { planeWreckShuttleSpot } from "./spots/plane-wreck-shuttle";
+import { husavikWhaleWatchingSpot } from "./spots/husavik-whale-watching";
+import { myvatnNatureBathsSpot } from "./spots/myvatn-nature-baths";
+import { kraumaSpot } from "./spots/krauma";
+import { skaftafellGlacierHikingSpot } from "./spots/skaftafell-glacier-hiking";
+import { vidgelmirLavaCaveSpot } from "./spots/vidgelmir-lava-cave";
+import { reykjavikWhaleWatchingSpot } from "./spots/reykjavik-whale-watching";
+import { solheimajokullGlacierHikingSpot } from "./spots/solheimajokull-glacier-hiking";
+import { fontanaSpot } from "./spots/fontana";
+import { snowmobileLangjokullSpot } from "./spots/snowmobile-langjokull";
+import { katlaIceCaveSpot } from "./spots/katla-ice-cave";
+import { vikLavaShowSpot } from "./spots/vik-lava-show";
+import { blueLagoonComfortSpot } from "./spots/blue-lagoon-comfort";
+import { perlanMuseumSpot } from "./spots/perlan-museum";
+import { reykjavikLavaShowSpot } from "./spots/reykjavik-lava-show";
+import { flyoverIcelandSpot } from "./spots/flyover-iceland";
+import { langjokullIceTunnelSpot } from "./spots/langjokull-ice-tunnel";
+import { silfraSnorkelingSelfDriveSpot } from "./spots/silfra-snorkeling-self-drive";
+import { studlagilSpot } from "./spots/studlagil";
+import { akureyriBotanicalGardenSpot } from "./spots/akureyri-botanical-garden";
+import { akureyrarkirkjaSpot } from "./spots/akureyrarkirkja";
+import { fridheimarSpot } from "./spots/fridheimar";
+import { blonduosSpot } from "./spots/blonduos";
+import { faskrudsfjordurSpot } from "./spots/faskrudsfjordur";
+import { djupivogurSpot } from "./spots/djupivogur";
+import { grjotagjaSpot } from "./spots/grjotagja";
+import { dettifossSpot } from "./spots/dettifoss";
+import { husavikSpot } from "./spots/husavik";
+import { hofnSpot } from "./spots/hofn";
+import { dimmuborgirSpot } from "./spots/dimmuborgir";
+import { hvammstangiSpot } from "./spots/hvammstangi";
+import { vestrahornSpot } from "./spots/vestrahorn";
+import { skutustadagigarSpot } from "./spots/skutustadagigar";
+import { seydisfjordurSpot } from "./spots/seydisfjordur";
+import { keflavikAirportSpot } from "./spots/keflavik-airport";
+import { myvatnGeothermalSpot } from "./spots/myvatn-geothermal";
+import { egilsstadirSpot } from "./spots/egilsstadir";
+import { kirkjubaejarklausturSpot } from "./spots/kirkjubaejarklaustur";
+import { reykholtSpot } from "./spots/reykholt";
+import { eldhraunSpot } from "./spots/eldhraun";
+import { keridSpot } from "./spots/kerid";
+import { vatnajokullSpot } from "./spots/vatnajokull";
+import { dyrholaeySpot } from "./spots/dyrholaey";
+import { planeWreckSpot } from "./spots/plane-wreck";
+import { gljufrabuiSpot } from "./spots/gljufabui";
+import { vikSpot } from "./spots/vik";
+import { deildartunguhverSpot } from "./spots/deildartunguhver";
+import { barnafossSpot } from "./spots/barnafoss";
+import { hraunfossarSpot } from "./spots/hraunfossar";
+import { akureyriSpot } from "./spots/akureyri";
+import { myvatnSpot } from "./spots/myvatn";
+import { godafossSpot } from "./spots/godafoss";
+import { gullfossSpot } from "./spots/gullfoss";
+import { geysirSpot } from "./spots/geysir";
+import { thingvellirSpot } from "./spots/thingvellir";
+import { diamondBeachSpot } from "./spots/diamond-beach";
+import { jokulsarlonSpot } from "./spots/jokulsarlon";
+import { reynisdrangarSpot } from "./spots/reynisdrangar";
+import { reynisfjaraSpot } from "./spots/reynisfjara";
+import { skogafossSpot } from "./spots/skogafoss";
+import { seljalandsfossSpot } from "./spots/seljalandsfoss";
+import { reykjavikSpot } from "./spots/reykjavik";
 
-const IMG = (file: string) =>
-  `https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/${file}`;
 
 export const icelandSelfDriveSummer9Day2Highlights: TripAttraction[] = [
-  {
-    name: "辛格維利爾國家公園",
-    nameEn: "Þingvellir National Park",
-    region: "冰島南部",
-    subtitle: "穿越時空，近距離了解最冰島的自然和文化。",
-    imageUrl: IMG("thingve_Ilir_unsplash_bea6a68605.jpg"),
-    galleryImages: [
-      IMG("thingve_Ilir_unsplash_bea6a68605.jpg"),
-      IMG("thingvellir_unsplash3_4b40480cfd.jpg"),
-      IMG("thingvellir_unsplash2_ebd6ece138.jpg"),
-    ],
-    paragraphs: [
-      "在辛格維利爾國家公園追隨維京人的腳步",
-      "辛格維利爾國家公園（Þingvellir National Park，又譯為辛格維勒國家公園）位於冰島西南部，距離冰島首都雷克雅維克東北約40公里，是冰島著名黃金圈路線的三大景點之一。辛格維利爾國家公園地處北美板塊和歐亞板塊分離所產生的巨大裂谷邊緣，也是冰島最早議會所在地，是一個具有重要歷史、文化和自然意義的地方，也是冰島最受歡迎的旅遊目的地之一。",
-      "公元930年，議會在辛格維利爾國家公園的平原上成立，標誌著冰島作為一個獨立國家的存在。園內地標法律石（Lögberg ）據說是世界上第一個議會聚集的地方，自930年以來，這裡見證了無數法律的裁決與正義的伸張。1928年，冰島通過立法保護議會遺址，兩年後，辛格維利爾國家公園正式建成，成為了冰島全國第一個國家公園。",
-      "Öxarárfoss是園內最受歡迎的景點之一，這條高13米、寬20米的瀑布在冬季會完全凍結，是攀冰愛好者的最愛。旅客除了通過步行路線遊覽公園，還可以體驗例如垂釣和浮潛等多種多樣的活動。公園南側的辛格瓦德拉湖是冰島境內最大的天然湖泊，湖中有褐鱒魚和各式的北極鮭魚，是全國數一數二的垂釣地點。另外，因驚人的能見度而世界聞名的絲浮拉大裂縫（Silfra）也位於國家公園範圍內。如果滿足有關潛水資格和規定，則能夠潛入清澈冰冷的地下水一探究竟。如果沒有潛水證，那麼參加帕芬假期旅行的浮潛團則是一個更好的選擇，潛水小白也能夠自在地領略絲浮拉的美麗。",
-      "在冰島，或許沒有任何一個地方比辛格維利爾國家公園在歷史、文化和自然方面更加重要。由於其獨特的地位和對世界以及冰島本國的重要價值，辛格維利爾國家公園在2004年被列為聯合國教科文組織世界遺產。",
-    ],
-  },
-  {
-    name: "蓋錫爾間歇泉地帶",
-    nameEn: "The Great Geysir and Strokkur",
-    region: "冰島南部",
-    subtitle: "感受來自地表之下的自然力量",
-    imageUrl: IMG("be5ba64f349aa795f653231dac5e44a_fa8600600a.jpg"),
-    galleryImages: [
-      IMG("be5ba64f349aa795f653231dac5e44a_fa8600600a.jpg"),
-      IMG("geysir_unsplash_83e7e7b45e.jpg"),
-      IMG("geysir_unsplash2_dd17e22e52.jpg"),
-      IMG("geysir_unsplash3_82d9f4f9ea.jpg"),
-    ],
-    paragraphs: [
-      "見證間歇泉噴發時刻",
-      "Geysir間歇泉被人們稱為蓋錫爾間歇泉地帶（The Great Geysir），是現代歐洲人所知的第一個間歇泉，甚至英文中表示“間歇泉”的單詞“Geyser”就是因它而得名。它坐落於冰島西南岸的Haukadalur山谷中，與辛格維利爾國家公園（Þingvellir National Park）和黃金瀑布（Gullfoss）共同組成了聞名遐邇的冰島黃金圈線路。",
-      "研究表明，蓋錫爾間歇泉已經存在了約1萬年，它最高的一次噴發是在1845年，噴發高度約為170米。但由於地殼運動和人類行為，它目前處於沉寂狀態。上世紀，冰島人曾嘗試多種方法使其噴發，例如在噴口周圍開鑿通道以降低地下水位，或是向噴泉口丟入肥皂，但這些行為後來引發了關於環境保護的爭議，因此在上世紀90年代被叫停。",
-      "不過旅客倒不必擔心無法看到間歇泉噴發，Geysir間歇泉向南50米的史托克間歇泉（Strokkur）是目前最為活躍的間歇泉，也是吸引旅客數量最多的間歇泉。 它每5-10分鐘噴發一次，高達約30米左右，噴發出的水柱溫度超過100攝氏。",
-      "需要注意的是，由於間歇泉的水溫極高，可能導致嚴重的人員傷亡，其周圍設有指定區域，出於安全考慮，一定要呆在這些區域內，確保與間歇泉保持一定的距離，也不要向間歇泉、地熱池和火山噴氣口扔東西。",
-    ],
-  },
-  {
-    name: "黃金瀑布",
-    nameEn: "Gullfoss",
-    region: "冰島南部",
-    subtitle: "一起探索通往冰島最大瀑布之一的道路",
-    imageUrl: IMG("gullfoss1_9c5319c04c.jpg"),
-    galleryImages: [
-      IMG("gullfoss1_9c5319c04c.jpg"),
-      IMG("gullfoss2_4aa3699337.jpg"),
-      IMG("gullfoss3_62d8e5e998.jpg"),
-    ],
-    paragraphs: [
-      "在陽光下流動的黃金",
-      "黃金瀑布（Gullfoss）位於Haukadalur山谷的Hvítá河上，是冰島最受歡迎的旅遊景點之一，也和辛格維利爾國家公園（Þingvellir National Park）、蓋錫爾間歇泉地帶（Geysir）組成了著名的黃金圈線路。許多人認為這裡是冰島最美的瀑布，沒錯，即使冰島有數以千計的瀑布，但也許沒有一條像黃金瀑布一樣聞名於世。",
-      "黃金瀑布的得名，是因為在陽光明媚的日子裡，瀑布的水會呈現出美妙夢幻的金褐色。從科學的角度解釋，是因為瀑布水是冰川水，攜帶著多年來大量冰川冰從陸地上鑿下的沉積物。",
-      "黃金瀑布由兩段瀑布組合而成，一段高11米，另一段高21米，流入下方長達2.5公里寬約20米的裂縫中。在冰河時代末期，巨大的洪水造成了這條裂縫，而不斷的水流侵蝕使它每年延長25釐米。這裡平均水流速度為每秒109立方米，冬季平均流速為每秒80立方米，夏季的水流速度會提高至每秒130立方米。",
-      "在冬季，黃金瀑布是最受風光攝影師們歡迎的地方之一，因為這裡是拍攝北極光的絕佳地點。不過，瀑布周圍狹窄的小路上可能會結冰，因此如果您在冬季遊覽黃金瀑布，我們強烈建議您不要離開主路。",
-    ],
-  },
-  {
-    name: "凱瑞斯火山口",
-    nameEn: "Kerið Crater",
-    region: "冰島南部",
-    subtitle: "黃金圈線路旁一處小眾但絕對精彩的視覺盛宴。",
-    imageUrl: IMG("kerid1_f15da5c881.jpg"),
-    galleryImages: [
-      IMG("kerid1_f15da5c881.jpg"),
-      IMG("kerid2_06a579efeb.jpg"),
-      IMG("kerid3_467079c053.jpg"),
-      IMG("Kerid_1a2aee2f66.jpg"),
-    ],
-    paragraphs: [
-      "有著三千年歷史的休眠火山口",
-      "凱瑞斯火山口（Kerið Crater）位於冰島南部，處在黃金圈附近，距離辛格維利爾國家公園（Þingvellir National Park）僅有 40 分鐘的車程。火山口在視覺上極具辨識度，藍綠色湖水與耀眼的紅色巖坡交相輝映，倍受喜愛小眾景點的旅客的青睞。",
-      "凱瑞斯火山口長 270 米，寬 170 米，深 55 米，並有著3000多年的歷史，是整個Tjarnarhólar火山群中最大的一個火山口，也是受到自然保護的景點之一。火山口最令人眼前一亮的特點當屬覆蓋著火山口周圍的鮮豔的紅色火山岩，這是由於火山口周邊由於礦物質鐵含量較高，因此形成了這一獨特的色彩景觀。除了紅色的火山岩石，湖水周圍還長滿了生機勃勃的綠色苔蘚。熱烈鮮豔的紅綠色彩與火山口底部清澈無比的湛藍湖水交相輝映，呈現出一副大膽、夢幻的畫卷。旅客可以繞著火山口行走，近距離欣賞湖景。",
-      "據信，凱瑞斯火山口是在 6500 年前的一次爆炸噴發中形成的。如今，大多數科學家都認為，凱裡德是一座錐形火山，噴發後巖漿庫枯竭。火山爆發使火山地基自行倒塌，形成了我們今天看到的火山口。傳說這裡的湖水會與位於Grímsnes地區的Búrfell山上的湖相連，每當火山口裡的湖水水位上漲時，Búrfell山上的湖水水位就會下降，而火山口湖水水位下降時，山上的湖水水位就會上漲。",
-    ],
-  },
-  {
-    name: "番茄農場",
-    nameEn: "Friðheimar",
-    region: "冰島南部",
-    subtitle: "在花香四溢的溫室內享受酸甜美味",
-    imageUrl: IMG("Fridheimar2_d71535f8dd.jpg"),
-    galleryImages: [
-      IMG("Fridheimar2_d71535f8dd.jpg"),
-      IMG("Fridheimar1_48768273b3.jpg"),
-    ],
-    paragraphs: [
-      "體驗冰島鄉土的絕佳去處",
-      "Friðheimar番茄農場於1995年創立，這裡是一個家庭農場，由農學家克努圖爾與他的妻子海倫娜以及他們的五個孩子共同經營。",
-      "Friðheimar番茄農場全年在溫室中種植番茄與黃瓜，設定了高標準的生產要求，追求天然、環保的種植理念。溫室的熱量供應得益於冰島豐富的天然地熱資源，由地熱蒸汽產生的二氧化碳也加強了植物的光合作用。電力則來自同樣綠色的水力和地熱發電廠，在如此偏北的緯度為作物的全年生長提供了必要的人工照明。在害蟲治理方面，農場利用生物防治技術，利用天敵消滅危害番茄植株的主要害蟲。另外，農場每隔幾週從荷蘭引進蜜蜂，這些忙碌的工蜂一天可以為多達2000朵番茄花完成授粉，很好地代替了人工授粉。",
-      "客人可以自由參觀溫室，了解冰島人是如何在大自然的幫助下實現全年種植蔬菜的。在地中海式的溫室餐廳品嚐他們招牌的番茄佳餚以及番茄基底的雞尾酒，還有農場自制食品，例如番茄醬、黃瓜辣醬和番茄果汁。另外，農場裡還飼養有馬匹，提供14種語言的馬術表演，結束後客人可以參觀馬廄，與可愛的馬兒們打個招呼、拍照或是與騎手交流一番。",
-      "Friðheimar番茄農場是一個對旅客來說較為小眾的景點，但實際上參觀番茄農場與黃金圈路線能夠完美結合，它距離黃金圈三大景點——辛格維利爾國家公園（Þingvellir National Park）、蓋錫爾間歇泉地帶（Geysir）和黃金瀑布（Gullfoss）的路程適中，距離雷克雅維克也只需要1小時左右車程。風景如畫的地熱小鎮弗呂濟（Flúðir）距此僅需10分鐘車程，旅客可以在參觀完農場之後前往秘密溫泉（Secret Lagoon）泡一場放鬆身心的熱湯。這裡適合各個年齡段的旅客，尤其是帶小朋友的客人，或是對冰島家庭農場生活充滿好奇的旅客。他們也被當地報紙稱為“冰雪中的綠洲”。",
-    ],
-  },
+    thingvellirSpot,
+    geysirSpot,
+    gullfossSpot,
+    keridSpot,
+    fridheimarSpot,
 ];
 
 export const icelandSelfDriveSummer9Day2OptionalActivities: TripAttraction[] = [
-  {
-    name: "絲浮拉大裂谷Silfra浮潛體驗（自駕集合）",
-    imageUrl: IMG("silfra_snorkeling_6_192e431aaf.jpg"),
-    galleryImages: [
-      IMG("silfra_snorkeling_6_192e431aaf.jpg"),
-      IMG("silfra_snorkeling_1_483bb2a929.jpg"),
-    ],
-    paragraphs: [
-      "絲浮拉大裂谷（Silfra）位於辛格維利爾國家公園（Þingvellir National Park）內，也是黃金圈景區的熱門旅遊景點之一。絲浮拉大裂谷形成於1789年，是北美板塊與亞歐板塊的分界，",
-      "絲浮拉大裂谷中的水雖然是來自朗格冰川（Langjökull） 的千年冰川水，但水溫卻可以常年保持在2～3攝氏，因此這裡全年都可以體驗浮潛項目。這裡的水經過火山岩常年累月的過濾，水質湛藍無比，十分清澈。",
-      "在絲浮拉大裂谷浮潛",
-      "浮潛安全條例：",
-      "在絲浮拉浮潛，並不需要潛水經驗或豐富的游泳經驗，但仍需滿足以下條件：",
-      "活動時長：",
-      "費用包含：",
-      "不包含：",
-      "參加乾衣浮潛時，潛水員會穿著幹潛水衣（Dry suit)",
-      "乾衣浮潛哪怕是游泳基礎薄弱的人也可以參加，潛水員在穿幹潛水衣下水前還能貼身套上柔軟保暖的打底裡衣，對於怕冷的客人但又想體驗水下活動的客人來說，乾衣潛水則是一個正好的選擇。",
-      "參加濕衣浮潛時，潛水員會穿著濕潛水衣（Wet suit）",
-      "參團注意事項：",
-      "1. 自駕前往客人需提前20-30分鐘到達集合點：Silfra 停車場 （“Thingvellir P5”，GPS: 64°15'23.3",
-      "2. 該活動為乾衣浮潛體驗，建議您穿著貼身保暖的打底裡衣、長於腳踝的襪子，方便和幹潛水衣疊加穿著。並建議您準備一套額外衣物以備不時之需。",
-      "3. 該浮潛團最少3人成團，若本次行程參團人數未達到3人，您將提前收到取行程取消通知，還請在行程開始前查看郵箱是否有關於行程的任何變更。",
-      "4. 行程的一應變更或取消等具體詳情還請參照帕芬假期旅行的服務條款執行",
-    ],
-  },
-  {
-    name: "朗格冰川雪地摩托體驗",
-    imageUrl: IMG("Snowmobiling_in_iceland_74161f17de.png"),
-    galleryImages: [
-      IMG("Snowmobiling_in_iceland_74161f17de.png"),
-      IMG("Snowmobiling_in_iceland_f4a729ddc9.jpg"),
-    ],
-    paragraphs: [
-      "冰島朗格冰川（Langjökull）是冰島最著名的冰川之一，也是旅客們前往冰島體驗雪地摩托的熱門目的地之一。這裡提供了令人難以置信的雪地摩托體驗，讓您可以在冰川上盡情馳騁。在參加活動前，專業嚮導會提供必要的訓練和指導，以確保參與者能夠安全地駕駛雪地摩托。",
-      "本次旅行將從黃金瀑布（Gullfoss）附近停車場出發，乘坐專屬超級吉普到達朗格冰川營地，您將獲得有關安全裝備，例如頭盔、專業防水騎行服、手套等，專業嚮導將會指導您穿戴齊全，為您講解如何安全駕駛雪地摩托，並在您正式開始騎行前為您檢查安全程序。在之後的騎行中，您可以盡情享受馳騁中的風光，嚮導也會為您講解冰川有關的知識和民間傳說。",
-      "適合人群：",
-      "最低參加年齡：",
-      "體驗包括：",
-      "不包括：",
-    ],
-  },
-  {
-    name: "冰島地熱溫泉區騎馬體驗",
-    imageUrl: IMG("icelandic_horse_riding_in_geothermal_hot_springs_area_fffc1c1c18.png"),
-    galleryImages: [
-      IMG("icelandic_horse_riding_in_geothermal_hot_springs_area_fffc1c1c18.png"),
-      IMG("3c_4_13fcb3c1c1.jpg"),
-    ],
-    paragraphs: [
-      "冰島全島遍佈各類地熱溫泉，而本次冰島馬騎行體驗，您將在冰島馬的陪伴下暢遊冰島溫泉地貌區。這些可愛的冰島小矮馬獨特而友善，它們將成為您的忠實夥伴，與您一同探索令人驚歎冰島自然美景。",
-      "在穿戴好騎行裝備後，您將同專業嚮導沿著挑選好的適合騎行的路線騎行，穿越雷克雅山（Reykjafjall）的山坡，沿途還會經過一片冰島罕見的翠綠森林。同時，本次騎行中，您還將穿過令人印象深刻且色彩繽紛的地熱溫泉區域。該地熱區位於有著“世界溫泉之都”之稱的惠拉蓋爾濟（Hveragerði）小鎮，這片地熱溫泉區在2008年的地震中不斷擴張變化，奇幻而神秘。",
-      "此外，冰島著名的地熱景觀：亨吉爾火山和南部低地廣闊平原之間的絕美火山地貌景觀也在等著您。在那裡，蒸汽在空中上升，宛如仙境一般，讓人心中湧起不可言說的奇妙之感。",
-      "行程結束後，您將回到馬廄，稍作休息後返回雷克雅維克。",
-      "集合地點",
-      "接送區域包括Reykjavik（雷克雅維克）、Hafnarfjörður（哈夫納夫約杜爾）、Mosfellsbær（莫斯菲爾拜爾）、Kópavogur（科帕沃於爾）。",
-      "接團時間為早上9點，詳細接站地點請在預定時聯繫後臺客服確認。",
-      "注意事項",
-      "1. 參加體驗的旅客體重需在120kg以下。",
-      "2. 建議您穿戴舒適的褲子與鞋靴、手套及暖脖套。",
-      "3. 在馬背上騎行時出於安全考慮，不能攜帶大型背包，如果您想攜帶相機，可以攜帶一個小腰包。",
-      "體驗時長：",
-      "最低參加年齡：",
-      "體驗包括：",
-      "不包括：",
-    ],
-  },
-  {
-    name: "Fontana豐塔納天然地熱溫泉入場票",
-    imageUrl: IMG("fontana_3a6aea54af.png"),
-    galleryImages: [
-      IMG("fontana_3a6aea54af.png"),
-      IMG("laugarvatn_fontana_drone_image_770df3d016_e80aa341ca.jpg"),
-    ],
-    paragraphs: [
-      "豐塔納天然地熱溫泉（Fontana）坐落在黃金圈沿線的Laugarvatn湖邊，面朝湖水，坐擁湖景山景，夏季怡人秀美，冬季純潔靜謐。如果您想要體驗一下小眾冰島溫泉的魅力，豐塔納將會是一個不錯的選擇。",
-      "豐塔納溫泉由多個溫泉池組成，Lauga、Sæla、Viska 是相連的室外礦泉溫泉池，三個泡池深度、大小和溫度各不相同，您可以選擇適合的泡池放鬆身心。其中熱水浴池 Viska建在稍高的樓層，可將周圍湖景環境盡收眼底，可以達到身心完全的享受。泡池邊還裝飾著冰島藝術家Erla Thorarinsdottir製作的有趣的石頭藝術品。",
-      "在這個獨特的冰島溫泉，湖泊、海灘與溫泉區域相連，您可以從溫泉池邊的碼頭步行進入涼爽的湖水，也可以在黑沙灘上漫步，感受溫度的變化。此外，冷水浴也被認為是對健康有益的活動，可以改善血液循環、加速緩解肌肉痠痛。",
-      "豐塔納還建有三間傳統蒸汽浴室，您可以邊享受湖景，邊享受天然蒸汽的滋養。",
-      "蒸汽浴室旁是芬蘭風格的桑拿房 Ylur，溫度介於 80°C 和 90°C 之間，濕度低於蒸汽房。您可以坐下來，透過大窗戶欣賞美麗的湖景。",
-      "體驗完之後，您還可以在溫泉大堂自點一份經由冰島天然地熱力量烘焙出來的地熱麵包，別有一番風味！",
-      "包含：",
-      "攜帶建議：",
-      "營業時間：",
-      "其他：",
-    ],
-  },
-  {
-    name: "冰島黃金圈新晉Laugarás Lagoon溫泉Birki級別入場票",
-    imageUrl: IMG("laugaras_4f8325fe4c.png"),
-    galleryImages: [
-      IMG("laugaras_4f8325fe4c.png"),
-      IMG("laugaras_infinity_edge_013dc89554.jpg"),
-    ],
-  },
+    silfraSnorkelingSelfDriveSpot,
+    snowmobileLangjokullSpot,
+    geothermalHorseRidingSpot,fontanaSpot,
+    laugarasLagoonSpot,
 ];
 
 export const icelandSelfDriveSummer9Day3Highlights: TripAttraction[] = [
-  {
-    name: "塞里雅蘭瀑布",
-    nameEn: "Seljalandsfoss",
-    region: "冰島南部",
-    subtitle: "繞行至塞里雅蘭瀑布的身後領略不一樣的風景",
-    imageUrl: IMG("seljalandsfoss1_b6412d5d4e.jpg"),
-    galleryImages: [
-      IMG("seljalandsfoss1_b6412d5d4e.jpg"),
-      IMG("seljalandsfoss2_6d4717fdda.jpg"),
-      IMG("seljalandsfoss3_531d93910f.jpg"),
-    ],
-    paragraphs: [
-      "塞里雅蘭瀑布之美的不同角度",
-      "塞里雅蘭瀑布（Seljalandsfoss）位於冰島南部1號公路旁，是一個落差達60米的巨大瀑布。在冰島這樣一個瀑布遍佈的國家，它的獨特之處就在於瀑布之後有一個寬闊的洞穴可供人穿行，旅客繞行至瀑布背後能夠透過水簾欣賞落日晚霞和冰島南岸的美麗景色。",
-      "瀑布所在的塞里雅蘭河（Seljalandsá）發源於埃亞菲亞德拉冰蓋（Eyjafjallajökull），河水充滿冰川融水，奔流向南，在陡峭的懸崖上飛瀉而下，這也是塞里雅蘭瀑布得名的原因。塞里雅蘭瀑布在過去直接流入大西洋，而現在由於海平面的下降，海洋和瀑布之間出現了一片低地。站在瀑布頂端，您可以看到大西洋和冰島南海岸的壯麗景色。",
-      "由於其雄偉壯觀和極其獨特的景觀，塞里雅蘭瀑布也出現在了許多膾炙人口的影視作品當中，例如《星際迷航》第三季和賈斯汀·比伯的《I'll Show You》MV中，以及在一檔美國真人秀節目《極速前進》第六季當中，它也被用作挑戰關卡。",
-      "需要提醒旅客的是，無論是夏季還是冬季前往塞里雅蘭瀑布，都需要注意這條小路極其濕滑，由於瀑布落差巨大，因此無論是否有風，瀑布都會打濕這條隱藏在其後的小路。冬季，這條小路有可能會因為安全原因而封路，如果幸運沒有遇到道路封閉的情況，請一定要注意腳下，另外還要注意頭上可能會落下的冰柱。",
-      "在距離幾百米塞里雅蘭外的地方，還有另外一條令人驚歎叫絕的瀑布，它近幾年才被人們發掘，被稱為秘密瀑布（Gljúfrabúi）。落差高達40米，秘密瀑布隱藏在一個狹窄而神秘的峽谷中，也正是因此特性而得名。在前往秘密瀑布的途中，還能看到另一個迷人的小瀑布，在群山、河流和清新的空氣環繞之處驕傲地展示著自己的美麗。",
-    ],
-  },
-  {
-    name: "秘密瀑布",
-    nameEn: "Gljúfrabúi",
-    region: "冰島南部",
-    subtitle: "穿過狹窄的峽谷，眼前的秘密瀑布會讓你豁然開朗",
-    imageUrl: IMG("Gljufrabui2_b243f65773.jpg"),
-    galleryImages: [
-      IMG("Gljufrabui2_b243f65773.jpg"),
-      IMG("Gljufrabui1_c9a6989051.jpg"),
-    ],
-    paragraphs: [
-      "隱藏在懸崖之內的秘密瀑布",
-      "秘密瀑布（Gljúfrabúi）位於冰島南岸1號公路旁，高約40米，和著名的塞里雅蘭瀑布（Seljalandsfoss）只有不到兩百米的距離，但人跡明顯稀少了許多。就如同它的名字一般，它藏身於一個狹窄的峽谷當中，直至近些年來才被人們所發現。這讓它在冰島這樣的萬瀑之國披上了一層神秘的面紗。",
-      "雖然不及它的鄰居一樣總是蜂擁著從全世界慕名而來的旅客，但並不意味著秘密瀑布的美麗也低人一等。當慢慢走近秘密瀑布時，首先映入眼簾的會是幾乎完全遮住了瀑布下半部的一道懸崖，而在懸崖的縫隙當中你能瞥見一縷白色湍急的水簾。與其他有名的瀑布相比，在這兒能玩得更野，如果願意的話，旅客甚至可以直接從瀑布下方走過，不過請一定要小心濕滑的岩石。",
-      "更加吸引人的地方在於，如果幸運的話，您甚至可以獨自享受秘密瀑布的美景，因此這裡也成為了一些攝影師和部落客的最愛。而由於地形的限制，瀑布內的光線可能不會很理想，這也意味著你需要更新鮮的創意來讓照片變得更加獨特。",
-    ],
-  },
-  {
-    name: "斯科加瀑布",
-    nameEn: "Skógafoss",
-    region: "冰島南部",
-    subtitle: "在冰島最具代表性的瀑布之一等待雙彩虹的出現",
-    imageUrl: IMG("skogafoss2_67abee5632.jpg"),
-    galleryImages: [
-      IMG("skogafoss2_67abee5632.jpg"),
-      IMG("skogafoss1_7e720b62ca.jpg"),
-      IMG("skogafoss3_d680db80b4.jpg"),
-    ],
-    paragraphs: [
-      "沉浸在冰島斯科加瀑布的難忘美景中",
-      "斯科加瀑布（Skógafoss）是位於冰島南部的一個瀑布，高60米，寬25米，直接來自兩座冰川：埃亞菲亞德拉冰蓋（Eyjafjallajökull）和米達爾斯冰原（Mýrdalsjökull）。斯科加瀑布流經的懸崖是上個冰河時代冰島海岸線的一部分，由於冰雪消融導致冰島的陸地面積上升，它目前距離海岸線已有5公里距離。",
-      "斯科加瀑布一年四季都十分壯觀，高達60米的水幕令人印象深刻，走近水幕，旅客會被籠罩在水花、雲霧和巨大的聲響之中。由於瀑布持續噴出大量水花，在晴朗的日子裡，通常可以看到一道或兩道彩虹。如果您願意攀登500多級階梯到達瀑布頂端的平台，您將欣賞到冰島南部海岸線的壯麗景色，這裡也是著名的Fimmvorduhals健行路線的起點。",
-      "斯科加瀑布的魅力遠不止於此，它還有一個美麗的古老傳說。據傳，一位叫Þrasi的維京人將一箱財寶扔進了河裡，許多人試圖撈起這個寶箱，但都失敗了。直到有一天，有人爬進了瀑布，但只能抓住箱子側面的把手。由於木頭已經腐朽，把手斷裂，寶物墜入瀑布底部，再也找不到了。有一段時間，這個把手一直掛在瀑布旁斯科加教堂的門上。如今，如果您參觀斯科加博物館，您可以親眼目睹這枚當地人所說的寶箱的“戒指”。",
-      "在斯科加瀑布不遠處的塞里雅蘭瀑布（Seljalandsfoss）同樣十分受旅客歡迎，在那裡人們可以繞到瀑布背後，拍下一張逆光的完美照片。",
-    ],
-  },
-  {
-    name: "飛機殘骸",
-    nameEn: "Solheimasandur Plane Wreck",
-    region: "冰島南部",
-    subtitle: "在黑沙灘的飛機殘骸處誤入一場科幻電影",
-    imageUrl: IMG("plane_wreck_unsplash2_34bf5e223d.jpg"),
-    galleryImages: [
-      IMG("plane_wreck_unsplash2_34bf5e223d.jpg"),
-      IMG("plane_wreck_unsplash3_48501ca14e.jpg"),
-      IMG("asa_rodger_hu2_c_F_Ff_VSA_unsplash_f73a890eee.jpg"),
-    ],
-    paragraphs: [
-      "世界盡頭的飛機殘骸",
-      "Sólheimasandur 黑沙灘是由於冰島卡特拉火山（Katla）噴發的冰川洪水而形成的沙灘。 1973 年，一架 DC-3 型美國海軍飛機燃油耗盡，迫降於此。這裡位於冰島南部1號環線旁，附近景點密集，距斯科加瀑布（Skógafoss）僅需10分鐘車程，距離維克（Vík í Mýrdal）和黑沙灘（Reynisfjara）也均只需20分鐘車程。",
-      "幸運的是，機上7名機組人員全部倖免於難，而飛機的殘骸永遠地停留在了這片海灘之上，截至本文寫至的2023年，飛機機身仍相對完好。想像一下，在這片完全漆黑的沙灘上，嵌著一座珍珠白色的飛機殘骸，這個場景就像是AI生成一般，充滿著超現實的弔詭氣息。這種科幻電影中的場景當然也成為了攝影師的天堂。2015年，賈斯汀·比伯在歌曲《I’ll Show You》的MV中滑著滑板從飛機殘骸上方滑過，對此我們不建議旅客效仿。",
-      "現在，這片沙灘屬於私人財產，自駕遊旅客無法駕車前往飛機殘骸，只能在 1 號環線主幹道旁的停車場停車，再從那裡步行或乘坐接駁車。步行的單程時間在1-1.5小時左右，接駁車的單程時間約為15分鐘。步行路程漫長且缺少風景，因此我們建議旅客乘坐擺渡車往返，節省體力和時間，為冰島南岸的其他景點預留更多的時間。",
-      "需要注意的是，冬季前往飛機殘骸一定要注意保暖防風，在惡劣天氣下不要貿然前往。冰島南部的冰川沖積平原已經奪去了無數人的生命，2017 年 10 月，一名年輕的美國旅客在飛機殘骸身亡；2020 年 1月，兩名臺灣旅客在飛機殘骸附近因體溫過低身亡。",
-    ],
-  },
-  {
-    name: "迪霍拉里",
-    nameEn: "Dyrhólaey",
-    region: "冰島南部",
-    subtitle: "在迪霍拉里盡收冰島南岸美景，近距離與海鸚say hi！",
-    imageUrl: IMG("Dyrholaey1_38349f5b51.jpg"),
-    galleryImages: [
-      IMG("Dyrholaey1_38349f5b51.jpg"),
-      IMG("Dyrholaey2_d75d7fa72b.jpg"),
-      IMG("Dyrholaey3_559b79fe53.jpg"),
-    ],
-    paragraphs: [
-      "屹立在冰島最南端的雄偉海角",
-      "迪霍拉里（Dyrhólaey）是位於冰島大陸最南端的岬角，距離維克（Vík í Mýrdal）和黑沙灘（Reynisfjara）不到20分鐘車程，成為了冰島南部1號公路自駕旅客的必去之處。海角海拔為120米，古老且造型特別的迪霍拉里燈塔坐落在海角地形的頂端，面向大海。在海角延伸之處有一個巨大的黑色岩石拱門矗立在海中，海角因此得名（其冰島名直譯為“門洞島”），海鸚和絨鴨也在此安家。",
-      "迪霍拉里被認為是因為冰川時期晚期的一次水下火山噴發形成的，從前被水手們稱為雷尼斯岩（Reynisdrangar），西面則是一望無際的黑色沙灘海岸線。",
-      "自1978年起，迪霍拉里成為了自然保護區。因為這裡有豐富的野生動物資源，尤其是海鸚（puffin）和絨鴨。這裡也是冰島觀賞海鸚的最可靠和最便捷的地方，這些呆萌的“玩具小鳥”每年5-9月在此棲息，即使在夏季的暴風雨中，它們也會在懸崖頂上嬉戲。",
-      "迪霍拉里燈塔造型奇特，依照城堡而建，現在看到的這座燈塔於 1927 年建成，遠眺岩石拱門和狂野的大西洋。燈塔每隔 10 秒發出一束白光，為海岸附近的航運船隻提供指引。",
-      "旅客在迪霍拉里遊玩時，特別需要注意安全問題。",
-    ],
-  },
-  {
-    name: "黑沙灘",
-    nameEn: "Reynisfjara Black Sand Beach",
-    region: "冰島南部",
-    subtitle: "在洶湧詭譎的黑沙灘留下你的腳印",
-    imageUrl: IMG("reynisfjara1_ef5a24c2b7.jpg"),
-    galleryImages: [
-      IMG("reynisfjara1_ef5a24c2b7.jpg"),
-      IMG("reynisfjara2_b3ec97ed1f.jpg"),
-      IMG("reynisfjara3_725ed9b454.jpg"),
-    ],
-    paragraphs: [
-      "讓人萌生「這是地球嗎？」疑問的異世黑沙灘",
-      "黑沙灘（Reynisfjara Black Sand Beach，音譯為雷尼斯黑沙灘）因其位於維克（Vík í Mýrdal）附近而得名。沙灘位於冰島南岸的環島1號公路沿線，交通便捷，是冰島最著名的海灘之一。火山噴發形成的黝黑色砂石千百年來受到北大西洋的海浪拍打，每年有無數旅客被其魔幻、深邃又略顯恐怖的奇異景色而折服。",
-      "讓黑沙灘從冰島眾多海灘中脫穎而出的，不僅是自古以來火山爆發後巖漿遇到海水迅速冷卻而形成的黝黑砂石，還有這片沙灘所能捕獲的風景。漫步於黑沙灘之上，可以眺望不遠處的雷尼斯岩（Reynisdrangar）。據說這些怪異的海柱是石化的巨魔，也有人堅信它們實際上曾經是海岸線懸崖的一部分，在其他部分被海水沖垮後依然屹立不倒。無論哪種說法能打動你，它們都賦予了黑沙灘一道獨特壯觀的風景線。",
-      "黑沙灘還有兩個著名的玄武岩柱景觀：加達爾懸崖（Gardar cliff）和Hálsanefshellir洞穴，它們像風琴管一樣駐守在暗黑色的灘原上。這些八角玄武岩柱是火山熔岩突然冷卻後形成的，石柱的高度不一，有的只有半米，有的則高達 20 米。夏季，加達爾懸崖還是成千上萬只海鸚和北極燕鷗等野生鳥類的棲息地。從海岸邊還可以看到迪霍拉里（Dyrhólaey）的拱門在大西洋上若隱若現的美妙景色。",
-      "最後，也是最重要的一點，在黑沙灘遊玩時，切記注意安全！",
-      "目前，為了保障旅客的生命安全，黑沙灘根據具體情況劃分了不同區域，並設置了相應的燈光。當黃燈和紅燈亮起時，旅客均不得進入相應顏色的區域。不必擔心，在安全的距離內，您完全可以看到同樣壯觀的景色。請注意，黑沙灘是沒有救生員或其他有人值守的，因此，請不要冒險靠近大海，為您的生命負責。",
-    ],
-  },
-  {
-    name: "雷尼斯岩",
-    nameEn: "Reynisdrangar",
-    region: "冰島南部",
-    subtitle: "領略三個玄武岩石從海面拔起的壯觀風景.",
-    imageUrl: IMG("Reynisdrangar1_e7a33951c7.jpg"),
-    galleryImages: [
-      IMG("Reynisdrangar1_e7a33951c7.jpg"),
-      IMG("Reynisdrangar3_1cc0b15f0a.jpg"),
-      IMG("Reynisdrangar2_1c540bca59.jpg"),
-    ],
-    paragraphs: [
-      "石化的巨怪如今矗立守候著黑沙灘",
-      "雷尼斯岩（Reynisdrangar）位於黑沙灘（Reynisfjara）外的海中央，緊鄰維克（Vík í Mýrdal），是冰島南岸最熱門的景點之一。60餘米高的玄武岩柱高聳入雲、長滿尖刺，從洶湧的大西洋海面上突兀而出。從遠處看，這些伸出海面的石柱就像是一個背上長滿尖刺的巨型生物正沉睡在海面。",
-      "雷尼斯岩的奇異造型和它從海面拔起的雄偉氣勢難免讓人遐想連篇。關於雷尼斯岩的神話也比比皆是，其中一個最有名的說法是：曾經有三個巨怪試圖把船從海里拖到陸地上，當他們把最後一艘船拉上岸時，太陽開始升起。當這些巨怪被太陽光照射到時，他們都變成了石頭。還有神話說，一個男人的妻子被巨怪綁架並殺害。傷心欲絕、滿懷復仇之心的丈夫最終在此追上了巨怪，並把巨怪變成了石頭。",
-      "但科學來說，在約 1800 萬年前，火山熔岩流經懸崖進入海洋後開始冷卻而形成了玄武岩懸崖。而我們所看到的雷尼斯岩則是在懸崖之後開始形成的。這個過程被稱為“水力侵蝕”，即海浪不斷拍打懸崖，削弱了懸崖的強度，最終導致懸崖崩塌，最後形成了這些巖柱。因此，雷尼斯並不是從海中升起的玄武岩堆，而是雷尼斯懸崖的幾塊“廢墟”。",
-      "最後，也是最重要的一點，參觀雷尼斯岩時，切記注意安全！",
-    ],
-  },
-  {
-    name: "維克",
-    nameEn: "Vík í Mýrdal",
-    region: "冰島南部",
-    subtitle: "連接雷克雅維克與南岸的樞紐小鎮",
-    imageUrl: IMG("vik1_39585849fc.jpg"),
-    galleryImages: [
-      IMG("vik1_39585849fc.jpg"),
-      IMG("vik2_5c8ab4b497.jpg"),
-      IMG("vik3_a117bb10f1.jpg"),
-    ],
-    paragraphs: [
-      "南岸樞紐維克小鎮",
-      "維克（Vík í Mýrdal）位於冰島南岸中部，隸屬於卡特拉火山（Katla）以南的Mýrdalshreppur市，在連接冰島東西兩側方面發揮著重要作用。這裡寧靜祥和，風景優美，固定人口約300人，是方圓 50 多公里內唯一的集中居民區。",
-      "維克是當地重要的零售中心和旅遊業服務中心，雖然相比首都區域，這裡的物資供應有限且價格昂貴，但這也是周圍唯一擁有各種公共服務設施的城鎮，有超市、酒吧、餐廳、咖啡館、公共泳池和加油站等一系列設施。維克飯店也較為集中，成為了冰島南部路線上的固定歇腳點。",
-      "維克不僅提供了“充電站”的功能，這裡本身也有著吸引力十足的旅遊資源：比如標誌性的維克教堂和全國僅有兩家的熔岩秀（Lava Show），通過將真正的熔岩加熱至 1100攝氏，再將其灌入展廳，再現火山爆發的場景。從維克出發前往著名的黑沙灘（Reynisfjara ）、迪霍拉里（Dyrhólaey）以及雷尼斯岩（Reynisdrangar）都十分方便。",
-      "維克周邊地區冰川遍佈，因此有眾多有趣驚險的戶外活動可供旅客選擇，是名副其實的戶外探險勝地：",
-      "米達爾斯冰原（Mýrdalsjökull）為旅客提供瞭如冰川健行、冰河湖湖獨木舟等活動；在卡特拉火山附近，您有機會體驗冰島獨一份的夏日冰洞探險以及雪地摩托的瘋狂駕駛感；在索爾黑馬黑沙灘（Sólheimasandur）上駕駛全地形車（ATV）；在峽谷中乘坐峽谷滑索或是乘坐滑翔傘“飛翔”在空中，一定會讓您的腎上腺素飆升。對於那些不喜歡過於刺激的項目的旅客，這附近也有許多的靜謐的健行路線，維克的郊區還有一個風景優美的高爾夫球場。",
-      "維克教堂是維克最具標誌性的地標建築，這座紅頂教堂於1934年竣工，是新人舉辦婚禮的絕佳場所，而且由於小鎮靠近卡特拉火山，如果火山爆發或發生危險，地勢較高的教堂就成為了鎮民的撤離點。",
-    ],
-  },
+    seljalandsfossSpot,
+    gljufrabuiSpot,skogafossSpot,
+    planeWreckSpot,
+    dyrholaeySpot,reynisfjaraSpot,
+    reynisdrangarSpot,
+    vikSpot,
 ];
 
 export const icelandSelfDriveSummer9Day3OptionalActivities: TripAttraction[] = [
-  {
-    name: "索爾黑馬冰川健行",
-    imageUrl: IMG("_5caf2a4881.png"),
-    galleryImages: [
-      IMG("_5caf2a4881.png"),
-      IMG("Myrdalsjoekull_a2838c30c2.jpg"),
-    ],
-    paragraphs: [
-      "索爾黑馬冰川（Sólheimajökull）是米達爾斯冰川（Mýrdalsjökull）的一個冰舌，距離雷克雅維克僅有158公里，也是距離雷克雅維克最近的冰川之一。因此索爾黑馬冰川健行也是冰島冰川健行地點的首選之一。同時，索爾黑馬冰川也是著名的卡特拉火山（Katla Volcano）的所在地。知識淵博的冰川嚮導將向您介紹冰川知識，帶您了解引人入勝的冰川歷史和地質特點，讓您了解冰川的真正魔力。",
-      "您將看到原始自然力量如何塑造和影響冰川，創造出迷人的冰脊和深V形裂縫，這些裂縫縱橫交錯，在冰面上留下疤痕。索爾黑馬冰川上有著黑色火山灰紋路，來自於2010年發生在艾雅法拉火山（Eyjafjallajökull）的火山爆發，也提醒人們冰島火山和冰川之間的緊密聯繫。",
-      "在索爾黑馬冰川停車場集合後，冰川嚮導會向大家分配專業的冰川健行裝備，並演示和講解如何穿戴以及注意事項。整裝完畢後，您就將向索爾黑馬冰川前進。到達索爾黑馬冰川前，會經過一處觀景臺，供大家拍照留念。在索爾黑馬冰川旁邊還藏有一個冰河湖，也是屬於索爾黑馬冰川的獨特風光。",
-      "整個健行時間耗時約2.5-3小時，輕鬆愉快，屬於冰島冰川健行項目中最適合大眾人群體驗的項目。如果說想和冰島冰川近距離接觸又不想走太多路程的話，健行索爾黑馬冰川不妨就可以列入您的最佳選擇列表裡。",
-      "若您自行前往集合點，請給自己留充足的時間前往以保證您不會錯過索爾黑馬冰川上這次令人驚歎的冒險。",
-      "集合點位置：",
-      "集合點距離雷克雅維克約158公里（98英里）。在良好的條件下，開車需兩個多小時，在惡劣的天氣或道路條件下，將需要更長時間，請您安排好時間開車前往。",
-      "最低參加年齡：",
-      "體驗時長：",
-      "體驗包括：",
-      "不包括：",
-      "攜帶建議：",
-    ],
-  },
-  {
-    name: "冰島黑沙灘ATV全地形山地摩托車騎行體驗",
-    imageUrl: IMG("icelandic_ATV_tour_on_black_sand_beach_510f58731a.png"),
-    galleryImages: [
-      IMG("icelandic_ATV_tour_on_black_sand_beach_510f58731a.png"),
-      IMG("ATV_3cf070ca7e.jpg"),
-    ],
-    paragraphs: [
-      "從米達爾斯冰川營地（Mýrdalsjökull Base）出發，盡情馳騁於ATV越野探險的刺激世界，發掘冰島之美！",
-      "本次旅程您需自駕前往米達爾斯冰川營地（Mýrdalsjökull Base），在那和您的專業嚮導匯合，在了解安全須知後，換上專業騎行裝備和頭盔，駕駛著強勁的ATV全地形山地摩托車，暢享冰島南岸自然風光。",
-      "這次獨一無二的ATV山地摩托車越野體驗將帶領您從營地出發，途中穿過小河，前往由休眠火山卡特拉（Katla）先前火山爆發形成的黑色熔岩沙地",
-      "請注意：",
-      "1. 所有駕駛員必須年滿 17 週歲，並持有合法駕照。",
-      "2. 單人和團體中單數旅客必須預訂單人駕駛。",
-      "集合地點：",
-      "最低參加年齡：",
-      "體驗時長：",
-      "體驗包括：",
-      "不包括：",
-    ],
-  },
-  {
-    name: "Plane Wreck DC-3飛機殘骸往返接送服務",
-    imageUrl: IMG("Plane_DC_3_6a46d18e06.png"),
-    galleryImages: [
-      IMG("Plane_DC_3_6a46d18e06.png"),
-      IMG("plane_wreck_unsplash2_34bf5e223d.jpg"),
-    ],
-    paragraphs: [
-      "飛機殘骸是冰島南岸一處非常有特點的景觀，是一個美麗的意外。",
-      "這架道格拉斯 DC-3 飛機（R4D-8）原屬美國海軍所有，是運載貨物的貨機。20 世紀 70 年代，美國和冰島簽署了單邊防務協議，作為協議的一部分，美國海軍經常駕駛各類飛機穿行冰島上空。1973 年 11 月 21 日下午，一架美軍飛機在冰島南岸 Sólheimasandur 黑沙灘發生事故，機上 7 名機組人員從冰島東南部的赫本（Höfn）起飛。失事原因已無從查證，但慶幸的是無人傷亡。飛機被迫降於沙灘後，殘骸成為冰島南岸獨特的地標，吸引無數旅客前來造訪。",
-      "如果旅客需要前往DC-3飛機殘骸，可以選擇健行從停車場前往殘骸地點，單程健行時間為1.5-2小時。為了減輕體力負擔，推薦您選擇乘坐擺渡車到達飛機殘骸。",
-      "體驗包含：",
-      "不包含：",
-    ],
-  },
-  {
-    name: "卡特拉冰洞探險（維克出發）",
-    imageUrl: IMG("Katla_Ice_Cave_e029f3b2be.png"),
-    galleryImages: [
-      IMG("Katla_Ice_Cave_e029f3b2be.png"),
-      IMG("katla_ice_cave_55d1ca5449.jpg"),
-    ],
-    paragraphs: [
-      "冰島的冰洞是非常有代表性的天然景觀，每年冬季開始，便是探尋神秘冰洞的好時節。",
-      "然而有這麼一處冰洞，可以一年四季參觀。它就是卡特拉冰洞（Katla Ice Cave）",
-      "卡特拉冰洞位於米爾達斯冰川（Mýrdalsjökull）的冰舌Kötlujökull冰川下。卡特拉冰洞名字的由來是因為Kötlujökull冰川下隱藏著一座火山，即聞名遐邇的卡特拉火山（Katla）。卡特拉火山是冰島最活躍的火山之一，只要路過卡特拉火山區域，手機就會收到關於卡特拉火山的提醒短信。但基於冰島火山監控系統的技術十分先進，因此您不用擔心參團過程中遇到火山爆發。",
-      "不知道大家有沒有看過Netflix的劇《Katla》卡特拉傳說，其故事的背景就是在卡特拉火山展開的。除此之外，旅程一路上還可以看到大海、山脈等等風光，讓人回想起各種科幻電影中熟悉的取景地！",
-      "行程安排",
-      "在維克集合後，乘坐超級吉普越野車到達卡特拉冰洞附近。專業的冰川嚮導會為提供冰爪、頭盔、等專業冰川裝備作為此行安全保障，同時給大家進行安全指導和注意事項培訓。",
-      "一切就緒後就開始向冰洞進發，嚮導在帶領大家探索神秘冰洞的同時，也會為大家講述與卡特拉火山相關的歷史背景和民間神話，以及地質形成原因等等。由於卡特拉冰洞地處火山帶，獨特的地理條件使得冰洞最終呈現出黑色、藍色、白色層疊交織的幽藍色，顯得深邃而又神秘，因此也被眾多旅客譽為宛如異星的秘境。",
-      "整個活動耗時3h左右，健行時長1-1.5h，在冰川嚮導的解說下，整個健行行程比較輕鬆，內容豐富有趣，適合所有人體驗。",
-      "集合地點及時間",
-      "1. 卡特拉冰洞行程集合點是維克 Icewear Magasin後的停車場，嚮導會在“Ice Cave Bistro / Restaurant in Vik” 前（停車場附近）等大家，請大家務必提前20-30分鐘到達集合點。",
-      "2. 如您需要從雷克雅維克出發的卡特拉冰洞探險，請您諮詢帕芬假期旅行後臺客服。",
-      "體驗時長：",
-      "最低參加年齡：",
-      "體驗包括：",
-      "不包括：",
-    ],
-  },
-  {
-    name: "維克熔岩秀（ Vík Lava Show）",
-    imageUrl: IMG("lava_show5_c93f919b4e.jpg"),
-    galleryImages: [
-      IMG("lava_show5_c93f919b4e.jpg"),
-      IMG("lava_show9_3b06a5a2b7.jpg"),
-    ],
-    paragraphs: [
-      "冰島以擁有諸多火山地貌而聞名，而您同樣可以不親臨火山就安全見證熔岩流動的奇景，",
-      "在表演中，您將近距離觀察到熾熱的巖漿流動，讓您歎為觀止。熾熱的熔岩被倒入一個特別設計的裝置，這些流動的巖漿在黑暗中形成了紅色和橙色的光輝，展示出逼真而令人驚歎的景象。當熔岩流動並凝固時，您可以觀察到它迷人的顏色和形態，增進對冰島火山活動的理解。通過這場神奇的熔岩秀，您將感受到大自然的力量和神秘，彷彿置身於一個火焰的王國。",
-      "本次獨一無二的熔岩秀體驗兼具娛樂性和教育性，不僅是視覺上的震撼，更是一次對冰島火山活動的深度認識。您將了解火山噴發的原理、歷史以及對冰島地貌的影響。",
-      "注意事項：",
-      "1. 場地有方便輪椅者出入的無障礙通道（請提前通知我們，以便我們做出安排）。",
-      "2. 兒童需要由一名監護成年人陪同入場，在演出期間，請儘可能讓兒童保持安靜，大人需環抱看護好嬰兒。",
-      "3. 建議您提前20分鐘到達，現場提供安全護目鏡。",
-      "體驗時長：",
-      "表演觀看人數最大容量：",
-      "體驗包括：",
-      "不包括：",
-    ],
-  },
-  {
-    name: "維克 | 冰島馬騎行體驗",
-    imageUrl: IMG("vik_black_beach_horse_riding_5c1f7d9db0.png"),
-    galleryImages: [
-      IMG("vik_black_beach_horse_riding_5c1f7d9db0.png"),
-      IMG("black_beach_riding2_a548581f03.jpg"),
-    ],
-    paragraphs: [
-      "或許您已經有所耳聞來冰島旅遊必須要參加的一項體驗——冰島馬騎行。人們都說騎馬體驗千千萬，想要印象深刻卻不簡單！然而，可以毫無疑問地說，這趟冰島小矮馬騎行體驗絕對讓您流連忘返：您將在冰島南岸最獨一無二的黑沙灘上騎馬！",
-      "本次冰島馬騎行體驗從冰島最南端小鎮維克（Vík）",
-      "維克小鎮風景如畫，在這個令人歎為觀止的地方，您將穿越一條清澈的小溪，讓可愛的冰島小矮馬載著你沿著黑色沙灘自由馳騁。在冰島南岸的黑沙灘，黑白兩色是這裡永恆的主題。聆聽著浩瀚飄渺的大西洋海浪衝擊拍打海岸，置身於如同異世星球般的世界，您將沿著黑沙灘欣賞壯麗的海岸線和奇特的海蝕柱景觀，在馬背上感受著馬蹄在細軟沙灘上的奔騰，這些聰明而友善的冰島小矮馬將成為您忠實的夥伴！",
-      "溫馨提示：",
-      "1. 本次騎行適合初學者和不經常騎馬的人，參加者體重限制為100公斤（220磅）。",
-      "2. 騎手應該能夠在沒有踏腳凳的情況下能從地面上獨立上馬，懷孕者、臀部及膝蓋背部有病痛者不建議參加騎行，騎行團保留在懷孕或嚴重身體損傷的情況下拒絕騎手參加本次旅行的權利。",
-      "3. 騎行時，請您務必始終握住韁繩並遵循嚮導的指示，因此參與者需要具備一定的英語水平。",
-      "4. 冰島天氣多變，請您穿戴好防風防水的保暖衣物和登山鞋，並佩戴好手套。",
-      "最低參加年齡：",
-      "騎行時長：",
-      "體驗包括：",
-      "不包括：",
-    ],
-  },
+    solheimajokullGlacierHikingSpot,
+    reynisfjaraAtvSpot,planeWreckShuttleSpot,katlaIceCaveSpot,vikLavaShowSpot,
+    vikHorseRidingSpot,
 ];
 
 export const icelandSelfDriveSummer9Day4Highlights: TripAttraction[] = [
-  {
-    name: "埃爾德熔岩原",
-    nameEn: "Eldhraun",
-    region: "冰島南部",
-    subtitle: "前往冰島最大的流紋巖草原欣賞火山爆發所形成的地質奇觀",
-    imageUrl: IMG("Eldhraun1_2b993446c2.jpg"),
-    galleryImages: [
-      IMG("Eldhraun1_2b993446c2.jpg"),
-      IMG("Eldhraun3_474479cd54.jpg"),
-      IMG("Eldhraun2_55b88ff698.jpg"),
-    ],
-    paragraphs: [
-      "看，是抹茶味的熔岩地！",
-      "埃爾德熔岩原（Eldhraun）是一處位於冰島南部的壯觀苔原地貌景觀，面積為565平方公里，位於維克（Vík í Mýrdal）和教堂鎮（Kirkjubæjarklaustur）之間。這片廣袤的“熔岩草原”是世界上最大的熔岩地，其宏偉壯觀的地質景觀、獨特的歷史和自然美景吸引著無數旅客前來探索。",
-      "埃爾德熔岩原的歷史可以追溯到1783-1984年間拉基火山（Laki）的爆發。那次爆發持續了長達八個月之久，火山熔岩和火山灰覆蓋了大片土地，導致了嚴重的農作物損失和人畜死亡。一些歷史學家推測，火山爆發還可能是同一時期歐洲農作物歉收的原因之一，這可能間接導致了法國大革命的爆發。隨著時間的推移，這片被破壞的土地逐漸變成了如今的壯麗景象。1969 年，阿波羅 11 號機組人員就是在這裡進行了他們的登月訓練，因為這裡與月球表面的景觀非常相似。",
-      "如今，這裡成為了一望無際的熔岩草原，生長著茂密厚重的苔蘚，尖銳的黑色熔岩從柔軟的綠色苔蘚下突起，形成起伏的形狀，就像一張綠色地毯在大地上鋪開。旅客們可以在這裡領略到地球上罕見的自然景觀，感受大自然的震撼與敬畏。由於其獨特的地質特徵，這片草原也吸引著許多地質學家和科學家前來研究。",
-      "需要注意的是，儘管埃爾德朗熔岩原地表長滿了苔蘚，但同時它也非常脆弱，因此旅客是禁止在熔岩地上行走的。",
-    ],
-  },
-  {
-    name: "教堂鎮",
-    nameEn: "Kirkjubæjarklaustur",
-    region: "冰島南部",
-    subtitle: "在教堂鎮親歷冰島的歷史文化，並感受獨特的人文氛圍",
-    imageUrl: IMG("DJI_0443_30e25d42d6.jpg"),
-    galleryImages: [
-      IMG("DJI_0443_30e25d42d6.jpg"),
-      IMG("Kirkjubaejarklaustur1_59009a9dce.jpg"),
-      IMG("Kirkjubaejarklaustur2_4bb321bbab.jpg"),
-    ],
-    paragraphs: [
-      "感受超過九百年曆史的冰島小鎮",
-      "教堂鎮（Kirkjubæjarklaustur）是隸屬於斯卡夫塔雷普爾市（Skaftárhreppur）的小鎮，常住人口約150人，位於冰島南部、瓦特納冰川（Vatnajökull）的西南側，是冰島環島1號公路上的重要一站，也是前往傑古沙龍冰河湖（Jökulsárlón）的必經之地。教堂鎮以其悠久豐富的歷史和周邊集聚的景點而聞名，是冰島南部環島旅行中不容錯過的停留地。",
-      "教堂鎮的歷史可以追溯到12世紀，其名稱在冰島語中可以被拆分為三個單詞，分別是“教堂”、“莊園”和“修道院“。在中世紀，這裡有一座本篤會修道院，現在依然可以參觀其遺址。鎮上還保存著古老的教堂建築，讓人們領略到歷史的厚重感。鎮上的服務與設施齊全，與所有冰島城鎮和村莊一樣，也設有一個帶熱水浴缸的游泳池。",
-      "教堂鎮上有不少小眾景點，包括Stjórnarfoss瀑布和姐妹瀑布（Systrafoss），以及特別的教堂地磚（Kirkjugólf），其實是地下的玄武岩柱，經過風浪的侵蝕和塑造，只有頂部顯露在地面之上，看上去就像鋪砌的教堂地板一樣。其周邊地區更是分佈著大大小小、或著名或小眾的旅遊地，例如羽毛峽谷（Fjaðrárgljúfur）、拉基火山（Laki）、矮人岩石（Dverghamrar）等。是旅客選擇在冰島南部環島時停車休整的不錯選擇。",
-      "我們強烈推薦下榻位於小鎮東側3公里處的magma飯店",
-    ],
-  },
-  {
-    name: "瓦特納冰川",
-    nameEn: "Vatnajökull",
-    region: "冰島東部",
-    subtitle: "歐洲最大冰川、聯合國教科文組織世界遺產……它的頭銜數不勝數，但只有身臨其境才是王道",
-    imageUrl: IMG("nicola_abraham_n_Qq_B_Xb_Weso_E_unsplash_ca0f843573.jpg"),
-    galleryImages: [
-      IMG("nicola_abraham_n_Qq_B_Xb_Weso_E_unsplash_ca0f843573.jpg"),
-      IMG("vatnajokull1_76898aedf8.jpg"),
-      IMG("vatnajokull3_e06c404945.jpg"),
-      IMG("vatnajokull2_1632ed10ae.jpg"),
-    ],
-    paragraphs: [
-      "冰與火之歌奏響之地",
-      "瓦特納冰川（Vatnajökull）是歐洲最大的冰川，它位於冰島東南海岸，西達雄偉的Lómagnúpur山，東至迷人的赫瓦爾內斯風景區（Hvalnes）。該區域有著眾多迷人的旅遊景點，其遊覽項目無疑是冰島最為出名的，例如藍冰洞探秘、冰川健行以及傑古沙龍冰河湖船遊，每天都吸引著成千上萬來自地球各個角落的旅客。",
-      "瓦特納冰川國家公園（Vatnajökull National Park）於2008年建立，旨在加強對該地區的保護和管理，其範圍包括整個瓦特納冰川及周圍地區，其中包括西南部的斯卡夫塔山國家公園（Skaftafell National Park）和北部的Jökulsárgljúfur國家公園，佔冰島國土面積的 13%，是歐洲最大的國家公園之一。儘管國家公園的很大一部分都位於瓦特納冰川的冰蓋之下，但在火山和冰川的共同作用下，其地貌仍然呈現出迷人的多樣性。",
-      "國家公園的南部聚集著高聳的山脊、出口冰川和冰河湖，最南端覆蓋了冰島最高峰華納達爾斯赫努克火山（Hvannadalshnúkur）。冰川的退縮形成了冰川瀉湖，冰島最大的冰河湖傑古沙龍冰河湖（Jökulsárlón）和小冰河湖（Fjallsárlón）就這樣靜靜鑲嵌在瓦特納冰川的南端，Breiðamerkurjökull冰川的碎冰掉落在湖中，美妙寧靜的景色下卻揭示著全球變暖的殘酷現實。這些碎冰被水流帶到大西洋海水中再被沖刷上岸，形成了冰島獨特的一道風景線——鑽石沙灘。",
-      "國家公園北部有兩條主要的冰川河流穿過。其中，Jökulsá河是歐洲水流量最大的瀑布黛提瀑布（Dettifoss）的源頭。深達120米的Jökulsárgljúfur峽谷是一個馬蹄形的大型峽谷，被許多人認為是世界上最美麗的峽谷之一。",
-      "國家公園東部地區，克韋爾克火山（Kverkfjöll）雪白的山峰佔據了整個天際線，在Snæfell荒野區和Lónsöræfi山區見健行甚至有機會見到野生馴鹿。",
-      "國家公園的西南部低地分佈著埃爾德熔岩原（Eldhraun），這是一大片覆蓋著苔蘚生長的熔岩地，是因1783年卡特拉火山噴發時產生的熔岩而形成的詭麗景觀。在高地深處，許多線狀的透明巖山脊並排分佈，引導著冰川河流的流向。這種透明巖脊是冰島獨有的，是冰河時期冰川下裂隙噴發而形成的。",
-      "冰川覆蓋了冰島約 10%的面積。據記載，1890年後，冰川開始融化，自2000年以來，冰川融化速度開始加快。由於氣候變化，冰川將繼續融化和後退。據科學家推測，到2100年，冰川的體積可能會減少一半。200 年後，最高的山峰上也將只剩下一個小小冰帽。",
-    ],
-  },
-  {
-    name: "傑古沙龍冰河湖",
-    nameEn: "Jökulsárlón",
-    region: "冰島東部",
-    subtitle: "在壯觀的傑古沙龍冰河湖親身體驗冰島的自然奇觀。",
-    imageUrl: IMG("DSC_00389_4_cadb104463.jpg"),
-    galleryImages: [
-      IMG("DSC_00389_4_cadb104463.jpg"),
-      IMG("jokulsarlon_unsplash4_afb37701fc.jpg"),
-      IMG("jokulsarlon_unsplash6_8247d88371.jpg"),
-      IMG("jokulsarlon_unsplash5_67dfcff32b.jpg"),
-      IMG("jokulsarlon_unsplash2_3ff49270dd.jpg"),
-    ],
-    paragraphs: [
-      "冰島“皇冠上的明珠”",
-      "傑古沙龍冰河湖（Jökulsárlón）是瓦特納冰川（Vatnajökull）南部出口冰川Breiðamerkurjökull冰川的一片瀉湖，靠近冰島1號環島公路，距離雷克雅維克約370公里，是冰島最偉大的自然奇觀之一。",
-      "冰河湖的歷史不久，大約在20世紀30年代形成，氣候變暖是其主要成因。巨大的冰塊不斷從Breiðamerkurjökull冰川上斷裂掉落，漂浮在湖面上。湖面不寬，但深達250米，是冰島最深的湖泊。",
-      "傑古沙龍冰河湖被《孤獨星球》列為此生必去景點之一。",
-      "從水上遊覽傑古沙龍冰河湖是最有趣且壯觀的方式。許多人喜歡乘船遊覽，因為這樣既能欣賞冰川湖，又能穿梭在冰山之間航行。有兩種船型——水陸兩棲船或衝鋒艇——可供選擇。其中最為熱門的選項就是傑古沙龍冰河湖水陸兩棲船遊。如果您想要更加沉浸式的體驗，那麼可以試試獨木舟項目，親手划船穿越鏡面般的水域，欣賞其充滿藍白色調的超現實環境。",
-      "眾多流行文化的名篇曾在傑古沙龍冰河湖留下印跡，《007之雷霆殺機》和《007之擇日而亡》的動作場面在這裡攝製，《勞拉：古墓麗影》《蝙蝠俠：俠影之謎》以及綜藝《極速前進》等諸多頂級的製作都曾在此取景拍攝。",
-    ],
-  },
-  {
-    name: "鑽石沙灘",
-    nameEn: "The Diamond Beach",
-    region: "冰島東部",
-    subtitle: "雕琢於大海之中，閃耀在陽光之下。親身前往鑽石沙灘，捕捉千年冰山的異世景象。",
-    imageUrl: IMG("diamond_beach_unsplash_11020ebd2f.jpg"),
-    galleryImages: [
-      IMG("diamond_beach_unsplash_11020ebd2f.jpg"),
-      IMG("diamond_beach_unsplash2_8710988286.jpg"),
-    ],
-    paragraphs: [
-      "當冰山遇上黑沙灘",
-      "鑽石沙灘（The Diamond Beach）的原名是Breiðamerkursandur沙灘，位於冰島南部，瓦特納冰川（Vatnajökull）南端傑古沙龍冰河湖（Jökulsárlón）附近。鑽石沙灘的得名是因為沙灘上晶瑩剔透的透明體，而這些實際上並不是鑽石，而是傑古沙龍冰河湖上的漂浮的冰山隨河流流向大西洋中，擱淺在了黢黑的沙灘上。伴隨著洶湧的大西洋海浪，透亮的冰山與暗黑的沙灘透露著一絲詭譎異世的氣氛。",
-      "冰島以黑沙灘聞名於世，而鑽石海灘也當然不是冰島唯一的黑色海灘，其中最有名的黑沙灘之一當屬位於維克（Vík í Mýrdal）附近的黑沙灘（Reynisfjara）。這些黑沙灘的形成得歸因於冰島的火山地貌。當火山熔岩與冰冷的海水接觸後迅速冷卻形成玄武岩，隨著時間的推移，碎裂的玄武岩變得越來越小，最終變成了沙子。",
-      "全年的任何時候都適合造訪鑽石海灘。夏季陽光充足，日照時間長，交通也較為便利安全；沙灘上的冰塊來自冰川，夏季也不會融化，反而在陽光下更加耀眼。冬季北大西洋海面氣勢磅礡，海浪拍打黑色沙灘，景色更為壯觀；金色日落也讓白天格外上鏡。幸運的話，還有機會在鑽石海灘上看見北極光。冬季造訪請務必穿暖，並與海浪保持安全距離。",
-    ],
-  },
-  {
-    name: "赫本",
-    nameEn: "Höfn",
-    region: "冰島東部",
-    subtitle: "冰島東南部最重要的旅遊樞紐，別忘了來這兒駐足品嚐聞名於世的赫本龍蝦。",
-    imageUrl: IMG("hofn3_3b1e58b24e.jpg"),
-    galleryImages: [
-      IMG("hofn3_3b1e58b24e.jpg"),
-      IMG("hofn2_db5c2826b6.jpg"),
-      IMG("hofn1_50d523e0a3.jpg"),
-    ],
-    paragraphs: [
-      "感受港口小鎮的奇妙魅力",
-      "赫本（Höfn）是位於冰島東南部的一個漁業小鎮，它以海岸風光和龍蝦餐館而聞名。在前往赫本的途中，您會發現冰島許多壯觀的地方，如黑沙灘（Reynisfjara）、斯卡夫塔山（Skaftafell）、瓦特納冰川（Vatnajökull）和傑古沙龍冰河湖（Jökulsárlón）。赫本的冰島語直譯為港口，坐落在歐洲最大的冰川瓦特納冰川下和令人歎為觀止的霍納峽灣（Hornafjörður）畔。不過，從嚴格意義上講，這裡並不是一個峽灣，而是一個由冰川河流留下的沉積物形成的大型淡水湖。",
-      "在赫本，人們可以欣賞到令人印象深刻的景色：從瓦特納冰川流淌而下的冰川河、延伸輻射狀的出口冰川、全景式的海景、奔騰的霍納冰川河（Hornafjarðarfljót），以及造型獨特的西角山（Vestrahorn）。",
-      "上世紀初，隨著技術的發展和漁業的增長，小鎮迅速發展起來。如今，赫本有 2400 多人口和眾多漁業公司。鎮上有許多服務設施，如醫院、藥房、商店、旅館、咖啡館和餐館等，還有一個很棒的游泳池和冰川博物館，小型島嶼和黑沙灘等景觀也足夠令人驚歎，北面則是瓦特納冰川的美景。赫本及其周邊地區提供眾多的住宿選擇，是旅客在周邊地區遊玩的理想駐地。",
-      "赫本還是觀鳥者的天堂，春季有大量鳥類飛來，還有許多珍稀鳥類在此停留。這裡也是冰島最大的龍蝦鎮，鎮上許多餐館的拿手菜都有龍蝦。這裡的出色條件被許多大型好萊塢製作所看中，在一些大賣的電影中被用作取景地，如《007之雷霆殺機》和《007之擇日而亡》，以及《古墓麗影》和《蝙蝠俠：俠影之謎》。",
-    ],
-  },
+    eldhraunSpot,
+    kirkjubaejarklausturSpot,vatnajokullSpot,jokulsarlonSpot,
+    diamondBeachSpot,
+    hofnSpot,
 ];
 
 export const icelandSelfDriveSummer9Day4OptionalActivities: TripAttraction[] = [
-  {
-    name: "斯卡夫塔冰川健行",
-    imageUrl: IMG("hiking_afe526bc72.png"),
-    galleryImages: [
-      IMG("hiking_afe526bc72.png"),
-      IMG("skaftafell_blue_ice_glacier_walk_iceland_mountain_guides_copyright_bjorgvin_hilmarsson_00d83a4fe2_162052f83a.jpg"),
-    ],
-    paragraphs: [
-      "冰川地貌是冰島最具特色的地貌之一。而冰川健行也一直是旅客最熱衷的項目之一。斯卡夫塔山自然保護區（Skaftafell）是冰島南岸冰川健行的熱門地點。它屬於歐洲最大冰川——瓦特納冰川（Vatnajökull）一部分，來此健行體驗千年冰川，絕對是獨一無二的體驗！",
-      "斯卡夫塔的顏值一直是冰島冰川中的佼佼者。斯卡夫塔冰川有著廣袤無邊的冰層，顏色剔透晶瑩，走在冰層上，彷彿踩在華麗的藍水晶上一般。這也引得攝影師和健行愛好者趨之若鶩。同時，斯卡夫塔冰川更是科幻電影《星際穿越》中冰星球——曼恩星的取景地，也是《權力的遊戲》在冰島的重要取景地。正是因為這裡綿延的冰川和獨特的地形地貌，形成了大家口中的異星既視感。",
-      "本次冰川健行在冰川上行走的1.5-2小時中，全程由專業冰川嚮導指導和帶領。專業嚮導會為您提供冰川健行裝備，並給大家進行專業的講解和培訓，豐富的知識將會使此次行程更加難忘。",
-      "集合地點：",
-      "注意事項：",
-      "體驗時長：",
-      "最低參加年齡：",
-      "體驗包括：",
-      "不包括：",
-    ],
-  },
-  {
-    name: "傑古沙龍冰河湖水陸兩棲船遊",
-    imageUrl: IMG("Joekulsarlon_Boat_d66523c73b.png"),
-    galleryImages: [
-      IMG("Joekulsarlon_Boat_d66523c73b.png"),
-      IMG("3_3313617579.jpg"),
-    ],
-    paragraphs: [
-      "傑古沙龍冰河湖（Jökulsárlón Glacier Lagoon）位於冰島東南部，是冰島最著名的旅遊景點之一。這個冰川瀉湖形成於Breiðamerkurjökull冰川的融化水源，被大大小小的冰山環繞，景色壯觀。",
-      "在傑古沙龍冰河湖，本次體驗將讓您可以乘坐兩棲船遊覽冰河湖。這些特殊設計的船隻可以在水上和冰塊之間自由穿行，讓您更貼近冰川和冰山，欣賞到令人驚歎的冰之景觀，近距離感受到冰島獨特自然美景的魅力所在。",
-      "在遊覽過程中，船員將會為您講解有關冰河湖形成的地理及歷史知識，您還有機會看到冰山崩塌的壯觀景象，聽到冰塊碰撞時發出的聲音，以及觀察到各種海洋生物，如海豹和各種鳥類在各個冰山上棲息的景象。",
-      "最低參加年齡：",
-      "乘船遊覽時長：",
-      "體驗包括：",
-      "不包括：",
-    ],
-  },
-  {
-    name: "傑古沙龍冰河湖獨木舟體驗",
-    imageUrl: IMG("kayaking1_89345632eb.jpg"),
-    galleryImages: [
-      IMG("kayaking1_89345632eb.jpg"),
-      IMG("kayaking_9412ffa392.jpg"),
-    ],
-    paragraphs: [
-      "傑古沙龍冰河湖（Jökulsárlón）被認為是冰島最著名的自然奇觀之一。",
-      "近年來，獨木舟運動在冰島受到了極大的歡迎。而在傑古沙龍冰河湖上體驗獨木舟，必將是一次獨一無二的經歷。您可以欣賞到高聳入雲的巨大冰川，漂浮的冰山碎片，以及湛藍色的壯闊冰河湖。運氣好的話，還能看到笨拙的小海豹懶洋洋地躺在冰塊上沐浴著陽光，可愛的鳥類在湖面上自由盤旋，人與自然的高度和諧統一在這裡得到最好的彰顯。",
-      "獨木舟採用平台舟系列（SIT-ON-TOP），非常穩固不易翻船，即便是獨木舟新手也能輕鬆駕馭。嚮導將準備好專業的服裝與器材，並進行指導。",
-      "開放季節：",
-      "集合地點：",
-      "注意事項：",
-      "1. 參加者需年滿14歲，體重不得超過120kg。",
-      "2. 請提前30分鐘在約定集合地點等待。",
-      "3. 所有冒險旅行和戶外活動都取決於天氣和路況，我們擁有更改或取消您的旅行的權利，以確保您的安全。具體取消條款請參照帕芬假期旅行服務條款。",
-      "體驗包含：",
-      "攜帶建議：",
-    ],
-  },
-  {
-    name: "傑古沙龍冰河湖快艇（Zodiac Boat）船遊體驗",
-    imageUrl: IMG("jokulsarlon_zodiac_boat_tour_potrait_8ef997e874.png"),
-    galleryImages: [
-      IMG("jokulsarlon_zodiac_boat_tour_potrait_8ef997e874.png"),
-      IMG("jokulsarlon_zodiac_boat_tour_4e3fd00550.webp"),
-    ],
-    paragraphs: [
-      "加入傑古沙龍冰河湖快艇船遊，在冰島最迷人的風景中，繞著漂浮的冰山航行。",
-      "在此次行程中，你將乘坐快艇將穿越寧靜的傑古沙龍冰河湖水，漫遊在壯麗的冰山之間，沉浸在冰河湖的神秘氛圍中，欣賞到令人驚歎的冰山景觀和冰河湖的獨特色彩。",
-      "乘坐快艇在冰河湖中遊覽，您將比乘坐水陸兩棲遊船遊覽時更加接近冰山。其中，最令人激動的時刻莫過於靠近浮冰，有機會觸摸到這些有著千年歷史之久的冰塊。",
-      "在陽光下，冰湖中的反射將令您屏住呼吸，這種迷人的光影交錯會讓您沉浸在一種奇妙的夢幻氛圍裡。在遊覽過程中，嚮導也會向您講解冰河湖形成過程和獨特的冰川生態系統。您還將有機會目睹海鷗翱翔湖上、海豹休憩在浮冰上的壯觀景象，為整個旅程增添更多的驚喜與樂趣。",
-      "注意事項：",
-      "1. 本次船遊體驗需在出發前 30 分鐘在售票處辦理登船手續，請您合理安排好時間提前到達。",
-      "2. 參加本行程的兒童身高必須滿足130cm。",
-      "3. 行程中將提供連體防寒服及救生衣，但建議您自行穿戴好防寒保暖裡衣、帽子及手套等。",
-      "體驗時長：",
-      "最低參加年齡：",
-      "體驗包括：",
-      "不包括：",
-    ],
-  },
-  {
-    name: "Fjallsárlón小冰河湖夏季經典船遊",
-    imageUrl: IMG("Fjallsarlon_Boat_Tour_Classic_2b091d79e1.png"),
-    galleryImages: [
-      IMG("Fjallsarlon_Boat_Tour_Classic_2b091d79e1.png"),
-      IMG("5_Fjallsarlon_Iceberg_Boat_Tours_glacier_lagoon_7_8e2b806b60.jpg"),
-    ],
-    paragraphs: [
-      "Fjallsárlón是冰島東南部的一個美麗而迷人的冰河湖靠近瓦特納冰川（Vatnajökull）東側。相較於久負盛名的傑古沙龍冰河湖（Jökulsárlón），小冰河湖相對較小，旅客也相對較少，保持了一種相對較為原始和寧靜的狀態。湖面上漂浮著巨大的冰山，它們從近處的冰川緩緩漂移而來，散發出耀眼的藍光。這些冰山的形狀各異，有的宛如藝術品般精雕細琢，有的則雄偉壯觀，給人一種無盡的想像空間。",
-      "穿戴整齊後，經驗豐富的嚮導會帶您穿過長滿苔蘚的世外桃源，到達冰河湖旁的快艇。天氣晴朗時，陽光穿透冰山的表面，投射出閃爍的光芒，猶如無數顆鑽石在湖面上飄動。湖水的顏色變幻莫測，從湛藍到湖綠，再到晶瑩透明，每一刻都展現出不同的魅力，而周圍的山巒和綿延的冰川為這片景色增添了壯麗的背景，讓人彷彿置身於童話世界中。出發後，您將在各種形狀和大小的冰山間盤旋，這些冰山時不時地翻轉，偶爾您還可以看到和聽到巨大的冰山從冰川邊緣斷裂，急速墜入湖中，然後靜靜地漂走，再慢慢融化。嚮導會在安全的情況下儘可能接近冰山，如果有機會，不妨近距離感受冰山的冰涼觸感，品嚐一下古老的冰雪滋味。",
-      "途中嚮導也會為您講解這個地區的自然和歷史，讓您對冰川有更加深入的了解。",
-      "季節：",
-      "體驗時長：",
-      "最低參加年齡：",
-      "快艇最大載客數：",
-      "體驗包括：",
-      "不包括：",
-    ],
-  },
+    skaftafellGlacierHikingSpot,
+    jokulsarlonAmphibianBoatSpot,
+    jokulsarlonKayakSpot,
+    jokulsarlonZodiacBoatSpot,
+    fjallsarlonBoatSpot,
 ];
 
 export const icelandSelfDriveSummer9Day5Highlights: TripAttraction[] = [
-  {
-    name: "西角山",
-    nameEn: "Vestrahorn",
-    region: "冰島東部",
-    subtitle: "在赫本向東不遠處，欣賞“天空之境”的山峰、湖泊與沙灘之美。",
-    imageUrl: IMG("vestrahorn1_de32f96f5d.jpg"),
-    galleryImages: [
-      IMG("vestrahorn1_de32f96f5d.jpg"),
-      IMG("vestrahorn2_9c0c249ea9.jpg"),
-      IMG("vestrahorn3_2982012489.jpg"),
-    ],
-    paragraphs: [
-      "令攝影師魂牽夢繞之山",
-      "西角山（Vestrahorn）位於冰島東南部的赫本附近，位於一處名為史托克角（Stokksnes）的岬角半島，海拔約為425米，以其崎峻的山峰而聞名，成為了冰島旅遊和一眾攝影愛好者的心儀之地，也成為了無數社交媒體賬號的背景圖片。從赫本驅車前往僅需大約20分鐘。",
-      "西角山那些峻峭的山峰彷彿被刀劈斧削般靜心地雕琢，形成了巍峨的巖峰和嶙峋的岩石。靜謐的湖泊躺臥在山腳下，寧靜無波，將山峰和天空的壯麗景色倒映其間。古往今來的探險家們將這一景象比作",
-      "與冰島的大部分山峰由玄武岩組成不同，西角山主要由輝長巖組成。大約800萬至1000萬年前，超高溫的熔岩隨著時間的推移慢慢冷卻，形成了巨大的晶體，構成了西角山的主要巖體輝長巖，一種由熔岩流形成的深綠色火山岩，顆粒粗大，呈尖刺狀。山的底部則被冰河時期冰川沉積的礫石和沙子覆蓋。",
-      "西角山是冰島最出片的景點之一。它尖聳的山峰在湖面和黑沙灘之上巍然屹立。想要找到最好的角度，您可以繞到維京咖啡（Viking Café）的南面拍攝。",
-      "另外，在一條小路上有兩個停車點，如果天氣晴朗，您可以在這裡拍到最美的山景照片。",
-      "如果風平潮漲，那麼可以拍到湖泊與山峰的絕美倒影。但即使不漲潮，點綴在黑沙灘周圍的小型沙丘也非常美麗。",
-      "想參觀西角山，旅客需要將車停放在附近的維京咖啡，也是這座山的擁有者（沒錯，西角山是一處私人財產）。旅客在維京咖啡購票獲得二維碼，憑碼可進入西角山景區。",
-      "西角山的擁有者開發了三條難度不等的健行路線並將其按照顏色分為紅線、黃線和藍線。紅線長度為5.5公里，途中會經過黑沙灘和史托克角燈塔；黃線長度為6.5公里，途中同樣經過黑沙灘，另外還會走過一處仿古維京村莊，這裡曾作為Netflix劇作《獵魔人》的取景地；藍線難度最高，僅適合專業的登山者，將會經過陡峭的山路，翻越巨石、陡峭的上坡和幾乎垂直的下坡。",
-    ],
-  },
-  {
-    name: "都皮沃古爾",
-    nameEn: "Djúpivogur",
-    region: "冰島東部",
-    subtitle: "在北緯64度感受冰島的慢生活",
-    imageUrl: IMG("andy_wang_L5x_Z94_F_Su_o_unsplash_e1c50ee4b1.jpg"),
-    galleryImages: [
-      IMG("andy_wang_L5x_Z94_F_Su_o_unsplash_e1c50ee4b1.jpg"),
-      IMG("cosmic_timetraveler_s_O_Pb_Er1ym3k_unsplash_b0c8e6561a.jpg"),
-      IMG("andy_wang_4_Tmh57l_Izk_unsplash_e886cbfbb5.jpg"),
-    ],
-    paragraphs: [
-      "國際認證慢城的自然與人文",
-      "都皮沃古爾（Djúpivogur）是坐落在冰島東部Búlandsnes半島上的一個小鎮，人口約為600人，小鎮以其濃厚的歷史氣息以及鮮活的人文藝術氛圍而聞名，同時，豐富的自然景觀讓都皮沃古爾成為許多戶外旅行者的駐足之所。",
-      "都皮沃古爾始建於16世紀，在當時是一個貿易站，如今，港口以捕魚和旅遊業為支柱產業。如今，都皮沃古爾是冰島唯一的認證“慢城”（Cittaslow），致力於通過引入社區意識和慢生活的概念來改善居民的生活",
-      "每年九月的最後一個週日，小鎮還會舉辦慢城週日，在這個特別的節日上，旅客可以感受慢城的特殊氣質，購買當地原產的農產品和文化產品。",
-      "自然景觀",
-      "都皮沃古爾獨特地貌之一是從東北部延伸至西南部的細長巖層，它們是數百萬年前火山爆發形成的長期凝固的巖漿堤，在冰河時期冰川的侵蝕作用下暴露出來。小鎮的遠處矗立著高達1069米的金字塔型Búlandstindur山，小鎮周圍有著幾條成熟的健行路線，其中一些通往高處廣闊的黑沙灘，另一些則通往周圍的群山深處。",
-      "岸邊的鳥蛋",
-      "2009年，34 枚巨大的鳥蛋雕塑被安裝在Djúpivogur附近海岸線上，每一個雕塑都附有介紹的標籤。這些鳥蛋的形狀和顏色都與鳥種相符，依據特定比例放大。該創意出自藝術家兼攝影師西格德爾·古蒙德松（Sigurður Guðmundsson），他此前曾在在中國居住，以中國花崗巖為創作基礎。",
-    ],
-  },
-  {
-    name: "福斯克魯斯菲厄澤",
-    nameEn: "Fáskrúðsfjörður",
-    region: "冰島東部",
-    subtitle: "奇妙的感受！在這座冰島東部峽灣的法語小鎮領略異域之美",
-    imageUrl: IMG("Faskrudsfjoerdur1_c0c54b64c5.jpg"),
-    galleryImages: [
-      IMG("Faskrudsfjoerdur1_c0c54b64c5.jpg"),
-      IMG("Faskrudsfjoerdur2_753d700b34.jpg"),
-      IMG("Faskrudsfjoerdur3_a45d237a7f.jpg"),
-    ],
-    paragraphs: [
-      "街上全是法語？別擔心，這兒還是冰島！",
-      "福斯克魯斯菲厄澤（Fáskrúðsfjörður，又稱Búðir）是冰島東部的一個獨特小鎮，坐落於與其同名的峽灣之中，人口約為710人。距離埃伊爾斯塔濟（Egilsstaðir）約50公里，車程約40分鐘。整個小鎮的所有街區全部是用法文和冰文雙語標註的，來紀念該地區濃重的法國傳統。",
-      "福斯克魯斯菲厄澤建鎮於1880年，直到1935年這裡都一直是法國漁民在冰島東部地區的聚集地，也是由法國人將這裡打造成了貿易港和漁村。在整個小鎮最鼎盛的時期，這裡還建立了法國醫院、領事館和教堂。其中，一家一直被當地人傳說鬧鬼的法國醫院，如今已經從新翻建，並將其改造成了一個特色飯店，裡面不僅有法國風格的餐廳，還有一個專門展示整個小鎮歷史的法國漁民博物館。",
-      "每年的七月底，在福斯克魯斯菲厄澤的法國日期間，人們仍然會在這裡進行傳統的法國遊戲。為了紀念與法國的淵源，7 月 14 日的法國獨立日也成為了福斯克魯斯菲厄澤的國旗日。",
-    ],
-  },
-  {
-    name: "塞濟斯菲厄澤",
-    nameEn: "Seyðisfjörður",
-    region: "冰島東部",
-    subtitle: "前往這個充滿藝術與生活氣息的冰島東峽灣最美小鎮",
-    imageUrl: IMG("Seydisfjoerdur1_482bda2d48.jpg"),
-    galleryImages: [
-      IMG("Seydisfjoerdur1_482bda2d48.jpg"),
-      IMG("Seydisfjoerdur2_12165d4980.jpg"),
-      IMG("Seydisfjoerdur3_2763c37853.jpg"),
-    ],
-    paragraphs: [
-      "白日夢想家小鎮",
-      "塞濟斯菲厄澤（Seyðisfjörður）是匯聚冰島東部人文、藝術與自然精華的旅遊中心，被《孤獨星球》雜誌譽為冰島東部最美的小鎮。",
-      "塞濟斯菲厄澤坐落於與其同名的峽灣中，距離埃伊爾斯塔濟（Egilsstaðir）約26公里。這個寧靜的海濱小鎮氛圍輕鬆，民風淳樸，人文藝術氣息濃厚，鎮上遍佈著獨特的精緻小店和餐飲。",
-      "小鎮中心有著許多建造於19世紀早期的原始木屋，環礁湖畔的環境如詩如畫，一條通向教堂的彩虹小路讓其聞名全球。小鎮沿峽灣南側延伸，沿海岸線可以看到岩石海灘、海鸚棲息地和昔日的自然遺址。小鎮鮮活的藝術場景和多樣的自然景觀使其全年都十分適合到訪遊玩。",
-      "文化活動",
-      "彩虹街是塞濟斯菲厄澤最主要的旅遊地標，也是冰島東部最受歡迎的景點之一。2016年，該鎮的居民和員工聚集在一起，在“驕傲遊行”之際繪製了這條彩虹磚路。此後的每年初夏，旅客和行人都有機會拿起畫筆，幫助重新補繪這條色彩斑斕的街道。彩虹街通往標誌性的藍色教堂，這同樣是冰島最知名的地標之一。",
-      "教堂以其獨特的色彩和建築風格成為旅客的熱門景點。教堂的身世曲折，從建成以來經歷了數次搬遷、被毀和重建。如今，教堂成為了小鎮的藝術文化中心，可容納300名觀眾，每年夏天，這裡會在七月和八月初的週三晚舉辦音樂會，音樂類型包括古典音樂、爵士樂、藍調、民間音樂和輕音樂，演奏者都是飽受讚譽的音樂家和藝術家。",
-      "戶外活動",
-      "在塞濟斯菲厄澤，人們可以近距離地接觸陡峭的高山和廣闊的大海。夏季，有眾多戶外活動供旅客選擇，從短途健行到長達一天的健行或航海探險。仲冬時節，各類滑雪愛好者也能在這裡找到心儀的滑雪場地。",
-      "塞濟斯菲厄澤周邊有七座大山，海拔接近，其中最矮的Bægsli有938米的海拔，最高峰Sandhólatindur海拔為1154米。特別的是，您可以事先前往小鎮的旅客中心，拿到一張包含這七座山峰的特製地圖。這七座山都在山頂放置了蓋章器，請記得在登頂每座山峰後在正確的位置蓋章。爬完所有七座山後，回到旅客中心再次出示地圖，您就能獲得“登山維京勇者”稱號",
-      "冬季，滑雪愛好者也不必擔心找不到好的雪場，Stafdalur滑雪場距離塞濟斯菲厄澤僅9公里，為在冰島感到滑雪能量無處施展的雪客們提供了一個絕佳的地點，雪場設有一條 1600 米長的滑雪纜車和兒童雪道，還可以進行越野滑雪和雪地摩托。",
-    ],
-  },
-  {
-    name: "埃伊爾斯塔濟",
-    nameEn: "Egilsstaðir",
-    region: "冰島東部",
-    subtitle: "冰島東部樞紐小鎮，野生馴鹿和健行是這裡的兩大黃金招牌。",
-    imageUrl: IMG("egilsstadir1_4cef6ca33c.jpg"),
-    galleryImages: [
-      IMG("egilsstadir1_4cef6ca33c.jpg"),
-      IMG("egilsstadir_ito_11572a4a84.jpg"),
-      IMG("Austurbru_Pall_Gudmundur_Egilsstadir_DJI_0142_2850a41506.jpg"),
-    ],
-    paragraphs: [
-      "拉加爾湖畔的東冰島核心小鎮",
-      "埃伊爾斯塔濟（Egilsstaðir）是冰島東部最大的城鎮，隸屬於冰島面積最大的自治市穆拉湖市（Múlaþing）。埃伊爾斯塔濟位於拉加爾湖（Lagarfjlót）畔，毗鄰 1 號環島公路，是冰島東部的重要樞紐。從小鎮出發，前往塞濟斯菲厄澤（Seyðisfjörður）僅需 20 分鐘，前往近年備受矚目的 Stuðlagil 峽谷也只需 1 小時車程。",
-      "無論夏季還是冬季，埃伊爾斯塔濟都是適宜的旅遊勝地，尤其以馴鹿觀賞、觀鳥、健行等戶外活動而出名。埃伊爾斯塔濟擁有富饒的綠色植被、迷人的山丘和瀑布，夏季陽光明媚，冬季白雪皚皚。遊覽埃伊爾斯塔濟絕對是獨一無二的體驗，因為冰島只有東部地區才會出現馴鹿這種野生動物。埃伊爾斯塔濟有著多樣的自然美景和宜人的氣候。 瀑布、峽谷、湖泊和河流讓這裡十分適合開展戶外活動，健行路線穿越森林和開闊地帶，全年開放。這裡還盛產漿果和蘑菇，湖泊和河流是垂釣愛好者的好去處，獵人們也公認這裡是冰島最令人興奮的狩獵地區。",
-      "距離小鎮僅1小時車程的Stuðlagil峽谷是近些年來冰島正在“崛起”的精華小眾景點之一。峽谷是在約庫爾薩河（Jökulsá）之下形成的，幾年前河水水位下降，才顯露出這個大自然的奇蹟。這裡擁有冰島數量最多的玄武岩石柱，您可以俯瞰顏色深淺不一的嶙峋巖柱，它們與清澈蔚藍的河水形成鮮明對比。",
-      "除了自然景觀以外，埃伊爾斯塔濟附近最著名的遊玩活動當屬Vök Baths溫泉，溫泉由兩個六邊形的無邊泳池組成，像寶石一樣漂浮在Urriðavatn湖上，距離埃伊爾斯塔濟僅約5公里，是冰島東部的必去之地之一。Vök Baths溫泉利用天然地熱能加熱泉水，顧客在溫泉水中放鬆休閒的同時還能欣賞到湖面和周圍地區的迷人景色，與大自然融為一體。與冰島其他地區相比，東部的溫泉較少，因此更加凸顯出Vök Baths溫泉的特別之處。",
-    ],
-  },
+    vestrahornSpot,
+    djupivogurSpot,
+    faskrudsfjordurSpot,seydisfjordurSpot,egilsstadirSpot,
 ];
 
 export const icelandSelfDriveSummer9Day5OptionalActivities: TripAttraction[] = [
-  {
-    name: "東部Vök Baths湖上溫泉入場票",
-    imageUrl: IMG("woman_enjoy_vok_baths_potrait_e256a6821f.png"),
-    galleryImages: [
-      IMG("woman_enjoy_vok_baths_potrait_e256a6821f.png"),
-      IMG("vok_baths_a66fee57b3.jpg"),
-    ],
-    paragraphs: [
-      "冰島溫泉數不勝數，東西南北都有各具特色的溫泉。在較為小眾的冰島東部峽灣區域，也有著一個獨特的湖上溫泉：Vök Baths。",
-      "Vök Baths湖上溫泉位於距離冰島東部最大城鎮埃伊爾斯塔濟（Egilsstaðir）僅5公里的地方，是冰島東部的必去之地之一。這裡的環境非常寧靜，能讓您完全放鬆身心，遠離城市的喧囂和壓力，並欣賞美麗的冰島自然風光。",
-      "溫泉由兩座六邊形的溫水浴池組成，形狀彷彿如鑲嵌於Urriðavatn湖面上的巨大寶石。這個冰島東部溫泉利用天然地熱能加熱泉水，您在放鬆身心的同時，還能觀賞到湖面和周圍的景色，十分愜意。除此之外，Vök Baths的設施十分完善，除了湖中的兩座浴池外，岸上還設有一個熱水池，兩者之間由木質步道相連。此外，Vök Baths還設有桑拿房、一個室外溫泉酒吧並帶有室內的更衣室與淋浴間。您可以在桑拿浴室中享受熱蒸汽的舒緩，或在酒吧點一杯飲品，享受溫泉的同時滿足味蕾。",
-      "開放時間：",
-      "（週末正常開放，除週末外的節假日開放時間請諮詢客服）",
-      "其他：",
-      "體驗包含：",
-      "不包含：",
-    ],
-  },
+    vokBathsSpot,
 ];
 
 export const icelandSelfDriveSummer9Day6Highlights: TripAttraction[] = [
-  {
-    name: "Stuðlagil峽谷",
-    region: "冰島東部",
-    subtitle: "造訪冰島近年備受矚目的新景點",
-    imageUrl: IMG("Studlagil1_e967a025b9.jpg"),
-    galleryImages: [
-      IMG("Studlagil1_e967a025b9.jpg"),
-      IMG("Studlagil3_44340eb789.jpg"),
-      IMG("Studlagil2_560e0c84bb.jpg"),
-    ],
-    paragraphs: [
-      "沉寂在冰河之下數百萬年的神奇峽谷",
-      "Stuðlagil峽谷位於冰島東部，距離埃伊爾斯塔濟（Egilsstaðir）大約70公里，車程需要大約1小時。這裡是冰島最大的玄武岩石柱群，峽谷聳立在隨季節變化顏色的河流兩側，是冰島最引人入勝的景點之一。Stuðlagil峽谷雖然形成於數百萬年前，但直到最近幾年才成為旅遊景點。這是為什麼呢？",
-      "實際上，在此之前，Stuðlagil峽谷的玄武岩石柱隱藏在布魯冰川河（Jökulsá á Brú）的冰川水下。2009 年，附近的Káranhjúkar水電站建成並投入使用後，河水水位下降，才露出了這冰島最不可思議的自然景觀之一。布魯冰河是冰島最長的冰川河流之一，從瓦特納冰川一直流淌至Héraðssandar海灘，全長150公里。 河水呈藍綠色，與色彩斑斕的玄武岩柱形成鮮明對比，令人目不暇接。與冰川河流一樣，它的顏色和水流也會隨著季節的變化而變化。到了春天，積雪解凍，水庫溢流，河水將會呈現出灰褐色。",
-      "冰島的氣候條件和火山活動十分適合玄武石柱的形成，因此您能夠在全國各地看到許多玄武岩柱的景觀，其中就包括鼎鼎有名的位於黑沙灘（Reynisfjara）之上的加達爾懸崖（Gardar cliff）和Hálsanefshellir洞穴，以及附近的雷尼斯岩（Reynisdrangar）。但是Stuðlagil峽谷無論在壯觀程度還是客觀面積上，都是其中的佼佼者。",
-    ],
-  },
-  {
-    name: "黛提瀑布",
-    nameEn: "Dettifoss",
-    region: "冰島北部",
-    subtitle: "浩大的巨響讓人感受到大自然的無窮力量，快來領略歐洲最洶湧的瀑布黛提瀑布！",
-    imageUrl: IMG("dettifoss2_45da311b3a.jpg"),
-    galleryImages: [
-      IMG("dettifoss2_45da311b3a.jpg"),
-      IMG("dettifoss1_9ceaad5480.jpg"),
-      IMG("dettifoss3_70d08e045f.jpg"),
-    ],
-    paragraphs: [
-      "歐洲最大瀑布盡收眼底",
-      "黛提瀑布（Dettifoss）位於冰島北部的鑽石圈路線中，寬100米，高45米，是歐洲水流量最大的瀑布，每秒的水流量達到了200立方米。不過，雖然瀑布旁的指示牌這麼說，但也有人指出，位於德國與瑞士交接處的萊茵瀑布在夏季汛期時的水流量已經超過了黛提瀑布。",
-      "黛提瀑布的壯觀景象如同天地之間的一道奇蹟，其浩大與磅礴之勢令人心生敬畏。當你靠近，隆隆的水聲如同大地的低吟，讓人感受到大自然的無窮力量。菲約德勒姆冰河（Jökulsá á Fjöllum）發源自歐洲最大的冰川瓦特納冰川（Vatnajökull），冰河水奔流而來，在這45米的落差峭壁上飛落直下，捲起濃濃白霧，發出野獸般的咆哮。這也是為什麼黛提瀑布和與它鄰近的眾神瀑布（Goðafoss）一併被人們稱為“美女與野獸”的原因——相比之下，眾神瀑布則顯得秀美很多。菲約德勒姆冰河也是冰島的第二長河，一直向北流入格陵蘭海中。",
-      "在河流的上游不遠處，塞爾福斯瀑布（Selfoss）顯露出了它的身影，它的名字與冰島南部重鎮Selfoss相同，這是一個更小但更加精緻的瀑布，距離黛提瀑布健行僅需大約1公里。而在黛提瀑布的下游，還有另一個更小的瀑布哈菲列斯瀑布（Hafragilsfoss），在這裡您能擁有一個更好的欣賞傑古沙格魯夫爾峽谷（Jökulsárgljúfur）的視角。",
-    ],
-  },
-  {
-    name: "胡薩維克",
-    nameEn: "Húsavík",
-    region: "冰島北部",
-    subtitle: "前往“歐陸觀鯨之都”胡薩維克體驗幾乎百分百觀鯨的絕妙體驗。",
-    imageUrl: IMG("husavik1_d0f3b53186.jpg"),
-    galleryImages: [
-      IMG("husavik1_d0f3b53186.jpg"),
-      IMG("husavik2_d180e46836.jpg"),
-      IMG("husavik3_b070e32e0d.jpg"),
-    ],
-    paragraphs: [
-      "走，出海觀鯨去！",
-      "胡薩維克（Húsavík）是冰島北部一個寧靜的小鎮，也是冰島最早的定居點之一，坐落在Skjálfandi海灣東岸。胡薩維克的名字直譯過來的意思是“房屋之港”，這裡也是世界上觀賞鯨魚的最佳地點之一，被認為是歐洲無可爭議的“觀鯨之都”，從港口出海大約20分鐘就能看到成群的鯨魚，成功率基本接近百分之百。",
-      "一次行程的時長根據具體服務商而不同，目前胡薩維克共有4家公司提供出海觀鯨船遊服務，基本都在2-3個小時左右。其中最常見的是難以捉摸的座頭鯨，還有巨大的藍鯨等等一系列壯觀的鯨魚。關於觀鯨的其他具體資訊，還可以查看文章下方的常見問題。",
-      "不過，雖然以觀鯨而出名，但現在吸引旅客來到胡薩維克的也不僅僅只是鯨魚。這裡有海洋博物館、自然歷史博物館、民俗博物館、地區檔案館、照片檔案館和藝術畫廊，鎮上還有各式各樣的餐館和咖啡館。這裡的文化氛圍十分濃厚，戲劇表演和音樂節節目豐富多彩。在揚帆出海去追尋那些溫順的龐然大物之前，還可以參觀一下坐落在海港邊的胡薩維克鯨魚博物館，這裡展示了冰島北部的捕鯨歷史，還陳列著許多鯨魚骨骼，甚至還有一比一大小的藍鯨骨骼。",
-      "在胡薩維克遊玩的另一大趣事就是前往Geosea溫泉好好放鬆。20世紀中葉，工人們在鑽探過程中發現了地熱海水，他們決定不讓海水白白浪費，在那基礎上建造了簡易的房屋，將其變成可供小鎮居民放鬆休閒的溫泉，這也就是現在Geosea溫泉的前身。Geosea溫泉是一處天然的海水溫泉，坐在池邊望向茫茫大海，您可能會瞧見座頭鯨在遠處浮出水面，以及在天邊佇立的金納菲爾山脈。",
-    ],
-  },
-  {
-    name: "米湖",
-    nameEn: "Lake Mývatn",
-    region: "冰島北部",
-    subtitle: "領略冰島第四大湖的旖旎風光，記得提前準備好面罩！",
-    imageUrl: IMG("myvatn2_c34ac89174.jpg"),
-    galleryImages: [
-      IMG("myvatn2_c34ac89174.jpg"),
-      IMG("myvatn3_409d3572c2.jpg"),
-      IMG("myvatn1_aeddb05db2.jpg"),
-    ],
-    paragraphs: [
-      "北部冰島的閃亮名片",
-      "米湖（Lake Mývatn）位於冰島北部，是冰島的第四大湖泊，長9.5千米，寬6.5千米，面積覆蓋37平方公里。米湖周圍遍佈著大大小小的景點，汩汩冒泡的泥漿池、大小不一的火山口和新生的熔岩地是這裡最為迷人的景緻，使其成為了冰島北部鑽石圈線路的最大亮點之一。",
-      "湖岸邊水灣靜靜地接受著湖水的拍打，湖面上點綴著約50個小島。湖中盛產蠓蟲，也正是這些無處不在的小飛蟲使該湖得名——米湖的冰島名稱直譯為飛蟲湖。米湖的景色對比之大，密度之高，讓人們不出十里路就能體驗到冰島北部最美的景色。",
-      "大約一萬年前，整個米湖及周邊地區還是一片被冰川覆蓋的不毛之地。數千年來，該地區遭受了多次火山運動的破壞，火山爆發後，大部分的冰川迅速融化。大約2300年前一次巨大的火山噴發形成的巨大熔岩阻塞了河流，米湖也因此而形成。",
-      "米湖的水不深，陽光可以照射到整個湖床表面。湖區的生態資源極為多樣，淡水海藻在湖中大量生長，湖床上也掛有大量的硅藻，而在靠近湖面的地方，米湖著名的北極鮭則穿梭於水生植物和長滿肥沃植被的島礁之間。",
-      "米湖的鳥類種類繁多，是多種湖鳥和沼鳥的棲息地。最值得一提的是，夏季的米湖有14種鴨子在這裡築巢，這在北半球是絕無僅有的，其密度之高、種類之多在全世界都稱得上是獨一無二的。米湖也因其自然多樣性成為了法定的自然保護區，與從米湖流出的拉克薩河（Laxá）一起被列入了國際重要濕地名錄。",
-    ],
-  },
+    studlagilSpot,dettifossSpot,husavikSpot,myvatnSpot,
 ];
 
 export const icelandSelfDriveSummer9Day6OptionalActivities: TripAttraction[] = [
-  {
-    name: "胡薩維克Húsavík經典觀鯨",
-    imageUrl: IMG("husavik_traditional_whale_watching_2_a7b91e5f12.png"),
-    galleryImages: [
-      IMG("husavik_traditional_whale_watching_2_a7b91e5f12.png"),
-      IMG("iceland_3851089_1280_601a5f7583.jpg"),
-    ],
-    paragraphs: [
-      "胡薩維克（Húsavík ）被稱為歐洲鯨魚之都，由此可見，在此觀鯨可謂是非常熱門。",
-      "參加本次經典冰島觀鯨體驗，乘坐傳統的冰島橡木船，在平穩安全的航行中，一同探索鯨魚的家園吧。您不僅可以一覽Skjálfandi海灣的峽灣美景，還可以在海鷗的陪伴下，一起尋找鯨魚的身影",
-      "除了海灣眾多不同種類的鯨魚外，您還可以留意各種鳥類。您或許可以看到北極燕鷗在尋找食物，海雀潛入水中游泳，以及其他好奇的海鳥在附近盤旋。如果您6月到8月參加我們的觀鯨團，還可能遇到冰島“國鳥”海鸚Puffin！",
-      "預訂須知",
-      "1. 觀鯨船是否可以出海條件完全受天氣與海面狀況所影響。為了保障您的旅行安全與旅途的舒適，觀鯨團保留臨時更改或取消行程的權利。若行程取消，您可及時聯繫我們確認更改到仍有空位的日期。",
-      "2. 胡薩維克觀鯨的成功率高達99%，但仍然無法確保您一定能在參團時看到鯨魚。如果旅途中沒有看到任何鯨魚或海豚，您可以免費再獲得一次參加觀鯨旅行團的機會。我們將盡力為您安排參加仍有空位的觀鯨旅行團，為您提供一張新的參團票據。本張票據不得轉讓，僅供原票據的持有者使用，具體參見帕芬假期旅行服務條款，聯繫後臺客服諮詢。",
-      "注意事項：",
-      "行程時長：",
-      "體驗包括：",
-      "不包括：",
-    ],
-  },
-  {
-    name: "Geosea天然海景溫泉入場票",
-    imageUrl: IMG("Geosea_6705414f40.png"),
-    galleryImages: [
-      IMG("Geosea_6705414f40.png"),
-      IMG("geosea_d7502be931.jpg"),
-    ],
-    paragraphs: [
-      "冰島溫泉文化由來已久，冰島人經常相約在溫泉池中放鬆身心，解除一天的疲勞。幾個世紀以來，胡薩維克（Húsavík）北部的Geosea天然海景溫泉一直為居民所熟知，數百年來，這個小漁村都很好地利用了地熱水資源，將富含礦物質的海水與地熱能源罕見結合。因此Geosea不僅是前來冰島旅行必體驗的溫泉聖地，也是深入了解胡薩維克生活的完美體驗點。",
-      "自開業以來，Geosea天然海景溫泉也一直深受冰島人的喜愛。Geosea天然海景溫泉坐落在朝西的懸崖邊，您可以以一種獨特的方式享受冰島的大自然。俯瞰斯克雅凡帝灣（Skjálfandi Bay）和北面的北極圈，為想要前來冰島北部觀鯨和尋找冰島北極光的旅客提供了絕佳的視角。此外，在Geosea38-39℃的熱海水中沐浴，也有助於放鬆肌肉，促進血液循環，讓人感覺煥然一新。",
-      "開放時間：9-5月：中午12點-晚上22點；6-8月：中午12點-0點",
-      "體驗包含：",
-      "攜帶建議：手機防水套、泳衣、浴巾、護膚品等",
-    ],
-  },
-  {
-    name: "米湖天然溫泉入場票",
-    imageUrl: IMG("myvant_949e057f28_48fd938e84.avif"),
-    galleryImages: [
-      IMG("myvant_949e057f28_48fd938e84.avif"),
-      IMG("myvant_949e057f28.avif"),
-    ],
-    paragraphs: [
-      "米湖天然溫泉（Mývatn Nature Baths）位於冰島北部，被譽為”袖珍版藍湖”，溫泉水也為乳藍色，水溫維持在36-40°C，非常舒適，而水中含有的大量礦物微量元素也被認為有護膚的神奇作用。",
-      "米湖天然溫泉的每個季節都有自己的特點：夏季的夜晚明亮如白晝，溫泉水即使在午夜依然色澤明亮；進入秋季，遠處點綴著金色和棕色；而到了冬季時分，白晝只有幾個小時，周圍逐漸呈現霜凍之景，您將有機會享受令人難忘的北極光。在寒冷的冬季夜晚，還有什麼比在熱泉水中保持身體舒適溫暖，同時還有可能捕捉到天空中舞動的綠色極光更好的呢？一起體驗乳藍色水浴的治癒力量，欣賞冰島北部的獨特風光！",
-      "當你沐浴在這個溫泉裡時，你會感受到一種深深的平靜和放鬆，感到自己彷彿被包裹在一種神秘的藍色氛圍中，非常美妙。",
-      "位置與距離：",
-      "體驗包括：",
-      "不包括：",
-      "建議體驗時長：",
-    ],
-  },
+    husavikWhaleWatchingSpot,
+    geoseaSpot,myvatnNatureBathsSpot,
 ];
 
 export const icelandSelfDriveSummer9Day7Highlights: TripAttraction[] = [
-  {
-    name: "米湖",
-    nameEn: "Lake Mývatn",
-    region: "冰島北部",
-    subtitle: "領略冰島第四大湖的旖旎風光，記得提前準備好面罩！",
-    imageUrl: IMG("myvatn2_c34ac89174.jpg"),
-    galleryImages: [
-      IMG("myvatn2_c34ac89174.jpg"),
-      IMG("myvatn3_409d3572c2.jpg"),
-      IMG("myvatn1_aeddb05db2.jpg"),
-    ],
-    paragraphs: [
-      "北部冰島的閃亮名片",
-      "米湖（Lake Mývatn）位於冰島北部，是冰島的第四大湖泊，長9.5千米，寬6.5千米，面積覆蓋37平方公里。米湖周圍遍佈著大大小小的景點，汩汩冒泡的泥漿池、大小不一的火山口和新生的熔岩地是這裡最為迷人的景緻，使其成為了冰島北部鑽石圈線路的最大亮點之一。",
-      "湖岸邊水灣靜靜地接受著湖水的拍打，湖面上點綴著約50個小島。湖中盛產蠓蟲，也正是這些無處不在的小飛蟲使該湖得名——米湖的冰島名稱直譯為飛蟲湖。米湖的景色對比之大，密度之高，讓人們不出十里路就能體驗到冰島北部最美的景色。",
-      "大約一萬年前，整個米湖及周邊地區還是一片被冰川覆蓋的不毛之地。數千年來，該地區遭受了多次火山運動的破壞，火山爆發後，大部分的冰川迅速融化。大約2300年前一次巨大的火山噴發形成的巨大熔岩阻塞了河流，米湖也因此而形成。",
-      "米湖的水不深，陽光可以照射到整個湖床表面。湖區的生態資源極為多樣，淡水海藻在湖中大量生長，湖床上也掛有大量的硅藻，而在靠近湖面的地方，米湖著名的北極鮭則穿梭於水生植物和長滿肥沃植被的島礁之間。",
-      "米湖的鳥類種類繁多，是多種湖鳥和沼鳥的棲息地。最值得一提的是，夏季的米湖有14種鴨子在這裡築巢，這在北半球是絕無僅有的，其密度之高、種類之多在全世界都稱得上是獨一無二的。米湖也因其自然多樣性成為了法定的自然保護區，與從米湖流出的拉克薩河（Laxá）一起被列入了國際重要濕地名錄。",
-    ],
-  },
-  {
-    name: "米湖地熱區",
-    nameEn: "Mývatn Geothermal Area",
-    region: "冰島北部",
-    subtitle: "在米湖旁的地熱區稍作停留，異世繽紛的景觀和硫磺的特殊氣味一定會讓你對這裡印象深刻。",
-    imageUrl: IMG("Myvatn_Geothermal_Area1_4b4bcb4149.jpg"),
-    galleryImages: [
-      IMG("Myvatn_Geothermal_Area1_4b4bcb4149.jpg"),
-      IMG("Myvatn_Geothermal_Area3_bd3aa3dbed.jpg"),
-      IMG("Myvatn_Geothermal_Area2_5844278012.jpg"),
-    ],
-    paragraphs: [
-      "上帝在這裡打翻了調色盤",
-      "米湖地熱區（Myvatn Geothermal Area）位於冰島北部，是著名的米湖旁一片異世景觀地。這裡以獨特的火山景觀、湛藍的湖泊、沸騰的泥漿坑和斑斕的地表色彩而聞名遐邇。米湖的冰島語原意為”飛蠓湖“，因夏季有大量飛蠓小蟲在此地上空飛舞而得名。",
-      "米湖地熱區的地熱活動是緣於其地理區位，這裡位於克拉弗拉火山系統內，地殼下是一系列相互連接的裂縫和巖漿室。當巖漿上升到地表時，會加熱周圍的岩石和地下水，從而形成地熱儲層。這些儲層的熱量會加熱地下水，從而形成溫泉。當火山活動、地熱和富含礦物質的地下水相結合，就形成了米湖地熱區獨特的地熱景觀。",
-      "米湖地熱區中最著名的區域當屬Hverir地熱區，這裡的大地色彩斑斕，泥漿池冒著騰騰熱氣，紅色、黃色和綠色的鮮豔色彩與貧瘠的岩石地形形成鮮明對比。",
-      "米湖地熱區的另一個著名景點是米湖溫泉，這裡通常被旅客稱為“北邊的藍湖溫泉”。",
-      "除了地熱特色，米湖地熱區還是一個熱門的觀鳥地點。米湖湖泊本身就吸引了多種多樣的鳥類，其中包括幾種稀有和受保護的鳥類。鳥類愛好者蜂擁而至，一睹各種水鳥、涉禽和候鳥的風採，使這裡成為了鳥類學愛好者的天堂。",
-    ],
-  },
-  {
-    name: "Grjótagjá洞穴",
-    region: "冰島北部",
-    subtitle: "考考你的權遊十級學者朋友，帶TA來這裡準沒錯！",
-    imageUrl: IMG("grjotagja2_2363306704.jpg"),
-    galleryImages: [
-      IMG("grjotagja2_2363306704.jpg"),
-      IMG("grjotagja1_f0528e853e.jpg"),
-    ],
-    paragraphs: [
-      "雪諾與耶哥蕊特",
-      "Grjótagjá洞穴是米湖地區的一個小型洞穴，位於米湖和米湖地熱區的中間，在過去曾是一個很受歡迎的私密溫泉。然而，在1975-1984年期間，多次地質和火山活動導致這裡的水溫上升最高達到了50度，從那以後，這裡就再也不適合人們在裡面泡溫泉了。此外，這個洞穴十分隱蔽，如果天氣不晴朗或有霧的話，您甚至會很難找到它的入口。",
-      "1975年的火山爆發使Grjótagjá洞穴中的水溫升至50度，隨後洞穴便下令禁止人們下水，但每次當水溫再次回到可以接受的溫度後，它會再次開放。這樣的情況一次次地重複發生，目前，洞穴內部是禁止下水的，您只能進入洞穴參觀和遊覽。由於洞穴和周邊地區屬於私人所有，但常年無人看管，因此您有幾率需要與管理者諮詢和交流後方可進入。",
-      "對於旅客來說，這個小眾的景點原本不屬於冰島的各類旅遊清單之上，直到那部現象級的電視劇的播出。沒錯，Grjótagjá洞穴是《權力的遊戲》在冰島的眾多取景地之一",
-      "這一段劇情是劇中的名場面，但由於拍攝限制，該場景實際上是在攝影棚內拍攝的。不過，《權力的遊戲》的創作團隊以最大限度地還原了洞穴的真實性，除了背景中的瀑布是電腦特效之外，其餘的部分均是實景。",
-      "事實證明，在劇集播出後，全世界的劇迷蜂擁而至，甚至因為人流量過大而導致洞穴在2018年有過短暫的關閉。目前， 洞穴已經重新開放。",
-      "需要提醒旅客的是，Grjótagjá洞穴屬私人所有，因此如果前來參觀，請一定要注意遵守規定不要在池中沐浴，也不要留下任何垃圾，這樣洞穴才能繼續為未來的旅客開放。",
-    ],
-  },
-  {
-    name: "黑暗城堡熔岩群",
-    nameEn: "Dimmuborgir",
-    region: "冰島北部",
-    subtitle: "米湖東部的巨大熔岩地，傳說中這裡是連接地球與地獄的地點。",
-    imageUrl: IMG("Dimmuborgir1_fb065fc970.jpg"),
-    galleryImages: [
-      IMG("Dimmuborgir1_fb065fc970.jpg"),
-      IMG("Dimmuborgir2_66eb5381ee.jpg"),
-    ],
-    paragraphs: [
-      "鬼斧天工的巨大熔岩群",
-      "黑暗城堡熔岩群（Dimmuborgir）位於米湖的東部地區，數千年來，米湖周邊地區火山活動頻繁，形成了眾多奇特的地貌和地質。黑暗城堡就是這樣一片由熔岩柱、洞穴、崎嶇的峭壁和高聳的岩石組成的熔岩地貌。一些洞室和熔岩柱的基座大到足以容納人類，因此這裡也被人們稱為“城堡”。",
-      "黑暗城堡熔岩群的整片區域是由2300年前的一次火山噴發而形成的。這裡曾是一片沼澤地，由於滾燙的巖漿從上方流過導致地下水沸騰，源源不斷的水蒸氣將巖漿塑造成了各種的奇特造型。",
-      "在民間的傳說中，造型各異的岩石都是一個個的巨魔，傳說有一次巨魔的派對上，這些巨魔忘記了時間，到了日出的時候還沒有離開，太陽便將他們全部石化了。除了巨魔的傳說以外，這裡也是冰島13個聖誕老人的故鄉。除了這兩個民間傳說以外，這裡通常還被人們認為是撒旦從天堂被貶的降落點，連接了地球與地獄。",
-      "現如今，這裡已經被修繕成了一個適合健行的公園，有著眾多長度不一的健行路線。健行路線都不太考驗體能，最長的一條只需幾個小時即可走完。但是由於黑暗城堡內地形十分複雜，容易迷路，所以請事先查詢好路線，並緊緊跟隨路標指示。",
-    ],
-  },
-  {
-    name: "Skútustaðagígar偽火山口",
-    region: "冰島北部",
-    subtitle: "2000多年前的熔岩流動塑造的奇異景觀，是米湖周邊不容錯過的景點之一。",
-    imageUrl: IMG("Skutustadagigar1_00cfe54f66.jpg"),
-    galleryImages: [
-      IMG("Skutustadagigar1_00cfe54f66.jpg"),
-      IMG("Skutustadagigar3_27c1c3e63b.jpg"),
-      IMG("Skutustadagigar2_740a9de3f7.jpg"),
-    ],
-    paragraphs: [
-      "火山口？隕石坑？傻傻分不清楚",
-      "Skútustaðagígar偽火山口位於冰島北部的米湖（Lake Mývatn）南岸，是米湖周圍最著名的景點之一，它由蒸汽爆炸而非真正的火山噴發而形成，但又由於其形狀與火山口極其相似，因而得名。",
-      "Skútustaðagígar偽火山口是在大約 2300 年前形成的。當附近的Lúdentaborgir 和 Þrengslaborgir 火山噴發時，滾燙的熔岩流過涼爽潮濕的地面，並對地表施壓。在熔岩的重壓下，蒸汽被困，產生極大的壓力。當壓力過大時，就會引發蒸汽爆炸，造成地面凹陷，形成了這些以假亂真的偽火山口。",
-      "Skútustaðagígar偽火山口的交通十分便利，對於自駕旅客來說，景區旁邊就有一個停車場。景區有兩條健行路線，長線距離在3公里左右，圍繞著這個碗狀的地塊步行一週，在旁邊還有一條更短的路線，大約1.5公里左右。總之，兩條線路非常輕鬆，適合各個年齡段的旅客。",
-      "夏季，巨大的火山口上長滿了青草，有時還能看到綿羊在周圍吃草。到了冬天，偽火山口中積滿白雪，周圍的世界好像只剩下了白色與黑色，讓本就異世的米湖比往常更加寧靜。",
-      "偽火山口與米湖濕地的風景融為一體，連綿起伏、風景如畫，特別受到攝影師和旅客的歡迎。這裡還是觀鳥的寶地之一，作為自然保護區，附近水域常年棲息著各種珍奇的鳥類和鴨子，據統計可以觀賞到近 150 種鳥類，因此也吸引著來自世界各地的觀鳥者和自然愛好者前來拜訪。",
-    ],
-  },
-  {
-    name: "眾神瀑布",
-    nameEn: "Goðafoss",
-    region: "冰島北部",
-    subtitle: "和黛提瀑布併成為“美女與野獸”的眾神瀑布，冰島鑽石圈上的絕美風光。",
-    imageUrl: IMG("godafoss3_54ff933f33.jpg"),
-    galleryImages: [
-      IMG("godafoss3_54ff933f33.jpg"),
-      IMG("godafoss2_004851286a.jpg"),
-      IMG("godafoss1_423882b152.jpg"),
-    ],
-    paragraphs: [
-      "美妙絕倫的30",
-      "眾神瀑布（Goðafoss）位於冰島北部鑽石圈線路內，位於米湖（Lake Mývatn）與阿克雷里（Akureyri）的中間，靠近胡薩維克（Húsavík）、米湖地熱區（Mývatn Geothermal Area）、黛提瀑布（Dettifoss）等北部著名景點。",
-      "眾神瀑布是冰島最壯觀的瀑布之一，Skjálfandafljót河的冰川河水從12米的半弧形懸崖上面落下，寬度則是達到了30米之寬，河水落下，形成了一幅藍綠色的漩渦圖案。",
-      "而眾神瀑布在冰島這個遍佈著瀑布的國家脫穎而出，成為旅客之中最出名的景點之一，不僅是憑藉其景色之磅礴壯美，有關瀑布的古老故事更是為其增添了不少神話色彩，讓這支白霧籠罩的美麗瀑布再蒙上了一層歷史厚重金色的面紗。",
-      "根據冰島傳說，在公元1000年，由於冰島信仰的宗教與歐洲主流的基督教不同，因而產生了矛盾，尤其是來自以挪威人為首的其他歐洲國家的壓力越來越大。當時的法律演講人Thorgeir Thorkelsson是一個受到冰島基督教派和舊教派雙方尊敬和敬仰的人物，他被選為最終作出決定的人。",
-      "在思考了三天之後，他宣佈冰島人應該信奉基督教，但同時不禁止或限制人們信仰北歐諸神的自由，仍然可以舉行異教節日。最後，他象徵性地將他的供奉的北歐神像們拋入了瀑布，標誌著該國正式接受基督教作為官方宗教，這支瀑布也因此得名為眾神瀑布。拋神像這一舉動據說惹惱了眾神，因此他們把瀑布一分為二。就如您所見，眾神瀑布中間由一塊巨大的黑色岩石分割開來。",
-      "瀑布靠近1號環島公路，兩邊都有停車場，並有良好的步行道路通往瀑布。從兩邊都能欣賞到美景，步行距離最短的地方是河的西邊。瀑布旁還有紀念品商店和餐廳，旅客們可以一併參觀。",
-    ],
-  },
-  {
-    name: "阿克雷里",
-    nameEn: "Akureyri",
-    region: "冰島北部",
-    subtitle: "這個冰島北部小城，連紅綠燈都是愛你的形狀",
-    imageUrl: IMG("akureyri2_4315b5a769.jpg"),
-    galleryImages: [
-      IMG("akureyri2_4315b5a769.jpg"),
-      IMG("akureyri1_3578767475.jpg"),
-      IMG("akureyri3_ee2c50a339.jpg"),
-    ],
-    paragraphs: [
-      "「北冰島之都」的無限魅力",
-      "阿克雷里（Akureyri）是冰島第二大城市，冰島北部最大的城市，人口約為19000人，因此也被人們稱為“冰島北部的首都”。",
-      "由於位於鑽石圈線路內，阿克雷里成為了旅行者遊覽冰島北部的駐地，從這裡出發前往米湖（Lake Myvatn）、Námafjall地熱區、胡薩維克（Húsavík）、眾神瀑布（Goðafoss）和黛提瀑布（Dettifoss）等令人神往的景點都非常便捷，一站式體驗漂流、健行、洞穴探險、觀鯨和騎馬等諸多令人腎上腺素直升的戶外娛樂活動。",
-      "城市生活",
-      "阿克雷里城市不大，坐落在冰島最北部的峽灣埃亞峽灣旁，民風淳樸，貼近自然，鎮上大部分的景點步行就可以到達，比如擁有7000多種植物的世界最北植物園、高大雄偉的阿克雷里大教堂（Akureyrarkirkja）、阿克雷里博物館等。",
-      "城市的公交系統是完全免費的，旅客可以在城市中的精品咖啡、餐館、泳池和飯店自由穿梭。別忘了前去阿克雷里北部的啤酒SPA享受一番，啤酒浴、溫泉加上餐廳的配置堪稱一絕。當地的藝術和音樂氛圍也十分濃厚，該鎮還擁有冰島在雷克雅維克以外唯一的一所專業劇院。",
-      "在阿克雷里的城市中游蕩，你很難不注意到遍佈全城的愛心紅綠燈。當紅燈亮起，所有人都趕忙合影一張，在這接近極圈的緯度中收集一絲城市的暖意。在2008年冰島的金融危機後，阿克雷里政府為了鼓舞民眾而將信號燈的形狀改成愛心，意在傳遞積極、開心的心態，這個暖心的舉動也一直延續到了今天。",
-      "冬季的阿克雷里",
-      "冬季的阿克雷里看起來更加純淨，粉雪覆蓋了整片大地。從這裡到全國最大的滑雪場之一Hlíðarfjall滑雪場只需十分鐘左右，備受旅客和當地滑雪愛好者的追捧和喜愛。在天黑後的晴朗冬日，北極光經常出現，在滑雪場上翩翩起舞，呈現出醒目的綠色、紫色甚至紅色，這也正是北部冰島吸引旅客的一大亮點。",
-      "跳島觀鳥",
-      "赫里斯島（Hrísey）和格里姆賽島（Grímsey）是冰島的兩大觀鳥天堂，分別於2004年和2009年被並入阿克雷里的管轄。從阿克雷里前往這兩個島嶼分別只需要1個小時和3個小時。",
-    ],
-  },
-  {
-    name: "阿克雷里植物園",
-    nameEn: "Akureyri Botanical Garden",
-    region: "冰島北部",
-    subtitle: "只有我一個人想知道，世界上最北部的植物園長什麼樣嗎？",
-    imageUrl: IMG("Akureyri_Botanical_Garden1_a3aab84a71.jpg"),
-    galleryImages: [
-      IMG("Akureyri_Botanical_Garden1_a3aab84a71.jpg"),
-      IMG("Akureyri_Botanical_Garden2_75fb797df6.jpg"),
-      IMG("Akureyri_Botanical_Garden3_67f0afc285.jpg"),
-    ],
-    paragraphs: [
-      "靠近北極圈的一片綠洲",
-      "阿克雷里植物園（Akureyri Botanical Garden）位於冰島北部城市阿克雷里（Akureyri），是一傢俱有百年曆史的老牌植物園。它距離北極圈僅 50 公里，是世界上最北端的植物園之一。",
-      "阿克雷里植物園的前身是於1912年開園的公共花園，也是冰島最早的公園之一，這裡於1957年正式成為植物園。它的歷史上曾有三次擴建，目前佔地面積約為3.7公頃。",
-      "就像極地的一片綠洲，阿克雷里植物園最吸引人的地方就在於其植物的豐富程度與冰島北部苛刻氣候的對比，讓人不禁生出「我真的是在接近北極圈的地方嗎？」這樣的懷疑。",
-      "冰島北部氣候的特點是氣溫和晝長具有明顯的季節性，常有大風和雪暴，而植物園在這樣的氣候條件下成功種植了喬木、灌木和多年生植物。除了冰島本土物種外，植物園還種植了數量驚人的6600種外來植物。園內有來自高山地區和溫帶地區的各種開花植物，還有原產於北極地區的物種。雖然花園裡的植物明顯收到了悉心的打理和修剪，但它們仍帶有一些野性和桀驁不馴。",
-      "許多人疑惑為什麼可以在如此北部的地區種植這麼豐富的植物，其實植物園被冰島最長的峽灣之一埃亞峽灣（Eyjafjörður）的山脈所遮擋，這為植物的生長提供了有利的小氣候條件。",
-      "阿克雷里植物園全年免費開放，開放時間為上午9:00-下午10:00，冬季園區內的衛生間將會暫停使用。",
-    ],
-  },
-  {
-    name: "阿克雷里大教堂",
-    nameEn: "Akureyrarkirkja",
-    region: "冰島北部",
-    subtitle: "親眼拜訪這座出自雷克雅維克大教堂建築師之手，但風格迥異的阿克雷里地標建築",
-    imageUrl: IMG("Akureyrarkirkja1_cc98890fac.jpg"),
-    galleryImages: [
-      IMG("Akureyrarkirkja1_cc98890fac.jpg"),
-      IMG("Akureyrarkirkja2_c04b67b4d9.jpg"),
-      IMG("akureyri_church_0c573033db.jpg"),
-    ],
-    paragraphs: [
-      "高大雄偉的路德教教堂矗立在阿克雷里市中心",
-      "阿克雷里大教堂（Akureyrarkirkja）是冰島北部第一重鎮阿克雷里（Akureyri）的地標性教堂，是阿克雷里的象徵。教堂坐落在市中心高高的山丘上，由位於雷克雅維克的哈爾格林姆斯教堂（Hallgrímskirkja ）的建築師 Guðjón Samúelsson 設計。雖然這兩座教堂都以玄武岩為主要建築材料，但阿克雷里教堂看起來更像是一座20世紀20年代美國風格的摩天大樓，而不是哈爾格林姆斯教堂的複製粘貼。",
-      "阿克雷里教堂建於1940年，是一座路德教教堂。內部擺放著一架裝有3200個管子的大型管風琴和一系列基督生平浮雕。天花板上懸掛著一艘船隻，反映了北歐古老的供奉祭品為海上親人祈福的傳統。中殿陽臺上的浮雕出自冰島先驅雕塑藝術家阿斯蒙杜爾·斯韋因松（Asmundur Sveinsson）之手，洗禮池則是丹麥雕塑家巴特爾·托瓦爾森（Bertel Thorvaldsen）作品的複製品。最吸引人們目光的或許是教堂上方絢麗的彩色玻璃窗，它原本是英國考文垂大教堂的一套玻璃窗的一部分。",
-      "阿克雷里教堂大部分時間都對旅客開放，但開放時間經常由於葬禮或其他事項的原因而變化，具體資訊請查看教堂門口的告示牌。",
-    ],
-  },
+    myvatnSpot,
+    myvatnGeothermalSpot,
+    grjotagjaSpot,dimmuborgirSpot,skutustadagigarSpot,godafossSpot,
+    akureyriSpot,
+    akureyriBotanicalGardenSpot,akureyrarkirkjaSpot,
 ];
 
 export const icelandSelfDriveSummer9Day7OptionalActivities: TripAttraction[] = [
-  {
-    name: "米湖天然溫泉入場票",
-    imageUrl: IMG("myvant_949e057f28_48fd938e84.avif"),
-    galleryImages: [
-      IMG("myvant_949e057f28_48fd938e84.avif"),
-      IMG("myvant_949e057f28.avif"),
-    ],
-    paragraphs: [
-      "米湖天然溫泉（Mývatn Nature Baths）位於冰島北部，被譽為”袖珍版藍湖”，溫泉水也為乳藍色，水溫維持在36-40°C，非常舒適，而水中含有的大量礦物微量元素也被認為有護膚的神奇作用。",
-      "米湖天然溫泉的每個季節都有自己的特點：夏季的夜晚明亮如白晝，溫泉水即使在午夜依然色澤明亮；進入秋季，遠處點綴著金色和棕色；而到了冬季時分，白晝只有幾個小時，周圍逐漸呈現霜凍之景，您將有機會享受令人難忘的北極光。在寒冷的冬季夜晚，還有什麼比在熱泉水中保持身體舒適溫暖，同時還有可能捕捉到天空中舞動的綠色極光更好的呢？一起體驗乳藍色水浴的治癒力量，欣賞冰島北部的獨特風光！",
-      "當你沐浴在這個溫泉裡時，你會感受到一種深深的平靜和放鬆，感到自己彷彿被包裹在一種神秘的藍色氛圍中，非常美妙。",
-      "位置與距離：",
-      "體驗包括：",
-      "不包括：",
-      "建議體驗時長：",
-    ],
-  },
-  {
-    name: "北部甄選啤酒溫泉水療（Beer Spa）體驗",
-    imageUrl: IMG("beer_spa_16c4293db2.jpg"),
-    galleryImages: [
-      IMG("beer_spa_16c4293db2.jpg"),
-      IMG("beer_spa3_f9d429e8ba.jpg"),
-    ],
-    paragraphs: [
-      "Bjórböðin啤酒水療（Beer Spa）位於冰島北部的Árskógssandur小鎮外，於2017年開業，是冰島第一家啤酒水療中心，在這裡，您將感受到冰島如何將自己獨特的溫泉文化和冰島啤酒文化融為一體！",
-      "當您踏入Bjórböðin啤酒水療中心，您將被迷人的環境所包圍。溫暖的木質建築、原始的冰島景色和迷人的啤酒芳香營造出獨特的氛圍，讓您沉浸在寧靜和放鬆之中。",
-      "在水療過程中，您將享受到啤酒的天然成分對身體的療愈作用。溫泉中注入了新鮮的啤酒，富含維生素B和天然酵母，為您的皮膚提供滋養和保濕，有助於平衡皮膚的PH值，促進細胞再生，並使肌膚更加柔軟和有光澤。在啤酒溫泉中漂浮時，您可以盡情享受溫熱水的舒緩和啤酒的香氣環繞。手拿一杯啤酒，閉上眼睛，感受身體和心靈的放鬆，彷彿自己已經全然與大自然融為一體。在這樣極致特別的水浴體驗中，您的身心也將得以全新煥發。",
-      "除了啤酒溫泉，Bjórböðin還提供其他令人愉悅的水療體驗。您可以嘗試啤酒按摩，享受專業按摩師用啤酒油為您帶來的深層放鬆和舒緩。此外，這裡還有啤酒吧檯供您品嚐各種精選啤酒，盡情體驗冰島的啤酒文化。",
-      "位置：",
-      "體驗時長：",
-      "最低參加年齡：",
-      "體驗包括：",
-      "不包括：",
-    ],
-  },
-  {
-    name: "豪加內斯（Hauganes）出海觀鯨 & 海釣體驗",
-    imageUrl: IMG("hauganes_whale_watching1_f132c3a412.jpg"),
-    galleryImages: [
-      IMG("hauganes_whale_watching1_f132c3a412.jpg"),
-      IMG("hauganes_whale_watching2_c98f4e3e26.jpg"),
-    ],
-    paragraphs: [
-      "豪加內斯（Hauganes）坐落在冰島北部壯麗的海岸線上，距離阿克雷里（Akureyri）不遠，擁有廣闊的海域和豐富的海洋生物資源。在這裡出海觀鯨，本次行程您將可以與座頭鯨、海豚等迷人海洋生物近距離接觸。",
-      "當您踏上觀鯨船時，您將開始一場令人興奮的冒險。船隻駛向海洋深處，伴隨著清新的海風和波浪聲，您將被冰島壯麗的自然景色所包圍。遠處是崇山峻嶺和綿延的海岸線，而海面上則是碧藍的水域和被陽光照耀的浪花，大自然的美麗在此刻盡顯。船員經驗豐富，他們會確保您的安全和舒適，並與您分享關於海洋生物的知識。",
-      "當船隻不斷駛入海域時，您將在專業船員指導下，手持漁具、繫上魚餌，與船友們一同分享歡聲笑語，共同期待著豐厚的捕撈。無論您是釣魚新手還是經驗豐富的釣手，您都可以懷著期待耐心等待魚兒上鉤。相信釣上魚兒的那一刻成就感絕對讓您欣喜若狂！在海釣的過程中，您也可以隨時注意海面動靜，視野良好，運氣使然時，鯨魚也可能隨時出沒在您的眼前。或許突然，一隻巨大的座頭鯨從海面上升起，向您展示它的雄姿。您可以親眼目睹它們優雅的水下動作甚至噴水孔噴出的水花，深刻感受到大海和海洋生物的神秘之美。",
-      "體驗時長：",
-      "最低參加年齡：",
-      "體驗包括：",
-      "不包括：",
-      "注意事項：",
-      "1. 出海觀鯨途中會為您提供可以套在衣物外面的連體防寒服（同時我們也建議您根據季節穿著合適的保暖裡衣、戶外衣物等）。",
-      "2. 請您至少提前30分鐘到達觀鯨集合點。",
-      "3. 本次行程發團取決於天氣和海況，為了您的安全和舒適，如果因天氣或其他條件發生變化不適宜出海，本次行程保留更改或取消出發的權利，相應政策請參考帕芬假期旅行服務條款。",
-    ],
-  },
+    myvatnNatureBathsSpot,
+    beerSpaSpot,hauganesWhaleFishingSpot,
 ];
 
 export const icelandSelfDriveSummer9Day8Highlights: TripAttraction[] = [
-  {
-    name: "布倫迪歐斯",
-    nameEn: "Blönduós",
-    region: "冰島北部",
-    subtitle: "沿著環島公路前往冰島西北部的農業小鎮領略旖旎景色。",
-    imageUrl: IMG("blonduos1_a16d82a167.jpg"),
-    galleryImages: [
-      IMG("blonduos1_a16d82a167.jpg"),
-    ],
-    paragraphs: [
-      "非典型海濱小鎮的詩意風光",
-      "布倫迪歐斯（Blönduós）是一個位於冰島西北部的小鎮，人口約為880人。布倫迪歐斯是冰島北部熱門的旅遊據點之一，距離冰島著名的景點犀牛石（Hvitserkur）僅需1小時車程，從雷克雅維克出發到達布倫迪歐斯也只需要3個小時。",
-      "同時，布倫迪歐斯自身也是環島公路上的熱門景點，位於瓦特內斯半島附近，冰島最長的河流之一布蘭達河穿過小鎮，將小鎮分為南北兩側。環島的旅客會選擇在這裡休息、用餐和加油。這裡也適合短期停留一兩天，探索周邊迷人的自然風光。",
-      "布倫迪歐斯雖然坐落在沿海地區，但從未成為典型冰島意義上的漁業小鎮，而且它可能是冰島海岸線上唯一一個從未大規模發展漁業的村鎮。原因可能是周邊肥沃的土壤和大型農場讓布倫杜斯從一開始就更適合作為一個農業和貿易中心。",
-      "農業的發達和茂盛的植被讓布倫迪歐斯具備著迷人的風光，日暮時分，沿著布蘭達河畔散步，遠處的Strandafjöll山脈莊嚴地佇立在天邊，伴著微風吹來，簡直浪漫極了。河心島Hrútey像小鎮的掌上明珠一般坐落在布蘭達河中央，由於春季鳥類築巢，小島會為了保護鳥類而關閉，但其餘時間，您可以從橋上步行前往小島。",
-      "位於布倫迪歐斯的紡織博物館展出了一系列獨特的手作羊毛和紡織品，以及美麗的冰島民族服飾和藝術刺繡。博物館於1976年正式開館，也是冰島唯一的紡織博物館。",
-    ],
-  },
-  {
-    name: "華姆斯唐吉",
-    nameEn: "Hvammstangi",
-    region: "冰島北部",
-    subtitle: "冰島西北角的閒適村莊，環島累了不如來這裡和海豹一起躺平！",
-    imageUrl: IMG("hvmmstangi1_8ae4659046.jpg"),
-    galleryImages: [
-      IMG("hvmmstangi1_8ae4659046.jpg"),
-      IMG("hvmmstangi2_6140f6e180.jpg"),
-    ],
-    paragraphs: [
-      "華姆斯唐吉（Hvammstangi）是一個位於冰島西北部的村莊，在雷克雅維克和阿克雷里的中間，沿著1號環島公路行駛即可輕鬆到達。對於想要放慢腳步的旅客來說，華姆斯唐吉絕對是體驗慢節奏的冰島小鎮生活最好的地方之一。同時，華姆斯唐吉對於遊覽瓦特內斯半島的旅客來說，也是一個合適的駐點。",
-      "村莊歷史",
-      "19世紀末，華姆斯唐吉成為了一個官方貿易站，但當時並沒有人在此居住。直到20世紀初，人們才逐漸搬到附近定居，社區初步形成。當時，冰島人為了創造更多共同決策的機會，並減少對以丹麥人為主的中間商的依賴，成立了許多類似合作社的貿易點。如今，位於華姆斯唐吉的已有110多年曆史的Kaupfelag是冰島僅存的幾家合作社之一。",
-      "20世紀初，華姆斯唐吉也吃到了冰島全國技術發展的紅利，開始大力發展漁業和貿易，隨後幾十年，教堂、學校、醫院等等設施不斷建成和升級，華姆斯唐吉也逐漸發展成為冰島西北部最大的居民點之一。",
-      "和可愛的海豹一起躺平",
-      "儘管該村靠近環島公路，但卻略顯偏僻，過去，在人們的眼中，它可能只是一個普通的漁村而已。但如今，華姆斯唐吉已經成為了人們不願錯過的旅遊目的地。",
-      "其中一個非常重要的原因就是那種慵懶呆萌的海豹們，它們一個個散落在海灘上的岩石上，或趴下或側躺，雙下巴依稀可見，灰黑色的臉蛋上鬍鬚時不時地晃動著，帶著與世無爭的懵懂眼神。觀看海豹的最佳地點是Illugastaðir，距離華姆斯唐吉25公里，駕車僅需30分鐘即可到達。另外，您還可以前往位於華姆斯唐吉的海豹中心，了解有關於這個可愛生物的有趣知識。",
-      "對於熱愛戶外的旅客，從田園詩般的露營地，有許多健行路線通往後方的山上，經過瀑布，進入美麗的山谷秘境。在不同長度的健行中，您可以盡情欣賞小鎮和峽灣，天氣好的時候，還可以遠眺西峽灣的風景。",
-    ],
-  },
-  {
-    name: "德爾達圖赫菲溫泉",
-    nameEn: "Deildartunguhver",
-    region: "冰島西部",
-    subtitle: "如果您路過冰島西部，一定別忘了來看看這座歐洲最強勁的溫泉。",
-    imageUrl: IMG("Deildartunguhver1_b06c7944aa.jpg"),
-    galleryImages: [
-      IMG("Deildartunguhver1_b06c7944aa.jpg"),
-    ],
-    paragraphs: [
-      "全歐洲最強勁的溫泉",
-      "德爾達圖赫菲溫泉（Deildartunguhver）位於冰島西部的歷史名鎮雷克霍特（Reykholt），是全歐洲最強勁、流速最快的地熱溫泉，每秒流量達到了驚人的180公升，溫度高達 97°C，滾燙而猛烈的泉水從佈滿藻類的岩石中不斷噴湧而出。",
-      "德爾達圖赫菲溫泉距離鎮中心僅需不到10分鐘車程，距離博爾加內斯（Borgarnes）也僅有不到30分鐘的車程。如果您從雷克雅維克出發，也只需要大約一個半小時即可到達。",
-      "博爾加內斯和阿克拉內斯這兩個小鎮的家庭和企業的大部分取暖用水都來自於德爾達圖赫菲溫泉。溫泉水通過一條 64 公里長的管道輸送，也是冰島同類管道中長度最長的。換句話說，只要您在溫泉 65 公里範圍內的地方洗上了熱水澡，就相當於已經沐浴在它的泉水之中了。",
-      "德爾達圖赫菲溫泉附近的克勞馬天然地熱浴場（Krauma Natural Geothermal Baths）是放鬆的好去處，它將來自 溫泉的水與冰川冷泉水混合，創造出完美的放鬆泡湯溫度。",
-      "冰島全境都遍佈著活躍的地熱區，西部有雷克霍特山谷，西南部有蓋錫爾間歇泉地帶，雷克雅內斯半島有蒸汽山谷，南部有中央內陸高地，北部則有米湖地熱區。德爾達圖赫菲溫泉坐落於西部的雷克霍特山谷（Reykholtsdalur）之內，是所有地熱溫泉中其中最湍急的一座，總有滾滾濃霧瀰漫空中。您總可以看到熱蒸汽和沸水不斷從地下冒出，溫泉周圍的地表也已經被礦物質和蒸汽染成了紅色。",
-    ],
-  },
-  {
-    name: "雷克霍特",
-    nameEn: "Reykholt",
-    region: "冰島西部",
-    subtitle: "前往中世紀著名作家斯諾裡的故鄉，感受歷史古城的氣息。",
-    imageUrl: IMG("imgp9586_4_ee8ad0bf2d.jpg"),
-    galleryImages: [
-      IMG("imgp9586_4_ee8ad0bf2d.jpg"),
-    ],
-    paragraphs: [
-      "冰島西部歷史重鎮",
-      "雷克霍特（Reykholt）位於冰島西部，是冰島最著名的歷史小鎮之一，是 13 世紀作家、詩人和學者斯諾裡·斯圖盧松（Snorri Sturluson）的故鄉。在他的時代，雷克霍特是冰島的文化中心，也是冰島最好的學校的所在地。需要旅客留心的是，冰島南部還有一個同名小鎮，著名的番茄農場（Friðheimar）就位於那裡。",
-      "在雷克霍特，您可以參觀斯諾裡舊農場的遺蹟，農場和澡堂之間有一條小道，斯諾裡就是在那裡去世的。另外，鎮上的文化中心和教堂也向旅客開放，文化中心提供歷史展覽、嚮導和講座，夏季時全天開放，而冬季時僅在工作日開放。教堂則會不定期地舉辦音樂會等文化活動。",
-      "雷克霍爾特最著名的建築之一就是斯諾裡在1206年至1241年的故居，這裡是冰島為數不多的保存完好的中世紀時期建築，承載著近千年的冰島記憶。",
-      "除了歷史景觀，距離雷克霍特約15分鐘車程的熔岩瀑布（Hraunfossar）和兒童瀑布（Barnafossar）為小鎮增添了迷人的自然風光。熔岩瀑布由一連串小瀑布組成，看似發源於一片沒有河流或湖泊的原野，實際上，水流從Hallmundarhraun熔岩地的小溪流淌而來。兒童瀑布緊鄰其邊，是一處狹窄而湍急的瀑布，擁有一個略顯傷感的傳說故事。",
-    ],
-  },
-  {
-    name: "熔岩瀑布",
-    nameEn: "Hraunfossar",
-    region: "冰島西部",
-    subtitle: "冰島西部熔岩地上冒出的壯觀瀑布群，您一定不想錯過。",
-    imageUrl: IMG("3_H6_A7791_4395de2b82.jpg"),
-    galleryImages: [
-      IMG("3_H6_A7791_4395de2b82.jpg"),
-      IMG("hraunfossar1_f201d71a46.webp"),
-      IMG("hraunfossar2_456cb6e815.jpg"),
-      IMG("DJI_0927_b298ae6a19.jpg"),
-    ],
-    paragraphs: [
-      "上百條溪流匯聚而成的流水飛瀑",
-      "熔岩瀑布（Hraunfossar）又名熔岩瀑布，是一處位於冰島西部雷克霍特（Reykholt）附近的美麗而獨特的瀑布群，距離首都雷克雅維克約122公里，僅需1小時40分鐘的車程即可到達。",
-      "就算在冰島這樣一個遍佈瀑布的國家，熔岩瀑布也憑藉其獨特的風景而成為了最有名的瀑布之一。熔岩瀑布並非像其他瀑布一樣，由一條河流流過懸崖而形成，而是上百條小溪流經這裡共同聚成了這一壯觀雄奇的水幕景觀。",
-      "旅客們都說，瀑布的水似乎是從熔岩地底中生生冒出來的。然而實際上，熔岩瀑布與和它相鄰的兒童瀑布（Barnafossar）都是來自赫維塔河，這條冰川河發源自冰島西部的Hallmundarhraun熔岩原。",
-      "在停車場旁的觀景臺上，旅客可以俯瞰熔岩瀑布、附近的兒童瀑布以及赫維塔河。當地人在1891年修建了一座橫跨河流的人行橋，並在整整一個世紀後對其進行了翻新。此外，還有一條健行小徑可以從熔岩瀑布通往兒童瀑布。",
-      "兒童瀑布相比於熔岩瀑布更加狹窄，也更加湍急，兒童瀑布名字的特殊是因為它過去一個帶有悲劇色彩的傳說故事。相傳附近的一戶人家的小孩在此溺水身亡，母親於是詛咒了瀑布上的石橋，隨後石橋就因為地震而被摧毀。",
-      "兩條瀑布十分相近，一般來說，旅客會選擇一同遊玩。",
-    ],
-  },
-  {
-    name: "兒童瀑布",
-    nameEn: "Barnafossar",
-    region: "冰島西部",
-    subtitle: "前往雷克霍特周邊的瀑布群欣賞冰島瀑布的迥異之美",
-    imageUrl: IMG("barnafoss_west_iceland_3b18a3043e.jpg"),
-    galleryImages: [
-      IMG("barnafoss_west_iceland_3b18a3043e.jpg"),
-    ],
-    paragraphs: [
-      "略顯悲劇色彩的傳奇瀑布",
-      "兒童瀑布（Barnafossar）位於冰島西部重鎮雷克霍特（Reykholt）附近，與著名的熔岩瀑布（Hraunfossar）相鄰，掩映在山林和岩石之間，十分狹窄而湍急。當天氣好時，水流流到瀑布下的水池中，呈現出美麗清澈的寶藍色。流過兒童瀑布的赫維塔河（Hvita）是從冰島西部的Hallmundarhraun熔岩原中奔流而來的。",
-      "雖然兒童瀑布並不是像斯科加瀑布（Skógafoss）那樣落差巨大的壯觀瀑布，但是在冰島國內以及對於國外的旅客來說，卻都十分出名，這是因為瀑布有著一個悲劇的傳說：",
-      "從瀑布的名字我們大概能夠猜到一些線索。傳說中，在瀑布附近的Hraunsás農場有一戶人家，家中有兩個孩子。有一天，當父母去教堂做聖誕彌撒時，他們本應待在家裡。但他們回家後卻發現孩子們不在家中，於是便出門尋找。他們沿著孩子們的足跡來到了瀑布邊的天然石橋，而足跡就在那裡消失不見，母親則斷定孩子們掉進了河裡。",
-      "於是，她對這座石橋施以詛咒，詛咒經過這座橋梁的人們都會失足落水。不久後，這座橋就被地震而摧毀了，詛咒也隨之失效。也有另外一種說法，說這位母親在當下就直接摧毀了這座橋梁。",
-      "直到現在，兒童瀑布依然是一個略顯有點危險的景點，但由於這裡不是山區，所以地勢較為平坦，風景優美，是健行的好去處，有幾條健行路線可以從這裡通向相鄰的熔岩瀑布。",
-    ],
-  },
+    blonduosSpot,hvammstangiSpot,deildartunguhverSpot,
+    reykholtSpot,hraunfossarSpot,
+    barnafossSpot,
 ];
 
 export const icelandSelfDriveSummer9Day8OptionalActivities: TripAttraction[] = [
-  {
-    name: "Krauma地熱溫泉體驗入場票",
-    imageUrl: IMG("krauma_cover_2e985853a2.png"),
-    galleryImages: [
-      IMG("krauma_cover_2e985853a2.png"),
-      IMG("krauma3_faf0c79f67.jpg"),
-    ],
-    paragraphs: [
-      "Krauma溫泉位於德爾達圖赫菲溫泉不遠處，距離雷克雅維克只有一個半小時的車程，它利用了德爾達圖赫菲溫泉溫度高達100攝氏的自然熱水，加以冰川水混合冷卻，以達到完美的沐浴溫度。Krauma溫泉共由6個浴池所構成，分別為5個溫度在37-42攝氏之間的熱水池和1個5-10攝氏之間的冷水池，您可以自由選擇。同時，Krauma溫泉不需要額外的化學物質來保持浴池的清潔，由於溫泉水的快速自然流動，水而不斷被更新替換，水富含礦物質，對皮膚和身體有多種好處，有利於血液循環和整體健康，可謂是體驗絕妙。",
-      "整個浴池由火山岩和木材等天然材料製成，將冰島的自然之美和地熱奇觀完美結合在一起，營造出自然、舒適的寧靜氛圍。在這裡，你可以感受大自然的力量和溫暖，讓身心得到完美的放鬆和舒緩。",
-      "體驗時長：",
-      "最低參加年齡：",
-      "體驗包括：",
-      "不包括：",
-    ],
-  },
-  {
-    name: "朗格冰川隧道探險 | Langjökull Ice Tunnel",
-    imageUrl: IMG("1_72a1dd6a90.jpg"),
-    galleryImages: [
-      IMG("1_72a1dd6a90.jpg"),
-      IMG("_6e92b90c97.jpg"),
-    ],
-    paragraphs: [
-      "如何抵達冰川心腹，那就來參加這個冰川隧道探險吧！走進冰島第二大冰川，也是冰島最長的冰川——朗格冰川（Langjökull）",
-      "朗格冰川隧道是全球最大的人造冰川隧道！在隧道中最近距離體驗千年冰川的肌理，直達冰川內部，通過最直接的感受，了解冰川千年的形成過程。這樣的體驗，獨一無二並讓人終身難忘。",
-      "您將乘坐巨輪雪地卡車前往冰川隧道門口，這不僅是進入冰川隧道的重要交通工具，還是極地雪域中獨特的交通工具，往返隧道的的過程也將成為您獨一無二的體驗。進入隧道您便可以360°全方位感觸欣賞千年冰雪的積澱。在這隧道中還有一個人造的小教堂，您可以坐在冰屋教堂中，了解冰川的形成和全球變暖對冰川帶來的影響。屆時，專業的嚮導也將為您講解冰川的有關知識。",
-      "集合地點：",
-      "體驗包括：",
-      "不包括：",
-      "注意事項：",
-      "1. 在選擇此購買項目之前，請確保您自駕前往集合點的車輛是4×4四驅越野車。",
-      "2. 您在集合點將換乘特別改裝過的巨輪雪地卡車往返冰川隧道，夏天單程約30分鐘，冬天單程約75分鐘。",
-    ],
-  },
-  {
-    name: "Víðgelmir火山熔岩洞穴探險",
-    imageUrl: IMG("The_Cave_Vidgelmir_6_2dfaf2ea19.jpg"),
-    galleryImages: [
-      IMG("The_Cave_Vidgelmir_6_2dfaf2ea19.jpg"),
-      IMG("The_Cave_Vidgelmir_6_13860a1b8e.jpg"),
-    ],
-    paragraphs: [
-      "Víðgelmir熔岩洞穴是冰島最長的火山熔岩洞穴，位於冰島西部，也是世界上最長的熔岩洞穴之一，長 1585 米，高近 16 米，寬 16 米。",
-      "在這個1.5小時左右的旅程中，您將近距離感受熔岩洞穴的神奇壯麗，了解冰島火山爆發對冰島文化的深刻影響及背後的神話故事。",
-      "您可以沿著照明良好的人行道下潛至洞穴內部，探索洞穴的深處秘境。洞穴的驚人之美隱藏在令人驚歎的色彩和岩石結構中，在當地專業嚮導的帶領下，您將看到精美的熔岩構造、冰晶、鐘乳石和石筍等特別的自然景觀，讓人倍覺神秘！",
-      "集合地點：",
-      "預訂須知：",
-      "1. 洞穴內的溫度很低，我們建議所有客人穿戴防寒保暖衣物，佩戴好手套和帽子。",
-      "2. 旅客需要在旅行團出發前20-30分鐘到達。",
-      "3. 帶6歲以下兒童的旅客必須遵守洞穴相關規定，包括行程期間在規定的地點集合，且不能參與洞穴最後一站的探險。",
-      "體驗包含：",
-      "不包含：",
-    ],
-  },
-  {
-    name: "Hvammsvík溫泉入場票",
-    imageUrl: IMG("hvammsvik3_bd62acec28.png"),
-    galleryImages: [
-      IMG("hvammsvik3_bd62acec28.png"),
-      IMG("DJI_0501_7f2b0d2bf6.jpg"),
-    ],
-    paragraphs: [
-      "Hvammsvík溫泉藏在距離雷克雅維克車程40分鐘的Hvalfjörður峽灣裡（當地人稱之為鯨魚灣），它遠離旅客和知名景區，因此也更似世外桃源。溫泉包含八個天然海水溫泉池，溫度範圍從海洋自然溫度（約 10°C）到溫泉溫度 （42°C），您可以選擇不同溫度和不同景色的溫泉，復刻冰島人的溫泉放鬆時刻。",
-      "Hvammsvík溫泉融合了大自然的魅力和溫泉的神奇力量。您可以遠離人群，沉浸在溫暖的礦物質水中，感受身心的舒緩與疲勞的消散，在最原始的自然風景中觀賞周圍環繞的山脈和黑色海灘，在舒適的海水溫泉中汲取海洋的能量。您也可以踏步走進冰島的海水中，感受來自大海的凌冽。",
-      "無論是僅僅享受寧靜的溫泉泡澡，還是一邊泡一邊小酌，盡情放鬆身心，Hvammsvík溫泉都將成為您疲憊旅程中的綠洲。",
-      "注意：",
-      "開放時間：",
-      "建議遊玩時長：",
-      "最小入場年齡：",
-      "體驗包含",
-      "建議攜帶：",
-    ],
-  },
+    kraumaSpot,langjokullIceTunnelSpot,
+    vidgelmirLavaCaveSpot,
+    hvammsvikTicketSpot,
 ];
 
 export const icelandSelfDriveSummer9Day9Highlights: TripAttraction[] = [
-  {
-    name: "雷克雅維克",
-    nameEn: "Reykjavík",
-    region: "雷克雅維克",
-    subtitle: "城市、雪山、酒吧、溫泉、北極光，這裡應有盡有。",
-    imageUrl: IMG("Reykjavik_bathed_in_sunset_2b179f83fe.jpg"),
-    galleryImages: [
-      IMG("Reykjavik_bathed_in_sunset_2b179f83fe.jpg"),
-      IMG("reykjavik1_839e01ff5d.jpg"),
-      IMG("reykjavik_cityscape_in_iceland_158525984_5c1182144cedfd00018fbb38_7f469e1459.jpg"),
-      IMG("Reykjavik_d71a13c273.jpg"),
-    ],
-    paragraphs: [
-      "雷克雅維克（Reykjavík）是冰島共和國的首都，冰島第一大城市。這裡一面臨海，雙面環山，是一個充滿活力和文化氛圍的城市，融合著現代都市生活與自然美景。位於冰島西南海岸的雷克雅維克，也是世界上最北的主權國家首都。市區人口約為13萬，整個大都會區人口超過23萬，是冰島經濟、政治和文化生活的中心。",
-      "雷克雅維克的歷史可以追溯到9世紀，當時由Ingólfr Arnarson帶領的諾斯人定居者建立了第一個永久性定居點。雷克雅維克這個名字在冰島語中意為“煙霧灣”，指的是當地的溫泉蒸汽。如今，雷克雅維克以其清潔、綠色和安全的環境而聞名，在全球生活品質指數中始終排名靠前。市區範圍內，擁有多個帶有溫泉池的公共泳池，以及唯一的精品溫泉Sky Lagoon。",
-      "雷克雅維克緊湊的市中心充滿了各種景點。最具標誌性的地標之一是哈爾格林姆斯教堂（Hallgrímskirkja），這座高聳的教堂從觀景塔上可以俯瞰城市全景。其建築靈感來自冰島的玄武岩熔岩壁，既引人注目又象徵著城市的創新精神。坐落在海岸線上的哈帕音樂廳（Harpa），其玻璃外牆反射著海洋和天空，是另一座現代建築奇觀，也是大型文化活動的中心，包括音樂會、展覽和節日活動等等。",
-      "藝術和文化是雷克雅維克身份的重要組成部分。城市擁有眾多博物館、畫廊和劇院。冰島國家美術館和雷克雅維克藝術博物館為藝術愛好者提供了欣賞當代藝術的平台。街頭藝術和壁畫裝飾了許多建築，為城市增添了生機。雷克雅維克還有多個年度節日，如雷克雅維克藝術節、冰島Airwaves音樂節和冬季燈光節，吸引了大量國際旅客，展示了城市的活力文化景觀。",
-      "在雷克雅維克，自然同樣近在咫尺。城市坐落在Faxaflói峽灣，有著壯麗的海岸景色，旅客可以輕鬆地從舊港踏上出海觀鯨、觀海鸚以及海釣之旅。僅需很短的距離，旅客便可探索黃金圈，線路包括辛格維利爾國家公園、蓋錫爾間歇泉地帶和壯觀的黃金瀑布三大冰島最熱門旅遊景點。城市本身也擁有眾多公園和綠地，如Laugardalur公園、植物園、動物園以及各種運動公園。",
-      "雷克雅維克的美食場景多種多樣且富有創新，反映了傳統的冰島菜餚和國際風味的融合。新鮮的海鮮、羊肉和乳製品在當地菜餚中佔據重要位置，而眾多餐館和咖啡館提供從米其林Fine Dining到休閒街頭小吃的各種選擇。城市的夜生活同樣充滿活力，擁有各種酒吧、俱樂部和現場音樂演出，特別是在週末生機勃勃。",
-      "可持續發展和創新是雷克雅維克發展的關鍵。這裡是全球可再生能源城市模型的先驅，幾乎所有的電力和供暖需求都由地熱和水電滿足。這種可持續性也在城市的公共交通系統、自行車道和眾多綠色倡議中得到了體現。",
-      "雷克雅維克完美地融合了過去與現在，提供了豐富的城市文化生活和自然美景。無論您是想享受便利的都市生活、探索充滿活力的藝術場景，還是深入冰島令人驚歎的自然風光，雷克雅維克作為您到達冰島的第一站，一定能為您帶來難忘的體驗。",
-    ],
-  },
-  {
-    name: "凱夫拉維克國際機場",
-    nameEn: "Keflavik International Airport",
-    region: "雷克雅內斯半島",
-    subtitle: "關於冰島最大的國際機場，你需要知道這些細節！",
-    imageUrl: IMG("Keflavik_International_Airport_Terminal_26bb533082.jpg"),
-    galleryImages: [
-      IMG("Keflavik_International_Airport_Terminal_26bb533082.jpg"),
-      IMG("Keflavik_International_Airport_Interior_f9a62f9a54.jpg"),
-      IMG("Keflavik_International_Airport_Exterior_1fc4a5ba1c.jpg"),
-      IMG("Rainbow_Installation_outside_Keflavik_International_Airport_4efa3c569c.jpg"),
-      IMG("Airports_in_Iceland_Illustration_5efe013e97.png"),
-    ],
-    paragraphs: [
-      "到達冰島的第一站，凱夫拉維克國際機場值得您好好了解",
-      "國內旅客通常所說的“冰島機場”或者“雷克雅維克機場”的正式名稱為凱夫拉維克國際機場（Keflavik International Airport，KEF），它是冰島最主要也是最大的國際機場，距離雷克雅維克約 50 公里，車程通常在1小時-1個半小時之間。",
-      "您可以在凱夫拉維克機場的官方網站上找到有關航班、到達和出發、停車和交通的資訊。我們也為您梳理了您最關心的一些問題。",
-      "對於非自駕旅客來說，從雷克雅維克往返凱夫拉維克國際機場，常見的方式有機場巴士與私人包車兩種。",
-      "您可以在我們的產品頁面單獨購買接機以及送機服務。如果您購買了我們的旅行團套餐產品，其中已經自動包含了所有人員的機場接送服務，無需額外訂票。",
-      "對於我們的自駕旅客，您可以直接在凱夫拉維克國際機場服務窗口取車，駕車前往您的首個目的地。",
-      "您可以在到達與出發大廳內的Change Group櫃檯辦理退稅，退稅需要在托運行李前辦理完畢。當上述櫃檯關閉時，貨幣兌換櫃檯可提供相應的退稅服務。",
-      "在Duty Free Iceland免稅店，冰島與國際化妝品、零食、葡萄酒和烈酒應有盡有。另外，您可以找到冰島本地戶外品牌66 North、大名鼎鼎的Blue Lagoon也在機場設立護膚品專賣店、書店、數碼產品、禮品店等等充滿冰島特色的店鋪。營業時間皆配合當天航班時間調整，保證旅客能夠選購自己喜歡的商品。",
-    ],
-  },
+    reykjavikSpot,
+    keflavikAirportSpot,
 ];
 
 export const icelandSelfDriveSummer9Day9OptionalActivities: TripAttraction[] = [
-  {
-    name: "雷克雅維克市區Flyover Iceland飛越冰島4D電影",
-    imageUrl: IMG("flyover_iceland_cover_59d7c22b26.png"),
-    galleryImages: [
-      IMG("flyover_iceland_cover_59d7c22b26.png"),
-      IMG("flyover5_9e879a69cd.jpg"),
-    ],
-    paragraphs: [
-      "想足不出戶遊覽冰島全貌嗎？參加Flyover飛越冰島4D電影體驗，不用乘坐直升飛機，您也可以像鳥兒一樣自由飛翔，俯瞰冰島風光！在這裡，您將去欣賞廣闊的冰川，飛越令人驚歎的峽灣，探尋古老的維京謎團。",
-      "本次體驗項目利用最先進的4D互動式技術為您帶來模擬飛行體驗，帶您飛越冰島的壯麗景觀。您將懸掛在20米的球形屏幕前，雙腳懸空，追隨影片踏上令人振奮的冰島之旅！",
-      "極致的視覺特效，伴隨著迎面而來的風、霧、氣味以及座椅營造出的飛翔感，這種結合讓您彷彿身臨其境冰島的每一處景點，包括冰川、瀑布、火山、山脈和海岸線等。您將感受到彷彿在飛行中的風吹拂臉頰，聽到真實的環境音效，並通過巨大的屏幕上的影像來獲得逼真的視覺效果，讓您感受到彷彿在現場飛行的刺激和真實感。同時，在感官體驗之外，您還將一步步了解冰島歷史、神話傳說，我們將以最生動的手法，展現這片“冰與火”領土的魅力！",
-      "門票包括兩組多媒體互動展覽，以及9分鐘左右的4D飛行觀影體驗，參觀體驗的總時長約為40分鐘左右。",
-      "最低參加年齡：",
-      "體驗包括：",
-      "不包括：",
-    ],
-  },
-  {
-    name: "雷克雅維克熔岩秀（Reykjavik Lava Show）",
-    imageUrl: IMG("lava_show_cover_f12c6a5f98.png"),
-    galleryImages: [
-      IMG("lava_show_cover_f12c6a5f98.png"),
-      IMG("63d27fc5e788e_96fee2b736.jpg"),
-    ],
-    paragraphs: [
-      "這是世界上唯一的現場熔岩秀！",
-      "您對熔岩、火山和地質學著迷嗎？您想在安全的環境中近距離觀看熾熱的熔岩嗎？您是否正在踏上穿越冰與火之國的冰島旅程？如果答案是YES，那麼您必須要來體驗一下雷克雅維克熔岩秀（Reykjavik Lava Show）。",
-      "本次體驗位於雷克雅維克市中心，通過模擬火山爆發和熔岩流動的效果，向旅客展示了火山活動的真實場景。您將進入一個特製的劇場，親眼目睹熔岩的流動、噴發的火山口以及令人驚歎的煙霧和火焰效果。為了重現火山噴發，工作人員對 1918 年卡特拉火山（Katla）噴發的真實熔岩進行加熱處理，熔化後將其倒入現場展廳。下一幕的場景將讓您倍感不可思議且永生難忘。瞬間！展廳急速升溫。大家安全地坐在自己的座位上，感受著近在咫尺的流動的熔岩，您的五官可以看到、聽到、聞到和感覺到從熔岩中散發出的難以置信的能量！",
-      "在展示巖漿的同時，主持人還會給大家講解冰島火山背景知識。除此之外，主持人還會帶領大家一起觀看火山的教育影片，寓教於樂！",
-      "注意事項：",
-      "1. 場地有方便輪椅者出入的無障礙通道（請提前通知我們，以便我們做出安排）。",
-      "2. 兒童需要由一名監護成年人陪同入場，在演出期間，請儘可能讓兒童保持安靜，大人需環抱看護好嬰兒。",
-      "3. 建議您提前20分鐘到達，現場提供安全護目鏡。",
-      "體驗時長：",
-      "表演觀看人數最大容量：",
-    ],
-  },
-  {
-    name: "珍珠樓博物館（Perlan Museum）入場票",
-    imageUrl: IMG("Perlan_b834e5a735.jpg"),
-    galleryImages: [
-      IMG("Perlan_b834e5a735.jpg"),
-      IMG("Perlan_3fa813d424.jpg"),
-    ],
-    paragraphs: [
-      "珍珠樓（Perlan Museum）",
-      "珍珠樓內展覽聚焦於冰島不斷變化的冰川特性的迷人展示外，旅客還能步入一條百米長的人造冰隧道。其建造使用了約350噸從冰島山脈收集的積雪。與之形成鮮明對比的是，博物館的“自然之力”（Forces of Nature）展覽將帶您沉浸式體驗冰島的火山系統和地熱活動。",
-      "同時，在擁有150個座位的穹頂天文館裡，您還可以將參觀焦點轉向北極光。利用8K投影和7.1環繞立體聲，令人歎為觀止的《極光》（Áróra）表演帶領大家踏上一段迷人的旅程，探索北極光的起源與傳說，將其生動而逼真地呈現在觀眾眼前。",
-      "除此之外，室內名為Styrmir的間歇泉也將從中央中庭噴出一道高達25米的水柱，讓人提前感受地熱之力的魅力。",
-      "無論您是計劃探索雷克雅維克之外的世界，還是選擇留在首都，這裡都是每位旅客行程中理想的首站或末站。",
-      "您可以乘坐汽車、公共汽車、出租車，步行或騎自行車前往。從雷克雅維克市中心步行大約需要30分鐘，乘出租車大約需要5分鐘。",
-      "珍珠樓亮點展覽活動：",
-      "注意：",
-      "體驗包含：",
-      "1. 珍珠樓博物館入場票：可參觀館內所有正在展出的展覽。包括：天文館的北極光秀，冰洞觀賞，火山記錄片，以及自然博物館的展出。",
-      "2. 雷克雅維克360°觀景臺",
-      "不包含：",
-    ],
-  },
-  {
-    name: "藍湖溫泉（Blue Lagoon）舒適體驗",
-    imageUrl: IMG("2_2_3fe1e87828.jpg"),
-    galleryImages: [
-      IMG("2_2_3fe1e87828.jpg"),
-      IMG("BLUE_LAGOON_2f31e94cb2.jpg"),
-    ],
-    paragraphs: [
-      "逃離喧囂，投入冰島最著名的地熱溫泉仙境——藍湖 (Blue Lagoon)。",
-      "踏入標誌性的藍湖，沉浸在溫暖（約37-40°C）、富含二氧化硅和礦物質的治癒性海水中吧，獨特的乳藍色澤與周圍壯觀的黑色熔岩場形成鮮明對比，宛如置身外星仙境。",
-      "在藍湖，您可以盡情讓溫潤的地熱海水舒緩您的肌肉，安撫您的神經，給您帶來全身心的煥然一新。",
-      "本次藍湖溫泉舒適體驗讓您可以感受這片如畫牛奶藍水域，放鬆、煥活身心，一洗旅途疲憊。套票包含免費領取一次標誌性的藍湖硅泥面膜（Silica Mud Mask）。親手塗抹在臉上，感受其深層清潔和滋養肌膚的神奇效果——這是藍湖體驗不可或缺的一部分！除此之外，更有一杯免費飲品相贈，暢享溫泉的悠閒時光。",
-      "套票包含：藍湖溫泉入場票、硅藻泥面膜、自選飲品一杯、毛巾",
-      "不包含：泳衣",
-    ],
-  },
-  {
-    name: "雷克雅維克經典觀鯨",
-    imageUrl: IMG("reykjavik_whale_watching_5897e57d77.png"),
-    galleryImages: [
-      IMG("reykjavik_whale_watching_5897e57d77.png"),
-      IMG("whale3_d5a7e3845f.jpg"),
-    ],
-    paragraphs: [
-      "如果在冰島坐船出海，就可以遇到各式各樣的北極圈附近的獨特物種，像海洋中的鯨魚、海豚、海獅等，以及各種海鳥。",
-      "本次旅行將在雷克雅維克老港集合，乘坐觀鯨遊船，一起從雷克雅維克出發，駛入大西洋，感受揚帆起航、海風吹拂的自在，尋找這些海洋朋友的身影，體驗冰島觀鯨的樂趣。",
-      "雷克雅維克附近海域可以看到眾多不同的鯨魚和海豚，例如小鬚鯨、座頭鯨、白喙海豚和鼠海豚等等。在它們的自然棲息地親眼看到這些標誌性海洋生物，與在電視、圖片中或者是在水族館看到的感受完全不一樣！在船上會有專業的嚮導給您講述海洋生物的各種故事，關於它們的種類、棲息地以及現在海洋環境情況等，充滿教育性互動式體驗。同時，嚮導也會為大家尋找鯨魚和海豚的身影，儘可能讓大家不要錯過每一個精彩瞬間！另外，在出海同途中還能看到到各種種類的海鳥，如果正值冰島夏季（5-8月），還可以遇到以呆萌著稱的冰島”國鳥“海鸚puffin。",
-      "整個行程耗時3小時左右，非常輕鬆愉快，適合老人小孩一起作為全家出遊活動。船上也會配備望遠鏡，可以讓大家仔細地觀看。",
-      "注意事項",
-      "1. 此觀鯨團會根據天氣和季節狀況調整出海時間和是否出團，請大家留意郵箱等聯繫方式。",
-      "2. 鯨魚和海豚等海洋生物的行蹤不可控，是否能幸運地看到鯨魚，不僅需要專業人士預測他們的行蹤，還要考慮其他因素，例如：天氣、海況等；若您參團後未看到鯨魚，我們將根據情況額外提供一次免費參團觀鯨機會，具體請您參見帕芬假期旅行的服務條款，詳情請聯繫後臺客服。",
-      "3. 本次旅行提供防寒衣物（可套在個人衣物外面的連體式防寒服），請大家放平心態，耐心等待。",
-      "4. 在出海後，您可以選擇在船艙內或者在甲板上欣賞風景，但需要大家注意安全。",
-      "集合地點及時間：",
-      "行程時長：",
-      "體驗包括：",
-      "不包括：",
-      "建議攜帶：",
-    ],
-  },
-  {
-    name: "珍珠樓博物館（Perlan Museum）入場票",
-    imageUrl: IMG("Perlan_b834e5a735.jpg"),
-    galleryImages: [
-      IMG("Perlan_b834e5a735.jpg"),
-      IMG("Perlan_3fa813d424.jpg"),
-    ],
-    paragraphs: [
-      "珍珠樓（Perlan Museum）",
-      "珍珠樓內展覽聚焦於冰島不斷變化的冰川特性的迷人展示外，旅客還能步入一條百米長的人造冰隧道。其建造使用了約350噸從冰島山脈收集的積雪。與之形成鮮明對比的是，博物館的“自然之力”（Forces of Nature）展覽將帶您沉浸式體驗冰島的火山系統和地熱活動。",
-      "同時，在擁有150個座位的穹頂天文館裡，您還可以將參觀焦點轉向北極光。利用8K投影和7.1環繞立體聲，令人歎為觀止的《極光》（Áróra）表演帶領大家踏上一段迷人的旅程，探索北極光的起源與傳說，將其生動而逼真地呈現在觀眾眼前。",
-      "除此之外，室內名為Styrmir的間歇泉也將從中央中庭噴出一道高達25米的水柱，讓人提前感受地熱之力的魅力。",
-      "無論您是計劃探索雷克雅維克之外的世界，還是選擇留在首都，這裡都是每位旅客行程中理想的首站或末站。",
-      "您可以乘坐汽車、公共汽車、出租車，步行或騎自行車前往。從雷克雅維克市中心步行大約需要30分鐘，乘出租車大約需要5分鐘。",
-      "珍珠樓亮點展覽活動：",
-      "注意：",
-      "體驗包含：",
-      "1. 珍珠樓博物館入場票：可參觀館內所有正在展出的展覽。包括：天文館的北極光秀，冰洞觀賞，火山記錄片，以及自然博物館的展出。",
-      "2. 雷克雅維克360°觀景臺",
-      "不包含：",
-    ],
-  },
-  {
-    name: "冰島海釣體驗（雷克雅維克出發）",
-    imageUrl: IMG("1_db432558d3.jpg"),
-    galleryImages: [
-      IMG("1_db432558d3.jpg"),
-      IMG("3_H6_A9478_bbc89301ab.jpg"),
-    ],
-    paragraphs: [
-      "一直以來，漁業都是冰島的支柱產業。而現在，海釣也慢慢變成了冰島人的一種休閒方式。不管您是喜歡嘗試有趣冒險的釣魚愛好者，還是熱愛美食的尋味者，參加我們雷克雅維克出發的海釣團，可以讓您一舉收穫美景、美食，同時體驗出海釣魚的悠閒時光。",
-      "乘坐漁船，從雷克雅維克老港出發，駛入大西洋，一路上會路過雷克雅維克附近的Esja山、維澤島（Viðey）、Kollafjörður海灣等美麗的風光，晴天您還能看到遠處的斯奈山半島上的冰川（Snæfellsjökull）和阿克雷半島（Akranes）上的燈塔。",
-      "出海後等駛入合適的區域，大家就可以開釣了！如果您從未參加過海釣也無需擔心，冰島海釣上鉤率非常高，而且海釣項目老少咸宜沒有年齡限制，船員也會很樂意向您展示海釣訣竅並傳授他們的海洋知識。您所要做的只是手持釣魚竿，放鬆享受海上風景。",
-      "在您悠閒地等待魚兒上鉤的同時，還可以欣賞一下圍繞在漁船周圍的海鳥和水中的水母。運氣好的話還能看到鯨魚或是在海面上飛行的冰島“國鳥”海鸚！",
-      "在體驗完海釣的樂趣後，船員會將所釣的勞動成果變成今晚的晚餐，品嚐最正宗的鮮美大魚！為了可持續發展，工作人員也會嚴格遵守海釣準則，只選擇尺寸達標的部分海魚作為食材。",
-      "集合地點及時間：",
-      "注意事項：",
-      "1. 海釣期間的具體能釣到的數量和海魚大小非人為能保證，受到天氣、海況、甚至每個人具體的海釣經驗等多方因素影響，如果本次海釣的數量不足以供全船客人分享，您將不會在本次活動中體驗船上烹飪海魚並享受美味的機會。",
-      "2. 海釣團最少發團人數為2人，如果僅有1人報名，我們將為您重新安排另一個時間/日期或參照帕芬假期旅行服務條款執行，請您諒解。",
-      "體驗長度：",
-      "體驗包括：",
-      "不包括：",
-    ],
-  },
+    flyoverIcelandSpot,
+    reykjavikLavaShowSpot,
+    perlanMuseumSpot,
+    blueLagoonComfortSpot,
+    reykjavikWhaleWatchingSpot,perlanMuseumSpot,
+    reykjavikSeaAnglingSpot,
 ];

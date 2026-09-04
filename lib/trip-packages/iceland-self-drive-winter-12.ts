@@ -1,4 +1,12 @@
 import type { TripPackage } from "./types";
+import { planeWreckSpot } from "./spots/plane-wreck";
+import { kirkjufellSpot } from "./spots/kirkjufell";
+import { gullfossSpot } from "./spots/gullfoss";
+import { geysirSpot } from "./spots/geysir";
+import { diamondBeachSpot } from "./spots/diamond-beach";
+import { jokulsarlonSpot } from "./spots/jokulsarlon";
+import { reynisfjaraSpot } from "./spots/reynisfjara";
+import { seljalandsfossSpot } from "./spots/seljalandsfoss";
 import {
   icelandSelfDriveWinter12Day1Highlights,
   icelandSelfDriveWinter12Day1OptionalActivities,
@@ -155,153 +163,12 @@ export const icelandSelfDriveWinter12: TripPackage = {
     "擁有充足時間探索首都雷克雅維克與冰島溫泉文化",
   ],
   attractions: [
-    {
-      name: "塞里雅蘭瀑布",
-      nameEn: "Seljalandsfoss",
-      region: "冰島南部",
-      subtitle: "塞里雅蘭瀑布之美的不同角度",
-      imageUrl:
-        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/seljalandsfoss1_b6412d5d4e.jpg",
-      galleryImages: [
-        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/seljalandsfoss1_b6412d5d4e.jpg",
-        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/seljalandsfoss2_6d4717fdda.jpg",
-        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/seljalandsfoss3_531d93910f.jpg",
-      ],
-      paragraphs: [
-        "塞里雅蘭瀑布（Seljalandsfoss）位於冰島南部1號公路旁，是一個落差達60米的巨大瀑布。在冰島這樣一個瀑布遍佈的國家，它的獨特之處就在於瀑布之後有一個寬闊的洞穴可供人穿行，旅客繞行至瀑布背後能夠透過水簾欣賞落日晚霞和冰島南岸的美麗景色。",
-        "瀑布所在的塞里雅蘭河（Seljalandsá）發源於埃亞菲亞德拉冰蓋（Eyjafjallajökull），河水充滿冰川融水，奔流向南，在陡峭的懸崖上飛瀉而下，這也是塞里雅蘭瀑布得名的原因。塞里雅蘭瀑布在過去直接流入大西洋，而現在由於海平面的下降，海洋和瀑布之間出現了一片低地。站在瀑布頂端，您可以看到大西洋和冰島南海岸的壯麗景色。",
-        "由於其雄偉壯觀和極其獨特的景觀，塞里雅蘭瀑布也出現在了許多膾炙人口的影視作品當中，例如《星際迷航》第三季和賈斯汀·比伯的《I'll Show You》MV中，以及在一檔美國真人秀節目《極速前進》第六季當中，它也被用作挑戰關卡。",
-        "需要提醒旅客的是，無論是夏季還是冬季前往塞里雅蘭瀑布，都需要注意這條小路極其濕滑，由於瀑布落差巨大，因此無論是否有風，瀑布都會打濕這條隱藏在其後的小路。冬季，這條小路有可能會因為安全原因而封路，如果幸運沒有遇到道路封閉的情況，請一定要注意腳下，另外還要注意頭上可能會落下的冰柱。",
-        "在距離幾百米塞里雅蘭外的地方，還有另外一條令人驚嘆叫絕的瀑布，它近幾年才被人們發掘，被稱為秘密瀑布（Gljúfrabúi）。落差高達40米，秘密瀑布隱藏在一個狹窄而神秘的峽谷中，也正是因此特性而得名。在前往秘密瀑布的途中，還能看到另一個迷人的小瀑布，在群山、河流和清新的空氣環繞之處驕傲地展示著自己的美麗。",
-      ],
-    },
-    {
-      name: "黑沙灘",
-      nameEn: "Reynisfjara Black Sand Beach",
-      region: "冰島南部",
-      subtitle: "讓人萌生「這是地球嗎？」疑問的異世黑沙灘",
-      imageUrl:
-        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/reynisfjara1_ef5a24c2b7.jpg",
-      galleryImages: [
-        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/reynisfjara2_b3ec97ed1f.jpg",
-        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/reynisfjara1_ef5a24c2b7.jpg",
-        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/reynisfjara3_725ed9b454.jpg",
-      ],
-      paragraphs: [
-        "黑沙灘（Reynisfjara Black Sand Beach，音譯為雷尼斯黑沙灘）因其位於維克（Vík í Mýrdal）附近而得名。沙灘位於冰島南岸的環島1號公路沿線，交通便捷，是冰島最著名的海灘之一。火山噴發形成的黝黑色砂石千百年來受到北大西洋的海浪拍打，每年有無數旅客被其魔幻、深邃又略顯恐怖的奇異景色而折服。",
-        "讓黑沙灘從冰島眾多海灘中脫穎而出的，不僅是自古以來火山爆發後巖漿遇到海水迅速冷卻而形成的黝黑砂石，還有這片沙灘所能捕獲的風景。漫步於黑沙灘之上，可以眺望不遠處的雷尼斯岩（Reynisdrangar）。據說這些怪異的海柱是石化的巨魔，也有人堅信它們實際上曾經是海岸線懸崖的一部分，在其他部分被海水沖垮後依然屹立不倒。無論哪種說法能打動你，它們都賦予了黑沙灘一道獨特壯觀的風景線。",
-        "黑沙灘還有兩個著名的玄武岩柱景觀：加達爾懸崖（Gardar cliff）和Hálsanefshellir洞穴，它們像風琴管一樣駐守在暗黑色的灘原上。這些八角玄武岩柱是火山熔岩突然冷卻後形成的，石柱的高度不一，有的只有半米，有的則高達 20 米。夏季，加達爾懸崖還是成千上萬只海鸚和北極燕鷗等野生鳥類的棲息地。從海岸邊還可以看到迪霍拉里（Dyrhólaey）的拱門在大西洋上若隱若現的美妙景色。",
-        "最後，也是最重要的一點，在黑沙灘遊玩時，切記注意安全！這裡雖然風景絕美，但卻是冰島最危險的地方之一。由於大西洋洋流在到達冰島之前毫無陸地阻擋，積蓄了巨大的能量，因此這裡經常會出現巨浪，而且水流非常湍急。當浪拍打上來時，如果被浪擊倒，會很難再站起來。海浪會產生一股吸力，沖走沙石，將你拖入水面。而一旦落水，水流就會把你拉離海岸，而冰冷的海水則會在幾分鐘內讓你失溫而造成生命危險。2021年，一名臺灣旅客因被捲入巨浪中而不幸遇難。因此，一定要與海水保持距離，保證生命安全！",
-        "目前，為了保障旅客的生命安全，黑沙灘根據具體情況劃分了不同區域，並設置了相應的燈光。當黃燈和紅燈亮起時，旅客均不得進入相應顏色的區域。不必擔心，在安全的距離內，您完全可以看到同樣壯觀的景色。請注意，黑沙灘是沒有救生員或其他有人值守的，因此，請不要冒險靠近大海，為您的生命負責。",
-      ],
-    },
-    {
-      name: "傑古沙龍冰河湖",
-      nameEn: "Jökulsárlón",
-      region: "冰島東部",
-      subtitle: "冰島「皇冠上的明珠」",
-      imageUrl:
-        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/DSC_00389_4_cadb104463.jpg",
-      galleryImages: [
-        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/DSC_00389_4_cadb104463.jpg",
-        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/jokulsarlon_unsplash4_afb37701fc.jpg",
-        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/jokulsarlon_unsplash6_8247d88371.jpg",
-        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/jokulsarlon_unsplash5_67dfcff32b.jpg",
-        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/jokulsarlon_unsplash2_3ff49270dd.jpg",
-      ],
-      paragraphs: [
-        "傑古沙龍冰河湖（Jökulsárlón）是瓦特納冰川（Vatnajökull）南部出口冰川Breiðamerkurjökull冰川的一片瀉湖，靠近冰島1號環島公路，距離雷克雅維克約370公里，是冰島最偉大的自然奇觀之一。",
-        "冰河湖的歷史不久，大約在20世紀30年代形成，氣候變暖是其主要成因。巨大的冰塊不斷從Breiðamerkurjökull冰川上斷裂掉落，漂浮在湖面上。湖面不寬，但深達250米，是冰島最深的湖泊。",
-        "傑古沙龍冰河湖被《孤獨星球》列為此生必去景點之一。它從一個狹窄的入口流入大西洋，隨河同流的冰塊被沖刷在黑沙灘上，留下了鑽石沙灘（Diamond Beach）這一壯觀景象。魚類豐富的冰河湖旁棲息著許多海豹，它們在湛藍的冰塊上曬著太陽，偶爾跳入湖中美美地飽餐一頓。景區全年開放，湖畔的小餐館也是如此。對於健行愛好者來說，可以在傑古沙龍冰河湖與小冰河湖（Fjallsárlón）之間發現一條健行路線，沿途風景優美，令人難忘。",
-        "從水上遊覽傑古沙龍冰河湖是最有趣且壯觀的方式。許多人喜歡乘船遊覽，因為這樣既能欣賞冰川湖，又能穿梭在冰山之間航行。有兩種船型——水陸兩棲船或衝鋒艇——可供選擇。其中最為熱門的選項就是傑古沙龍冰河湖水陸兩棲船遊。如果您想要更加沉浸式的體驗，那麼可以試試獨木舟項目，親手划船穿越鏡面般的水域，欣賞其充滿藍白色調的超現實環境。",
-        "眾多流行文化的名篇曾在傑古沙龍冰河湖留下印跡，《007之雷霆殺機》和《007之擇日而亡》的動作場面在這裡攝製，《勞拉：古墓麗影》《蝙蝠俠：俠影之謎》以及綜藝《極速前進》等諸多頂級的製作都曾在此取景拍攝。",
-      ],
-    },
-    {
-      name: "飛機殘骸",
-      nameEn: "Solheimasandur Plane Wreck",
-      region: "冰島南部",
-      subtitle: "南岸必訪景點",
-      imageUrl:
-        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/plane_wreck_unsplash2_34bf5e223d.jpg",
-      galleryImages: [
-        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/plane_wreck_unsplash2_34bf5e223d.jpg",
-        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/Plane_DC_3_6a46d18e06.png",
-      ],
-      paragraphs: [
-        "飛機殘骸是冰島南岸一處非常有特色的景觀，可說是美麗的意外。這架道格拉斯 DC-3 飛機（R4D-8）原屬美國海軍所有，1973 年在南岸 Sólheimasandur 黑沙灘發生事故後迫降於沙灘之上，如今成為冰島南岸獨特地標，吸引無數旅客前來造訪。",
-        "若需前往 DC-3 飛機殘骸，可選擇從停車場健行（單程約 1.5–2 小時），或搭乘擺渡車減輕體力負擔。冬季請注意保暖與路況安全。",
-      ],
-    },
-    {
-      name: "鑽石沙灘",
-      nameEn: "The Diamond Beach",
-      region: "冰島東部",
-      subtitle: "當冰山遇上黑沙灘",
-      imageUrl:
-        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/diamond_beach_unsplash_11020ebd2f.jpg",
-      galleryImages: [
-        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/diamond_beach_unsplash_11020ebd2f.jpg",
-        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/diamond_beach_unsplash2_8710988286.jpg",
-      ],
-      paragraphs: [
-        "鑽石沙灘（The Diamond Beach）的原名是Breiðamerkursandur沙灘，位於冰島南部，瓦特納冰川（Vatnajökull）南端傑古沙龍冰河湖（Jökulsárlón）附近。鑽石沙灘的得名是因為沙灘上晶瑩剔透的透明體，而這些實際上並不是鑽石，而是傑古沙龍冰河湖上的漂浮的冰山隨河流流向大西洋中，擱淺在了黢黑的沙灘上。伴隨著洶湧的大西洋海浪，透亮的冰山與暗黑的沙灘透露著一絲詭譎異世的氣氛。",
-        "冰島以黑沙灘聞名於世，而鑽石海灘也當然不是冰島唯一的黑色海灘，其中最有名的黑沙灘之一當屬位於維克（Vík í Mýrdal）附近的黑沙灘（Reynisfjara）。這些黑沙灘的形成得歸因於冰島的火山地貌。當火山熔岩與冰冷的海水接觸後迅速冷卻形成玄武岩，隨著時間的推移，碎裂的玄武岩變得越來越小，最終變成了沙子。",
-        "全年的任何時候都適合造訪鑽石海灘。夏季陽光充足，日照時間長，交通也較為便利安全；沙灘上的冰塊來自冰川，夏季也不會融化，反而在陽光下更加耀眼。冬季北大西洋海面氣勢磅礡，海浪拍打黑色沙灘，景色更為壯觀；金色日落也讓白天格外上鏡。幸運的話，還有機會在鑽石海灘上看見北極光。冬季造訪請務必穿暖，並與海浪保持安全距離。",
-      ],
-    },
-    {
-      name: "黃金瀑布",
-      nameEn: "Gullfoss",
-      region: "冰島南部",
-      subtitle: "在陽光下流動的黃金",
-      imageUrl:
-        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/gullfoss1_9c5319c04c.jpg",
-      galleryImages: [
-        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/gullfoss1_9c5319c04c.jpg",
-        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/gullfoss2_4aa3699337.jpg",
-        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/gullfoss3_62d8e5e998.jpg",
-      ],
-      paragraphs: [
-        "黃金瀑布（Gullfoss）位於 Haukadalur 山谷的 Hvítá 河上，是冰島最受歡迎的旅遊景點之一，與辛格維利爾國家公園、蓋錫爾間歇泉地帶組成著名的黃金圈線路。",
-        "黃金瀑布由兩段瀑布組合而成，冬季地表被白雪覆蓋時景色尤為壯麗。走近瀑布時，您將被巨大的水流所震撼；在陽光照射下，水珠有時會散發金色光芒。冬季亦是拍攝北極光的熱門地點之一，請注意路面結冰，勿離開主路。",
-      ],
-    },
-    {
-      name: "蓋錫爾間歇泉地帶",
-      nameEn: "The Great Geysir and Strokkur",
-      region: "冰島南部",
-      subtitle: "感受來自地表之下的自然力量",
-      imageUrl:
-        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/be5ba64f349aa795f653231dac5e44a_fa8600600a.jpg",
-      galleryImages: [
-        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/be5ba64f349aa795f653231dac5e44a_fa8600600a.jpg",
-        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/geysir_unsplash_83e7e7b45e.jpg",
-        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/geysir_unsplash2_dd17e22e52.jpg",
-      ],
-      paragraphs: [
-        "Geysir 間歇泉被人們稱為蓋錫爾間歇泉地帶（The Great Geysir），英文單詞「Geyser」即因它而得名。它坐落於冰島西南岸 Haukadalur 山谷，與辛格維利爾國家公園和黃金瀑布共同組成黃金圈。",
-        "史托克間歇泉（Strokkur）是目前最為活躍的間歇泉，每 5–10 分鐘噴發一次，高達約 30 米。請待在指定安全區域內，勿向間歇泉或地熱池投擲物品。",
-      ],
-    },
-    {
-      name: "教會山",
-      nameEn: "Kirkjufell",
-      region: "斯奈山半島",
-      subtitle: "冰島最上鏡的山峰之一",
-      imageUrl:
-        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/kirkjufell1_b2a1018312.jpg",
-      galleryImages: [
-        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/kirkjufell1_b2a1018312.jpg",
-        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/kirkjufell2_26aae9d397.jpg",
-        "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/kirkjufell3_a34c5b3e82.jpg",
-      ],
-      paragraphs: [
-        "教會山（Kirkjufell）位於斯奈山半島，是冰島最具代表性的山峰之一，常與教會山瀑布一同入鏡，冬季雪景下尤為壯麗。",
-        "斯奈山半島被稱為「冰島縮影」，是 12 天環島自駕的經典亮點之一。",
-      ],
-    },
-  ],
+        seljalandsfossSpot,
+    reynisfjaraSpot,
+    jokulsarlonSpot,
+    planeWreckSpot,diamondBeachSpot,
+    gullfossSpot,geysirSpot,
+    kirkjufellSpot,],
   routeOverviewSubtitle: "一號公路冬季完整環島自駕動線（含西部白銀圈與斯奈山半島）",
   routeStops: [
     { label: "第 1 天", detail: "雷克雅維克（入境、取車）" },
@@ -598,7 +465,7 @@ export const icelandSelfDriveWinter12: TripPackage = {
         {
           question: "去冰島自駕需要準備什麼行李？",
           answer:
-            "無論哪個季節都可能遇到各種天氣，建議攜帶：防水防風外套與長褲、防水徒步鞋、透氣運動鞋、墨鏡、手套毛線帽圍巾、泳衣、羊毛衫或毛衣、羽絨衣、保濕霜與潤唇膏、手機支架，以及駕照翻譯公證文件。",
+            "無論哪個季節都可能遇到各種天氣，建議攜帶：防水防風外套與長褲、防水健行鞋、透氣運動鞋、墨鏡、手套毛線帽圍巾、泳衣、羊毛衫或毛衣、羽絨衣、保濕霜與潤唇膏、手機支架，以及駕照翻譯公證文件。",
         },
         {
           question: "什麼是自選報名活動？",

@@ -34,7 +34,14 @@ const PATTERNS = [
   { pattern: /花少/g, label: "綜藝行銷「花少」" },
   { pattern: /冲锋衣/g, label: "大陸用語「冲锋衣」" },
   { pattern: /酒店/g, label: "大陸用語「酒店」（台灣常用飯店）" },
-  { pattern: /冰川徒步/g, label: "大陸用語「冰川徒步」（台灣常用冰川健行）" },
+  { pattern: /徒步/g, label: "大陸用語「徒步」（台灣常用健行）" },
+  { pattern: /默認/g, label: "大陸用語「默認」（台灣常用預設）" },
+  { pattern: /預定/g, label: "大陸用語「預定」（台灣常用預訂）" },
+  { pattern: /線路/g, label: "大陸用語「線路」（台灣常用路線）" },
+  { pattern: /前臺/g, label: "大陸用語「前臺」（台灣常用櫃檯）" },
+  { pattern: /定金/g, label: "大陸用語「定金」（台灣常用訂金）" },
+  { pattern: /矗立着/g, label: "簡體字「着」（台灣用「著」）" },
+  { pattern: /\d+ 米/g, label: "大陸長度單位「米」（台灣常用公尺）" },
 ];
 
 function walkFiles(dir) {

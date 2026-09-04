@@ -26,7 +26,38 @@ type TransportFilter = "all" | TripTransport;
 type SeasonFilter = "all" | TripSeason;
 type DaysFilter = "all" | TripDaysRange;
 type RouteFilter = "all" | TripRouteType;
-type SortOrder = "days-asc" | "days-desc";
+type SortOrder = "days-asc" | "days-desc" | "price-asc" | "price-desc";
+
+function getSortOptions(locale: ReturnType<typeof useSiteLocale>): FilterChipOption<SortOrder>[] {
+  return [
+    { value: "days-asc", label: localizeText("天數由短到長", locale) },
+    { value: "days-desc", label: localizeText("天數由長到短", locale) },
+    { value: "price-asc", label: localizeText("價格由低到高", locale) },
+    { value: "price-desc", label: localizeText("價格由高到低", locale) },
+  ];
+}
+
+function compareCatalogItems(
+  a: TripCatalogItem,
+  b: TripCatalogItem,
+  sort: SortOrder,
+): number {
+  if (sort === "price-asc" || sort === "price-desc") {
+    const aPrice = a.fromPrice?.perPersonDoubleIsk ?? null;
+    const bPrice = b.fromPrice?.perPersonDoubleIsk ?? null;
+
+    if (aPrice === null && bPrice === null) {
+      return a.days - b.days;
+    }
+    if (aPrice === null) return 1;
+    if (bPrice === null) return -1;
+
+    const diff = aPrice - bPrice;
+    return sort === "price-desc" ? -diff : diff;
+  }
+
+  return sort === "days-desc" ? b.days - a.days : a.days - b.days;
+}
 
 type FilterChipOption<T extends string> = {
   value: T;
@@ -138,10 +169,7 @@ function TripCatalogFilters({
     { value: "south", label: localizeText("南岸專線", locale) },
   ];
 
-  const sortOptions: FilterChipOption<SortOrder>[] = [
-    { value: "days-asc", label: localizeText("天數由短到長", locale) },
-    { value: "days-desc", label: localizeText("天數由長到短", locale) },
-  ];
+  const sortOptions = getSortOptions(locale);
 
   const hasActiveFilters =
     transport !== "all" ||
@@ -253,6 +281,8 @@ export function TripCatalogGrid({
   const days = (searchParams.get("days") as DaysFilter) || "all";
   const route = (searchParams.get("route") as RouteFilter) || "all";
   const sort = (searchParams.get("sort") as SortOrder) || "days-asc";
+  const isValidSort = getSortOptions(locale).some((option) => option.value === sort);
+  const activeSort: SortOrder = isValidSort ? sort : "days-asc";
 
   const updateParam = useCallback(
     (key: string, value: string) => {
@@ -289,21 +319,16 @@ export function TripCatalogGrid({
       return true;
     });
 
-    result = [...result].sort((a, b) =>
-      sort === "days-desc" ? b.days - a.days : a.days - b.days,
-    );
+    result = [...result].sort((a, b) => compareCatalogItems(a, b, activeSort));
 
     return result;
-  }, [items, transport, season, days, route, sort]);
+  }, [items, transport, season, days, route, activeSort]);
 
   const bookableItems = filteredItems.filter((item) => !item.comingSoon);
   const comingSoonItems = filteredItems.filter((item) => item.comingSoon);
   const activeFilterCount = countActiveFilters(transport, season, days, route);
 
-  const sortOptions: FilterChipOption<SortOrder>[] = [
-    { value: "days-asc", label: localizeText("天數由短到長", locale) },
-    { value: "days-desc", label: localizeText("天數由長到短", locale) },
-  ];
+  const sortOptions = getSortOptions(locale);
 
   const resultsSummary = localizeText(
     `顯示 ${filteredItems.length} / ${items.length} 個行程`,
@@ -418,7 +443,8 @@ export function TripCatalogGrid({
             season={season}
             days={days}
             route={route}
-            sort={sort}
+            sort={activeSort}
+            showSort={false}
             onUpdateParam={updateParam}
             onClear={clearFilters}
           />
@@ -432,7 +458,7 @@ export function TripCatalogGrid({
                 {localizeText("排序", locale)}
               </span>
               <select
-                value={sort}
+                value={activeSort}
                 onChange={(event) => updateParam("sort", event.target.value)}
                 className="rounded-lg border border-foreground/12 bg-background px-3 py-1.5 text-sm font-medium text-foreground/80"
                 aria-label={localizeText("排序", locale)}
@@ -460,7 +486,7 @@ export function TripCatalogGrid({
               ) : null}
             </button>
             <select
-              value={sort}
+              value={activeSort}
               onChange={(event) => updateParam("sort", event.target.value)}
               className="flex-1 rounded-full border border-foreground/12 bg-background px-3 py-2 text-sm font-medium text-foreground/80 sm:hidden"
               aria-label={localizeText("排序", locale)}
@@ -512,7 +538,7 @@ export function TripCatalogGrid({
                 season={season}
                 days={days}
                 route={route}
-                sort={sort}
+                sort={activeSort}
                 showSort={false}
                 onUpdateParam={updateParam}
                 onClear={clearFilters}
@@ -541,7 +567,7 @@ export function TripCatalogGrid({
           season={season}
           days={days}
           route={route}
-          sort={sort}
+          sort={activeSort}
           onUpdateParam={updateParam}
           onClear={clearFilters}
         />

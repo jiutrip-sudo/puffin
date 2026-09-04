@@ -4,6 +4,9 @@ import { getLocalizedBrandName, getLocalizedCompanyInfo } from "@/lib/i18n/compa
 import { PRIVACY_POLICY_URL } from "@/lib/legal/privacy-policy-content";
 import { t } from "@/lib/i18n/messages";
 
+/** 暫時隱藏 footer 公司登記／聯絡資訊面板 */
+const SHOW_FOOTER_COMPANY_INFO = false;
+
 type InfoItem = {
   label: string;
   value: string;
@@ -57,31 +60,39 @@ function FooterInfoSection({
 }
 
 export function SiteFooter({ locale }: { locale: SiteLocale }) {
-  const companyInfo = getLocalizedCompanyInfo(locale);
-  const brandName = getLocalizedBrandName(locale);
+  const companyInfo = SHOW_FOOTER_COMPANY_INFO
+    ? getLocalizedCompanyInfo(locale)
+    : null;
+  const brandName = SHOW_FOOTER_COMPANY_INFO
+    ? getLocalizedBrandName(locale)
+    : null;
 
   return (
     <footer className="site-footer w-full px-4 py-4 sm:px-5 sm:py-8 md:px-8 md:py-2.5">
       <div className="mx-auto max-w-7xl">
-        <section className="site-footer-panel rounded-xl px-3 py-2.5 md:rounded-lg md:px-3 md:py-2">
-          <div className="mb-3 border-b border-white/12 pb-2.5">
-            <p className="text-sm font-semibold leading-tight text-white">
-              {companyInfo.name}
-            </p>
-            <p className="font-display mt-0.5 text-[8px] font-medium uppercase tracking-[0.2em] text-white/50">
-              {brandName}
-            </p>
-          </div>
-          <div className="grid gap-4 md:grid-cols-2 md:gap-5">
-            <FooterInfoSection items={companyInfo.registration} />
-            <FooterInfoSection
-              title={t("footer.contact", locale)}
-              items={companyInfo.contact}
-            />
-          </div>
-        </section>
+        {SHOW_FOOTER_COMPANY_INFO && companyInfo && brandName ? (
+          <section className="site-footer-panel rounded-xl px-3 py-2.5 md:rounded-lg md:px-3 md:py-2">
+            <div className="mb-3 border-b border-white/12 pb-2.5">
+              <p className="text-sm font-semibold leading-tight text-white">
+                {companyInfo.name}
+              </p>
+              <p className="font-display mt-0.5 text-[8px] font-medium uppercase tracking-[0.2em] text-white/50">
+                {brandName}
+              </p>
+            </div>
+            <div className="grid gap-4 md:grid-cols-2 md:gap-5">
+              <FooterInfoSection items={companyInfo.registration} />
+              <FooterInfoSection
+                title={t("footer.contact", locale)}
+                items={companyInfo.contact}
+              />
+            </div>
+          </section>
+        ) : null}
 
-        <div className="mt-3 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-[10px] text-white/45">
+        <div
+          className={`flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-[10px] text-white/45 ${SHOW_FOOTER_COMPANY_INFO ? "mt-3" : ""}`}
+        >
           <LocaleLink
             href="/booking/lookup"
             locale={locale}

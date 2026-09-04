@@ -4,7 +4,7 @@ export const BRAND_NAME = "Tomoaki Travel Service Ltd., Co.";
 export const SITE_DISPLAY_NAME = "帕芬假期";
 
 /** 對外客服／聯絡信箱 */
-export const COMPANY_EMAIL = "vip@poffinholiday.com";
+export const COMPANY_EMAIL = "vip@puffinholiday.com";
 
 export const COMPANY_LOGO = {
   src: "/images/dollar-travel-logo.png",

@@ -8,7 +8,7 @@ import { stripLocalePrefix } from "@/lib/i18n/paths";
 function pathHasBuiltInHeader(pathname: string): boolean {
   const path = stripLocalePrefix(pathname);
 
-  if (path === "/" || path === "/taiwan" || path === "/iceland") {
+  if (path === "/" || path === "/taiwan" || path === "/iceland" || path === "/trips") {
     return true;
   }
 
