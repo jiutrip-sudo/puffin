@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { AdminFxRateNote } from "./AdminIskTwdAmount";
+import { AdminFxRateNote, AdminIskTwdAmount } from "./AdminIskTwdAmount";
 import { AdminReferencePriceBlock } from "./AdminReferencePriceBlock";
 import { AdminShell } from "./AdminShell";
 
@@ -16,9 +16,11 @@ type MatrixRow = {
   vehicleTier: string;
   supplierTotal: number;
   retailTotal: number;
+  retailPerPerson: number;
   deposit: number;
   perPersonDouble: number;
   syncedAt: string;
+  isFresh: boolean;
 };
 
 type PackageMeta = {
@@ -310,7 +312,7 @@ export function AdminPricingDetailPanel({ packageId }: { packageId: string }) {
           <summary>使用說明</summary>
           <p>
             瀏覽此套餐的 Corivo 計價快照矩陣。價格欄顯示供應商價、前台售價（+15%）與訂金（
-            {Math.round(depositRate * 100)}%）；台幣為政策參考匯率換算（
+            {Math.round(depositRate * 100)}%）；「零售人均」為前台售價除以人數。行程卡片「每人起價」取預設房型（第一個等級）與預設車型、2 位成人，在快照各出發日中的最低零售人均，與詳情頁預設條件一致。台幣為政策參考匯率換算（
             <AdminFxRateNote />
             ）。「即時查價」會向 Corivo 重新取價，僅更新目前頁面顯示，不會寫入快照。
           </p>
@@ -425,6 +427,7 @@ export function AdminPricingDetailPanel({ packageId }: { packageId: string }) {
                   <th>房型</th>
                   <th>車型</th>
                   <th>價格</th>
+                  <th>零售人均</th>
                   <th>同步</th>
                   <th>操作</th>
                 </tr>
@@ -432,7 +435,7 @@ export function AdminPricingDetailPanel({ packageId }: { packageId: string }) {
               <tbody>
                 {Array.from({ length: 8 }, (_, index) => (
                   <tr key={index} className="admin-table__skeleton-row">
-                    {Array.from({ length: 7 }, (__, cellIndex) => (
+                    {Array.from({ length: 8 }, (__, cellIndex) => (
                       <td key={cellIndex}>
                         <span className="admin-skeleton" />
                       </td>
@@ -482,6 +485,7 @@ export function AdminPricingDetailPanel({ packageId }: { packageId: string }) {
                   <th>房型</th>
                   <th>車型</th>
                   <th>價格</th>
+                  <th>零售人均</th>
                   <th>同步</th>
                   <th>操作</th>
                 </tr>
@@ -492,6 +496,9 @@ export function AdminPricingDetailPanel({ packageId }: { packageId: string }) {
                   const supplierTotal = live?.supplierTotal ?? row.supplierTotal;
                   const retailTotal = live?.retailTotal ?? row.retailTotal;
                   const deposit = Math.round(retailTotal * depositRate);
+                  const travelers = row.adults + row.children + row.infants;
+                  const retailPerPerson =
+                    travelers > 0 ? Math.round(retailTotal / travelers) : row.retailPerPerson;
 
                   return (
                     <tr
@@ -529,6 +536,12 @@ export function AdminPricingDetailPanel({ packageId }: { packageId: string }) {
                           retail={retailTotal}
                           deposit={deposit}
                         />
+                      </td>
+                      <td className="admin-table__prices">
+                        {live ? (
+                          <span className="admin-matrix-live-badge">即時</span>
+                        ) : null}
+                        <AdminIskTwdAmount isk={retailPerPerson} />
                       </td>
                       <td
                         className="admin-table__updated"

@@ -9,6 +9,11 @@ import {
 } from "@/lib/admin/pricing-package-category";
 import { applyRetailMarkupAmount } from "@/lib/trip-pricing/retail-markup";
 import {
+  listPricingSnapshotMatrixRows,
+  type PricingSnapshotMatrixFilters,
+  type PricingSnapshotMatrixRow,
+} from "@/lib/trip-pricing/pricing-snapshot-matrix";
+import {
   getAllPricingConfigs,
   usesCorivoPricing,
   getPricingConfig,
@@ -45,43 +50,12 @@ export type PricingPackageSummary = {
   referenceDepositLabel: string | null;
 };
 
-export type PricingMatrixRow = {
-  key: string;
-  startDate: string;
-  adults: number;
-  children: number;
-  infants: number;
-  accommodationTier: string;
-  vehicleTier: string;
-  supplierTotal: number;
-  retailTotal: number;
-  deposit: number;
+export type PricingMatrixRow = PricingSnapshotMatrixRow & {
+  /** @deprecated 請用 supplierPerPersonDouble；保留供舊 CSV 欄位相容 */
   perPersonDouble: number;
-  syncedAt: string;
 };
 
-export type PricingMatrixFilters = {
-  startDateFrom?: string;
-  startDateTo?: string;
-  accommodationTier?: string;
-  vehicleTier?: string;
-  adults?: number;
-};
-
-function parseMatrixKey(key: string): Omit<PricingMatrixRow, "supplierTotal" | "retailTotal" | "deposit" | "perPersonDouble" | "syncedAt"> {
-  const [startDate, adults, children, infants, accommodationTier, vehicleTier] =
-    key.split("|");
-
-  return {
-    key,
-    startDate: startDate ?? "",
-    adults: Number(adults) || 0,
-    children: Number(children) || 0,
-    infants: Number(infants) || 0,
-    accommodationTier: accommodationTier ?? "",
-    vehicleTier: vehicleTier ?? "",
-  };
-}
+export type PricingMatrixFilters = PricingSnapshotMatrixFilters;
 
 export type PricingOverviewResult = {
   total: number;
@@ -180,48 +154,10 @@ export function listPricingMatrixRows(
   snapshot: PackagePricingSnapshot | null,
   filters: PricingMatrixFilters,
 ): PricingMatrixRow[] {
-  if (!snapshot) return [];
-
-  const rows: PricingMatrixRow[] = [];
-
-  for (const [key, entry] of Object.entries(snapshot.prices)) {
-    const parsed = parseMatrixKey(key);
-
-    if (filters.startDateFrom && parsed.startDate < filters.startDateFrom) {
-      continue;
-    }
-    if (filters.startDateTo && parsed.startDate > filters.startDateTo) {
-      continue;
-    }
-    if (
-      filters.accommodationTier &&
-      parsed.accommodationTier !== filters.accommodationTier
-    ) {
-      continue;
-    }
-    if (filters.vehicleTier && parsed.vehicleTier !== filters.vehicleTier) {
-      continue;
-    }
-    if (filters.adults !== undefined && parsed.adults !== filters.adults) {
-      continue;
-    }
-
-    const supplierTotal = entry.result.total;
-    rows.push({
-      ...parsed,
-      supplierTotal,
-      retailTotal: applyRetailMarkupAmount(supplierTotal),
-      deposit: entry.result.deposit,
-      perPersonDouble: entry.result.perPersonDouble,
-      syncedAt: entry.syncedAt,
-    });
-  }
-
-  return rows.sort((a, b) => {
-    const dateCmp = a.startDate.localeCompare(b.startDate);
-    if (dateCmp !== 0) return dateCmp;
-    return a.key.localeCompare(b.key);
-  });
+  return listPricingSnapshotMatrixRows(snapshot, filters).map((row) => ({
+    ...row,
+    perPersonDouble: row.supplierPerPersonDouble,
+  }));
 }
 
 export function paginateRows<T>(rows: T[], page: number, pageSize: number): {
@@ -255,8 +191,9 @@ export function buildPricingMatrixCsv(rows: PricingMatrixRow[]): string {
     "車型",
     "供應商價 ISK",
     "前台售價 ISK",
+    "零售人均 ISK",
     "訂金 ISK",
-    "人均雙人 ISK",
+    "供應商人均 ISK",
     "同步時間",
   ].join(",");
 
@@ -270,8 +207,9 @@ export function buildPricingMatrixCsv(rows: PricingMatrixRow[]): string {
       row.vehicleTier || "—",
       row.supplierTotal,
       row.retailTotal,
+      row.retailPerPerson,
       row.deposit,
-      row.perPersonDouble,
+      row.supplierPerPersonDouble,
       row.syncedAt,
     ].join(","),
   );

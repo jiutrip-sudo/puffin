@@ -334,7 +334,6 @@ export const icelandSelfDriveSummer11: TripPackage = {
       "10整天租車（多種車型可選，包含CDW碰撞險）",
       "冰島行程期間10晚住宿",
       "每日住宿提供早餐",
-      "簽證輔助行程單材料提供",
       "台灣冰島雙時區服務",
       "VAT增值稅",
     ],

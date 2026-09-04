@@ -284,7 +284,6 @@ export const icelandGroupWinter8NonRing: TripPackage = {
   inclusions: {
     included: [
       "專業行程策劃師為您獨家客製的中文行程手冊（包含各類景點、歷史、文化、自然等資訊描述）",
-      "簽證輔助行程單材料提供",
       "機場往返市區飯店大巴接送",
       "雷克雅維克市區5晚住宿",
       "雷克雅維克市區參團接送服務",

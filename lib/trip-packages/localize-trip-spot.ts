@@ -1,5 +1,6 @@
 import { localizeDeep } from "@/lib/i18n/localize";
 import { normalizeContentForTaiwan } from "@/lib/i18n/tw-content-normalize";
+import { parseFaqAnswerText } from "@/lib/trip-packages/parse-faq-answer";
 import type { SiteLocale } from "@/lib/site-locale";
 import type { TripAttraction, TripPackage } from "./types";
 
@@ -102,7 +103,7 @@ export function normalizeTripPackageForTaiwan(pkg: TripPackage): TripPackage {
       title: tw(group.title),
       items: group.items.map((item) => ({
         question: tw(item.question),
-        answer: tw(item.answer),
+        answer: tw(parseFaqAnswerText(item.answer)),
       })),
     })),
     similarTrips: pkg.similarTrips.map((trip) => ({

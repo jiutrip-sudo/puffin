@@ -26,12 +26,13 @@ import { TripPackageBookingSection } from "./TripPackageBookingSection";
 import { TripPackageHero } from "./TripPackageHero";
 import { TripRoomVehicleCards } from "./TripRoomVehicleCards";
 import { TripSectionNav } from "./TripSectionNav";
-import { TripInlineCta } from "./TripInlineCta";
 import { TripSimilarPackages } from "./TripSimilarPackages";
+import type { SimilarTripCard } from "@/lib/trip-packages/similar-trips";
 
 type TripPackagePageClientProps = {
   package: TripPackage;
   pricingConfig: PricingConfig;
+  similarTrips: SimilarTripCard[];
 };
 
 function SectionHeading({
@@ -59,6 +60,7 @@ function SectionHeading({
 type TripPackageMainContentProps = {
   pkg: TripPackage;
   pricingConfig: PricingConfig;
+  similarTrips: SimilarTripCard[];
   desktopPanel: React.ReactNode;
   accommodationTier: string;
   setAccommodationTier: (value: string) => void;
@@ -69,12 +71,12 @@ type TripPackageMainContentProps = {
   availabilityActive: boolean;
   pricingLoading: boolean;
   requestAvailability: () => void;
-  openMobileBooking: () => void;
 };
 
 function TripPackageMainContent({
   pkg,
   pricingConfig,
+  similarTrips,
   desktopPanel,
   accommodationTier,
   setAccommodationTier,
@@ -85,7 +87,6 @@ function TripPackageMainContent({
   availabilityActive,
   pricingLoading,
   requestAvailability,
-  openMobileBooking,
 }: TripPackageMainContentProps) {
   const locale = useSiteLocale();
   const roomVehicleSectionRef = useRef<HTMLElement>(null);
@@ -211,17 +212,6 @@ function TripPackageMainContent({
           <section>
             <SectionHeading id="faq" title={t("trip.section.faq", locale)} />
             <TripFaqAccordion groups={pkg.faq} />
-            <TripInlineCta
-              onOpenBooking={() => {
-                if (window.matchMedia("(max-width: 1023px)").matches) {
-                  openMobileBooking();
-                } else {
-                  document
-                    .getElementById("trip-booking")
-                    ?.scrollIntoView({ behavior: "smooth", block: "start" });
-                }
-              }}
-            />
           </section>
         </main>
 
@@ -234,7 +224,7 @@ function TripPackageMainContent({
 
       <section className="mt-14 lg:mt-16">
         <SectionHeading id="similar" title={t("trip.section.similar", locale)} />
-        <TripSimilarPackages trips={pkg.similarTrips} />
+        <TripSimilarPackages trips={similarTrips} />
       </section>
     </div>
   );
@@ -243,6 +233,7 @@ function TripPackageMainContent({
 export function TripPackagePageClient({
   package: pkg,
   pricingConfig,
+  similarTrips,
 }: TripPackagePageClientProps) {
   const locale = useSiteLocale();
   const pageRef = useRef<HTMLDivElement>(null);
@@ -338,11 +329,11 @@ export function TripPackagePageClient({
           availabilityActive,
           pricingLoading,
           requestAvailability,
-          openMobileBooking,
         }) => (
           <TripPackageMainContent
             pkg={pkg}
             pricingConfig={pricingConfig}
+            similarTrips={similarTrips}
             desktopPanel={desktopPanel}
             accommodationTier={accommodationTier}
             setAccommodationTier={setAccommodationTier}
@@ -353,7 +344,6 @@ export function TripPackagePageClient({
             availabilityActive={availabilityActive}
             pricingLoading={pricingLoading}
             requestAvailability={requestAvailability}
-            openMobileBooking={openMobileBooking}
           />
         )}
       </TripPackageBookingSection>

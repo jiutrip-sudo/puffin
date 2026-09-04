@@ -25,6 +25,63 @@ type TripPackageCardProps = {
   comingSoon?: boolean;
 };
 
+function TripCardFooter({
+  trip,
+  locale,
+  comingSoon,
+}: {
+  trip: TripPackageCardData;
+  locale: SiteLocale;
+  comingSoon: boolean;
+}) {
+  if (comingSoon) {
+    return (
+      <p className="text-sm font-semibold text-foreground/45">
+        {localizeText("敬請期待", locale)}
+      </p>
+    );
+  }
+
+  if (trip.fromPrice) {
+    return (
+      <div
+        className="flex items-center justify-between gap-2"
+        title={trip.fromPrice.assumptions}
+      >
+        <p className="min-w-0 text-sm font-bold tabular-nums text-foreground">
+          <span className="mr-1 text-[10px] font-semibold text-foreground/55">
+            {t("common.perPerson", locale)}
+          </span>
+          {trip.fromPrice.displayLabel}
+          <span className="ml-0.5 text-xs font-semibold text-foreground/60">
+            {t("common.from", locale)}
+          </span>
+        </p>
+        <span
+          className="shrink-0 text-lg font-semibold text-primary-dark transition-transform group-hover:translate-x-0.5"
+          aria-hidden
+        >
+          →
+        </span>
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex items-center justify-between gap-2">
+      <span className="text-sm font-semibold text-primary-dark">
+        {t("common.viewDetails", locale)}
+      </span>
+      <span
+        className="shrink-0 text-lg font-semibold text-primary-dark transition-transform group-hover:translate-x-0.5"
+        aria-hidden
+      >
+        →
+      </span>
+    </div>
+  );
+}
+
 export function TripPackageCard({
   trip,
   locale,
@@ -46,13 +103,26 @@ export function TripPackageCard({
         ) : (
           <div className="absolute inset-0 bg-gradient-to-br from-primary-surface/60 to-primary-dark/20" />
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-primary-dark/90 via-primary-dark/30 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-primary-dark/90 via-primary-dark/25 to-transparent" />
+        <div className="absolute left-3 top-3 flex flex-wrap gap-1.5">
+          <span className="rounded-full bg-black/55 px-2.5 py-1 text-[11px] font-semibold text-white backdrop-blur-sm">
+            {trip.durationLabel}
+          </span>
+          {trip.tags?.slice(0, 2).map((tag) => (
+            <span
+              key={tag}
+              className="rounded-full bg-black/45 px-2.5 py-1 text-[11px] font-semibold text-white/90 backdrop-blur-sm"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
         {comingSoon && (
           <span className="absolute right-3 top-3 rounded-full bg-white/90 px-2.5 py-1 text-[11px] font-semibold text-foreground/70 shadow-sm">
             {localizeText("即將推出", locale)}
           </span>
         )}
-        <div className="absolute bottom-0 left-0 right-0 p-4 pt-12">
+        <div className="absolute bottom-0 left-0 right-0 p-4 pt-10">
           <h3 className="line-clamp-2 text-sm font-bold leading-snug text-white md:text-base">
             {trip.title}
           </h3>
@@ -62,42 +132,15 @@ export function TripPackageCard({
         </div>
       </div>
 
-      <div className="flex flex-1 flex-col p-3 md:p-4">
-        {comingSoon ? (
-          <p className="mt-auto text-sm font-semibold text-foreground/45">
-            {localizeText("敬請期待", locale)}
+      <div className="flex flex-1 flex-col gap-3 p-3 md:p-4">
+        {trip.description ? (
+          <p className="line-clamp-2 text-sm leading-relaxed text-foreground/70">
+            {trip.description}
           </p>
-        ) : trip.fromPrice ? (
-          <div
-            className="mt-auto flex items-center justify-between gap-2 border-t border-foreground/8 pt-3"
-            title={trip.fromPrice.assumptions}
-          >
-            <p className="min-w-0 text-sm font-bold tabular-nums text-foreground">
-              <span className="mr-1 text-[10px] font-semibold text-foreground/55">
-                {t("common.perPerson", locale)}
-              </span>
-              {trip.fromPrice.displayLabel}
-              <span className="ml-0.5 text-xs font-semibold text-foreground/60">
-                {t("common.from", locale)}
-              </span>
-            </p>
-            <span
-              className="shrink-0 text-lg font-semibold text-primary-dark transition-transform group-hover:translate-x-0.5"
-              aria-hidden
-            >
-              →
-            </span>
-          </div>
-        ) : (
-          <div className="mt-auto flex justify-end border-t border-foreground/8 pt-3">
-            <span
-              className="text-lg font-semibold text-primary-dark transition-transform group-hover:translate-x-0.5"
-              aria-hidden
-            >
-              →
-            </span>
-          </div>
-        )}
+        ) : null}
+        <div className="mt-auto border-t border-foreground/8 pt-3">
+          <TripCardFooter trip={trip} locale={locale} comingSoon={comingSoon} />
+        </div>
       </div>
     </>
   );

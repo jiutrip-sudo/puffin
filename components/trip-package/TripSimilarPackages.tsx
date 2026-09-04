@@ -1,44 +1,18 @@
 "use client";
 
-import {
-  COMING_SOON_TRIPS,
-  getIcelandGroupSummerPackageTripKey,
-} from "@/lib/trip-options";
-import { getTripPackage } from "@/lib/trip-packages/registry";
-import type { SimilarTrip } from "@/lib/trip-packages/types";
+import type { SimilarTripCard } from "@/lib/trip-packages/similar-trips";
 import { useSiteLocale } from "@/components/SiteLocaleProvider";
 import { localizeText } from "@/lib/i18n/localize";
 import { TripPackageCard } from "./TripPackageCard";
 
 type TripSimilarPackagesProps = {
-  trips: SimilarTrip[];
+  trips: SimilarTripCard[];
 };
-
-function resolvePackageTripKey(tripKey: string): string {
-  const parts = tripKey.split("/");
-  if (
-    parts.length === 5 &&
-    parts[0] === "iceland" &&
-    parts[1] === "group" &&
-    parts[2] === "summer"
-  ) {
-    return getIcelandGroupSummerPackageTripKey(parts[3], parts[4]);
-  }
-  return tripKey;
-}
-
-function resolvePackage(tripKey: string) {
-  return getTripPackage(resolvePackageTripKey(tripKey));
-}
 
 export function TripSimilarPackages({ trips }: TripSimilarPackagesProps) {
   const locale = useSiteLocale();
-  const bookableTrips = trips.filter(
-    (trip) => !COMING_SOON_TRIPS.has(trip.tripKey),
-  );
-  const comingSoonTrips = trips.filter((trip) =>
-    COMING_SOON_TRIPS.has(trip.tripKey),
-  );
+  const bookableTrips = trips.filter((trip) => !trip.comingSoon);
+  const comingSoonTrips = trips.filter((trip) => trip.comingSoon);
 
   if (bookableTrips.length === 0 && comingSoonTrips.length === 0) {
     return null;
@@ -56,9 +30,12 @@ export function TripSimilarPackages({ trips }: TripSimilarPackagesProps) {
               trip={{
                 tripKey: trip.tripKey,
                 title: trip.title,
+                subtitle: trip.subtitle,
                 description: trip.description,
                 durationLabel: trip.durationLabel,
-                heroImage: resolvePackage(trip.tripKey)?.heroImage,
+                heroImage: trip.heroImage,
+                tags: trip.tags,
+                fromPrice: trip.fromPrice,
               }}
             />
           ))}
@@ -79,9 +56,11 @@ export function TripSimilarPackages({ trips }: TripSimilarPackagesProps) {
                 trip={{
                   tripKey: trip.tripKey,
                   title: trip.title,
+                  subtitle: trip.subtitle,
                   description: trip.description,
                   durationLabel: trip.durationLabel,
-                  heroImage: resolvePackage(trip.tripKey)?.heroImage,
+                  heroImage: trip.heroImage,
+                  tags: trip.tags,
                 }}
               />
             ))}

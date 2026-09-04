@@ -4,13 +4,8 @@ import { LocaleLink } from "@/components/LocaleLink";
 import { SiteLogo } from "./SiteLogo";
 import { ThemeControlsBar } from "./ThemeControls";
 import { LocaleControlsBar } from "./LocaleControls";
-import { COMPANY_EMAIL, COMPANY_INFO } from "@/lib/company-info";
 import { useSiteLocale } from "@/components/SiteLocaleProvider";
 import { t } from "@/lib/i18n/messages";
-
-const OFFICE_EMAIL =
-  COMPANY_INFO.contact.find((item) => item.label === "信箱")?.value ??
-  COMPANY_EMAIL;
 
 type SiteHeaderProps = {
   activeLabel?: string;
@@ -30,8 +25,6 @@ export function SiteHeader({
     { label: t("nav.about", locale), href: "/" },
     { label: t("nav.trips", locale), href: "/trips" },
     { label: t("nav.guides", locale), href: "/guides" },
-    { label: t("nav.service", locale), href: "/terms-and-conditions" },
-    { label: t("nav.contact", locale), href: `mailto:${OFFICE_EMAIL}` },
   ];
 
   return (

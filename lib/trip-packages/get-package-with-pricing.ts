@@ -1,5 +1,6 @@
 import { getTripPackage } from "@/lib/trip-packages/registry";
 import { normalizeTripPackageModalContent } from "@/lib/trip-packages/localize-trip-spot";
+import { applyLocaleInclusions } from "@/lib/trip-packages/locale-inclusions";
 import { getPricingConfig } from "@/lib/trip-pricing/fetch";
 import { localizeDeep } from "@/lib/i18n/localize";
 import type { SiteLocale } from "@/lib/site-locale";
@@ -28,8 +29,13 @@ function buildLocalized(
     return { package: twPackage, pricingConfig };
   }
 
+  const localizedPackage = localizeDeep(twPackage, locale);
+
   return {
-    package: localizeDeep(twPackage, locale),
+    package: {
+      ...localizedPackage,
+      inclusions: applyLocaleInclusions(localizedPackage.inclusions, locale),
+    },
     pricingConfig: localizeDeep(pricingConfig, locale),
   };
 }
