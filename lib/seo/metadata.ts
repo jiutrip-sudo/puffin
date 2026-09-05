@@ -3,9 +3,11 @@ import { absoluteUrl } from "@/lib/site-url";
 import type { SiteLocale } from "@/lib/site-locale";
 import { siteLocaleToOpenGraphLocale } from "@/lib/site-locale";
 import { localePath } from "@/lib/i18n/paths";
-import { SITE_DISPLAY_NAME } from "@/lib/company-info";
+import { DEFAULT_OG_IMAGE, SITE_DISPLAY_NAME } from "@/lib/company-info";
 
-const DEFAULT_OG_IMAGE = "/images/puffin-logo.png";
+const DEFAULT_OG_IMAGE_PATH = DEFAULT_OG_IMAGE.src;
+const DEFAULT_OG_IMAGE_WIDTH = DEFAULT_OG_IMAGE.width;
+const DEFAULT_OG_IMAGE_HEIGHT = DEFAULT_OG_IMAGE.height;
 
 export function buildPageMetadata(options: {
   title: string;
@@ -18,7 +20,17 @@ export function buildPageMetadata(options: {
   const locale = options.locale ?? "zh-TW";
   const canonicalPath = options.path;
   const canonical = canonicalPath ? absoluteUrl(localePath(canonicalPath, locale)) : undefined;
-  const ogImage = options.ogImage ?? absoluteUrl(DEFAULT_OG_IMAGE);
+  const ogImage = options.ogImage ?? absoluteUrl(DEFAULT_OG_IMAGE_PATH);
+  const openGraphImages = options.ogImage
+    ? [{ url: ogImage }]
+    : [
+        {
+          url: ogImage,
+          width: DEFAULT_OG_IMAGE_WIDTH,
+          height: DEFAULT_OG_IMAGE_HEIGHT,
+          alt: DEFAULT_OG_IMAGE.alt,
+        },
+      ];
   const alternateLocale = locale === "zh-CN" ? "zh-TW" : "zh-CN";
   const alternatePath = canonicalPath
     ? absoluteUrl(localePath(canonicalPath, alternateLocale))
@@ -50,7 +62,7 @@ export function buildPageMetadata(options: {
       locale: siteLocaleToOpenGraphLocale(locale),
       alternateLocale: siteLocaleToOpenGraphLocale(alternateLocale),
       type: "website",
-      images: [{ url: ogImage }],
+      images: openGraphImages,
     },
     twitter: {
       card: "summary_large_image",

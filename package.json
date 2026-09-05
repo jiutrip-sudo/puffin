@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "generate-hero": "node scripts/generate-hero.mjs",
+    "generate-og": "node scripts/generate-og-default.mjs",
     "sync-pricing": "SYNC_PRICING_CLI=1 npx tsx scripts/sync-trip-pricing.ts",
     "suggest-fx": "node scripts/suggest-fx-rate.mjs",
     "audit:places": "node scripts/audit-place-names.mjs --fail",

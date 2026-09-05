@@ -12,6 +12,14 @@ export const COMPANY_LOGO = {
   height: 512,
 } as const;
 
+/** 全站預設 Open Graph 橫幅（1200×630，供 Threads / Facebook 等連結預覽） */
+export const DEFAULT_OG_IMAGE = {
+  src: "/images/og-default.jpg",
+  width: 1200,
+  height: 630,
+  alt: SITE_DISPLAY_NAME,
+} as const;
+
 export const SOCIAL_LINKS = [
   { id: "line", href: "https://lin.ee/XJTgHN5", label: "LINE" },
   { id: "threads", href: "https://www.threads.com/@puffin.tw", label: "Threads" },
