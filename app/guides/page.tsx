@@ -1,7 +1,6 @@
 import { buildPageMetadata } from "@/lib/seo/metadata";
 import { GUIDE_ARTICLES } from "@/lib/guides/registry";
-import { GuideTripCta } from "@/components/guides/GuideTripCta";
-import { GuideIndexCard } from "@/components/guides/GuideIndexCard";
+import { GuidesIndexGrid } from "@/components/guides/GuidesIndexGrid";
 import { GuidesIndexShell } from "@/components/guides/GuidesIndexShell";
 import { getRequestLocale } from "@/lib/i18n/server";
 import { localizeDeep, localizeText } from "@/lib/i18n/localize";
@@ -22,26 +21,19 @@ export async function generateMetadata() {
 
 export default async function GuidesIndexPage() {
   const locale = await getRequestLocale();
-  const articles = GUIDE_ARTICLES.map((article) =>
-    localizeDeep(article, locale),
-  );
+  const articles = GUIDE_ARTICLES.map((article) => localizeDeep(article, locale));
 
   return (
     <GuidesIndexShell
       activeLabel={t("nav.guides", locale)}
+      variant="compact"
       title={localizeText("冰島旅遊攻略", locale)}
       description={localizeText(
-        "出發前先讀：天數怎麼抓、冬季自駕要注意什麼、如何預訂與付款。",
+        `${articles.length} 篇出發前必讀，依規劃階段從選方式、抓天數到預訂出發。`,
         locale,
       )}
     >
-      <ul className="guides-index-list">
-        {articles.map((article) => (
-          <GuideIndexCard key={article.slug} article={article} locale={locale} />
-        ))}
-      </ul>
-
-      <GuideTripCta className="mt-10" />
+      <GuidesIndexGrid articles={articles} />
     </GuidesIndexShell>
   );
 }

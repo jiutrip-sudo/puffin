@@ -13,6 +13,67 @@ type SiteHeaderProps = {
   onSurface?: boolean;
 };
 
+type NavLink = {
+  label: string;
+  href: string;
+};
+
+function navLinkClassName(
+  link: NavLink,
+  activeLabel: string | undefined,
+  onSurface: boolean,
+  compact: boolean,
+) {
+  const active =
+    activeLabel === link.label
+      ? onSurface
+        ? "bg-primary-dark text-white shadow-sm"
+        : "bg-white text-primary-dark shadow-sm"
+      : onSurface
+        ? "text-hero-text/80 hover:bg-foreground/8 hover:text-hero-text"
+        : "text-hero-text/90 hover:bg-white/15 hover:text-hero-text";
+
+  return compact
+    ? `inline-flex min-h-11 min-w-[2.75rem] items-center justify-center rounded-full px-3 py-2 text-[11px] font-medium tracking-wide transition-all ${active}`
+    : `rounded-full px-4 py-1.5 text-xs font-medium tracking-wide transition-all ${active}`;
+}
+
+function SiteMainNav({
+  navLinks,
+  locale,
+  activeLabel,
+  onSurface,
+  compact = false,
+  className = "",
+}: {
+  navLinks: NavLink[];
+  locale: ReturnType<typeof useSiteLocale>;
+  activeLabel?: string;
+  onSurface: boolean;
+  compact?: boolean;
+  className?: string;
+}) {
+  return (
+    <nav
+      className={`glass-hero flex items-center gap-0.5 rounded-full ${
+        compact ? "site-header-mobile-nav px-1 py-1" : "gap-1 px-2 py-1.5"
+      } ${className}`.trim()}
+      aria-label={t("nav.main", locale)}
+    >
+      {navLinks.map((link) => (
+        <LocaleLink
+          key={link.href}
+          href={link.href}
+          locale={locale}
+          className={navLinkClassName(link, activeLabel, onSurface, compact)}
+        >
+          {link.label}
+        </LocaleLink>
+      ))}
+    </nav>
+  );
+}
+
 export function SiteHeader({
   activeLabel,
   rightSlot,
@@ -20,7 +81,7 @@ export function SiteHeader({
 }: SiteHeaderProps) {
   const locale = useSiteLocale();
 
-  const navLinks = [
+  const navLinks: NavLink[] = [
     { label: t("nav.about", locale), href: "/" },
     { label: t("nav.trips", locale), href: "/trips" },
     { label: t("nav.guides", locale), href: "/guides" },
@@ -33,11 +94,23 @@ export function SiteHeader({
       }`}
     >
       <div className="mx-auto max-w-7xl">
-        <div className="flex items-center justify-between gap-2 md:hidden">
-          <SiteLogo />
-          <div className="flex shrink-0 items-center justify-end gap-1.5">
-            <SitePreferencesBar />
-            {rightSlot}
+        <div className="md:hidden">
+          <div className="flex items-center justify-between gap-2">
+            <SiteLogo />
+            <div className="flex shrink-0 items-center justify-end gap-1.5">
+              <SitePreferencesBar />
+              {rightSlot}
+            </div>
+          </div>
+
+          <div className="mt-2 flex justify-center">
+            <SiteMainNav
+              navLinks={navLinks}
+              locale={locale}
+              activeLabel={activeLabel}
+              onSurface={onSurface}
+              compact
+            />
           </div>
         </div>
 
@@ -46,29 +119,13 @@ export function SiteHeader({
             <SiteLogo />
           </div>
 
-          <nav
-            className="glass-hero flex items-center justify-self-center gap-1 rounded-full px-2 py-1.5"
-            aria-label={t("nav.main", locale)}
-          >
-            {navLinks.map((link) => (
-              <LocaleLink
-                key={link.href}
-                href={link.href}
-                locale={locale}
-                className={`rounded-full px-4 py-1.5 text-xs font-medium tracking-wide transition-all ${
-                  activeLabel === link.label
-                    ? onSurface
-                      ? "bg-primary-dark text-white shadow-sm"
-                      : "bg-white text-primary-dark shadow-sm"
-                    : onSurface
-                      ? "text-hero-text/80 hover:bg-foreground/8 hover:text-hero-text"
-                      : "text-hero-text/90 hover:bg-white/15 hover:text-hero-text"
-                }`}
-              >
-                {link.label}
-              </LocaleLink>
-            ))}
-          </nav>
+          <SiteMainNav
+            navLinks={navLinks}
+            locale={locale}
+            activeLabel={activeLabel}
+            onSurface={onSurface}
+            className="justify-self-center"
+          />
 
           <div className="flex shrink-0 items-center justify-end gap-2 justify-self-end">
             <SitePreferencesBar />

@@ -1,3 +1,5 @@
+import type { GuideJourneyStageId } from "./journey-stages";
+
 export type GuideFeaturedTrip = {
   href: string;
   title: string;
@@ -9,8 +11,11 @@ export type GuideArticle = {
   title: string;
   description: string;
   category: string;
+  journeyStage: GuideJourneyStageId;
   coverImage: string;
   publishedAt: string;
+  /** 攻略索引「入門必讀」區塊 */
+  featured?: boolean;
   featuredTrip: GuideFeaturedTrip;
   sections: Array<{
     heading: string;
@@ -26,6 +31,7 @@ export const GUIDE_ARTICLES: GuideArticle[] = [
     description:
       "第一次冬季自駕冰島，天數怎麼抓？從雷克雅維克到南岸精華，4 天 3 夜是否夠用，一次說清楚。",
     category: "冬季自駕",
+    journeyStage: "plan-days",
     coverImage:
       "https://images.unsplash.com/photo-1504829857797-ddff29c27927?w=1200&q=80",
     publishedAt: "2026-03-01",
@@ -66,6 +72,7 @@ export const GUIDE_ARTICLES: GuideArticle[] = [
     description:
       "冬季自駕冰島前要準備什麼？路況、服裝、保險與 CDW 碰撞險重點整理。",
     category: "行前準備",
+    journeyStage: "prepare",
     coverImage:
       "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/3_H6_A4177_2f23f858c9.jpg",
     publishedAt: "2026-03-01",
@@ -105,6 +112,7 @@ export const GUIDE_ARTICLES: GuideArticle[] = [
     description:
       "想同時體驗冰川健行與自駕自由度？行程節奏、天數與預訂時機建議。",
     category: "冬季自駕",
+    journeyStage: "plan-days",
     coverImage:
       "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/skaftafell_49295564f1.jpg",
     publishedAt: "2026-03-01",
@@ -143,6 +151,8 @@ export const GUIDE_ARTICLES: GuideArticle[] = [
     description:
       "線上預訂流程：訂金、銀行匯款、現金付款與訂單查詢方式。",
     category: "預訂付款",
+    journeyStage: "book",
+    featured: true,
     coverImage: "/images/hero-1920.webp",
     publishedAt: "2026-03-01",
     featuredTrip: {
@@ -180,6 +190,8 @@ export const GUIDE_ARTICLES: GuideArticle[] = [
     description:
       "第一次到冰島，不確定跟團或自駕哪個好？從駕駛、預算、自由度與適合族群比較。",
     category: "行程選擇",
+    journeyStage: "choose-mode",
+    featured: true,
     coverImage:
       "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/66_5e073a69d6.jpg",
     publishedAt: "2026-03-02",
@@ -225,6 +237,7 @@ export const GUIDE_ARTICLES: GuideArticle[] = [
     description:
       "夏季日照長、路況佳，想走一號公路環島該排幾天？8 天、10 天與 12 天差在哪。",
     category: "夏季環島",
+    journeyStage: "plan-days",
     coverImage:
       "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/_cc18d6eba7.jpg",
     publishedAt: "2026-03-02",
@@ -263,6 +276,7 @@ export const GUIDE_ARTICLES: GuideArticle[] = [
     description:
       "極光季節、觀測條件與行程怎麼排，提高冬季看到北極光的機會。",
     category: "極光",
+    journeyStage: "plan-days",
     coverImage:
       "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/Kirkjufell1_053dfbdc9a.jpg",
     publishedAt: "2026-03-02",
@@ -305,4 +319,12 @@ export function getGuideBySlug(slug: string): GuideArticle | undefined {
 
 export function getAllGuideSlugs(): string[] {
   return GUIDE_ARTICLES.map((article) => article.slug);
+}
+
+export function getFeaturedGuides(): GuideArticle[] {
+  return GUIDE_ARTICLES.filter((article) => article.featured);
+}
+
+export function getGuideCategories(): string[] {
+  return [...new Set(GUIDE_ARTICLES.map((article) => article.category))];
 }

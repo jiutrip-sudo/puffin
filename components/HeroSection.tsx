@@ -39,7 +39,7 @@ export function HeroSection({
         <div
           className={
             isCentered
-              ? `pointer-events-none absolute inset-0 z-10 flex flex-col px-5 text-center max-md:pt-[calc(env(safe-area-inset-top)+3.25rem)] max-md:pb-[calc(env(safe-area-inset-bottom)+0.5rem)] md:px-8 md:pt-16 ${footer ? "max-md:justify-between md:justify-center" : "justify-center"} ${footer ? "md:pb-28" : ""}`
+              ? `pointer-events-none absolute inset-0 z-10 flex flex-col px-5 text-center max-md:pt-[var(--site-header-mobile-offset)] max-md:pb-[calc(env(safe-area-inset-bottom)+0.5rem)] md:px-8 md:pt-16 ${footer ? "max-md:justify-between md:justify-center" : "justify-center"} ${footer ? "md:pb-28" : ""}`
               : "pointer-events-none absolute inset-0 z-10 flex flex-col items-center justify-end px-6 pb-24 pt-16 text-center md:items-start md:px-8 md:pb-28 md:pt-20 md:text-left"
           }
         >
