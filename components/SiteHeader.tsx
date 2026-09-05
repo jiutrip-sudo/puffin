@@ -34,7 +34,7 @@ function navLinkClassName(
         : "text-hero-text/90 hover:bg-white/15 hover:text-hero-text";
 
   return compact
-    ? `inline-flex min-h-11 min-w-[2.75rem] items-center justify-center rounded-full px-3 py-2 text-[11px] font-medium tracking-wide transition-all ${active}`
+    ? `inline-flex min-h-11 min-w-0 flex-1 items-center justify-center rounded-full px-2 py-2 text-xs font-medium tracking-wide transition-all ${active}`
     : `rounded-full px-4 py-1.5 text-xs font-medium tracking-wide transition-all ${active}`;
 }
 
@@ -55,8 +55,10 @@ function SiteMainNav({
 }) {
   return (
     <nav
-      className={`glass-hero flex items-center gap-0.5 rounded-full ${
-        compact ? "site-header-mobile-nav px-1 py-1" : "gap-1 px-2 py-1.5"
+      className={`glass-hero flex items-center rounded-full ${
+        compact
+          ? "site-header-mobile-nav min-w-0 flex-1 gap-0.5 px-1 py-1"
+          : "gap-1 px-2 py-1.5"
       } ${className}`.trim()}
       aria-label={t("nav.main", locale)}
     >
@@ -94,23 +96,18 @@ export function SiteHeader({
       }`}
     >
       <div className="mx-auto max-w-7xl">
-        <div className="md:hidden">
-          <div className="flex items-center justify-between gap-2">
-            <SiteLogo />
-            <div className="flex shrink-0 items-center justify-end gap-1.5">
-              <SitePreferencesBar />
-              {rightSlot}
-            </div>
-          </div>
-
-          <div className="mt-2 flex justify-center">
-            <SiteMainNav
-              navLinks={navLinks}
-              locale={locale}
-              activeLabel={activeLabel}
-              onSurface={onSurface}
-              compact
-            />
+        <div className="site-header-mobile-bar md:hidden">
+          <SiteLogo className="shrink-0" />
+          <SiteMainNav
+            navLinks={navLinks}
+            locale={locale}
+            activeLabel={activeLabel}
+            onSurface={onSurface}
+            compact
+          />
+          <div className="flex shrink-0 items-center gap-1.5">
+            {rightSlot}
+            <SitePreferencesBar />
           </div>
         </div>
 
