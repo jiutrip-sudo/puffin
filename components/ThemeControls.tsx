@@ -6,8 +6,6 @@ import {
   readSiteThemePreferenceFromDocument,
   setPuffinTheme,
 } from "@/lib/site-theme-client";
-import { useSiteLocale } from "./SiteLocaleProvider";
-import { t } from "@/lib/i18n/messages";
 
 function subscribeThemePreference(onStoreChange: () => void) {
   window.addEventListener("site-theme-change", onStoreChange);
@@ -84,50 +82,16 @@ const THEME_OPTIONS: {
 
 type ThemeControlsBarProps = {
   className?: string;
-  variant?: "compact" | "sheet";
 };
 
-export function ThemeControlsBar({
-  className = "",
-  variant = "compact",
-}: ThemeControlsBarProps) {
+export function ThemeControlsBar({ className = "" }: ThemeControlsBarProps) {
   const preference = useThemePreference();
-  const locale = useSiteLocale();
-
-  if (variant === "sheet") {
-    return (
-      <div
-        className={`site-preferences-sheet__options ${className}`.trim()}
-        role="group"
-        aria-label={t("theme.label", locale)}
-      >
-        {THEME_OPTIONS.map((option) => {
-          const isActive = preference === option.value;
-          return (
-            <button
-              key={option.value}
-              type="button"
-              className={`site-preferences-sheet__option site-preferences-sheet__option--theme${
-                isActive ? " site-preferences-sheet__option--active" : ""
-              }`}
-              data-theme-option={option.value}
-              aria-pressed={isActive}
-              onClick={() => setPuffinTheme(option.value)}
-            >
-              {option.icon}
-              <span>{option.label}</span>
-            </button>
-          );
-        })}
-      </div>
-    );
-  }
 
   return (
     <div
       className={`site-theme-toggle site-theme-toggle--compact shrink-0 ${className}`.trim()}
       role="group"
-      aria-label={t("theme.label", locale)}
+      aria-label="主題模式"
     >
       {THEME_OPTIONS.map((option) => {
         const isActive = preference === option.value;

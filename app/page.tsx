@@ -5,7 +5,6 @@ import { buildPageMetadata } from "@/lib/seo/metadata";
 import { getRequestLocale } from "@/lib/i18n/server";
 import { localizeText } from "@/lib/i18n/localize";
 import { localizeTripOptions } from "@/lib/i18n/trip-options";
-import { t } from "@/lib/i18n/messages";
 
 export async function generateMetadata() {
   const locale = await getRequestLocale();
@@ -26,7 +25,6 @@ export default async function Home() {
 
   return (
     <HeroSection
-      activeLabel={t("nav.about", locale)}
       eyebrow="ICELAND TRAVEL"
       title={localizeText("探索冰島，從這裡開始。", locale)}
       subtitle={localizeText("選擇您的出發方式，我們將為您推薦最適合的行程。", locale)}

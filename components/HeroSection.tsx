@@ -7,7 +7,6 @@ type HeroSectionProps = {
   subtitle?: string;
   eyebrow?: string;
   tagline?: string;
-  activeLabel?: string;
   children?: React.ReactNode;
   footer?: React.ReactNode;
   header?: React.ReactNode;
@@ -21,7 +20,6 @@ export function HeroSection({
   subtitle,
   eyebrow,
   tagline,
-  activeLabel,
   children,
   footer,
   header,
@@ -33,9 +31,7 @@ export function HeroSection({
 
   return (
     <section className="relative isolate w-full">
-      <SiteHeaderShell variant="overlay" activeLabel={activeLabel}>
-        {header}
-      </SiteHeaderShell>
+      <SiteHeaderShell variant="overlay">{header}</SiteHeaderShell>
 
       <HeroMediaFrame>
         <HeroMedia priority={priority} />

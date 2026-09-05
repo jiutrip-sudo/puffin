@@ -7,55 +7,18 @@ import { switchLocalePath } from "@/lib/i18n/paths";
 import { useSiteLocale } from "./SiteLocaleProvider";
 import { setPuffinLocale } from "@/lib/site-locale-client";
 
-const LOCALE_OPTIONS: {
-  value: SiteLocale;
-  labelKey: "locale.zhTW" | "locale.zhCN";
-  sheetLabelKey: "locale.zhTWFull" | "locale.zhCNFull";
-}[] = [
-  { value: "zh-TW", labelKey: "locale.zhTW", sheetLabelKey: "locale.zhTWFull" },
-  { value: "zh-CN", labelKey: "locale.zhCN", sheetLabelKey: "locale.zhCNFull" },
+const LOCALE_OPTIONS: { value: SiteLocale; labelKey: "locale.zhTW" | "locale.zhCN" }[] = [
+  { value: "zh-TW", labelKey: "locale.zhTW" },
+  { value: "zh-CN", labelKey: "locale.zhCN" },
 ];
 
 type LocaleControlsBarProps = {
   className?: string;
-  variant?: "compact" | "sheet";
 };
 
-export function LocaleControlsBar({
-  className = "",
-  variant = "compact",
-}: LocaleControlsBarProps) {
+export function LocaleControlsBar({ className = "" }: LocaleControlsBarProps) {
   const pathname = usePathname() ?? "/";
   const locale = useSiteLocale();
-
-  if (variant === "sheet") {
-    return (
-      <div
-        className={`site-preferences-sheet__options ${className}`.trim()}
-        role="group"
-        aria-label={t("locale.label", locale)}
-      >
-        {LOCALE_OPTIONS.map((option) => {
-          const isActive = locale === option.value;
-          const href = switchLocalePath(pathname, option.value);
-
-          return (
-            <a
-              key={option.value}
-              href={href}
-              className={`site-preferences-sheet__option${
-                isActive ? " site-preferences-sheet__option--active" : ""
-              }`}
-              aria-current={isActive ? "true" : undefined}
-              onClick={() => setPuffinLocale(option.value)}
-            >
-              {t(option.sheetLabelKey, locale)}
-            </a>
-          );
-        })}
-      </div>
-    );
-  }
 
   return (
     <div
