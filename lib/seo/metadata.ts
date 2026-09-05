@@ -5,7 +5,7 @@ import { siteLocaleToOpenGraphLocale } from "@/lib/site-locale";
 import { localePath } from "@/lib/i18n/paths";
 import { SITE_DISPLAY_NAME } from "@/lib/company-info";
 
-const DEFAULT_OG_IMAGE = "/images/dollar-travel-logo.png";
+const DEFAULT_OG_IMAGE = "/images/puffin-logo.png";
 
 export function buildPageMetadata(options: {
   title: string;

@@ -7,9 +7,9 @@ export const SITE_DISPLAY_NAME = "帕芬假期";
 export const COMPANY_EMAIL = "vip@puffinholiday.com";
 
 export const COMPANY_LOGO = {
-  src: "/images/dollar-travel-logo.png",
-  width: 399,
-  height: 363,
+  src: "/images/puffin-logo.png",
+  width: 512,
+  height: 512,
 } as const;
 
 export const SOCIAL_LINKS = [
