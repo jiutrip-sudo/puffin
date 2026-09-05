@@ -479,9 +479,14 @@
     "variant": "gallery-1",
     "nameEn": "Geosea Geothermal Sea Baths"
   },
-  "3c_4_13fcb3c1c1.jpg": {
+  "icelandic_horse_riding_in_geothermal_hot_springs_area_fffc1c1c18.png": {
     "slug": "geothermal-horse-riding",
     "variant": "cover",
+    "nameEn": "Geothermal Area Horse Riding"
+  },
+  "3c_4_13fcb3c1c1.jpg": {
+    "slug": "geothermal-horse-riding",
+    "variant": "gallery-1",
     "nameEn": "Geothermal Area Horse Riding"
   },
   "be5ba64f349aa795f653231dac5e44a_fa8600600a.jpg": {
@@ -1502,6 +1507,11 @@
   "hiking_afe526bc72.png": {
     "slug": "skaftafell-glacier-hiking",
     "variant": "cover",
+    "nameEn": "Skaftafell Glacier Hike"
+  },
+  "skaftafell_blue_ice_glacier_walk_iceland_mountain_guides_copyright_bjorgvin_hilmarsson_00d83a4fe2_162052f83a.jpg": {
+    "slug": "skaftafell-glacier-hiking",
+    "variant": "gallery-1",
     "nameEn": "Skaftafell Glacier Hike"
   },
   "skaftafell_unsplash2_896376fc08.jpg": {

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Pexels 搜圖 → WebP →（可選）上傳 Cloudflare R2，並更新 lib/media/manifest.json
+ * senlinmao 鏡像（spots / trips / pricing / guides）→ WebP →（可選）上傳 R2
  *
  * 環境變數（.env.local 或 shell）：
  *   PEXELS_API_KEY
@@ -15,13 +15,14 @@
  *   node scripts/media-sync.mjs --slug seljalandsfoss --variant cover --dry-run
  *   node scripts/media-sync.mjs --all --limit 5
  *   node scripts/media-sync.mjs --slug seljalandsfoss --upload
+ *   node scripts/media-sync.mjs --all --force --upload          # spots：鏡像 senlinmao 原圖
  *   node scripts/build-trip-media-inventory.mjs
- *   node scripts/media-sync.mjs --kind trips --all --upload
- *   node scripts/media-sync.mjs --kind trips --slug iceland-green-grass-and-waterfall --upload
+ *   node scripts/media-sync.mjs --kind trips --all --force --upload   # trips：鏡像 senlinmao 原圖
  *   node scripts/build-pricing-media-inventory.mjs
  *   node scripts/media-sync.mjs --kind pricing --all --upload
+ *   node scripts/media-sync.mjs --kind pricing --all --force --upload  # 鏡像 senlinmao 原圖覆寫 Pexels
  *   node scripts/build-guides-media-inventory.mjs
- *   node scripts/media-sync.mjs --kind guides --all --upload
+ *   node scripts/media-sync.mjs --kind guides --all --force --upload  # guides：鏡像 senlinmao 原圖
  */
 import fs from "fs";
 import path from "path";
@@ -162,7 +163,16 @@ function labelForJob(job) {
   return `${job.slug} / ${job.variant}`;
 }
 
-/** slug / assetId 專用搜尋詞（Pexels 對活動／抽象名稱常無結果） */
+function usesSenlinmaoMirror(job) {
+  return (
+    job.kind === "spots" ||
+    job.kind === "trips" ||
+    job.kind === "pricing" ||
+    job.kind === "guides"
+  );
+}
+
+/** slug / assetId 專用搜尋詞（legacy：僅非 mirror job 時使用） */
 const QUERY_OVERRIDES = {
   "reykjavik-horse-riding": ["Icelandic horse", "Iceland horse"],
   "iceland-green-grass-and-waterfall": ["Iceland waterfall", "Iceland landscape"],
@@ -239,6 +249,23 @@ async function downloadAndConvert(photo, destPath) {
   }
   const buffer = Buffer.from(await res.arrayBuffer());
 
+  await writeWebp(buffer, destPath);
+}
+
+const SLM_MIRROR_BASE =
+  "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good";
+
+async function mirrorSenlinmaoAndConvert(legacyFile, destPath) {
+  const res = await fetch(`${SLM_MIRROR_BASE}/${legacyFile}`);
+  if (!res.ok) {
+    throw new Error(`senlinmao 鏡像下載失敗 ${res.status}：${legacyFile}`);
+  }
+  const buffer = Buffer.from(await res.arrayBuffer());
+  await writeWebp(buffer, destPath);
+  console.log(`  已鏡像 senlinmao → ${path.relative(ROOT, destPath)}`);
+}
+
+async function writeWebp(buffer, destPath) {
   fs.mkdirSync(path.dirname(destPath), { recursive: true });
   await sharp(buffer)
     .rotate()
@@ -327,14 +354,17 @@ async function main() {
     const r2Key = r2KeyForJob(job);
     const localPath = path.join(OUTBOX, r2Key);
     const primaryQuery = buildPexelsQueries(job)[0];
+    const jobLabel = usesSenlinmaoMirror(job)
+      ? `${job.slug} / mirror ${job.legacyFile}`
+      : `${primaryQuery}`;
 
-    console.log(`\n→ ${labelForJob(job)}  (${primaryQuery})`);
+    console.log(`\n→ ${labelForJob(job)}  (${jobLabel})`);
 
     if (keySet.has(r2Key) && !args.includes("--force")) {
       if (upload && fs.existsSync(localPath)) {
         try {
           uploadToR2(localPath, r2Key);
-          console.log(`  已上傳 ${R2_BUCKET}/${r2Key}（manifest 已有，略過 Pexels）`);
+          console.log(`  已上傳 ${R2_BUCKET}/${r2Key}（manifest 已有，略過下載）`);
         } catch (err) {
           const message = err instanceof Error ? err.message : String(err);
           console.error(`  ✘ 上傳失敗：${message}`);
@@ -356,16 +386,19 @@ async function main() {
     }
 
     try {
-      const { photo, query } = await searchPexels(job);
-      if (query !== primaryQuery) {
-        console.log(`  使用備援關鍵字：${query}`);
+      if (usesSenlinmaoMirror(job)) {
+        await mirrorSenlinmaoAndConvert(job.legacyFile, localPath);
+      } else {
+        const { photo, query } = await searchPexels(job);
+        if (query !== primaryQuery) {
+          console.log(`  使用備援關鍵字：${query}`);
+        }
+        console.log(
+          `  Pexels #${photo.id} by ${photo.photographer} — ${photo.url}`,
+        );
+        await downloadAndConvert(photo, localPath);
+        console.log(`  已輸出 ${path.relative(ROOT, localPath)}`);
       }
-      console.log(
-        `  Pexels #${photo.id} by ${photo.photographer} — ${photo.url}`,
-      );
-
-      await downloadAndConvert(photo, localPath);
-      console.log(`  已輸出 ${path.relative(ROOT, localPath)}`);
 
       if (upload) {
         uploadToR2(localPath, r2Key);

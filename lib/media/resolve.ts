@@ -4,10 +4,8 @@ import pricingLegacyMap from "@/lib/media/pricing-legacy-map.json";
 import guidesLegacyMap from "@/lib/media/guides-legacy-map.json";
 import manifest from "@/lib/media/manifest.json";
 import { mediaBaseUrl } from "@/lib/media/url";
+import type { PricingConfig } from "@/lib/trip-pricing/types";
 import type { TripPackage } from "@/lib/trip-packages/types";
-
-const SLM_BASE =
-  "https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good";
 
 type SpotLegacyEntry = {
   slug: string;
@@ -28,6 +26,7 @@ type PricingLegacyEntry = {
 };
 
 type GuidesLegacyEntry = {
+  guideSlug: string;
   assetId: string;
   nameEn: string;
   legacyFile: string;
@@ -89,7 +88,7 @@ function resolveLegacyFile(legacyFile: string): string | undefined {
   return undefined;
 }
 
-/** senlinmao URL → R2（spot → trip → pricing → guides），否則原 URL */
+/** senlinmao URL → R2（spot → trip → pricing → guides）；已登記 inventory 則不再 fallback senlinmao */
 export function resolveSenlinmaoUrl(url: string): string {
   if (!url.includes("senlinmao.com")) {
     return url;
@@ -100,14 +99,39 @@ export function resolveSenlinmaoUrl(url: string): string {
     return url;
   }
 
-  return resolveLegacyFile(legacyFile) ?? url;
+  const resolved = resolveLegacyFile(legacyFile);
+  if (resolved) {
+    return resolved;
+  }
+
+  if (
+    legacyFile in spotLegacyMap ||
+    legacyFile in tripLegacyMap ||
+    legacyFile in pricingLegacyMap ||
+    legacyFile in guidesLegacyMap
+  ) {
+    throw new Error(
+      `媒體尚未同步至 R2：${legacyFile}（請執行 media:sync -- --all --force --upload）`,
+    );
+  }
+
+  return url;
 }
 
-/** spot 舊檔名；manifest 有 R2 時自動切換，否則 fallback senlinmao */
+/** spot 舊檔名 → R2 spots/{slug}/{variant}.webp，不引用 senlinmao */
 export function resolveSpotImg(file: string): string {
-  const r2 = resolveLegacyFile(file);
-  if (r2) return r2;
-  return `${SLM_BASE}/${file}`;
+  const base = mediaBaseUrl();
+  const entry = (spotLegacyMap as Record<string, SpotLegacyEntry>)[file];
+  if (base && entry) {
+    const key = `spots/${entry.slug}/${entry.variant}.webp`;
+    if (manifestKeys.has(key)) {
+      return `${base}/${key}`;
+    }
+  }
+
+  throw new Error(
+    `Spot 圖片尚未同步至 R2：${file}（請執行 npm run media:sync -- --all --force --upload）`,
+  );
 }
 
 export function applyTripPackageMedia(pkg: TripPackage): TripPackage {
@@ -121,11 +145,51 @@ export function applyTripPackageMedia(pkg: TripPackage): TripPackage {
   };
 }
 
-export function applyGuideArticleMedia<T extends { coverImage: string }>(
+/** 若 pricing 仍含 senlinmao URL（舊資料），轉成 R2 */
+export function applyPricingConfigMedia(config: PricingConfig): PricingConfig {
+  return {
+    ...config,
+    tiers: config.tiers.map((tier) => ({
+      ...tier,
+      imageUrl: resolveSenlinmaoUrl(tier.imageUrl),
+      galleryImages: tier.galleryImages?.map((url) => resolveSenlinmaoUrl(url)),
+    })),
+    vehicleTiers: config.vehicleTiers?.map((vehicle) => ({
+      ...vehicle,
+      imageUrl: resolveSenlinmaoUrl(vehicle.imageUrl),
+    })),
+  };
+}
+
+export function applyGuideArticleMedia<T extends { slug: string; coverImage: string }>(
   article: T,
 ): T {
   return {
     ...article,
-    coverImage: resolveSenlinmaoUrl(article.coverImage),
+    coverImage: resolveGuideCoverImage(article),
   };
+}
+
+function resolveGuideCoverImage(article: {
+  slug: string;
+  coverImage: string;
+}): string {
+  if (!article.coverImage.includes("senlinmao.com")) {
+    return article.coverImage;
+  }
+
+  const base = mediaBaseUrl();
+  const entry = (guidesLegacyMap as Record<string, GuidesLegacyEntry>)[
+    article.slug
+  ];
+  if (base && entry) {
+    const key = `guides/assets/${entry.assetId}.webp`;
+    if (manifestKeys.has(key)) {
+      return `${base}/${key}`;
+    }
+  }
+
+  throw new Error(
+    `攻略封面尚未同步至 R2：${article.slug}（請執行 npm run media:sync:guides -- --all --force --upload）`,
+  );
 }

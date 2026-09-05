@@ -1,5 +1,10 @@
 {
   "keys": [
+    "guides/assets/glacier-hike-and-self-drive.webp",
+    "guides/assets/group-tour-vs-self-drive.webp",
+    "guides/assets/iceland-winter-driving-prep.webp",
+    "guides/assets/northern-lights-season.webp",
+    "guides/assets/summer-ring-road-days.webp",
     "pricing/assets/bf970f5aa3.webp",
     "pricing/assets/fh-reykholt-bar-1.webp",
     "pricing/assets/fh-reykholt-restaurant.webp",
@@ -130,6 +135,7 @@
     "spots/geosea/cover.webp",
     "spots/geosea/gallery-1.webp",
     "spots/geothermal-horse-riding/cover.webp",
+    "spots/geothermal-horse-riding/gallery-1.webp",
     "spots/geysir/cover.webp",
     "spots/geysir/gallery-1.webp",
     "spots/geysir/gallery-2.webp",
@@ -333,6 +339,7 @@
     "spots/silfra-snorkeling-self-drive/gallery-1.webp",
     "spots/silfra-snorkeling-self-drive/gallery-2.webp",
     "spots/skaftafell-glacier-hiking/cover.webp",
+    "spots/skaftafell-glacier-hiking/gallery-1.webp",
     "spots/skaftafell/cover.webp",
     "spots/skaftafell/gallery-1.webp",
     "spots/skogafoss/cover.webp",

@@ -1,1 +1,32 @@
-{}
+{
+  "iceland-winter-driving-prep": {
+    "guideSlug": "iceland-winter-driving-prep",
+    "assetId": "iceland-winter-driving-prep",
+    "nameEn": "冰島南岸冬季自駕必備：路況、服裝、保險與 CDW",
+    "legacyFile": "3_H6_A4177_2f23f858c9.jpg"
+  },
+  "glacier-hike-and-self-drive": {
+    "guideSlug": "glacier-hike-and-self-drive",
+    "assetId": "glacier-hike-and-self-drive",
+    "nameEn": "冰川健行與冬季自駕怎麼排？南岸行程建議",
+    "legacyFile": "skaftafell_49295564f1.jpg"
+  },
+  "group-tour-vs-self-drive": {
+    "guideSlug": "group-tour-vs-self-drive",
+    "assetId": "group-tour-vs-self-drive",
+    "nameEn": "冰島跟團還是自駕？怎麼選適合你的方式",
+    "legacyFile": "66_5e073a69d6.jpg"
+  },
+  "summer-ring-road-days": {
+    "guideSlug": "summer-ring-road-days",
+    "assetId": "summer-ring-road-days",
+    "nameEn": "冰島夏季環島要幾天？一號公路天數建議",
+    "legacyFile": "_cc18d6eba7.jpg"
+  },
+  "northern-lights-season": {
+    "guideSlug": "northern-lights-season",
+    "assetId": "northern-lights-season",
+    "nameEn": "冰島極光什麼時候看？冬季追光實用指南",
+    "legacyFile": "Kirkjufell1_053dfbdc9a.jpg"
+  }
+}

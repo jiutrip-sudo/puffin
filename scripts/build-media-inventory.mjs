@@ -11,7 +11,7 @@ const ROOT = process.cwd();
 const SPOTS_DIR = path.join(ROOT, "lib/trip-packages/spots");
 const OUT = path.join(ROOT, "lib/media/legacy-map.json");
 
-const IMG_RE = /IMG\(\s*["']([^"']+)["']\s*\)/g;
+const IMG_RE = /IMG\(\s*["']([^"']+)["']\s*,?\s*\)/g;
 const NAME_EN_RE = /nameEn:\s*["']([^"']+)["']/;
 
 const files = fs
