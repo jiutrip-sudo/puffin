@@ -82,13 +82,21 @@ function collectSpotJobs(legacyMap) {
 
 /** @returns {Array<{ slug: string; variant: string; nameEn: string; legacyFile: string; kind: string }>} */
 function collectTripJobs(tripMap) {
-  return Object.values(tripMap).map((entry) => ({
-    slug: entry.assetId,
-    variant: "asset",
-    nameEn: entry.nameEn,
-    legacyFile: entry.legacyFile,
-    kind: "trips",
-  }));
+  return Object.values(tripMap)
+    .filter((entry) => {
+      if (!entry.assetId) {
+        console.warn(`略過空 assetId：${entry.legacyFile}`);
+        return false;
+      }
+      return true;
+    })
+    .map((entry) => ({
+      slug: entry.assetId,
+      variant: "asset",
+      nameEn: entry.nameEn,
+      legacyFile: entry.legacyFile,
+      kind: "trips",
+    }));
 }
 
 /** @returns {Array<{ slug: string; variant: string; nameEn: string; legacyFile: string; kind: string }>} */
@@ -342,6 +350,23 @@ async function main() {
   const guidesMap = fs.existsSync(GUIDES_MAP_PATH) ? loadJson(GUIDES_MAP_PATH) : {};
   const manifest = loadJson(MANIFEST_PATH);
   const keySet = new Set(manifest.keys ?? []);
+
+  if (kind === "trips" || kind === "all") {
+    const validTripKeys = new Set(
+      Object.values(tripMap).map((entry) => `trips/assets/${entry.assetId}.webp`),
+    );
+    let pruned = 0;
+    for (const key of keySet) {
+      if (key.startsWith("trips/assets/") && !validTripKeys.has(key)) {
+        keySet.delete(key);
+        pruned += 1;
+      }
+    }
+    if (pruned > 0) {
+      console.log(`已自 manifest 移除 ${pruned} 個過期 trip 圖 key`);
+    }
+  }
+
   const jobs = collectJobs(legacyMap, tripMap, pricingMap, guidesMap);
 
   console.log(`Kind: ${kind}`);

@@ -25,31 +25,55 @@ function loadJson(filePath) {
   return JSON.parse(fs.readFileSync(filePath, "utf8"));
 }
 
-function legacyToAssetId(filename) {
-  const stem = filename.replace(/\.[a-z0-9]+$/i, "");
-  let trimmed = stem.replace(/_[a-f0-9]{6,}$/i, "").replace(/^\d+_/, "");
-  if (!trimmed || /^_+$/.test(trimmed)) {
-    trimmed = stem.replace(/^_+/, "");
-  }
-  const assetId = trimmed
+function hashSuffix(stem) {
+  const match = stem.match(/_([a-f0-9]{6,})$/i);
+  return match?.[1]?.toLowerCase();
+}
+
+function slugify(value) {
+  return value
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-|-$/g, "")
-    .slice(0, 80);
-  return (
-    assetId ||
-    `legacy-${stem.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 40)}`
-  );
+    .replace(/^-|-$/g, "");
+}
+
+function legacyToAssetId(filename, usedIds) {
+  const stem = filename.replace(/\.[a-z0-9]+$/i, "");
+  const hash = hashSuffix(stem);
+  let readable = stem.replace(/_[a-f0-9]{6,}$/i, "").replace(/^\d+_/, "").replace(/^_+/, "");
+  const readableSlug = slugify(readable);
+
+  let base =
+    readableSlug && readableSlug.length > 2 && !/^_+$/.test(readable)
+      ? readableSlug.slice(0, 60)
+      : hash || slugify(stem.replace(/^_+/, "")) || slugify(stem);
+
+  if (!base) {
+    base = hash || `legacy-${slugify(stem).slice(0, 40)}`;
+  }
+
+  let assetId = base.slice(0, 80);
+  if (usedIds.has(assetId)) {
+    const suffix = hash || slugify(stem).slice(-12) || "dup";
+    assetId = `${base.slice(0, 72)}-${suffix}`.replace(/-+/g, "-").replace(/^-|-$/g, "");
+  }
+
+  usedIds.add(assetId);
+  return assetId;
 }
 
 function legacyToNameEn(filename) {
-  return filename
-    .replace(/\.[a-z0-9]+$/i, "")
+  const stem = filename.replace(/\.[a-z0-9]+$/i, "");
+  const hash = hashSuffix(stem);
+  const name = stem
     .replace(/_[a-f0-9]{6,}$/i, "")
     .replace(/^\d+_/, "")
+    .replace(/^_+/, "")
     .replace(/[_-]+/g, " ")
     .replace(/\s+/g, " ")
     .trim();
+
+  return name || (hash ? `Legacy ${hash}` : stem.replace(/[_-]+/g, " ").trim());
 }
 
 function galleryIdToNameEn(id) {
@@ -58,11 +82,12 @@ function galleryIdToNameEn(id) {
 
 /** @type {Record<string, { assetId: string; nameEn: string; legacyFile: string; tripId?: string }>} */
 const map = {};
+const usedAssetIds = new Set();
 
 function remember(legacyFile, nameEn, tripId) {
   if (!legacyFile || map[legacyFile]) return;
   map[legacyFile] = {
-    assetId: legacyToAssetId(legacyFile),
+    assetId: legacyToAssetId(legacyFile, usedAssetIds),
     nameEn: nameEn || legacyToNameEn(legacyFile),
     legacyFile,
     ...(tripId ? { tripId } : {}),
