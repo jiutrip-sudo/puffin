@@ -43,3 +43,6 @@ next-env.d.ts
 # pricing sync snapshots (local dev)
 .data/
 .neon
+
+# pexels → r2 sync output (local)
+/media-outbox/

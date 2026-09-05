@@ -1,3 +1,4 @@
+import { applyTripPackageMedia } from "@/lib/media/resolve";
 import type { TripPackage } from "./types";
 import { icelandSelfDriveWinter4 } from "./iceland-self-drive-winter-4";
 import { icelandSelfDriveSummer4 } from "./iceland-self-drive-summer-4";
@@ -90,14 +91,18 @@ const PACKAGES: Record<string, TripPackage> = {
   [icelandGroupWinter10NonRing.tripKey]: icelandGroupWinter10NonRing,
 };
 
+function withMedia(pkg: TripPackage | undefined): TripPackage | undefined {
+  return pkg ? applyTripPackageMedia(pkg) : undefined;
+}
+
 export function getTripPackageByPackageId(packageId: string): TripPackage | undefined {
-  return Object.values(PACKAGES).find((pkg) => pkg.id === packageId);
+  return withMedia(Object.values(PACKAGES).find((pkg) => pkg.id === packageId));
 }
 
 export function getTripPackage(tripKey: string): TripPackage | undefined {
-  return PACKAGES[tripKey];
+  return withMedia(PACKAGES[tripKey]);
 }
 
 export function getAllTripPackages(): TripPackage[] {
-  return Object.values(PACKAGES);
+  return Object.values(PACKAGES).map((pkg) => applyTripPackageMedia(pkg));
 }

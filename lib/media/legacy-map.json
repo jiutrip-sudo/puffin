@@ -1,0 +1,1857 @@
+{
+  "Akureyrarkirkja1_cc98890fac.jpg": {
+    "slug": "akureyrarkirkja",
+    "variant": "cover",
+    "nameEn": "Akureyrarkirkja"
+  },
+  "Akureyrarkirkja2_c04b67b4d9.jpg": {
+    "slug": "akureyrarkirkja",
+    "variant": "gallery-1",
+    "nameEn": "Akureyrarkirkja"
+  },
+  "akureyri_church_0c573033db.jpg": {
+    "slug": "akureyrarkirkja",
+    "variant": "gallery-2",
+    "nameEn": "Akureyrarkirkja"
+  },
+  "Akureyri_Botanical_Garden1_a3aab84a71.jpg": {
+    "slug": "akureyri-botanical-garden",
+    "variant": "cover",
+    "nameEn": "Akureyri Botanical Garden"
+  },
+  "Akureyri_Botanical_Garden2_75fb797df6.jpg": {
+    "slug": "akureyri-botanical-garden",
+    "variant": "gallery-1",
+    "nameEn": "Akureyri Botanical Garden"
+  },
+  "Akureyri_Botanical_Garden3_67f0afc285.jpg": {
+    "slug": "akureyri-botanical-garden",
+    "variant": "gallery-2",
+    "nameEn": "Akureyri Botanical Garden"
+  },
+  "akureyri2_4315b5a769.jpg": {
+    "slug": "akureyri",
+    "variant": "cover",
+    "nameEn": "Akureyri"
+  },
+  "akureyri1_3578767475.jpg": {
+    "slug": "akureyri",
+    "variant": "gallery-1",
+    "nameEn": "Akureyri"
+  },
+  "akureyri3_ee2c50a339.jpg": {
+    "slug": "akureyri",
+    "variant": "gallery-2",
+    "nameEn": "Akureyri"
+  },
+  "Arnarstapi1_d87729c2b9.jpg": {
+    "slug": "arnarstapi",
+    "variant": "cover",
+    "nameEn": "Arnarstapi"
+  },
+  "Arnarstapi3_1279cde8e4.jpg": {
+    "slug": "arnarstapi",
+    "variant": "gallery-1",
+    "nameEn": "Arnarstapi"
+  },
+  "Arnarstapi2_45e11a63e9.jpg": {
+    "slug": "arnarstapi",
+    "variant": "gallery-2",
+    "nameEn": "Arnarstapi"
+  },
+  "2_724f80a9ac.jpg": {
+    "slug": "aurora-boat-tour",
+    "variant": "cover",
+    "nameEn": "Northern Lights by Boat"
+  },
+  "2_d3d522c3ff.jpg": {
+    "slug": "aurora-boat-tour",
+    "variant": "gallery-1",
+    "nameEn": "Northern Lights by Boat"
+  },
+  "MINI_22daeef80a.png": {
+    "slug": "aurora-mini-bus",
+    "variant": "cover",
+    "nameEn": "Northern Lights MINI Bus Tour"
+  },
+  "aurora_borealis_2173702_1920_17e8f5ee5e.jpg": {
+    "slug": "aurora-mini-bus",
+    "variant": "gallery-1",
+    "nameEn": "Northern Lights MINI Bus Tour"
+  },
+  "5_f4643ac461.jpg": {
+    "slug": "aurora-premium-minibus",
+    "variant": "cover",
+    "nameEn": "Premium Northern Lights Minibus"
+  },
+  "1_2_25ff42627e.jpg": {
+    "slug": "aurora-premium-minibus",
+    "variant": "gallery-1",
+    "nameEn": "Premium Northern Lights Minibus"
+  },
+  "_1a983ab81d.png": {
+    "slug": "aurora-super-jeep",
+    "variant": "cover",
+    "nameEn": "Northern Lights Super Jeep Tour"
+  },
+  "aurora_borealis_2173565_1920_de68ee72d3.jpg": {
+    "slug": "aurora-super-jeep",
+    "variant": "gallery-1",
+    "nameEn": "Northern Lights Super Jeep Tour"
+  },
+  "Baejarins_Beztu_Pylsur_Hot_Dog_Stand_daytime_af672dfcf3.jpg": {
+    "slug": "baejarins-beztu",
+    "variant": "cover",
+    "nameEn": "Bæjarins Beztu Pylsur"
+  },
+  "Baejarins_Beztu_Pylsur_Hot_Dog_Stand_nighttime_672d502cbd.jpg": {
+    "slug": "baejarins-beztu",
+    "variant": "gallery-1",
+    "nameEn": "Bæjarins Beztu Pylsur"
+  },
+  "Baejarins_Beztu_Pylsur_Hot_Dog_Stand_with_long_queue_eb57d0a625.jpg": {
+    "slug": "baejarins-beztu",
+    "variant": "gallery-2",
+    "nameEn": "Bæjarins Beztu Pylsur"
+  },
+  "People_at_Baejarins_Beztu_Pylsur_Hot_Dog_Stand_8cff4cf4eb.jpg": {
+    "slug": "baejarins-beztu",
+    "variant": "gallery-3",
+    "nameEn": "Bæjarins Beztu Pylsur"
+  },
+  "barnafoss_west_iceland_3b18a3043e.jpg": {
+    "slug": "barnafoss",
+    "variant": "cover",
+    "nameEn": "Barnafossar"
+  },
+  "beer_spa_16c4293db2.jpg": {
+    "slug": "beer-spa",
+    "variant": "cover",
+    "nameEn": "Bjórböðin Beer Spa"
+  },
+  "beer_spa3_f9d429e8ba.jpg": {
+    "slug": "beer-spa",
+    "variant": "gallery-1",
+    "nameEn": "Bjórböðin Beer Spa"
+  },
+  "blonduos1_a16d82a167.jpg": {
+    "slug": "blonduos",
+    "variant": "cover",
+    "nameEn": "Blönduós"
+  },
+  "blue_lagoon_re6_776ecba9d9.png": {
+    "slug": "blue-lagoon-comfort-transfer",
+    "variant": "cover",
+    "nameEn": "Blue Lagoon Comfort with Transfer"
+  },
+  "blue_lagoon_re2_3ca7423c18.png": {
+    "slug": "blue-lagoon-comfort-transfer",
+    "variant": "gallery-1",
+    "nameEn": "Blue Lagoon Comfort with Transfer"
+  },
+  "2_2_3fe1e87828.jpg": {
+    "slug": "blue-lagoon-comfort",
+    "variant": "cover",
+    "nameEn": "Blue Lagoon Comfort"
+  },
+  "BLUE_LAGOON_2f31e94cb2.jpg": {
+    "slug": "blue-lagoon-comfort",
+    "variant": "gallery-1",
+    "nameEn": "Blue Lagoon Comfort"
+  },
+  "bluelagoon2_03f4fe484e.jpg": {
+    "slug": "blue-lagoon",
+    "variant": "cover",
+    "nameEn": "Blue Lagoon"
+  },
+  "bluelagoon1_3cc32fcacd.jpg": {
+    "slug": "blue-lagoon",
+    "variant": "gallery-1",
+    "nameEn": "Blue Lagoon"
+  },
+  "borgarnes1_e7534aec68.jpg": {
+    "slug": "borgarnes",
+    "variant": "cover",
+    "nameEn": "Borgarnes"
+  },
+  "borgarnes2_180383958c.jpg": {
+    "slug": "borgarnes",
+    "variant": "gallery-1",
+    "nameEn": "Borgarnes"
+  },
+  "borgarnes3_6b46debad5.jpg": {
+    "slug": "borgarnes",
+    "variant": "gallery-2",
+    "nameEn": "Borgarnes"
+  },
+  "Budakirkja3_743b89f7a2.jpg": {
+    "slug": "budakirkja",
+    "variant": "cover",
+    "nameEn": "Búðakirkja"
+  },
+  "Budakirkja1_910d19313e.jpg": {
+    "slug": "budakirkja",
+    "variant": "gallery-1",
+    "nameEn": "Búðakirkja"
+  },
+  "Budakirkja2_9a606719cd.jpg": {
+    "slug": "budakirkja",
+    "variant": "gallery-2",
+    "nameEn": "Búðakirkja"
+  },
+  "crystal_ice_cave1_d570272984.jpg": {
+    "slug": "crystal-ice-cave",
+    "variant": "cover",
+    "nameEn": "Crystal Ice Cave Adventure"
+  },
+  "crystal_ice_cave2_13a7c81950.jpg": {
+    "slug": "crystal-ice-cave",
+    "variant": "gallery-1",
+    "nameEn": "Crystal Ice Cave Adventure"
+  },
+  "crystal_ice_cave3_d00e366be0.jpg": {
+    "slug": "crystal-ice-cave",
+    "variant": "gallery-2",
+    "nameEn": "Crystal Ice Cave Adventure"
+  },
+  "Dalvik1_a8b4f5d641.jpg": {
+    "slug": "dalvik",
+    "variant": "cover",
+    "nameEn": "Dalvík"
+  },
+  "Dalvik3_48020d168c.jpg": {
+    "slug": "dalvik",
+    "variant": "gallery-1",
+    "nameEn": "Dalvík"
+  },
+  "Dalvik2_634a2418d7.jpg": {
+    "slug": "dalvik",
+    "variant": "gallery-2",
+    "nameEn": "Dalvík"
+  },
+  "Dalvik_d6a76bc66f.jpg": {
+    "slug": "dalvik",
+    "variant": "gallery-3",
+    "nameEn": "Dalvík"
+  },
+  "Deildartunguhver1_b06c7944aa.jpg": {
+    "slug": "deildartunguhver",
+    "variant": "cover",
+    "nameEn": "Deildartunguhver"
+  },
+  "dettifoss2_45da311b3a.jpg": {
+    "slug": "dettifoss",
+    "variant": "cover",
+    "nameEn": "Dettifoss"
+  },
+  "dettifoss1_9ceaad5480.jpg": {
+    "slug": "dettifoss",
+    "variant": "gallery-1",
+    "nameEn": "Dettifoss"
+  },
+  "dettifoss3_70d08e045f.jpg": {
+    "slug": "dettifoss",
+    "variant": "gallery-2",
+    "nameEn": "Dettifoss"
+  },
+  "diamond_beach_unsplash_11020ebd2f.jpg": {
+    "slug": "diamond-beach",
+    "variant": "cover",
+    "nameEn": "The Diamond Beach"
+  },
+  "diamond_beach_unsplash2_8710988286.jpg": {
+    "slug": "diamond-beach",
+    "variant": "gallery-1",
+    "nameEn": "The Diamond Beach"
+  },
+  "Dimmuborgir1_fb065fc970.jpg": {
+    "slug": "dimmuborgir",
+    "variant": "cover",
+    "nameEn": "Dimmuborgir"
+  },
+  "Dimmuborgir2_66eb5381ee.jpg": {
+    "slug": "dimmuborgir",
+    "variant": "gallery-1",
+    "nameEn": "Dimmuborgir"
+  },
+  "Djupalonssandur1_ce82259896.jpg": {
+    "slug": "djupalonssandur",
+    "variant": "cover",
+    "nameEn": "Djúpalónssandur"
+  },
+  "Djupalonssandur2_df91514864.jpg": {
+    "slug": "djupalonssandur",
+    "variant": "gallery-1",
+    "nameEn": "Djúpalónssandur"
+  },
+  "Djupalonssandur3_d0462b9152.jpg": {
+    "slug": "djupalonssandur",
+    "variant": "gallery-2",
+    "nameEn": "Djúpalónssandur"
+  },
+  "andy_wang_L5x_Z94_F_Su_o_unsplash_e1c50ee4b1.jpg": {
+    "slug": "djupivogur",
+    "variant": "cover",
+    "nameEn": "Djúpivogur"
+  },
+  "cosmic_timetraveler_s_O_Pb_Er1ym3k_unsplash_b0c8e6561a.jpg": {
+    "slug": "djupivogur",
+    "variant": "gallery-1",
+    "nameEn": "Djúpivogur"
+  },
+  "andy_wang_4_Tmh57l_Izk_unsplash_e886cbfbb5.jpg": {
+    "slug": "djupivogur",
+    "variant": "gallery-2",
+    "nameEn": "Djúpivogur"
+  },
+  "Dverghamrar1_b78698a5f6.jpg": {
+    "slug": "dverghamrar",
+    "variant": "cover",
+    "nameEn": "Dverghamrar"
+  },
+  "Dverghamrar2_f1195f2321.jpg": {
+    "slug": "dverghamrar",
+    "variant": "gallery-1",
+    "nameEn": "Dverghamrar"
+  },
+  "Dverghamrar3_visit_e2ed91983f.jpg": {
+    "slug": "dverghamrar",
+    "variant": "gallery-2",
+    "nameEn": "Dverghamrar"
+  },
+  "Dyrholaey1_38349f5b51.jpg": {
+    "slug": "dyrholaey",
+    "variant": "cover",
+    "nameEn": "Dyrhólaey"
+  },
+  "Dyrholaey2_d75d7fa72b.jpg": {
+    "slug": "dyrholaey",
+    "variant": "gallery-1",
+    "nameEn": "Dyrhólaey"
+  },
+  "Dyrholaey3_559b79fe53.jpg": {
+    "slug": "dyrholaey",
+    "variant": "gallery-2",
+    "nameEn": "Dyrhólaey"
+  },
+  "egilsstadir1_4cef6ca33c.jpg": {
+    "slug": "egilsstadir",
+    "variant": "cover",
+    "nameEn": "Egilsstaðir"
+  },
+  "egilsstadir_ito_11572a4a84.jpg": {
+    "slug": "egilsstadir",
+    "variant": "gallery-1",
+    "nameEn": "Egilsstaðir"
+  },
+  "Austurbru_Pall_Gudmundur_Egilsstadir_DJI_0142_2850a41506.jpg": {
+    "slug": "egilsstadir",
+    "variant": "gallery-2",
+    "nameEn": "Egilsstaðir"
+  },
+  "Eldhraun1_2b993446c2.jpg": {
+    "slug": "eldhraun",
+    "variant": "cover",
+    "nameEn": "Eldhraun"
+  },
+  "Eldhraun3_474479cd54.jpg": {
+    "slug": "eldhraun",
+    "variant": "gallery-1",
+    "nameEn": "Eldhraun"
+  },
+  "Eldhraun2_55b88ff698.jpg": {
+    "slug": "eldhraun",
+    "variant": "gallery-2",
+    "nameEn": "Eldhraun"
+  },
+  "Faskrudsfjoerdur1_c0c54b64c5.jpg": {
+    "slug": "faskrudsfjordur",
+    "variant": "cover",
+    "nameEn": "Fáskrúðsfjörður"
+  },
+  "Faskrudsfjoerdur2_753d700b34.jpg": {
+    "slug": "faskrudsfjordur",
+    "variant": "gallery-1",
+    "nameEn": "Fáskrúðsfjörður"
+  },
+  "Faskrudsfjoerdur3_a45d237a7f.jpg": {
+    "slug": "faskrudsfjordur",
+    "variant": "gallery-2",
+    "nameEn": "Fáskrúðsfjörður"
+  },
+  "Fjadrargljufur1_1391949e75.jpg": {
+    "slug": "fjadrargljufur",
+    "variant": "cover",
+    "nameEn": "Fjaðrárgljúfur"
+  },
+  "Fjadrargljufur2_026e6e2dcc.jpg": {
+    "slug": "fjadrargljufur",
+    "variant": "gallery-1",
+    "nameEn": "Fjaðrárgljúfur"
+  },
+  "Fjadrargljufur3_2155e6b135.jpg": {
+    "slug": "fjadrargljufur",
+    "variant": "gallery-2",
+    "nameEn": "Fjaðrárgljúfur"
+  },
+  "Fjallsarlon_Boat_Tour_Classic_2b091d79e1.png": {
+    "slug": "fjallsarlon-boat",
+    "variant": "cover",
+    "nameEn": "Fjallsárlón Classic Boat Tour"
+  },
+  "5_Fjallsarlon_Iceberg_Boat_Tours_glacier_lagoon_7_8e2b806b60.jpg": {
+    "slug": "fjallsarlon-boat",
+    "variant": "gallery-1",
+    "nameEn": "Fjallsárlón Classic Boat Tour"
+  },
+  "1_Fjallsarlon_Iceberg_Boat_Tours_glacier_lagoon_1_435265ceb2.jpg": {
+    "slug": "fjallsarlon",
+    "variant": "cover",
+    "nameEn": "Fjallsárlón"
+  },
+  "Fjallsarlon1_6087fe43ca.jpg": {
+    "slug": "fjallsarlon",
+    "variant": "gallery-1",
+    "nameEn": "Fjallsárlón"
+  },
+  "Fjallsarlon2_d0ce2eabaa.jpg": {
+    "slug": "fjallsarlon",
+    "variant": "gallery-2",
+    "nameEn": "Fjallsárlón"
+  },
+  "flyover_iceland_cover_59d7c22b26.png": {
+    "slug": "flyover-iceland",
+    "variant": "cover",
+    "nameEn": "FlyOver Iceland"
+  },
+  "flyover5_9e879a69cd.jpg": {
+    "slug": "flyover-iceland",
+    "variant": "gallery-1",
+    "nameEn": "FlyOver Iceland"
+  },
+  "fontana_3a6aea54af.png": {
+    "slug": "fontana",
+    "variant": "cover",
+    "nameEn": "Fontana Geothermal Baths"
+  },
+  "laugarvatn_fontana_drone_image_770df3d016_e80aa341ca.jpg": {
+    "slug": "fontana",
+    "variant": "gallery-1",
+    "nameEn": "Fontana Geothermal Baths"
+  },
+  "forest_lagoon_55786562e0.webp": {
+    "slug": "forest-lagoon",
+    "variant": "cover",
+    "nameEn": "Forest Lagoon"
+  },
+  "1_c59bc357d9.jpg": {
+    "slug": "forest-lagoon",
+    "variant": "gallery-1",
+    "nameEn": "Forest Lagoon"
+  },
+  "Foss_a_Sidu_southis_0350e3089a.jpg": {
+    "slug": "foss-a-sidu",
+    "variant": "cover",
+    "nameEn": "Foss á Síðu"
+  },
+  "Foss_a_Sidu_ins_824fba129f.jpg": {
+    "slug": "foss-a-sidu",
+    "variant": "gallery-1",
+    "nameEn": "Foss á Síðu"
+  },
+  "Fridheimar2_d71535f8dd.jpg": {
+    "slug": "fridheimar",
+    "variant": "cover",
+    "nameEn": "Friðheimar"
+  },
+  "Fridheimar1_48768273b3.jpg": {
+    "slug": "fridheimar",
+    "variant": "gallery-1",
+    "nameEn": "Friðheimar"
+  },
+  "Geosea_6705414f40.png": {
+    "slug": "geosea",
+    "variant": "cover",
+    "nameEn": "Geosea Geothermal Sea Baths"
+  },
+  "geosea_d7502be931.jpg": {
+    "slug": "geosea",
+    "variant": "gallery-1",
+    "nameEn": "Geosea Geothermal Sea Baths"
+  },
+  "3c_4_13fcb3c1c1.jpg": {
+    "slug": "geothermal-horse-riding",
+    "variant": "cover",
+    "nameEn": "Geothermal Area Horse Riding"
+  },
+  "be5ba64f349aa795f653231dac5e44a_fa8600600a.jpg": {
+    "slug": "geysir",
+    "variant": "cover",
+    "nameEn": "The Great Geysir and Strokkur"
+  },
+  "geysir_unsplash_83e7e7b45e.jpg": {
+    "slug": "geysir",
+    "variant": "gallery-1",
+    "nameEn": "The Great Geysir and Strokkur"
+  },
+  "geysir_unsplash2_dd17e22e52.jpg": {
+    "slug": "geysir",
+    "variant": "gallery-2",
+    "nameEn": "The Great Geysir and Strokkur"
+  },
+  "geysir_unsplash3_82d9f4f9ea.jpg": {
+    "slug": "golden-circle",
+    "variant": "gallery-2",
+    "nameEn": "Golden Circle"
+  },
+  "Glanni_Waterfall2_7bcc1494c2.jpg": {
+    "slug": "glanni",
+    "variant": "cover",
+    "nameEn": "Glanni Waterfall"
+  },
+  "Glanni_Waterfall1_ee86f804dd.jpg": {
+    "slug": "glanni",
+    "variant": "gallery-1",
+    "nameEn": "Glanni Waterfall"
+  },
+  "Gljufrabui2_b243f65773.jpg": {
+    "slug": "gljufabui",
+    "variant": "cover",
+    "nameEn": "Gljúfrabúi"
+  },
+  "Gljufrabui1_c9a6989051.jpg": {
+    "slug": "gljufabui",
+    "variant": "gallery-1",
+    "nameEn": "Gljúfrabúi"
+  },
+  "godafoss3_54ff933f33.jpg": {
+    "slug": "godafoss",
+    "variant": "cover",
+    "nameEn": "Goðafoss"
+  },
+  "godafoss2_004851286a.jpg": {
+    "slug": "godafoss",
+    "variant": "gallery-1",
+    "nameEn": "Goðafoss"
+  },
+  "godafoss1_423882b152.jpg": {
+    "slug": "godafoss",
+    "variant": "gallery-2",
+    "nameEn": "Goðafoss"
+  },
+  "golden_circle1_b2e6f91bdb.jpg": {
+    "slug": "golden-circle",
+    "variant": "cover",
+    "nameEn": "Golden Circle"
+  },
+  "z3rd_03dd6ce7bf.jpg": {
+    "slug": "golden-circle",
+    "variant": "gallery-1",
+    "nameEn": "Golden Circle"
+  },
+  "jan_brennenstuhl_i_Jyw_d_Mcs_VE_unsplash_950b4250f1.jpg": {
+    "slug": "golden-circle",
+    "variant": "gallery-3",
+    "nameEn": "Golden Circle"
+  },
+  "grjotagja2_2363306704.jpg": {
+    "slug": "grjotagja",
+    "variant": "cover",
+    "nameEn": "Grjótagjá"
+  },
+  "grjotagja1_f0528e853e.jpg": {
+    "slug": "grjotagja",
+    "variant": "gallery-1",
+    "nameEn": "Grjótagjá"
+  },
+  "gullfoss1_9c5319c04c.jpg": {
+    "slug": "gullfoss",
+    "variant": "cover",
+    "nameEn": "Gullfoss"
+  },
+  "gullfoss2_4aa3699337.jpg": {
+    "slug": "gullfoss",
+    "variant": "gallery-1",
+    "nameEn": "Gullfoss"
+  },
+  "gullfoss3_62d8e5e998.jpg": {
+    "slug": "gullfoss",
+    "variant": "gallery-2",
+    "nameEn": "Gullfoss"
+  },
+  "3_H6_A4726_db03df2882.jpg": {
+    "slug": "hallgrimskirkja",
+    "variant": "cover",
+    "nameEn": "Hallgrímskirkja"
+  },
+  "Hallgrimskirkja_and_statue_7708039358.jpg": {
+    "slug": "hallgrimskirkja",
+    "variant": "gallery-1",
+    "nameEn": "Hallgrímskirkja"
+  },
+  "Hallgrimskirkja_Church_Reykjavik_Iceland_1_8756f217e7.jpg": {
+    "slug": "hallgrimskirkja",
+    "variant": "gallery-2",
+    "nameEn": "Hallgrímskirkja"
+  },
+  "Hallgrimskirkja_Church_1_905b7555be.jpg": {
+    "slug": "hallgrimskirkja",
+    "variant": "gallery-3",
+    "nameEn": "Hallgrímskirkja"
+  },
+  "Hallgrimskirkja_Interior_acd42f66b0.jpg": {
+    "slug": "hallgrimskirkja",
+    "variant": "gallery-4",
+    "nameEn": "Hallgrímskirkja"
+  },
+  "Harpa_Exterior_765d2cad4e.jpg": {
+    "slug": "harpa",
+    "variant": "cover",
+    "nameEn": "Harpa"
+  },
+  "Harpa_Reflection_Sunset_d5679e30b9.jpg": {
+    "slug": "old-harbour",
+    "variant": "cover",
+    "nameEn": "Reykjavík Old Harbour"
+  },
+  "Harpa_Concert_Hall_and_Ferry_66cf578f72.jpg": {
+    "slug": "harpa",
+    "variant": "gallery-2",
+    "nameEn": "Harpa"
+  },
+  "Harpa_and_Statue_ea54cb28e1.jpg": {
+    "slug": "harpa",
+    "variant": "gallery-3",
+    "nameEn": "Harpa"
+  },
+  "hauganes_whale_watching1_f132c3a412.jpg": {
+    "slug": "hauganes-whale-fishing",
+    "variant": "cover",
+    "nameEn": "Hauganes Whale Watching & Sea Angling"
+  },
+  "hauganes_whale_watching2_c98f4e3e26.jpg": {
+    "slug": "hauganes-whale-fishing",
+    "variant": "gallery-1",
+    "nameEn": "Hauganes Whale Watching & Sea Angling"
+  },
+  "Hauganes1_70c88f9e6b.jpg": {
+    "slug": "hauganes",
+    "variant": "cover",
+    "nameEn": "Hauganes"
+  },
+  "Hauganes2_0a76d34b99.jpg": {
+    "slug": "hauganes",
+    "variant": "gallery-1",
+    "nameEn": "Hauganes"
+  },
+  "Hauganes_whale_watching_8d58058bbe.jpg": {
+    "slug": "hauganes",
+    "variant": "gallery-2",
+    "nameEn": "Hauganes"
+  },
+  "hella_unsplash1_9d8987892f.jpg": {
+    "slug": "hella",
+    "variant": "cover",
+    "nameEn": "Hella"
+  },
+  "hella2_147b20cd30.jpg": {
+    "slug": "hella",
+    "variant": "gallery-1",
+    "nameEn": "Hella"
+  },
+  "hofn3_3b1e58b24e.jpg": {
+    "slug": "hofn",
+    "variant": "cover",
+    "nameEn": "Höfn"
+  },
+  "hofn2_db5c2826b6.jpg": {
+    "slug": "hofn",
+    "variant": "gallery-1",
+    "nameEn": "Höfn"
+  },
+  "hofn1_50d523e0a3.jpg": {
+    "slug": "hofn",
+    "variant": "gallery-2",
+    "nameEn": "Höfn"
+  },
+  "3_H6_A7791_4395de2b82.jpg": {
+    "slug": "hraunfossar",
+    "variant": "cover",
+    "nameEn": "Hraunfossar"
+  },
+  "hraunfossar1_f201d71a46.webp": {
+    "slug": "hraunfossar",
+    "variant": "gallery-1",
+    "nameEn": "Hraunfossar"
+  },
+  "hraunfossar2_456cb6e815.jpg": {
+    "slug": "hraunfossar",
+    "variant": "gallery-2",
+    "nameEn": "Hraunfossar"
+  },
+  "DJI_0927_b298ae6a19.jpg": {
+    "slug": "hraunfossar",
+    "variant": "gallery-3",
+    "nameEn": "Hraunfossar"
+  },
+  "husavik_traditional_whale_watching_2_a7b91e5f12.png": {
+    "slug": "husavik-whale-watching",
+    "variant": "cover",
+    "nameEn": "Húsavík Classic Whale Watching"
+  },
+  "iceland_3851089_1280_601a5f7583.jpg": {
+    "slug": "reykjavik-whale-watching",
+    "variant": "gallery-1",
+    "nameEn": "Reykjavík Whale Watching"
+  },
+  "husavik1_d0f3b53186.jpg": {
+    "slug": "husavik",
+    "variant": "cover",
+    "nameEn": "Húsavík"
+  },
+  "husavik2_d180e46836.jpg": {
+    "slug": "husavik",
+    "variant": "gallery-1",
+    "nameEn": "Húsavík"
+  },
+  "husavik3_b070e32e0d.jpg": {
+    "slug": "husavik",
+    "variant": "gallery-2",
+    "nameEn": "Húsavík"
+  },
+  "hvmmstangi1_8ae4659046.jpg": {
+    "slug": "hvammstangi",
+    "variant": "cover",
+    "nameEn": "Hvammstangi"
+  },
+  "hvmmstangi2_6140f6e180.jpg": {
+    "slug": "hvammstangi",
+    "variant": "gallery-1",
+    "nameEn": "Hvammstangi"
+  },
+  "hvammsvik3_bd62acec28.png": {
+    "slug": "hvammsvik-ticket",
+    "variant": "cover",
+    "nameEn": "Hvammsvík Hot Springs Admission"
+  },
+  "DJI_0501_7f2b0d2bf6.jpg": {
+    "slug": "hvammsvik-ticket",
+    "variant": "gallery-1",
+    "nameEn": "Hvammsvík Hot Springs Admission"
+  },
+  "Hvammsvik_hot_spring_25b328571c.png": {
+    "slug": "hvammsvik-transfer",
+    "variant": "cover",
+    "nameEn": "Hvammsvík Hot Springs (with transfer)"
+  },
+  "Hvammsvik8_0e82bd448c.jpg": {
+    "slug": "hvammsvik-transfer",
+    "variant": "gallery-1",
+    "nameEn": "Hvammsvík Hot Springs (with transfer)"
+  },
+  "hvammsvik1_westiceland_9962a9b5e7.webp": {
+    "slug": "hvammsvik",
+    "variant": "cover",
+    "nameEn": "Hvammsvík Hot Springs"
+  },
+  "hvammsvik2_westiceland_fe0d49cccc.webp": {
+    "slug": "hvammsvik",
+    "variant": "gallery-1",
+    "nameEn": "Hvammsvík Hot Springs"
+  },
+  "hvammsvik2_3418be19dc.webp": {
+    "slug": "hvammsvik",
+    "variant": "gallery-2",
+    "nameEn": "Hvammsvík Hot Springs"
+  },
+  "hvammsvik1_41295ebdee.webp": {
+    "slug": "hvammsvik",
+    "variant": "gallery-3",
+    "nameEn": "Hvammsvík Hot Springs"
+  },
+  "horse_riding_c4f3750de2.png": {
+    "slug": "hveragerdi-horse-riding",
+    "variant": "cover",
+    "nameEn": "Hveragerði Horse Riding"
+  },
+  "horse_riding_ea5209e6fc.png": {
+    "slug": "hveragerdi-horse-riding",
+    "variant": "gallery-1",
+    "nameEn": "Hveragerði Horse Riding"
+  },
+  "hvitserkur3_11e1b81699.jpg": {
+    "slug": "hvitserkur",
+    "variant": "cover",
+    "nameEn": "Hvítserkur"
+  },
+  "hvitserkur1_07264cd005.jpg": {
+    "slug": "hvitserkur",
+    "variant": "gallery-1",
+    "nameEn": "Hvítserkur"
+  },
+  "hvitserkur2_8066093684.jpg": {
+    "slug": "hvitserkur",
+    "variant": "gallery-2",
+    "nameEn": "Hvítserkur"
+  },
+  "Benjamin_Hardman_Inside_the_Volcano_5c4549e563.jpg": {
+    "slug": "inside-volcano",
+    "variant": "cover",
+    "nameEn": "Inside the Volcano"
+  },
+  "inside_the_volcano_by_bicnick_105c479b81.jpg": {
+    "slug": "inside-volcano",
+    "variant": "gallery-1",
+    "nameEn": "Inside the Volcano"
+  },
+  "The_Cave_Vidgelmir_5_db28443a4e.jpg": {
+    "slug": "inside-volcano",
+    "variant": "gallery-2",
+    "nameEn": "Inside the Volcano"
+  },
+  "The_Cave_Vidgelmir_4_0609c7781c.jpg": {
+    "slug": "inside-volcano",
+    "variant": "gallery-3",
+    "nameEn": "Inside the Volcano"
+  },
+  "isafjordur3_8d7dfb78f3.jpg": {
+    "slug": "isafjordur",
+    "variant": "cover",
+    "nameEn": "Ísafjörður"
+  },
+  "isafjordur1_5214e23485.jpg": {
+    "slug": "isafjordur",
+    "variant": "gallery-1",
+    "nameEn": "Ísafjörður"
+  },
+  "isafjordur2_e38e94c73a.jpg": {
+    "slug": "isafjordur",
+    "variant": "gallery-2",
+    "nameEn": "Ísafjörður"
+  },
+  "Joekulsarlon_Boat_d66523c73b.png": {
+    "slug": "jokulsarlon-amphibian-boat",
+    "variant": "cover",
+    "nameEn": "Jökulsárlón Amphibian Boat Tour"
+  },
+  "3_3313617579.jpg": {
+    "slug": "jokulsarlon-amphibian-boat",
+    "variant": "gallery-1",
+    "nameEn": "Jökulsárlón Amphibian Boat Tour"
+  },
+  "kayaking1_89345632eb.jpg": {
+    "slug": "jokulsarlon-kayak",
+    "variant": "cover",
+    "nameEn": "Jökulsárlón Kayaking"
+  },
+  "kayaking_9412ffa392.jpg": {
+    "slug": "jokulsarlon-kayak",
+    "variant": "gallery-1",
+    "nameEn": "Jökulsárlón Kayaking"
+  },
+  "jokulsarlon_zodiac_boat_tour_potrait_8ef997e874.png": {
+    "slug": "jokulsarlon-zodiac-boat",
+    "variant": "cover",
+    "nameEn": "Jökulsárlón Zodiac Boat Tour"
+  },
+  "jokulsarlon_zodiac_boat_tour_4e3fd00550.webp": {
+    "slug": "jokulsarlon-zodiac-boat",
+    "variant": "gallery-1",
+    "nameEn": "Jökulsárlón Zodiac Boat Tour"
+  },
+  "DSC_00389_4_cadb104463.jpg": {
+    "slug": "jokulsarlon",
+    "variant": "cover",
+    "nameEn": "Jökulsárlón"
+  },
+  "jokulsarlon_unsplash4_afb37701fc.jpg": {
+    "slug": "jokulsarlon",
+    "variant": "gallery-1",
+    "nameEn": "Jökulsárlón"
+  },
+  "jokulsarlon_unsplash6_8247d88371.jpg": {
+    "slug": "jokulsarlon",
+    "variant": "gallery-2",
+    "nameEn": "Jökulsárlón"
+  },
+  "jokulsarlon_unsplash5_67dfcff32b.jpg": {
+    "slug": "jokulsarlon",
+    "variant": "gallery-3",
+    "nameEn": "Jökulsárlón"
+  },
+  "jokulsarlon_unsplash2_3ff49270dd.jpg": {
+    "slug": "jokulsarlon",
+    "variant": "gallery-4",
+    "nameEn": "Jökulsárlón"
+  },
+  "katlatrack_tours_Katla_1_c637acd217.jpg": {
+    "slug": "katla-ice-cave-transfer",
+    "variant": "cover",
+    "nameEn": "Katla Ice Cave with Transfer"
+  },
+  "man_and_woman_katla_ice_cave_iceland_c13ba13931.webp": {
+    "slug": "katla-ice-cave-transfer",
+    "variant": "gallery-1",
+    "nameEn": "Katla Ice Cave with Transfer"
+  },
+  "Katla_Ice_Cave_e029f3b2be.png": {
+    "slug": "katla-ice-cave",
+    "variant": "cover",
+    "nameEn": "Katla Ice Cave"
+  },
+  "katla_ice_cave_55d1ca5449.jpg": {
+    "slug": "katla-ice-cave",
+    "variant": "gallery-1",
+    "nameEn": "Katla Ice Cave"
+  },
+  "Keflavik_International_Airport_Terminal_26bb533082.jpg": {
+    "slug": "keflavik-airport",
+    "variant": "cover",
+    "nameEn": "Keflavik International Airport"
+  },
+  "Keflavik_International_Airport_Interior_f9a62f9a54.jpg": {
+    "slug": "keflavik-airport",
+    "variant": "gallery-1",
+    "nameEn": "Keflavik International Airport"
+  },
+  "Keflavik_International_Airport_Exterior_1fc4a5ba1c.jpg": {
+    "slug": "keflavik-airport",
+    "variant": "gallery-2",
+    "nameEn": "Keflavik International Airport"
+  },
+  "Rainbow_Installation_outside_Keflavik_International_Airport_4efa3c569c.jpg": {
+    "slug": "keflavik-airport",
+    "variant": "gallery-3",
+    "nameEn": "Keflavik International Airport"
+  },
+  "Airports_in_Iceland_Illustration_5efe013e97.png": {
+    "slug": "keflavik-airport",
+    "variant": "gallery-4",
+    "nameEn": "Keflavik International Airport"
+  },
+  "keflavik2_8787ff38e1.jpg": {
+    "slug": "keflavik",
+    "variant": "cover",
+    "nameEn": "Keflavík"
+  },
+  "keflavik1_caa2c46bb6.jpg": {
+    "slug": "keflavik",
+    "variant": "gallery-1",
+    "nameEn": "Keflavík"
+  },
+  "keflavik3_4b2b5391e2.jpg": {
+    "slug": "keflavik",
+    "variant": "gallery-2",
+    "nameEn": "Keflavík"
+  },
+  "kerid1_f15da5c881.jpg": {
+    "slug": "kerid",
+    "variant": "cover",
+    "nameEn": "Kerið Crater"
+  },
+  "kerid2_06a579efeb.jpg": {
+    "slug": "kerid",
+    "variant": "gallery-1",
+    "nameEn": "Kerið Crater"
+  },
+  "kerid3_467079c053.jpg": {
+    "slug": "kerid",
+    "variant": "gallery-2",
+    "nameEn": "Kerið Crater"
+  },
+  "Kerid_1a2aee2f66.jpg": {
+    "slug": "kerid",
+    "variant": "gallery-3",
+    "nameEn": "Kerið Crater"
+  },
+  "DJI_0443_30e25d42d6.jpg": {
+    "slug": "kirkjubaejarklaustur",
+    "variant": "cover",
+    "nameEn": "Kirkjubæjarklaustur"
+  },
+  "Kirkjubaejarklaustur1_59009a9dce.jpg": {
+    "slug": "kirkjubaejarklaustur",
+    "variant": "gallery-1",
+    "nameEn": "Kirkjubæjarklaustur"
+  },
+  "Kirkjubaejarklaustur2_4bb321bbab.jpg": {
+    "slug": "kirkjubaejarklaustur",
+    "variant": "gallery-2",
+    "nameEn": "Kirkjubæjarklaustur"
+  },
+  "kirkjufell1_b2a1018312.jpg": {
+    "slug": "kirkjufell",
+    "variant": "cover",
+    "nameEn": "Kirkjufell"
+  },
+  "kirkjufell2_26aae9d397.jpg": {
+    "slug": "kirkjufell",
+    "variant": "gallery-1",
+    "nameEn": "Kirkjufell"
+  },
+  "kirkjufell3_a34c5b3e82.jpg": {
+    "slug": "kirkjufell",
+    "variant": "gallery-2",
+    "nameEn": "Kirkjufell"
+  },
+  "koushik_chowdavarapu_JT_8_IW_Aaxp_Qk_unsplash_b8dd319dcb.jpg": {
+    "slug": "kirkjufellsfoss",
+    "variant": "cover",
+    "nameEn": "Kirkjufellsfoss"
+  },
+  "kirkjufellsfoss1_7c3ec6c488.jpg": {
+    "slug": "kirkjufellsfoss",
+    "variant": "gallery-1",
+    "nameEn": "Kirkjufellsfoss"
+  },
+  "kirkjufellsfoss2_0f8828f92c.jpg": {
+    "slug": "kirkjufellsfoss",
+    "variant": "gallery-2",
+    "nameEn": "Kirkjufellsfoss"
+  },
+  "krauma_cover_2e985853a2.png": {
+    "slug": "krauma",
+    "variant": "cover",
+    "nameEn": "Krauma Geothermal Baths"
+  },
+  "krauma3_faf0c79f67.jpg": {
+    "slug": "krauma",
+    "variant": "gallery-1",
+    "nameEn": "Krauma Geothermal Baths"
+  },
+  "Landmannalaugar_b44d770d8d.png": {
+    "slug": "landmannalaugar-day-tour",
+    "variant": "cover",
+    "nameEn": "Landmannalaugar Day Tour"
+  },
+  "Landmannalaugar_1_e271c2b668.jpg": {
+    "slug": "landmannalaugar-day-tour",
+    "variant": "gallery-1",
+    "nameEn": "Landmannalaugar Day Tour"
+  },
+  "landmannalaugar_unsplash3_2b2dc0fc79.jpg": {
+    "slug": "landmannalaugar",
+    "variant": "cover",
+    "nameEn": "Landmannalaugar"
+  },
+  "fernando_puente_GJYY_5_VZB_3c_unsplash_727770bf3b.jpg": {
+    "slug": "landmannalaugar",
+    "variant": "gallery-1",
+    "nameEn": "Landmannalaugar"
+  },
+  "jon_flobrant_t_Ssb28hz_ZSI_unsplash_c7b16cdc81.jpg": {
+    "slug": "landmannalaugar",
+    "variant": "gallery-2",
+    "nameEn": "Landmannalaugar"
+  },
+  "cover_72748b89c9.png": {
+    "slug": "langjokull-ice-tunnel-transfer",
+    "variant": "cover",
+    "nameEn": "Langjökull Ice Tunnel with Transfer"
+  },
+  "2_cac9f940a9.jpg": {
+    "slug": "langjokull-ice-tunnel-transfer",
+    "variant": "gallery-1",
+    "nameEn": "Langjökull Ice Tunnel with Transfer"
+  },
+  "1_72a1dd6a90.jpg": {
+    "slug": "langjokull-ice-tunnel",
+    "variant": "cover",
+    "nameEn": "Langjökull Ice Tunnel"
+  },
+  "_6e92b90c97.jpg": {
+    "slug": "langjokull-ice-tunnel",
+    "variant": "gallery-1",
+    "nameEn": "Langjökull Ice Tunnel"
+  },
+  "Latrabjarg3_6ba79e2bda.jpg": {
+    "slug": "latrabjarg",
+    "variant": "cover",
+    "nameEn": "Látrabjarg"
+  },
+  "Latrabjarg2_fb6f325176.jpg": {
+    "slug": "latrabjarg",
+    "variant": "gallery-1",
+    "nameEn": "Látrabjarg"
+  },
+  "Latrabjarg1_0a8fd35acc.jpg": {
+    "slug": "latrabjarg",
+    "variant": "gallery-2",
+    "nameEn": "Látrabjarg"
+  },
+  "laugaras_4f8325fe4c.png": {
+    "slug": "laugaras-lagoon",
+    "variant": "cover",
+    "nameEn": "Laugarás Lagoon Birki"
+  },
+  "laugaras_infinity_edge_013dc89554.jpg": {
+    "slug": "laugaras-lagoon",
+    "variant": "gallery-1",
+    "nameEn": "Laugarás Lagoon Birki"
+  },
+  "Colorful_street_view_of_Laugavegur_c7f18f046f.jpg": {
+    "slug": "laugavegur",
+    "variant": "cover",
+    "nameEn": "Laugavegur Street"
+  },
+  "Shops_on_Laugavegur_6b7902c6fc.jpg": {
+    "slug": "laugavegur",
+    "variant": "gallery-1",
+    "nameEn": "Laugavegur Street"
+  },
+  "Sunrise_in_Laugavegur_0255fdfdd7.jpg": {
+    "slug": "laugavegur",
+    "variant": "gallery-2",
+    "nameEn": "Laugavegur Street"
+  },
+  "vivid_graffiti_on_Laugavegur_1418332f75.jpg": {
+    "slug": "laugavegur",
+    "variant": "gallery-3",
+    "nameEn": "Laugavegur Street"
+  },
+  "icelandic_horse_ec951d0e80.png": {
+    "slug": "lava-field-horse-riding",
+    "variant": "cover",
+    "nameEn": "Lava Field Horse Riding"
+  },
+  "3_H6_A0284_51ed047d81.jpg": {
+    "slug": "lava-field-horse-riding",
+    "variant": "gallery-1",
+    "nameEn": "Lava Field Horse Riding"
+  },
+  "Londrangar1_5273647d5f.jpg": {
+    "slug": "londrangar",
+    "variant": "cover",
+    "nameEn": "Lóndrangar"
+  },
+  "Londrangar2_e99b544099.jpg": {
+    "slug": "londrangar",
+    "variant": "gallery-1",
+    "nameEn": "Lóndrangar"
+  },
+  "Londrangar3_f95bb93526.jpg": {
+    "slug": "londrangar",
+    "variant": "gallery-2",
+    "nameEn": "Lóndrangar"
+  },
+  "Myvatn_Geothermal_Area1_4b4bcb4149.jpg": {
+    "slug": "myvatn-geothermal",
+    "variant": "cover",
+    "nameEn": "Mývatn Geothermal Area"
+  },
+  "Myvatn_Geothermal_Area3_bd3aa3dbed.jpg": {
+    "slug": "myvatn-geothermal",
+    "variant": "gallery-1",
+    "nameEn": "Mývatn Geothermal Area"
+  },
+  "Myvatn_Geothermal_Area2_5844278012.jpg": {
+    "slug": "myvatn-geothermal",
+    "variant": "gallery-2",
+    "nameEn": "Mývatn Geothermal Area"
+  },
+  "myvant_949e057f28_48fd938e84.avif": {
+    "slug": "myvatn-nature-baths",
+    "variant": "cover",
+    "nameEn": "Mývatn Nature Baths"
+  },
+  "myvant_949e057f28.avif": {
+    "slug": "myvatn-nature-baths",
+    "variant": "gallery-1",
+    "nameEn": "Mývatn Nature Baths"
+  },
+  "myvatn2_c34ac89174.jpg": {
+    "slug": "myvatn",
+    "variant": "cover",
+    "nameEn": "Lake Mývatn"
+  },
+  "myvatn3_409d3572c2.jpg": {
+    "slug": "myvatn",
+    "variant": "gallery-1",
+    "nameEn": "Lake Mývatn"
+  },
+  "myvatn1_aeddb05db2.jpg": {
+    "slug": "myvatn",
+    "variant": "gallery-2",
+    "nameEn": "Lake Mývatn"
+  },
+  "namafjall1_3ac5a450e6.jpg": {
+    "slug": "namafjall",
+    "variant": "cover",
+    "nameEn": "Námafjall"
+  },
+  "namafjall2_9f30a871c7.jpg": {
+    "slug": "namafjall",
+    "variant": "gallery-1",
+    "nameEn": "Námafjall"
+  },
+  "T_Hufa_in_Old_Harbour_143bcccafb.jpg": {
+    "slug": "old-harbour",
+    "variant": "gallery-1",
+    "nameEn": "Reykjavík Old Harbour"
+  },
+  "reykjavik2_b97db08584.jpg": {
+    "slug": "sun-voyager",
+    "variant": "cover",
+    "nameEn": "Sun Voyager"
+  },
+  "Old_Harbour_Street_a78b64372d.jpg": {
+    "slug": "old-harbour",
+    "variant": "gallery-3",
+    "nameEn": "Reykjavík Old Harbour"
+  },
+  "Perlan_b834e5a735.jpg": {
+    "slug": "perlan-museum",
+    "variant": "cover",
+    "nameEn": "Perlan Museum"
+  },
+  "Perlan_3fa813d424.jpg": {
+    "slug": "perlan-museum",
+    "variant": "gallery-1",
+    "nameEn": "Perlan Museum"
+  },
+  "Icelandic_Phallological_Museum_Sign_205618002d.jpg": {
+    "slug": "phallological-museum",
+    "variant": "cover",
+    "nameEn": "Icelandic Phallological Museum"
+  },
+  "Icelandic_Phallological_Museum_Exterior_1f841ee2f3.jpg": {
+    "slug": "phallological-museum",
+    "variant": "gallery-1",
+    "nameEn": "Icelandic Phallological Museum"
+  },
+  "Iceland_National_Handball_Team_Penis_in_Icelandic_Phallological_Museum_3d0c12a1cc.jpg": {
+    "slug": "phallological-museum",
+    "variant": "gallery-2",
+    "nameEn": "Icelandic Phallological Museum"
+  },
+  "Icelandic_Phallological_Museum_Animal_Penises_a7d1fcd5af.jpg": {
+    "slug": "phallological-museum",
+    "variant": "gallery-3",
+    "nameEn": "Icelandic Phallological Museum"
+  },
+  "Icelandic_Phallological_Museum_Interior_c417967b1a.jpg": {
+    "slug": "phallological-museum",
+    "variant": "gallery-4",
+    "nameEn": "Icelandic Phallological Museum"
+  },
+  "Plane_DC_3_6a46d18e06.png": {
+    "slug": "plane-wreck-shuttle",
+    "variant": "cover",
+    "nameEn": "DC-3 Plane Wreck Shuttle"
+  },
+  "plane_wreck_unsplash2_34bf5e223d.jpg": {
+    "slug": "plane-wreck",
+    "variant": "cover",
+    "nameEn": "Solheimasandur Plane Wreck"
+  },
+  "plane_wreck_unsplash3_48501ca14e.jpg": {
+    "slug": "plane-wreck",
+    "variant": "gallery-1",
+    "nameEn": "Solheimasandur Plane Wreck"
+  },
+  "asa_rodger_hu2_c_F_Ff_VSA_unsplash_f73a890eee.jpg": {
+    "slug": "plane-wreck",
+    "variant": "gallery-2",
+    "nameEn": "Solheimasandur Plane Wreck"
+  },
+  "Rainbow_street_Reykjavik_ee8ba4a146.jpg": {
+    "slug": "rainbow-street",
+    "variant": "cover",
+    "nameEn": "Rainbow Street"
+  },
+  "DSC_07898_199f8ec7eb.jpg": {
+    "slug": "rainbow-street",
+    "variant": "gallery-1",
+    "nameEn": "Rainbow Street"
+  },
+  "aiden_patrissi_3_QL_4_Oj_NY_3q_U_unsplash_2397278862.jpg": {
+    "slug": "rainbow-street",
+    "variant": "gallery-2",
+    "nameEn": "Rainbow Street"
+  },
+  "imgp9586_4_ee8ad0bf2d.jpg": {
+    "slug": "reykholt",
+    "variant": "cover",
+    "nameEn": "Reykholt"
+  },
+  "reykjanes1_c54b64ad07.jpg": {
+    "slug": "reykjanes",
+    "variant": "cover",
+    "nameEn": "Reykjanes"
+  },
+  "reykjanes2_f3c1b45b38.jpg": {
+    "slug": "reykjanes",
+    "variant": "gallery-1",
+    "nameEn": "Reykjanes"
+  },
+  "3_1f93eb8d0c.jpg": {
+    "slug": "reykjavik-horse-riding",
+    "variant": "cover",
+    "nameEn": "Icelandic Horse Riding"
+  },
+  "4_34f06a7e05.jpg": {
+    "slug": "reykjavik-horse-riding",
+    "variant": "gallery-1",
+    "nameEn": "Icelandic Horse Riding"
+  },
+  "3_2ee0efdc1a.jpg": {
+    "slug": "reykjavik-horse-riding",
+    "variant": "gallery-2",
+    "nameEn": "Icelandic Horse Riding"
+  },
+  "2_8dbc11160f.jpg": {
+    "slug": "reykjavik-horse-riding",
+    "variant": "gallery-3",
+    "nameEn": "Icelandic Horse Riding"
+  },
+  "lava_show_cover_f12c6a5f98.png": {
+    "slug": "reykjavik-lava-show",
+    "variant": "cover",
+    "nameEn": "Reykjavik Lava Show"
+  },
+  "63d27fc5e788e_96fee2b736.jpg": {
+    "slug": "reykjavik-lava-show",
+    "variant": "gallery-1",
+    "nameEn": "Reykjavik Lava Show"
+  },
+  "sea_angling_in_iceland_81aa88fa48.jpg": {
+    "slug": "reykjavik-sea-angling-classic",
+    "variant": "cover",
+    "nameEn": "Classic Sea Angling"
+  },
+  "people_got_fish_from_the_sea_319f1f41d5.jpg": {
+    "slug": "reykjavik-sea-angling-classic",
+    "variant": "gallery-1",
+    "nameEn": "Classic Sea Angling"
+  },
+  "1_db432558d3.jpg": {
+    "slug": "reykjavik-sea-angling",
+    "variant": "cover",
+    "nameEn": "Sea Angling from Reykjavík"
+  },
+  "3_H6_A9478_bbc89301ab.jpg": {
+    "slug": "reykjavik-sea-angling",
+    "variant": "gallery-1",
+    "nameEn": "Sea Angling from Reykjavík"
+  },
+  "reykjavik_wedding_photograpghy_f5dee8705d.png": {
+    "slug": "reykjavik-wedding-photography",
+    "variant": "cover",
+    "nameEn": "Reykjavík Half-Day Photo Tour"
+  },
+  "006_Lf_J_Moly1gdy60pl0elj356o3ggqvh_68b4e37ce1.jpg": {
+    "slug": "reykjavik-wedding-photography",
+    "variant": "gallery-1",
+    "nameEn": "Reykjavík Half-Day Photo Tour"
+  },
+  "_d88e089aea.jpg": {
+    "slug": "reykjavik-whale-watching",
+    "variant": "cover",
+    "nameEn": "Reykjavík Whale Watching"
+  },
+  "todd_cravens_Qn_Brj_Y_n_F_Us_unsplash_3ab688c433.jpg": {
+    "slug": "reykjavik-whale-watching",
+    "variant": "gallery-2",
+    "nameEn": "Reykjavík Whale Watching"
+  },
+  "_9b1504bf13.jpg": {
+    "slug": "reykjavik-whale-watching",
+    "variant": "gallery-3",
+    "nameEn": "Reykjavík Whale Watching"
+  },
+  "Reykjavik_bathed_in_sunset_2b179f83fe.jpg": {
+    "slug": "reykjavik",
+    "variant": "cover",
+    "nameEn": "Reykjavík"
+  },
+  "reykjavik1_839e01ff5d.jpg": {
+    "slug": "reykjavik",
+    "variant": "gallery-1",
+    "nameEn": "Reykjavík"
+  },
+  "reykjavik_cityscape_in_iceland_158525984_5c1182144cedfd00018fbb38_7f469e1459.jpg": {
+    "slug": "reykjavik",
+    "variant": "gallery-2",
+    "nameEn": "Reykjavík"
+  },
+  "Reykjavik_d71a13c273.jpg": {
+    "slug": "reykjavik",
+    "variant": "gallery-3",
+    "nameEn": "Reykjavík"
+  },
+  "Reynisdrangar1_e7a33951c7.jpg": {
+    "slug": "reynisdrangar",
+    "variant": "cover",
+    "nameEn": "Reynisdrangar"
+  },
+  "Reynisdrangar3_1cc0b15f0a.jpg": {
+    "slug": "reynisdrangar",
+    "variant": "gallery-1",
+    "nameEn": "Reynisdrangar"
+  },
+  "Reynisdrangar2_1c540bca59.jpg": {
+    "slug": "reynisdrangar",
+    "variant": "gallery-2",
+    "nameEn": "Reynisdrangar"
+  },
+  "icelandic_ATV_tour_on_black_sand_beach_510f58731a.png": {
+    "slug": "reynisfjara-atv",
+    "variant": "cover",
+    "nameEn": "Black Sand Beach ATV Tour"
+  },
+  "ATV_3cf070ca7e.jpg": {
+    "slug": "reynisfjara-atv",
+    "variant": "gallery-1",
+    "nameEn": "Black Sand Beach ATV Tour"
+  },
+  "reynisfjara1_ef5a24c2b7.jpg": {
+    "slug": "reynisfjara",
+    "variant": "cover",
+    "nameEn": "Reynisfjara Black Sand Beach"
+  },
+  "reynisfjara2_b3ec97ed1f.jpg": {
+    "slug": "reynisfjara",
+    "variant": "gallery-1",
+    "nameEn": "Reynisfjara Black Sand Beach"
+  },
+  "reynisfjara3_725ed9b454.jpg": {
+    "slug": "reynisfjara",
+    "variant": "gallery-2",
+    "nameEn": "Reynisfjara Black Sand Beach"
+  },
+  "seljalandsfoss1_b6412d5d4e.jpg": {
+    "slug": "seljalandsfoss",
+    "variant": "cover",
+    "nameEn": "Seljalandsfoss"
+  },
+  "seljalandsfoss2_6d4717fdda.jpg": {
+    "slug": "seljalandsfoss",
+    "variant": "gallery-1",
+    "nameEn": "Seljalandsfoss"
+  },
+  "seljalandsfoss3_531d93910f.jpg": {
+    "slug": "seljalandsfoss",
+    "variant": "gallery-2",
+    "nameEn": "Seljalandsfoss"
+  },
+  "Seydisfjoerdur1_482bda2d48.jpg": {
+    "slug": "seydisfjordur",
+    "variant": "cover",
+    "nameEn": "Seyðisfjörður"
+  },
+  "Seydisfjoerdur2_12165d4980.jpg": {
+    "slug": "seydisfjordur",
+    "variant": "gallery-1",
+    "nameEn": "Seyðisfjörður"
+  },
+  "Seydisfjoerdur3_2763c37853.jpg": {
+    "slug": "seydisfjordur",
+    "variant": "gallery-2",
+    "nameEn": "Seyðisfjörður"
+  },
+  "Siglufjoerdur1_e3da0be444.jpg": {
+    "slug": "siglufjordur",
+    "variant": "cover",
+    "nameEn": "Siglufjörður"
+  },
+  "Siglufjoerdur2_d671c6668a.jpg": {
+    "slug": "siglufjordur",
+    "variant": "gallery-1",
+    "nameEn": "Siglufjörður"
+  },
+  "Siglufjoerdur3_5bb479f6ad.jpg": {
+    "slug": "siglufjordur",
+    "variant": "gallery-2",
+    "nameEn": "Siglufjörður"
+  },
+  "Silfra_snorkeling5_e325829527.jpg": {
+    "slug": "silfra-snorkeling-self-drive",
+    "variant": "gallery-1",
+    "nameEn": "Silfra Snorkeling (self-drive meetup)"
+  },
+  "Silfra_snorkeling_eca221b839.jpg": {
+    "slug": "silfra-snorkeling-self-drive",
+    "variant": "gallery-2",
+    "nameEn": "Silfra Snorkeling (self-drive meetup)"
+  },
+  "Silfra_snorkeling2_007c4cf6c5.jpg": {
+    "slug": "silfra-snorkeling-group",
+    "variant": "gallery-2",
+    "nameEn": "Silfra Snorkeling (with Reykjavík transfer)"
+  },
+  "Silfra_snorkeling6_d76840e31c.jpg": {
+    "slug": "silfra-snorkeling-group",
+    "variant": "gallery-3",
+    "nameEn": "Silfra Snorkeling (with Reykjavík transfer)"
+  },
+  "silfra_snorkeling_1_483bb2a929.jpg": {
+    "slug": "silfra-snorkeling-reykjavik-transfer",
+    "variant": "cover",
+    "nameEn": "Silfra Snorkeling (with Reykjavík transfer)"
+  },
+  "silfra_3_1d702a2a92.jpg": {
+    "slug": "silfra-snorkeling-reykjavik-transfer",
+    "variant": "gallery-1",
+    "nameEn": "Silfra Snorkeling (with Reykjavík transfer)"
+  },
+  "silfra_snorkeling_6_192e431aaf.jpg": {
+    "slug": "silfra-snorkeling-self-drive",
+    "variant": "cover",
+    "nameEn": "Silfra Snorkeling (self-drive meetup)"
+  },
+  "hiking_afe526bc72.png": {
+    "slug": "skaftafell-glacier-hiking",
+    "variant": "cover",
+    "nameEn": "Skaftafell Glacier Hike"
+  },
+  "skaftafell_unsplash2_896376fc08.jpg": {
+    "slug": "skaftafell",
+    "variant": "cover",
+    "nameEn": "Skaftafell National Park"
+  },
+  "skaftafell_unsplash_73c8d3fa66.jpg": {
+    "slug": "skaftafell",
+    "variant": "gallery-1",
+    "nameEn": "Skaftafell National Park"
+  },
+  "cassie_boca_pgkr_Kjq_Pe_Xg_unsplash_9c2f4b98c8.jpg": {
+    "slug": "svartifoss",
+    "variant": "gallery-2",
+    "nameEn": "Svartifoss"
+  },
+  "skogafoss2_67abee5632.jpg": {
+    "slug": "skogafoss",
+    "variant": "cover",
+    "nameEn": "Skógafoss"
+  },
+  "skogafoss1_7e720b62ca.jpg": {
+    "slug": "skogafoss",
+    "variant": "gallery-1",
+    "nameEn": "Skógafoss"
+  },
+  "skogafoss3_d680db80b4.jpg": {
+    "slug": "skogafoss",
+    "variant": "gallery-2",
+    "nameEn": "Skógafoss"
+  },
+  "Skutustadagigar1_00cfe54f66.jpg": {
+    "slug": "skutustadagigar",
+    "variant": "cover",
+    "nameEn": "Skútustaðagígar"
+  },
+  "Skutustadagigar3_27c1c3e63b.jpg": {
+    "slug": "skutustadagigar",
+    "variant": "gallery-1",
+    "nameEn": "Skútustaðagígar"
+  },
+  "Skutustadagigar2_740a9de3f7.jpg": {
+    "slug": "skutustadagigar",
+    "variant": "gallery-2",
+    "nameEn": "Skútustaðagígar"
+  },
+  "skylagoon1_a6d89d4b28.png": {
+    "slug": "sky-lagoon-ticket",
+    "variant": "cover",
+    "nameEn": "Sky Lagoon Pure Lite Ritual"
+  },
+  "image_9e81d2e77a.png": {
+    "slug": "sky-lagoon-ticket",
+    "variant": "gallery-1",
+    "nameEn": "Sky Lagoon Pure Lite Ritual"
+  },
+  "skylagoon_003a1d7932.png": {
+    "slug": "sky-lagoon-transfer",
+    "variant": "cover",
+    "nameEn": "Sky Lagoon Pure Lite with Transfer"
+  },
+  "group_in_sky_lagoon_ebb8c6cc79_4a2e08027e.webp": {
+    "slug": "sky-lagoon-transfer",
+    "variant": "gallery-1",
+    "nameEn": "Sky Lagoon Pure Lite with Transfer"
+  },
+  "group_in_sky_lagoon_c1a2fc7548.png": {
+    "slug": "sky-lagoon",
+    "variant": "cover",
+    "nameEn": "Sky Lagoon"
+  },
+  "Sky_Lagoon_743552dfc3.jpg": {
+    "slug": "sky-lagoon",
+    "variant": "gallery-1",
+    "nameEn": "Sky Lagoon"
+  },
+  "skylagoon_b97c4aea60.jpg": {
+    "slug": "sky-lagoon",
+    "variant": "gallery-2",
+    "nameEn": "Sky Lagoon"
+  },
+  "skylagoon2_b2eca622df.jpg": {
+    "slug": "sky-lagoon",
+    "variant": "gallery-3",
+    "nameEn": "Sky Lagoon"
+  },
+  "Snowmobiling_in_iceland_74161f17de.png": {
+    "slug": "snowmobile-langjokull",
+    "variant": "cover",
+    "nameEn": "Langjökull Snowmobile"
+  },
+  "Snowmobiling_in_iceland_f4a729ddc9.jpg": {
+    "slug": "snowmobile-langjokull",
+    "variant": "gallery-1",
+    "nameEn": "Langjökull Snowmobile"
+  },
+  "1_b6042fd6ba.png": {
+    "slug": "solheimajokull-glacier-hiking-transfer",
+    "variant": "cover",
+    "nameEn": "Sólheimajökull Glacier Hike with Transfer"
+  },
+  "Myrdalsjoekull_37c906dcd0.jpg": {
+    "slug": "solheimajokull-glacier-hiking-transfer",
+    "variant": "gallery-1",
+    "nameEn": "Sólheimajökull Glacier Hike with Transfer"
+  },
+  "Solheimajoekull_Glacier_Hiking1_fa82481b62.jpg": {
+    "slug": "solheimajokull-glacier-hiking",
+    "variant": "cover",
+    "nameEn": "Sólheimajökull Glacier Hiking"
+  },
+  "Solheimajoekull_Glacier_Hiking3_9ec701c501.jpg": {
+    "slug": "solheimajokull-glacier-hiking",
+    "variant": "gallery-1",
+    "nameEn": "Sólheimajökull Glacier Hiking"
+  },
+  "Solheimajoekull_Glacier_Hiking2_5e55c22c70.jpg": {
+    "slug": "solheimajokull-glacier-hiking",
+    "variant": "gallery-2",
+    "nameEn": "Sólheimajökull Glacier Hiking"
+  },
+  "Studlagil1_e967a025b9.jpg": {
+    "slug": "studlagil",
+    "variant": "cover",
+    "nameEn": "Stuðlagil Canyon"
+  },
+  "Studlagil3_44340eb789.jpg": {
+    "slug": "studlagil",
+    "variant": "gallery-1",
+    "nameEn": "Stuðlagil Canyon"
+  },
+  "Studlagil2_560e0c84bb.jpg": {
+    "slug": "studlagil",
+    "variant": "gallery-2",
+    "nameEn": "Stuðlagil Canyon"
+  },
+  "stykkisholmur1_c880ec95f2.jpg": {
+    "slug": "stykkisholmur",
+    "variant": "cover",
+    "nameEn": "Stykkishólmur"
+  },
+  "stykkisholmur2_708e5bb897.jpg": {
+    "slug": "stykkisholmur",
+    "variant": "gallery-1",
+    "nameEn": "Stykkishólmur"
+  },
+  "3_H6_A9833_07a93016f2.jpg": {
+    "slug": "stykkisholmur",
+    "variant": "gallery-2",
+    "nameEn": "Stykkishólmur"
+  },
+  "Solfarid_9c24228023.jpg": {
+    "slug": "sun-voyager",
+    "variant": "gallery-1",
+    "nameEn": "Sun Voyager"
+  },
+  "Sun_Voyager_a18897c683.jpg": {
+    "slug": "sun-voyager",
+    "variant": "gallery-2",
+    "nameEn": "Sun Voyager"
+  },
+  "svatifoss_unsplash2_129e77f58e.jpg": {
+    "slug": "svartifoss",
+    "variant": "cover",
+    "nameEn": "Svartifoss"
+  },
+  "svatifoss_unsplash_5aea613d05.jpg": {
+    "slug": "svartifoss",
+    "variant": "gallery-1",
+    "nameEn": "Svartifoss"
+  },
+  "thingve_Ilir_unsplash_bea6a68605.jpg": {
+    "slug": "thingvellir",
+    "variant": "cover",
+    "nameEn": "Þingvellir National Park"
+  },
+  "thingvellir_unsplash3_4b40480cfd.jpg": {
+    "slug": "thingvellir",
+    "variant": "gallery-1",
+    "nameEn": "Þingvellir National Park"
+  },
+  "thingvellir_unsplash2_ebd6ece138.jpg": {
+    "slug": "thingvellir",
+    "variant": "gallery-2",
+    "nameEn": "Þingvellir National Park"
+  },
+  "Tjornin_Pond_Reykkavik_2e08075ee2.jpg": {
+    "slug": "tjornin",
+    "variant": "cover",
+    "nameEn": "Tjörnin Pond"
+  },
+  "East_Side_of_Tjornin_Pond_4c61422848.jpg": {
+    "slug": "tjornin",
+    "variant": "gallery-1",
+    "nameEn": "Tjörnin Pond"
+  },
+  "Tjornin_Pond_Reykjavik_and_Birds_dcd6f314b4.jpg": {
+    "slug": "tjornin",
+    "variant": "gallery-2",
+    "nameEn": "Tjörnin Pond"
+  },
+  "Blue_Ice_Cave_e3d0b17918.png": {
+    "slug": "vatnajokull-crystal-palace",
+    "variant": "cover",
+    "nameEn": "Crystal Palace Blue Ice Cave"
+  },
+  "8_27559f4c70.jpg": {
+    "slug": "vatnajokull-crystal-palace",
+    "variant": "gallery-1",
+    "nameEn": "Crystal Palace Blue Ice Cave"
+  },
+  "nicola_abraham_n_Qq_B_Xb_Weso_E_unsplash_ca0f843573.jpg": {
+    "slug": "vatnajokull",
+    "variant": "cover",
+    "nameEn": "Vatnajökull"
+  },
+  "vatnajokull1_76898aedf8.jpg": {
+    "slug": "vatnajokull",
+    "variant": "gallery-1",
+    "nameEn": "Vatnajökull"
+  },
+  "vatnajokull3_e06c404945.jpg": {
+    "slug": "vatnajokull",
+    "variant": "gallery-2",
+    "nameEn": "Vatnajökull"
+  },
+  "vatnajokull2_1632ed10ae.jpg": {
+    "slug": "vatnajokull",
+    "variant": "gallery-3",
+    "nameEn": "Vatnajökull"
+  },
+  "lift_into_vatnshellir_cave_51c732c1f7.webp": {
+    "slug": "vatnshellir-cave",
+    "variant": "cover",
+    "nameEn": "Vatnshellir Cave Tour"
+  },
+  "vatnshellir_aegir_9675_copy_281_29_1300ec30_3ad518e6_1920w_c55e723dd6.jpg": {
+    "slug": "vatnshellir-cave",
+    "variant": "gallery-1",
+    "nameEn": "Vatnshellir Cave Tour"
+  },
+  "_0fd06e7c5c.png": {
+    "slug": "vestmannaeyjar-day-tour",
+    "variant": "cover",
+    "nameEn": "Westman Islands Day Tour"
+  },
+  "Vestmannaeyjar_820e0cfd70.jpg": {
+    "slug": "vestmannaeyjar-day-tour",
+    "variant": "gallery-1",
+    "nameEn": "Westman Islands Day Tour"
+  },
+  "vestrahorn1_de32f96f5d.jpg": {
+    "slug": "vestrahorn",
+    "variant": "cover",
+    "nameEn": "Vestrahorn"
+  },
+  "vestrahorn2_9c0c249ea9.jpg": {
+    "slug": "vestrahorn",
+    "variant": "gallery-1",
+    "nameEn": "Vestrahorn"
+  },
+  "vestrahorn3_2982012489.jpg": {
+    "slug": "vestrahorn",
+    "variant": "gallery-2",
+    "nameEn": "Vestrahorn"
+  },
+  "The_Cave_Vidgelmir_6_2dfaf2ea19.jpg": {
+    "slug": "vidgelmir-lava-cave",
+    "variant": "cover",
+    "nameEn": "Víðgelmir Lava Cave"
+  },
+  "The_Cave_Vidgelmir_6_13860a1b8e.jpg": {
+    "slug": "vidgelmir-lava-cave",
+    "variant": "gallery-1",
+    "nameEn": "Víðgelmir Lava Cave"
+  },
+  "Vidgelmir1_4fbd1ac7c0.jpg": {
+    "slug": "vidgelmir",
+    "variant": "cover",
+    "nameEn": "Víðgelmir Cave"
+  },
+  "Vidgelmir2_e4c2a2efdc.jpg": {
+    "slug": "vidgelmir",
+    "variant": "gallery-1",
+    "nameEn": "Víðgelmir Cave"
+  },
+  "Vidgelmir3_7c4e702da9.jpg": {
+    "slug": "vidgelmir",
+    "variant": "gallery-2",
+    "nameEn": "Víðgelmir Cave"
+  },
+  "Vidgelmir4_38e9fbe258.jpg": {
+    "slug": "vidgelmir",
+    "variant": "gallery-3",
+    "nameEn": "Víðgelmir Cave"
+  },
+  "vik_black_beach_horse_riding_5c1f7d9db0.png": {
+    "slug": "vik-horse-riding",
+    "variant": "cover",
+    "nameEn": "Vík Horse Riding"
+  },
+  "black_beach_riding2_a548581f03.jpg": {
+    "slug": "vik-horse-riding",
+    "variant": "gallery-1",
+    "nameEn": "Vík Horse Riding"
+  },
+  "lava_show5_c93f919b4e.jpg": {
+    "slug": "vik-lava-show",
+    "variant": "cover",
+    "nameEn": "Vík Lava Show"
+  },
+  "lava_show9_3b06a5a2b7.jpg": {
+    "slug": "vik-lava-show",
+    "variant": "gallery-1",
+    "nameEn": "Vík Lava Show"
+  },
+  "vik1_39585849fc.jpg": {
+    "slug": "vik",
+    "variant": "cover",
+    "nameEn": "Vík í Mýrdal"
+  },
+  "vik2_5c8ab4b497.jpg": {
+    "slug": "vik",
+    "variant": "gallery-1",
+    "nameEn": "Vík í Mýrdal"
+  },
+  "vik3_a117bb10f1.jpg": {
+    "slug": "vik",
+    "variant": "gallery-2",
+    "nameEn": "Vík í Mýrdal"
+  },
+  "woman_enjoy_vok_baths_potrait_e256a6821f.png": {
+    "slug": "vok-baths",
+    "variant": "cover",
+    "nameEn": "Vök Baths"
+  },
+  "vok_baths_a66fee57b3.jpg": {
+    "slug": "vok-baths",
+    "variant": "gallery-1",
+    "nameEn": "Vök Baths"
+  },
+  "ytri_tunga1_4f26805767.jpg": {
+    "slug": "ytri-tunga",
+    "variant": "cover",
+    "nameEn": "Ytri Tunga"
+  },
+  "ytri_tunga2_31a063c8cc.jpg": {
+    "slug": "ytri-tunga",
+    "variant": "gallery-1",
+    "nameEn": "Ytri Tunga"
+  }
+}

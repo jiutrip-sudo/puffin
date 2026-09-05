@@ -1,2 +1,6 @@
-export const IMG = (file: string) =>
-  `https://www.senlinmao.com/images/g_auto,f_auto,c_fill,w_1200,q_auto:good/${file}`;
+import { resolveSpotImg } from "@/lib/media/resolve";
+
+/** 既有 spot 檔名；manifest 有 R2 資源時自動切換，否則 fallback senlinmao */
+export const IMG = (file: string) => resolveSpotImg(file);
+
+export { mediaUrl, spotImage } from "@/lib/media/url";

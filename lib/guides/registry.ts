@@ -1,4 +1,5 @@
 import type { GuideJourneyStageId } from "./journey-stages";
+import { applyGuideArticleMedia } from "@/lib/media/resolve";
 
 export type GuideFeaturedTrip = {
   href: string;
@@ -24,7 +25,7 @@ export type GuideArticle = {
   }>;
 };
 
-export const GUIDE_ARTICLES: GuideArticle[] = [
+const RAW_GUIDE_ARTICLES: GuideArticle[] = [
   {
     slug: "iceland-winter-self-drive-days",
     title: "冰島冬季自駕適合幾天？南岸 4 天行程怎麼排",
@@ -312,6 +313,10 @@ export const GUIDE_ARTICLES: GuideArticle[] = [
     ],
   },
 ];
+
+export const GUIDE_ARTICLES: GuideArticle[] = RAW_GUIDE_ARTICLES.map((article) =>
+  applyGuideArticleMedia(article),
+);
 
 export function getGuideBySlug(slug: string): GuideArticle | undefined {
   return GUIDE_ARTICLES.find((article) => article.slug === slug);

@@ -1,6 +1,20 @@
 import type { NextConfig } from "next";
 import os from "os";
 
+function mediaRemotePattern(): { protocol: "https"; hostname: string } | undefined {
+  const raw = process.env.NEXT_PUBLIC_MEDIA_BASE_URL?.trim();
+  if (!raw) return undefined;
+  try {
+    const { protocol, hostname } = new URL(raw);
+    if (protocol !== "https:" || !hostname) return undefined;
+    return { protocol: "https", hostname };
+  } catch {
+    return undefined;
+  }
+}
+
+const mediaPattern = mediaRemotePattern();
+
 /** 開發時自動允許本機 LAN IP，避免手機連內網時 /_next/* 被跨域封鎖、onClick 失效 */
 function collectLanIpv4Addresses(): string[] {
   const addresses = new Set<string>();
@@ -51,6 +65,11 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: "res.cloudinary.com",
+      },
+      ...(mediaPattern ? [mediaPattern] : []),
+      {
+        protocol: "https",
+        hostname: "**.r2.dev",
       },
     ],
   },
