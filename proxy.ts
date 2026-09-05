@@ -30,7 +30,7 @@ function parseLocaleHeader(value: string | null): "zh-CN" | "zh-TW" | null {
 }
 
 function handleLocale(request: NextRequest): NextResponse {
-  // `/zh-cn/*` rewrite 會再觸發一次 middleware；保留已判定的語系，避免被覆寫成 zh-TW。
+  // `/zh-cn/*` rewrite 會再觸發一次 proxy；保留已判定的語系，避免被覆寫成 zh-TW。
   const resolvedLocale = parseLocaleHeader(
     request.headers.get(SITE_LOCALE_HEADER),
   );
