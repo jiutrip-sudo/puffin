@@ -3,7 +3,8 @@ import { readFileSync, statSync } from "fs";
 
 const WIDTH = 1200;
 const HEIGHT = 630;
-const OUTPUT = "public/images/og-default.jpg";
+// Programmatic fallback only; production OG uses public/images/og-default.jpg (Affinity).
+const OUTPUT = "public/images/og-default.generated.jpg";
 const HERO = "public/images/hero-1920.webp";
 const LOGO = "public/images/puffin-logo.png";
 
