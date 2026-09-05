@@ -20,7 +20,11 @@ export function TripsCatalogShell({
   children,
 }: TripsCatalogShellProps) {
   return (
-    <div className={variant === "compact" ? "guides-index iceland-catalog" : "guides-index"}>
+    <div
+      className={`guides-index iceland-catalog${
+        variant === "compact" ? " guides-index--compact" : ""
+      }`}
+    >
       <section className="guides-index__hero">
         <div className="guides-index__backdrop" aria-hidden="true">
           <HeroBackground priority={false} />

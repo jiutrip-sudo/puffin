@@ -20,9 +20,7 @@ export function GuidesIndexShell({
   children,
 }: GuidesIndexShellProps) {
   return (
-    <div
-      className={`guides-index${variant === "compact" ? " guides-index--compact" : ""}`}
-    >
+    <div className={`guides-index${variant === "compact" ? " guides-index--compact" : ""}`.trim()}>
       <section className="guides-index__hero">
         <div className="guides-index__backdrop" aria-hidden="true">
           <HeroBackground priority={false} />
