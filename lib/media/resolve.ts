@@ -4,7 +4,6 @@ import pricingLegacyMap from "@/lib/media/pricing-legacy-map.json";
 import guidesLegacyMap from "@/lib/media/guides-legacy-map.json";
 import manifest from "@/lib/media/manifest.json";
 import { mediaBaseUrl } from "@/lib/media/url";
-import type { PricingConfig } from "@/lib/trip-pricing/types";
 import type { TripPackage } from "@/lib/trip-packages/types";
 
 const SLM_BASE =
@@ -118,21 +117,6 @@ export function applyTripPackageMedia(pkg: TripPackage): TripPackage {
     gallery: pkg.gallery.map((item) => ({
       ...item,
       url: resolveSenlinmaoUrl(item.url),
-    })),
-  };
-}
-
-export function applyPricingConfigMedia(config: PricingConfig): PricingConfig {
-  return {
-    ...config,
-    tiers: config.tiers.map((tier) => ({
-      ...tier,
-      imageUrl: resolveSenlinmaoUrl(tier.imageUrl),
-      galleryImages: tier.galleryImages?.map((url) => resolveSenlinmaoUrl(url)),
-    })),
-    vehicleTiers: config.vehicleTiers?.map((vehicle) => ({
-      ...vehicle,
-      imageUrl: resolveSenlinmaoUrl(vehicle.imageUrl),
     })),
   };
 }

@@ -1,5 +1,4 @@
 import type { PricingConfig } from "./types";
-import { applyPricingConfigMedia } from "@/lib/media/resolve";
 import { icelandSelfDriveWinter4Pricing } from "./iceland-self-drive-winter-4";
 import { icelandSelfDriveSummer4Pricing } from "./iceland-self-drive-summer-4";
 import { icelandSelfDriveSummer5Pricing } from "./iceland-self-drive-summer-5";
@@ -94,15 +93,11 @@ const CONFIGS: Record<string, PricingConfig> = {
 };
 
 export function getAllPricingConfigs(): PricingConfig[] {
-  return Object.values(CONFIGS).map((config) => applyPricingConfigMedia(config));
+  return Object.values(CONFIGS);
 }
 
 export function getPricingConfig(packageId: string): PricingConfig | undefined {
-  return withPricingMedia(CONFIGS[packageId]);
-}
-
-function withPricingMedia(config: PricingConfig | undefined): PricingConfig | undefined {
-  return config ? applyPricingConfigMedia(config) : undefined;
+  return CONFIGS[packageId];
 }
 
 export async function fetchPricingConfig(
