@@ -12,6 +12,7 @@ export const MESSAGES = {
   "locale.zhCN": "简",
   "footer.registration": "登記資訊",
   "footer.contact": "聯絡方式",
+  "footer.social": "社群",
   "trip.section.overview": "簡介",
   "trip.section.highlights": "行程亮點",
   "trip.section.attractions": "精選景點",

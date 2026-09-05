@@ -3984,6 +3984,43 @@ html[data-theme="dark"] .hero-bg-dark {
   background: var(--footer-bg);
 }
 
+.site-footer-social {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+}
+
+.site-footer-social__link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  color: rgb(255 255 255 / 45%);
+  border-radius: 999px;
+  transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+.site-footer-social__link:hover {
+  color: var(--color-primary-light);
+  background: rgb(255 255 255 / 8%);
+}
+
+.site-footer-social__icon {
+  display: block;
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.site-footer-social__link--line:hover,
+.site-footer-social__link--threads:hover,
+.site-footer-social__link--facebook:hover,
+.site-footer-social__link--instagram:hover {
+  color: rgb(255 255 255 / 45%);
+}
+
 .site-footer-panel {
   background: var(--footer-panel-bg);
   border: 1px solid var(--footer-panel-border);

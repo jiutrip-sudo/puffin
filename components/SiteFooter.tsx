@@ -1,4 +1,5 @@
 import { LocaleLink } from "@/components/LocaleLink";
+import { SiteSocialLinks } from "@/components/SiteSocialLinks";
 import type { SiteLocale } from "@/lib/site-locale";
 import { getLocalizedBrandName, getLocalizedCompanyInfo } from "@/lib/i18n/company";
 import { PRIVACY_POLICY_URL } from "@/lib/legal/privacy-policy-content";
@@ -90,8 +91,13 @@ export function SiteFooter({ locale }: { locale: SiteLocale }) {
           </section>
         ) : null}
 
+        <SiteSocialLinks
+          locale={locale}
+          className={SHOW_FOOTER_COMPANY_INFO ? "mt-3" : ""}
+        />
+
         <div
-          className={`flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-[10px] text-white/45 ${SHOW_FOOTER_COMPANY_INFO ? "mt-3" : ""}`}
+          className={`flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-[10px] text-white/45 ${SHOW_FOOTER_COMPANY_INFO ? "mt-3" : "mt-2"}`}
         >
           <LocaleLink
             href="/booking/lookup"

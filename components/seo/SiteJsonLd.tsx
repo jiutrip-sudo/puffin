@@ -2,7 +2,7 @@ import type { TripPackage } from "@/lib/trip-packages/types";
 import type { PricingConfig } from "@/lib/trip-pricing/types";
 import type { SiteLocale } from "@/lib/site-locale";
 import { absoluteUrl } from "@/lib/site-url";
-import { COMPANY_EMAIL, COMPANY_INFO } from "@/lib/company-info";
+import { COMPANY_EMAIL, COMPANY_INFO, SOCIAL_LINKS } from "@/lib/company-info";
 import { buildTripStructuredData } from "@/lib/seo/trip-json-ld";
 import { JsonLd } from "./JsonLd";
 
@@ -41,6 +41,7 @@ export function SiteOrganizationJsonLd() {
       streetAddress: address,
       addressCountry: "TW",
     },
+    sameAs: SOCIAL_LINKS.map((link) => link.href),
   };
 
   return <JsonLd data={data} />;

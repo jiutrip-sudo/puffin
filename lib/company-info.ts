@@ -12,6 +12,25 @@ export const COMPANY_LOGO = {
   height: 363,
 } as const;
 
+export const SOCIAL_LINKS = [
+  { id: "line", href: "https://lin.ee/XJTgHN5", label: "LINE" },
+  { id: "threads", href: "https://www.threads.com/@puffin.tw", label: "Threads" },
+  { id: "facebook", href: "https://www.facebook.com/puffin.tw", label: "Facebook" },
+  { id: "instagram", href: "https://www.instagram.com/puffin.tw/", label: "Instagram" },
+] as const;
+
+/** 官方 LINE Brand Icon（https://line.me/tw/logo，請勿變形或改色） */
+export const LINE_BRAND_ICON_SRC = "/images/social/line-brand-icon.png";
+
+/** 官方 Threads Logo（https://www.meta.com/brand/resources/threads/，深色底用白版，請勿變形或改色） */
+export const THREADS_BRAND_ICON_SRC = "/images/social/threads-brand-icon.png";
+
+/** 官方 Facebook Primary Logo（https://www.meta.com/brand/resources/facebook/logo/，請勿變形或改色） */
+export const FACEBOOK_BRAND_ICON_SRC = "/images/social/facebook-brand-icon.png";
+
+/** 官方 Instagram Glyph（https://www.meta.com/brand/resources/instagram/，Gradient 全彩版，請勿變形或改色） */
+export const INSTAGRAM_BRAND_ICON_SRC = "/images/social/instagram-brand-icon.png";
+
 export const COMPANY_INFO = {
   name: "友明旅行社有限公司",
   registration: [
