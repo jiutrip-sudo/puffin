@@ -10,28 +10,30 @@ import { setPuffinLocale } from "@/lib/site-locale-client";
 const LOCALE_OPTIONS: {
   value: SiteLocale;
   labelKey: "locale.zhTW" | "locale.zhCN";
-  sheetLabelKey: "locale.zhTWFull" | "locale.zhCNFull";
+  drawerLabelKey: "locale.zhTWFull" | "locale.zhCNFull";
 }[] = [
-  { value: "zh-TW", labelKey: "locale.zhTW", sheetLabelKey: "locale.zhTWFull" },
-  { value: "zh-CN", labelKey: "locale.zhCN", sheetLabelKey: "locale.zhCNFull" },
+  { value: "zh-TW", labelKey: "locale.zhTW", drawerLabelKey: "locale.zhTWFull" },
+  { value: "zh-CN", labelKey: "locale.zhCN", drawerLabelKey: "locale.zhCNFull" },
 ];
 
 type LocaleControlsBarProps = {
   className?: string;
-  variant?: "compact" | "sheet";
+  variant?: "compact" | "drawer";
+  onAction?: () => void;
 };
 
 export function LocaleControlsBar({
   className = "",
   variant = "compact",
+  onAction,
 }: LocaleControlsBarProps) {
   const pathname = usePathname() ?? "/";
   const locale = useSiteLocale();
 
-  if (variant === "sheet") {
+  if (variant === "drawer") {
     return (
       <div
-        className={`site-preferences-sheet__options ${className}`.trim()}
+        className={`site-preferences-drawer__options ${className}`.trim()}
         role="group"
         aria-label={t("locale.label", locale)}
       >
@@ -43,13 +45,16 @@ export function LocaleControlsBar({
             <a
               key={option.value}
               href={href}
-              className={`site-preferences-sheet__option${
-                isActive ? " site-preferences-sheet__option--active" : ""
+              className={`site-preferences-drawer__option${
+                isActive ? " site-preferences-drawer__option--active" : ""
               }`}
               aria-current={isActive ? "true" : undefined}
-              onClick={() => setPuffinLocale(option.value)}
+              onClick={() => {
+                setPuffinLocale(option.value);
+                onAction?.();
+              }}
             >
-              {t(option.sheetLabelKey, locale)}
+              {t(option.drawerLabelKey, locale)}
             </a>
           );
         })}
@@ -73,7 +78,10 @@ export function LocaleControlsBar({
             href={href}
             className={`site-locale-toggle__btn${isActive ? " is-active" : ""}`}
             aria-current={isActive ? "page" : undefined}
-            onClick={() => setPuffinLocale(option.value)}
+            onClick={() => {
+              setPuffinLocale(option.value);
+              onAction?.();
+            }}
           >
             {t(option.labelKey, option.value)}
           </a>

@@ -6,21 +6,31 @@ import { t } from "@/lib/i18n/messages";
 type SitePreferencesTriggerProps = {
   onClick: () => void;
   className?: string;
+  "aria-expanded"?: boolean;
+  "aria-controls"?: string;
 };
 
 export function SitePreferencesTrigger({
   onClick,
   className = "",
+  "aria-expanded": ariaExpanded = false,
+  "aria-controls": ariaControls,
 }: SitePreferencesTriggerProps) {
   const locale = useSiteLocale();
 
   return (
     <button
       type="button"
-      className={`site-preferences-trigger ${className}`.trim()}
+      className={`site-preferences-trigger${ariaExpanded ? " site-preferences-trigger--open" : ""} ${className}`.trim()}
       aria-label={t("preferences.label", locale)}
       aria-haspopup="dialog"
-      onClick={onClick}
+      aria-expanded={ariaExpanded}
+      aria-controls={ariaControls}
+      onClick={(event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        onClick();
+      }}
     >
       <svg
         viewBox="0 0 24 24"

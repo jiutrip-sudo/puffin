@@ -96,7 +96,7 @@ export function SiteHeader({
       }`}
     >
       <div className="mx-auto max-w-7xl">
-        <div className="site-header-mobile-bar md:hidden">
+        <div className="site-header-mobile-bar flex md:hidden">
           <SiteLogo className="shrink-0" />
           <SiteMainNav
             navLinks={navLinks}

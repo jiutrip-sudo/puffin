@@ -84,20 +84,22 @@ const THEME_OPTIONS: {
 
 type ThemeControlsBarProps = {
   className?: string;
-  variant?: "compact" | "sheet";
+  variant?: "compact" | "drawer";
+  onAction?: () => void;
 };
 
 export function ThemeControlsBar({
   className = "",
   variant = "compact",
+  onAction,
 }: ThemeControlsBarProps) {
   const preference = useThemePreference();
   const locale = useSiteLocale();
 
-  if (variant === "sheet") {
+  if (variant === "drawer") {
     return (
       <div
-        className={`site-preferences-sheet__options ${className}`.trim()}
+        className={`site-preferences-drawer__options ${className}`.trim()}
         role="group"
         aria-label={t("theme.label", locale)}
       >
@@ -107,12 +109,15 @@ export function ThemeControlsBar({
             <button
               key={option.value}
               type="button"
-              className={`site-preferences-sheet__option site-preferences-sheet__option--theme${
-                isActive ? " site-preferences-sheet__option--active" : ""
+              className={`site-preferences-drawer__option site-preferences-drawer__option--theme${
+                isActive ? " site-preferences-drawer__option--active" : ""
               }`}
               data-theme-option={option.value}
               aria-pressed={isActive}
-              onClick={() => setPuffinTheme(option.value)}
+              onClick={() => {
+                setPuffinTheme(option.value);
+                onAction?.();
+              }}
             >
               {option.icon}
               <span>{option.label}</span>
@@ -139,7 +144,10 @@ export function ThemeControlsBar({
             data-theme-option={option.value}
             aria-label={option.label}
             aria-pressed={isActive}
-            onClick={() => setPuffinTheme(option.value)}
+            onClick={() => {
+              setPuffinTheme(option.value);
+              onAction?.();
+            }}
           >
             {option.icon}
           </button>
