@@ -3700,6 +3700,19 @@ html[data-locale="zh-CN"] body {
   text-shadow: 0 1px 10px rgba(0, 0, 0, 0.4);
 }
 
+/* Light theme — hero overlays need stronger scrim + glass contrast */
+html[data-theme="light"] .hero-text-shadow {
+  text-shadow:
+    0 2px 24px rgb(0 0 0 / 58%),
+    0 1px 4px rgb(0 0 0 / 42%);
+}
+
+html[data-theme="light"] .hero-text-shadow-sm {
+  text-shadow:
+    0 1px 14px rgb(0 0 0 / 52%),
+    0 1px 3px rgb(0 0 0 / 38%);
+}
+
 .glass-pill {
   background: rgba(255, 255, 255, 0.14);
   backdrop-filter: blur(12px);
@@ -3814,6 +3827,40 @@ html[data-theme="dark"] .hero-bg-dark {
     transparent 0%,
     var(--hero-fade-end) 73%
   );
+}
+
+html[data-theme="light"] .hero-media-frame::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgb(12 10 24 / 48%) 0%,
+    rgb(12 10 24 / 24%) 42%,
+    rgb(12 10 24 / 8%) 68%,
+    transparent 82%
+  );
+}
+
+html[data-theme="light"] .site-header:not(.site-header--on-surface) .glass-hero {
+  background: rgb(8 8 16 / 34%);
+  border-color: rgb(255 255 255 / 28%);
+  box-shadow: 0 2px 14px rgb(0 0 0 / 22%);
+}
+
+html[data-theme="light"] .hero-media-frame .glass-pill-button-face,
+html[data-theme="light"] .hero-media-frame .circle-button-face {
+  background: rgb(8 8 16 / 38%);
+  border-color: rgb(255 255 255 / 28%);
+  box-shadow: 0 4px 20px rgb(0 0 0 / 24%);
+}
+
+html[data-theme="light"] .hero-media-frame .glass-pill-button:hover .glass-pill-button-face,
+html[data-theme="light"] .hero-media-frame .circle-button:hover .circle-button-face {
+  background: rgb(8 8 16 / 50%);
+  border-color: rgb(255 255 255 / 36%);
 }
 
 /* JiuTrip-style hero color pop — animated blur blob over hero image */
@@ -4924,6 +4971,15 @@ html[data-theme="dark"] .hero-bg-dark {
     180deg,
     rgb(0 0 0 / 10%) 0%,
     rgb(0 0 0 / 42%) 72%,
+    var(--hero-fade-end) 100%
+  );
+}
+
+html[data-theme="light"] .guides-index__backdrop-fade {
+  background: linear-gradient(
+    180deg,
+    rgb(0 0 0 / 28%) 0%,
+    rgb(0 0 0 / 44%) 58%,
     var(--hero-fade-end) 100%
   );
 }
