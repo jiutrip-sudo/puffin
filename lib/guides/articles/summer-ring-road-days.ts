@@ -7,7 +7,7 @@ export const guideArticle: GuideArticle = {
   "category": "夏季環島",
   "journeyStage": "plan-days",
   "coverImage": "https://media.puffinholiday.com/guides/assets/summer-ring-road-days.webp",
-  "publishedAt": "2026-03-15",
+  "publishedAt": "2026-09-06",
   "featuredTrip": {
     "href": "/trips/iceland/self-drive/summer/10",
     "title": "10 天 9 夜冰島夏季深度環島自駕",

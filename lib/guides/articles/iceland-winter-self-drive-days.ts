@@ -7,7 +7,7 @@ export const guideArticle: GuideArticle = {
   "category": "冬季自駕",
   "journeyStage": "plan-days",
   "coverImage": "https://media.puffinholiday.com/guides/assets/iceland-winter-self-drive-days.webp",
-  "publishedAt": "2026-03-15",
+  "publishedAt": "2026-09-06",
   "featuredTrip": {
     "href": "/trips/iceland/self-drive/winter/4",
     "title": "4 天 3 夜冰島南岸冬季自駕遊",

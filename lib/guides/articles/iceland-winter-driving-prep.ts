@@ -7,7 +7,7 @@ export const guideArticle: GuideArticle = {
   "category": "行前準備",
   "journeyStage": "prepare",
   "coverImage": "https://media.puffinholiday.com/guides/assets/iceland-winter-driving-prep.webp",
-  "publishedAt": "2026-03-15",
+  "publishedAt": "2026-09-06",
   "featuredTrip": {
     "href": "/trips/iceland/self-drive/winter/6",
     "title": "6 天 5 夜冰島冬季經典自駕遊",

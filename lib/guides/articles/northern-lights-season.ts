@@ -7,7 +7,7 @@ export const guideArticle: GuideArticle = {
   "category": "極光",
   "journeyStage": "plan-days",
   "coverImage": "https://media.puffinholiday.com/guides/assets/northern-lights-season.webp",
-  "publishedAt": "2026-03-15",
+  "publishedAt": "2026-09-06",
   "featuredTrip": {
     "href": "/trips/iceland/self-drive/winter/7",
     "title": "冰島西南岸 7 天 6 夜冬季自駕遊",

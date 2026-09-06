@@ -7,7 +7,7 @@ export const guideArticle: GuideArticle = {
   "category": "預訂付款",
   "journeyStage": "book",
   "coverImage": "https://media.puffinholiday.com/guides/assets/how-to-book-and-pay.webp",
-  "publishedAt": "2026-03-15",
+  "publishedAt": "2026-09-06",
   "featured": true,
   "featuredTrip": {
     "href": "/iceland",

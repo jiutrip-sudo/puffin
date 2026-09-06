@@ -7,7 +7,7 @@ export const guideArticle: GuideArticle = {
   "category": "行程選擇",
   "journeyStage": "choose-mode",
   "coverImage": "https://media.puffinholiday.com/guides/assets/group-tour-vs-self-drive.webp",
-  "publishedAt": "2026-03-15",
+  "publishedAt": "2026-09-06",
   "featured": true,
   "featuredTrip": {
     "href": "/trips/iceland/group/winter/6",
