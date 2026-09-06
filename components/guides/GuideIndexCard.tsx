@@ -2,7 +2,6 @@ import { TripImage } from "@/components/trip-package/TripImage";
 import { LocaleLink } from "@/components/LocaleLink";
 import type { SiteLocale } from "@/lib/site-locale";
 import type { GuideArticle } from "@/lib/guides/registry";
-import { estimateReadingMinutes } from "@/lib/guides/utils";
 import { localizeText } from "@/lib/i18n/localize";
 
 export type GuideIndexCardLayout = "default" | "rail";
@@ -18,7 +17,6 @@ export function GuideIndexCard({
   locale,
   layout = "default",
 }: GuideIndexCardProps) {
-  const readingMinutes = estimateReadingMinutes(article);
   const isRail = layout === "rail";
 
   return (
@@ -55,8 +53,6 @@ export function GuideIndexCard({
               <span className="guides-index-card__category">
                 {localizeText(article.category, locale)}
               </span>
-              <span aria-hidden="true">·</span>
-              <span>{localizeText(`約 ${readingMinutes} 分鐘`, locale)}</span>
             </div>
             <h2 className="guides-index-card__title">{article.title}</h2>
             <p className="guides-index-card__desc">{article.description}</p>

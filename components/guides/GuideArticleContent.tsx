@@ -5,7 +5,6 @@ import { TripImage } from "@/components/trip-package/TripImage";
 import type { GuideArticle } from "@/lib/guides/registry";
 import { resolveGuideFeaturedTripImage } from "@/lib/guides/resolve-featured-trip-image";
 import {
-  estimateReadingMinutes,
   formatGuideDate,
   guideSectionId,
 } from "@/lib/guides/utils";
@@ -43,7 +42,6 @@ export function GuideArticleContent({
   article,
   locale,
 }: GuideArticleContentProps) {
-  const readingMinutes = estimateReadingMinutes(article);
   const publishedLabel = formatGuideDate(article.publishedAt, locale);
   const midCtaIndex = Math.max(1, Math.ceil(article.sections.length / 2) - 1);
   const showToc = article.sections.length >= 3;
@@ -74,8 +72,6 @@ export function GuideArticleContent({
           <p className="guides-article__lead">{article.description}</p>
           <p className="guides-article__meta">
             <time dateTime={article.publishedAt}>{publishedLabel}</time>
-            <span aria-hidden="true"> · </span>
-            <span>{localizeText(`約 ${readingMinutes} 分鐘閱讀`, locale)}</span>
           </p>
 
           {showToc ? (

@@ -4998,6 +4998,10 @@ html[data-theme="light"] .hero-media-frame .circle-button:hover .circle-button-f
   flex: 1;
 }
 
+.guides-index .site-header-shell {
+  z-index: 100;
+}
+
 .guides-index__hero {
   position: relative;
   z-index: 2;

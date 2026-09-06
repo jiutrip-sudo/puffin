@@ -1,19 +1,5 @@
-import type { GuideArticle } from "./registry";
-
 export function guideSectionId(index: number): string {
   return `section-${index + 1}`;
-}
-
-export function estimateReadingMinutes(article: GuideArticle): number {
-  let chars = article.title.length + article.description.length;
-
-  for (const section of article.sections) {
-    chars += section.heading.length;
-    chars += section.paragraphs.join("").length;
-    chars += (section.bullets ?? []).join("").length;
-  }
-
-  return Math.max(3, Math.round(chars / 400));
 }
 
 export function formatGuideDate(date: string, locale: string): string {

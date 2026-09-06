@@ -48,12 +48,14 @@ function TripCardFooter({
         className="flex items-center justify-between gap-2"
         title={trip.fromPrice.assumptions}
       >
-        <p className="min-w-0 text-sm font-bold tabular-nums text-foreground">
-          <span className="mr-1 text-[10px] font-semibold text-foreground/55">
+        <p className="inline-flex max-w-full flex-wrap items-baseline gap-x-1.5 gap-y-0.5 rounded-xl bg-primary-dark/12 px-2.5 py-1.5 ring-1 ring-primary-dark/15">
+          <span className="text-[11px] font-semibold text-foreground/55">
             {t("common.perPerson", locale)}
           </span>
-          {trip.fromPrice.displayLabel}
-          <span className="ml-0.5 text-xs font-semibold text-foreground/60">
+          <span className="text-lg font-extrabold tabular-nums tracking-tight text-primary-dark md:text-xl">
+            {trip.fromPrice.displayLabel}
+          </span>
+          <span className="text-sm font-bold text-primary-dark/80">
             {t("common.from", locale)}
           </span>
         </p>

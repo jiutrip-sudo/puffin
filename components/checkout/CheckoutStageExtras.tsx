@@ -247,7 +247,7 @@ export function CheckoutStageExtras({
                                 {extra.name}
                               </p>
                               <p className="checkout-extra-card__price tabular-nums">
-                                {formatMoney(perPerson)} / 人
+                                {formatMoney(perPerson)}
                                 <span className="checkout-extra-card__per-person">
                                   / 人
                                 </span>
