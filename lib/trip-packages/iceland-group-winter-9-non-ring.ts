@@ -92,7 +92,7 @@ export const icelandGroupWinter9NonRing: TripPackage = {
 
 您將沿南岸探索塞里雅蘭瀑布（Seljalandsfoss）、斯科加瀑布（Skógafoss）與黑沙灘（Reynisfjara），造訪傑古沙龍冰河湖（Jökulsárlón）、鑽石沙灘（Diamond Beach）與藍冰洞（Blue Ice Cave）；另遊覽黃金圈三大景點——辛格維利爾國家公園（Þingvellir National Park）、蓋錫爾間歇泉地帶（Geysir）與黃金瀑布（Gullfoss）。
 
-行程另安排一日西部白銀圈，造訪熔岩瀑布（Hraunfossar）、兒童瀑布（Barnafoss）與雷克霍特（Reykholt）歷史名鎮；以及「冰島縮影」斯奈山半島（Snæfellsnes）一日遊，並在絲浮拉裂谷（Silfra）體驗浮潛。途中亦可另行加購觀鯨或極光船遊等體驗。完成預訂後，您將收到行程策劃師為您客製的中文行程手冊，讓您輕鬆盡享冰島冬季西南岸精華。`,
+行程另安排一日西部白銀圈，造訪熔岩瀑布（Hraunfossar）、兒童瀑布（Barnafoss）與雷克霍特（Reykholt）歷史名鎮；以及「冰島縮影」斯奈山半島（Snæfellsnes）一日遊，並在絲浮拉裂谷（Silfra）體驗浮潛。途中亦可另行加購賞鯨或極光船遊等體驗。完成預訂後，您將收到行程策劃師為您客製的中文行程手冊，讓您輕鬆盡享冰島冬季西南岸精華。`,
   },
   gallery: [
     {
@@ -277,7 +277,7 @@ export const icelandGroupWinter9NonRing: TripPackage = {
       title: "首都自由活動日：探索最北首都的悠閒時光",
       accommodation: "雷克雅維克",
       description:
-        "今日在雷克雅維克自由安排一日，漫步洛加維格大街（Laugavegur）、哈帕音樂廳（Harpa）與彩虹街等市區景點，品嚐當地美食，感受北歐首都的獨特氛圍。亦可另行加購 Sky Lagoon、藍湖溫泉、極光船遊或觀鯨等體驗。今晚繼續入住雷克雅維克。",
+        "今日在雷克雅維克自由安排一日，漫步洛加維格大街（Laugavegur）、哈帕音樂廳（Harpa）與彩虹街等市區景點，品嚐當地美食，感受北歐首都的獨特氛圍。亦可另行加購 Sky Lagoon、藍湖溫泉、極光船遊或賞鯨等體驗。今晚繼續入住雷克雅維克。",
       highlights: icelandGroupWinter9NonRingDay8Highlights,
       optionalActivities: icelandGroupWinter9NonRingDay8OptionalActivities,
     },

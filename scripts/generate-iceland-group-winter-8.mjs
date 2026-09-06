@@ -575,7 +575,7 @@ function renderPackage(meta, dayData) {
     "傑古沙龍冰河湖 → 鑽石沙灘 → 藍冰洞",
     "東部峽灣風光",
     "米湖 → Hverir 地熱區 → 黑暗城堡 → 眾神瀑布",
-    "阿克雷里 → 北部觀鯨 → 返回雷克雅未克",
+    "阿克雷里 → 北部賞鯨 → 返回雷克雅未克",
     "雷克雅未克 → 機場離境",
   ];
   const routeStops = meta.days.map((day, index) => {
@@ -737,7 +737,7 @@ ${routeStops.join(",\n")}
         lng: -18.09,
         lat: 65.68,
         label: "第 7 天",
-        detail: "阿克雷里 → 觀鯨",
+        detail: "阿克雷里 → 賞鯨",
       },
       {
         lng: -21.9426,

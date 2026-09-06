@@ -267,7 +267,7 @@ export const icelandGroupWinter8NonRing: TripPackage = {
       title: "雷克雅維克自由活動日",
       accommodation: "雷克雅維克",
       description:
-        "今日在雷克雅維克自由安排一日，漫步洛加維格大街（Laugavegur）、哈帕音樂廳、哈爾格林姆斯大教堂與托寧湖（Tjörnin）等市區景點，品嚐當地美食，感受北歐首都的獨特氛圍。\n\n亦可另行加購 Sky Lagoon、藍湖溫泉、極光船遊或觀鯨等體驗。今晚繼續入住雷克雅維克。",
+        "今日在雷克雅維克自由安排一日，漫步洛加維格大街（Laugavegur）、哈帕音樂廳、哈爾格林姆斯大教堂與托寧湖（Tjörnin）等市區景點，品嚐當地美食，感受北歐首都的獨特氛圍。\n\n亦可另行加購 Sky Lagoon、藍湖溫泉、極光船遊或賞鯨等體驗。今晚繼續入住雷克雅維克。",
       highlights: icelandGroupWinter8NonRingDay7Highlights,
       optionalActivities: icelandGroupWinter8NonRingDay7OptionalActivities,
     },

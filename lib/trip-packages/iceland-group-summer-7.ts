@@ -240,7 +240,7 @@ export const icelandGroupSummer7: TripPackage = {
       title: "自由活動日（可選內陸健行）",
       accommodation: "雷克雅維克",
       description:
-        "今日為自由活動日，可在雷克雅維克市區自由安排，漫步洛加維格大街（Laugavegur）、哈帕音樂廳（Harpa）與彩虹街等景點。\n\n建議另行加購蘭德曼納勞卡（Landmannalaugar）內陸高地健行一日遊——僅夏季開放，流紋岩山脈色彩斑斕，健行結束後可在天然地熱溫泉中放鬆。亦可另行加購絲浮拉裂谷（Silfra）浮潛、觀鯨或溫泉等體驗。內陸高地一般於 6 月至 9 月開放，具體時間依天候而定。今晚繼續入住雷克雅維克。",
+        "今日為自由活動日，可在雷克雅維克市區自由安排，漫步洛加維格大街（Laugavegur）、哈帕音樂廳（Harpa）與彩虹街等景點。\n\n建議另行加購蘭德曼納勞卡（Landmannalaugar）內陸高地健行一日遊——僅夏季開放，流紋岩山脈色彩斑斕，健行結束後可在天然地熱溫泉中放鬆。亦可另行加購絲浮拉裂谷（Silfra）浮潛、賞鯨或溫泉等體驗。內陸高地一般於 6 月至 9 月開放，具體時間依天候而定。今晚繼續入住雷克雅維克。",
       highlights: icelandGroupSummer7Day6Highlights,
       optionalActivities: icelandGroupSummer7Day6OptionalActivities,
     },

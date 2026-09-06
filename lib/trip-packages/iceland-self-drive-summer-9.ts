@@ -96,7 +96,7 @@ export const icelandSelfDriveSummer9: TripPackage = {
 
 往東則穿越寧靜的東部峽灣海岸；北上探索黛提瀑布（Dettifoss）與東北部風光，並造訪米湖（Lake Mývatn）地區的火山地質奇景，以及眾神瀑布（Goðafoss）與「北方之都」阿克雷里（Akureyri）。回程則遊覽西部熔岩瀑布等風光，為環島旅程劃下句點。
 
-途中亦可另行加購觀鯨、溫泉體驗或絲浮拉裂谷（Silfra）浮潛等夏季活動。完成預訂後，您將收到行程策劃師為您客製的中文行程手冊，讓您輕鬆盡享冰島環島精華。`,
+途中亦可另行加購賞鯨、溫泉體驗或絲浮拉裂谷（Silfra）浮潛等夏季活動。完成預訂後，您將收到行程策劃師為您客製的中文行程手冊，讓您輕鬆盡享冰島環島精華。`,
   },
   gallery: [
     {
@@ -264,7 +264,7 @@ export const icelandSelfDriveSummer9: TripPackage = {
       title: "東北部風光",
       accommodation: "米湖周邊",
       description:
-        "今日繼續北上，探索冰島東北部風光。可造訪 Stuðlagil 峽谷的玄武岩石柱，以及歐洲水流量最大的黛提瀑布（Dettifoss）。夏季長白晝下，峽谷河水與瀑布水霧色彩鮮明。\n\n途經胡薩維克（Húsavík）時，亦可另行加購觀鯨體驗；夏季海鳥於周邊海島繁殖，是觀鳥的佳季。今晚入住米湖周邊。",
+        "今日繼續北上，探索冰島東北部風光。可造訪 Stuðlagil 峽谷的玄武岩石柱，以及歐洲水流量最大的黛提瀑布（Dettifoss）。夏季長白晝下，峽谷河水與瀑布水霧色彩鮮明。\n\n途經胡薩維克（Húsavík）時，亦可另行加購賞鯨體驗；夏季海鳥於周邊海島繁殖，是觀鳥的佳季。今晚入住米湖周邊。",
       highlights: icelandSelfDriveSummer9Day6Highlights,
       optionalActivities: icelandSelfDriveSummer9Day6OptionalActivities,
     },

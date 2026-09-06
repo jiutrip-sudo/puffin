@@ -94,9 +94,9 @@ export const icelandSelfDriveSummer12: TripPackage = {
 
 您將造訪黃金圈三大景點——辛格維利爾國家公園（Þingvellir National Park）、蓋錫爾間歇泉地帶（Geysir）與黃金瀑布（Gullfoss）；沿南岸探索壯麗瀑布、冰川與黑沙灘（Reynisfjara），亦可另行加購冰川健行或冰河湖船遊。
 
-往東則穿越寧靜的東部峽灣海岸；北上造訪黛提瀑布（Dettifoss）與觀鯨之都胡薩維克（Húsavík），探索米湖（Lake Mývatn）火山地質奇景，並造訪眾神瀑布（Goðafoss）與「北方之都」阿克雷里（Akureyri）。回程則安排兩日悠遊西部風光，深度探索白銀圈（Silver Circle）與「冰島縮影」斯奈山半島（Snæfellsnes），並留有一日暢遊雷克雅維克。
+往東則穿越寧靜的東部峽灣海岸；北上造訪黛提瀑布（Dettifoss）與賞鯨之都胡薩維克（Húsavík），探索米湖（Lake Mývatn）火山地質奇景，並造訪眾神瀑布（Goðafoss）與「北方之都」阿克雷里（Akureyri）。回程則安排兩日悠遊西部風光，深度探索白銀圈（Silver Circle）與「冰島縮影」斯奈山半島（Snæfellsnes），並留有一日暢遊雷克雅維克。
 
-途中亦可另行加購觀鯨、溫泉體驗或絲浮拉浮潛等夏季活動。完成預訂後，您將收到行程策劃師為您客製的中文行程手冊，讓您輕鬆盡享冰島環島精華。`,
+途中亦可另行加購賞鯨、溫泉體驗或絲浮拉浮潛等夏季活動。完成預訂後，您將收到行程策劃師為您客製的中文行程手冊，讓您輕鬆盡享冰島環島精華。`,
   },
   gallery: [
     {
@@ -144,7 +144,7 @@ export const icelandSelfDriveSummer12: TripPackage = {
     { label: "第 3 天", detail: "南岸瀑布群 → 黑沙灘 → 維克 → 南岸住宿" },
     { label: "第 4 天", detail: "瓦特納冰川 → 傑古沙龍冰河湖 → 鑽石沙灘" },
     { label: "第 5 天", detail: "東部峽灣海岸公路 → 東部住宿" },
-    { label: "第 6 天", detail: "黛提瀑布 → 胡薩維克（出海觀鯨可選）→ 北部住宿" },
+    { label: "第 6 天", detail: "黛提瀑布 → 胡薩維克（出海賞鯨可選）→ 北部住宿" },
     { label: "第 7 天", detail: "米湖 → 眾神瀑布 → 阿克雷里 → 北部" },
     { label: "第 8 天", detail: "西部沿途風光" },
     { label: "第 9 天", detail: "西部白銀圈（德爾達圖赫菲溫泉 → 熔岩瀑布 → 兒童瀑布）" },
@@ -279,7 +279,7 @@ export const icelandSelfDriveSummer12: TripPackage = {
       title: "黛提瀑布+胡薩維克",
       accommodation: "米湖地區",
       description:
-        "今日繼續北上，途經黛提瀑布（Dettifoss）與觀鯨小鎮胡薩維克（Húsavík）。黛提瀑布為歐洲水量最大的瀑布之一，夏季水量充沛，氣勢尤為壯觀。\n\n亦可另行加購觀鯨或 Geosea 海水溫泉等體驗。今晚入住北部。",
+        "今日繼續北上，途經黛提瀑布（Dettifoss）與賞鯨小鎮胡薩維克（Húsavík）。黛提瀑布為歐洲水量最大的瀑布之一，夏季水量充沛，氣勢尤為壯觀。\n\n亦可另行加購賞鯨或 Geosea 海水溫泉等體驗。今晚入住北部。",
       highlights: icelandSelfDriveSummer12Day6Highlights,
       optionalActivities: icelandSelfDriveSummer12Day6OptionalActivities,
     },
@@ -478,7 +478,7 @@ export const icelandSelfDriveSummer12: TripPackage = {
       tourCode: "SSD-111",
       durationLabel: "11 天／10 夜",
       description:
-        "東部峽灣與出海觀鯨，完整環島並造訪斯奈山半島與首都自由行。",
+        "東部峽灣與出海賞鯨，完整環島並造訪斯奈山半島與首都自由行。",
     },
   ],
 };

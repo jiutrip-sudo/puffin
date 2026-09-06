@@ -1,5 +1,7 @@
 import { Converter } from "opencc-js";
 import type { SiteLocale } from "@/lib/site-locale";
+import { CN_INSURANCE_FAQ_OVERRIDES } from "./cn-insurance-faq";
+import { CN_RENTAL_LICENSE_OVERRIDES } from "./cn-rental-license";
 import { CN_TERMS } from "./cn-terms";
 import {
   normalizePlaceAliases,
@@ -17,6 +19,11 @@ const PLACE_CN_BEFORE_OPENCC = [...PLACE_CN_OVERRIDES].sort(
 const CN_TERMS_SORTED = [...CN_TERMS].sort(
   (a, b) => b[0].length - a[0].length,
 );
+
+const CN_LOCAL_OVERRIDES_SORTED = [
+  ...CN_RENTAL_LICENSE_OVERRIDES,
+  ...CN_INSURANCE_FAQ_OVERRIDES,
+].sort((a, b) => b[0].length - a[0].length);
 
 const SKIP_KEYS = new Set([
   "id",
@@ -64,6 +71,9 @@ export function localizeText(text: string, locale: SiteLocale): string {
 
   out = twToCnConverter(out);
   for (const [from, to] of CN_TERMS_SORTED) {
+    out = out.split(from).join(to);
+  }
+  for (const [from, to] of CN_LOCAL_OVERRIDES_SORTED) {
     out = out.split(from).join(to);
   }
   return out;

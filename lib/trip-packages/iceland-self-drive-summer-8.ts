@@ -90,7 +90,7 @@ export const icelandSelfDriveSummer8: TripPackage = {
 
 往東則穿越寧靜的東部峽灣海岸，感受漁村與山脈交織的北國風情；北上米湖（Lake Mývatn）地區，可浸泡米湖溫泉（Mývatn Nature Baths）放鬆身心，欣賞北部火山地質奇景。回程則遊覽西部白銀圈（Silver Circle），為環島旅程劃下句點。
 
-途中亦可另行加購觀鯨、溫泉體驗或絲浮拉裂谷（Silfra）浮潛等夏季活動。完成預訂後，您將收到行程策劃師為您客製的中文行程手冊，讓您輕鬆盡享冰島環島精華。`,
+途中亦可另行加購賞鯨、溫泉體驗或絲浮拉裂谷（Silfra）浮潛等夏季活動。完成預訂後，您將收到行程策劃師為您客製的中文行程手冊，讓您輕鬆盡享冰島環島精華。`,
   },
   gallery: [
     {
@@ -242,7 +242,7 @@ export const icelandSelfDriveSummer8: TripPackage = {
       title: "米湖風光",
       accommodation: "阿克雷里",
       description:
-        "今日前往北部米湖（Lake Mývatn）地區，探索偽火山、熔岩地貌與地熱奇景等獨特火山地質景觀。夏季米湖周邊鳥類豐富，湖水與熔岩地帶在長白晝下色彩鮮明。亦可另行加購米湖溫泉或觀鯨體驗。今晚入住北部。",
+        "今日前往北部米湖（Lake Mývatn）地區，探索偽火山、熔岩地貌與地熱奇景等獨特火山地質景觀。夏季米湖周邊鳥類豐富，湖水與熔岩地帶在長白晝下色彩鮮明。亦可另行加購米湖溫泉或賞鯨體驗。今晚入住北部。",
       highlights: icelandSelfDriveSummer8Day6Highlights,
       optionalActivities: icelandSelfDriveSummer8Day6OptionalActivities,
     },

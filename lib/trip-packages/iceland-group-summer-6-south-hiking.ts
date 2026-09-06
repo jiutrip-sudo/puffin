@@ -27,7 +27,7 @@ export const icelandGroupSummer6SouthHiking: TripPackage = {
   slug: "iceland-summer-6-day-adventure-tour-package-glacier-hiking-volcano-whale-watching",
   tourCode: "SMD-063",
   title: "6 天 5 夜冰島夏季健行探險跟團遊",
-  subtitle: "冰川健行&火山探險&首都觀鯨",
+  subtitle: "冰川健行&火山探險&首都賞鯨",
   duration: { days: 6, nights: 5 },
   season: { label: "夏季", months: "5 月–10 月" },
   meta: {
@@ -73,10 +73,10 @@ export const icelandGroupSummer6SouthHiking: TripPackage = {
   ],
   intro: {
     summary:
-      "這個 6 天 5 夜夏季探險跟團套餐涵蓋火山內部探險、觀鯨、南岸冰川健行與冰河湖，由品質小巴團與專業嚮導帶領。第五日為自由活動，可另行加購蘭德曼納勞卡高地健行。",
-    full: `這個 6 天 5 夜夏季探險跟團套餐涵蓋火山內部探險、雷克雅維克觀鯨、南岸冰川健行與傑古沙龍冰河湖，由品質小巴團與專業嚮導帶領。套餐含凱夫拉維克機場至市區大巴接送，充分運用夏季日照長的優勢。
+      "這個 6 天 5 夜夏季探險跟團套餐涵蓋火山內部探險、賞鯨、南岸冰川健行與冰河湖，由品質小巴團與專業嚮導帶領。第五日為自由活動，可另行加購蘭德曼納勞卡高地健行。",
+    full: `這個 6 天 5 夜夏季探險跟團套餐涵蓋火山內部探險、雷克雅維克賞鯨、南岸冰川健行與傑古沙龍冰河湖，由品質小巴團與專業嚮導帶領。套餐含凱夫拉維克機場至市區大巴接送，充分運用夏季日照長的優勢。
 
-第二日將搭乘升降機深入 Þríhnúkagígur 休眠火山內部，並從雷克雅維克老港口出海觀鯨。南岸行程涵蓋塞里雅蘭瀑布（Seljalandsfoss）、斯科加瀑布（Skógafoss）、索爾黑馬冰川健行、黑沙灘（Reynisfjara）與雷尼斯岩（Reynisdrangar）；第四日造訪傑古沙龍冰河湖（Jökulsárlón）與鑽石沙灘（Diamond Beach）。
+第二日將搭乘升降機深入 Þríhnúkagígur 休眠火山內部，並從雷克雅維克老港口出海賞鯨。南岸行程涵蓋塞里雅蘭瀑布（Seljalandsfoss）、斯科加瀑布（Skógafoss）、索爾黑馬冰川健行、黑沙灘（Reynisfjara）與雷尼斯岩（Reynisdrangar）；第四日造訪傑古沙龍冰河湖（Jökulsárlón）與鑽石沙灘（Diamond Beach）。
 
 第五日為自由活動，可另行加購蘭德曼納勞卡（Landmannalaugar）高地健行——僅夏季開放，流紋岩山脈色彩斑斕。夏季迪霍拉里（Dyrhólaey）等地常有海鸚棲息，實際停留時間將由嚮導依天候與路況調整。`,
   },
@@ -130,7 +130,7 @@ export const icelandGroupSummer6SouthHiking: TripPackage = {
   routeOverviewSubtitle: "南岸健行探險夏季跟團動線",
   routeStops: [
     { label: "第 1 天", detail: "雷克雅維克（入境、機場接送）" },
-    { label: "第 2 天", detail: "火山內部探險與雷克雅維克觀鯨" },
+    { label: "第 2 天", detail: "火山內部探險與雷克雅維克賞鯨" },
     { label: "第 3 天", detail: "南岸三大瀑布 → 冰川健行 → 黑沙灘" },
     { label: "第 4 天", detail: "傑古沙龍冰河湖 → 鑽石沙灘" },
     { label: "第 5 天", detail: "自由活動日（可選高地健行）" },
@@ -148,7 +148,7 @@ export const icelandGroupSummer6SouthHiking: TripPackage = {
         lng: -21.9426,
         lat: 64.1466,
         label: "第 2 天",
-        detail: "火山內部探險與觀鯨",
+        detail: "火山內部探險與賞鯨",
       },
       {
         lng: -19.0,
@@ -188,10 +188,10 @@ export const icelandGroupSummer6SouthHiking: TripPackage = {
     },
     {
       day: 2,
-      title: "火山內部探秘 & 雷克雅維克觀鯨",
+      title: "火山內部探秘 & 雷克雅維克賞鯨",
       accommodation: "雷克雅維克",
       description:
-        "今日搭乘品質小巴團前往 Þríhnúkagígur 休眠火山，健行穿越火山口後乘坐升降機深入地球內部，在專業嚮導帶領下近距離觀察多彩礦石層與岩壁構造。這是世界上少數允許旅客進入的火山之一。\n\n下午返回雷克雅維克，從老港口（Old Harbour）出海觀鯨。夏季冰島海域常見座頭鯨、小鬚鯨與白喙海豚。傍晚返回市區住宿。",
+        "今日搭乘品質小巴團前往 Þríhnúkagígur 休眠火山，健行穿越火山口後乘坐升降機深入地球內部，在專業嚮導帶領下近距離觀察多彩礦石層與岩壁構造。這是世界上少數允許旅客進入的火山之一。\n\n下午返回雷克雅維克，從老港口（Old Harbour）出海賞鯨。夏季冰島海域常見座頭鯨、小鬚鯨與白喙海豚。傍晚返回市區住宿。",
       highlights: icelandGroupSummer6SouthHikingDay2Highlights,
       optionalActivities: icelandGroupSummer6SouthHikingDay2OptionalActivities,
     },
@@ -218,7 +218,7 @@ export const icelandGroupSummer6SouthHiking: TripPackage = {
       title: "自由活動日（可選蘭德曼納勞卡健行）",
       accommodation: "雷克雅維克",
       description:
-        "今日為自由活動日，可在雷克雅維克市區自由安排，漫步洛加維格大街（Laugavegur）、哈帕音樂廳（Harpa）與彩虹街等景點。\n\n建議另行加購蘭德曼納勞卡（Landmannalaugar）高地健行一日遊——僅夏季開放，流紋岩山脈色彩斑斕，健行結束後可在天然地熱溫泉中放鬆。亦可另行加購絲浮拉裂谷（Silfra）浮潛、觀鯨或溫泉等體驗。內陸高地一般於 6 月至 9 月開放，具體時間依天候而定。今晚繼續入住雷克雅維克。",
+        "今日為自由活動日，可在雷克雅維克市區自由安排，漫步洛加維格大街（Laugavegur）、哈帕音樂廳（Harpa）與彩虹街等景點。\n\n建議另行加購蘭德曼納勞卡（Landmannalaugar）高地健行一日遊——僅夏季開放，流紋岩山脈色彩斑斕，健行結束後可在天然地熱溫泉中放鬆。亦可另行加購絲浮拉裂谷（Silfra）浮潛、賞鯨或溫泉等體驗。內陸高地一般於 6 月至 9 月開放，具體時間依天候而定。今晚繼續入住雷克雅維克。",
       highlights: icelandGroupSummer6SouthHikingDay5Highlights,
       optionalActivities: icelandGroupSummer6SouthHikingDay5OptionalActivities,
     },
@@ -244,7 +244,7 @@ export const icelandGroupSummer6SouthHiking: TripPackage = {
       "冰川健行體驗及裝備（注：5-9月為冰川健行體驗，10月將替換為藍冰洞體驗）",
       "南岸1晚舒適級住宿",
       "火山內部探險體驗及安全裝備",
-      "雷克雅維克觀鯨體驗",
+      "雷克雅維克賞鯨體驗",
       "每日住宿提供早餐",
       "台灣冰島雙時區服務",
       "車載WiFi",

@@ -104,9 +104,9 @@ export const icelandSelfDriveSummer14: TripPackage = {
 
 您將造訪黃金圈三大景點——辛格維利爾國家公園（Þingvellir National Park）、蓋錫爾間歇泉地帶（Geysir）與黃金瀑布（Gullfoss）；沿南岸探索壯麗瀑布、冰川與黑沙灘（Reynisfjara），亦可另行加購冰川健行或冰河湖船遊。
 
-往東則穿越寧靜的東部峽灣海岸；北上造訪黛提瀑布（Dettifoss）與觀鯨之都胡薩維克（Húsavík），探索米湖（Lake Mývatn）與阿克雷里（Akureyri）。之後深入西峽灣（Westfjords），造訪丁堅瀑布（Dynjandi）與拉特拉爾角（Látrabjarg）海鳥崖，夏季可近距離觀賞海鸚。回程則遊覽斯奈山半島與西部白銀圈風光，並留有一日暢遊雷克雅維克。
+往東則穿越寧靜的東部峽灣海岸；北上造訪黛提瀑布（Dettifoss）與賞鯨之都胡薩維克（Húsavík），探索米湖（Lake Mývatn）與阿克雷里（Akureyri）。之後深入西峽灣（Westfjords），造訪丁堅瀑布（Dynjandi）與拉特拉爾角（Látrabjarg）海鳥崖，夏季可近距離觀賞海鸚。回程則遊覽斯奈山半島與西部白銀圈風光，並留有一日暢遊雷克雅維克。
 
-途中亦可另行加購觀鯨、溫泉體驗或絲浮拉浮潛等夏季活動。完成預訂後，您將收到行程策劃師為您客製的中文行程手冊，讓您輕鬆盡享冰島環島精華。`,
+途中亦可另行加購賞鯨、溫泉體驗或絲浮拉浮潛等夏季活動。完成預訂後，您將收到行程策劃師為您客製的中文行程手冊，讓您輕鬆盡享冰島環島精華。`,
   },
   gallery: [
     {
@@ -157,7 +157,7 @@ export const icelandSelfDriveSummer14: TripPackage = {
     { label: "第 3 天", detail: "南岸瀑布群 → 黑沙灘 → 維克 → 南岸住宿" },
     { label: "第 4 天", detail: "瓦特納冰川 → 傑古沙龍冰河湖 → 鑽石沙灘" },
     { label: "第 5 天", detail: "東部峽灣海岸公路 → 東部住宿" },
-    { label: "第 6 天", detail: "黛提瀑布 → 胡薩維克觀鯨 → 北部方向" },
+    { label: "第 6 天", detail: "黛提瀑布 → 胡薩維克賞鯨 → 北部方向" },
     { label: "第 7 天", detail: "米湖地熱區 → 眾神瀑布 → 阿克雷里" },
     { label: "第 8 天", detail: "西北沿途風光（巨魔半島 → 西峽灣入口）" },
     { label: "第 9 天", detail: "西峽灣探險 Day 1（伊薩菲厄澤 → 帕特雷克斯峽灣）" },
@@ -203,7 +203,7 @@ export const icelandSelfDriveSummer14: TripPackage = {
         lng: -17.338,
         lat: 66.046,
         label: "第 6 天",
-        detail: "黛提瀑布 → 胡薩維克觀鯨",
+        detail: "黛提瀑布 → 胡薩維克賞鯨",
       },
       {
         lng: -17.55,
@@ -303,10 +303,10 @@ export const icelandSelfDriveSummer14: TripPackage = {
     },
     {
       day: 6,
-      title: "黛提瀑布、胡薩維克觀鯨",
+      title: "黛提瀑布、胡薩維克賞鯨",
       accommodation: "米湖地區",
       description:
-        "今日繼續北上，途經黛提瀑布（Dettifoss）與觀鯨小鎮胡薩維克（Húsavík）。黛提瀑布為歐洲水量最大的瀑布之一，夏季水量充沛，氣勢尤為壯觀。\n\n亦可另行加購觀鯨或 Geosea 海水溫泉等體驗。今晚入住北部。",
+        "今日繼續北上，途經黛提瀑布（Dettifoss）與賞鯨小鎮胡薩維克（Húsavík）。黛提瀑布為歐洲水量最大的瀑布之一，夏季水量充沛，氣勢尤為壯觀。\n\n亦可另行加購賞鯨或 Geosea 海水溫泉等體驗。今晚入住北部。",
       highlights: icelandSelfDriveSummer14Day6Highlights,
       optionalActivities: icelandSelfDriveSummer14Day6OptionalActivities,
     },

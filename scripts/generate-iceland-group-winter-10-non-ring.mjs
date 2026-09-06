@@ -591,7 +591,7 @@ function renderPackage(meta, dayData) {
     "斯奈山半島（教會山 → 阿爾納斯塔皮 → 布迪爾黑教堂）",
     "Hvammsvík 溫泉（可選浮潛）",
     "冰島馬騎行（可選浮潛）",
-    "雷克雅未克自由行（可選觀鯨）",
+    "雷克雅未克自由行（可選賞鯨）",
     "雷克雅未克 → 機場離境",
   ];
   const routeStops = meta.days.map((day, index) => {

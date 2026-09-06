@@ -88,12 +88,12 @@ export const icelandGroupWinter9: TripPackage = {
   ],
   intro: {
     summary:
-      "這個 9 天 8 夜冰島冬季一號公路環島跟團，由品質小巴團與專業嚮導帶領，盡覽黃金圈、南岸、東部峽灣、米湖、觀鯨與斯奈山半島等冬日精華。行程充分顧及冬季日照與路況，節奏適中、安排務實。",
-    full: `這個 9 天 8 夜冰島冬季一號公路環島跟團，由品質小巴團與專業嚮導帶領，沿環島一號公路盡覽黃金圈、南岸、東部峽灣、米湖、觀鯨與斯奈山半島等冬日精華。套餐充分顧及冬季日照時數與路況，行程安排合理、節奏適中。
+      "這個 9 天 8 夜冰島冬季一號公路環島跟團，由品質小巴團與專業嚮導帶領，盡覽黃金圈、南岸、東部峽灣、米湖、賞鯨與斯奈山半島等冬日精華。行程充分顧及冬季日照與路況，節奏適中、安排務實。",
+    full: `這個 9 天 8 夜冰島冬季一號公路環島跟團，由品質小巴團與專業嚮導帶領，沿環島一號公路盡覽黃金圈、南岸、東部峽灣、米湖、賞鯨與斯奈山半島等冬日精華。套餐充分顧及冬季日照時數與路況，行程安排合理、節奏適中。
 
 您將造訪黃金圈三大景點——辛格維利爾國家公園（Þingvellir National Park）、蓋錫爾間歇泉地帶（Geysir）與黃金瀑布（Gullfoss）；沿南岸探索塞里雅蘭瀑布、斯科加瀑布、黑沙灘（Reynisfjara）與維克（Vík），並進入傑古沙龍冰河湖（Jökulsárlón）、鑽石沙灘（Diamond Beach）與藍冰洞（Blue Ice Cave）。
 
-往東穿越東部峽灣海岸；北上米湖（Lake Mývatn）地區探索火山地質奇景，並造訪眾神瀑布（Goðafoss）。行程另安排北部觀鯨，以及「冰島縮影」斯奈山半島（Snæfellsnes）一日遊。途中亦可另行加購雪地摩托、溫泉體驗或極光船遊等冬季活動。完成預訂後，您將收到行程策劃師為您客製的中文行程手冊，讓您輕鬆盡享冰島環島精華。`,
+往東穿越東部峽灣海岸；北上米湖（Lake Mývatn）地區探索火山地質奇景，並造訪眾神瀑布（Goðafoss）。行程另安排北部賞鯨，以及「冰島縮影」斯奈山半島（Snæfellsnes）一日遊。途中亦可另行加購雪地摩托、溫泉體驗或極光船遊等冬季活動。完成預訂後，您將收到行程策劃師為您客製的中文行程手冊，讓您輕鬆盡享冰島環島精華。`,
   },
   gallery: [
     {
@@ -122,7 +122,7 @@ export const icelandGroupWinter9: TripPackage = {
     "踏上探索歐洲最大冰川之旅",
     "在東部峽灣感受漁民生活日常",
     "造訪冰島黃金圈經典三大景點",
-    "在冰島北部出海觀鯨，感受維京文化",
+    "在冰島北部出海賞鯨，感受維京文化",
     "在冬日追逐神秘夢幻的北極光",
   ],
   attractions: [
@@ -144,7 +144,7 @@ export const icelandGroupWinter9: TripPackage = {
     { label: "第 4 天", detail: "傑古沙龍冰河湖 → 鑽石沙灘 → 藍冰洞" },
     { label: "第 5 天", detail: "東部峽灣風光" },
     { label: "第 6 天", detail: "米湖 → Hverir 地熱區 → 黑暗城堡 → 眾神瀑布" },
-    { label: "第 7 天", detail: "北部觀鯨（胡薩維克／阿克雷里）" },
+    { label: "第 7 天", detail: "北部賞鯨（胡薩維克／阿克雷里）" },
     { label: "第 8 天", detail: "斯奈山半島（教會山 → 阿爾納斯塔皮 → 布迪爾黑教堂）" },
     { label: "第 9 天", detail: "雷克雅維克 → 機場離境" }
   ],
@@ -190,7 +190,7 @@ export const icelandGroupWinter9: TripPackage = {
         lng: -18.09,
         lat: 65.68,
         label: "第 7 天",
-        detail: "北部觀鯨",
+        detail: "北部賞鯨",
       },
       {
         lng: -23.8,
@@ -263,10 +263,10 @@ export const icelandGroupWinter9: TripPackage = {
     },
     {
       day: 7,
-      title: "北部觀鯨之旅",
+      title: "北部賞鯨之旅",
       accommodation: "雷克雅維克",
       description:
-        "今日從阿克雷里出發，前往豪加內斯（Hauganes）出海觀鯨。專業嚮導將介紹當地海洋生態，若運氣佳可見到座頭鯨、海豚等海洋生物。觀鯨結束後返回雷克雅維克，途中嚮導將在風景優美的地點適時停車。今晚入住雷克雅維克。",
+        "今日從阿克雷里出發，前往豪加內斯（Hauganes）出海賞鯨。專業嚮導將介紹當地海洋生態，若運氣佳可見到座頭鯨、海豚等海洋生物。賞鯨結束後返回雷克雅維克，途中嚮導將在風景優美的地點適時停車。今晚入住雷克雅維克。",
       highlights: icelandGroupWinter9Day7Highlights,
       optionalActivities: icelandGroupWinter9Day7OptionalActivities,
     },
@@ -303,7 +303,7 @@ export const icelandGroupWinter9: TripPackage = {
       "Sky lagoon 往返接駁巴士",
       "冰川健行體驗及安全裝備",
       "藍冰洞探險體驗及安全裝備",
-      "北部觀鯨體驗",
+      "北部賞鯨體驗",
       "車載WiFi",
       "台灣冰島雙時區服務",
       "VAT增值稅",

@@ -36,7 +36,7 @@ export const icelandGroupSummer9: TripPackage = {
   slug: "iceland-summer-9-day-tour-package-whale-watching-south-coast-west-iceland",
   tourCode: "SMD-093",
   title: "9 天 8 夜冰島夏季深度體驗跟團遊",
-  subtitle: "觀鯨&黑沙灘&西部小眾景觀",
+  subtitle: "賞鯨&黑沙灘&西部小眾景觀",
   duration: { days: 9, nights: 8 },
   season: { label: "夏季", months: "5 月–10 月" },
   meta: {
@@ -82,12 +82,12 @@ export const icelandGroupSummer9: TripPackage = {
   ],
   intro: {
     summary:
-      "這個 9 天 8 夜冰島夏季深度跟團遊，由品質小巴團與專業嚮導帶您走訪黃金圈、南岸、冰河湖、西部白銀圈與斯奈山半島，並安排火山內部探險與出海觀鯨。套餐含機場接送，夏季日照充沛，行程節奏適中、安排務實。",
-    full: `這個 9 天 8 夜冰島夏季深度跟團遊，由品質小巴團與專業嚮導帶您走訪黃金圈、南岸、冰河湖、西部白銀圈與斯奈山半島，並安排火山內部探險與出海觀鯨。套餐含機場接送，夏季日照充沛，行程安排合理、節奏適中。
+      "這個 9 天 8 夜冰島夏季深度跟團遊，由品質小巴團與專業嚮導帶您走訪黃金圈、南岸、冰河湖、西部白銀圈與斯奈山半島，並安排火山內部探險與出海賞鯨。套餐含機場接送，夏季日照充沛，行程節奏適中、安排務實。",
+    full: `這個 9 天 8 夜冰島夏季深度跟團遊，由品質小巴團與專業嚮導帶您走訪黃金圈、南岸、冰河湖、西部白銀圈與斯奈山半島，並安排火山內部探險與出海賞鯨。套餐含機場接送，夏季日照充沛，行程安排合理、節奏適中。
 
 您將造訪黃金圈三大景點——辛格維利爾國家公園（Þingvellir National Park）、蓋錫爾間歇泉地帶（Geysir）與黃金瀑布（Gullfoss）；沿南岸探索塞里雅蘭瀑布、斯科加瀑布，參加索爾黑馬冰川健行，並在黑沙灘（Reynisfjara）遠眺雷尼斯岩（Reynisdrangar），途中經過維克（Vík）。繼續造訪傑古沙龍冰河湖（Jökulsárlón）與鑽石沙灘（Diamond Beach）。
 
-西部白銀圈將遊覽熔岩瀑布（Hraunfossar）、德爾達圖赫菲溫泉（Deildartunguhver）與 Víðgelmir 熔岩洞穴；斯奈山半島則造訪教會山（Kirkjufell）與布迪爾黑教堂。行程另安排一日火山內部探險與出海觀鯨，並留有一日雷克雅維克自由行，可另行加購絲浮拉浮潛、溫泉體驗或內陸高地健行等夏季活動。完成預訂後，您將收到行程策劃師為您客製的中文行程手冊。`,
+西部白銀圈將遊覽熔岩瀑布（Hraunfossar）、德爾達圖赫菲溫泉（Deildartunguhver）與 Víðgelmir 熔岩洞穴；斯奈山半島則造訪教會山（Kirkjufell）與布迪爾黑教堂。行程另安排一日火山內部探險與出海賞鯨，並留有一日雷克雅維克自由行，可另行加購絲浮拉浮潛、溫泉體驗或內陸高地健行等夏季活動。完成預訂後，您將收到行程策劃師為您客製的中文行程手冊。`,
   },
   gallery: [
     {
@@ -159,7 +159,7 @@ export const icelandGroupSummer9: TripPackage = {
     { label: "第 4 天", detail: "傑古沙龍冰河湖 → 鑽石沙灘" },
     { label: "第 5 天", detail: "西部白銀圈" },
     { label: "第 6 天", detail: "斯奈山半島" },
-    { label: "第 7 天", detail: "火山內部探秘 & 出海觀鯨" },
+    { label: "第 7 天", detail: "火山內部探秘 & 出海賞鯨" },
     { label: "第 8 天", detail: "雷克雅維克（自由活動日）" },
     { label: "第 9 天", detail: "雷克雅維克 → 機場離境" }
   ],
@@ -205,7 +205,7 @@ export const icelandGroupSummer9: TripPackage = {
         lng: -21.9426,
         lat: 64.1466,
         label: "第 7 天",
-        detail: "火山內部探秘 & 出海觀鯨",
+        detail: "火山內部探秘 & 出海賞鯨",
       },
       {
         lng: -21.9426,
@@ -278,10 +278,10 @@ export const icelandGroupSummer9: TripPackage = {
     },
     {
       day: 7,
-      title: "火山 & 觀鯨",
+      title: "火山 & 賞鯨",
       accommodation: "—",
       description:
-        "今日安排兩項夏季特色體驗。上午搭乘開放式纜索電梯深入 Þríhnúkagígur 火山內部，在專業嚮導帶領下探索休眠火山的彩色岩壁與地質奇觀；火山內部探險僅於每年 5 月至 10 月開放。\n\n下午從雷克雅維克老港口出海觀鯨，專業船員將介紹當地海洋生態，夏季常可見到座頭鯨、小鬚鯨與海豚等海洋生物。若第一天未能前往 Sky Lagoon，亦可調整至今日。",
+        "今日安排兩項夏季特色體驗。上午搭乘開放式纜索電梯深入 Þríhnúkagígur 火山內部，在專業嚮導帶領下探索休眠火山的彩色岩壁與地質奇觀；火山內部探險僅於每年 5 月至 10 月開放。\n\n下午從雷克雅維克老港口出海賞鯨，專業船員將介紹當地海洋生態，夏季常可見到座頭鯨、小鬚鯨與海豚等海洋生物。若第一天未能前往 Sky Lagoon，亦可調整至今日。",
       highlights: icelandGroupSummer9Day7Highlights,
       optionalActivities: icelandGroupSummer9Day7OptionalActivities,
     },
@@ -320,7 +320,7 @@ export const icelandGroupSummer9: TripPackage = {
       "Vidgelmir熔岩洞穴探險及安全設備",
       "西部1晚舒適級住宿",
       "火山內部探險體驗及安全裝備",
-      "雷克雅維克觀鯨體驗",
+      "雷克雅維克賞鯨體驗",
       "台灣冰島雙時區服務",
       "車載WiFi",
       "VAT增值稅",

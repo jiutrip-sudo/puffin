@@ -3850,6 +3850,28 @@ html[data-theme="light"] .site-header:not(.site-header--on-surface) .glass-hero 
   box-shadow: 0 2px 14px rgb(0 0 0 / 22%);
 }
 
+html[data-theme="light"] .site-header:not(.site-header--on-surface) .site-theme-toggle,
+html[data-theme="light"] .site-header:not(.site-header--on-surface) .site-locale-toggle {
+  background: rgb(8 8 16 / 36%);
+  border-color: rgb(255 255 255 / 30%);
+  box-shadow: 0 2px 14px rgb(0 0 0 / 22%);
+  --theme-toggle-muted: rgb(255 255 255 / 84%);
+  --theme-toggle-active-bg: rgb(255 255 255 / 24%);
+  --theme-toggle-active-text: #ffffff;
+}
+
+html[data-theme="light"] .site-header:not(.site-header--on-surface) .site-theme-toggle__btn:hover,
+html[data-theme="light"] .site-header:not(.site-header--on-surface) .site-locale-toggle__btn:hover {
+  color: #ffffff;
+}
+
+html[data-theme="light"] .site-header:not(.site-header--on-surface) .site-theme-toggle__btn.is-active,
+html[data-theme="light"] .site-header:not(.site-header--on-surface) .site-locale-toggle__btn.is-active {
+  background: rgb(255 255 255 / 28%);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 38%);
+  color: #ffffff;
+}
+
 html[data-theme="light"] .hero-media-frame .glass-pill-button-face,
 html[data-theme="light"] .hero-media-frame .circle-button-face {
   background: rgb(8 8 16 / 38%);
@@ -4220,6 +4242,55 @@ html[data-theme="light"] .hero-media-frame .circle-button:hover .circle-button-f
 .site-locale-toggle__btn.is-active {
   background: var(--theme-toggle-active-bg);
   color: var(--theme-toggle-active-text);
+}
+
+@media (min-width: 768px) {
+  .site-theme-toggle,
+  .site-locale-toggle {
+    height: 2.125rem;
+    padding: 3px 4px;
+  }
+
+  .site-locale-toggle--compact .site-locale-toggle__btn {
+    min-width: 1.875rem;
+    padding: 0 0.5625rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.02em;
+  }
+
+  .site-theme-toggle__icon {
+    width: 15px;
+    height: 15px;
+  }
+
+  .site-header--on-surface {
+    --theme-toggle-muted: color-mix(in srgb, var(--foreground) 72%, transparent);
+    --theme-toggle-active-bg: color-mix(
+      in srgb,
+      var(--color-primary) 34%,
+      var(--background)
+    );
+    --glass-hero-border: color-mix(in srgb, var(--foreground) 18%, transparent);
+  }
+
+  [data-theme="dark"] .site-header--on-surface {
+    --theme-toggle-muted: color-mix(in srgb, var(--foreground) 80%, transparent);
+    --theme-toggle-active-bg: color-mix(
+      in srgb,
+      var(--color-primary) 40%,
+      var(--background)
+    );
+  }
+
+  .site-header--on-surface .site-theme-toggle__btn.is-active,
+  .site-header--on-surface .site-locale-toggle__btn.is-active {
+    box-shadow: inset 0 0 0 1px
+      color-mix(in srgb, var(--foreground) 16%, transparent);
+  }
+
+  .site-locale-toggle__btn.is-active {
+    font-weight: 700;
+  }
 }
 
 .site-header-mobile-bar {

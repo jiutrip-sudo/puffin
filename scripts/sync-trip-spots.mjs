@@ -557,7 +557,7 @@ const SPOT_CONFIGS = [
     exclude: "spots/inside-volcano.ts",
   },
   {
-    marker: /name: "雷克雅維克經典觀鯨",\s*region: "雷克雅維克",/,
+    marker: /name: "雷克雅維克經典賞鯨",\s*region: "雷克雅維克",/,
     importLine:
       'import { reykjavikWhaleWatchingSpot } from "./spots/reykjavik-whale-watching";',
     replacement: "reykjavikWhaleWatchingSpot",
@@ -680,7 +680,7 @@ const SPOT_CONFIGS = [
     exclude: "spots/solheimajokull-glacier-hiking.ts",
   },
   {
-    marker: /name: "雷克雅維克經典觀鯨",\s*imageUrl:/,
+    marker: /name: "雷克雅維克經典賞鯨",\s*imageUrl:/,
     importLine:
       'import { reykjavikWhaleWatchingSpot } from "./spots/reykjavik-whale-watching";',
     replacement: "reykjavikWhaleWatchingSpot",
@@ -728,7 +728,7 @@ const SPOT_CONFIGS = [
     exclude: "spots/hvammsvik-transfer.ts",
   },
   {
-    marker: /name: "胡薩維克Húsavík經典觀鯨",/,
+    marker: /name: "胡薩維克Húsavík經典賞鯨",/,
     importLine:
       'import { husavikWhaleWatchingSpot } from "./spots/husavik-whale-watching";',
     replacement: "husavikWhaleWatchingSpot",
@@ -920,7 +920,7 @@ const SPOT_CONFIGS = [
     exclude: "spots/vestmannaeyjar-day-tour.ts",
   },
   {
-    marker: /name: "豪加內斯（Hauganes）出海觀鯨 & 海釣體驗",/,
+    marker: /name: "豪加內斯（Hauganes）出海賞鯨 & 海釣體驗",/,
     importLine:
       'import { hauganesWhaleFishingSpot } from "./spots/hauganes-whale-fishing";',
     replacement: "hauganesWhaleFishingSpot",

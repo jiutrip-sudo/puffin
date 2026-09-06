@@ -45,7 +45,7 @@ export const icelandSelfDriveSummer11: TripPackage = {
   slug: "summer-self-drive-around-iceland-in-11-days",
   tourCode: "SSD-111",
   title: "11 天 10 夜冰島夏季驚喜環島自駕",
-  subtitle: "東部峽灣 & 出海觀鯨",
+  subtitle: "東部峽灣 & 出海賞鯨",
   duration: { days: 11, nights: 10 },
   season: { label: "夏季", months: "4 月–10 月" },
   meta: {
@@ -96,9 +96,9 @@ export const icelandSelfDriveSummer11: TripPackage = {
 
 您將造訪黃金圈三大景點——辛格維利爾國家公園（Þingvellir National Park）、蓋錫爾間歇泉地帶（Geysir）與黃金瀑布（Gullfoss）；沿南岸探索壯麗瀑布、冰川與黑沙灘（Reynisfjara），亦可另行加購冰川健行或冰河湖船遊。
 
-往東則穿越寧靜的東部峽灣海岸；北上造訪黛提瀑布（Dettifoss）與觀鯨之都胡薩維克（Húsavík），探索米湖（Lake Mývatn）火山地質奇景，並造訪眾神瀑布（Goðafoss）與「北方之都」阿克雷里（Akureyri）。回程則遊覽西部沿途風光，安排一日探索「冰島縮影」斯奈山半島（Snæfellsnes），並留有一日暢遊雷克雅維克。
+往東則穿越寧靜的東部峽灣海岸；北上造訪黛提瀑布（Dettifoss）與賞鯨之都胡薩維克（Húsavík），探索米湖（Lake Mývatn）火山地質奇景，並造訪眾神瀑布（Goðafoss）與「北方之都」阿克雷里（Akureyri）。回程則遊覽西部沿途風光，安排一日探索「冰島縮影」斯奈山半島（Snæfellsnes），並留有一日暢遊雷克雅維克。
 
-途中亦可另行加購觀鯨、溫泉體驗或絲浮拉浮潛等夏季活動。完成預訂後，您將收到行程策劃師為您客製的中文行程手冊，讓您輕鬆盡享冰島環島精華。`,
+途中亦可另行加購賞鯨、溫泉體驗或絲浮拉浮潛等夏季活動。完成預訂後，您將收到行程策劃師為您客製的中文行程手冊，讓您輕鬆盡享冰島環島精華。`,
   },
   gallery: [
     {
@@ -128,7 +128,7 @@ export const icelandSelfDriveSummer11: TripPackage = {
     "船遊冰河湖感受鑽石沙灘之美",
     "探訪冰島東部峽灣迷人景色",
     "前往冰島北部米湖地區感受不一樣的地貌",
-    "漫步阿克雷里，在胡薩維克出海觀鯨",
+    "漫步阿克雷里，在胡薩維克出海賞鯨",
     "擁有充足的時間首都自由行",
     "在探索冰島西部和斯奈山半島自然風光",
   ],
@@ -150,7 +150,7 @@ export const icelandSelfDriveSummer11: TripPackage = {
     { label: "第 3 天", detail: "南岸瀑布群 → 黑沙灘 → 維克 → 南岸住宿" },
     { label: "第 4 天", detail: "瓦特納冰川 → 傑古沙龍冰河湖 → 鑽石沙灘" },
     { label: "第 5 天", detail: "東部峽灣海岸公路 → 東部住宿" },
-    { label: "第 6 天", detail: "米湖、黛提瀑布、胡薩維克（出海觀鯨可選）→ 北部住宿" },
+    { label: "第 6 天", detail: "米湖、黛提瀑布、胡薩維克（出海賞鯨可選）→ 北部住宿" },
     { label: "第 7 天", detail: "眾神瀑布 → 阿克雷里 → 冰島北部" },
     { label: "第 8 天", detail: "西部沿途風光 → 雷克雅維克" },
     { label: "第 9 天", detail: "斯奈山半島（教會山 → 斯蒂基斯霍爾米 → 海岸漁村）" },
@@ -278,7 +278,7 @@ export const icelandSelfDriveSummer11: TripPackage = {
       title: "米湖、黛提瀑布、胡薩維克",
       accommodation: "米湖地區",
       description:
-        "今日繼續北上，途經黛提瀑布（Dettifoss）與觀鯨小鎮胡薩維克（Húsavík），抵達米湖（Lake Mývatn）地區。夏季米湖水鳥豐富，地熱奇景與熔岩地貌交織，是觀鳥與地質探索的絕佳時節。\n\n亦可另行加購觀鯨、米湖溫泉或 Geosea 海水溫泉等體驗。今晚入住米湖地區。",
+        "今日繼續北上，途經黛提瀑布（Dettifoss）與賞鯨小鎮胡薩維克（Húsavík），抵達米湖（Lake Mývatn）地區。夏季米湖水鳥豐富，地熱奇景與熔岩地貌交織，是觀鳥與地質探索的絕佳時節。\n\n亦可另行加購賞鯨、米湖溫泉或 Geosea 海水溫泉等體驗。今晚入住米湖地區。",
       highlights: icelandSelfDriveSummer11Day6Highlights,
       optionalActivities: icelandSelfDriveSummer11Day6OptionalActivities,
     },

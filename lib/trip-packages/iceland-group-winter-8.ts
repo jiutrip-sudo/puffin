@@ -90,7 +90,7 @@ export const icelandGroupWinter8: TripPackage = {
 
 您將造訪黃金圈三大景點——辛格維利爾國家公園（Þingvellir National Park）、蓋錫爾間歇泉地帶（Geysir）與黃金瀑布（Gullfoss）；沿南岸探索塞里雅蘭瀑布、斯科加瀑布、黑沙灘（Reynisfjara）與雷尼斯岩（Reynisdrangar），並參加索爾黑馬冰川健行與藍冰洞探險。
 
-往東穿越東部峽灣海岸，北上米湖（Lake Mývatn）地區，遊覽 Hverir 地熱區、黑暗城堡（Dimmuborgir）與眾神瀑布（Goðafoss）；回程前於豪加內斯（Hauganes）出海觀鯨。天候許可時，亦有機會在途中共賞北極光。
+往東穿越東部峽灣海岸，北上米湖（Lake Mývatn）地區，遊覽 Hverir 地熱區、黑暗城堡（Dimmuborgir）與眾神瀑布（Goðafoss）；回程前於豪加內斯（Hauganes）出海賞鯨。天候許可時，亦有機會在途中共賞北極光。
 
 完成預訂後，您將收到行程策劃師為您客製的中文行程手冊。冬季環島團發團日期及團次位置有限，預訂前請確認出發日是否有餘位。`,
   },
@@ -143,7 +143,7 @@ export const icelandGroupWinter8: TripPackage = {
     { label: "第 4 天", detail: "傑古沙龍冰河湖 → 鑽石沙灘 → 藍冰洞" },
     { label: "第 5 天", detail: "東部峽灣風光" },
     { label: "第 6 天", detail: "米湖 → Hverir 地熱區 → 黑暗城堡 → 眾神瀑布" },
-    { label: "第 7 天", detail: "阿克雷里 → 北部觀鯨 → 返回雷克雅維克" },
+    { label: "第 7 天", detail: "阿克雷里 → 北部賞鯨 → 返回雷克雅維克" },
     { label: "第 8 天", detail: "雷克雅維克 → 機場離境" }
   ],
   routeMap: {
@@ -188,7 +188,7 @@ export const icelandGroupWinter8: TripPackage = {
         lng: -18.09,
         lat: 65.68,
         label: "第 7 天",
-        detail: "阿克雷里 → 觀鯨",
+        detail: "阿克雷里 → 賞鯨",
       },
       {
         lng: -21.9426,
@@ -255,10 +255,10 @@ export const icelandGroupWinter8: TripPackage = {
     },
     {
       day: 7,
-      title: "阿克雷里、北部觀鯨體驗",
+      title: "阿克雷里、北部賞鯨體驗",
       accommodation: "雷克雅維克",
       description:
-        "今日從北部阿克雷里（Akureyri）返程。出發前於豪加內斯（Hauganes）出海觀鯨，專業船員帶領您在大西洋上尋找座頭鯨、海豚等海洋生物。\n\n觀鯨結束後沿一號公路返回雷克雅維克，途中視天候於精選景點短暫停留。今晚入住雷克雅維克。",
+        "今日從北部阿克雷里（Akureyri）返程。出發前於豪加內斯（Hauganes）出海賞鯨，專業船員帶領您在大西洋上尋找座頭鯨、海豚等海洋生物。\n\n賞鯨結束後沿一號公路返回雷克雅維克，途中視天候於精選景點短暫停留。今晚入住雷克雅維克。",
       highlights: icelandGroupWinter8Day7Highlights,
       optionalActivities: icelandGroupWinter8Day7OptionalActivities,
     },
@@ -285,7 +285,7 @@ export const icelandGroupWinter8: TripPackage = {
       "Sky lagoon 往返接駁巴士",
       "冰川健行體驗及安全裝備",
       "藍冰洞探險體驗及安全裝備",
-      "北部觀鯨體驗",
+      "北部賞鯨體驗",
       "車載WiFi",
       "台灣冰島雙時區服務",
       "VAT增值稅",

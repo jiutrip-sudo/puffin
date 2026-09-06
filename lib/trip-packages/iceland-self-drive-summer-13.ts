@@ -108,9 +108,9 @@ export const icelandSelfDriveSummer13: TripPackage = {
 
 您將造訪黃金圈三大景點——辛格維利爾國家公園（Þingvellir National Park）、蓋錫爾間歇泉地帶（Geysir）與黃金瀑布（Gullfoss）；沿南岸探索壯麗瀑布、冰川與黑沙灘（Reynisfjara），亦可另行加購冰川健行或冰河湖船遊。
 
-往東則穿越寧靜的東部峽灣海岸；北上造訪黛提瀑布（Dettifoss）與觀鯨之都胡薩維克（Húsavík），探索米湖（Lake Mývatn）火山地質奇景，並造訪阿克雷里（Akureyri）與巨魔半島海岸。回程則遊覽西北部與西部白銀圈風光，安排一日探索「冰島縮影」斯奈山半島（Snæfellsnes），並留有一日暢遊雷克雅維克與雷克雅內斯半島。
+往東則穿越寧靜的東部峽灣海岸；北上造訪黛提瀑布（Dettifoss）與賞鯨之都胡薩維克（Húsavík），探索米湖（Lake Mývatn）火山地質奇景，並造訪阿克雷里（Akureyri）與巨魔半島海岸。回程則遊覽西北部與西部白銀圈風光，安排一日探索「冰島縮影」斯奈山半島（Snæfellsnes），並留有一日暢遊雷克雅維克與雷克雅內斯半島。
 
-途中亦可另行加購觀鯨、溫泉體驗或絲浮拉浮潛等夏季活動。完成預訂後，您將收到行程策劃師為您客製的中文行程手冊，讓您輕鬆盡享冰島環島精華。`,
+途中亦可另行加購賞鯨、溫泉體驗或絲浮拉浮潛等夏季活動。完成預訂後，您將收到行程策劃師為您客製的中文行程手冊，讓您輕鬆盡享冰島環島精華。`,
   },
   gallery: [
     {
@@ -138,7 +138,7 @@ export const icelandSelfDriveSummer13: TripPackage = {
     "造訪熱門黃金圈景點",
     "感受壯闊的冰島南岸瀑布",
     "置身冰河湖船遊感受純淨冰晶",
-    "前往鯨魚之都胡薩維克觀鯨",
+    "前往鯨魚之都胡薩維克賞鯨",
     "感受冰島北部米湖地區的別樣風採",
     "探索冰島西部白銀圈及沿途風光",
     "前往冰島縮影斯奈山半島",
@@ -164,7 +164,7 @@ export const icelandSelfDriveSummer13: TripPackage = {
     { label: "第 3 天", detail: "南岸瀑布群 → 瓦特納冰川 → 黑沙灘 → 維克" },
     { label: "第 4 天", detail: "瓦特納冰川 → 傑古沙龍冰河湖 → 鑽石沙灘" },
     { label: "第 5 天", detail: "東部峽灣漁村海岸公路 → 東部住宿" },
-    { label: "第 6 天", detail: "黛提瀑布 → 胡薩維克觀鯨 → 米湖地區" },
+    { label: "第 6 天", detail: "黛提瀑布 → 胡薩維克賞鯨 → 米湖地區" },
     { label: "第 7 天", detail: "阿克雷里 → 巨魔半島（錫格呂菲厄澤）→ 北部" },
     { label: "第 8 天", detail: "西北部風光（布倫迪歐斯 → 華姆斯唐吉）" },
     { label: "第 9 天", detail: "西部白銀圈（熔岩瀑布 → 兒童瀑布）" },
@@ -303,10 +303,10 @@ export const icelandSelfDriveSummer13: TripPackage = {
     },
     {
       day: 6,
-      title: "黛提瀑布、胡薩維克觀鯨、米湖",
+      title: "黛提瀑布、胡薩維克賞鯨、米湖",
       accommodation: "米湖地區",
       description:
-        "今日繼續北上，途經黛提瀑布（Dettifoss）與觀鯨小鎮胡薩維克（Húsavík），抵達米湖（Lake Mývatn）地區。夏季米湖水鳥豐富，地熱奇景與熔岩地貌交織，是觀鳥與地質探索的絕佳時節。\n\n亦可另行加購觀鯨、米湖溫泉或 Geosea 海水溫泉等體驗。今晚入住米湖地區。",
+        "今日繼續北上，途經黛提瀑布（Dettifoss）與賞鯨小鎮胡薩維克（Húsavík），抵達米湖（Lake Mývatn）地區。夏季米湖水鳥豐富，地熱奇景與熔岩地貌交織，是觀鳥與地質探索的絕佳時節。\n\n亦可另行加購賞鯨、米湖溫泉或 Geosea 海水溫泉等體驗。今晚入住米湖地區。",
       highlights: icelandSelfDriveSummer13Day6Highlights,
       optionalActivities: icelandSelfDriveSummer13Day6OptionalActivities,
     },

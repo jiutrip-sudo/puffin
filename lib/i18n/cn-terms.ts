@@ -18,6 +18,7 @@ export const CN_TERMS: ReadonlyArray<readonly [string, string]> = [
   ["台灣", "台湾"],
   ["台灣出發", "台湾出发"],
   ["台灣旅客", "中国旅客"],
+  ["台湾旅客", "中国旅客"],
   ["飯店", "酒店"],
   ["並入", "并入"],
   ["為您", "为您"],
@@ -51,5 +52,6 @@ export const CN_TERMS: ReadonlyArray<readonly [string, string]> = [
   ["被盜", "被盗"],
   ["行程手冊", "行程手册"],
   ["冰川健行", "冰川徒步"],
+  ["赏鲸", "观鲸"],
   ["帕芬假期", "帕芬假期"],
 ];

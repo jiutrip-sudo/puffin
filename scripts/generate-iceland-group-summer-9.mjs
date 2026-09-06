@@ -332,7 +332,7 @@ function extractPackageMeta(decoded) {
   const headerTitle = headerMatch?.[1] ?? "";
   const subtitle = headerTitle.includes("：")
     ? headerTitle.split("：").slice(1).join("：")
-    : "觀鯨 & 黑沙灘 & 西部小眾景觀";
+    : "賞鯨 & 黑沙灘 & 西部小眾景觀";
 
   const heroFiles = [
     ...(
@@ -552,7 +552,7 @@ function renderPackage(meta, dayData) {
     "傑古沙龍冰河湖 → 鑽石沙灘",
     "西部白銀圈",
     "斯奈山半島",
-    "火山內部探秘 & 出海觀鯨",
+    "火山內部探秘 & 出海賞鯨",
     "雷克雅未克（自由活動日）",
     "雷克雅未克 → 機場離境",
   ];
@@ -717,7 +717,7 @@ ${routeStops.join(",\n")}
         lng: -21.9426,
         lat: 64.1466,
         label: "第 7 天",
-        detail: "火山內部探秘 & 出海觀鯨",
+        detail: "火山內部探秘 & 出海賞鯨",
       },
       {
         lng: -21.9426,
