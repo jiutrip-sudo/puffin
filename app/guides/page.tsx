@@ -29,7 +29,9 @@ export default async function GuidesIndexPage() {
       variant="compact"
       title={localizeText("冰島旅遊攻略", locale)}
       description={localizeText(
-        `${articles.length} 篇出發前必讀，依規劃階段從選方式、抓天數到預訂出發。`,
+        articles.length === 0
+          ? "冰島旅遊規劃攻略整理中，可先瀏覽行程或聯絡顧問。"
+          : `${articles.length} 篇出發前必讀，依規劃階段從選方式、抓天數到預訂出發。`,
         locale,
       )}
     >

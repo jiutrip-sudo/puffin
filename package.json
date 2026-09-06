@@ -14,6 +14,7 @@
     "audit:places": "node scripts/audit-place-names.mjs --fail",
     "audit:images": "node scripts/audit-images.mjs",
     "audit:tw": "node scripts/audit-tw-terms.mjs",
+    "guides:publish": "npx tsx scripts/publish-guide.mjs",
     "media:inventory": "node scripts/build-media-inventory.mjs && node scripts/build-trip-media-inventory.mjs && node scripts/build-pricing-media-inventory.mjs && node scripts/build-guides-media-inventory.mjs",
     "media:inventory:trips": "node scripts/build-trip-media-inventory.mjs",
     "media:inventory:pricing": "node scripts/build-pricing-media-inventory.mjs",

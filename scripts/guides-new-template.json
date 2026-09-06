@@ -1,0 +1,46 @@
+{
+  "_meta": {
+    "notes": "從零建立新攻略：填好後 npm run guides:publish -- scripts/guides-new-template.json",
+    "journeyStageOptions": [
+      "choose-mode",
+      "plan-days",
+      "prepare",
+      "book"
+    ],
+    "doNotUseMarkdownCodeFencesInChatGptOutput": true
+  },
+  "slug": "your-article-slug",
+  "title": "攻略標題（台灣繁中）",
+  "description": "SEO 摘要，約 60–120 字",
+  "category": "分類標籤，例如：冬季自駕",
+  "journeyStage": "choose-mode",
+  "featured": false,
+  "coverR2Key": "guides/assets/group-tour-vs-self-drive.webp",
+  "publishedAt": "2026-03-15",
+  "featuredTrip": {
+    "href": "/trips/iceland/self-drive/winter/4",
+    "title": "對應行程標題",
+    "blurb": "CTA 簡述，一至兩句"
+  },
+  "sections": [
+    {
+      "heading": "第一節標題",
+      "image": {
+        "r2Key": "spots/reykjavik/cover.webp",
+        "alt": "雷克雅維克市區天際線",
+        "caption": "可選圖說"
+      },
+      "paragraphs": ["段落一。", "段落二。"],
+      "bullets": ["條列一", "條列二"]
+    },
+    {
+      "heading": "第二節標題",
+      "image": {
+        "r2Key": "spots/gullfoss/cover.webp",
+        "alt": "黃金瀑布冬季景色"
+      },
+      "paragraphs": ["…"],
+      "bullets": []
+    }
+  ]
+}

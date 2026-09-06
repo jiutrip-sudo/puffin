@@ -106,15 +106,26 @@ export function GuidesIndexGrid({ articles }: GuidesIndexGridProps) {
       {visibleArticles.length === 0 ? (
         <div className="guides-index-grid__empty">
           <p className="guides-index-grid__empty-title">
-            {localizeText("沒有符合條件的攻略", locale)}
+            {articles.length === 0
+              ? localizeText("攻略內容整理中，敬請期待。", locale)
+              : localizeText("沒有符合條件的攻略", locale)}
           </p>
-          <button
-            type="button"
-            onClick={() => setStageFilter("all")}
-            className="guides-index-grid__empty-reset"
-          >
-            {localizeText("顯示全部攻略", locale)}
-          </button>
+          {articles.length === 0 ? (
+            <Link
+              href={localePath("/trips", locale)}
+              className="guides-index-grid__empty-reset"
+            >
+              {localizeText("先瀏覽冰島行程 →", locale)}
+            </Link>
+          ) : (
+            <button
+              type="button"
+              onClick={() => setStageFilter("all")}
+              className="guides-index-grid__empty-reset"
+            >
+              {localizeText("顯示全部攻略", locale)}
+            </button>
+          )}
         </div>
       ) : (
         <div className="guides-index-grid__rails">
@@ -135,16 +146,21 @@ export function GuidesIndexGrid({ articles }: GuidesIndexGridProps) {
                   {localizeText(`${stageArticles.length} 篇`, locale)}
                 </span>
               </div>
-              <ul className="guides-index-rail__track">
-                {stageArticles.map((article) => (
-                  <GuideIndexCard
-                    key={article.slug}
-                    article={article}
-                    locale={locale}
-                    layout="rail"
-                  />
-                ))}
-              </ul>
+              <div className="scroll-carousel">
+                <ul className="guides-index-rail__track">
+                  {stageArticles.map((article) => (
+                    <GuideIndexCard
+                      key={article.slug}
+                      article={article}
+                      locale={locale}
+                      layout="rail"
+                    />
+                  ))}
+                </ul>
+                <p className="scroll-carousel__hint">
+                  {localizeText("左右滑動查看更多", locale)}
+                </p>
+              </div>
             </section>
           ))}
         </div>

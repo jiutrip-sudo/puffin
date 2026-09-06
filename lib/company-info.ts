@@ -20,8 +20,11 @@ export const DEFAULT_OG_IMAGE = {
   alt: SITE_DISPLAY_NAME,
 } as const;
 
+/** 官方 LINE 加好友／客服連結 */
+export const COMPANY_LINE_URL = "https://lin.ee/XJTgHN5";
+
 export const SOCIAL_LINKS = [
-  { id: "line", href: "https://lin.ee/XJTgHN5", label: "LINE" },
+  { id: "line", href: COMPANY_LINE_URL, label: "LINE" },
   { id: "threads", href: "https://www.threads.com/@puffin.tw", label: "Threads" },
   { id: "facebook", href: "https://www.facebook.com/puffin.tw", label: "Facebook" },
   { id: "instagram", href: "https://www.instagram.com/puffin.tw/", label: "Instagram" },

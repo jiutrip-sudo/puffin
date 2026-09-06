@@ -1,5 +1,5 @@
 import { TripImage } from "@/components/trip-package/TripImage";
-import { SiteHeaderShell } from "@/components/SiteHeaderShell";
+import { GuideArticleScrollHeader } from "@/components/guides/GuideArticleScrollHeader";
 
 type GuideArticleShellProps = {
   activeLabel: string;
@@ -14,6 +14,8 @@ export function GuideArticleShell({
 }: GuideArticleShellProps) {
   return (
     <div className="guides-article-page">
+      <GuideArticleScrollHeader activeLabel={activeLabel} />
+
       <header className="guides-article-page__hero">
         <TripImage
           src={coverImage}
@@ -24,7 +26,6 @@ export function GuideArticleShell({
           sizes="100vw"
         />
         <div className="guides-article-page__hero-overlay" aria-hidden="true" />
-        <SiteHeaderShell variant="overlay" activeLabel={activeLabel} />
       </header>
 
       <div className="guides-article-page__surface">{children}</div>

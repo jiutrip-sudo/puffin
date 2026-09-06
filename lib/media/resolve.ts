@@ -161,24 +161,55 @@ export function applyPricingConfigMedia(config: PricingConfig): PricingConfig {
   };
 }
 
-export function applyGuideArticleMedia<T extends { slug: string; coverImage: string }>(
-  article: T,
-): T {
+export function applyGuideArticleMedia<
+  T extends {
+    slug: string;
+    coverImage: string;
+    sections?: Array<{
+      image?: { src: string; alt: string; caption?: string };
+    }>;
+  },
+>(article: T): T {
   return {
     ...article,
     coverImage: resolveGuideCoverImage(article),
+    ...(article.sections
+      ? {
+          sections: article.sections.map((section) =>
+            section.image
+              ? {
+                  ...section,
+                  image: {
+                    ...section.image,
+                    src: resolveGuideSectionImageSrc(section.image.src),
+                  },
+                }
+              : section,
+          ),
+        }
+      : {}),
   };
+}
+
+function resolveGuideSectionImageSrc(src: string): string {
+  if (src.includes("senlinmao.com")) {
+    return resolveSenlinmaoUrl(src);
+  }
+  return src;
 }
 
 function resolveGuideCoverImage(article: {
   slug: string;
   coverImage: string;
 }): string {
-  if (!article.coverImage.includes("senlinmao.com")) {
+  const base = mediaBaseUrl();
+  if (base && article.coverImage.startsWith(`${base}/`)) {
     return article.coverImage;
   }
 
-  const base = mediaBaseUrl();
+  if (!article.coverImage.includes("senlinmao.com")) {
+    return article.coverImage;
+  }
   const entry = (guidesLegacyMap as Record<string, GuidesLegacyEntry>)[
     article.slug
   ];

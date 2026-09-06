@@ -1,0 +1,58 @@
+{
+  "_meta": {
+    "notes": "僅使用 manifest.json 內的 r2Key。draft JSON 用 coverR2Key 與 sections[].image.r2Key。"
+  },
+  "covers": {
+    "group-tour-vs-self-drive": "guides/assets/group-tour-vs-self-drive.webp",
+    "how-to-book-and-pay": "guides/assets/how-to-book-and-pay.webp",
+    "iceland-winter-self-drive-days": "guides/assets/iceland-winter-self-drive-days.webp",
+    "iceland-winter-driving-prep": "guides/assets/iceland-winter-driving-prep.webp",
+    "summer-ring-road-days": "guides/assets/summer-ring-road-days.webp",
+    "northern-lights-season": "guides/assets/northern-lights-season.webp"
+  },
+  "byArticle": {
+    "group-tour-vs-self-drive": [
+      "guides/assets/group-tour-vs-self-drive.webp",
+      "trips/assets/5e073a69d6.webp",
+      "spots/golden-circle/cover.webp",
+      "trips/assets/iceland-self-drive-winter-06.webp",
+      "spots/reykjavik/cover.webp"
+    ],
+    "how-to-book-and-pay": [
+      "guides/assets/how-to-book-and-pay.webp",
+      "spots/reykjavik/cover.webp",
+      "spots/hallgrimskirkja/cover.webp",
+      "spots/keflavik-airport/cover.webp",
+      "spots/old-harbour/cover.webp"
+    ],
+    "iceland-winter-self-drive-days": [
+      "guides/assets/iceland-winter-self-drive-days.webp",
+      "spots/skogafoss/cover.webp",
+      "spots/reynisfjara/cover.webp",
+      "spots/jokulsarlon/cover.webp",
+      "spots/gullfoss/cover.webp"
+    ],
+    "iceland-winter-driving-prep": [
+      "guides/assets/iceland-winter-driving-prep.webp",
+      "trips/assets/h6-a4177.webp",
+      "spots/skaftafell-glacier-hiking/cover.webp",
+      "pricing/assets/type-r3-car-jpg-a123239eaa.webp",
+      "spots/seljalandsfoss/cover.webp",
+      "trips/assets/ice-black-beach.webp"
+    ],
+    "summer-ring-road-days": [
+      "guides/assets/summer-ring-road-days.webp",
+      "spots/studlagil/cover.webp",
+      "spots/myvatn/cover.webp",
+      "spots/dettifoss/cover.webp",
+      "spots/akureyri/cover.webp"
+    ],
+    "northern-lights-season": [
+      "guides/assets/northern-lights-season.webp",
+      "spots/kirkjufell/cover.webp",
+      "spots/aurora-mini-bus/cover.webp",
+      "pricing/assets/lights1.webp",
+      "spots/jokulsarlon/cover.webp"
+    ]
+  }
+}
