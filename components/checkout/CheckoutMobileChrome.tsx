@@ -83,26 +83,28 @@ export function CheckoutMobileChrome({
 
   return (
     <>
-      <div className="checkout-mobile-chrome__compact">
-        <div className="checkout-mobile-chrome__compact-inner">
-          <p className="checkout-mobile-chrome__compact-total">
-            <span className="checkout-mobile-chrome__compact-label">總計</span>
-            <span className="checkout-mobile-chrome__compact-value tabular-nums">
-              {loading ? <BookingShimmer variant="badge" /> : totalLabel}
-            </span>
-          </p>
-          <span className="checkout-mobile-chrome__compact-divider" aria-hidden="true" />
-          <button
-            type="button"
-            className="checkout-mobile-chrome__summary-toggle"
-            onClick={() => setSheetOpen(true)}
-            aria-expanded={sheetOpen}
-          >
-            顯示完整摘要
-            <ChevronDownIcon />
-          </button>
+      {!(showPrimaryCta && onPrimaryAction) && (
+        <div className="checkout-mobile-chrome__compact">
+          <div className="checkout-mobile-chrome__compact-inner">
+            <p className="checkout-mobile-chrome__compact-total">
+              <span className="checkout-mobile-chrome__compact-label">總計</span>
+              <span className="checkout-mobile-chrome__compact-value tabular-nums">
+                {loading ? <BookingShimmer variant="badge" /> : totalLabel}
+              </span>
+            </p>
+            <span className="checkout-mobile-chrome__compact-divider" aria-hidden="true" />
+            <button
+              type="button"
+              className="checkout-mobile-chrome__summary-toggle"
+              onClick={() => setSheetOpen(true)}
+              aria-expanded={sheetOpen}
+            >
+              顯示完整摘要
+              <ChevronDownIcon />
+            </button>
+          </div>
         </div>
-      </div>
+      )}
 
       {sheetOpen && (
         <div className="checkout-summary-sheet" role="dialog" aria-modal="true" aria-label="訂單摘要">

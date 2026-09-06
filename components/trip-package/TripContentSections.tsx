@@ -6,6 +6,7 @@ import type { RouteMapConfig, ValueProp } from "@/lib/trip-packages/types";
 import { ROUTE_MAP_SKELETON_CLASS } from "./trip-route-map-layout";
 import { useSiteLocale } from "@/components/SiteLocaleProvider";
 import { t } from "@/lib/i18n/messages";
+import { localizeText } from "@/lib/i18n/localize";
 
 const TripRouteMap = dynamic(() => import("./TripRouteMap"), {
   ssr: false,
@@ -109,32 +110,39 @@ function TripRouteStopChips({
 }: {
   stops: TripRouteOverviewProps["stops"];
 }) {
+  const locale = useSiteLocale();
+
   return (
-    <ol
-      className="-mx-4 flex gap-3 overflow-x-auto scroll-pl-4 scroll-pr-4 px-4 pb-1 snap-x snap-mandatory [-ms-overflow-style:none] [scrollbar-width:none] md:mx-0 md:grid md:grid-cols-2 md:gap-3 md:overflow-visible md:scroll-pl-0 md:scroll-pr-0 md:px-0 md:snap-none lg:grid-cols-4 [&::-webkit-scrollbar]:hidden"
-      aria-label="路線站點"
-    >
-      {stops.map((stop, index) => (
-        <li
-          key={stop.label}
-          className="flex min-w-[min(100%,240px)] shrink-0 snap-start gap-3 rounded-2xl border border-foreground/10 bg-background p-3.5 md:min-w-0"
-        >
-          <span
-            className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary-dark text-xs font-bold text-white"
+    <div className="scroll-carousel md:contents">
+      <ol
+        className="-mx-4 flex gap-3 overflow-x-auto scroll-pl-4 scroll-pr-4 px-4 pb-1 snap-x snap-mandatory [-ms-overflow-style:none] [scrollbar-width:none] md:mx-0 md:grid md:grid-cols-2 md:gap-3 md:overflow-visible md:scroll-pl-0 md:scroll-pr-0 md:px-0 md:snap-none lg:grid-cols-4 [&::-webkit-scrollbar]:hidden"
+        aria-label="路線站點"
+      >
+        {stops.map((stop, index) => (
+          <li
+            key={stop.label}
+            className="flex min-w-[min(100%,240px)] shrink-0 snap-start gap-3 rounded-2xl border border-foreground/10 bg-background p-3.5 md:min-w-0"
           >
-            {index + 1}
-          </span>
-          <div className="min-w-0">
-            <p className="font-semibold text-foreground">{stop.label}</p>
-            {stop.detail && (
-              <p className="mt-1 text-sm leading-snug text-foreground/70">
-                {stop.detail}
-              </p>
-            )}
-          </div>
-        </li>
-      ))}
-    </ol>
+            <span
+              className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary-dark text-xs font-bold text-white"
+            >
+              {index + 1}
+            </span>
+            <div className="min-w-0">
+              <p className="font-semibold text-foreground">{stop.label}</p>
+              {stop.detail && (
+                <p className="mt-1 text-sm leading-snug text-foreground/70">
+                  {stop.detail}
+                </p>
+              )}
+            </div>
+          </li>
+        ))}
+      </ol>
+      <p className="scroll-carousel__hint px-4 md:hidden">
+        {localizeText("左右滑動查看更多", locale)}
+      </p>
+    </div>
   );
 }
 

@@ -63,27 +63,36 @@ export function TripSpotDetailModal({ spot, onClose }: TripSpotDetailModalProps)
 
   return (
     <div
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 p-4 backdrop-blur-sm"
+      className="fixed inset-0 z-[100] max-md:flex max-md:items-end md:flex md:items-center md:justify-center md:bg-black/50 md:p-4 md:backdrop-blur-sm"
       role="dialog"
       aria-modal="true"
       aria-labelledby="spot-modal-title"
-      onClick={onClose}
     >
+      <button
+        type="button"
+        className="absolute inset-0 bg-black/40 md:bg-black/50"
+        aria-label="關閉"
+        onClick={onClose}
+      />
       <div
-        className="relative flex max-h-[90vh] w-full max-w-[800px] flex-col overflow-hidden rounded-[20px] bg-background shadow-xl"
+        className="relative flex max-h-[92vh] w-full flex-col overflow-hidden bg-background shadow-xl max-md:rounded-t-2xl max-md:pb-[max(1rem,env(safe-area-inset-bottom))] md:max-h-[90vh] md:max-w-[800px] md:rounded-[20px]"
         onClick={(event) => event.stopPropagation()}
       >
+        <div
+          className="mx-auto mt-2 mb-1 h-1 w-10 shrink-0 rounded-full bg-foreground/15 md:hidden"
+          aria-hidden="true"
+        />
         <button
           type="button"
           onClick={onClose}
-          className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-foreground/5 text-lg text-foreground/70 transition-colors hover:bg-foreground/10"
+          className="absolute right-4 top-4 z-10 flex h-11 w-11 items-center justify-center rounded-full bg-foreground/5 text-lg text-foreground/70 transition-colors hover:bg-foreground/10"
           aria-label="關閉"
         >
           ×
         </button>
 
-        <div className="overflow-y-auto">
-          <div className="px-6 pb-8 pt-10 md:px-10">
+        <div className="overflow-y-auto overscroll-contain">
+          <div className="px-6 pb-8 pt-8 md:px-10 md:pt-10">
             {displaySpot.region && (
               <p className="mb-3 text-sm font-semibold text-primary">
                 {displaySpot.region}

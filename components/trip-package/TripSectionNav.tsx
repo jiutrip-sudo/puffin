@@ -7,12 +7,17 @@ import { localizeText } from "@/lib/i18n/localize";
 
 type TripSectionNavProps = {
   elevated?: boolean;
+  /** 捲動離開 Hero 後收斂高度，減少行動版 sticky 占用 */
+  compact?: boolean;
   /** 無租車選項的跟團套餐使用「房型」 */
   roomSectionLabel?: string;
 };
 
 export const TripSectionNav = forwardRef<HTMLElement, TripSectionNavProps>(
-  function TripSectionNav({ elevated = false, roomSectionLabel = "房型車型" }, ref) {
+  function TripSectionNav(
+    { elevated = false, compact = false, roomSectionLabel = "房型車型" },
+    ref,
+  ) {
   const locale = useSiteLocale();
   const [activeId, setActiveId] = useState<string>("overview");
 
@@ -57,13 +62,19 @@ export const TripSectionNav = forwardRef<HTMLElement, TripSectionNavProps>(
       }`}
       aria-label={t("trip.nav.sections", locale)}
     >
-      <div className="mx-auto flex max-w-7xl gap-1 overflow-x-auto px-4 py-2 md:px-8 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+      <div
+        className={`mx-auto flex max-w-7xl gap-1 overflow-x-auto px-4 md:px-8 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${
+          compact ? "py-1.5 md:py-2" : "py-2"
+        }`}
+      >
         {sections.map(({ id, label }) => (
           <a
             key={id}
             href={`#${id}`}
             onClick={() => setActiveId(id)}
-            className={`shrink-0 rounded-full px-4 py-2 text-sm font-medium transition-colors ${
+            className={`shrink-0 rounded-full font-medium transition-colors ${
+              compact ? "px-3 py-1.5 text-xs md:px-4 md:py-2 md:text-sm" : "px-4 py-2 text-sm"
+            } ${
               activeId === id
                 ? "bg-primary-dark text-white"
                 : "text-foreground/70 hover:bg-primary/10 hover:text-foreground"

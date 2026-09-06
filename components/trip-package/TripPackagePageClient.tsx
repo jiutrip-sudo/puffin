@@ -306,6 +306,7 @@ export function TripPackagePageClient({
       <TripSectionNav
         ref={navRef}
         elevated={headerElevated}
+        compact={headerElevated}
         roomSectionLabel={
           packageIncludesVehicle(pricingConfig)
             ? t("trip.nav.roomVehicleShort", locale)
@@ -348,7 +349,10 @@ export function TripPackagePageClient({
         )}
       </TripPackageBookingSection>
 
-      <div className="h-24 lg:hidden" aria-hidden />
+      <div
+        className="h-[calc(5.5rem+env(safe-area-inset-bottom))] lg:hidden"
+        aria-hidden
+      />
     </div>
   );
 }

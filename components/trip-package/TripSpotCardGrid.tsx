@@ -3,6 +3,7 @@
 import { TripImage } from "@/components/trip-package/TripImage";
 import { useSiteLocale } from "@/components/SiteLocaleProvider";
 import { localizeTripSpot } from "@/lib/trip-packages/localize-trip-spot";
+import { localizeText } from "@/lib/i18n/localize";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { TripAttraction } from "@/lib/trip-packages/types";
 import { TripSpotDetailModal } from "./TripSpotDetailModal";
@@ -110,50 +111,57 @@ export function TripSpotCardGrid({
           </button>
         )}
 
-        <div
-          ref={scrollRef}
-          className="trip-spot-scroll -mx-4 flex gap-6 overflow-x-auto scroll-pl-4 scroll-pr-4 px-4 pb-1 md:mx-0 md:scroll-pl-0 md:scroll-pr-0 md:px-0 snap-x snap-mandatory [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-          aria-label={scrollAriaLabel}
-        >
-          {displayItems.map((spot, index) => (
-            <button
-              key={`${spot.nameEn ?? spot.name}-${spot.imageUrl}`}
-              type="button"
-              onClick={() => openSpot(items[index])}
-              className={`group w-[159px] shrink-0 cursor-pointer snap-start overflow-hidden ${TRIP_SPOT_CARD_RADIUS} border border-foreground/5 bg-background text-left shadow-sm transition-[transform,box-shadow,ring-color] hover:scale-[1.02] hover:shadow-md hover:ring-2 hover:ring-primary/35 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2`}
-              aria-label={`${cardAriaLabelPrefix}：${spot.name}`}
-            >
-              <div className="relative h-[118px] w-full overflow-hidden rounded-t-[10px] bg-primary-surface/25">
-                <TripImage
-                  src={spotImageSrc(spot.imageUrl, 320)}
-                  alt={spot.name}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
-                  sizes="159px"
-                />
-                <div
-                  className="absolute inset-0 flex items-center justify-center bg-black/0 transition-colors group-hover:bg-black/30 group-focus-visible:bg-black/30"
-                  aria-hidden="true"
-                >
-                  <span
-                    className="rounded-full bg-background/95 px-3 py-1 text-[11px] font-semibold text-foreground opacity-0 shadow-sm transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100"
+        <div className="scroll-carousel md:contents">
+          <div
+            ref={scrollRef}
+            className="trip-spot-scroll -mx-4 flex gap-6 overflow-x-auto scroll-pl-4 scroll-pr-4 px-4 pb-1 md:mx-0 md:scroll-pl-0 md:scroll-pr-0 md:px-0 snap-x snap-mandatory [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            aria-label={scrollAriaLabel}
+          >
+            {displayItems.map((spot, index) => (
+              <button
+                key={`${spot.nameEn ?? spot.name}-${spot.imageUrl}`}
+                type="button"
+                onClick={() => openSpot(items[index])}
+                className={`group w-[159px] shrink-0 cursor-pointer snap-start overflow-hidden ${TRIP_SPOT_CARD_RADIUS} border border-foreground/5 bg-background text-left shadow-sm transition-[transform,box-shadow,ring-color] hover:scale-[1.02] hover:shadow-md hover:ring-2 hover:ring-primary/35 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2`}
+                aria-label={`${cardAriaLabelPrefix}：${spot.name}`}
+              >
+                <div className="relative h-[118px] w-full overflow-hidden rounded-t-[10px] bg-primary-surface/25">
+                  <TripImage
+                    src={spotImageSrc(spot.imageUrl, 320)}
+                    alt={spot.name}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                    sizes="159px"
+                  />
+                  <div
+                    className="absolute inset-0 flex items-center justify-center bg-black/0 transition-colors group-hover:bg-black/30 group-focus-visible:bg-black/30"
+                    aria-hidden="true"
                   >
-                    查看介紹
-                  </span>
+                    <span
+                      className="rounded-full bg-background/95 px-3 py-1 text-[11px] font-semibold text-foreground opacity-0 shadow-sm transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100"
+                    >
+                      查看介紹
+                    </span>
+                  </div>
                 </div>
-              </div>
-              <div className="flex h-[78px] flex-col px-3.5 py-3">
-                <p className="line-clamp-1 text-[15px] font-bold leading-[18px] text-foreground">
-                  {spot.name}
-                </p>
-                {spot.nameEn && (
-                  <p className="mt-0.5 line-clamp-2 text-[12px] font-medium leading-[16px] text-foreground/65">
-                    {spot.nameEn}
+                <div className="flex h-[78px] flex-col px-3.5 py-3">
+                  <p className="line-clamp-1 text-[15px] font-bold leading-[18px] text-foreground">
+                    {spot.name}
                   </p>
-                )}
-              </div>
-            </button>
-          ))}
+                  {spot.nameEn && (
+                    <p className="mt-0.5 line-clamp-2 text-[12px] font-medium leading-[16px] text-foreground/65">
+                      {spot.nameEn}
+                    </p>
+                  )}
+                </div>
+              </button>
+            ))}
+          </div>
+          {showCarouselArrows ? (
+            <p className="scroll-carousel__hint px-4 md:hidden">
+              {localizeText("左右滑動查看更多", locale)}
+            </p>
+          ) : null}
         </div>
       </div>
 

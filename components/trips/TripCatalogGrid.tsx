@@ -559,7 +559,7 @@ export function TripCatalogGrid({
 
   return (
     <div className="space-y-6">
-      <div className="sticky top-[calc(env(safe-area-inset-top)+3.5rem)] z-20 -mx-1 rounded-2xl border border-foreground/10 bg-background/92 p-4 shadow-sm backdrop-blur-md md:top-[4.5rem]">
+      <div className="sticky top-[var(--site-header-mobile-offset)] z-20 -mx-1 rounded-2xl border border-foreground/10 bg-background/92 p-4 shadow-sm backdrop-blur-md md:top-[var(--site-header-sticky-top-desktop)]">
         <TripCatalogFilters
           locale={locale}
           layout="inline"
