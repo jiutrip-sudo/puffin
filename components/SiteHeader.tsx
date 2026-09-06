@@ -106,9 +106,6 @@ export function SiteHeader({
             compact
           />
           <div className="site-header-mobile-bar__actions">
-            {rightSlot ? (
-              <div className="site-header-mobile-bar__slot">{rightSlot}</div>
-            ) : null}
             <SitePreferencesBar />
           </div>
         </div>
