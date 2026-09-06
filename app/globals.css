@@ -5931,6 +5931,58 @@ html[data-theme="light"] .guides-index__backdrop-fade {
   background: color-mix(in srgb, var(--foreground) 6%, transparent);
 }
 
+.guides-related {
+  padding-top: 1.25rem;
+  border-top: 1px solid color-mix(in srgb, var(--foreground) 10%, transparent);
+}
+
+.guides-related__label {
+  margin-bottom: 0.75rem;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--foreground) 48%, transparent);
+}
+
+.guides-related__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.guides-related__link {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.65rem 0.85rem;
+  border-radius: 0.75rem;
+  border: 1px solid color-mix(in srgb, var(--foreground) 8%, transparent);
+  background: color-mix(in srgb, var(--foreground) 2%, transparent);
+  text-decoration: none;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.guides-related__link:hover {
+  background: color-mix(in srgb, var(--foreground) 5%, transparent);
+  border-color: color-mix(in srgb, var(--color-primary-dark) 22%, transparent);
+}
+
+.guides-related__title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--foreground);
+}
+
+.guides-related__category {
+  font-size: 0.75rem;
+  color: color-mix(in srgb, var(--foreground) 55%, transparent);
+}
+
 .trip-inline-cta {
   margin-top: 2rem;
   padding: 1.25rem 1.35rem;

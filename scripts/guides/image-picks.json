@@ -8,7 +8,15 @@
     "iceland-winter-self-drive-days": "guides/assets/iceland-winter-self-drive-days.webp",
     "iceland-winter-driving-prep": "guides/assets/iceland-winter-driving-prep.webp",
     "summer-ring-road-days": "guides/assets/summer-ring-road-days.webp",
-    "northern-lights-season": "guides/assets/northern-lights-season.webp"
+    "northern-lights-season": "guides/assets/northern-lights-season.webp",
+    "iceland-best-time-to-visit": "spots/kirkjufell/cover.webp",
+    "iceland-group-tour-days": "trips/assets/5e073a69d6.webp",
+    "iceland-summer-self-drive-prep": "spots/seljalandsfoss/cover.webp",
+    "taiwan-passport-iceland-entry": "spots/keflavik-airport/cover.webp",
+    "iceland-activities-booking": "guides/assets/glacier-hike-and-self-drive.webp",
+    "iceland-packing-list": "trips/assets/ice-black-beach.webp",
+    "golden-circle-how-many-days": "spots/golden-circle/cover.webp",
+    "ring-road-vs-non-ring": "spots/studlagil/cover.webp"
   },
   "byArticle": {
     "group-tour-vs-self-drive": [
@@ -53,6 +61,62 @@
       "spots/aurora-mini-bus/cover.webp",
       "pricing/assets/lights1.webp",
       "spots/jokulsarlon/cover.webp"
+    ],
+    "iceland-best-time-to-visit": [
+      "spots/kirkjufell/cover.webp",
+      "spots/aurora-mini-bus/cover.webp",
+      "spots/studlagil/cover.webp",
+      "spots/jokulsarlon/cover.webp",
+      "spots/reykjavik/cover.webp"
+    ],
+    "iceland-group-tour-days": [
+      "trips/assets/5e073a69d6.webp",
+      "spots/diamond-beach/cover.webp",
+      "spots/gullfoss/cover.webp",
+      "spots/myvatn/cover.webp",
+      "spots/kirkjufell/cover.webp"
+    ],
+    "iceland-summer-self-drive-prep": [
+      "spots/seljalandsfoss/cover.webp",
+      "spots/golden-circle/cover.webp",
+      "spots/reynisfjara/cover.webp",
+      "pricing/assets/type-r3-car-jpg-a123239eaa.webp",
+      "spots/skaftafell-glacier-hiking/cover.webp"
+    ],
+    "taiwan-passport-iceland-entry": [
+      "spots/keflavik-airport/cover.webp",
+      "spots/blue-lagoon/cover.webp",
+      "spots/reykjavik/cover.webp",
+      "spots/hallgrimskirkja/cover.webp",
+      "spots/old-harbour/cover.webp"
+    ],
+    "iceland-activities-booking": [
+      "guides/assets/glacier-hike-and-self-drive.webp",
+      "spots/crystal-ice-cave/cover.webp",
+      "spots/blue-lagoon/cover.webp",
+      "spots/jokulsarlon/cover.webp",
+      "spots/skaftafell-glacier-hiking/cover.webp"
+    ],
+    "iceland-packing-list": [
+      "trips/assets/ice-black-beach.webp",
+      "spots/reynisfjara/cover.webp",
+      "trips/assets/iceland-self-drive-winter-06.webp",
+      "spots/keflavik-airport/cover.webp",
+      "spots/seljalandsfoss/cover.webp"
+    ],
+    "golden-circle-how-many-days": [
+      "spots/golden-circle/cover.webp",
+      "spots/gullfoss/cover.webp",
+      "spots/skogafoss/cover.webp",
+      "spots/geysir/cover.webp",
+      "spots/thingvellir/cover.webp"
+    ],
+    "ring-road-vs-non-ring": [
+      "spots/studlagil/cover.webp",
+      "spots/myvatn/cover.webp",
+      "spots/akureyri/cover.webp",
+      "spots/dettifoss/cover.webp",
+      "spots/kirkjufell/cover.webp"
     ]
   }
 }

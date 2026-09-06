@@ -1,4 +1,5 @@
 import { LocaleLink } from "@/components/LocaleLink";
+import { GuideRelatedArticles } from "@/components/guides/GuideRelatedArticles";
 import { GuideTripCta } from "@/components/guides/GuideTripCta";
 import { TripImage } from "@/components/trip-package/TripImage";
 import type { GuideArticle } from "@/lib/guides/registry";
@@ -144,6 +145,12 @@ export function GuideArticleContent({
           tripTitle={article.featuredTrip.title}
           tripBlurb={article.featuredTrip.blurb}
           tripImage={featuredTripImage}
+        />
+
+        <GuideRelatedArticles
+          slug={article.slug}
+          locale={locale}
+          className="mt-10"
         />
       </article>
     </div>
